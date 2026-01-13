@@ -1,7 +1,10 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "@app/styles/globals.css";
+@import "@app/styles/all4trees.css";
 
 @plugin "tailwindcss-animate";
-@import "tw-animate-css";
+
 
 @custom-variant dark (&:is(.dark *));
 

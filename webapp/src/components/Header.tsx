@@ -2,6 +2,7 @@
 import "@app/styles/all4trees.css";
 import logo from '@assets/logo_all4trees.png';
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "./ModeToggle";
 
 interface HeaderProps {
     onLogout: () => void;
@@ -24,9 +25,9 @@ export function Header({
         <header className="bg-gray-800 border-b border-gray-700 px-6 py-4 relative z-40">
             <div className="flex items-center justify-between">
                 <img src={logo} alt="Logo" className="h-24 w-60 mr-1" />
-                <h1 className="text-primary-foreground font-title-primary">Carte</h1>
 
                 <div className="flex items-center gap-4">
+                    <ModeToggle />
                     {isLogin ? (
                         <Button
                             onClick={onLogout}
