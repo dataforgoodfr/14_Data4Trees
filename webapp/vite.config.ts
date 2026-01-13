@@ -6,14 +6,12 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-    resolve: {
+  resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@app': path.resolve(__dirname, './src/app'),
+      '@components': path.resolve(__dirname, './src/components'),
       "@assets": path.resolve(__dirname, './src/assets'),
-      "@entities": path.resolve(__dirname, './src/entities'),
-      "@features": path.resolve(__dirname, './src/features'),
-      "@widgets": path.resolve(__dirname, './src/widgets'),
-      "@pages": path.resolve(__dirname, './src/pages'),
     },
   },
   plugins: [

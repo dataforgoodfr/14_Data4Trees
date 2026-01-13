@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -113,12 +114,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.AllowAny', ),
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
-CORS_ALLOW_METHODS = (
-    "GET",
-)
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
