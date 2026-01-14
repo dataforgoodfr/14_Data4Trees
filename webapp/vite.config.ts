@@ -10,8 +10,10 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@app': path.resolve(__dirname, './src/app'),
+      "@providers": path.resolve(__dirname, './src/app/providers'),
       '@components': path.resolve(__dirname, './src/components'),
       "@assets": path.resolve(__dirname, './src/assets'),
+      "@pages": path.resolve(__dirname, './src/pages'),
     },
   },
   plugins: [
