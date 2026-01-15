@@ -53,7 +53,7 @@ export function GraphConsoElec({ name, chartData }: GraphConsoElecProps) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Consommation Electrique de {name}</CardTitle>
+                <CardTitle className='font-title-primary'>Consommation Electrique de {name}</CardTitle>
                 <CardDescription>2015-2023</CardDescription>
             </CardHeader>
             <CardContent>

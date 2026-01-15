@@ -1,40 +1,41 @@
-@import "./all4trees.css";
-@reference "tailwindcss";
+/**
+ * GLOBALS.CSS - Reset & Styles de Base HTML
+ * 
+ * Responsabilité :
+ * - Reset CSS (normalize styles navigateur)
+ * - Styles HTML de base (body, headings, links, etc.)
+ * 
+ * ℹ️ Utilise les variables CSS de all4trees.css et index.css
+ */
+
+/* ========================================================================
+   RESET CSS
+   ======================================================================== */
 
 
-body {
-    background-color: var(--color-bg-color);
-    color: var(--color-primary);
-    font-family: var(--font-body-primary);
+@import "@app/styles/all4trees.css";
+@import "@/index.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-@layer base {
-    html {
-        @apply dark:brightness-90;
-    }
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
 
-    body {
-        @apply bg-gray-900 text-white antialiased;
-    }
+body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+}
 
-    /* Focus styles globaux */
-    *:focus {
-        @apply outline-none;
-    }
-
-    :root {
-        --chart-1: oklch(0.646 0.222 41.116);
-        --chart-2: oklch(0.6 0.118 184.704);
-        --chart-3: oklch(0.398 0.07 227.392);
-        --chart-4: oklch(0.828 0.189 84.429);
-        --chart-5: oklch(0.769 0.188 70.08);
-    }
-
-    .dark {
-        --chart-1: oklch(0.488 0.243 264.376);
-        --chart-2: oklch(0.696 0.17 162.48);
-        --chart-3: oklch(0.769 0.188 70.08);
-        --chart-4: oklch(0.627 0.265 303.9);
-        --chart-5: oklch(0.645 0.246 16.439);
-    }
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
 }

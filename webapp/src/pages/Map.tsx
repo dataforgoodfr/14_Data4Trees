@@ -22,7 +22,7 @@ export function Map() {
                 isLogin={false}
                 isDashboardShown={false} />
 
-            <h1 className="py-4 text-center text-primary-foreground font-title-primary">Bienvenue sur la carte all4Trees</h1>
+            <h1 className="py-4 text-center text-foreground font-title-primary">Bienvenue sur la carte all4Trees</h1>
 
             <div className="px-4 py-10 items-center justify-between max-w-7xl max-h-7">
                 {data && (

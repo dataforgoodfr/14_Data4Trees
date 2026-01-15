@@ -4,67 +4,29 @@
    Fichier de style réalisé pour le projet All4Trees.
    Contient les variables CSS définissant la charte graphique de l'association telle que définie dans son brandbook.
    ========================================================================== */
-@import "tailwindcss";
 
 :root {
-    /* ===========================
-     COULEURS PRINCIPALES
-     =========================== */
-    --nuit: #0f0f0f;
-    /* NUIT */
-    --onyx: #424242;
-    /* ONYX */
-    --brunswick-green: #224d41;
-    /* BRUNSWICK GREEN */
-    --vert-kelly: #54b025;
-    /* VERT KELLY */
-    --jaune-vert: #99cf16;
-    /* JAUNE VERT */
-    --citrouille: #f98038;
-    /* CITROUILLE */
-    --alabaster: #f5f4eb;
-    /* ALABASTER */
-    --bleu: #2d6db4;
-    /* BLEU */
-    --vert-de-gris: #3fafb6;
-}
+    /* ========================================================================
+     COULEURS PRINCIPALES - CHARTE ALL4TREES
+     ======================================================================== */
 
-@theme inline {
-    --color-nuit: var(--nuit);
-    --color-onyx: var(--onyx);
-    --color-brunswick-green: var(--brunswick-green);
-    --color-vert-kelly: var(--vert-kelly);
-    --color-jaune-vert: var(--jaune-vert);
-    --color-citrouille: var(--citrouille);
-    --color-alabaster: var(--alabaster);
-    --color-bleu: var(--bleu);
-    --color-vert-de-gris: var(--vert-de-gris);
-}
+    --color-nuit: #0f0f0f;
+    --color-onyx: #424242;
+    --color-brunswick-green: #224d41;
+    --color-vert-kelly: #54b025;
+    --color-jaune-vert: #99cf16;
+    --color-citrouille: #f98038;
+    --color-alabaster: #f5f4eb;
+    --color-bleu: #2d6db4;
+    --color-vert-de-gris: #3fafb6;
 
-/* =========================================================================
-   DARK THEME
-   ========================================================================= */
+    /* ========================================================================
+     TYPOGRAPHIE - CHARTE ALL4TREES
+     ======================================================================== */
 
-@media (prefers-color-scheme: dark) {
-    @theme {
-        --color-background: var(--color-night);
-        --color-surface: var(--color-onyx);
-        --color-primary: var(--color-yellow-green);
-        --color-secondary: var(--color-alabaster);
-        --color-border: rgba(255, 255, 255, 0.15);
-    }
-}
+    --font-title-primary: "Phosphate", "Phosphate Solid", Impact, "Arial Black", system-ui, sans-serif;
+    --font-body-primary: Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-/* =========================================================================
-   LIGHT THEME
-   ========================================================================= */
-
-@media (prefers-color-scheme: light) {
-    @theme {
-        --color-background: var(--color-alabaster);
-        --color-surface: var(--color-white);
-        --color-primary: var(--color-night);
-        --color-secondary: var(--color-onyx);
-        --color-border: rgba(15, 15, 15, 0.15);
-    }
+    --font-title-secondary: "Century Gothic", "Century Gothic Black", "Arial Black", system-ui, sans-serif;
+    --font-body-secondary: "Open Sans", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
