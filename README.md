@@ -1,42 +1,39 @@
-# Template DataForGood
 
-This file will become your README and also the index of your
-documentation.
+# SITE WEB ALL 4 TREES
 
-# Contributing
+![Logo All4Trees](./webapp/src/assets/logo_all4trees.png)
 
+Bienvenue sur le projet de la Saison 14 de DataForGood pour l'association All 4 Trees !
 
-## Installation
+Le but de ce projet est de fournir un site web simple, élégant et efficace pour aider les équipes de bénévoles de l'association All 4 Trees à se coordonner, recueillir et visualiser les données récoltées sur le terrain.
 
-- [Installation de Python](#installation-de-python)
+Les données récoltées sur le terrain seront importées dans une base de données externes à ce projet. Voir [le dépôt Github Coordonnées](https://github.com/dataforgoodfr/Coordonnees).
 
-Ce projet utilise [uv](https://docs.astral.sh/uv/) pour la gestion des dépendances Python. Il est préréquis pour l'installation de ce projet.
+Pour ce faire, le site web présentera :
 
-Une fois installé, il suffit de lancer la commande suivante pour installer la version de Python adéquate, créer un environnement virtuel et installer les dépendances du projet.
+- Une carte avec des points, chaque point correspondant à un site où des données ont été récoltées. 
+- Un widget pour filtrer les points de la carte selon certains critères (localisation, catégorie, etc.).
+- Un widget de Dashboard pour faire apparaître des graphiques permettant de visualiser les données liées à un ou plusieurs points de la carte.
+- Un page de connexion avec gestion de l'authentification, pour permettre aux acteurs locaux de voir certaines données qui ne seront pas accessibles au grand public.
 
-```bash
-uv sync
-```
+## Backend
 
-A l'usage, si vous utilisez VSCode, l'environnement virtuel sera automatiquement activé lorsque vous ouvrirez le projet. Sinon, il suffit de l'activer manuellement avec la commande suivante :
+Le Backend du site permettra de stocker les informations liées aux utilisateurs ayant accès aux données protégées.
+Il est écrit en python avec le framework Django.
 
-```bash
-source .venv/bin/activate
-```
+[Readme du Backend](./backend/README.md)
 
-Ou alors, utilisez la commande `uv run ...` (au lieu de `python ...`) pour lancer un script Python. Par exemple:
+## Frontend 
 
-```bash
-uv run pipelines/run.py run build_database
-```
+Le Frontend est en ReactJS + Vite, dans le dossier [webapp](./webapp).
 
+[Readme du Frontend](./webapp/README.md)
 
-## Lancer les precommit-hook localement
+## Règles de collaboration :
 
-[Installer les precommit](https://pre-commit.com/)
-
-    pre-commit run --all-files
-
-## Utiliser Tox pour tester votre code
-
-    tox -vv
+- Aucun Push ne doit être fait directement sur main.
+- Pour travailler sur une évolution du site, il vous faudra d'abord créer une branche et l'associer à une tâche du tableau Kanban.
+- Pour plus de clarté et faciliter la collaboration, il serait préférable de nommer vos branches selon le format suivant:
+`{votrePseudo}/{tâche}`, par exemple `arnaudfnr/gestion_auth`
+- Lorsque votre code est prêt, il faudra créer une Pull Request avec une description claire et concise du code ajouté.
+- La Pull Request sera ensuite revue par un autre dev, puis fusionnée avec la branche main une fois que les changements auront été validés.

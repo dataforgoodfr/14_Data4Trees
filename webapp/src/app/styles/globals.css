@@ -1,0 +1,41 @@
+/**
+ * GLOBALS.CSS - Reset & Styles de Base HTML
+ * 
+ * Responsabilité :
+ * - Reset CSS (normalize styles navigateur)
+ * - Styles HTML de base (body, headings, links, etc.)
+ * 
+ * ℹ️ Utilise les variables CSS de all4trees.css et index.css
+ */
+
+/* ========================================================================
+   RESET CSS
+   ======================================================================== */
+
+
+@import "@app/styles/all4trees.css";
+@import "@/index.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
