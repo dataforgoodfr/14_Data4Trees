@@ -14,3 +14,10 @@ npm ci
 ```
 npm run dev
 ```
+
+## Autres commandes
+
+- `npm run build` : package l'application pour la mise en production (dossier [dist](./dist))
+- `npm run preview` : Démarre le serveur à partir du build pour la production (dans le dist)
+- `npm run check:arch` : Vérifier si les imports du projet respectent le principe de l'architecture FSD.
+- `npm run arch:tree` : Génère un fichier text contenant l'arborescence du projet.
