@@ -1,5 +1,10 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/graphql';
 
+export const fetchJsonFixture = async (name: string) => {
+  const response = await fetch(`/src/fixtures/${name}.json`);
+  return response.json();
+};
+
 export const fetchGraphQLData = async () => {
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -64,7 +69,7 @@ export const fetchJSONWithAuth = async (
 
 export const createApiClient = () => ({
   getData() {
-    return fetchGraphQLData();
+    return fetchJsonFixture('exampleData');
   }
 });
 

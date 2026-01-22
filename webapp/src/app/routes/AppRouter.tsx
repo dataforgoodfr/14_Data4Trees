@@ -1,5 +1,5 @@
-import { Map } from '@pages';
+import { MainPage } from '@pages';
 
 export function AppRouter() {
-    return <Map />;
+    return <MainPage />;
 }

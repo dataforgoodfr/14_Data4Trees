@@ -20,6 +20,9 @@
       "@providers": [
         "./src/app/providers/index.ts"
       ],
+      "@components": [
+        "./src/components/index.ts"
+      ],
       "@components/*": [
         "./src/components/*"
       ],
