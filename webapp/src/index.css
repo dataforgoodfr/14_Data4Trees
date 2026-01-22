@@ -14,7 +14,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 @layer base {
     * {
         @apply border-border outline-ring/50;
@@ -42,15 +41,15 @@
     -moz-osx-font-smoothing: grayscale;
     --radius: 0.625rem;
 
-    /* LIGHT MODE */
+    /* LIGHT MODE SHADCN */
     --background: var(--color-alabaster);
     --foreground: var(--color-nuit);
     --card: #ffffff;
     --card-foreground: var(--color-nuit);
     --popover: #ffffff;
     --popover-foreground: var(--color-nuit);
-    --primary: var(--color-brunswick-green);
-    --primary-foreground: var(--color-alabaster);
+    --primary: var(--color-vert-kelly);
+    --primary-foreground: var(--color-bleu);
     --secondary: var(--color-jaune-vert);
     --secondary-foreground: var(--color-nuit);
     --muted: #e5e7eb;
@@ -67,7 +66,7 @@
     --chart-4: var(--color-citrouille);
     --chart-5: var(--color-jaune-vert);
     --sidebar: var(--color-alabaster);
-    --sidebar-foreground: var(--color-nuit);
+    --sidebar-foreground: var(--color-alabaster);
     --sidebar-primary: var(--color-brunswick-green);
     --sidebar-primary-foreground: var(--color-alabaster);
     --sidebar-accent: var(--color-citrouille);
@@ -77,19 +76,18 @@
 }
 
 body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--foreground);
     font-family: var(--font-body-primary);
 }
 
 a {
     font-weight: 500;
-    color: #646cff;
+    color: var(--primary);
     text-decoration: inherit;
 }
 
 a:hover {
-    color: #535bf2;
+    color: var(--secondary);
 }
 
 button {
@@ -99,19 +97,17 @@ button {
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #1a1a1a;
+    color: var(--foreground);
+    border-color: var(--border);
+    background-color: var(--primary);
     cursor: pointer;
     transition: border-color 0.25s;
 }
 
 button:hover {
-    border-color: #646cff;
+    background-color: var(--secondary);
 }
 
-button:focus,
-button:focus-visible {
-    outline: 4px auto var(--ring);
-}
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
@@ -154,7 +150,7 @@ button:focus-visible {
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* DARK MODE */
+/* DARK MODE SHADCN */
 @media (prefers-color-scheme: dark) {
     :root {
         --background: var(--color-nuit);
@@ -163,7 +159,7 @@ button:focus-visible {
         --card-foreground: var(--color-alabaster);
         --popover: var(--color-onyx);
         --popover-foreground: var(--color-alabaster);
-        --primary: var(--color-vert-kelly);
+        --primary: var(--color-brunswick-green);
         --primary-foreground: var(--color-nuit);
         --secondary: var(--color-vert-de-gris);
         --secondary-foreground: var(--color-nuit);
@@ -182,8 +178,8 @@ button:focus-visible {
         --chart-5: #f97316;
         --sidebar: var(--color-onyx);
         --sidebar-foreground: var(--color-alabaster);
-        --sidebar-primary: var(--color-vert-kelly);
-        --sidebar-primary-foreground: var(--color-nuit);
+        --sidebar-primary: var(--color-onyx);
+        --sidebar-primary-foreground: var(--color-vert-kelly);
         --sidebar-accent: var(--color-citrouille);
         --sidebar-accent-foreground: var(--color-nuit);
         --sidebar-border: rgba(255, 255, 255, 0.15);
@@ -199,7 +195,7 @@ button:focus-visible {
     --card-foreground: var(--color-alabaster);
     --popover: var(--color-onyx);
     --popover-foreground: var(--color-alabaster);
-    --primary: var(--color-vert-kelly);
+    --primary: var(--color-brunswick-green);
     --primary-foreground: var(--color-nuit);
     --secondary: var(--color-vert-de-gris);
     --secondary-foreground: var(--color-nuit);
@@ -213,8 +209,8 @@ button:focus-visible {
     --ring: var(--color-jaune-vert);
     --sidebar: var(--color-onyx);
     --sidebar-foreground: var(--color-alabaster);
-    --sidebar-primary: var(--color-vert-kelly);
-    --sidebar-primary-foreground: var(--color-nuit);
+    --sidebar-primary: var(--color-onyx);
+    --sidebar-primary-foreground: var(--color-vert-kelly);
     --sidebar-accent: var(--color-citrouille);
     --sidebar-accent-foreground: var(--color-nuit);
     --sidebar-border: rgba(255, 255, 255, 0.15);

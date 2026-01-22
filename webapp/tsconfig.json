@@ -32,6 +32,15 @@
       "@pages/*": [
         "./src/pages/*"
       ],
+      "@widgets": [
+        "./src/widgets/index.ts"
+      ],
+      "@widgets/*": [
+        "./src/widgets/*"
+      ],
+      "@ui/*": [
+        "./src/components/ui/*"
+      ],
       "@assets/*": [
         "./src/assets/*"
       ]

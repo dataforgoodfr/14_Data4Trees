@@ -7,13 +7,13 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@components/ui/card"
+} from "@ui/card"
 import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
     type ChartConfig,
-} from "@components/ui/chart"
+} from "@ui/chart"
 
 export const description = "A line chart with custom dots"
 

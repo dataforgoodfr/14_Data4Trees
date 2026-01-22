@@ -1,7 +1,14 @@
-import { useApi } from "@/app/providers/ApiProvider";
-import { Header, Map } from "@/components";
-import { Dashboard } from "@/components/Dashboard";
+import { useApi } from "@providers";
+import { Header } from "@components";
+import { SidebarProvider } from "@ui/sidebar";
+import { DashboardPopover, MapSidebar, Map } from "@/widgets";
 import { useEffect, useState } from "react";
+
+import {
+    ResizableHandle,
+    ResizablePanel,
+    ResizablePanelGroup,
+} from "@/components/ui/resizable"
 
 export interface MainPageProps {
     userData?: any;
@@ -10,7 +17,6 @@ export interface MainPageProps {
 export function MainPage() {
     const client = useApi();
     const [data, setData] = useState<any>(null);
-    const [isDashboardShown, setIsDashboardShown] = useState<boolean>(true);
 
     useEffect(() => {
         client.getData()
@@ -18,21 +24,39 @@ export function MainPage() {
             .catch((err) => console.error("fetchData error", err));
     }, []);
     return (
-        <>
+        <div className="flex flex-col h-screen">
             <Header
                 onLogin={() => console.log("Login clicked")}
                 onLogout={() => console.log("Logout clicked")}
-                onShowDashboard={() => setIsDashboardShown(true)}
-                onHideDashboard={() => setIsDashboardShown(false)}
-                isLogin={false}
-                isDashboardShown={isDashboardShown} />
+                isLogin={false} />
 
-            <Map />
+            {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}
+            <ResizablePanelGroup
+                direction="horizontal"
+                className="bg-background"
+            >
+                <SidebarProvider>
 
-            {isDashboardShown && data && (
-                <Dashboard graphData={data} dataType="example" />
-            )}
-        </>
+                    <ResizablePanel defaultSize={20} className="h-full">
+                        <MapSidebar />
+                    </ResizablePanel>
+                    <ResizableHandle />
+                    <ResizablePanel defaultSize={80}>
+                        <ResizablePanelGroup direction="vertical">
+                            <ResizablePanel defaultSize={10}>
+                                <div className="flex h-full items-center justify-center p-6">
+                                    <DashboardPopover graphData={data} dataType="example" />
+                                </div>
+                            </ResizablePanel>
+                            <ResizableHandle />
+                            <ResizablePanel defaultSize={90}>
+                                <Map />
+                            </ResizablePanel>
+                        </ResizablePanelGroup>
+                    </ResizablePanel>
+                </SidebarProvider >
+            </ResizablePanelGroup>
+        </div>
     );
 }
 
