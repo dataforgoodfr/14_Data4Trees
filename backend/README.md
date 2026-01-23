@@ -1,5 +1,4 @@
 # Django Backend
-====================
 
 Le backend est un projet django simple qui permettra une gestion des utilisateurs et de leurs permissions sur le site web.
 
