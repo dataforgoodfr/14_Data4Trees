@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/resizable"
 
 export interface MainPageProps {
-    userData?: any;
+    userData?: unknown;
 }
 
 export function MainPage() {
     const client = useApi();
-    const [data, setData] = useState<any>(null);
+    const [data, setData] = useState<unknown | null>(null);
 
     useEffect(() => {
         client.getData()
@@ -45,6 +45,7 @@ export function MainPage() {
                         <ResizablePanelGroup direction="vertical">
                             <ResizablePanel defaultSize={10}>
                                 <div className="flex h-full items-center justify-center p-6">
+                                    {/** @ts-expect-error Need to type data */}
                                     <DashboardPopover graphData={data} dataType="example" />
                                 </div>
                             </ResizablePanel>

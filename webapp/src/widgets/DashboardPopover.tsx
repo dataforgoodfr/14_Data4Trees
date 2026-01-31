@@ -1,9 +1,11 @@
-import { ExampleGraph } from "@components";
+import { ExampleGraph, type GraphConsoElecProps } from "@components";
 import { Button } from "@ui/button";
 import { Popover, PopoverTrigger, PopoverContent } from "@ui/popover";
 
 export interface DashboardProps {
-    graphData: any;
+    graphData: {
+        clientByName: { fullName: GraphConsoElecProps["name"], consumptionSet: GraphConsoElecProps["chartData"] }
+    };
     dataType: string;
 }
 

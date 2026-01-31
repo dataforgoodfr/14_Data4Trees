@@ -52,7 +52,7 @@ export const fetchWithAuth = async (
 
     const error = new Error(`Erreur API: ${res.status}`);
 
-    // @ts-ignore
+    // @ts-expect-error Property 'response' does not exist on type 'Error'.
     error.response = { data: errorData };
 
     throw error;
