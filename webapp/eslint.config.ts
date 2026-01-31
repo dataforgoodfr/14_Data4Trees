@@ -9,7 +9,6 @@ import pluginPrettier from "eslint-config-prettier/flat";
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
   tseslint.configs.recommended,
-  pluginPrettier,
   {
     ...pluginReact.configs.flat.recommended,
     rules: {
@@ -29,4 +28,5 @@ export default defineConfig([
   { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
   /** @ts-expect-error json plugin not typed well*/
   { files: ["**/*.jsonc"], plugins: { json }, language: "json/jsonc", extends: ["json/recommended"] },
+  pluginPrettier,
 ]);
