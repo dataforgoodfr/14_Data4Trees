@@ -23,7 +23,7 @@ interface DataPoint {
     kwhConsumed: number
 }
 
-interface GraphConsoElecProps {
+export interface GraphConsoElecProps {
     name: string
     chartData: DataPoint[]
 }

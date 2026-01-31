@@ -1,12 +1,9 @@
-// @ts-ignore
+// @ts-expect-error Could not find a declaration file for module 'coordo'.
 import { createMap } from "coordo"
-import { useEffect, useRef, useState } from "react";
-export interface MapProps {
-
-}
+import { useEffect, useRef, useState, type FC } from "react";
 
 export type MapApi = {
-    getDataForLayer: (layerId: string) => any;
+    getDataForLayer: (layerId: string) => unknown;
 }
 
 // Hook personnalisé pour initialiser la carte
@@ -29,7 +26,7 @@ function useMap(containerSelector: string) {
     return mapApi;
 }
 
-export function Map({ }: MapProps) {
+export const Map: FC = () => {
     const mapApi = useMap("#map");
 
     return (
