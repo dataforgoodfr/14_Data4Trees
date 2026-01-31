@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "check:arch": "node ./scripts/check-architecture.cjs",
     "arch:tree": "node ./scripts/generate-tree.cjs ./src webappTree.md",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
   },
@@ -46,6 +48,7 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.2.0",
     "jiti": "^2.6.1",
+    "prettier": "3.8.1",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "tailwindcss-animate": "^1.0.7",
