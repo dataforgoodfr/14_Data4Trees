@@ -18,5 +18,29 @@
   "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
-  "embeddedLanguageFormatting": "auto"
+  "embeddedLanguageFormatting": "auto",
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "<BUILTIN_MODULES>",
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^@app/(.*)$",
+    "^@providers",
+    "^@providers/(.*)$",
+    "^@components",
+    "^@components/(.*)$",
+    "^@widgets",
+    "^@widgets/(.*)$",
+    "^@assets",
+    "^@assets/(.*)$",
+    "^@pages",
+    "^@pages/(.*)$",
+    "^@ui",
+    "^@ui/(.*)$",
+    "[../]",
+    "[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": false
 }
