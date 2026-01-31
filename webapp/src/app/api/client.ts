@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/graphql';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/graphql";
 
 export const fetchJsonFixture = async (name: string) => {
   const response = await fetch(`/src/fixtures/${name}.json`);
@@ -7,8 +7,8 @@ export const fetchJsonFixture = async (name: string) => {
 
 export const fetchGraphQLData = async () => {
   const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
     query {
@@ -22,20 +22,20 @@ export const fetchGraphQLData = async () => {
       month
     }
   }
-}`
+}`,
     }),
   });
   const data = await res.json();
   return data;
-}
+};
 
 export const fetchWithAuth = async (
   endpoint: string,
   options: RequestInit = {},
-  authToken: string | null
+  authToken: string | null,
 ) => {
   const headers = new Headers(options.headers);
-  headers.set('Authorization', authToken ? `Bearer ${authToken}` : '');
+  headers.set("Authorization", authToken ? `Bearer ${authToken}` : "");
 
   const res = await fetch(`${API_URL}${endpoint}`, {
     ...options,
@@ -45,10 +45,10 @@ export const fetchWithAuth = async (
   if (!res.ok) {
     console.error(`Erreur API: ${res.status} ${res.statusText}`);
     const errorData = await res.json().catch(() => ({
-      error: 'Erreur de communication',
+      error: "Erreur de communication",
       details: [res.statusText],
     }));
-    console.error('Détails de l\'erreur:', JSON.stringify(errorData, null, 2));
+    console.error("Détails de l'erreur:", JSON.stringify(errorData, null, 2));
 
     const error = new Error(`Erreur API: ${res.status}`);
 
@@ -64,13 +64,13 @@ export const fetchWithAuth = async (
 export const fetchJSONWithAuth = async (
   endpoint: string,
   options: RequestInit = {},
-  authToken: string | null
+  authToken: string | null,
 ) => (await fetchWithAuth(endpoint, options, authToken)).json();
 
 export const createApiClient = () => ({
   getData() {
-    return fetchJsonFixture('exampleData');
-  }
+    return fetchJsonFixture("exampleData");
+  },
 });
 
 export type ApiClient = ReturnType<typeof createApiClient>;
