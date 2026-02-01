@@ -8,11 +8,13 @@ Plus d'infos ici : [https://feature-sliced.github.io/documentation/docs/get-star
 - Avoir Node.js installé sur votre machine [voir comment faire](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm)
 
 ## Installer les packages
+
 ```
 npm ci
 ```
 
 ## Démarrer le serveur
+
 ```
 npm run dev
 ```
