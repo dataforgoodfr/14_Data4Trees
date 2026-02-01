@@ -1,3 +1,3 @@
 export { Header } from "./Header";
 export { ModeToggle } from "./ModeToggle";
-export { ExampleGraph } from "./Charts/ExampleGraph";
+export { ExampleGraph, type GraphConsoElecProps } from "./Charts/ExampleGraph";
