@@ -11,17 +11,42 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@app/*": ["./src/app/*"],
-      "@providers": ["./src/app/providers/index.ts"],
-      "@components": ["./src/components/index.ts"],
-      "@components/*": ["./src/components/*"],
-      "@pages": ["./src/pages/index.ts"],
-      "@pages/*": ["./src/pages/*"],
-      "@widgets": ["./src/widgets/index.ts"],
-      "@widgets/*": ["./src/widgets/*"],
-      "@ui/*": ["./src/components/ui/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@providers": [
+        "./src/app/providers/index.ts"
+      ],
+      "@components": [
+        "./src/components/index.ts"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@pages": [
+        "./src/pages/index.ts"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@widgets": [
+        "./src/widgets/index.ts"
+      ],
+      "@widgets/*": [
+        "./src/widgets/*"
+      ],
+      "@ui/*": [
+        "./src/components/ui/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ]
     }
   }
 }

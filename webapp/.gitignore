@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 METABASE_LOGIN.json
+
+# Translations
+public/locales

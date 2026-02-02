@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "npm run translations:update && vite",
+    "build": "npm run translations:update && tsc -b && vite build",
     "preview": "vite preview",
     "check:arch": "node ./scripts/check-architecture.cjs",
     "check:code": "npm run compile && npm run format && npm run lint",
@@ -14,7 +14,8 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "lint:fix": "eslint ./src --fix",
+    "translations:update": "./scripts/update-translations.sh"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

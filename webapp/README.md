@@ -31,3 +31,4 @@ npm run dev
 - `npm run format:check` : Détermine les fichiers où le formattage de prettier aurait des effets (fichiers non formattés correctement)
 - `npm run lint` : Vérifie que le code ./src respecte les règles de Lint
 - `npm run lint:fix` : Fix si possible les problèmes de Linter dans ./src
+- `npm run translations:update`: Upload les fichiers de traductions vers public/locales, depuis lequel sont servis les fichiers de traduction
