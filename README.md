@@ -35,9 +35,4 @@ Le Frontend est en ReactJS + Vite, dans le dossier [webapp](./webapp).
 
 ## Règles de collaboration :
 
-- Aucun Push ne doit être fait directement sur main.
-- Pour travailler sur une évolution du site, il vous faudra d'abord créer une branche et l'associer à une tâche du tableau Kanban.
-- Pour plus de clarté et faciliter la collaboration, il serait préférable de nommer vos branches selon le format suivant:
-`{votrePseudo}/{tâche}`, par exemple `arnaudfnr/gestion_auth`
-- Lorsque votre code est prêt, il faudra créer une Pull Request avec une description claire et concise du code ajouté.
-- La Pull Request sera ensuite revue par un autre dev, puis fusionnée avec la branche main une fois que les changements auront été validés.
+[Voir le guide de contribution](https://outline.services.dataforgood.fr/doc/onboarding-dev-dzWHb9O90Q)

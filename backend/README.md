@@ -7,7 +7,8 @@ Endpoints
 ------------
 
 - `http://localhost:8000/admin`: interface d'administration par défaut de Django, permettant de gérer les utilisateurs et les groupes.
-- `http://localhost:8000/users`: permet de récupérer la liste des utilsiateurs.
+- `htpp://localhost:8000/admin/doc` : interface de documentation des applications installées sur Django.
+- `http://localhost:8000/users`: permet de récupérer la liste des utilisateurs.
 - `http://localhost:8000/groups`: permet de récupérer la liste des groupes.
 
 Installation
