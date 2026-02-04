@@ -8,8 +8,13 @@ Endpoints
 
 - `http://localhost:8000/admin`: interface d'administration par défaut de Django, permettant de gérer les utilisateurs et les groupes.
 - `htpp://localhost:8000/admin/doc` : interface de documentation des applications installées sur Django.
-- `http://localhost:8000/users`: permet de récupérer la liste des utilisateurs.
-- `http://localhost:8000/groups`: permet de récupérer la liste des groupes.
+- `http://localhost:8000/api/users`: permet de récupérer la liste des utilisateurs, nécessite d'être adminisitrateur.
+- `http://localhost:8000/api/groups`: permet de récupérer la liste des groupes., nécessite d'être administrateur.
+- `http://localhost:8000/token`: permet de créer un token JWT à partir des identifiants de connexion d'un utilisateur.
+- `http://localhost:8000/token/refresh`: permet de rafraîchir un token JWT.
+
+Plus d'infos sur la gestion des tokens: 
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html
 
 Installation
 ------------
@@ -30,12 +35,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-2. Load data into the mysql database
-``` bash
-python manage.py loaddata db.json
-```
-
-3. Create admin user
+2. Create admin user
 ``` bash
 python manage.py createsuperuser
 ```
