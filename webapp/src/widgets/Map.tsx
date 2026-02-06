@@ -1,6 +1,8 @@
 // @ts-expect-error Could not find a declaration file for module 'coordo'.
 import { createMap } from "coordo"
 import { useEffect, useRef, useState, type FC } from "react";
+import mapStyle from "@/fixtures/mapStyle.json";
+import "./Map.css";
 
 export type MapApi = {
     getDataForLayer: (layerId: string) => unknown;
@@ -15,7 +17,7 @@ function useMap(containerSelector: string) {
         if (isInitialized.current) return;
 
         try {
-            const api = createMap(containerSelector);
+            const api = createMap(containerSelector, mapStyle);
             setMapApi(api);
             isInitialized.current = true;
         } catch (error) {
@@ -31,11 +33,6 @@ export const Map: FC = () => {
 
     return (
         <div id="map" className="w-full h-screen" onClick={() => console.log(mapApi.getDataForLayer("my-layer"))}>
-            <button
-                className="absolute top-4 left-4 z-10 p-2 bg-foreground rounded shadow"
-                onClick={(e) => { e.stopPropagation(); }}>
-                Button
-            </button>
         </div>
     );
 }

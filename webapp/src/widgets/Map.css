@@ -1,0 +1,13 @@
+#map .maplibregl-ctrl-group {
+    color: #333;
+}
+
+#map .maplibregl-ctrl-group button {
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+    font-size: inherit;
+    font-weight: normal;
+}
