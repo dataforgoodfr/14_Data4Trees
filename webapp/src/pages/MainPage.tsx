@@ -1,20 +1,22 @@
-import { useApi } from "@providers";
+import { DashboardPopover, Map, MapSidebar } from "@/widgets";
 import { Header } from "@components";
+import { useApi } from "@providers";
 import { SidebarProvider } from "@ui/sidebar";
-import { DashboardPopover, MapSidebar, Map } from "@/widgets";
 import { useEffect, useState } from "react";
 
 import {
     ResizableHandle,
     ResizablePanel,
     ResizablePanelGroup,
-} from "@/components/ui/resizable"
+} from "@/components/ui/resizable";
+import { useNavigate } from "react-router-dom";
 
 export interface MainPageProps {
     userData?: unknown;
 }
 
 export function MainPage() {
+    const navigate = useNavigate();
     const client = useApi();
     const [data, setData] = useState<unknown | null>(null);
 
@@ -23,10 +25,11 @@ export function MainPage() {
             .then((json) => setData(json.data))
             .catch((err) => console.error("fetchData error", err));
     }, []);
+
     return (
         <div className="flex flex-col h-screen">
             <Header
-                onLogin={() => console.log("Login clicked")}
+                onLogin={() => navigate('/login')}
                 onLogout={() => console.log("Logout clicked")}
                 isLogin={false} />
 
