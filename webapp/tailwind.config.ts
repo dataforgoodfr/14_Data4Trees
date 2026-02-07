@@ -43,16 +43,10 @@ export default {
         ],
 
         // Corps principal : Arial
-        "a4t-body-primary": [
-          "Arial",
-          ...defaultTheme.fontFamily.sans,
-        ],
+        "a4t-body-primary": ["Arial", ...defaultTheme.fontFamily.sans],
 
         // Corps secondaire : Open Sans
-        "a4t-body-secondary": [
-          "Open Sans",
-          ...defaultTheme.fontFamily.sans,
-        ],
+        "a4t-body-secondary": ["Open Sans", ...defaultTheme.fontFamily.sans],
       },
       screens: {
         mdl: "920px",

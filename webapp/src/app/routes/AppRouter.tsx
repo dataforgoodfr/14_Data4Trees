@@ -1,6 +1,8 @@
-import { MainPage } from "@/pages";
 import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { MainPage } from "@/pages";
+
 import { AdminRoute } from "./lib/ProtectedRoute";
 
 const AdminPage = lazy(() => import("@/pages/admin"));
@@ -10,10 +12,19 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<MainPage />} />
-        <Route path="login" element={<LoginPage />} />
+        <Route
+          path=""
+          element={<MainPage />}
+        />
+        <Route
+          path="login"
+          element={<LoginPage />}
+        />
         <Route element={<AdminRoute />}>
-          <Route path="admin" element={<AdminPage />} />
+          <Route
+            path="admin"
+            element={<AdminPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

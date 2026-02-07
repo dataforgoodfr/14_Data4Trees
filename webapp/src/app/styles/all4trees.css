@@ -6,27 +6,31 @@
    ========================================================================== */
 
 :root {
-    /* ========================================================================
+  /* ========================================================================
      COULEURS PRINCIPALES - CHARTE ALL4TREES
      ======================================================================== */
 
-    --color-nuit: #0f0f0f;
-    --color-onyx: #424242;
-    --color-brunswick-green: #224d41;
-    --color-vert-kelly: #54b025;
-    --color-jaune-vert: #99cf16;
-    --color-citrouille: #f98038;
-    --color-alabaster: #f5f4eb;
-    --color-bleu: #2d6db4;
-    --color-vert-de-gris: #3fafb6;
+  --color-nuit: #0f0f0f;
+  --color-onyx: #424242;
+  --color-brunswick-green: #224d41;
+  --color-vert-kelly: #54b025;
+  --color-jaune-vert: #99cf16;
+  --color-citrouille: #f98038;
+  --color-alabaster: #f5f4eb;
+  --color-bleu: #2d6db4;
+  --color-vert-de-gris: #3fafb6;
 
-    /* ========================================================================
+  /* ========================================================================
      TYPOGRAPHIE - CHARTE ALL4TREES
      ======================================================================== */
 
-    --font-title-primary: "Phosphate", "Phosphate Solid", Impact, "Arial Black", system-ui, sans-serif;
-    --font-body-primary: Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-title-primary:
+    "Phosphate", "Phosphate Solid", Impact, "Arial Black", system-ui, sans-serif;
+  --font-body-primary: Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-    --font-title-secondary: "Century Gothic", "Century Gothic Black", "Arial Black", system-ui, sans-serif;
-    --font-body-secondary: "Open Sans", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-title-secondary:
+    "Century Gothic", "Century Gothic Black", "Arial Black", system-ui,
+    sans-serif;
+  --font-body-secondary:
+    "Open Sans", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
