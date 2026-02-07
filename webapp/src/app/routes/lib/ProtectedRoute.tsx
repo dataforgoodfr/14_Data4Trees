@@ -1,5 +1,6 @@
-import { useAuth } from "@/app/providers/AuthProvider";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+
+import { useAuth } from "@/app/providers/AuthProvider";
 
 /**
  * Route guard for admin routes.
@@ -10,7 +11,13 @@ export function AdminRoute() {
   const location = useLocation();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return (
+      <Navigate
+        to="/login"
+        state={{ from: location }}
+        replace
+      />
+    );
   }
 
   return <Outlet />;
