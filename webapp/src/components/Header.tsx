@@ -1,9 +1,9 @@
 // frontend/src/shared/ui/Header/Header.tsx
 import "@app/styles/all4trees.css";
 
-import logo from "@assets/logo_all4trees.png";
-
 import { Button } from "@ui/button";
+
+import logo from "@assets/logo_all4trees.png";
 
 import { useTranslation } from "@shared/i18n";
 
