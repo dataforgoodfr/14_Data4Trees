@@ -5,16 +5,16 @@ import mapStyle from "@/fixtures/mapStyle.json";
 import "./Map.css";
 
 export type MapApi = {
-    getDataForLayer: (layerId: string) => unknown;
-}
+  getDataForLayer: (layerId: string) => unknown;
+};
 
 // Hook personnalisé pour initialiser la carte
 function useMap(containerSelector: string) {
-    const [mapApi, setMapApi] = useState<MapApi>({} as MapApi);
-    const isInitialized = useRef(false);
+  const [mapApi, setMapApi] = useState<MapApi>({} as MapApi);
+  const isInitialized = useRef(false);
 
-    useEffect(() => {
-        if (isInitialized.current) return;
+  useEffect(() => {
+    if (isInitialized.current) return;
 
         try {
             const api = createMap(containerSelector, mapStyle);
@@ -25,7 +25,7 @@ function useMap(containerSelector: string) {
         }
     }, [containerSelector]);
 
-    return mapApi;
+  return mapApi;
 }
 
 export const Map: FC = () => {
@@ -36,4 +36,3 @@ export const Map: FC = () => {
         </div>
     );
 }
-

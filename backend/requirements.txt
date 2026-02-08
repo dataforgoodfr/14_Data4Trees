@@ -2,4 +2,5 @@ asgiref==3.8.1
 Django==4.2.2
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.1
+django-cors-headers==4.9.0
 docutils==0.22
