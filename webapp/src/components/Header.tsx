@@ -5,6 +5,9 @@ import { Button } from "@ui/button";
 
 import logo from "@assets/logo_all4trees.png";
 
+import { useTranslation } from "@shared/i18n";
+
+import { LanguageSelecor } from "./LanguageSelector";
 import { ModeToggle } from "./ModeToggle";
 
 interface HeaderProps {
@@ -14,6 +17,8 @@ interface HeaderProps {
 }
 
 export function Header({ onLogout, onLogin, isLogin }: HeaderProps) {
+  const { t } = useTranslation("translations");
+
   return (
     <header className="bg-background border-b border-border px-6 py-4 relative z-40">
       <div className="mx-auto max-w-screen-2xl px-6 py-4">
@@ -41,6 +46,8 @@ export function Header({ onLogout, onLogin, isLogin }: HeaderProps) {
               </Button>
             )}
             <ModeToggle />
+            <p>{t("helloWorld")}</p>
+            <LanguageSelecor />
           </div>
         </div>
       </div>

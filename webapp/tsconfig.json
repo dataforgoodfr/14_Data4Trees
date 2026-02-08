@@ -21,7 +21,8 @@
       "@widgets": ["./src/widgets/index.ts"],
       "@widgets/*": ["./src/widgets/*"],
       "@ui/*": ["./src/components/ui/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   }
 }
