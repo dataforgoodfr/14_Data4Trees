@@ -1,6 +1,8 @@
 import { LanguagesIcon } from "lucide-react";
 import type { FC } from "react";
 
+import { LANGUAGES, i18nInstance } from "@shared/i18n";
+
 import { Button } from "@ui/button";
 import {
   DropdownMenu,
@@ -8,8 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@ui/dropdown-menu";
-
-import { LANGUAGES, i18nInstance } from "@shared/i18n";
 
 const LANGUAGES_CONFIGS = [
   {

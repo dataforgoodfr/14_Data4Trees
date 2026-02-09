@@ -11,36 +11,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@app/*": [
-        "./src/app/*"
-      ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@widgets/*": [
-        "./src/widgets/*"
-      ],
-      "@features/*": [
-        "./src/features/*"
-      ],
-      "@entities/*": [
-        "./src/entities/*"
-      ],
-      "@shared/*": [
-        "./src/shared/*"
-      ],
-      "@i18n": [
-        "./src/shared/i18n/index.ts"
-      ],
-      "@libs/*": [
-        "./src/shared/libs/*"
-      ],
-      "@hooks/*": [
-        "./src/shared/hooks/*"
-      ],
-      "@ui/*": [
-        "./src/shared/ui/*"
-      ]
+      "@app/*": ["./src/app/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@widgets/*": ["./src/widgets/*"],
+      "@features/*": ["./src/features/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@i18n": ["./src/shared/i18n/index.ts"],
+      "@libs/*": ["./src/shared/libs/*"],
+      "@hooks/*": ["./src/shared/hooks/*"],
+      "@ui/*": ["./src/shared/ui/*"]
     }
   }
 }

@@ -1,6 +1,6 @@
-import { Button } from "@ui/button";
-
 import { useTranslation } from "@shared/i18n";
+
+import { Button } from "@ui/button";
 
 import { LanguageSelecor } from "./LanguageSelector";
 import { ModeToggle } from "./ModeToggle";
