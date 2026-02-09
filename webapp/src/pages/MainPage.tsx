@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { MapInstance } from "@/widgets/Map";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -22,6 +23,7 @@ export function MainPage() {
   const navigate = useNavigate();
   const client = useApi();
   const [data, setData] = useState<unknown | null>(null);
+  const [mapInstance, setMapInstance] = useState<MapInstance>(null);
 
   useEffect(() => {
     client
@@ -48,7 +50,7 @@ export function MainPage() {
             defaultSize={20}
             className="h-full"
           >
-            <MapSidebar />
+            <MapSidebar map={mapInstance} />
           </ResizablePanel>
           <ResizableHandle />
           <ResizablePanel defaultSize={80}>
@@ -64,7 +66,7 @@ export function MainPage() {
               </ResizablePanel>
               <ResizableHandle />
               <ResizablePanel defaultSize={90}>
-                <Map />
+                <Map setMapInstance={setMapInstance} />
               </ResizablePanel>
             </ResizablePanelGroup>
           </ResizablePanel>

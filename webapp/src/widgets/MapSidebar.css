@@ -1,0 +1,181 @@
+.map-sidebar {
+  height: 100%;
+  background-color: #1b2524;
+  display: flex;
+  justify-content: center;
+}
+
+.map-sidebar .sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px;
+  width: 100%;
+  max-width: 260px;
+}
+
+/* Header */
+.map-sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-sidebar .sidebar-header svg {
+  width: 16px;
+  height: 16px;
+  color: #a1a1aa;
+}
+
+.map-sidebar .sidebar-header span {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Tout / Aucun tabs */
+.map-sidebar .tabs {
+  display: flex;
+  gap: 4px;
+  border-radius: 6px;
+  background-color: #1b2524;
+  height: 34px;
+  overflow: hidden;
+}
+
+.map-sidebar .tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.15s;
+}
+
+.map-sidebar .tab--active {
+  background-color: #283836;
+  color: #d4d4d8;
+}
+
+.map-sidebar .tab--active:hover {
+  background-color: #2f4340;
+}
+
+.map-sidebar .tab--muted {
+  background-color: #1f2b2a;
+  color: #71717a;
+}
+
+.map-sidebar .tab--muted:hover {
+  background-color: #232f2e;
+}
+
+/* Section label */
+.map-sidebar .section-label {
+  color: #71717a;
+  font-size: 12px;
+}
+
+/* Layer list */
+.map-sidebar .layer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Layer button - reset global button styles */
+.map-sidebar .layer-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #2f4f4a;
+  background-color: #1f2f2d;
+  transition: opacity 0.15s;
+  box-sizing: border-box;
+}
+
+.map-sidebar .layer-btn:hover {
+  background-color: #243834;
+  border-color: #3a6b63;
+}
+
+.map-sidebar .layer-btn--hidden {
+  background-color: transparent;
+  border-color: #2a3533;
+  opacity: 0.5;
+}
+
+/* Checkbox */
+.map-sidebar .checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #059669;
+  background-color: #1f2f2d;
+}
+
+.map-sidebar .checkbox--unchecked {
+  background-color: #111;
+  border-color: #52525b;
+}
+
+.map-sidebar .checkbox svg {
+  width: 12px;
+  height: 12px;
+  color: #10b981;
+}
+
+/* Layer icon */
+.map-sidebar .layer-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Color dot (fallback for unknown layers) */
+.map-sidebar .color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Layer label */
+.map-sidebar .layer-label {
+  font-size: 12px;
+  color: #d4d4d8;
+}
+
+.map-sidebar .layer-label--hidden {
+  color: #52525b;
+}
+
+/* Footer */
+.map-sidebar .sidebar-footer {
+  border-radius: 8px;
+  border: 1px solid #2f4f4a;
+  padding: 10px;
+}
+
+.map-sidebar .sidebar-footer p:first-child {
+  color: #10b981;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.map-sidebar .sidebar-footer p:last-child {
+  color: #71717a;
+  font-size: 12px;
+  margin-top: 2px;
+}
