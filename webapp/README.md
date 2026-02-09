@@ -16,6 +16,11 @@ npm ci
 npm run dev
 ```
 
+## Architecture
+
+Ce projet suit est inspiré par l'architecture FSD sans toutefois respecter tous les principes car le site ne sera pas assez complexe pour cela.
+Retrouvez toutes les explications et instructions de structure dans cette documentation: [FSD Architecture](./docs/fsd_architecture.md).
+
 ## Autres commandes
 
 - `npm run build` : package l'application pour la mise en production (dossier [dist](./dist))
