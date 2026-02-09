@@ -1,7 +1,4 @@
-// frontend/src/shared/ui/Header/Header.tsx
 import { Button } from "@ui/button";
-
-import logo from "@assets/logo_all4trees.png";
 
 import { useTranslation } from "@shared/i18n";
 
@@ -22,7 +19,7 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
       <div className="mx-auto max-w-screen-2xl">
         <div className="flex items-center justify-between">
           <img
-            src={logo}
+            src="/logo_all4trees.png"
             alt="Logo"
             className="h-24 w-60 mr-1"
           />

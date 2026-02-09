@@ -2,26 +2,26 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@ui/button";
+import { Input } from "@ui/input";
+import { Separator } from "@ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@ui/sheet";
+import { Skeleton } from "@ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
+} from "@ui/tooltip";
 
+import { useIsMobile } from "@hooks/use-mobile";
+import { cn } from "@libs/cn";
 import { Slot } from "@radix-ui/react-slot";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";

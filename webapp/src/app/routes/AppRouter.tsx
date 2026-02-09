@@ -1,12 +1,12 @@
 import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { MainPage } from "@/pages";
+import { MainPage } from "@pages/MainPage";
 
 import { AdminRoute } from "./lib/ProtectedRoute";
 
-const AdminPage = lazy(() => import("@/pages/admin"));
-const LoginPage = lazy(() => import("@/pages/login"));
+const AdminPage = lazy(() => import("@pages/admin"));
+const LoginPage = lazy(() => import("@pages/login"));
 
 export function AppRouter() {
   return (

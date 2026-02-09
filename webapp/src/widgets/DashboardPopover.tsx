@@ -1,7 +1,10 @@
-import { ExampleGraph, type GraphConsoElecProps } from "@components";
-
 import { Button } from "@ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover";
+
+import {
+  ExampleGraph,
+  type GraphConsoElecProps,
+} from "@features/charts/ExampleGraph";
 
 export interface DashboardProps {
   graphData: {

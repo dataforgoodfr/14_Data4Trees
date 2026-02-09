@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * @todo Don't respect FSD
+ */
+import { useApi, useAuth } from "@app/providers";
+
+import { DashboardPopover } from "@widgets/DashboardPopover";
+import { Map } from "@widgets/Map";
+import { MapSidebar } from "@widgets/MapSidebar";
+import { Header } from "@widgets/header";
+
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import { DashboardPopover, Map, MapSidebar } from "@/widgets";
-
-import { useApi, useAuth } from "@providers";
-
-import { Header } from "@components";
-
+} from "@ui/resizable";
 import { SidebarProvider } from "@ui/sidebar";
 
 export interface MainPageProps {
