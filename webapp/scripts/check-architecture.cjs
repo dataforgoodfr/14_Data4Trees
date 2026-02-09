@@ -6,33 +6,62 @@
 const fs = require("fs");
 const path = require("path");
 
-const LAYERS = ["app", "pages", "widgets", "features", "entities", "shared"];
-const LAYER_HIERARCHY = {
-  shared: [],
-  entities: ["shared"],
-  features: ["entities", "shared"],
-  widgets: ["features", "entities", "shared"],
-  pages: ["widgets", "features", "entities", "shared"],
-  app: ["pages", "widgets", "features", "entities", "shared"],
+// =============== DEFINE LAYERS ===============
+
+const LAYERS_DICT = {
+  app: "app",
+  pages: "pages",
+  widgets: "widgets",
+  features: "features",
+  entities: "entitiers",
+  shared: "shared",
 };
 
+const SHARED_FOLDERS = ["libs", "i18n", "ui", "hooks"].map(
+  (folder) => `${LAYERS_DICT.shared}/${folder}`,
+);
+
+const LAYERS = Object.keys(LAYERS_DICT);
+
+const SHARED_DEPENDENCIES = [...SHARED_FOLDERS, LAYERS_DICT.shared];
+const ENTITIES_DEPENDENCIES = [...SHARED_DEPENDENCIES, LAYERS_DICT.entities];
+const FEATURES_DEPENDENCIES = [...ENTITIES_DEPENDENCIES, LAYERS_DICT.features];
+const WIDGETS_DEPENDENCIES = [...FEATURES_DEPENDENCIES, LAYERS_DICT.widgets];
+const PAGES_DEPENDENCIES = [...WIDGETS_DEPENDENCIES, LAYERS_DICT.pages];
+const APP_DEPENDENCIES = [...PAGES_DEPENDENCIES, LAYERS_DICT.app];
+
+const LAYER_HIERARCHY = {
+  shared: SHARED_DEPENDENCIES,
+  entities: ENTITIES_DEPENDENCIES,
+  features: FEATURES_DEPENDENCIES,
+  widgets: WIDGETS_DEPENDENCIES,
+  pages: PAGES_DEPENDENCIES,
+  app: APP_DEPENDENCIES,
+};
+
+// =============== DEFINE CONSTANTS ===============
+
+const SRC_DIR = path.join(__dirname, "../src");
+
 function getLayerFromPath(filePath) {
-  const relativePath = path.relative(path.join(__dirname, "src"), filePath);
+  const relativePath = path.relative(SRC_DIR, filePath);
   const firstDir = relativePath.split(path.sep)[0];
   return LAYERS.includes(firstDir) ? firstDir : null;
 }
 
 function checkImports(filePath, fileContent) {
   const layer = getLayerFromPath(filePath);
+  console.log("Layer is ", layer, " for ", filePath);
   if (!layer) return [];
 
   const violations = [];
-  const importRegex = /import\s+.*\s+from\s+['"]@\/([^/'"]+)/g;
+  const importRegex =
+    /import\s+.*\s+from\s+['"](@(?:app|pages|widgets|features|entities|shared|i18n|libs|hooks|ui)(?:\/.*)?)['"]/g;
   let match;
 
   while ((match = importRegex.exec(fileContent)) !== null) {
-    const importedLayer = match[1];
-
+    const importPath = match[1]; // @app/providers/...;
+    const importedLayer = importPath.split("/")[0].replace("@", ""); // app
     if (
       LAYERS.includes(importedLayer) &&
       !LAYER_HIERARCHY[layer].includes(importedLayer)
@@ -76,10 +105,9 @@ function scanDirectory(dir) {
 }
 
 // Exécution
-console.log("🔍 Vérification de l'architecture FSD...\n");
+console.log("🔍 Vérification de l'architecture custom FSD...\n");
 
-const srcDir = path.join(__dirname, "../src");
-const violations = scanDirectory(srcDir);
+const violations = scanDirectory(SRC_DIR);
 
 if (violations.length === 0) {
   console.log(
