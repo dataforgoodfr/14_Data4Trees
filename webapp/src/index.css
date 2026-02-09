@@ -3,10 +3,8 @@
  * 
  * Responsabilités :
  * 1. Imports Tailwind + plugins
- * 2. Import all4trees.css (variables charte)
- * 3. Import globals.css (reset)
- * 4. Remapper variables shadcn sur la charte A4T
- * 5. Dark mode (light + dark)
+ * 2. Remapper variables shadcn sur la charte A4T
+ * 3. Dark mode (light + dark)
  */
 
 @import "tailwindcss";
@@ -75,39 +73,6 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e5e7eb;
   --sidebar-ring: var(--color-vert-kelly);
-}
-
-body {
-  background-color: var(--foreground);
-  font-family: var(--font-body-primary);
-}
-
-a {
-  font-weight: 500;
-  color: var(--primary);
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: var(--secondary);
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: var(--foreground);
-  border-color: var(--border);
-  background-color: var(--primary);
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  background-color: var(--secondary);
 }
 
 @theme inline {
