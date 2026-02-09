@@ -3,58 +3,51 @@
  * 
  * Responsabilité :
  * - Styles HTML de base (body, headings, links, etc.)
+ *
  * 
  * ℹ️ Utilise les variables CSS de all4trees.css et index.css
+ * ⚠️ Ajouter la customisation à la layer components, de sorte à pouvoir override dans le code (layer utilies)
  */
 
+/**
+ * ⚠️ Keep this import for the globals.css to know the tailwind theme
+ * ℹ️ It'll import the right tailwind classes.
+ */
+@import "@/index.css";
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+@layer components {
+  * {
+    @apply border-border outline-ring/50;
+  }
 
-body {
-  font-size: 1rem;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-}
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  body {
+    @apply scheme-light-dark;
+    @apply bg-background text-foreground;
+    @apply font-(family-name:--font-body-primary);
+    @apply text-base;
+  }
 
-body {
-  background-color: var(--foreground);
-  font-family: var(--font-body-primary);
-}
+  h1 {
+    @apply text-5xl;
+  }
 
-a {
-  font-weight: 500;
-  color: var(--primary);
-  text-decoration: inherit;
-}
+  a {
+    @apply text-primary hover:text-secondary;
+    @apply font-medium;
+  }
 
-a:hover {
-  color: var(--secondary);
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: var(--foreground);
-  border-color: var(--border);
-  background-color: var(--primary);
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  background-color: var(--secondary);
+  button {
+    @apply px-4 py-2 rounded-lg;
+    @apply border border-solid border-[var(--border)];
+    @apply cursor-pointer;
+    @apply text-foreground font-medium;
+    @apply bg-primary hover:bg-secondary;
+    @apply transition-colors duration-250;
+  }
 }
