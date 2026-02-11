@@ -1,5 +1,6 @@
 import { AlertCircle } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { fetchToken } from "@/app/api/client";
 import { useAuth } from "@/app/providers";
@@ -21,6 +22,8 @@ interface LoginFormProps extends React.ComponentPropsWithoutRef<"div"> {
 }
 
 export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
+  const { t } = useTranslation("translations");
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +41,7 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
       login(token);
       onSuccess();
     } catch {
-      setError("Identifiants invalides");
+      setError(t("auth.loginForm.credentialsError"));
     } finally {
       setIsLoading(false);
     }
@@ -51,10 +54,10 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
     >
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Connexion</CardTitle>
-          <CardDescription>
-            Renseignez votre nom d'utilisateur ci-dessous pour vous connecter
-          </CardDescription>
+          <CardTitle className="text-2xl">
+            {t("auth.loginForm.title")}
+          </CardTitle>
+          <CardDescription>{t("auth.loginForm.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -63,7 +66,9 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
           >
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="username">Nom d'utilisateur</Label>
+                <Label htmlFor="username">
+                  {t("auth.loginForm.field.username")}
+                </Label>
                 <Input
                   id="username"
                   type="text"
@@ -74,7 +79,9 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="password">Mot de passe</Label>
+                <Label htmlFor="password">
+                  {t("auth.loginForm.field.password")}
+                </Label>
                 <Input
                   id="password"
                   type="password"
@@ -98,7 +105,9 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
                 className="w-full"
                 disabled={isLoading}
               >
-                {isLoading ? "Connexion..." : "Se connecter"}
+                {isLoading
+                  ? t("auth.loginForm.button.pendingLogin")
+                  : t("auth.loginForm.button.login")}
               </Button>
             </div>
           </form>

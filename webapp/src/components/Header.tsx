@@ -35,14 +35,14 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
                 onClick={onLogout}
                 className="px-4 py-2 bg-primary text rounded hover:bg-red-700"
               >
-                Déconnexion
+                {t("header.button.logout")}
               </Button>
             ) : (
               <Button
                 onClick={onLogin}
                 className="px-4 py-2 bg-primary text-white rounded hover:bg-green-700"
               >
-                Connexion
+                {t("header.button.login")}
               </Button>
             )}
             <ModeToggle />

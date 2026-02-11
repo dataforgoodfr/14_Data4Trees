@@ -1,3 +1,24 @@
 {
-  "helloWorld": "Hello world !"
+  "helloWorld": "Bonjour le monde !",
+  "header": {
+    "button": {
+      "login": "Login",
+      "logout": "Logout"
+    }
+  },
+  "auth": {
+    "loginForm": {
+      "credentialsError": "Invalid credentials",
+      "title": "Login",
+      "description": "Enter your username below to log in",
+      "field": {
+        "username": "Username",
+        "password": "Password"
+      },
+      "button": {
+        "login": "Login",
+        "pendingLogin": "Logging in..."
+      }
+    }
+  }
 }
