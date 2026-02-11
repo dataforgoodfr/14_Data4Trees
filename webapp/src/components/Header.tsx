@@ -13,10 +13,10 @@ import { ModeToggle } from "./ModeToggle";
 interface HeaderProps {
   onLogout: () => void;
   onLogin: () => void;
-  isLogin: boolean;
+  isAuthenticated: boolean;
 }
 
-export function Header({ onLogout, onLogin, isLogin }: HeaderProps) {
+export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
   const { t } = useTranslation("translations");
 
   return (
@@ -30,7 +30,7 @@ export function Header({ onLogout, onLogin, isLogin }: HeaderProps) {
           />
 
           <div className="flex items-center gap-4">
-            {isLogin ? (
+            {isAuthenticated ? (
               <Button
                 onClick={onLogout}
                 className="px-4 py-2 bg-primary text rounded hover:bg-red-700"

@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+import { verifyToken } from "../api/client";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -39,15 +39,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
-      // Vérifier si le token est toujours valide
-      fetch(`${API_URL}/auth/verify`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.valid) {
+      verifyToken(storedToken)
+        .then((isValid) => {
+          if (isValid) {
             setToken(storedToken);
             setIsAuthenticated(true);
           } else {
