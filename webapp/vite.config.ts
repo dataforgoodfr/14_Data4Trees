@@ -17,6 +17,7 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@pages": path.resolve(__dirname, "./src/pages"),
       "@ui": path.resolve(__dirname, "./src/components/ui"),
+      "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
   plugins: [react(), tailwindcss()],
