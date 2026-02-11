@@ -5,11 +5,14 @@ import { useAuth } from "@/app/providers/AuthProvider";
 /**
  * Route guard for admin routes.
  * Redirect to login page if not authenticated.
- * //TODO: avoid login redirection while verifyToken is pending
  */
 export function AdminRoute() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAuthLoading } = useAuth();
   const location = useLocation();
+
+  if (isAuthLoading) {
+    return null;
+  }
 
   if (!isAuthenticated) {
     return (
