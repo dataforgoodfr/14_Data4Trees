@@ -6,33 +6,22 @@ import style from "@/fixtures/style.json";
 
 import "./Map.css";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type MapInstance = any;
-
-interface MapProps {
-  setMapInstance?: (map: MapInstance) => void;
-}
-
-function useMap(
-  containerSelector: string,
-  onReady?: (map: MapInstance) => void,
-) {
+function useMap(containerSelector: string) {
   const isInitialized = useRef(false);
 
   useEffect(() => {
     if (isInitialized.current) return;
     try {
-      const api = createMap(containerSelector, style);
-      api.map.on("load", () => onReady?.(api.map));
+      createMap(containerSelector, style);
       isInitialized.current = true;
     } catch (error) {
       console.error("Erreur lors de l'initialisation de la carte:", error);
     }
-  }, [containerSelector, onReady]);
+  }, [containerSelector]);
 }
 
-export const Map: FC<MapProps> = ({ setMapInstance }) => {
-  useMap("#map", setMapInstance);
+export const Map: FC = () => {
+  useMap("#map");
 
   return (
     <div

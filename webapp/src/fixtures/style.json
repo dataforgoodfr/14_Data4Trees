@@ -148,6 +148,7 @@
   "metadata": {
     "controls": [
       { "type": "compass", "position": "top-left" },
+      { "type": "layer", "position": "top-right" },
       { "type": "scale", "position": "bottom-left" }
     ]
   }
