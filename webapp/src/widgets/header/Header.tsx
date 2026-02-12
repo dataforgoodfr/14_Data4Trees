@@ -1,3 +1,5 @@
+import { AdminLink } from "@features/admin/AdminLink";
+
 import { useTranslation } from "@shared/i18n";
 
 import { Button } from "@ui/button";
@@ -25,6 +27,7 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
           />
 
           <div className="flex items-center gap-4">
+            <AdminLink />
             {isAuthenticated ? (
               <Button
                 onClick={onLogout}
