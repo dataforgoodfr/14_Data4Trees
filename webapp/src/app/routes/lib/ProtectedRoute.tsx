@@ -7,8 +7,12 @@ import { useAuth } from "@/app/providers/AuthProvider";
  * Redirect to login page if not authenticated.
  */
 export function AdminRoute() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAuthLoading } = useAuth();
   const location = useLocation();
+
+  if (isAuthLoading) {
+    return null;
+  }
 
   if (!isAuthenticated) {
     return (

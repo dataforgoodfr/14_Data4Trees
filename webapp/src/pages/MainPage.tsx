@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/resizable";
 import { DashboardPopover, Map, MapSidebar } from "@/widgets";
 
-import { useApi } from "@providers";
+import { useApi, useAuth } from "@providers";
 
 import { Header } from "@components";
 
@@ -19,6 +19,7 @@ export interface MainPageProps {
 }
 
 export function MainPage() {
+  const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const client = useApi();
   const [data, setData] = useState<unknown | null>(null);
@@ -34,8 +35,8 @@ export function MainPage() {
     <div className="flex flex-col h-screen">
       <Header
         onLogin={() => navigate("/login")}
-        onLogout={() => console.log("Logout clicked")}
-        isLogin={false}
+        onLogout={() => logout()}
+        isAuthenticated={isAuthenticated}
       />
 
       {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}

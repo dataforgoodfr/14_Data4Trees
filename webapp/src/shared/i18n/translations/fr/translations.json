@@ -1,3 +1,24 @@
 {
-  "helloWorld": "Bonjour le monde !"
+  "helloWorld": "Bonjour le monde !",
+  "header": {
+    "button": {
+      "login": "Connexion",
+      "logout": "Déconnexion"
+    }
+  },
+  "auth": {
+    "loginForm": {
+      "credentialsError": "Identifiants invalides",
+      "title": "Connexion",
+      "description": "Renseignez votre nom d'utilisateur ci-dessous pour vous connecter",
+      "field": {
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe"
+      },
+      "button": {
+        "login": "Connexion",
+        "pendingLogin": "Connexion..."
+      }
+    }
+  }
 }

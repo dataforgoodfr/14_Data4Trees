@@ -6,10 +6,11 @@ import {
   useState,
 } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+import { verifyToken } from "../api/client";
 
 export interface AuthContextType {
   isAuthenticated: boolean;
+  isAuthLoading: boolean;
   token: string | null;
   login: (token: string) => void;
   logout: () => void;
@@ -33,34 +34,35 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
-    if (storedToken) {
-      // Vérifier si le token est toujours valide
-      fetch(`${API_URL}/auth/verify`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.valid) {
-            setToken(storedToken);
-            setIsAuthenticated(true);
-          } else {
-            // Token invalide, nettoyer le localStorage
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-          }
-        })
-        .catch(() => {
+    if (!storedToken) {
+      setIsAuthLoading(false);
+      return;
+    }
+
+    verifyToken(storedToken)
+      .then((isValid) => {
+        if (isValid) {
+          setToken(storedToken);
+          setIsAuthenticated(true);
+        } else {
+          // Token invalide, nettoyer le localStorage
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-        });
-    }
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      })
+      .finally(() => {
+        setIsAuthLoading(false);
+      });
   }, []);
 
   const login = (newToken: string) => {
@@ -77,7 +79,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, token, login, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, isAuthLoading, token, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
