@@ -28,7 +28,6 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
           />
 
           <div className="flex items-center gap-4">
-            <p>{t("helloWorld")}</p>
             {isAuthenticated ? (
               <Button
                 onClick={onLogout}
