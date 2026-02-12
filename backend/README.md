@@ -48,3 +48,40 @@ Simply start the django server, and you're good to go !
 ``` bash
 python manage.py runserver
 ```
+
+## Shared authentication between front and backend
+
+We bridge JWT authentication (stateless) with Django session authentication (stateful).
+
+### Strategy
+
+Instead of trying to make Django Admin understand JWT directly, we:
+
+1. Validate the JWT on the backend.
+2. Create a Django session for that user.
+3. Redirect to /admin/.
+
+### Workflow
+
+1. Frontend makes JWT authentication and gets a token
+2. When requesting access to the admin, it calls /admin-session endpoint.
+3. If the JWT token is valid, it creates a Django session for that user.
+4. Because in the frontend we provide `credentials: "include"`, the Browser stores the `sessionid` cookie.
+5. When /admin-session succeeds, the frontend can safely redirect to the Django admin page, with the `sessionid` cookie.
+
+### Why cookie sharing is working
+
+First, in `settings.py` we have
+
+```py
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+# Enable credentials (e.g., cookies) if needed
+CORS_ALLOW_CREDENTIALS = True
+```
+
+Then, Cookie are shared the subdomains for a same domain with `SESSION_COOKIE_SAMESITE = "Lax"`.
+
+:warning: When deploying to production, we'll need to ensure `SESSION_COOKIE_SECURE = True`.
