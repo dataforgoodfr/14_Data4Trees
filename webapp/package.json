@@ -32,7 +32,7 @@
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "coordo": "github:dataforgoodfr/Coordonnees#fix/coordo-package-main-entry",
+    "coordo": "github:dataforgoodfr/Coordonnees#main",
     "i18next": "^25.8.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-http-backend": "^3.0.2",
