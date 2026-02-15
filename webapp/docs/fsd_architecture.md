@@ -39,6 +39,9 @@ Pour faire simple, un élément d'une couche n'a le droit d'importer du code que
 
 > The CLI will use the aliases.ui value to determine where to place your ui components. Use this config if you want to customize the installation directory for your ui components.
 
+:warning: Les alias de ShadCN sont configurés dans components.json et sont très peu customisables.
+Il est très important de conserver l'export de `cn` (et autres utils ShadCN) dans `shared/lib/utils` (notamment `lib` et `utils` sont les formats attendus).
+
 **Règle** : Pas de logique métier ici.
 
 ### 2. `entities/` (optionnel)

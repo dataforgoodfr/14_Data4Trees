@@ -17,7 +17,7 @@ const LAYERS_DICT = {
   shared: "shared",
 };
 
-const SHARED_FOLDERS = ["libs", "i18n", "ui", "hooks"].flatMap((folder) => [
+const SHARED_FOLDERS = ["lib", "i18n", "ui", "hooks"].flatMap((folder) => [
   `${LAYERS_DICT.shared}/${folder}`,
   folder,
 ]);

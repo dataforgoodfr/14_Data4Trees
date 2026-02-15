@@ -18,9 +18,11 @@
       "@entities/*": ["./src/entities/*"],
       "@shared/*": ["./src/shared/*"],
       "@i18n": ["./src/shared/i18n/index.ts"],
-      "@libs/*": ["./src/shared/libs/*"],
+      "@lib/*": ["./src/shared/lib/*"],
       "@hooks/*": ["./src/shared/hooks/*"],
-      "@ui/*": ["./src/shared/ui/*"]
+      "@hooks": ["./src/shared/hooks"],
+      "@ui/*": ["./src/shared/ui/*"],
+      "@ui": ["./src/shared/ui"]
     }
   }
 }

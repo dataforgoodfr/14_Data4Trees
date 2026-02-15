@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { fetchToken } from "@app/api/client";
 import { useAuth } from "@app/providers";
 
-import { cn } from "@libs/cn";
+import { cn } from "@shared/lib/utils";
 
 import { Alert, AlertDescription } from "@ui/alert";
 import { Button } from "@ui/button";
