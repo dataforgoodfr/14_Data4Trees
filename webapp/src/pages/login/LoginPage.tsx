@@ -5,8 +5,9 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import { useAuth } from "@/app/providers";
-import { LoginForm } from "@/features/auth/LoginForm";
+import { useAuth } from "@app/providers";
+
+import { LoginForm } from "@features/auth/LoginForm";
 
 /**
  * Initial source target before redirecting to Login

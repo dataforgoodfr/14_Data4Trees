@@ -13,13 +13,14 @@ const LAYERS_DICT = {
   pages: "pages",
   widgets: "widgets",
   features: "features",
-  entities: "entitiers",
+  entities: "entities",
   shared: "shared",
 };
 
-const SHARED_FOLDERS = ["libs", "i18n", "ui", "hooks"].map(
-  (folder) => `${LAYERS_DICT.shared}/${folder}`,
-);
+const SHARED_FOLDERS = ["libs", "i18n", "ui", "hooks"].flatMap((folder) => [
+  `${LAYERS_DICT.shared}/${folder}`,
+  folder,
+]);
 
 const LAYERS = Object.keys(LAYERS_DICT);
 

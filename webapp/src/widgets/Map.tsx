@@ -2,7 +2,7 @@
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef } from "react";
 
-import style from "@/fixtures/style.json";
+import style from "@app/api/style.json";
 
 import "./Map.css";
 
