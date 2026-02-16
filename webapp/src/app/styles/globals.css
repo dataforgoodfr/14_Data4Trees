@@ -1,40 +1,53 @@
 /**
- * GLOBALS.CSS - Reset & Styles de Base HTML
+ * GLOBALS.CSS
  * 
  * Responsabilité :
- * - Reset CSS (normalize styles navigateur)
  * - Styles HTML de base (body, headings, links, etc.)
+ *
  * 
  * ℹ️ Utilise les variables CSS de all4trees.css et index.css
+ * ⚠️ Ajouter la customisation à la layer components, de sorte à pouvoir override dans le code (layer utilies)
  */
 
-/* ========================================================================
-   RESET CSS
-   ======================================================================== */
-
-@import "@app/styles/all4trees.css";
+/**
+ * ⚠️ Keep this import for the globals.css to know the tailwind theme
+ * ℹ️ It'll import the right tailwind classes.
+ */
 @import "@/index.css";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer components {
+  * {
+    @apply border-border outline-ring/50;
+  }
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-body {
-  font-size: 1rem;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-}
+  body {
+    @apply scheme-light-dark;
+    @apply bg-background text-foreground;
+    @apply font-(family-name:--font-body-primary);
+    @apply text-base;
+  }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  h1 {
+    @apply text-5xl;
+  }
+
+  a {
+    @apply text-primary hover:text-secondary;
+    @apply font-medium;
+  }
+
+  button {
+    @apply px-4 py-2 rounded-lg;
+    @apply border border-solid border-[var(--border)];
+    @apply cursor-pointer;
+    @apply text-foreground font-medium;
+    @apply bg-primary hover:bg-secondary;
+    @apply transition-colors duration-250;
+  }
 }

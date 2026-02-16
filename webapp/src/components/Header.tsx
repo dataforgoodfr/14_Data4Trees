@@ -1,6 +1,4 @@
 // frontend/src/shared/ui/Header/Header.tsx
-import "@app/styles/all4trees.css";
-
 import { Button } from "@ui/button";
 
 import logo from "@assets/logo_all4trees.png";
@@ -21,8 +19,8 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
 
   return (
     <header className="bg-background border-b border-border px-6 py-4 relative z-40">
-      <div className="mx-auto max-w-screen-2xl px-6 py-4">
-        <div className="flex items-center justify-between pr-10">
+      <div className="mx-auto max-w-screen-2xl">
+        <div className="flex items-center justify-between">
           <img
             src={logo}
             alt="Logo"
@@ -46,7 +44,6 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
               </Button>
             )}
             <ModeToggle />
-            <p>{t("helloWorld")}</p>
             <LanguageSelecor />
           </div>
         </div>
