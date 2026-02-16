@@ -1,4 +1,3 @@
-// @ts-expect-error Could not find a declaration file for module 'coordo'.
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef } from "react";
 
@@ -21,7 +20,7 @@ function useMap(containerSelector: string) {
     el.addEventListener("map:ready", handleReady);
 
     try {
-      createMap(containerSelector, style);
+      createMap(containerSelector, style as unknown as string);
     } catch (error) {
       console.error("Erreur lors de l'initialisation de la carte:", error);
     }
