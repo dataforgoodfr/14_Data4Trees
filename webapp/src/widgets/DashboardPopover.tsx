@@ -1,4 +1,7 @@
-import { ExampleGraph, type GraphConsoElecProps } from "@components";
+import {
+  ExampleGraph,
+  type GraphConsoElecProps,
+} from "@features/charts/ExampleGraph";
 
 import { Button } from "@ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover";

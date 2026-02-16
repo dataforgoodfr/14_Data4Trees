@@ -1,7 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
 export const fetchJsonFixture = async (name: string) => {
-  const response = await fetch(`/src/fixtures/${name}.json`);
+  const response = await fetch(`/src/app/api/${name}.json`);
   return response.json();
 };
 

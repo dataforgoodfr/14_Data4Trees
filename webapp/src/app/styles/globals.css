@@ -13,7 +13,7 @@
  * ⚠️ Keep this import for the globals.css to know the tailwind theme
  * ℹ️ It'll import the right tailwind classes.
  */
-@import "@/index.css";
+@import "../../index.css";
 
 @layer components {
   * {

@@ -1,7 +1,4 @@
-# FRONTEND ALL 4 TREES ![logo React](./src/assets/react.svg)
-
-Ce projet suit est inspiré par l'architecture FSD sans toutefois respecter tous les principes car le site ne sera pas assez complexe pour cela.
-Plus d'infos ici : [https://feature-sliced.github.io/documentation/docs/get-started/overview](https://feature-sliced.github.io/documentation/docs/get-started/overview)
+# FRONTEND ALL 4 TREES
 
 ## Prérequis:
 
@@ -18,6 +15,11 @@ npm ci
 ```
 npm run dev
 ```
+
+## Architecture
+
+Ce projet suit est inspiré par l'architecture FSD sans toutefois respecter tous les principes car le site ne sera pas assez complexe pour cela.
+Retrouvez toutes les explications et instructions de structure dans cette documentation: [FSD Architecture](./docs/fsd_architecture.md).
 
 ## Autres commandes
 

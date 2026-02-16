@@ -11,18 +11,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
-      "@providers": ["./src/app/providers/index.ts"],
-      "@components": ["./src/components/index.ts"],
-      "@components/*": ["./src/components/*"],
-      "@pages": ["./src/pages/index.ts"],
       "@pages/*": ["./src/pages/*"],
-      "@widgets": ["./src/widgets/index.ts"],
       "@widgets/*": ["./src/widgets/*"],
-      "@ui/*": ["./src/components/ui/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@features/*": ["./src/features/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@i18n": ["./src/shared/i18n/index.ts"],
+      "@lib/*": ["./src/shared/lib/*"],
+      "@hooks/*": ["./src/shared/hooks/*"],
+      "@hooks": ["./src/shared/hooks"],
+      "@ui/*": ["./src/shared/ui/*"],
+      "@ui": ["./src/shared/ui"]
     }
   }
 }

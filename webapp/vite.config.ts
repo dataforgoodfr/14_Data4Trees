@@ -9,15 +9,16 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
       "@app": path.resolve(__dirname, "./src/app"),
-      "@providers": path.resolve(__dirname, "./src/app/providers"),
-      "@components": path.resolve(__dirname, "./src/components"),
-      "@widgets": path.resolve(__dirname, "./src/widgets"),
-      "@assets": path.resolve(__dirname, "./src/assets"),
       "@pages": path.resolve(__dirname, "./src/pages"),
-      "@ui": path.resolve(__dirname, "./src/components/ui"),
+      "@widgets": path.resolve(__dirname, "./src/widgets"),
+      "@features": path.resolve(__dirname, "./src/features"),
+      "@entities": path.resolve(__dirname, "./src/entities"),
       "@shared": path.resolve(__dirname, "./src/shared"),
+      "@i18n": path.resolve(__dirname, "./src/shared/i18n"),
+      "@ui": path.resolve(__dirname, "./src/shared/ui"),
+      "@lib": path.resolve(__dirname, "./src/shared/lib"),
+      "@hooks": path.resolve(__dirname, "./src/shared/hooks"),
     },
   },
   plugins: [react(), tailwindcss()],
