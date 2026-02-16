@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-/**
- * @todo Don't respect FSD
- */
-import { useApi, useAuth } from "@app/providers";
-
 import { DashboardPopover } from "@widgets/DashboardPopover";
 import { Map } from "@widgets/Map";
 import { MapSidebar } from "@widgets/MapSidebar";
 import { Header } from "@widgets/header";
+
+import { useApi } from "@shared/hooks/useApi";
+import { useAuth } from "@shared/hooks/useAuth";
 
 import {
   ResizableHandle,
