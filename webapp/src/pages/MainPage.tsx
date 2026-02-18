@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 /**
  * @todo Don't respect FSD
  */
-import { useApi, useAuth } from "@app/providers";
+import { useApi } from "@app/providers";
 
 import { DashboardPopover } from "@widgets/DashboardPopover";
 import { Map } from "@widgets/Map";
 import { MapSidebar } from "@widgets/MapSidebar";
-import { Header } from "@widgets/header";
 
 import {
   ResizableHandle,
@@ -23,8 +21,6 @@ export interface MainPageProps {
 }
 
 export function MainPage() {
-  const { isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
   const client = useApi();
   const [data, setData] = useState<unknown | null>(null);
 
@@ -36,13 +32,7 @@ export function MainPage() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
-      <Header
-        onLogin={() => navigate("/login")}
-        onLogout={() => logout()}
-        isAuthenticated={isAuthenticated}
-      />
-
+    <>
       {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}
       <ResizablePanelGroup
         direction="horizontal"
@@ -51,7 +41,7 @@ export function MainPage() {
         <SidebarProvider>
           <ResizablePanel
             defaultSize={20}
-            className="h-full"
+            className="h-full p-4"
           >
             <MapSidebar />
           </ResizablePanel>
@@ -75,6 +65,6 @@ export function MainPage() {
           </ResizablePanel>
         </SidebarProvider>
       </ResizablePanelGroup>
-    </div>
+    </>
   );
 }
