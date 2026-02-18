@@ -1,0 +1,26 @@
+{
+  "layers": [
+    {
+      "id": "satellite",
+      "type": "xyzservices",
+      "provider": "Esri.WorldImagery"
+    },
+    {
+      "id": "villages",
+      "type": "openmaptiles",
+      "layer": "place",
+      "filters": { "class": "village" }
+    },
+    {
+      "id": "boundaries",
+      "type": "openmaptiles",
+      "layer": "boundary",
+      "filters": { "admin_level": 2 }
+    }
+  ],
+  "controls": [
+    { "type": "compass", "position": "top-left" },
+    { "type": "layer", "position": "top-right" },
+    { "type": "scale", "position": "bottom-left" }
+  ]
+}

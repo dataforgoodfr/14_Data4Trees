@@ -5,13 +5,15 @@ import { type FC, useEffect, useRef } from "react";
 import "./Map.css";
 import style from "./style.json";
 
+const STYLE_URL = "http://localhost:8000/api/maps/style.json";
+
 function useMap(containerSelector: string) {
   const isInitialized = useRef(false);
 
   useEffect(() => {
     if (isInitialized.current) return;
     try {
-      createMap(containerSelector, style);
+      createMap(containerSelector, STYLE_URL);
       isInitialized.current = true;
     } catch (error) {
       console.error("Erreur lors de l'initialisation de la carte:", error);
