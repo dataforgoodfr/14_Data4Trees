@@ -38,13 +38,13 @@
   --popover-foreground: var(--color-nuit);
 
   --primary: var(--color-vert-kelly);
-  --primary-foreground: var(--color-bleu);
+  --primary-foreground: var(--color-nuit);
   --secondary: var(--color-jaune-vert);
   --secondary-foreground: var(--color-nuit);
 
   --muted: #e5e7eb;
   --muted-foreground: var(--color-onyx);
-  --accent: var(--color-citrouille);
+  --accent: var(--color-vert-de-gris);
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
 
@@ -69,7 +69,7 @@
 }
 
 .dark {
-  --background: var(--color-nuit);
+  --background: var(--color-vert-sombre);
   --foreground: var(--color-alabaster);
 
   --card: var(--color-onyx);
@@ -79,14 +79,14 @@
   --popover-foreground: var(--color-alabaster);
 
   --primary: var(--color-brunswick-green);
-  --primary-foreground: var(--color-nuit);
+  --primary-foreground: var(--color-vert-clair);
   --secondary: var(--color-vert-de-gris);
   --secondary-foreground: var(--color-nuit);
 
   --muted: var(--color-onyx);
   --muted-foreground: #9ca3af;
-  --accent: var(--color-citrouille);
-  --accent-foreground: var(--color-nuit);
+  --accent: var(--color-brunswick-green);
+  --accent-foreground: var(--color-vert-clair);
   --destructive: #ef4444;
 
   --border: rgba(255, 255, 255, 0.15);
@@ -124,29 +124,37 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
