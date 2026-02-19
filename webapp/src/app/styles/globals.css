@@ -16,37 +16,21 @@
 @import "../../index.css";
 
 @layer components {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-synthesis: none;
+
+    font-family:
+      var(--font-body-primary), var(--font-title-primary),
+      var(--font-body-secondary), var(--font-title-secondary), system-ui,
+      sans-serif;
   }
 
   body {
     @apply bg-background text-foreground;
     @apply font-(family-name:--font-body-primary);
     @apply text-base;
-  }
-
-  h1 {
-    @apply text-5xl;
-  }
-
-  a {
-    @apply text-primary hover:text-secondary;
-    @apply font-medium;
-  }
-
-  button {
-    @apply px-4 py-2 rounded-lg;
-    @apply border border-solid border-[var(--border)];
-    @apply cursor-pointer;
-    @apply text-foreground font-medium;
-    @apply bg-primary hover:bg-secondary;
-    @apply transition-colors duration-250;
   }
 }
