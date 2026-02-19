@@ -9,8 +9,9 @@
 
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
+@import "./app/styles/all4trees.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark *));
 
 /* THEMING SHADCN/UI AJUSTE AVEC LA CHARTE GRAPHIQUE ALL4TREES */
 :root {
@@ -107,43 +108,8 @@
 }
 
 /* DARK MODE SHADCN */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-nuit);
-    --foreground: var(--color-alabaster);
-    --card: var(--color-onyx);
-    --card-foreground: var(--color-alabaster);
-    --popover: var(--color-onyx);
-    --popover-foreground: var(--color-alabaster);
-    --primary: var(--color-brunswick-green);
-    --primary-foreground: var(--color-nuit);
-    --secondary: var(--color-vert-de-gris);
-    --secondary-foreground: var(--color-nuit);
-    --muted: var(--color-onyx);
-    --muted-foreground: #9ca3af;
-    --accent: var(--color-citrouille);
-    --accent-foreground: var(--color-nuit);
-    --destructive: #ef4444;
-    --border: rgba(255, 255, 255, 0.15);
-    --input: rgba(255, 255, 255, 0.05);
-    --ring: var(--color-jaune-vert);
-    --chart-1: #60a5fa;
-    --chart-2: #22d3ee;
-    --chart-3: #86efac;
-    --chart-4: #fbbf24;
-    --chart-5: #f97316;
-    --sidebar: var(--color-onyx);
-    --sidebar-foreground: var(--color-alabaster);
-    --sidebar-primary: var(--color-onyx);
-    --sidebar-primary-foreground: var(--color-vert-kelly);
-    --sidebar-accent: var(--color-citrouille);
-    --sidebar-accent-foreground: var(--color-nuit);
-    --sidebar-border: rgba(255, 255, 255, 0.15);
-    --sidebar-ring: var(--color-jaune-vert);
-  }
-}
 
-/* Alternative : Support de la classe `.dark` pour contrôle manuel */
+/* Support de la classe `.dark` pour contrôle manuel */
 .dark {
   --background: var(--color-nuit);
   --foreground: var(--color-alabaster);
