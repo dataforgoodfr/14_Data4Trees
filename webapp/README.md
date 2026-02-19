@@ -65,3 +65,67 @@ Vous pouvez vous référrer au [README](./src/shared/i18n/README.md) du dossier 
      // ...
    };
    ```
+
+## Gérer les tokens tailwind
+
+1. Nous définissons des variables css qui correspondent à la charte graphique de l'association (`app/styles/all4trees.css`)
+
+```css
+:root {
+  --color-nuit: #0f0f0f;
+  --color-alabaster: #f5f4eb;
+  --color-onyx: #424242;
+  --color-vert-kelly: #54b025;
+  ...
+}
+```
+
+2. Nous utilitons ces variables css pour définir d'autres variables css à but métier: couleur primaire, couleur de texte par défaut, couleur de surface, ... Ces variables css métiers varient entre le light et le dark mode. Par exemple, le dark mode correpond à du texte clair sur un fond sombre, tandis que le light mode correspond à du texte foncé sur un fond clair.
+   :warning: Certaines de ces variables ne sont pas nommées par hasard: elles correspondent aux [variables natives de ShadCN](https://ui.shadcn.com/docs/theming).
+
+```css
+:root {
+  --foreground: var(--color-nuit);
+  --background: var(--color-alabaster);
+}
+
+.dark {
+  --foreground: var(--color-alabaster);
+  --background: var(--color-nuit);
+}
+```
+
+3. Enfin, nous créons dans le thème tailwind de nouveau tokens qui permettront d'utiliser ces variables métiers dynamiques.
+   :warning: Contrairement à ce qui est indiqué dans [la documentation de theming de ShadCn](https://ui.shadcn.com/docs/theming), les variables css prédéfinies dans le système (foregound, background, primary, ...) ne sont pas automatiquement intégrées dans le thème tailwind (v4 tailwind). C'est pourquoi nous devons ajouter "manuellement" ces variables de couleur dans l'extension du thème.
+
+```css
+@theme {
+  --color-primary: var(--color-vert-kelly);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+}
+```
+
+```tsx
+className = "text-foreground hover:text-primary bg-background";
+```
+
+4. On peut ajouter bien d'autres variables dans le thème tailwind, dès lors qu'on respecte les conventions de namespace:
+   > --color-_ Color utilities like bg-red-500, text-sky-300, and many more
+   > --font-_ Font family utilities like font-sans
+   > --text-_ Font size utilities like text-xl
+   > --font-weight-_ Font weight utilities like font-bold
+   > --tracking-_ Letter spacing utilities like tracking-wide
+   > --leading-_ Line height utilities like leading-tight
+   > --breakpoint-_ Responsive breakpoint variants like sm:_
+   > --container-_ Container query variants like @sm:_ and size utilities like max-w-md
+   > --spacing-_ Spacing and sizing utilities like px-4, max-h-16, and many more
+   > --radius-_ Border radius utilities like rounded-sm
+   > --shadow-_ Box shadow utilities like shadow-md
+   > --inset-shadow-_ Inset box shadow utilities like inset-shadow-xs
+   > --drop-shadow-_ Drop shadow filter utilities like drop-shadow-md
+   > --blur-_ Blur filter utilities like blur-md
+   > --perspective-_ Perspective utilities like perspective-near
+   > --aspect-_ Aspect ratio utilities like aspect-video
+   > --ease-_ Transition timing function utilities like ease-out
+   > --animate-_ Animation utilities like animate-spin
