@@ -13,7 +13,6 @@
 
 @import "./all4trees.css";
 
-
 /* ========================================================================
  * THEMING SHADCN - https://ui.shadcn.com/docs/theming
  * ======================================================================== 
@@ -34,31 +33,31 @@
 
   --card: #ffffff;
   --card-foreground: var(--color-nuit);
-  
+
   --popover: #ffffff;
   --popover-foreground: var(--color-nuit);
-  
+
   --primary: var(--color-vert-kelly);
   --primary-foreground: var(--color-bleu);
   --secondary: var(--color-jaune-vert);
   --secondary-foreground: var(--color-nuit);
-  
+
   --muted: #e5e7eb;
   --muted-foreground: var(--color-onyx);
   --accent: var(--color-citrouille);
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
-  
+
   --border: #e5e7eb;
   --input: #ffffff;
   --ring: var(--color-vert-kelly);
-  
+
   --chart-1: var(--color-bleu);
   --chart-2: var(--color-vert-de-gris);
   --chart-3: var(--color-vert-kelly);
   --chart-4: var(--color-citrouille);
   --chart-5: var(--color-jaune-vert);
-  
+
   --sidebar: var(--color-alabaster);
   --sidebar-foreground: var(--color-alabaster);
   --sidebar-primary: var(--color-brunswick-green);
@@ -75,21 +74,21 @@
 
   --card: var(--color-onyx);
   --card-foreground: var(--color-alabaster);
-  
+
   --popover: var(--color-onyx);
   --popover-foreground: var(--color-alabaster);
-  
+
   --primary: var(--color-brunswick-green);
   --primary-foreground: var(--color-nuit);
   --secondary: var(--color-vert-de-gris);
   --secondary-foreground: var(--color-nuit);
-  
+
   --muted: var(--color-onyx);
   --muted-foreground: #9ca3af;
   --accent: var(--color-citrouille);
   --accent-foreground: var(--color-nuit);
   --destructive: #ef4444;
-  
+
   --border: rgba(255, 255, 255, 0.15);
   --input: rgba(255, 255, 255, 0.05);
   --ring: var(--color-jaune-vert);
@@ -157,4 +156,3 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
