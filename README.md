@@ -3,7 +3,7 @@
 
 <img src="./webapp/public/seed-logo.png" alt="Logo Seed" width="200"/>
 
-![Logo All4Trees](./webapp/src/assets/logo_all4trees.png)
+![Logo All4Trees](./webapp/public/logo_all4trees.png)
 
 Bienvenue sur le projet de la Saison 14 de DataForGood pour les associations SEED et All 4 Trees !
 
