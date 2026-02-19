@@ -17,13 +17,13 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
   const { t } = useTranslation("translations");
 
   return (
-    <header className="bg-background border-b border-border px-6 py-4 relative z-40">
+    <header className="bg-background border-b border-border p-3 relative z-40">
       <div className="mx-auto max-w-screen-2xl">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-md">
           <img
             src="/logo_all4trees.png"
             alt="Logo"
-            className="h-24 w-60 mr-1"
+            className="h-12"
           />
 
           <div className="flex items-center gap-4">
@@ -31,14 +31,16 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
             {isAuthenticated ? (
               <Button
                 onClick={onLogout}
-                className="px-4 py-2 bg-primary text rounded hover:bg-red-700"
+                variant="default"
+                size="default"
               >
                 {t("header.button.logout")}
               </Button>
             ) : (
               <Button
                 onClick={onLogin}
-                className="px-4 py-2 bg-primary text-white rounded hover:bg-green-700"
+                variant="default"
+                size="default"
               >
                 {t("header.button.login")}
               </Button>
