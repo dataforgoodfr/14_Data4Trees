@@ -1,6 +1,7 @@
 import { ApiProvider, AuthProvider, ThemeProvider } from "./providers";
 import { AppRouter } from "./routes/AppRouter";
 import "./styles/globals.css";
+import "./styles/index.css";
 
 function App() {
   return (

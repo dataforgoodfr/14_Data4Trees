@@ -5,43 +5,60 @@
  * 1. Imports Tailwind + plugins
  * 2. Remapper variables shadcn sur la charte A4T
  * 3. Dark mode (light + dark)
+ * 4. Extension du thème tailwind
  */
 
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-@import "./app/styles/all4trees.css";
+@import "./all4trees.css";
+
+
+/* ========================================================================
+ * THEMING SHADCN - https://ui.shadcn.com/docs/theming
+ * ======================================================================== 
+ * On définit des variables css propres à ShadCn pour s'intégrer
+ * naturellement avec les composants.
+ * -> :root => correspond au light mode et variables par défaut
+ * -> .dark => correspond au dark mode 
+ */
 
 @custom-variant dark (&:where(.dark *));
 
-/* THEMING SHADCN/UI AJUSTE AVEC LA CHARTE GRAPHIQUE ALL4TREES */
 :root {
   --radius: 0.625rem;
 
   /* LIGHT MODE SHADCN */
   --background: var(--color-alabaster);
   --foreground: var(--color-nuit);
+
   --card: #ffffff;
   --card-foreground: var(--color-nuit);
+  
   --popover: #ffffff;
   --popover-foreground: var(--color-nuit);
+  
   --primary: var(--color-vert-kelly);
   --primary-foreground: var(--color-bleu);
   --secondary: var(--color-jaune-vert);
   --secondary-foreground: var(--color-nuit);
+  
   --muted: #e5e7eb;
   --muted-foreground: var(--color-onyx);
   --accent: var(--color-citrouille);
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
+  
   --border: #e5e7eb;
   --input: #ffffff;
   --ring: var(--color-vert-kelly);
+  
   --chart-1: var(--color-bleu);
   --chart-2: var(--color-vert-de-gris);
   --chart-3: var(--color-vert-kelly);
   --chart-4: var(--color-citrouille);
   --chart-5: var(--color-jaune-vert);
+  
   --sidebar: var(--color-alabaster);
   --sidebar-foreground: var(--color-alabaster);
   --sidebar-primary: var(--color-brunswick-green);
@@ -51,6 +68,54 @@
   --sidebar-border: #e5e7eb;
   --sidebar-ring: var(--color-vert-kelly);
 }
+
+.dark {
+  --background: var(--color-nuit);
+  --foreground: var(--color-alabaster);
+
+  --card: var(--color-onyx);
+  --card-foreground: var(--color-alabaster);
+  
+  --popover: var(--color-onyx);
+  --popover-foreground: var(--color-alabaster);
+  
+  --primary: var(--color-brunswick-green);
+  --primary-foreground: var(--color-nuit);
+  --secondary: var(--color-vert-de-gris);
+  --secondary-foreground: var(--color-nuit);
+  
+  --muted: var(--color-onyx);
+  --muted-foreground: #9ca3af;
+  --accent: var(--color-citrouille);
+  --accent-foreground: var(--color-nuit);
+  --destructive: #ef4444;
+  
+  --border: rgba(255, 255, 255, 0.15);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: var(--color-jaune-vert);
+  --chart-1: #60a5fa;
+  --chart-2: #22d3ee;
+  --chart-3: #86efac;
+  --chart-4: #fbbf24;
+  --chart-5: #f97316;
+
+  --sidebar: var(--color-onyx);
+  --sidebar-foreground: var(--color-alabaster);
+  --sidebar-primary: var(--color-onyx);
+  --sidebar-primary-foreground: var(--color-vert-kelly);
+  --sidebar-accent: var(--color-citrouille);
+  --sidebar-accent-foreground: var(--color-nuit);
+  --sidebar-border: rgba(255, 255, 255, 0.15);
+  --sidebar-ring: var(--color-jaune-vert);
+}
+
+/* ========================================================================
+ * EXTEND TAILWIND THEME - https://tailwindcss.com/docs/theme
+ * ======================================================================== 
+ * Pour que les variables soient intégrées nativement dans des classes
+ * tailwind, on utilise les namespaces (color-,radius-,...).
+ * On fait cela pour toutes les variables ShadCn (limitation tailwind v4) 
+ */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -93,39 +158,3 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* DARK MODE SHADCN */
-
-/* Support de la classe `.dark` pour contrôle manuel */
-.dark {
-  --background: var(--color-nuit);
-  --foreground: var(--color-alabaster);
-  --card: var(--color-onyx);
-  --card-foreground: var(--color-alabaster);
-  --popover: var(--color-onyx);
-  --popover-foreground: var(--color-alabaster);
-  --primary: var(--color-brunswick-green);
-  --primary-foreground: var(--color-nuit);
-  --secondary: var(--color-vert-de-gris);
-  --secondary-foreground: var(--color-nuit);
-  --muted: var(--color-onyx);
-  --muted-foreground: #9ca3af;
-  --accent: var(--color-citrouille);
-  --accent-foreground: var(--color-nuit);
-  --destructive: #ef4444;
-  --border: rgba(255, 255, 255, 0.15);
-  --input: rgba(255, 255, 255, 0.05);
-  --ring: var(--color-jaune-vert);
-  --sidebar: var(--color-onyx);
-  --sidebar-foreground: var(--color-alabaster);
-  --sidebar-primary: var(--color-onyx);
-  --sidebar-primary-foreground: var(--color-vert-kelly);
-  --sidebar-accent: var(--color-citrouille);
-  --sidebar-accent-foreground: var(--color-nuit);
-  --sidebar-border: rgba(255, 255, 255, 0.15);
-  --sidebar-ring: var(--color-jaune-vert);
-  --chart-1: #60a5fa;
-  --chart-2: #22d3ee;
-  --chart-3: #86efac;
-  --chart-4: #fbbf24;
-  --chart-5: #f97316;
-}

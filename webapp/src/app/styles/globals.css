@@ -1,19 +1,13 @@
 /**
  * GLOBALS.CSS
+ * 
+ * Responsabilité : 
+ * - Styles appliqués sur les balises html de base: html, body, ...
  *
- * Responsabilité :
- * - Styles HTML de base (body, headings, links, etc.)
- *
- *
- * ℹ️ Utilise les variables CSS de all4trees.css et index.css
+ * ℹ️ Il est possible d'utiliser des variables css
+ * ⚠️ Il n'est pas possible d'utiliser des classes tailwind avec `@apply`
  * ⚠️ Ajouter la customisation à la layer components, de sorte à pouvoir override dans le code (layer utilies)
  */
-
-/**
- * ⚠️ Keep this import for the globals.css to know the tailwind theme
- * ℹ️ It'll import the right tailwind classes.
- */
-@import "../../index.css";
 
 @layer components {
   html {
@@ -29,8 +23,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    @apply font-(family-name:--font-body-primary);
-    @apply text-base;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--text-base);
   }
 }
