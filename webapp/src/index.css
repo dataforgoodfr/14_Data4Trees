@@ -9,27 +9,13 @@
 
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
+
 @import "./app/styles/all4trees.css";
 
 @custom-variant dark (&:where(.dark *));
 
 /* THEMING SHADCN/UI AJUSTE AVEC LA CHARTE GRAPHIQUE ALL4TREES */
 :root {
-  font-family:
-    var(--font-body-primary), var(--font-title-primary),
-    var(--font-body-secondary), var(--font-title-secondary), system-ui,
-    sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
 
   /* LIGHT MODE SHADCN */
