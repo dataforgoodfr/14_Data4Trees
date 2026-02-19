@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "check:arch": "node ./scripts/check-architecture.cjs",
     "check:code": "npm run compile && npm run format:check && npm run lint",
+    "fix:code": "npm run format && npm run lint:fix",
     "arch:tree": "node ./scripts/generate-tree.cjs ./src webappTree.md",
     "compile": "tsc -b",
     "format": "prettier . --write",

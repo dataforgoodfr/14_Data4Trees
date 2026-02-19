@@ -16,7 +16,7 @@
     "components": "@shared",
     "lib": "@lib",
     "utils": "@lib/utils",
-    "hooks": "@hooks"
+    "hooks": "@shared/hooks"
   },
   "registries": {}
 }

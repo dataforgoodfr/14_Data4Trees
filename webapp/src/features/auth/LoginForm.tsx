@@ -2,8 +2,6 @@ import { AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { fetchToken } from "@shared/api/client";
-import { useAuth } from "@shared/hooks/useAuth";
 import { cn } from "@shared/lib/utils";
 
 import { Alert, AlertDescription } from "@ui/alert";
@@ -17,6 +15,9 @@ import {
 } from "@ui/card";
 import { Input } from "@ui/input";
 import { Label } from "@ui/label";
+
+import { fetchToken } from "./authClient";
+import { useAuth } from "./useAuth";
 
 interface LoginFormProps extends React.ComponentPropsWithoutRef<"div"> {
   onSuccess: () => void;

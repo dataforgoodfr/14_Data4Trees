@@ -26,7 +26,8 @@ Retrouvez toutes les explications et instructions de structure dans cette docume
 - `npm run build` : package l'application pour la mise en production (dossier [dist](./dist))
 - `npm run preview` : Démarre le serveur à partir du build pour la production (dans le dist)
 - `npm run check:arch` : Vérifie si les imports du projet respectent le principe de l'architecture FSD.
-- `npm run check:code` : Applique les 3 commandes de vérification de code: Linter, TS Compiler, Formatter.
+- `npm run check:code` : Applique les 3 commandes de vérification de code sans appliquer les correction: Linter, TS Compiler, Formatter.
+- `npm run fix:code` : Applique les deux commandes permettant de corriger les éléments remontés avec la commande ce-dessus.
 - `npm run arch:tree` : Génère un fichier text contenant l'arborescence du projet.
 - `npm run compile` : Vérifie que TypeScript compile correctement
 - `npm run format` : Applique le formattage de prettier à l'ensemble du projet

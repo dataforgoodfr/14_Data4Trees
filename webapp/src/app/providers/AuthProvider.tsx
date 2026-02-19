@@ -1,7 +1,6 @@
 import { type ReactNode, useEffect, useState } from "react";
 
-import { verifyToken } from "@shared/api/client";
-import { AuthContext } from "@shared/contexts/AuthContext";
+import { AuthContext, verifyToken } from "@features/auth";
 
 interface AuthProviderProps {
   children: ReactNode;

@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-import { useAuth } from "@shared/hooks/useAuth";
+import { useAuth } from "@features/auth/useAuth";
 
 /**
  * Route guard for admin routes.

@@ -2,9 +2,8 @@
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef } from "react";
 
-import style from "@shared/api/style.json";
-
 import "./Map.css";
+import style from "./style.json";
 
 function useMap(containerSelector: string) {
   const isInitialized = useRef(false);

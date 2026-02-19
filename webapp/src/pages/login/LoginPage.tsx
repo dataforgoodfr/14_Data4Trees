@@ -6,8 +6,7 @@ import {
 } from "react-router-dom";
 
 import { LoginForm } from "@features/auth/LoginForm";
-
-import { useAuth } from "@shared/hooks/useAuth";
+import { useAuth } from "@features/auth/useAuth";
 
 /**
  * Initial source target before redirecting to Login
