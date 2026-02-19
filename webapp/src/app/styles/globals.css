@@ -27,7 +27,6 @@
   }
 
   body {
-    @apply scheme-light-dark;
     @apply bg-background text-foreground;
     @apply font-(family-name:--font-body-primary);
     @apply text-base;
