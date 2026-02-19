@@ -10,7 +10,7 @@ parser = MapConfig.from_file(config_path)
 
 
 def style_json(request):
-    return JsonResponse(parser.to_maplibre())
+    return JsonResponse(parser.to_maplibre(base_url="/api/maps/"))
 
 
 @csrf_exempt
