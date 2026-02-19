@@ -16,6 +16,19 @@
       "type": "openmaptiles",
       "layer": "boundary",
       "filters": { "admin_level": 2 }
+    },
+    {
+      "id": "inventaire",
+      "type": "datapackage",
+      "path": "catalog/inventaire_id",
+      "resource": "inventaire_id",
+      "groupby": ["for"],
+      "aggregate": {
+        "geometry": "centroid(gps)",
+        "richness": "count(unique(ind.ess_arb))",
+        "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))"
+      },
+      "popup": { "trigger": "click" }
     }
   ],
   "controls": [
