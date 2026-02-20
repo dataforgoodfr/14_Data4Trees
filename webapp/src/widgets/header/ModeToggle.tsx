@@ -1,7 +1,6 @@
 import { Moon, Sun } from "lucide-react";
 
-/** @todo Fix FSD import  */
-import { useTheme } from "@app/providers/ThemeProvider";
+import { useTheme } from "@shared/hooks/useTheme";
 
 import { Button } from "@ui/button";
 import {

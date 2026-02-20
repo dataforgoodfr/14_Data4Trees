@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-/**
- * @todo Don't respect FSD
- */
-import { useApi, useAuth } from "@app/providers";
-
 import { DashboardPopover } from "@widgets/DashboardPopover";
-import { Map } from "@widgets/Map";
 import { MapSidebar } from "@widgets/MapSidebar";
 import { Header } from "@widgets/header";
+import { Map } from "@widgets/map";
+
+import { useAuth } from "@features/auth/";
+import { getChartData } from "@features/charts/chartClient";
+
+import { SidebarProvider } from "@shared/ui/sidebar";
 
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@ui/resizable";
-import { SidebarProvider } from "@ui/sidebar";
 
 export interface MainPageProps {
   userData?: unknown;
@@ -25,12 +24,10 @@ export interface MainPageProps {
 export function MainPage() {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-  const client = useApi();
   const [data, setData] = useState<unknown | null>(null);
 
   useEffect(() => {
-    client
-      .getData()
+    getChartData("exampleData")
       .then((json) => setData(json.data))
       .catch((err) => console.error("fetchData error", err));
   }, []);
