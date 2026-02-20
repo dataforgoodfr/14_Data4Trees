@@ -13,7 +13,7 @@ Endpoints
 - `http://localhost:8000/token`: permet de créer un token JWT à partir des identifiants de connexion d'un utilisateur.
 - `http://localhost:8000/token/refresh`: permet de rafraîchir un token JWT.
 - `http://localhost:8000/api/maps/style.json`: retourne le style MapLibre (configuration de la carte, sources et layers).
-- `http://localhost:8000/api/maps/<layer_id>`: retourne les données GeoJSON d'un layer. Supporte le POST avec un filtre CQL2-JSON.
+- `http://localhost:8000/api/maps/layers/<layer_id>`: retourne les données GeoJSON d'un layer. Supporte le POST avec un filtre CQL2-JSON.
 
 Plus d'infos sur la gestion des tokens:
 https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html
