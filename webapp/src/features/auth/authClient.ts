@@ -1,4 +1,4 @@
-import { API_URL } from "@shared/constants";
+import { API_URL } from "@shared/api/client";
 
 export const fetchToken = async (username: string, password: string) => {
   const res = await fetch(`${API_URL}/auth/token/`, {
