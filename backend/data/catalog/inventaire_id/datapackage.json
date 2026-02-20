@@ -1,0 +1,4364 @@
+{
+  "name": "inventaire_id",
+  "resources": [
+    {
+      "name": "reg",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "ess_reg",
+            "title": "Essence",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Acacia albida"
+              },
+              {
+                "value": "2",
+                "label": "Acacia ataxacantha"
+              },
+              {
+                "value": "3",
+                "label": "Acacia macrostachya"
+              },
+              {
+                "value": "4",
+                "label": "Acacia nilotica ssp adansonii"
+              },
+              {
+                "value": "5",
+                "label": "Acacia nilotica ssp tomentosa"
+              },
+              {
+                "value": "6",
+                "label": "Acacia polyacantha"
+              },
+              {
+                "value": "7",
+                "label": "Acacia raddiana"
+              },
+              {
+                "value": "8",
+                "label": "Acacia senegal"
+              },
+              {
+                "value": "9",
+                "label": "Acacia seyal"
+              },
+              {
+                "value": "10",
+                "label": "Acacia sieberiana"
+              },
+              {
+                "value": "11",
+                "label": "Acacia ssp."
+              },
+              {
+                "value": "12",
+                "label": "Adansonia digitata"
+              },
+              {
+                "value": "13",
+                "label": "Adenium obesum"
+              },
+              {
+                "value": "14",
+                "label": "Afzelia africana"
+              },
+              {
+                "value": "15",
+                "label": "Albizia adianthifolia"
+              },
+              {
+                "value": "16",
+                "label": "Albizia chevalieri"
+              },
+              {
+                "value": "17",
+                "label": "Albizia zygia"
+              },
+              {
+                "value": "18",
+                "label": "Alchornea cordifolia"
+              },
+              {
+                "value": "19",
+                "label": "Allophylus africanus"
+              },
+              {
+                "value": "20",
+                "label": "Alstonia boonei"
+              },
+              {
+                "value": "21",
+                "label": "Anacardium occidentale"
+              },
+              {
+                "value": "22",
+                "label": "Anana comosus"
+              },
+              {
+                "value": "23",
+                "label": "Andira inermis"
+              },
+              {
+                "value": "24",
+                "label": "Annona senegalensis"
+              },
+              {
+                "value": "25",
+                "label": "Anogeissus leiocarpus"
+              },
+              {
+                "value": "26",
+                "label": "Anthocleista djalonensis"
+              },
+              {
+                "value": "27",
+                "label": "Anthocleista nobilis"
+              },
+              {
+                "value": "28",
+                "label": "Anthonotha crassifolia"
+              },
+              {
+                "value": "29",
+                "label": "Anthostema senegalense"
+              },
+              {
+                "value": "30",
+                "label": "Antiaris africana"
+              },
+              {
+                "value": "31",
+                "label": "Aphania senegalensis"
+              },
+              {
+                "value": "32",
+                "label": "Avicennia africana"
+              },
+              {
+                "value": "33",
+                "label": "Azadirachta indica"
+              },
+              {
+                "value": "34",
+                "label": "Baissea multiflora"
+              },
+              {
+                "value": "35",
+                "label": "Balanites aegyptiaca"
+              },
+              {
+                "value": "36",
+                "label": "Bauhinia reticulata"
+              },
+              {
+                "value": "37",
+                "label": "Bauhinia rufescens"
+              },
+              {
+                "value": "38",
+                "label": "Bombax costatum"
+              },
+              {
+                "value": "39",
+                "label": "Borassus aethiopum"
+              },
+              {
+                "value": "40",
+                "label": "Boscia angustifolia"
+              },
+              {
+                "value": "41",
+                "label": "Boscia salicifolia"
+              },
+              {
+                "value": "42",
+                "label": "Boscia senegalensis"
+              },
+              {
+                "value": "43",
+                "label": "Bridelia micrantha"
+              },
+              {
+                "value": "44",
+                "label": "Burkea africana"
+              },
+              {
+                "value": "45",
+                "label": "Butyrospermum parkii"
+              },
+              {
+                "value": "46",
+                "label": "Cadaba farinosa"
+              },
+              {
+                "value": "47",
+                "label": "Calotropis procera"
+              },
+              {
+                "value": "48",
+                "label": "Canarium schweinfurthii"
+              },
+              {
+                "value": "49",
+                "label": "Capparis corymbosa"
+              },
+              {
+                "value": "50",
+                "label": "Capparis tomentosa"
+              },
+              {
+                "value": "51",
+                "label": "Carapa procera"
+              },
+              {
+                "value": "52",
+                "label": "Carica papaya"
+              },
+              {
+                "value": "53",
+                "label": "Cassia siamea"
+              },
+              {
+                "value": "54",
+                "label": "Cassia sieberiana"
+              },
+              {
+                "value": "55",
+                "label": "Cassia tora"
+              },
+              {
+                "value": "56",
+                "label": "Casuarina equisetifolia"
+              },
+              {
+                "value": "57",
+                "label": "Ceiba pentandra"
+              },
+              {
+                "value": "58",
+                "label": "Celtis integrifolia"
+              },
+              {
+                "value": "59",
+                "label": "Chlorophora regia"
+              },
+              {
+                "value": "60",
+                "label": "Chrysophyllum pruniforme"
+              },
+              {
+                "value": "61",
+                "label": "Cissus populnea"
+              },
+              {
+                "value": "62",
+                "label": "Citrus limon"
+              },
+              {
+                "value": "63",
+                "label": "Citrus sinensis"
+              },
+              {
+                "value": "64",
+                "label": "Cocos nucifera"
+              },
+              {
+                "value": "65",
+                "label": "Cola cordifolia"
+              },
+              {
+                "value": "66",
+                "label": "Cola nitida"
+              },
+              {
+                "value": "67",
+                "label": "Combretum aculeatum"
+              },
+              {
+                "value": "68",
+                "label": "Combretum crotonoides"
+              },
+              {
+                "value": "69",
+                "label": "Combretum geitonophyllum"
+              },
+              {
+                "value": "70",
+                "label": "Combretum glutinosum"
+              },
+              {
+                "value": "71",
+                "label": "Combretum lecardii"
+              },
+              {
+                "value": "72",
+                "label": "Combretum micranthum"
+              },
+              {
+                "value": "73",
+                "label": "Combretum molle"
+              },
+              {
+                "value": "74",
+                "label": "Combretum nigricans"
+              },
+              {
+                "value": "75",
+                "label": "Combretum paniculatum"
+              },
+              {
+                "value": "76",
+                "label": "Combretum tomentosum"
+              },
+              {
+                "value": "77",
+                "label": "Commiphora africana"
+              },
+              {
+                "value": "78",
+                "label": "Commiphora pedunculata"
+              },
+              {
+                "value": "79",
+                "label": "Cordyla pinnata"
+              },
+              {
+                "value": "80",
+                "label": "Crataeva religiosa"
+              },
+              {
+                "value": "81",
+                "label": "Crossopterix febrifuga"
+              },
+              {
+                "value": "82",
+                "label": "Cussonia barteri"
+              },
+              {
+                "value": "83",
+                "label": "Dalbergia boehmii"
+              },
+              {
+                "value": "84",
+                "label": "Dalbergia melanoxylon"
+              },
+              {
+                "value": "85",
+                "label": "Dalbergia sissoo"
+              },
+              {
+                "value": "86",
+                "label": "Daniellia ogea"
+              },
+              {
+                "value": "87",
+                "label": "Daniellia oliveri"
+              },
+              {
+                "value": "88",
+                "label": "Delonix regia"
+              },
+              {
+                "value": "89",
+                "label": "Detarium microcarpum"
+              },
+              {
+                "value": "90",
+                "label": "Detarium senegalense"
+              },
+              {
+                "value": "91",
+                "label": "Detarium sp.(autres)"
+              },
+              {
+                "value": "92",
+                "label": "Dialium guineense"
+              },
+              {
+                "value": "93",
+                "label": "Dicrostachys cinerea"
+              },
+              {
+                "value": "94",
+                "label": "Diospyros ferrea"
+              },
+              {
+                "value": "95",
+                "label": "Diospyros heudelotii"
+              },
+              {
+                "value": "96",
+                "label": "Diospyros mespiliformis"
+              },
+              {
+                "value": "97",
+                "label": "Dombeya quinqueseta"
+              },
+              {
+                "value": "98",
+                "label": "Ekebergia senegalensis"
+              },
+              {
+                "value": "99",
+                "label": "Elaeis guineensis"
+              },
+              {
+                "value": "100",
+                "label": "Entada africana"
+              },
+              {
+                "value": "101",
+                "label": "Erythrina senegalensis"
+              },
+              {
+                "value": "102",
+                "label": "Erythrina sigmoidea"
+              },
+              {
+                "value": "103",
+                "label": "Erythrophleum africanum"
+              },
+              {
+                "value": "104",
+                "label": "Erythrophleum guineense"
+              },
+              {
+                "value": "105",
+                "label": "Eucalyptus camaldulensis"
+              },
+              {
+                "value": "106",
+                "label": "Euphorbia sp."
+              },
+              {
+                "value": "107",
+                "label": "Euphorbia sudanica"
+              },
+              {
+                "value": "108",
+                "label": "Euphorbia unispina"
+              },
+              {
+                "value": "109",
+                "label": "Euphorbia unispina"
+              },
+              {
+                "value": "110",
+                "label": "Fagara leprieurii"
+              },
+              {
+                "value": "111",
+                "label": "Feretia apodanthera"
+              },
+              {
+                "value": "112",
+                "label": "Ficus capensis"
+              },
+              {
+                "value": "113",
+                "label": "Ficus dicranostyla"
+              },
+              {
+                "value": "114",
+                "label": "Ficus exasperata"
+              },
+              {
+                "value": "115",
+                "label": "Ficus glumosa"
+              },
+              {
+                "value": "116",
+                "label": "Ficus gnaphalocarpa"
+              },
+              {
+                "value": "117",
+                "label": "Ficus iteophylla"
+              },
+              {
+                "value": "118",
+                "label": "Ficus ovata"
+              },
+              {
+                "value": "119",
+                "label": "Ficus platyphylla"
+              },
+              {
+                "value": "120",
+                "label": "Ficus sagittifolia"
+              },
+              {
+                "value": "121",
+                "label": "Ficus thonningii"
+              },
+              {
+                "value": "122",
+                "label": "Garcinia livingstonei"
+              },
+              {
+                "value": "123",
+                "label": "Gardenia erubescens"
+              },
+              {
+                "value": "124",
+                "label": "Gardenia ternifolia"
+              },
+              {
+                "value": "125",
+                "label": "Gardenia triacantha"
+              },
+              {
+                "value": "126",
+                "label": "Gmelina arborea"
+              },
+              {
+                "value": "127",
+                "label": "Grewia bicolor"
+              },
+              {
+                "value": "128",
+                "label": "Grewia flavescens"
+              },
+              {
+                "value": "129",
+                "label": "Grewia lasiodiscus"
+              },
+              {
+                "value": "130",
+                "label": "Grewia sp"
+              },
+              {
+                "value": "131",
+                "label": "Grewia tenax"
+              },
+              {
+                "value": "132",
+                "label": "Guibourtia leonensis"
+              },
+              {
+                "value": "133",
+                "label": "Guiera senegalensis"
+              },
+              {
+                "value": "134",
+                "label": "Hannoa undulata"
+              },
+              {
+                "value": "135",
+                "label": "Harungana madagascariensis"
+              },
+              {
+                "value": "136",
+                "label": "Heeria insignis"
+              },
+              {
+                "value": "137",
+                "label": "Hexalobus monopetalus"
+              },
+              {
+                "value": "138",
+                "label": "Holarrhena floribunda"
+              },
+              {
+                "value": "139",
+                "label": "Hygrophila auriculata"
+              },
+              {
+                "value": "140",
+                "label": "Hymenocardia acida"
+              },
+              {
+                "value": "141",
+                "label": "Hymenocardia lyrata"
+              },
+              {
+                "value": "142",
+                "label": "Khaya senegalensis"
+              },
+              {
+                "value": "143",
+                "label": "Kigelia africana"
+              },
+              {
+                "value": "144",
+                "label": "Landolphia heudelotii"
+              },
+              {
+                "value": "145",
+                "label": "Lannea acida"
+              },
+              {
+                "value": "146",
+                "label": "Lannea microcarpa"
+              },
+              {
+                "value": "147",
+                "label": "Lannea velutina"
+              },
+              {
+                "value": "148",
+                "label": "Lecaniodiscus cupanioides"
+              },
+              {
+                "value": "149",
+                "label": "Leptadenia pyrotechnica"
+              },
+              {
+                "value": "150",
+                "label": "Leuceana leucocephala"
+              },
+              {
+                "value": "151",
+                "label": "Lonchocarpus laxiflorus"
+              },
+              {
+                "value": "152",
+                "label": "Lophira alata"
+              },
+              {
+                "value": "153",
+                "label": "Lophira lanceolata"
+              },
+              {
+                "value": "154",
+                "label": "Maerua angolensis"
+              },
+              {
+                "value": "155",
+                "label": "Maerua oblongifolia"
+              },
+              {
+                "value": "156",
+                "label": "Malacantha alnifolia"
+              },
+              {
+                "value": "157",
+                "label": "Mallotus oppositifolius"
+              },
+              {
+                "value": "158",
+                "label": "Mammea africana"
+              },
+              {
+                "value": "159",
+                "label": "Mangifera indica"
+              },
+              {
+                "value": "160",
+                "label": "Manilkara multinervis"
+              },
+              {
+                "value": "161",
+                "label": "Markhamia tomentosa"
+              },
+              {
+                "value": "162",
+                "label": "Maytenus senegalensis"
+              },
+              {
+                "value": "163",
+                "label": "Melaleuca leucadendron"
+              },
+              {
+                "value": "164",
+                "label": "Mezoneuron benthamianum"
+              },
+              {
+                "value": "165",
+                "label": "Microdesmis puberula"
+              },
+              {
+                "value": "166",
+                "label": "Mitragyna inermis"
+              },
+              {
+                "value": "167",
+                "label": "Mitragyna stipulosa"
+              },
+              {
+                "value": "168",
+                "label": "Morinda geminata"
+              },
+              {
+                "value": "169",
+                "label": "Moringa oleifera"
+              },
+              {
+                "value": "170",
+                "label": "Morus mesozygia"
+              },
+              {
+                "value": "171",
+                "label": "Musa sinensis"
+              },
+              {
+                "value": "172",
+                "label": "Nauclea latifolia"
+              },
+              {
+                "value": "173",
+                "label": "Neocarya macrophylla"
+              },
+              {
+                "value": "174",
+                "label": "Newbouldia laevis"
+              },
+              {
+                "value": "175",
+                "label": "Oncoba spinosa"
+              },
+              {
+                "value": "176",
+                "label": "Ormocarpum bibracteatum"
+              },
+              {
+                "value": "177",
+                "label": "Ostryoderris chevalieri"
+              },
+              {
+                "value": "178",
+                "label": "Oxytenanthera abyssinica"
+              },
+              {
+                "value": "179",
+                "label": "Ozoroa insignis"
+              },
+              {
+                "value": "180",
+                "label": "Pachystela pobeguiniana"
+              },
+              {
+                "value": "181",
+                "label": "Pandanus candelabrum"
+              },
+              {
+                "value": "182",
+                "label": "Parinari curatellifolia"
+              },
+              {
+                "value": "183",
+                "label": "Parinari excelsa"
+              },
+              {
+                "value": "184",
+                "label": "Parkia biglobosa"
+              },
+              {
+                "value": "185",
+                "label": "Parkinsonia aculeata"
+              },
+              {
+                "value": "186",
+                "label": "Paullinia pinnata"
+              },
+              {
+                "value": "187",
+                "label": "Pavetta cinereifolia"
+              },
+              {
+                "value": "188",
+                "label": "Pavetta corymbosa"
+              },
+              {
+                "value": "189",
+                "label": "Pentaclethra macrophylla"
+              },
+              {
+                "value": "190",
+                "label": "Pericopsis laxiflora"
+              },
+              {
+                "value": "191",
+                "label": "Persea americana"
+              },
+              {
+                "value": "192",
+                "label": "Phoenix dactylifera"
+              },
+              {
+                "value": "193",
+                "label": "Phoenix reclinata"
+              },
+              {
+                "value": "194",
+                "label": "Piliostigma reticulatum"
+              },
+              {
+                "value": "195",
+                "label": "Piliostigma thonningii"
+              },
+              {
+                "value": "196",
+                "label": "Polyscias guilfoylei"
+              },
+              {
+                "value": "197",
+                "label": "Prosopis africana"
+              },
+              {
+                "value": "198",
+                "label": "Prosopis juliflora"
+              },
+              {
+                "value": "199",
+                "label": "Pseudocedrela kotschyi"
+              },
+              {
+                "value": "200",
+                "label": "Pseudospondias microcarpa"
+              },
+              {
+                "value": "201",
+                "label": "Psidium guajava"
+              },
+              {
+                "value": "202",
+                "label": "Pteleopsis suberosa"
+              },
+              {
+                "value": "203",
+                "label": "Pterocarpus erinaceus"
+              },
+              {
+                "value": "204",
+                "label": "Pterocarpus lucens"
+              },
+              {
+                "value": "205",
+                "label": "Pterocarpus santalinoides"
+              },
+              {
+                "value": "206",
+                "label": "Raphia palma-pinus"
+              },
+              {
+                "value": "207",
+                "label": "Ricinodendron heudelotii"
+              },
+              {
+                "value": "208",
+                "label": "Saba senegalensis"
+              },
+              {
+                "value": "209",
+                "label": "Salvadora persica"
+              },
+              {
+                "value": "210",
+                "label": "Samanea dinklagei"
+              },
+              {
+                "value": "211",
+                "label": "Sapium ellipticum"
+              },
+              {
+                "value": "212",
+                "label": "Schrebera arborea"
+              },
+              {
+                "value": "213",
+                "label": "Sclerocarya birrea"
+              },
+              {
+                "value": "214",
+                "label": "Securidaca longipedunculata"
+              },
+              {
+                "value": "215",
+                "label": "Securinega virosa"
+              },
+              {
+                "value": "216",
+                "label": "Smeathmannia laevigata"
+              },
+              {
+                "value": "217",
+                "label": "Sorindeia juglandifolia"
+              },
+              {
+                "value": "218",
+                "label": "Spondias mombin"
+              },
+              {
+                "value": "219",
+                "label": "Sterculia setigera"
+              },
+              {
+                "value": "220",
+                "label": "Sterculia tragacantha"
+              },
+              {
+                "value": "221",
+                "label": "Sterospermum kunthianum"
+              },
+              {
+                "value": "222",
+                "label": "Strophanthus hispidus"
+              },
+              {
+                "value": "223",
+                "label": "Strophanthus sarmentosus"
+              },
+              {
+                "value": "224",
+                "label": "Strychnos spinosa"
+              },
+              {
+                "value": "225",
+                "label": "Swartzia madagascariensis"
+              },
+              {
+                "value": "226",
+                "label": "Syzygium guineense"
+              },
+              {
+                "value": "227",
+                "label": "Tamarindus indica"
+              },
+              {
+                "value": "228",
+                "label": "Tamarix senegalensis"
+              },
+              {
+                "value": "229",
+                "label": "Tectona grandis"
+              },
+              {
+                "value": "230",
+                "label": "Terminalia avicennioides"
+              },
+              {
+                "value": "231",
+                "label": "Terminalia laxiflora"
+              },
+              {
+                "value": "232",
+                "label": "Terminalia macroptera"
+              },
+              {
+                "value": "233",
+                "label": "Terminalia mantaly"
+              },
+              {
+                "value": "234",
+                "label": "Tetracera alnifolia"
+              },
+              {
+                "value": "235",
+                "label": "Tetrapleura tetraptera"
+              },
+              {
+                "value": "236",
+                "label": "Treculia africana"
+              },
+              {
+                "value": "237",
+                "label": "Trema guineensis"
+              },
+              {
+                "value": "238",
+                "label": "Trichilia emetica"
+              },
+              {
+                "value": "239",
+                "label": "Trichilia prieureana"
+              },
+              {
+                "value": "240",
+                "label": "Trichilia roka"
+              },
+              {
+                "value": "241",
+                "label": "Uapaca togoensis"
+              },
+              {
+                "value": "242",
+                "label": "Usteria guineensis"
+              },
+              {
+                "value": "243",
+                "label": "Uvaria chamae"
+              },
+              {
+                "value": "244",
+                "label": "Vitex doniana"
+              },
+              {
+                "value": "245",
+                "label": "Vitex madiensis"
+              },
+              {
+                "value": "246",
+                "label": "Voacanga africana"
+              },
+              {
+                "value": "247",
+                "label": "Xeroderris stuhlmannii"
+              },
+              {
+                "value": "248",
+                "label": "Ximenia americana"
+              },
+              {
+                "value": "249",
+                "label": "Xylopia aethiopica"
+              },
+              {
+                "value": "250",
+                "label": "Ziziphus amphibia"
+              },
+              {
+                "value": "251",
+                "label": "Ziziphus mauritiana"
+              },
+              {
+                "value": "252",
+                "label": "Ziziphus mucronata"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "nomb_pet",
+            "title": "Nombre de pieds dans la classe d'hauteur 0-50 cm",
+            "type": "integer",
+            "constraints": {
+              "required": false,
+              "minimum": 0,
+              "maximum": 50
+            }
+          },
+          {
+            "name": "nomb_moy",
+            "title": "Nombre de pieds dans la classe d'hauteur 51-100 cm",
+            "type": "integer",
+            "constraints": {
+              "required": false,
+              "minimum": 0,
+              "maximum": 50
+            }
+          },
+          {
+            "name": "nom_gr",
+            "title": "Nombre de pieds dans la classe d'hauteur >100 cm",
+            "type": "integer",
+            "constraints": {
+              "required": false,
+              "minimum": 0,
+              "maximum": 50
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ind",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "zon",
+            "title": "Zone",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Zone A (Nord-Est)"
+              },
+              {
+                "value": "2",
+                "label": "Zone B (Sud-Est)"
+              },
+              {
+                "value": "3",
+                "label": "Zone C (Sud-Ouest)"
+              },
+              {
+                "value": "4",
+                "label": "Zone D (Nord-Ouest)"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "etat",
+            "title": "Etat",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Bois vivant"
+              },
+              {
+                "value": "2",
+                "label": "Bois mort sur pied"
+              },
+              {
+                "value": "3",
+                "label": "Bois mort au sol"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "decomp",
+            "title": "Stade de décomposition",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Bois frais"
+              },
+              {
+                "value": "2",
+                "label": "Bois dur"
+              },
+              {
+                "value": "3",
+                "label": "Bois pourri"
+              },
+              {
+                "value": "4",
+                "label": "Bois en décomposition"
+              },
+              {
+                "value": "5",
+                "label": "Bois vermoulu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "ess_arb",
+            "title": "Essence",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Acacia albida"
+              },
+              {
+                "value": "2",
+                "label": "Acacia ataxacantha"
+              },
+              {
+                "value": "3",
+                "label": "Acacia macrostachya"
+              },
+              {
+                "value": "4",
+                "label": "Acacia nilotica ssp adansonii"
+              },
+              {
+                "value": "5",
+                "label": "Acacia nilotica ssp tomentosa"
+              },
+              {
+                "value": "6",
+                "label": "Acacia polyacantha"
+              },
+              {
+                "value": "7",
+                "label": "Acacia raddiana"
+              },
+              {
+                "value": "8",
+                "label": "Acacia senegal"
+              },
+              {
+                "value": "9",
+                "label": "Acacia seyal"
+              },
+              {
+                "value": "10",
+                "label": "Acacia sieberiana"
+              },
+              {
+                "value": "11",
+                "label": "Acacia ssp."
+              },
+              {
+                "value": "12",
+                "label": "Adansonia digitata"
+              },
+              {
+                "value": "13",
+                "label": "Adenium obesum"
+              },
+              {
+                "value": "14",
+                "label": "Afzelia africana"
+              },
+              {
+                "value": "15",
+                "label": "Albizia adianthifolia"
+              },
+              {
+                "value": "16",
+                "label": "Albizia chevalieri"
+              },
+              {
+                "value": "17",
+                "label": "Albizia zygia"
+              },
+              {
+                "value": "18",
+                "label": "Alchornea cordifolia"
+              },
+              {
+                "value": "19",
+                "label": "Allophylus africanus"
+              },
+              {
+                "value": "20",
+                "label": "Alstonia boonei"
+              },
+              {
+                "value": "21",
+                "label": "Anacardium occidentale"
+              },
+              {
+                "value": "22",
+                "label": "Anana comosus"
+              },
+              {
+                "value": "23",
+                "label": "Andira inermis"
+              },
+              {
+                "value": "24",
+                "label": "Annona senegalensis"
+              },
+              {
+                "value": "25",
+                "label": "Anogeissus leiocarpus"
+              },
+              {
+                "value": "26",
+                "label": "Anthocleista djalonensis"
+              },
+              {
+                "value": "27",
+                "label": "Anthocleista nobilis"
+              },
+              {
+                "value": "28",
+                "label": "Anthonotha crassifolia"
+              },
+              {
+                "value": "29",
+                "label": "Anthostema senegalense"
+              },
+              {
+                "value": "30",
+                "label": "Antiaris africana"
+              },
+              {
+                "value": "31",
+                "label": "Aphania senegalensis"
+              },
+              {
+                "value": "32",
+                "label": "Avicennia africana"
+              },
+              {
+                "value": "33",
+                "label": "Azadirachta indica"
+              },
+              {
+                "value": "34",
+                "label": "Baissea multiflora"
+              },
+              {
+                "value": "35",
+                "label": "Balanites aegyptiaca"
+              },
+              {
+                "value": "36",
+                "label": "Bauhinia reticulata"
+              },
+              {
+                "value": "37",
+                "label": "Bauhinia rufescens"
+              },
+              {
+                "value": "38",
+                "label": "Bombax costatum"
+              },
+              {
+                "value": "39",
+                "label": "Borassus aethiopum"
+              },
+              {
+                "value": "40",
+                "label": "Boscia angustifolia"
+              },
+              {
+                "value": "41",
+                "label": "Boscia salicifolia"
+              },
+              {
+                "value": "42",
+                "label": "Boscia senegalensis"
+              },
+              {
+                "value": "43",
+                "label": "Bridelia micrantha"
+              },
+              {
+                "value": "44",
+                "label": "Burkea africana"
+              },
+              {
+                "value": "45",
+                "label": "Butyrospermum parkii"
+              },
+              {
+                "value": "46",
+                "label": "Cadaba farinosa"
+              },
+              {
+                "value": "47",
+                "label": "Calotropis procera"
+              },
+              {
+                "value": "48",
+                "label": "Canarium schweinfurthii"
+              },
+              {
+                "value": "49",
+                "label": "Capparis corymbosa"
+              },
+              {
+                "value": "50",
+                "label": "Capparis tomentosa"
+              },
+              {
+                "value": "51",
+                "label": "Carapa procera"
+              },
+              {
+                "value": "52",
+                "label": "Carica papaya"
+              },
+              {
+                "value": "53",
+                "label": "Cassia siamea"
+              },
+              {
+                "value": "54",
+                "label": "Cassia sieberiana"
+              },
+              {
+                "value": "55",
+                "label": "Cassia tora"
+              },
+              {
+                "value": "56",
+                "label": "Casuarina equisetifolia"
+              },
+              {
+                "value": "57",
+                "label": "Ceiba pentandra"
+              },
+              {
+                "value": "58",
+                "label": "Celtis integrifolia"
+              },
+              {
+                "value": "59",
+                "label": "Chlorophora regia"
+              },
+              {
+                "value": "60",
+                "label": "Chrysophyllum pruniforme"
+              },
+              {
+                "value": "61",
+                "label": "Cissus populnea"
+              },
+              {
+                "value": "62",
+                "label": "Citrus limon"
+              },
+              {
+                "value": "63",
+                "label": "Citrus sinensis"
+              },
+              {
+                "value": "64",
+                "label": "Cocos nucifera"
+              },
+              {
+                "value": "65",
+                "label": "Cola cordifolia"
+              },
+              {
+                "value": "66",
+                "label": "Cola nitida"
+              },
+              {
+                "value": "67",
+                "label": "Combretum aculeatum"
+              },
+              {
+                "value": "68",
+                "label": "Combretum crotonoides"
+              },
+              {
+                "value": "69",
+                "label": "Combretum geitonophyllum"
+              },
+              {
+                "value": "70",
+                "label": "Combretum glutinosum"
+              },
+              {
+                "value": "71",
+                "label": "Combretum lecardii"
+              },
+              {
+                "value": "72",
+                "label": "Combretum micranthum"
+              },
+              {
+                "value": "73",
+                "label": "Combretum molle"
+              },
+              {
+                "value": "74",
+                "label": "Combretum nigricans"
+              },
+              {
+                "value": "75",
+                "label": "Combretum paniculatum"
+              },
+              {
+                "value": "76",
+                "label": "Combretum tomentosum"
+              },
+              {
+                "value": "77",
+                "label": "Commiphora africana"
+              },
+              {
+                "value": "78",
+                "label": "Commiphora pedunculata"
+              },
+              {
+                "value": "79",
+                "label": "Cordyla pinnata"
+              },
+              {
+                "value": "80",
+                "label": "Crataeva religiosa"
+              },
+              {
+                "value": "81",
+                "label": "Crossopterix febrifuga"
+              },
+              {
+                "value": "82",
+                "label": "Cussonia barteri"
+              },
+              {
+                "value": "83",
+                "label": "Dalbergia boehmii"
+              },
+              {
+                "value": "84",
+                "label": "Dalbergia melanoxylon"
+              },
+              {
+                "value": "85",
+                "label": "Dalbergia sissoo"
+              },
+              {
+                "value": "86",
+                "label": "Daniellia ogea"
+              },
+              {
+                "value": "87",
+                "label": "Daniellia oliveri"
+              },
+              {
+                "value": "88",
+                "label": "Delonix regia"
+              },
+              {
+                "value": "89",
+                "label": "Detarium microcarpum"
+              },
+              {
+                "value": "90",
+                "label": "Detarium senegalense"
+              },
+              {
+                "value": "91",
+                "label": "Detarium sp.(autres)"
+              },
+              {
+                "value": "92",
+                "label": "Dialium guineense"
+              },
+              {
+                "value": "93",
+                "label": "Dicrostachys cinerea"
+              },
+              {
+                "value": "94",
+                "label": "Diospyros ferrea"
+              },
+              {
+                "value": "95",
+                "label": "Diospyros heudelotii"
+              },
+              {
+                "value": "96",
+                "label": "Diospyros mespiliformis"
+              },
+              {
+                "value": "97",
+                "label": "Dombeya quinqueseta"
+              },
+              {
+                "value": "98",
+                "label": "Ekebergia senegalensis"
+              },
+              {
+                "value": "99",
+                "label": "Elaeis guineensis"
+              },
+              {
+                "value": "100",
+                "label": "Entada africana"
+              },
+              {
+                "value": "101",
+                "label": "Erythrina senegalensis"
+              },
+              {
+                "value": "102",
+                "label": "Erythrina sigmoidea"
+              },
+              {
+                "value": "103",
+                "label": "Erythrophleum africanum"
+              },
+              {
+                "value": "104",
+                "label": "Erythrophleum guineense"
+              },
+              {
+                "value": "105",
+                "label": "Eucalyptus camaldulensis"
+              },
+              {
+                "value": "106",
+                "label": "Euphorbia sp."
+              },
+              {
+                "value": "107",
+                "label": "Euphorbia sudanica"
+              },
+              {
+                "value": "108",
+                "label": "Euphorbia unispina"
+              },
+              {
+                "value": "109",
+                "label": "Euphorbia unispina"
+              },
+              {
+                "value": "110",
+                "label": "Fagara leprieurii"
+              },
+              {
+                "value": "111",
+                "label": "Feretia apodanthera"
+              },
+              {
+                "value": "112",
+                "label": "Ficus capensis"
+              },
+              {
+                "value": "113",
+                "label": "Ficus dicranostyla"
+              },
+              {
+                "value": "114",
+                "label": "Ficus exasperata"
+              },
+              {
+                "value": "115",
+                "label": "Ficus glumosa"
+              },
+              {
+                "value": "116",
+                "label": "Ficus gnaphalocarpa"
+              },
+              {
+                "value": "117",
+                "label": "Ficus iteophylla"
+              },
+              {
+                "value": "118",
+                "label": "Ficus ovata"
+              },
+              {
+                "value": "119",
+                "label": "Ficus platyphylla"
+              },
+              {
+                "value": "120",
+                "label": "Ficus sagittifolia"
+              },
+              {
+                "value": "121",
+                "label": "Ficus thonningii"
+              },
+              {
+                "value": "122",
+                "label": "Garcinia livingstonei"
+              },
+              {
+                "value": "123",
+                "label": "Gardenia erubescens"
+              },
+              {
+                "value": "124",
+                "label": "Gardenia ternifolia"
+              },
+              {
+                "value": "125",
+                "label": "Gardenia triacantha"
+              },
+              {
+                "value": "126",
+                "label": "Gmelina arborea"
+              },
+              {
+                "value": "127",
+                "label": "Grewia bicolor"
+              },
+              {
+                "value": "128",
+                "label": "Grewia flavescens"
+              },
+              {
+                "value": "129",
+                "label": "Grewia lasiodiscus"
+              },
+              {
+                "value": "130",
+                "label": "Grewia sp"
+              },
+              {
+                "value": "131",
+                "label": "Grewia tenax"
+              },
+              {
+                "value": "132",
+                "label": "Guibourtia leonensis"
+              },
+              {
+                "value": "133",
+                "label": "Guiera senegalensis"
+              },
+              {
+                "value": "134",
+                "label": "Hannoa undulata"
+              },
+              {
+                "value": "135",
+                "label": "Harungana madagascariensis"
+              },
+              {
+                "value": "136",
+                "label": "Heeria insignis"
+              },
+              {
+                "value": "137",
+                "label": "Hexalobus monopetalus"
+              },
+              {
+                "value": "138",
+                "label": "Holarrhena floribunda"
+              },
+              {
+                "value": "139",
+                "label": "Hygrophila auriculata"
+              },
+              {
+                "value": "140",
+                "label": "Hymenocardia acida"
+              },
+              {
+                "value": "141",
+                "label": "Hymenocardia lyrata"
+              },
+              {
+                "value": "142",
+                "label": "Khaya senegalensis"
+              },
+              {
+                "value": "143",
+                "label": "Kigelia africana"
+              },
+              {
+                "value": "144",
+                "label": "Landolphia heudelotii"
+              },
+              {
+                "value": "145",
+                "label": "Lannea acida"
+              },
+              {
+                "value": "146",
+                "label": "Lannea microcarpa"
+              },
+              {
+                "value": "147",
+                "label": "Lannea velutina"
+              },
+              {
+                "value": "148",
+                "label": "Lecaniodiscus cupanioides"
+              },
+              {
+                "value": "149",
+                "label": "Leptadenia pyrotechnica"
+              },
+              {
+                "value": "150",
+                "label": "Leuceana leucocephala"
+              },
+              {
+                "value": "151",
+                "label": "Lonchocarpus laxiflorus"
+              },
+              {
+                "value": "152",
+                "label": "Lophira alata"
+              },
+              {
+                "value": "153",
+                "label": "Lophira lanceolata"
+              },
+              {
+                "value": "154",
+                "label": "Maerua angolensis"
+              },
+              {
+                "value": "155",
+                "label": "Maerua oblongifolia"
+              },
+              {
+                "value": "156",
+                "label": "Malacantha alnifolia"
+              },
+              {
+                "value": "157",
+                "label": "Mallotus oppositifolius"
+              },
+              {
+                "value": "158",
+                "label": "Mammea africana"
+              },
+              {
+                "value": "159",
+                "label": "Mangifera indica"
+              },
+              {
+                "value": "160",
+                "label": "Manilkara multinervis"
+              },
+              {
+                "value": "161",
+                "label": "Markhamia tomentosa"
+              },
+              {
+                "value": "162",
+                "label": "Maytenus senegalensis"
+              },
+              {
+                "value": "163",
+                "label": "Melaleuca leucadendron"
+              },
+              {
+                "value": "164",
+                "label": "Mezoneuron benthamianum"
+              },
+              {
+                "value": "165",
+                "label": "Microdesmis puberula"
+              },
+              {
+                "value": "166",
+                "label": "Mitragyna inermis"
+              },
+              {
+                "value": "167",
+                "label": "Mitragyna stipulosa"
+              },
+              {
+                "value": "168",
+                "label": "Morinda geminata"
+              },
+              {
+                "value": "169",
+                "label": "Moringa oleifera"
+              },
+              {
+                "value": "170",
+                "label": "Morus mesozygia"
+              },
+              {
+                "value": "171",
+                "label": "Musa sinensis"
+              },
+              {
+                "value": "172",
+                "label": "Nauclea latifolia"
+              },
+              {
+                "value": "173",
+                "label": "Neocarya macrophylla"
+              },
+              {
+                "value": "174",
+                "label": "Newbouldia laevis"
+              },
+              {
+                "value": "175",
+                "label": "Oncoba spinosa"
+              },
+              {
+                "value": "176",
+                "label": "Ormocarpum bibracteatum"
+              },
+              {
+                "value": "177",
+                "label": "Ostryoderris chevalieri"
+              },
+              {
+                "value": "178",
+                "label": "Oxytenanthera abyssinica"
+              },
+              {
+                "value": "179",
+                "label": "Ozoroa insignis"
+              },
+              {
+                "value": "180",
+                "label": "Pachystela pobeguiniana"
+              },
+              {
+                "value": "181",
+                "label": "Pandanus candelabrum"
+              },
+              {
+                "value": "182",
+                "label": "Parinari curatellifolia"
+              },
+              {
+                "value": "183",
+                "label": "Parinari excelsa"
+              },
+              {
+                "value": "184",
+                "label": "Parkia biglobosa"
+              },
+              {
+                "value": "185",
+                "label": "Parkinsonia aculeata"
+              },
+              {
+                "value": "186",
+                "label": "Paullinia pinnata"
+              },
+              {
+                "value": "187",
+                "label": "Pavetta cinereifolia"
+              },
+              {
+                "value": "188",
+                "label": "Pavetta corymbosa"
+              },
+              {
+                "value": "189",
+                "label": "Pentaclethra macrophylla"
+              },
+              {
+                "value": "190",
+                "label": "Pericopsis laxiflora"
+              },
+              {
+                "value": "191",
+                "label": "Persea americana"
+              },
+              {
+                "value": "192",
+                "label": "Phoenix dactylifera"
+              },
+              {
+                "value": "193",
+                "label": "Phoenix reclinata"
+              },
+              {
+                "value": "194",
+                "label": "Piliostigma reticulatum"
+              },
+              {
+                "value": "195",
+                "label": "Piliostigma thonningii"
+              },
+              {
+                "value": "196",
+                "label": "Polyscias guilfoylei"
+              },
+              {
+                "value": "197",
+                "label": "Prosopis africana"
+              },
+              {
+                "value": "198",
+                "label": "Prosopis juliflora"
+              },
+              {
+                "value": "199",
+                "label": "Pseudocedrela kotschyi"
+              },
+              {
+                "value": "200",
+                "label": "Pseudospondias microcarpa"
+              },
+              {
+                "value": "201",
+                "label": "Psidium guajava"
+              },
+              {
+                "value": "202",
+                "label": "Pteleopsis suberosa"
+              },
+              {
+                "value": "203",
+                "label": "Pterocarpus erinaceus"
+              },
+              {
+                "value": "204",
+                "label": "Pterocarpus lucens"
+              },
+              {
+                "value": "205",
+                "label": "Pterocarpus santalinoides"
+              },
+              {
+                "value": "206",
+                "label": "Raphia palma-pinus"
+              },
+              {
+                "value": "207",
+                "label": "Ricinodendron heudelotii"
+              },
+              {
+                "value": "208",
+                "label": "Saba senegalensis"
+              },
+              {
+                "value": "209",
+                "label": "Salvadora persica"
+              },
+              {
+                "value": "210",
+                "label": "Samanea dinklagei"
+              },
+              {
+                "value": "211",
+                "label": "Sapium ellipticum"
+              },
+              {
+                "value": "212",
+                "label": "Schrebera arborea"
+              },
+              {
+                "value": "213",
+                "label": "Sclerocarya birrea"
+              },
+              {
+                "value": "214",
+                "label": "Securidaca longipedunculata"
+              },
+              {
+                "value": "215",
+                "label": "Securinega virosa"
+              },
+              {
+                "value": "216",
+                "label": "Smeathmannia laevigata"
+              },
+              {
+                "value": "217",
+                "label": "Sorindeia juglandifolia"
+              },
+              {
+                "value": "218",
+                "label": "Spondias mombin"
+              },
+              {
+                "value": "219",
+                "label": "Sterculia setigera"
+              },
+              {
+                "value": "220",
+                "label": "Sterculia tragacantha"
+              },
+              {
+                "value": "221",
+                "label": "Sterospermum kunthianum"
+              },
+              {
+                "value": "222",
+                "label": "Strophanthus hispidus"
+              },
+              {
+                "value": "223",
+                "label": "Strophanthus sarmentosus"
+              },
+              {
+                "value": "224",
+                "label": "Strychnos spinosa"
+              },
+              {
+                "value": "225",
+                "label": "Swartzia madagascariensis"
+              },
+              {
+                "value": "226",
+                "label": "Syzygium guineense"
+              },
+              {
+                "value": "227",
+                "label": "Tamarindus indica"
+              },
+              {
+                "value": "228",
+                "label": "Tamarix senegalensis"
+              },
+              {
+                "value": "229",
+                "label": "Tectona grandis"
+              },
+              {
+                "value": "230",
+                "label": "Terminalia avicennioides"
+              },
+              {
+                "value": "231",
+                "label": "Terminalia laxiflora"
+              },
+              {
+                "value": "232",
+                "label": "Terminalia macroptera"
+              },
+              {
+                "value": "233",
+                "label": "Terminalia mantaly"
+              },
+              {
+                "value": "234",
+                "label": "Tetracera alnifolia"
+              },
+              {
+                "value": "235",
+                "label": "Tetrapleura tetraptera"
+              },
+              {
+                "value": "236",
+                "label": "Treculia africana"
+              },
+              {
+                "value": "237",
+                "label": "Trema guineensis"
+              },
+              {
+                "value": "238",
+                "label": "Trichilia emetica"
+              },
+              {
+                "value": "239",
+                "label": "Trichilia prieureana"
+              },
+              {
+                "value": "240",
+                "label": "Trichilia roka"
+              },
+              {
+                "value": "241",
+                "label": "Uapaca togoensis"
+              },
+              {
+                "value": "242",
+                "label": "Usteria guineensis"
+              },
+              {
+                "value": "243",
+                "label": "Uvaria chamae"
+              },
+              {
+                "value": "244",
+                "label": "Vitex doniana"
+              },
+              {
+                "value": "245",
+                "label": "Vitex madiensis"
+              },
+              {
+                "value": "246",
+                "label": "Voacanga africana"
+              },
+              {
+                "value": "247",
+                "label": "Xeroderris stuhlmannii"
+              },
+              {
+                "value": "248",
+                "label": "Ximenia americana"
+              },
+              {
+                "value": "249",
+                "label": "Xylopia aethiopica"
+              },
+              {
+                "value": "250",
+                "label": "Ziziphus amphibia"
+              },
+              {
+                "value": "251",
+                "label": "Ziziphus mauritiana"
+              },
+              {
+                "value": "252",
+                "label": "Ziziphus mucronata"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "autr",
+            "title": "Autre : merci de préciser laquelle",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "haut",
+            "title": "Hauteur (en m)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 130
+            }
+          },
+          {
+            "name": "longueur",
+            "title": "Longueur (en m)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "tig",
+            "title": "Nombre de tiges (≥ 5 cm)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "dhp1",
+            "title": "DHP 1 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp2",
+            "title": "DHP 2 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp3",
+            "title": "DHP 3 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp4",
+            "title": "DHP 4 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp5",
+            "title": "DHP 5 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "dhp6",
+            "title": "DHP 6 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp7",
+            "title": "DHP 7 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp8",
+            "title": "DHP 8 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "dhp9",
+            "title": "DHP 9 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp10",
+            "title": "DHP 10 (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true,
+              "maximum": 3000
+            }
+          },
+          {
+            "name": "dhp_b",
+            "title": "Diamètre à la base (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "dhp_e",
+            "title": "Diamètre à l'extrémité (en cm)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "dmh",
+            "title": "Dendromicrohabitats observés",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Loges de pic"
+              },
+              {
+                "value": "2",
+                "label": "Cavités à terreau"
+              },
+              {
+                "value": "3",
+                "label": "Concavités"
+              },
+              {
+                "value": "4",
+                "label": "Orifices ou galeries d'insectes"
+              },
+              {
+                "value": "5",
+                "label": "Aubier apparent"
+              },
+              {
+                "value": "6",
+                "label": "Aubier et bois de cœur apparents"
+              },
+              {
+                "value": "7",
+                "label": "Bois mort dans le houppier"
+              },
+              {
+                "value": "8",
+                "label": "Racines"
+              },
+              {
+                "value": "9",
+                "label": "Gourmands ou rameaux"
+              },
+              {
+                "value": "10",
+                "label": "Nids"
+              },
+              {
+                "value": "11",
+                "label": "Loupes ou chancres"
+              },
+              {
+                "value": "12",
+                "label": "Champignons pérennes"
+              },
+              {
+                "value": "13",
+                "label": "Champignons éphémères"
+              },
+              {
+                "value": "14",
+                "label": "Plantes et lichens"
+              },
+              {
+                "value": "15",
+                "label": "Microsols"
+              },
+              {
+                "value": "16",
+                "label": "Sève ou résine"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "tsbf_001",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "tax1_tsbf",
+            "title": "Taxon",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Arachnides"
+              },
+              {
+                "value": "2",
+                "label": "Chilopodes (mille-pattes)"
+              },
+              {
+                "value": "3",
+                "label": "Diplopodes (mille-pattes)"
+              },
+              {
+                "value": "4",
+                "label": "Crustacés"
+              },
+              {
+                "value": "5",
+                "label": "Mollusques"
+              },
+              {
+                "value": "6",
+                "label": "Insectes"
+              },
+              {
+                "value": "7",
+                "label": "Vers annélides"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "autr1_tsbf",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax2_tsbf",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Araignées"
+              },
+              {
+                "value": "2",
+                "label": "Opilions"
+              },
+              {
+                "value": "3",
+                "label": "Pseudoscorpions"
+              },
+              {
+                "value": "4",
+                "label": "Scorpions"
+              },
+              {
+                "value": "5",
+                "label": "Cloportes"
+              },
+              {
+                "value": "6",
+                "label": "Stylommatophora"
+              },
+              {
+                "value": "7",
+                "label": "Blattodea"
+              },
+              {
+                "value": "8",
+                "label": "Coléoptères"
+              },
+              {
+                "value": "9",
+                "label": "Dermaptères"
+              },
+              {
+                "value": "10",
+                "label": "Hémiptères"
+              },
+              {
+                "value": "11",
+                "label": "Hyménoptères"
+              },
+              {
+                "value": "12",
+                "label": "Lombriciens"
+              },
+              {
+                "value": "13",
+                "label": "Orthoptères"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr2_tsbf",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax3_tsbf",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Escargot"
+              },
+              {
+                "value": "2",
+                "label": "Limace"
+              },
+              {
+                "value": "3",
+                "label": "Blattes"
+              },
+              {
+                "value": "4",
+                "label": "Termites"
+              },
+              {
+                "value": "5",
+                "label": "Adulte"
+              },
+              {
+                "value": "6",
+                "label": "Larve (vers blancs)"
+              },
+              {
+                "value": "7",
+                "label": "Perce-oreilles"
+              },
+              {
+                "value": "8",
+                "label": "Fourmis"
+              },
+              {
+                "value": "9",
+                "label": "Vers anéciques"
+              },
+              {
+                "value": "10",
+                "label": "Vers endogés"
+              },
+              {
+                "value": "11",
+                "label": "Vers épigés"
+              },
+              {
+                "value": "12",
+                "label": "Criquets"
+              },
+              {
+                "value": "13",
+                "label": "Grillons"
+              },
+              {
+                "value": "14",
+                "label": "Sauterelles"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr3_tsbf",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "esp_tsbf",
+            "title": "Espèce",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "nomb_tsbf",
+            "title": "Nombre d'individus",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "barba_001",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "tax1_barbA",
+            "title": "Taxon",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Arachnides"
+              },
+              {
+                "value": "2",
+                "label": "Chilopodes (mille-pattes)"
+              },
+              {
+                "value": "3",
+                "label": "Diplopodes (mille-pattes)"
+              },
+              {
+                "value": "4",
+                "label": "Crustacés"
+              },
+              {
+                "value": "5",
+                "label": "Mollusques"
+              },
+              {
+                "value": "6",
+                "label": "Insectes"
+              },
+              {
+                "value": "7",
+                "label": "Vers annélides"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "autr1_barbA",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax2_barbA",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Araignées"
+              },
+              {
+                "value": "2",
+                "label": "Opilions"
+              },
+              {
+                "value": "3",
+                "label": "Pseudoscorpions"
+              },
+              {
+                "value": "4",
+                "label": "Scorpions"
+              },
+              {
+                "value": "5",
+                "label": "Cloportes"
+              },
+              {
+                "value": "6",
+                "label": "Stylommatophora"
+              },
+              {
+                "value": "7",
+                "label": "Blattodea"
+              },
+              {
+                "value": "8",
+                "label": "Coléoptères"
+              },
+              {
+                "value": "9",
+                "label": "Dermaptères"
+              },
+              {
+                "value": "10",
+                "label": "Hémiptères"
+              },
+              {
+                "value": "11",
+                "label": "Hyménoptères"
+              },
+              {
+                "value": "12",
+                "label": "Lombriciens"
+              },
+              {
+                "value": "13",
+                "label": "Orthoptères"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr2_barbA",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax3_barbA",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Escargot"
+              },
+              {
+                "value": "2",
+                "label": "Limace"
+              },
+              {
+                "value": "3",
+                "label": "Blattes"
+              },
+              {
+                "value": "4",
+                "label": "Termites"
+              },
+              {
+                "value": "5",
+                "label": "Adulte"
+              },
+              {
+                "value": "6",
+                "label": "Larve (vers blancs)"
+              },
+              {
+                "value": "7",
+                "label": "Perce-oreilles"
+              },
+              {
+                "value": "8",
+                "label": "Fourmis"
+              },
+              {
+                "value": "9",
+                "label": "Vers anéciques"
+              },
+              {
+                "value": "10",
+                "label": "Vers endogés"
+              },
+              {
+                "value": "11",
+                "label": "Vers épigés"
+              },
+              {
+                "value": "12",
+                "label": "Criquets"
+              },
+              {
+                "value": "13",
+                "label": "Grillons"
+              },
+              {
+                "value": "14",
+                "label": "Sauterelles"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "aut31_barbA",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "esp_barbA",
+            "title": "Espèce",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "nomb_barbA",
+            "title": "Nombre d'individus",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "barbb_001",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "tax1_barbB",
+            "title": "Taxon",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Arachnides"
+              },
+              {
+                "value": "2",
+                "label": "Chilopodes (mille-pattes)"
+              },
+              {
+                "value": "3",
+                "label": "Diplopodes (mille-pattes)"
+              },
+              {
+                "value": "4",
+                "label": "Crustacés"
+              },
+              {
+                "value": "5",
+                "label": "Mollusques"
+              },
+              {
+                "value": "6",
+                "label": "Insectes"
+              },
+              {
+                "value": "7",
+                "label": "Vers annélides"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr1_barbB",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax2_barbB",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Araignées"
+              },
+              {
+                "value": "2",
+                "label": "Opilions"
+              },
+              {
+                "value": "3",
+                "label": "Pseudoscorpions"
+              },
+              {
+                "value": "4",
+                "label": "Scorpions"
+              },
+              {
+                "value": "5",
+                "label": "Cloportes"
+              },
+              {
+                "value": "6",
+                "label": "Stylommatophora"
+              },
+              {
+                "value": "7",
+                "label": "Blattodea"
+              },
+              {
+                "value": "8",
+                "label": "Coléoptères"
+              },
+              {
+                "value": "9",
+                "label": "Dermaptères"
+              },
+              {
+                "value": "10",
+                "label": "Hémiptères"
+              },
+              {
+                "value": "11",
+                "label": "Hyménoptères"
+              },
+              {
+                "value": "12",
+                "label": "Lombriciens"
+              },
+              {
+                "value": "13",
+                "label": "Orthoptères"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr2_barbB",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax3_barbB",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Escargot"
+              },
+              {
+                "value": "2",
+                "label": "Limace"
+              },
+              {
+                "value": "3",
+                "label": "Blattes"
+              },
+              {
+                "value": "4",
+                "label": "Termites"
+              },
+              {
+                "value": "5",
+                "label": "Adulte"
+              },
+              {
+                "value": "6",
+                "label": "Larve (vers blancs)"
+              },
+              {
+                "value": "7",
+                "label": "Perce-oreilles"
+              },
+              {
+                "value": "8",
+                "label": "Fourmis"
+              },
+              {
+                "value": "9",
+                "label": "Vers anéciques"
+              },
+              {
+                "value": "10",
+                "label": "Vers endogés"
+              },
+              {
+                "value": "11",
+                "label": "Vers épigés"
+              },
+              {
+                "value": "12",
+                "label": "Criquets"
+              },
+              {
+                "value": "13",
+                "label": "Grillons"
+              },
+              {
+                "value": "14",
+                "label": "Sauterelles"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "aut31_barbB",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "esp_barbB",
+            "title": "Espèce",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "nomb_barbB",
+            "title": "Nombre d'individus",
+            "type": "integer",
+            "constraints": {
+              "required": false,
+              "minimum": 0
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "barbc_001",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "tax1_barbC",
+            "title": "Taxon",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Arachnides"
+              },
+              {
+                "value": "2",
+                "label": "Chilopodes (mille-pattes)"
+              },
+              {
+                "value": "3",
+                "label": "Diplopodes (mille-pattes)"
+              },
+              {
+                "value": "4",
+                "label": "Crustacés"
+              },
+              {
+                "value": "5",
+                "label": "Mollusques"
+              },
+              {
+                "value": "6",
+                "label": "Insectes"
+              },
+              {
+                "value": "7",
+                "label": "Vers annélides"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr1_barbC",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax2_barbC",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Araignées"
+              },
+              {
+                "value": "2",
+                "label": "Opilions"
+              },
+              {
+                "value": "3",
+                "label": "Pseudoscorpions"
+              },
+              {
+                "value": "4",
+                "label": "Scorpions"
+              },
+              {
+                "value": "5",
+                "label": "Cloportes"
+              },
+              {
+                "value": "6",
+                "label": "Stylommatophora"
+              },
+              {
+                "value": "7",
+                "label": "Blattodea"
+              },
+              {
+                "value": "8",
+                "label": "Coléoptères"
+              },
+              {
+                "value": "9",
+                "label": "Dermaptères"
+              },
+              {
+                "value": "10",
+                "label": "Hémiptères"
+              },
+              {
+                "value": "11",
+                "label": "Hyménoptères"
+              },
+              {
+                "value": "12",
+                "label": "Lombriciens"
+              },
+              {
+                "value": "13",
+                "label": "Orthoptères"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr2_barbC",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax3_barbC",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Escargot"
+              },
+              {
+                "value": "2",
+                "label": "Limace"
+              },
+              {
+                "value": "3",
+                "label": "Blattes"
+              },
+              {
+                "value": "4",
+                "label": "Termites"
+              },
+              {
+                "value": "5",
+                "label": "Adulte"
+              },
+              {
+                "value": "6",
+                "label": "Larve (vers blancs)"
+              },
+              {
+                "value": "7",
+                "label": "Perce-oreilles"
+              },
+              {
+                "value": "8",
+                "label": "Fourmis"
+              },
+              {
+                "value": "9",
+                "label": "Vers anéciques"
+              },
+              {
+                "value": "10",
+                "label": "Vers endogés"
+              },
+              {
+                "value": "11",
+                "label": "Vers épigés"
+              },
+              {
+                "value": "12",
+                "label": "Criquets"
+              },
+              {
+                "value": "13",
+                "label": "Grillons"
+              },
+              {
+                "value": "14",
+                "label": "Sauterelles"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "aut31_barbC",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "esp_barbC",
+            "title": "Espèce",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "nomb_barbC",
+            "title": "Nombre d'individus",
+            "type": "integer",
+            "constraints": {
+              "required": false,
+              "minimum": 0
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "barbd_001",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "parent_id",
+            "type": "integer"
+          },
+          {
+            "name": "tax1_barbD",
+            "title": "Taxon",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun"
+              },
+              {
+                "value": "1",
+                "label": "Arachnides"
+              },
+              {
+                "value": "2",
+                "label": "Chilopodes (mille-pattes)"
+              },
+              {
+                "value": "3",
+                "label": "Diplopodes (mille-pattes)"
+              },
+              {
+                "value": "4",
+                "label": "Crustacés"
+              },
+              {
+                "value": "5",
+                "label": "Mollusques"
+              },
+              {
+                "value": "6",
+                "label": "Insectes"
+              },
+              {
+                "value": "7",
+                "label": "Vers annélides"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr1_barbD",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax2_barbD",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Araignées"
+              },
+              {
+                "value": "2",
+                "label": "Opilions"
+              },
+              {
+                "value": "3",
+                "label": "Pseudoscorpions"
+              },
+              {
+                "value": "4",
+                "label": "Scorpions"
+              },
+              {
+                "value": "5",
+                "label": "Cloportes"
+              },
+              {
+                "value": "6",
+                "label": "Stylommatophora"
+              },
+              {
+                "value": "7",
+                "label": "Blattodea"
+              },
+              {
+                "value": "8",
+                "label": "Coléoptères"
+              },
+              {
+                "value": "9",
+                "label": "Dermaptères"
+              },
+              {
+                "value": "10",
+                "label": "Hémiptères"
+              },
+              {
+                "value": "11",
+                "label": "Hyménoptères"
+              },
+              {
+                "value": "12",
+                "label": "Lombriciens"
+              },
+              {
+                "value": "13",
+                "label": "Orthoptères"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "autr2_barbD",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "tax3_barbD",
+            "title": "Merci de préciser",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Escargot"
+              },
+              {
+                "value": "2",
+                "label": "Limace"
+              },
+              {
+                "value": "3",
+                "label": "Blattes"
+              },
+              {
+                "value": "4",
+                "label": "Termites"
+              },
+              {
+                "value": "5",
+                "label": "Adulte"
+              },
+              {
+                "value": "6",
+                "label": "Larve (vers blancs)"
+              },
+              {
+                "value": "7",
+                "label": "Perce-oreilles"
+              },
+              {
+                "value": "8",
+                "label": "Fourmis"
+              },
+              {
+                "value": "9",
+                "label": "Vers anéciques"
+              },
+              {
+                "value": "10",
+                "label": "Vers endogés"
+              },
+              {
+                "value": "11",
+                "label": "Vers épigés"
+              },
+              {
+                "value": "12",
+                "label": "Criquets"
+              },
+              {
+                "value": "13",
+                "label": "Grillons"
+              },
+              {
+                "value": "14",
+                "label": "Sauterelles"
+              },
+              {
+                "value": "998",
+                "label": "Autre"
+              },
+              {
+                "value": "999",
+                "label": "Inconnu"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "aut31_barbD",
+            "title": "Autre : merci de préciser",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "esp_barbD",
+            "title": "Espèce",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "nomb_barbD",
+            "title": "Nombre d'individus",
+            "type": "integer",
+            "constraints": {
+              "required": false,
+              "minimum": 0
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": [
+          {
+            "fields": [
+              "parent_id"
+            ],
+            "reference": {
+              "resource": "inventaire_id",
+              "fields": [
+                "_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "inventaire_id",
+      "path": "db.sqlite",
+      "format": "sqlite",
+      "dialect": {},
+      "schema": {
+        "fields": [
+          {
+            "name": "_id",
+            "type": "integer"
+          },
+          {
+            "name": "gps",
+            "type": "geojson",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "name": "nom",
+            "title": "Nom du chef d'équipe",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "for",
+            "title": "Nom de la forêt",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Djilor"
+              },
+              {
+                "value": "2",
+                "label": "Malka"
+              },
+              {
+                "value": "3",
+                "label": "Samba Dia"
+              },
+              {
+                "value": "4",
+                "label": "Takkite"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "cod",
+            "title": "Code de la placette",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "exclusiveMaximum": 100
+            }
+          },
+          {
+            "name": "typ_inv",
+            "title": "Type d'inventaire",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Inventaire forestier"
+              },
+              {
+                "value": "1",
+                "label": "Inventaire forestier et pédologique"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "veg",
+            "title": "Couvert végétal",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 5
+            }
+          },
+          {
+            "name": "eros_eo",
+            "title": "Signes d'érosion éolienne",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun signe d'érosion"
+              },
+              {
+                "value": "1",
+                "label": "Erosion faible"
+              },
+              {
+                "value": "2",
+                "label": "Erosion modérée"
+              },
+              {
+                "value": "3",
+                "label": "Erosion importante"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "eros_hy",
+            "title": "Signes d'érosion hydrique",
+            "categories": [
+              {
+                "value": "0",
+                "label": "Aucun signe d'érosion"
+              },
+              {
+                "value": "1",
+                "label": "Erosion faible"
+              },
+              {
+                "value": "2",
+                "label": "Erosion modérée"
+              },
+              {
+                "value": "3",
+                "label": "Erosion importante"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "pent",
+            "title": "Pente (en °)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 90
+            }
+          },
+          {
+            "name": "beer1",
+            "title": "Vitesse d'infiltration 1 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer2",
+            "title": "Vitesse d'infiltration 2 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer3",
+            "title": "Vitesse d'infiltration 3 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer4",
+            "title": "Vitesse d'infiltration 4 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer5",
+            "title": "Vitesse d'infiltration 5 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer6",
+            "title": "Vitesse d'infiltration 6 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer7",
+            "title": "Vitesse d'infiltration 7 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer8",
+            "title": "Vitesse d'infiltration 8 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer9",
+            "title": "Vitesse d'infiltration 9 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "beer10",
+            "title": "Vitesse d'infiltration 10 (en sec)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 1800
+            }
+          },
+          {
+            "name": "slak1",
+            "title": "Conservation agrégat 1",
+            "categories": [
+              {
+                "value": "0",
+                "label": "c ≤ 50 % après 5 sec d'immersion ET c ≤ 10 % après 5 immersions OU sol trop instable pour être testé"
+              },
+              {
+                "value": "1",
+                "label": "c ≤ 50 % après 30 sec d'immersion ET c ≤ 10 % après 5 immersions"
+              },
+              {
+                "value": "2",
+                "label": "c ≤ 50 % après 300 sec d'immersion OU c ≤ 10 % après 5 immersions"
+              },
+              {
+                "value": "3",
+                "label": "10 < c ≤ 25 % après 5 immersions"
+              },
+              {
+                "value": "4",
+                "label": "25 < c ≤ 75 % après 5 immersions"
+              },
+              {
+                "value": "5",
+                "label": "c > 75 % après 5 immersions"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "slak2",
+            "title": "Conservation agrégat 2",
+            "categories": [
+              {
+                "value": "0",
+                "label": "c ≤ 50 % après 5 sec d'immersion ET c ≤ 10 % après 5 immersions OU sol trop instable pour être testé"
+              },
+              {
+                "value": "1",
+                "label": "c ≤ 50 % après 30 sec d'immersion ET c ≤ 10 % après 5 immersions"
+              },
+              {
+                "value": "2",
+                "label": "c ≤ 50 % après 300 sec d'immersion OU c ≤ 10 % après 5 immersions"
+              },
+              {
+                "value": "3",
+                "label": "10 < c ≤ 25 % après 5 immersions"
+              },
+              {
+                "value": "4",
+                "label": "25 < c ≤ 75 % après 5 immersions"
+              },
+              {
+                "value": "5",
+                "label": "c > 75 % après 5 immersions"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "slak3",
+            "title": "Conservation agrégat 3",
+            "categories": [
+              {
+                "value": "0",
+                "label": "c ≤ 50 % après 5 sec d'immersion ET c ≤ 10 % après 5 immersions OU sol trop instable pour être testé"
+              },
+              {
+                "value": "1",
+                "label": "c ≤ 50 % après 30 sec d'immersion ET c ≤ 10 % après 5 immersions"
+              },
+              {
+                "value": "2",
+                "label": "c ≤ 50 % après 300 sec d'immersion OU c ≤ 10 % après 5 immersions"
+              },
+              {
+                "value": "3",
+                "label": "10 < c ≤ 25 % après 5 immersions"
+              },
+              {
+                "value": "4",
+                "label": "25 < c ≤ 75 % après 5 immersions"
+              },
+              {
+                "value": "5",
+                "label": "c > 75 % après 5 immersions"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "hor",
+            "title": "Nombre d'horizons visibles",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0,
+              "maximum": 5
+            }
+          },
+          {
+            "name": "ep1",
+            "title": "Epaisseur de l'horizon 1 (en mm)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "not1",
+            "title": "Qualité de la structure de l'horizon 1",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Friable"
+              },
+              {
+                "value": "2",
+                "label": "Intact"
+              },
+              {
+                "value": "3",
+                "label": "Ferme"
+              },
+              {
+                "value": "4",
+                "label": "Compact"
+              },
+              {
+                "value": "5",
+                "label": "Très compact"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "ep2",
+            "title": "Epaisseur de l'horizon 2 (en mm)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "not2",
+            "title": "Qualité de la structure de l'horizon 2",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Friable"
+              },
+              {
+                "value": "2",
+                "label": "Intact"
+              },
+              {
+                "value": "3",
+                "label": "Ferme"
+              },
+              {
+                "value": "4",
+                "label": "Compact"
+              },
+              {
+                "value": "5",
+                "label": "Très compact"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "ep3",
+            "title": "Epaisseur de l'horizon 3 (en mm)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "not3",
+            "title": "Qualité de la structure de l'horizon 3",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Friable"
+              },
+              {
+                "value": "2",
+                "label": "Intact"
+              },
+              {
+                "value": "3",
+                "label": "Ferme"
+              },
+              {
+                "value": "4",
+                "label": "Compact"
+              },
+              {
+                "value": "5",
+                "label": "Très compact"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "ep4",
+            "title": "Epaisseur de l'horizon 4 (en mm)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "not4",
+            "title": "Qualité de la structure de l'horizon 4",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Friable"
+              },
+              {
+                "value": "2",
+                "label": "Intact"
+              },
+              {
+                "value": "3",
+                "label": "Ferme"
+              },
+              {
+                "value": "4",
+                "label": "Compact"
+              },
+              {
+                "value": "5",
+                "label": "Très compact"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "ep5",
+            "title": "Epaisseur de l'horizon 5 (en mm)",
+            "type": "integer",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "not5",
+            "title": "Qualité de la structure de l'horizon 5",
+            "categories": [
+              {
+                "value": "1",
+                "label": "Friable"
+              },
+              {
+                "value": "2",
+                "label": "Intact"
+              },
+              {
+                "value": "3",
+                "label": "Ferme"
+              },
+              {
+                "value": "4",
+                "label": "Compact"
+              },
+              {
+                "value": "5",
+                "label": "Très compact"
+              }
+            ],
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "com_001",
+            "title": "Commentaires (optionnel)",
+            "type": "string",
+            "constraints": {
+              "required": false
+            }
+          }
+        ],
+        "missingValues": [],
+        "primaryKey": "_id",
+        "foreignKeys": []
+      }
+    }
+  ]
+}
