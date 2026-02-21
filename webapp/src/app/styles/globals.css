@@ -1,11 +1,12 @@
 /**
  * GLOBALS.CSS
- * 
- * Responsabilité : 
+ *
+ * Responsabilité :
  * - Styles appliqués sur les balises html de base: html, body, ...
  *
  * ℹ️ Il est possible d'utiliser des variables css
- * ⚠️ Il n'est pas possible d'utiliser des classes tailwind avec `@apply`
+ * ⚠️ Il n'est pas possible d'utiliser des classes tailwind avec `@apply`, car elles ne sont pas importées
+ * (pas de directive tailwind, ni d'import de index.css) afin d'éviter de les bundle plusieurs fois !
  * ⚠️ Ajouter la customisation à la layer components, de sorte à pouvoir override dans le code (layer utilies)
  */
 
@@ -26,5 +27,10 @@
     background-color: var(--background);
     color: var(--foreground);
     font-size: var(--text-base);
+  }
+
+  * {
+    border-color: var(--border);
+    outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.5);
   }
 }

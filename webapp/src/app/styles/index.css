@@ -9,9 +9,9 @@
  */
 
 @import "tailwindcss";
-@plugin "tailwindcss-animate";
-
 @import "./all4trees.css";
+
+@plugin "tailwindcss-animate";
 
 /* ========================================================================
  * THEMING SHADCN - https://ui.shadcn.com/docs/theming
@@ -28,84 +28,85 @@
   --radius: 0.625rem;
 
   /* LIGHT MODE SHADCN */
-  --background: var(--color-alabaster);
-  --foreground: var(--color-nuit);
+  --background: var(--a4t-color-alabaster);
+  --foreground: var(--a4t-color-nuit);
 
-  --card: #ffffff;
-  --card-foreground: var(--color-nuit);
+  --card: var(--custom-color-grey-light);
+  --card-foreground: var(--a4t-color-nuit);
 
-  --popover: #ffffff;
-  --popover-foreground: var(--color-nuit);
+  --popover: var(--a4t-color-alabaster);
+  --popover-foreground: var(--a4t-color-nuit);
 
-  --primary: var(--color-vert-kelly);
-  --primary-foreground: var(--color-nuit);
-  --secondary: var(--color-jaune-vert);
-  --secondary-foreground: var(--color-nuit);
+  --primary: var(--a4t-color-vert-kelly);
+  --primary-foreground: var(--a4t-color-nuit);
+  --secondary: var(--a4t-color-jaune-vert);
+  --secondary-foreground: var(--a4t-color-nuit);
 
   --muted: #e5e7eb;
-  --muted-foreground: var(--color-onyx);
-  --accent: var(--color-vert-de-gris);
-  --accent-foreground: #ffffff;
+  --muted-foreground: var(--a4t-color-onyx);
+  --accent: var(--a4t-color-jaune-vert);
+  --accent-foreground: var(--a4t-color-nuit);
   --destructive: #dc2626;
 
-  --border: #e5e7eb;
+  --border: #e5e7ebaa;
   --input: #ffffff;
-  --ring: var(--color-vert-kelly);
+  --ring: var(--a4t-color-vert-kelly);
 
-  --chart-1: var(--color-bleu);
-  --chart-2: var(--color-vert-de-gris);
-  --chart-3: var(--color-vert-kelly);
-  --chart-4: var(--color-citrouille);
-  --chart-5: var(--color-jaune-vert);
+  --chart-1: var(--a4t-color-bleu);
+  --chart-2: var(--a4t-color-vert-de-gris);
+  --chart-3: var(--a4t-color-vert-kelly);
+  --chart-4: var(--a4t-color-citrouille);
+  --chart-5: var(--a4t-color-jaune-vert);
 
-  --sidebar: var(--color-alabaster);
-  --sidebar-foreground: var(--color-alabaster);
-  --sidebar-primary: var(--color-brunswick-green);
-  --sidebar-primary-foreground: var(--color-alabaster);
-  --sidebar-accent: var(--color-citrouille);
+  --sidebar: var(--a4t-color-alabaster);
+  --sidebar-foreground: var(--a4t-color-alabaster);
+  --sidebar-primary: var(--a4t-color-brunswick-green);
+  --sidebar-primary-foreground: var(--a4t-color-alabaster);
+  --sidebar-accent: var(--a4t-color-citrouille);
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: var(--color-vert-kelly);
+  --sidebar-ring: var(--a4t-color-vert-kelly);
 }
 
 .dark {
-  --background: var(--color-vert-sombre);
-  --foreground: var(--color-alabaster);
+  --background: var(--custom-color-green-dark);
+  --foreground: var(--a4t-color-alabaster);
 
-  --card: var(--color-onyx);
-  --card-foreground: var(--color-alabaster);
+  --card: var(--a4t-color-nuit);
+  --card-foreground: var(--a4t-color-alabaster);
 
-  --popover: var(--color-onyx);
-  --popover-foreground: var(--color-alabaster);
+  --popover: var(--a4t-color-nuit);
+  --popover-foreground: var(--a4t-color-alabaster);
 
-  --primary: var(--color-brunswick-green);
-  --primary-foreground: var(--color-vert-clair);
-  --secondary: var(--color-vert-de-gris);
-  --secondary-foreground: var(--color-nuit);
+  --primary: var(--a4t-color-brunswick-green);
+  --primary-foreground: var(--custom-color-green-pastel);
+  --secondary: var(--a4t-color-vert-de-gris);
+  --secondary-foreground: var(--a4t-color-nuit);
 
-  --muted: var(--color-onyx);
+  --muted: var(--a4t-color-onyx);
   --muted-foreground: #9ca3af;
-  --accent: var(--color-brunswick-green);
-  --accent-foreground: var(--color-vert-clair);
+  --accent: var(--custom-color-green-main);
+  --accent-foreground: var(--custom-color-green-pastel);
   --destructive: #ef4444;
 
   --border: rgba(255, 255, 255, 0.15);
   --input: rgba(255, 255, 255, 0.05);
-  --ring: var(--color-jaune-vert);
+  --ring: var(--a4t-color-jaune-vert);
+
   --chart-1: #60a5fa;
   --chart-2: #22d3ee;
   --chart-3: #86efac;
   --chart-4: #fbbf24;
   --chart-5: #f97316;
 
-  --sidebar: var(--color-onyx);
-  --sidebar-foreground: var(--color-alabaster);
-  --sidebar-primary: var(--color-onyx);
-  --sidebar-primary-foreground: var(--color-vert-kelly);
-  --sidebar-accent: var(--color-citrouille);
-  --sidebar-accent-foreground: var(--color-nuit);
+  --sidebar: var(--a4t-color-onyx);
+  --sidebar-foreground: var(--a4t-color-alabaster);
+  --sidebar-primary: var(--a4t-color-onyx);
+  --sidebar-primary-foreground: var(--a4t-color-vert-kelly);
+  --sidebar-accent: var(--a4t-color-citrouille);
+  --sidebar-accent-foreground: var(--a4t-color-nuit);
   --sidebar-border: rgba(255, 255, 255, 0.15);
-  --sidebar-ring: var(--color-jaune-vert);
+  --sidebar-ring: var(--a4t-color-jaune-vert);
 }
 
 /* ========================================================================
@@ -127,34 +128,34 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
