@@ -6,13 +6,13 @@ import "./Map.css";
 import style from "./style.json";
 
 function useMap(containerSelector: string) {
-  const isInitialized = useRef(false);
+  const isInitializedRef = useRef(false);
 
   useEffect(() => {
-    if (isInitialized.current) return;
+    if (isInitializedRef.current) return;
     try {
       createMap(containerSelector, style);
-      isInitialized.current = true;
+      isInitializedRef.current = true;
     } catch (error) {
       console.error("Erreur lors de l'initialisation de la carte:", error);
     }
