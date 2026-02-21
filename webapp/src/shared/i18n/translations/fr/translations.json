@@ -3,6 +3,11 @@
     "button": {
       "login": "Connexion",
       "logout": "Déconnexion"
+    },
+    "colorModeSelector": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
     }
   },
   "auth": {
