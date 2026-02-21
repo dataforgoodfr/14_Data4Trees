@@ -46,11 +46,11 @@ export function ThemeProvider({
   };
 
   return (
-    <ThemeContext.Provider
+    <ThemeContext
       {...props}
       value={value}
     >
       {children}
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
