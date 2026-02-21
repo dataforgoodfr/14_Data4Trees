@@ -1,28 +1,47 @@
-import pluginReact from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-import js from "@eslint/js";
-import json from "@eslint/json";
+import eslintReact from "@eslint-react/eslint-plugin";
+import eslintJs from "@eslint/js";
+import eslintJson from "@eslint/json";
 import pluginPrettier from "eslint-config-prettier/flat";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: { js },
+    plugins: { js: eslintJs },
     extends: ["js/recommended"],
     languageOptions: { globals: globals.browser },
   },
-  tseslint.configs.recommended,
   {
-    ...pluginReact.configs.flat.recommended,
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      eslintReact.configs["recommended-typescript"],
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+    ],
     rules: {
       /**
-       * Disable react/display-name since it's currently broken
-       * TypeError: Error while loading rule 'react/display-name': sourceCode.getAllComments is not a function
+       * Disable some opiniated rules...
        */
-      "react/display-name": ["off"],
+      // "In React 19, 'use' is preferred over 'useContext' because it is more flexible"
+      "@eslint-react/no-use-context": "off",
+      // "In React 19, 'forwardRef' is no longer necessary. Pass 'ref' as a prop instead"
+      "@eslint-react/no-forward-ref": "off",
+      // "In React 19, you can render '<Context>' as a provider instead of '<Context.Provider>'"
+      "@eslint-react/no-context-provider": "off"
+    },
+    // Configure language/parsing options
+    languageOptions: {
+      // Use TypeScript ESLint parser for TypeScript files
+      parser: tseslint.parser,
+      parserOptions: {
+        // Enable project service for better TypeScript integration
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     settings: {
       react: {
@@ -33,14 +52,14 @@ export default defineConfig([
   {
     files: ["**/*.json"],
     /** @ts-expect-error json plugin not typed well*/
-    plugins: { json },
+    plugins: { json: eslintJson },
     language: "json/json",
     extends: ["json/recommended"],
   },
   {
     files: ["**/*.jsonc"],
     /** @ts-expect-error json plugin not typed well*/
-    plugins: { json },
+    plugins: { json: eslintJson },
     language: "json/jsonc",
     extends: ["json/recommended"],
   },
