@@ -1,9 +1,10 @@
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 
+import { API_URL } from "@shared/api/client";
 import "./Map.css";
 
-const STYLE_URL = "http://localhost:8000/api/maps/style.json";
+const STYLE_URL = `${API_URL}/maps/style.json`;
 
 type Category = { value: string; label: string };
 

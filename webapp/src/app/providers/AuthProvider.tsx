@@ -8,19 +8,20 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
     if (!storedToken) {
-      setIsAuthLoading(false);
       return;
     }
 
-    verifyToken(storedToken)
-      .then((isValid) => {
+    async function checkToken(token: string) {
+      setIsAuthLoading(true);
+      try {
+        const isValid = await verifyToken(token);
         if (isValid) {
           setToken(storedToken);
           setIsAuthenticated(true);
@@ -29,14 +30,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
         }
-      })
-      .catch(() => {
+      } catch {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-      })
-      .finally(() => {
-        setIsAuthLoading(false);
-      });
+      }
+
+      setIsAuthLoading(false);
+    }
+
+    checkToken(storedToken);
   }, []);
 
   const login = (newToken: string) => {
@@ -53,10 +55,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return (
-    <AuthContext.Provider
+    <AuthContext
       value={{ isAuthenticated, isAuthLoading, token, login, logout }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthContext>
   );
 }

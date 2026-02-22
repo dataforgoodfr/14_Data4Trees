@@ -10,5 +10,5 @@ interface ApiProviderProps {
 export function ApiProvider({ children }: ApiProviderProps) {
   const api = useMemo(() => createApiClient(), []);
 
-  return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>;
+  return <ApiContext value={api}>{children}</ApiContext>;
 }
