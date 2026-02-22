@@ -25,30 +25,30 @@ const LANGUAGES_CONFIGS = [
 ] as const;
 
 export const LanguageSelecor: FC = () => (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild={true}>
-        <Button
-          variant="outline"
-          size="icon"
-          className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
-        >
-          <LanguagesIcon className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">{i18nInstance.language.toUpperCase()}</span>
-        </Button>
-      </DropdownMenuTrigger>
-
-      <DropdownMenuContent
-        className="bg-background"
-        align="end"
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild={true}>
+      <Button
+        variant="outline"
+        size="icon"
+        className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
       >
-        {LANGUAGES_CONFIGS.map((config) => (
-          <DropdownMenuItem
-            key={config.identifier}
-            onClick={() => i18nInstance.changeLanguage(config.identifier)}
-          >
-            {`${config.flag} - ${config.fullString}`}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+        <LanguagesIcon className="h-[1.2rem] w-[1.2rem]" />
+        <span className="sr-only">{i18nInstance.language.toUpperCase()}</span>
+      </Button>
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent
+      className="bg-background"
+      align="end"
+    >
+      {LANGUAGES_CONFIGS.map((config) => (
+        <DropdownMenuItem
+          key={config.identifier}
+          onClick={() => i18nInstance.changeLanguage(config.identifier)}
+        >
+          {`${config.flag} - ${config.fullString}`}
+        </DropdownMenuItem>
+      ))}
+    </DropdownMenuContent>
+  </DropdownMenu>
+);
