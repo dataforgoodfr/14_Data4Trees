@@ -24,10 +24,9 @@ const LANGUAGES_CONFIGS = [
   },
 ] as const;
 
-export const LanguageSelecor: FC = () => {
-  return (
+export const LanguageSelecor: FC = () => (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild={true}>
         <Button
           variant="outline"
           size="icon"
@@ -53,4 +52,3 @@ export const LanguageSelecor: FC = () => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};

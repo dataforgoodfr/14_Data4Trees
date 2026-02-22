@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { DashboardPopover } from "@widgets/DashboardPopover";
 import { MapSidebar } from "@widgets/MapSidebar";
 import { Header } from "@widgets/header";
-import { Map } from "@widgets/map";
+import { WidgetMap } from "@widgets/map";
 
 import { useAuth } from "@features/auth/";
 import { getChartData } from "@features/charts/chartClient";
@@ -66,7 +66,7 @@ export function MainPage() {
               </ResizablePanel>
               <ResizableHandle />
               <ResizablePanel defaultSize={90}>
-                <Map />
+                <WidgetMap />
               </ResizablePanel>
             </ResizablePanelGroup>
           </ResizablePanel>

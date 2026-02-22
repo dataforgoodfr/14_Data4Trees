@@ -19,7 +19,7 @@ export function AdminRoute() {
       <Navigate
         to="/login"
         state={{ from: location }}
-        replace
+        replace={true}
       />
     );
   }

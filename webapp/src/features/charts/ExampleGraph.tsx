@@ -61,7 +61,7 @@ export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
       <CardContent>
         <ChartContainer config={chartConfig}>
           <LineChart
-            accessibilityLayer
+            accessibilityLayer={true}
             data={chartData}
             margin={{
               left: 12,
@@ -86,7 +86,7 @@ export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent hideLabel={true} />}
             />
             <Line
               dataKey="kwhConsumed"

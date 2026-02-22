@@ -19,7 +19,7 @@ export interface DashboardProps {
 export function DashboardPopover({ graphData, dataType }: DashboardProps) {
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild={true}>
         <Button variant="outline">Montrer Dashboard</Button>
       </PopoverTrigger>
       <PopoverContent className="w-80">

@@ -47,7 +47,7 @@ function useMap(containerSelector: string) {
   return { isReady, mapApiRef, forests };
 }
 
-export const Map: FC = () => {
+export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests } = useMap("#map");
 
   const filterByForest = (forestId: string) => {
