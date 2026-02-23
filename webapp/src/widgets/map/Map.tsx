@@ -1,3 +1,4 @@
+// @ts-expect-error No types for the coordo lib
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 
@@ -19,7 +20,8 @@ function useMap(containerSelector: string) {
 
     const handleReady = () => {
       setIsReady(true);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // @todo ADD TYPES TO THE LIBRARY
+      // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
       const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
       const forestField = metadata?.schema?.fields?.find(
         (field: { name: string }) => field.name === "for",
