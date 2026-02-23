@@ -28,7 +28,10 @@
         "richness": "count(unique(ind.ess_arb))",
         "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))"
       },
-      "popup": { "trigger": "click" }
+      "popup": {
+        "trigger": "click",
+        "html": "<h1>Forêt {{ for }}</h1>Richesse : {{ richness }}<br>Hauteur dominante : {{ dominant_height }}"
+      }
     }
   ],
   "controls": [
