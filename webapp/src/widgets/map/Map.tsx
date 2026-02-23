@@ -13,8 +13,6 @@ function useMap(containerSelector: string) {
   const [forests, setForests] = useState<Category[]>([]);
 
   useEffect(() => {
-    if (mapApiRef.current) return;
-
     const el = document.querySelector(containerSelector);
     if (!el) return;
 
@@ -32,10 +30,12 @@ function useMap(containerSelector: string) {
 
     el.addEventListener("map:ready", handleReady);
 
-    try {
-      mapApiRef.current = createMap(containerSelector, STYLE_URL);
-    } catch (error) {
-      console.error("Erreur lors de l'initialisation de la carte:", error);
+    if (!mapApiRef.current) {
+      try {
+        mapApiRef.current = createMap(containerSelector, STYLE_URL);
+      } catch (error) {
+        console.error("Erreur lors de l'initialisation de la carte:", error);
+      }
     }
 
     return () => {
