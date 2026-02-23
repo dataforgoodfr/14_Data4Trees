@@ -31,7 +31,7 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background items-center justify-center">
+    <div className="flex flex-col h-screen items-center justify-center gap-4">
       <h1>Login Page</h1>
       <LoginForm
         onSuccess={() => {
