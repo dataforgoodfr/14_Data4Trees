@@ -64,7 +64,10 @@ export const Map: FC = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <div id="map" className="w-full h-full"></div>
+      <div
+        id="map"
+        className="w-full h-full"
+      ></div>
       {!isReady && (
         <div className="map-loader absolute inset-0 z-50 flex items-center justify-center bg-background/80">
           <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
