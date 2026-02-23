@@ -1,4 +1,7 @@
 {
+  "common": {
+    "loading": "Chargement..."
+  },
   "header": {
     "button": {
       "login": "Connexion",

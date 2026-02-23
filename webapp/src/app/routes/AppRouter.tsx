@@ -1,11 +1,11 @@
 import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { RootLayout } from "@app/layouts/RootLayout";
+
 import { MainPage } from "@pages/MainPage";
 
-import { RootLayout } from "@widgets/RootLayout";
-
-import { AdminRoute } from "./lib/ProtectedRoute";
+import { AdminRoute } from "./lib/AdminRoute";
 
 const AdminPage = lazy(() => import("@pages/admin"));
 const LoginPage = lazy(() => import("@pages/login"));
@@ -26,13 +26,18 @@ export function AppRouter() {
             index
             element={<MainPage />}
           />
-
-          <Route element={<AdminRoute />}>
-            <Route
-              path="admin"
-              element={<AdminPage />}
-            />
-          </Route>
+        </Route>
+        <Route
+          element={
+            <AdminRoute>
+              <RootLayout />
+            </AdminRoute>
+          }
+        >
+          <Route
+            path="admin"
+            element={<AdminPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

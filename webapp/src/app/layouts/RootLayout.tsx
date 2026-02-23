@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { useAuth } from "@app/providers";
-
 import { Header } from "@widgets/header";
+
+import { useAuth } from "@features/auth";
 
 export const RootLayout: React.FC = () => {
   const { isAuthenticated, isAuthLoading, logout } = useAuth();
