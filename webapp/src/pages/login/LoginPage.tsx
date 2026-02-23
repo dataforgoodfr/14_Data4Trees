@@ -25,7 +25,7 @@ export function LoginPage() {
     return (
       <Navigate
         to={redirectTo}
-        replace
+        replace={true}
       />
     );
   }

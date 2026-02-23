@@ -77,7 +77,7 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
                   placeholder="admin"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  required
+                  required={true}
                 />
               </div>
               <div className="grid gap-2">
@@ -89,7 +89,7 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
+                  required={true}
                 />
               </div>
               {error && (

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ["builtin", "external"],
+              ["^@radix-ui/(.*)$"],
+              ["^@/(.*)$"],
+              ["^@app/(.*)$"],
+              ["^@pages"],
+              ["^@pages/(.*)$"],
+              ["^@widgets"],
+              ["^@widgets/(.*)$"],
+              ["^@features"],
+              ["^@features/(.*)$"],
+              ["^@shared"],
+              ["^@shared/(.*)$"],
+              ["^@libs"],
+              ["^@libs/(.*)$"],
+              ["^@i18n"],
+              ["^@i18n/(.*)$"],
+              ["^@ui"],
+              ["^@ui/(.*)$"],
+              ["parent", "sibling", "index"]
+            ]
+          }
+        },
+        "recommended": true,
+        "useSortedAttributes": "on",
+        "useSortedInterfaceMembers": "on",
+        "useSortedKeys": "on",
+        "useSortedProperties": "on"
+      }
+    },
+    "enabled": true,
+    "includes": ["!package.json"]
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "attributePosition": "multiline",
+    "bracketSpacing": true,
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "a11y": "info",
+      "complexity": {
+        "noExcessiveLinesPerFunction": "off"
+      },
+      "correctness": {
+        "useImportExtensions": "off"
+      },
+      "nursery": "off",
+      "performance": {
+        "noBarrelFile": "off"
+      },
+      "recommended": true,
+      "security": {
+        "noDangerouslySetInnerHtml": "info"
+      },
+      "style": {
+        "useConsistentArrowReturn": "off"
+      },
+      "suspicious": {
+        "noConsole": "info"
+      }
+    }
+  },
+  "vcs": {
+    "enabled": false
+  }
+}

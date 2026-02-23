@@ -1,9 +1,11 @@
+// @ts-expect-error No types for the coordo lib
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 
+import { API_URL } from "@shared/api/client";
 import "./Map.css";
 
-const STYLE_URL = "http://localhost:8000/api/maps/style.json";
+const STYLE_URL = `${API_URL}/maps/style.json`;
 
 type Category = { value: string; label: string };
 
@@ -18,7 +20,8 @@ function useMap(containerSelector: string) {
 
     const handleReady = () => {
       setIsReady(true);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // @todo ADD TYPES TO THE LIBRARY
+      // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
       const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
       const forestField = metadata?.schema?.fields?.find(
         (field: { name: string }) => field.name === "for",
@@ -46,7 +49,7 @@ function useMap(containerSelector: string) {
   return { isReady, mapApiRef, forests };
 }
 
-export const Map: FC = () => {
+export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests } = useMap("#map");
 
   const filterByForest = (forestId: string) => {
