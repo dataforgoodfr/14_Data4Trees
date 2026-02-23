@@ -8,19 +8,17 @@ const STYLE_URL = "http://localhost:8000/api/maps/style.json";
 type Category = { value: string; label: string };
 
 function useMap(containerSelector: string) {
-  const isInitialized = useRef(false);
   const [isReady, setIsReady] = useState(false);
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
   const [forests, setForests] = useState<Category[]>([]);
 
   useEffect(() => {
-    if (isInitialized.current) return;
+    if (mapApiRef.current) return;
 
     const el = document.querySelector(containerSelector);
     if (!el) return;
 
     const handleReady = () => {
-      isInitialized.current = true;
       setIsReady(true);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
