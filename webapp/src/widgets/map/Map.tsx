@@ -1,11 +1,12 @@
 import { createMap } from "coordo";
-import { type FC, useEffect, useRef } from "react";
+import { type FC, useEffect, useRef, useState } from "react";
 
 import "./Map.css";
-import style from "./style.json";
+import styleUrl from "./style.json?url";
 
 function useMap(containerSelector: string) {
   const isInitialized = useRef(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (isInitialized.current) return;
@@ -15,12 +16,13 @@ function useMap(containerSelector: string) {
 
     const handleReady = () => {
       isInitialized.current = true;
+      setIsReady(true);
     };
 
     el.addEventListener("map:ready", handleReady);
 
     try {
-      createMap(containerSelector, style as unknown as string);
+      createMap(containerSelector, styleUrl);
     } catch (error) {
       console.error("Erreur lors de l'initialisation de la carte:", error);
     }
@@ -30,7 +32,7 @@ function useMap(containerSelector: string) {
     };
   }, [containerSelector]);
 
-  return isInitialized.current;
+  return isReady;
 }
 
 export const Map: FC = () => {

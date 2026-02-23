@@ -12,13 +12,45 @@
   font-weight: normal;
 }
 
-#map .maplibregl-popup-content {
+#map .maplibregl-popup .maplibregl-popup-content {
+  padding: 8px 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+  font-size: 13px;
   color: #333;
   background-color: #fff;
 }
 
 #map .maplibregl-popup-content h1 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  margin: 0 0 4px 0;
+  margin: -8px -12px 8px -12px;
+  padding: 8px 12px;
+  background-color: #166534;
+  color: #fff;
+}
+
+#map .maplibregl-popup-content br + * ,
+#map .maplibregl-popup-content {
+  line-height: 1.6;
+}
+
+#map .maplibregl-popup-content br {
+  display: block;
+  margin: 0;
+}
+
+#map .maplibregl-popup-close-button {
+  color: #fff;
+  font-size: 16px;
+  padding: 4px 8px;
+  top: 0;
+  right: 0;
+}
+
+#map .maplibregl-popup-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0;
 }
