@@ -2,7 +2,15 @@
    Charte Graphique All4Trees - Variables CSS & Classes Utilitaires
    --------------------------------------------------------------------------
    Fichier de style réalisé pour le projet All4Trees.
-   Contient les variables CSS définissant la charte graphique de l'association telle que définie dans son brandbook.
+   Contient les variables CSS définissant la charte graphique de 
+   l'association telle que définie dans son brandbook.
+   --------------------------------------------------------------------------
+   -> Utiliser le préfix a4t pour les variables de la charte graphique.
+   -> Utiliser le préfix custom pour les variables du Figma.
+   -> Pour utiliser les niveaux d'alpha, il faut utiliser la notation rgb
+      --a4t-rgb-my-color: 123, 123, 123;
+      --a4t-color-my-color: rgba(var(--a4t-rgb-my-color), 1);
+      --other-usage: rgba(var(--a4t-rgb-my-color), 0.3);
    ========================================================================== */
 
 :root {
@@ -10,15 +18,28 @@
      COULEURS PRINCIPALES - CHARTE ALL4TREES
      ======================================================================== */
 
-  --color-nuit: #0f0f0f;
-  --color-onyx: #424242;
-  --color-brunswick-green: #224d41;
-  --color-vert-kelly: #54b025;
-  --color-jaune-vert: #99cf16;
-  --color-citrouille: #f98038;
-  --color-alabaster: #f5f4eb;
-  --color-bleu: #2d6db4;
-  --color-vert-de-gris: #3fafb6;
+  --a4t-color-nuit: #0f0f0f;
+  --a4t-color-onyx: #424242;
+  --a4t-color-brunswick-green: #224d41;
+  --a4t-rgb-vert-kelly: 153, 207, 22;
+  --a4t-color-vert-kelly: rgba(var(--a4t-rgb-vert-kelly), 1);
+  --a4t-color-jaune-vert: #99cf16;
+  --a4t-color-citrouille: #f98038;
+  --a4t-color-alabaster: #f5f4eb;
+
+  /* ========================================================================
+  COULEURS LA FORET - CHARTE ALL4TREES
+  ======================================================================== */
+  --a4t-color-bleu: #2d6db4;
+  --a4t-color-vert-de-gris: #3fafb6;
+
+  /* ========================================================================
+  COULEURS AJUSTEES - POUR UNE MEILLEURE UI
+  ======================================================================== */
+  --custom-color-green-dark: #1a2420;
+  --custom-color-green-main: #007a55;
+  --custom-color-green-pastel: #d0fae5;
+  --custom-color-grey-light: #f2e5e5;
 
   /* ========================================================================
      TYPOGRAPHIE - CHARTE ALL4TREES

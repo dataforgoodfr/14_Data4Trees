@@ -1,0 +1,167 @@
+/**
+ * INDEX.CSS - Point d'Entrée & Theming ShadCN/UI
+ *
+ * Responsabilités :
+ * 1. Imports Tailwind + plugins
+ * 2. Remapper variables shadcn sur la charte A4T
+ * 3. Dark mode (light + dark)
+ * 4. Extension du thème tailwind
+ */
+
+@import "tailwindcss";
+@import "./all4trees.css";
+
+@plugin "tailwindcss-animate";
+
+/* ========================================================================
+ * THEMING SHADCN - https://ui.shadcn.com/docs/theming
+ * ======================================================================== 
+ * On définit des variables css propres à ShadCn pour s'intégrer
+ * naturellement avec les composants.
+ * -> :root => correspond au light mode et variables par défaut
+ * -> .dark => correspond au dark mode 
+ */
+
+@custom-variant dark (&:where(.dark *));
+
+:root {
+  --radius: 0.625rem;
+
+  /* LIGHT MODE SHADCN */
+  --background: var(--a4t-color-alabaster);
+  --foreground: var(--a4t-color-nuit);
+
+  --card: var(--custom-color-grey-light);
+  --card-foreground: var(--a4t-color-nuit);
+
+  --popover: var(--a4t-color-alabaster);
+  --popover-foreground: var(--a4t-color-nuit);
+
+  --primary: var(--a4t-color-vert-kelly);
+  --primary-foreground: var(--a4t-color-nuit);
+  --secondary: var(--a4t-color-jaune-vert);
+  --secondary-foreground: var(--a4t-color-nuit);
+
+  --muted: #e5e7eb;
+  --muted-foreground: var(--a4t-color-onyx);
+  --accent: var(--a4t-color-jaune-vert);
+  --accent-foreground: var(--a4t-color-nuit);
+  --destructive: #dc2626;
+
+  --border: #e5e7ebaa;
+  --input: #ffffff;
+  --ring: var(--a4t-color-vert-kelly);
+
+  --chart-1: var(--a4t-color-bleu);
+  --chart-2: var(--a4t-color-vert-de-gris);
+  --chart-3: var(--a4t-color-vert-kelly);
+  --chart-4: var(--a4t-color-citrouille);
+  --chart-5: var(--a4t-color-jaune-vert);
+
+  --sidebar: var(--a4t-color-alabaster);
+  --sidebar-foreground: var(--a4t-color-alabaster);
+  --sidebar-primary: var(--a4t-color-brunswick-green);
+  --sidebar-primary-foreground: var(--a4t-color-alabaster);
+  --sidebar-accent: var(--a4t-color-citrouille);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: var(--a4t-color-vert-kelly);
+}
+
+.dark {
+  --background: var(--custom-color-green-dark);
+  --foreground: var(--a4t-color-alabaster);
+
+  --card: var(--a4t-color-nuit);
+  --card-foreground: var(--a4t-color-alabaster);
+
+  --popover: var(--a4t-color-nuit);
+  --popover-foreground: var(--a4t-color-alabaster);
+
+  --primary: var(--a4t-color-brunswick-green);
+  --primary-foreground: var(--custom-color-green-pastel);
+  --secondary: var(--a4t-color-vert-de-gris);
+  --secondary-foreground: var(--a4t-color-nuit);
+
+  --muted: var(--a4t-color-onyx);
+  --muted-foreground: #9ca3af;
+  --accent: var(--custom-color-green-main);
+  --accent-foreground: var(--custom-color-green-pastel);
+  --destructive: #ef4444;
+
+  --border: rgba(255, 255, 255, 0.15);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: var(--a4t-color-jaune-vert);
+
+  --chart-1: #60a5fa;
+  --chart-2: #22d3ee;
+  --chart-3: #86efac;
+  --chart-4: #fbbf24;
+  --chart-5: #f97316;
+
+  --sidebar: var(--a4t-color-onyx);
+  --sidebar-foreground: var(--a4t-color-alabaster);
+  --sidebar-primary: var(--a4t-color-onyx);
+  --sidebar-primary-foreground: var(--a4t-color-vert-kelly);
+  --sidebar-accent: var(--a4t-color-citrouille);
+  --sidebar-accent-foreground: var(--a4t-color-nuit);
+  --sidebar-border: rgba(255, 255, 255, 0.15);
+  --sidebar-ring: var(--a4t-color-jaune-vert);
+}
+
+/* ========================================================================
+ * EXTEND TAILWIND THEME - https://tailwindcss.com/docs/theme
+ * ======================================================================== 
+ * Pour que les variables soient intégrées nativement dans des classes
+ * tailwind, on utilise les namespaces (color-,radius-,...).
+ * On fait cela pour toutes les variables ShadCn (limitation tailwind v4) 
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}

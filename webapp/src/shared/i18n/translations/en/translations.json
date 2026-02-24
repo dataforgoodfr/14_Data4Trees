@@ -6,6 +6,11 @@
     "button": {
       "login": "Login",
       "logout": "Logout"
+    },
+    "colorModeSelector": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
     }
   },
   "auth": {

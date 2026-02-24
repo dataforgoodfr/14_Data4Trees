@@ -2,52 +2,35 @@
  * GLOBALS.CSS
  *
  * Responsabilité :
- * - Styles HTML de base (body, headings, links, etc.)
+ * - Styles appliqués sur les balises html de base: html, body, ...
  *
- *
- * ℹ️ Utilise les variables CSS de all4trees.css et index.css
+ * ℹ️ Il est possible d'utiliser des variables css
+ * ⚠️ Il n'est pas possible d'utiliser des classes tailwind avec `@apply`, car elles ne sont pas importées
+ * (pas de directive tailwind, ni d'import de index.css) afin d'éviter de les bundle plusieurs fois !
  * ⚠️ Ajouter la customisation à la layer components, de sorte à pouvoir override dans le code (layer utilies)
  */
 
-/**
- * ⚠️ Keep this import for the globals.css to know the tailwind theme
- * ℹ️ It'll import the right tailwind classes.
- */
-@import "../../index.css";
-
 @layer components {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-synthesis: none;
+
+    font-family:
+      var(--font-body-primary), var(--font-title-primary),
+      var(--font-body-secondary), var(--font-title-secondary), system-ui,
+      sans-serif;
   }
 
   body {
-    @apply scheme-light-dark;
-    @apply bg-background text-foreground;
-    @apply font-(family-name:--font-body-primary);
-    @apply text-base;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--text-base);
   }
 
-  h1 {
-    @apply text-5xl;
-  }
-
-  a {
-    @apply text-primary hover:text-secondary;
-    @apply font-medium;
-  }
-
-  button {
-    @apply px-4 py-2 rounded-lg;
-    @apply border border-solid border-[var(--border)];
-    @apply cursor-pointer;
-    @apply text-foreground font-medium;
-    @apply bg-primary hover:bg-secondary;
-    @apply transition-colors duration-250;
+  * {
+    border-color: var(--border);
+    outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.5);
   }
 }
