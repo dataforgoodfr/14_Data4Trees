@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "npm@11.10.1",
   "scripts": {
     "dev": "npm run translations:update && vite",
     "build": "npm run translations:update && tsc -b && vite build",
