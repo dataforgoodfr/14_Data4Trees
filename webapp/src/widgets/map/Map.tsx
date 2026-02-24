@@ -1,3 +1,4 @@
+// @ts-expect-error No types for the coordo lib
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 
