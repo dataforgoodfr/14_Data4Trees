@@ -14,5 +14,5 @@ jobs:
         with:
           node-version: '24'
       - run: cd webapp && npm ci
-      - run: cd coordo-ts && npm run check:arch
+      - run: cd webapp && npm run check:arch
       - run: cd webapp && npm run check:code
