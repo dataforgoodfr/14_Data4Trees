@@ -5,7 +5,14 @@ import { Header } from "@widgets/header";
 
 import { useAuth } from "@features/auth";
 
-export const RootLayout: React.FC = () => {
+import type { FC } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+
+import { Header } from "@widgets/header";
+
+import { useAuth } from "@features/auth";
+
+export const RootLayout: FC = () => {
   const { isAuthenticated, isAuthLoading, logout } = useAuth();
   const navigate = useNavigate();
 
