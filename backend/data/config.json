@@ -26,11 +26,13 @@
       "aggregate": {
         "geometry": "centroid(gps)",
         "richness": "count(unique(ind.ess_arb))",
-        "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))"
+        "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))",
+        "number_of_trees": "count(ind.ess_arb)",
+        "tree_density": "count(ind.ess_arb) / 10000"
       },
       "popup": {
         "trigger": "click",
-        "html": "<h1>Forêt {{ for }}</h1>Richesse : {{ richness }}<br>Hauteur dominante : {{ dominant_height }}"
+        "html": "<h1>Forêt {{ for }}</h1>Richesse : {{ richness }}<br>Hauteur dominante : {{ dominant_height }}<br>Nombre d'arbres : {{ number_of_trees }}<br>Densité arborée : {{ tree_density }} arbres/m2<br>"
       }
     }
   ],
