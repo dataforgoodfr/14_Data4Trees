@@ -30,9 +30,15 @@ export function MainPage() {
   return (
     <>
       {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}
-      <ResizablePanelGroup direction="horizontal" className="bg-background">
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="bg-background"
+      >
         <SidebarProvider>
-          <ResizablePanel defaultSize={20} className="h-full p-4">
+          <ResizablePanel
+            defaultSize={20}
+            className="h-full p-4"
+          >
             <MapSidebar />
           </ResizablePanel>
           <ResizableHandle />
