@@ -48,15 +48,13 @@ function useMap(containerSelector: string) {
 
     if (!mapApiRef.current) {
       try {
-        // console.log("Create map.", mapSettings);
-        
         mapApiRef.current = createMap(containerSelector, STYLE_URL, {
           center: mapSettings.center,
           zoom: mapSettings.zoom
         });
 
         // Update map settings
-        mapApiRef.current?.mapInstance.on("move", (event) => {
+        mapApiRef.current.addEventListener("move", (event) => {
           setMapSettings({
             zoom: event.target.getZoom(),
             center: event.target.getCenter().toArray()
