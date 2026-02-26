@@ -1,12 +1,6 @@
-import { type VariantProps, cva } from "class-variance-authority";
-import { PanelLeft } from "lucide-react";
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
-
 import { useIsMobile } from "@shared/hooks/use-mobile";
 import { cn } from "@shared/lib/utils";
-
 import { Button } from "@ui/button";
 import { Input } from "@ui/input";
 import { Separator } from "@ui/separator";
@@ -24,6 +18,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@ui/tooltip";
+import { cva, type VariantProps } from "class-variance-authority";
+import { PanelLeft } from "lucide-react";
+import * as React from "react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -147,7 +144,7 @@ const SidebarProvider = React.forwardRef<
               ...style,
             }}
             className={cn(
-              "group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar",
+              "group/sidebar-wrapper flex w-full h-full has-[[data-variant=inset]]:bg-sidebar",
               className,
             )}
             ref={ref}
