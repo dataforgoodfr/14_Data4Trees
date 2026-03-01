@@ -26,6 +26,7 @@
 
 :root {
   --radius: 0.625rem;
+  --spacing-base: 0.25rem;
 
   /* LIGHT MODE SHADCN */
   --background: var(--a4t-color-alabaster);
@@ -47,6 +48,8 @@
   --accent: var(--a4t-color-jaune-vert);
   --accent-foreground: var(--a4t-color-nuit);
   --destructive: #dc2626;
+  --info: var(--custom-color-blue-light);
+  --info-foreground: var(--custom-color-blue-dark);
 
   --border: #e5e7ebaa;
   --input: #ffffff;
@@ -88,6 +91,8 @@
   --accent: var(--custom-color-green-main);
   --accent-foreground: var(--custom-color-green-pastel);
   --destructive: #ef4444;
+  --info: var(--custom-color-blue-dark);
+  --info-foreground: var(--custom-color-blue-light);
 
   --border: rgba(255, 255, 255, 0.15);
   --input: rgba(255, 255, 255, 0.05);
@@ -118,6 +123,13 @@
  */
 
 @theme inline {
+  --spacing-2xs: calc(var(--spacing-base) / 2);
+  --spacing-xs: calc(var(--spacing-base));
+  --spacing-sm: calc(var(--spacing-base) * 2);
+  --spacing-md: calc(var(--spacing-base) * 3);
+  --spacing-lg: calc(var(--spacing-base) * 4);
+  --spacing-xl: calc(var(--spacing-base) * 5);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -145,6 +157,8 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 
   --color-border: var(--border);
   --color-input: var(--input);
