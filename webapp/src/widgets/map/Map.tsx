@@ -1,8 +1,12 @@
 import { API_URL } from "@shared/api/client";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
+// @ts-expect-error No types from coordo
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 import "./Map.css";
+import { BiodiversityIndicator } from "@features/indicators/biodiversity/biodiversity-indicator";
+import { Button } from "@shared/ui/button";
+import { Popover, PopoverAnchor, PopoverContent } from "@shared/ui/popover";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -76,6 +80,7 @@ function useMap(containerSelector: string) {
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests } = useMap("#map");
+  const [openPopup, setOpenPopup] = useState(false);
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters("inventaire", {
@@ -89,7 +94,17 @@ export const WidgetMap: FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-screen">
+      <Popover open={openPopup}>
+        <PopoverAnchor>
+          <Button onClick={() => setOpenPopup((prev) => !prev)}>
+            Open popup
+          </Button>
+        </PopoverAnchor>
+        <PopoverContent className="p-0 border-none bg-black">
+          <BiodiversityIndicator onClose={() => setOpenPopup(false)} />
+        </PopoverContent>
+      </Popover>
       <div
         id="map"
         className="w-full h-full"
