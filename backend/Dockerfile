@@ -1,16 +1,21 @@
-FROM python:3.12-slim-bookworm
+FROM python:3.14-slim-bookworm
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    ca-certificates \
-    curl \
-    gdal-bin \
-    libgdal-dev \
-    libsqlite3-mod-spatialite && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y \
+        git
 
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-WORKDIR /app/
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN python manage.py migrate && \
+    python manage.py createsuperuser --noinput --username john --email john.doe@example.com
+
 
 EXPOSE 8000

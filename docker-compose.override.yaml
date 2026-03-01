@@ -1,0 +1,13 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+  webapp:
+    volumes:
+      - ./webapp:/app
+    ports:
+      - "3000:3000"
+    command: ["npm", "run", "dev"]
