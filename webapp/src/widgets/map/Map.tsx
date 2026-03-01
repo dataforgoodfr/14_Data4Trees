@@ -1,18 +1,33 @@
-// @ts-expect-error No types for the coordo lib
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 
 import { API_URL } from "@shared/api/client";
 import "./Map.css";
+import { useLocalStorage } from "@shared/hooks/use-local-storage";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
 type Category = { value: string; label: string };
 
+type MapSettings = {
+  zoom: number;
+  center: [number, number];
+};
+
+// The default settings are set to show africa and madagascar on the map
+const DEFAULT_MAP_SETTINGS: MapSettings = {
+  zoom: 3.8,
+  center: [34.1246, -23.0758],
+};
+
 function useMap(containerSelector: string) {
   const [isReady, setIsReady] = useState(false);
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
   const [forests, setForests] = useState<Category[]>([]);
+  const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
+    "map-settings",
+    DEFAULT_MAP_SETTINGS,
+  );
 
   useEffect(() => {
     const el = document.querySelector(containerSelector);
@@ -35,7 +50,18 @@ function useMap(containerSelector: string) {
 
     if (!mapApiRef.current) {
       try {
-        mapApiRef.current = createMap(containerSelector, STYLE_URL);
+        mapApiRef.current = createMap(containerSelector, STYLE_URL, {
+          center: mapSettings.center,
+          zoom: mapSettings.zoom,
+        });
+
+        // Update map settings
+        mapApiRef.current.addEventListener("move", (event) => {
+          setMapSettings({
+            zoom: event.target.getZoom(),
+            center: event.target.getCenter().toArray(),
+          });
+        });
       } catch (error) {
         console.error("Erreur lors de l'initialisation de la carte:", error);
       }
@@ -44,7 +70,7 @@ function useMap(containerSelector: string) {
     return () => {
       el.removeEventListener("map:ready", handleReady);
     };
-  }, [containerSelector]);
+  }, [containerSelector, mapSettings, setMapSettings]);
 
   return { isReady, mapApiRef, forests };
 }
