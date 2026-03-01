@@ -27,5 +27,45 @@
         "pendingLogin": "Connexion..."
       }
     }
+  },
+  "indicators": {
+    "common": {
+      "date": "Date enquête"
+    },
+    "biodiversity": {
+      "title": "Données biodiversité",
+      "sections": {
+        "biomass": {
+          "title": "Biomasse du peuplement",
+          "volume": "Volume de biomasse",
+          "density": "Densité arborée"
+        },
+        "treeDiversity": {
+          "title": "Diversité arborée",
+          "specificWealth": "Richesse spécifique",
+          "shannon": "Indice de shannon"
+        },
+        "indicatorSpecies": {
+          "title": "Espèces indicatrices",
+          "abudanceTaxon1": "Abondance taxon n°1",
+          "specificWealthTaxon1": "Richesse spécifique taxon n°1",
+          "abudanceTaxon2": "Abondance taxon n°2",
+          "specificWealthTaxon2": "Richesse spécifique taxon n°2",
+          "abudanceTaxon3": "Abondance taxon n°3",
+          "specificWealthTaxon3": "Richesse spécifique taxon n°3"
+        },
+        "forestPotentialLevel": {
+          "title": "Indice d’écopotentialité forestière",
+          "density": "Densité arborée",
+          "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
+          "diversity": "Diversité arborée",
+          "spatialDistribution": "Distribution spatiale",
+          "diameterDistribution": "Distribution diamétrale",
+          "verticalDistribution": "Distribution verticale",
+          "masterHeight": "Hauteur dominante",
+          "microhabitat": "Dendro-microhabitats"
+        }
+      }
+    }
   }
 }
