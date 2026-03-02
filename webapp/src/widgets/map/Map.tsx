@@ -1,9 +1,8 @@
+import { API_URL } from "@shared/api/client";
+import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
-
-import { API_URL } from "@shared/api/client";
 import "./Map.css";
-import { useLocalStorage } from "@shared/hooks/use-local-storage";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -90,7 +89,7 @@ export const WidgetMap: FC = () => {
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-full">
       <div
         id="map"
         className="w-full h-full"
