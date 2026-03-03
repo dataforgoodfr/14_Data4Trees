@@ -13,4 +13,4 @@ services:
       - traefik.http.routers.data4trees.tls=true
       - traefik.docker.network=d4g-internal
       - traefik.http.services.data4trees.loadbalancer.server.port=5173
-    command: ["npm", "run", "docker:build"]
+    command: ["npm", "run", "docker:prod"]

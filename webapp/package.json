@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "npm run translations:update && vite",
     "build": "npm run translations:update && tsc -b && vite build",
-    "docker:dev": "npm run translations:update && vite --host 0.0.0.0",
-    "docker:build": "npm run translations:update && tsc -b && vite build --host 0.0.0.0",
     "preview": "vite preview",
+    "docker:dev": "npm run translations:update && vite --host 0.0.0.0",
+    "docker:prod": "npm run translations:update && tsc -b && vite build && vite --host 0.0.0.0",
     "check:arch": "node ./scripts/check-architecture.cjs",
     "check:code": "npm run compile && npm run format:check && npm run lint",
     "fix:code": "npm run format && npm run lint:fix",
