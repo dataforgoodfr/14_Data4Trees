@@ -1,15 +1,17 @@
 services:
   backend:
     volumes:
-      - ./backend:/app
+      - ../backend:/app
       - /app/.venv # anonymous volume: to avoid python environment from being erased during the mapping
     ports:
       - "8000:8000"
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
   webapp:
     volumes:
-      - ./webapp:/app
+      - ../webapp:/app
       - /app/node_modules # anonymous volume: to avoid node modules from being erased during the mapping
     ports:
       - "5173:5173"
     command: ["npm", "run", "docker:dev"]
+    environment:
+      - VITE_API_URL=http://backend:8000/api

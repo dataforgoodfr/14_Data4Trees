@@ -1,9 +1,0 @@
-services:
-  backend:
-    build: ./backend
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m" # adjust as needed
-        max-file: "3"
