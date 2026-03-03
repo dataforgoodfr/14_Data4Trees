@@ -9,6 +9,8 @@ services:
       - traefik.http.routers.backend.tls=true
       - traefik.docker.network=d4g-internal
       - traefik.http.services.backend.loadbalancer.server.port=8000
+    environment:
+      - DJANGO_ALLOWED_HOSTS=data4trees.services.d4g.fr
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     networks:
       - d4g-internal

@@ -5,6 +5,8 @@ services:
       - /app/.venv # anonymous volume: to avoid python environment from being erased during the mapping
     ports:
       - "8000:8000"
+    environment:
+      - DJANGO_ALLOWED_HOSTS=localhost
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
   webapp:
     volumes:
@@ -13,5 +15,3 @@ services:
     ports:
       - "5173:5173"
     command: ["npm", "run", "docker:dev"]
-    environment:
-      - VITE_API_URL=http://backend:8000/api

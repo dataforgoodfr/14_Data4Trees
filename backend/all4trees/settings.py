@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-ot7b#&pes@%&0b2w(e@b278k2x2n4y$1@t4(!@(c&zthr3k)n(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "data4trees.services.d4g.fr"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
