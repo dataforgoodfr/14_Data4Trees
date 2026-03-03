@@ -3,6 +3,8 @@ import { IndicatorContainer } from "../components/indicator-container";
 import { TreesIcon } from "lucide-react";
 import { useTranslation } from "@i18n";
 import { useBiodiversityIndicatorElements } from "./use-biodiversity-indicator-elements";
+import { ICON_SIZE_HEADER } from "../components/constants";
+import { formatBiodiversityData } from "./format-data";
 
 type BiodiversityIndicatorProps = {
   onClose: () => void;
@@ -11,16 +13,17 @@ type BiodiversityIndicatorProps = {
 export const BiodiversityIndicator: FC<BiodiversityIndicatorProps> = ({
   onClose,
 }) => {
-  // @todo: Get data from API;
   const { t } = useTranslation("translations");
-  const elements = useBiodiversityIndicatorElements();
+  // @todo: Get data from API or props and provide them here
+  const data = formatBiodiversityData();
+  const elements = useBiodiversityIndicatorElements(data);
 
   return (
     <IndicatorContainer
       onCrossClick={onClose}
-      title="Point #se-4" // Get from data
+      title={data.title}
       subtitle={t("indicators.biodiversity.title")}
-      icon={<TreesIcon size={18} />}
+      icon={<TreesIcon size={ICON_SIZE_HEADER} />}
       elements={elements}
     />
   );
