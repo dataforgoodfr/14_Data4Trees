@@ -1,8 +1,8 @@
 FROM node:25-bookworm-slim
 
 WORKDIR /app
-COPY package*.json .
+COPY . /app
 
 RUN npm ci
 
-EXPOSE 8000
+EXPOSE 5173
