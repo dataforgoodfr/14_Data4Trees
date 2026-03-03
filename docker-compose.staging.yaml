@@ -1,5 +1,16 @@
 services:
   backend:
+    ports:
+      - 8000
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
   webapp:
-    command: ["npm", "run", "build"]
+    ports:
+      - 5173
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.data4trees.rule=Host(`data4trees.services.d4g.fr`)
+      - traefik.http.routers.data4trees.entryPoints=webtls
+      - traefik.http.routers.data4trees.tls=true
+      - traefik.docker.network=d4g-internal
+      - traefik.http.services.data4trees.loadbalancer.server.port=5173
+    command: ["npm", "run", "docker:build"]
