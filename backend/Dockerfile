@@ -18,11 +18,6 @@ COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-ARG DJANGO_SUPERUSER_EMAIL=john.doe@example.com
-ARG DJANGO_SUPERUSER_PASSWORD=doe
-
-RUN python manage.py migrate && \
-    python manage.py createsuperuser --noinput --username john
-
+ENTRYPOINT [ "./entrypoint.sh" ]
 
 EXPOSE 8000

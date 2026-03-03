@@ -6,8 +6,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DJANGO_ALLOWED_HOSTS=localhost
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+      - DJANGO_SUPERUSER_USERNAME=john
+      - DJANGO_SUPERUSER_EMAIL=john.doe@example.com
+      - DJANGO_SUPERUSER_PASSWORD=doe
+
   webapp:
     volumes:
       - ../webapp:/app

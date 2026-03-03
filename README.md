@@ -37,7 +37,7 @@ Le Frontend est en ReactJS + Vite, dans le dossier [webapp](./webapp).
 
 Il est possible de déployer l'application localement en mode développement, avec:
 
-```
+```bash
 docker compose up [--build]
 ```
 
