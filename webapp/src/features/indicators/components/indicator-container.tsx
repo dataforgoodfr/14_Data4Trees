@@ -13,6 +13,7 @@ import type { UseIndicatorReturnType } from "./types";
 import { Divider } from "./divider";
 import { IndicatorDate } from "./indicator-date";
 import { IndicatorSection } from "./indicator-section";
+import { ICON_SIZE_HEADER } from "./constants";
 
 type IndicatorContainerProps = {
   title: string;
@@ -32,7 +33,7 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
   return (
     <div>
       <Alert
-        className="w-full rounded-b-none border-none text-sm py-lg"
+        className="w-full rounded-t-md rounded-b-none border-none text-sm py-lg"
         variant="info"
       >
         {icon}
@@ -52,12 +53,12 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
             size="icon"
             className="text-muted-foreground hover:text-info-foreground"
           >
-            <XIcon />
+            <XIcon size={ICON_SIZE_HEADER} />
           </Button>
         </AlertAction>
       </Alert>
 
-      <div className="p-md flex flex-col gap-sm text-xs">
+      <div className="p-md flex flex-col gap-md text-xs">
         {elements.map((config, index) => {
           if (config.type === "divider") {
             // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
@@ -77,7 +78,7 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
             return (
               <IndicatorSection
                 title={config.title}
-                key={`element-section-${title}`}
+                key={`element-section-${config.title}`}
               >
                 {config.children}
               </IndicatorSection>

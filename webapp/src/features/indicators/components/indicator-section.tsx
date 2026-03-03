@@ -9,9 +9,9 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
   children,
 }) => {
   return (
-    <section className="flex flex-col w-full gap-xs">
+    <section className="flex flex-col w-full gap-sm">
       <h5 className="text-xs">{title}</h5>
-      <div className="text-foreground/75">{children}</div>
+      {children}
     </section>
   );
 };
