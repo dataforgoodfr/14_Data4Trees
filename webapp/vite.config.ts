@@ -21,4 +21,7 @@ export default defineConfig({
     },
   },
   plugins: [react(), tailwindcss()],
+  server: {
+    allowedHosts: ["data4trees.services.d4g.fr"],
+  },
 });

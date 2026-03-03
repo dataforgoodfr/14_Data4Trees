@@ -1,0 +1,33 @@
+services:
+  backend:
+    ports:
+      - 8000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(api|api-auth|auth|admin|admin-session|layers)`)
+      - traefik.http.routers.backend.entryPoints=webtls
+      - traefik.http.routers.backend.tls=true
+      - traefik.docker.network=d4g-internal
+      - traefik.http.services.backend.loadbalancer.server.port=8000
+    networks:
+      - d4g-internal
+
+  webapp:
+    ports:
+      - 5173
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.data4trees.rule=Host(`data4trees.services.d4g.fr`)
+      - traefik.http.routers.data4trees.entryPoints=webtls
+      - traefik.http.routers.data4trees.tls=true
+      - traefik.docker.network=d4g-internal
+      - traefik.http.services.data4trees.loadbalancer.server.port=5173
+    command: ["npm", "run", "docker:prod"]
+    networks:
+      - d4g-internal
+    environment:
+      - VITE_API_URL=api
+
+networks:
+  d4g-internal:
+    external: true
