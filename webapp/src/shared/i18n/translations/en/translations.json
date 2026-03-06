@@ -27,5 +27,54 @@
         "pendingLogin": "Logging in..."
       }
     }
+  },
+  "indicators": {
+    "common": {
+      "date": "Survey date",
+      "control": "Control",
+      "beneficiary": "Benef."
+    },
+    "units": {
+      "tonPerHectare": "{{ value }} t/ha",
+      "individualPerHectare": "{{ value }} ind/ha",
+      "speciesCount": "",
+      "speciesCount_one": "{{ count }} species inventoried",
+      "speciesCount_other": "{{ count }} species inventoried"
+    },
+    "biodiversity": {
+      "title": "Biodiversity Data",
+      "sections": {
+        "biomass": {
+          "title": "Stand Biomass",
+          "volume": "Biomass volume",
+          "density": "Tree density"
+        },
+        "treeDiversity": {
+          "title": "Tree Diversity",
+          "speciesRichness": "Species richness",
+          "shannon": "Shannon index"
+        },
+        "indicatorSpecies": {
+          "title": "Indicator Species",
+          "abundanceTaxon1": "Abundance taxon #1",
+          "speciesRichnessTaxon1": "Species richness taxon #1",
+          "abundanceTaxon2": "Abundance taxon #2",
+          "speciesRichnessTaxon2": "Species richness taxon #2",
+          "abundanceTaxon3": "Abundance taxon #3",
+          "speciesRichnessTaxon3": "Species richness taxon #3"
+        },
+        "forestPotentialLevel": {
+          "title": "Forest Ecopotentiality Index",
+          "density": "Tree density",
+          "ratioDeathmassBiomass": "Deadwood/biomass ratio",
+          "diversity": "Tree diversity",
+          "spatialDistribution": "Spatial distribution",
+          "diameterDistribution": "Diameter distribution",
+          "verticalDistribution": "Vertical distribution",
+          "masterHeight": "Dominant height",
+          "microhabitat": "Dendro-microhabitats"
+        }
+      }
+    }
   }
 }
