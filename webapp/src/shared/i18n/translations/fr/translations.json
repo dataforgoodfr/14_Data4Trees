@@ -30,7 +30,16 @@
   },
   "indicators": {
     "common": {
-      "date": "Date enquête"
+      "date": "Date enquête",
+      "control": "Témoin",
+      "beneficiary": "Bénef."
+    },
+    "units": {
+      "tonPerHectare": "{{ value }} t/ha",
+      "individualPerHectare": "{{ value }} ind/ha",
+      "speciesCount": "",
+      "speciesCount_one": "{{ count }} espèce inventoriée",
+      "speciesCount_other": "{{ count }} espèces inventoriées"
     },
     "biodiversity": {
       "title": "Données biodiversité",
@@ -47,11 +56,11 @@
         },
         "indicatorSpecies": {
           "title": "Espèces indicatrices",
-          "abudanceTaxon1": "Abondance taxon n°1",
+          "abundanceTaxon1": "Abondance taxon n°1",
           "specificWealthTaxon1": "Richesse spécifique taxon n°1",
-          "abudanceTaxon2": "Abondance taxon n°2",
+          "abundanceTaxon2": "Abondance taxon n°2",
           "specificWealthTaxon2": "Richesse spécifique taxon n°2",
-          "abudanceTaxon3": "Abondance taxon n°3",
+          "abundanceTaxon3": "Abondance taxon n°3",
           "specificWealthTaxon3": "Richesse spécifique taxon n°3"
         },
         "forestPotentialLevel": {
