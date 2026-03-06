@@ -39,9 +39,9 @@ export const useBiodiversityIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t(
-              "indicators.biodiversity.sections.treeDiversity.specificWealth",
+              "indicators.biodiversity.sections.treeDiversity.speciesRichness",
             )}
-            value={data.treeDiversity.specificWealth}
+            value={data.treeDiversity.speciesRichness}
             iconStart={<HeartPulseIcon size={ICON_SIZE} />}
           />
           <IndicatorRawValue
@@ -68,9 +68,9 @@ export const useBiodiversityIndicatorElements = (
           />
           <IndicatorRawValue
             dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.specificWealthTaxon1",
+              "indicators.biodiversity.sections.indicatorSpecies.speciesRichnessTaxon1",
             )}
-            value={data.indicatorSpecies.specificWealthTaxon1}
+            value={data.indicatorSpecies.speciesRichnessTaxon1}
           />
           <IndicatorRawValue
             dataName={t(
@@ -80,9 +80,9 @@ export const useBiodiversityIndicatorElements = (
           />
           <IndicatorRawValue
             dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.specificWealthTaxon2",
+              "indicators.biodiversity.sections.indicatorSpecies.speciesRichnessTaxon2",
             )}
-            value={data.indicatorSpecies.specificWealthTaxon2}
+            value={data.indicatorSpecies.speciesRichnessTaxon2}
           />
           <IndicatorRawValue
             dataName={t(
@@ -92,9 +92,9 @@ export const useBiodiversityIndicatorElements = (
           />
           <IndicatorRawValue
             dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.specificWealthTaxon3",
+              "indicators.biodiversity.sections.indicatorSpecies.speciesRichnessTaxon3",
             )}
-            value={data.indicatorSpecies.specificWealthTaxon3}
+            value={data.indicatorSpecies.speciesRichnessTaxon3}
           />
         </>
       ),

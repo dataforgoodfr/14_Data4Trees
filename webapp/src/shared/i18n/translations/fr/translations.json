@@ -51,17 +51,17 @@
         },
         "treeDiversity": {
           "title": "Diversité arborée",
-          "specificWealth": "Richesse spécifique",
+          "speciesRichness": "Richesse spécifique",
           "shannon": "Indice de shannon"
         },
         "indicatorSpecies": {
           "title": "Espèces indicatrices",
           "abundanceTaxon1": "Abondance taxon n°1",
-          "specificWealthTaxon1": "Richesse spécifique taxon n°1",
+          "speciesRichnessTaxon1": "Richesse spécifique taxon n°1",
           "abundanceTaxon2": "Abondance taxon n°2",
-          "specificWealthTaxon2": "Richesse spécifique taxon n°2",
+          "speciesRichnessTaxon2": "Richesse spécifique taxon n°2",
           "abundanceTaxon3": "Abondance taxon n°3",
-          "specificWealthTaxon3": "Richesse spécifique taxon n°3"
+          "speciesRichnessTaxon3": "Richesse spécifique taxon n°3"
         },
         "forestPotentialLevel": {
           "title": "Indice d’écopotentialité forestière",
