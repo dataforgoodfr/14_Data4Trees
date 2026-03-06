@@ -24,17 +24,17 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       density: formatWithUnit(120, UNITS.individualPerHectare), // replace hardcoded value
     },
     treeDiversity: {
-      specificWealth: formatWithUnit(1257, UNITS.speciesCount), // replace hardcoded value
+      speciesRichness: formatWithUnit(1257, UNITS.speciesCount), // replace hardcoded value
       shannon: 1.1, // replace hardcoded value
     },
     // replace hardcoded value
     indicatorSpecies: {
       abundanceTaxon1: 43,
-      specificWealthTaxon1: 47,
+      speciesRichnessTaxon1: 47,
       abundanceTaxon2: 56,
-      specificWealthTaxon2: 23,
+      speciesRichnessTaxon2: 23,
       abundanceTaxon3: 33,
-      specificWealthTaxon3: 24,
+      speciesRichnessTaxon3: 24,
     },
     // replace hardcoded value
     forestPotentialLevel: {
