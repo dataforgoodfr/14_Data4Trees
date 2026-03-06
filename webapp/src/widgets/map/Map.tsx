@@ -3,10 +3,11 @@ import { useLocalStorage } from "@shared/hooks/use-local-storage";
 // @ts-expect-error No types from coordo
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
-import "./Map.css";
-import { BiodiversityIndicator } from "@features/indicators/biodiversity/biodiversity-indicator";
-import { Button } from "@shared/ui/button";
-import { Popover, PopoverAnchor, PopoverContent } from "@shared/ui/popover";
+import {
+  BiodiversityIndicator,
+  type BiodiversityData,
+} from "@features/indicators/biodiversity";
+import { createRoot } from "react-dom/client";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -59,6 +60,7 @@ function useMap(containerSelector: string) {
         });
 
         // Update map settings
+        // @ts-expect-error Event not typed (missing from coordo)
         mapApiRef.current.addEventListener("move", (event) => {
           setMapSettings({
             zoom: event.target.getZoom(),
@@ -80,7 +82,38 @@ function useMap(containerSelector: string) {
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests } = useMap("#map");
-  const [openPopup, setOpenPopup] = useState(false);
+
+  useEffect(() => {
+    if (!isReady || !mapApiRef.current) return;
+
+    const renderPopup = (properties: BiodiversityData) => {
+      const container = document.createElement("div");
+      const root = createRoot(container);
+      root.render(
+        <BiodiversityIndicator
+          data={properties}
+          onClose={() => root.unmount()}
+          className="w-[300px] max-h-[350px]"
+        />,
+      );
+      return container;
+    };
+
+    // Set the popup for the "inventaire" layer
+    mapApiRef.current.setLayerPopup<BiodiversityData>({
+      layerId: "inventaire",
+      trigger: "click",
+      renderCallback: renderPopup,
+      popupConfig: {
+        className: "bg-background/90 rounded-md",
+        closeButton: false,
+        closeOnClick: true,
+        closeOnMove: false,
+        maxWidth: "300px",
+        anchor: "center",
+      },
+    });
+  }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters("inventaire", {
@@ -95,16 +128,6 @@ export const WidgetMap: FC = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <Popover open={openPopup}>
-        <PopoverAnchor>
-          <Button onClick={() => setOpenPopup((prev) => !prev)}>
-            Open popup
-          </Button>
-        </PopoverAnchor>
-        <PopoverContent className="p-0 border-none bg-black">
-          <BiodiversityIndicator onClose={() => setOpenPopup(false)} />
-        </PopoverContent>
-      </Popover>
       <div
         id="map"
         className="w-full h-full"
