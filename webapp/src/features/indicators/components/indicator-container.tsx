@@ -14,6 +14,7 @@ import { Divider } from "./divider";
 import { IndicatorDate } from "./indicator-date";
 import { IndicatorSection } from "./indicator-section";
 import { ICON_SIZE_HEADER } from "./constants";
+import { cx } from "class-variance-authority";
 
 type IndicatorContainerProps = {
   title: string;
@@ -21,6 +22,7 @@ type IndicatorContainerProps = {
   icon?: ReactNode;
   onCrossClick: () => void;
   elements: UseIndicatorReturnType;
+  className?: string;
 };
 
 export const IndicatorContainer: FC<IndicatorContainerProps> = ({
@@ -29,9 +31,10 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
   icon,
   onCrossClick,
   elements,
+  className,
 }) => {
   return (
-    <div>
+    <div className={cx(className ?? "", "flex flex-col")}>
       <Alert
         className="w-full rounded-t-md rounded-b-none border-none text-sm py-lg"
         variant="info"
@@ -58,7 +61,16 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
         </AlertAction>
       </Alert>
 
-      <div className="p-md flex flex-col gap-md text-xs">
+      <div
+        className={cx(
+          "p-md flex flex-col gap-md text-xs",
+          "overflow-y-scroll custom-scrollbar",
+        )}
+        style={{
+          "--scrollbar-track": "var(--background)",
+          "--scrollbar-thumb": "var(--info-foreground)",
+        }}
+      >
         {elements.map((config, index) => {
           if (config.type === "divider") {
             // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
@@ -77,8 +89,9 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
           if (config.type === "section") {
             return (
               <IndicatorSection
-                title={config.title}
                 key={`element-section-${config.title}`}
+                title={config.title}
+                iconStart={config.iconStart}
               >
                 {config.children}
               </IndicatorSection>
