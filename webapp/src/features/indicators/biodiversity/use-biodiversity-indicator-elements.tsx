@@ -1,8 +1,9 @@
 import type { UseIndicatorReturnType } from "../components/types";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import { useTranslation } from "@i18n";
-import { HeartPulseIcon, InfoIcon } from "lucide-react";
+import { HeartPulseIcon, InfoIcon, BinocularsIcon } from "lucide-react";
 import { ICON_SIZE } from "../components/constants";
+import { ChartForestPotential } from "./chart-forest-potential";
 import type { FormattedData } from "./format-data";
 
 export const useBiodiversityIndicatorElements = (
@@ -43,7 +44,6 @@ export const useBiodiversityIndicatorElements = (
             value={data.treeDiversity.specificWealth}
             iconStart={<HeartPulseIcon size={ICON_SIZE} />}
           />
-          <div>TODO: Add the sector graph</div>
           <IndicatorRawValue
             dataName={t(
               "indicators.biodiversity.sections.treeDiversity.shannon",
@@ -56,14 +56,61 @@ export const useBiodiversityIndicatorElements = (
     { type: "divider" },
     {
       type: "section",
-      children: <p>Hello world</p>,
       title: t("indicators.biodiversity.sections.indicatorSpecies.title"),
+      iconStart: <BinocularsIcon size={ICON_SIZE} />,
+      children: (
+        <>
+          <IndicatorRawValue
+            dataName={t(
+              "indicators.biodiversity.sections.indicatorSpecies.abundanceTaxon1",
+            )}
+            value={data.indicatorSpecies.abundanceTaxon1}
+          />
+          <IndicatorRawValue
+            dataName={t(
+              "indicators.biodiversity.sections.indicatorSpecies.specificWealthTaxon1",
+            )}
+            value={data.indicatorSpecies.specificWealthTaxon1}
+          />
+          <IndicatorRawValue
+            dataName={t(
+              "indicators.biodiversity.sections.indicatorSpecies.abundanceTaxon2",
+            )}
+            value={data.indicatorSpecies.abundanceTaxon2}
+          />
+          <IndicatorRawValue
+            dataName={t(
+              "indicators.biodiversity.sections.indicatorSpecies.specificWealthTaxon2",
+            )}
+            value={data.indicatorSpecies.specificWealthTaxon2}
+          />
+          <IndicatorRawValue
+            dataName={t(
+              "indicators.biodiversity.sections.indicatorSpecies.abundanceTaxon3",
+            )}
+            value={data.indicatorSpecies.abundanceTaxon3}
+          />
+          <IndicatorRawValue
+            dataName={t(
+              "indicators.biodiversity.sections.indicatorSpecies.specificWealthTaxon3",
+            )}
+            value={data.indicatorSpecies.specificWealthTaxon3}
+          />
+        </>
+      ),
     },
     { type: "divider" },
     {
       type: "section",
-      children: <p>Hello world</p>,
       title: t("indicators.biodiversity.sections.forestPotentialLevel.title"),
+      children: (
+        <ChartForestPotential
+          data={{
+            benef: data.forestPotentialLevel.benef,
+            temoin: data.forestPotentialLevel.temoin,
+          }}
+        />
+      ),
     },
   ];
 };
