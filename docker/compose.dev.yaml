@@ -1,0 +1,19 @@
+services:
+  backend:
+    volumes:
+      - ../backend:/app
+      - /app/.venv # anonymous volume: to avoid python environment from being erased during the mapping
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SUPERUSER_USERNAME=john
+      - DJANGO_SUPERUSER_EMAIL=john.doe@example.com
+      - DJANGO_SUPERUSER_PASSWORD=doe
+
+  webapp:
+    volumes:
+      - ../webapp:/app
+      - /app/node_modules # anonymous volume: to avoid node modules from being erased during the mapping
+    ports:
+      - "5173:5173"
+    command: ["npm", "run", "docker:dev"]
