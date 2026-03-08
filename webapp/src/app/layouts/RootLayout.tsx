@@ -14,13 +14,13 @@ export const RootLayout: FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-svh">
       <Header
         onLogin={() => navigate("/login")}
         onLogout={() => logout()}
         isAuthenticated={isAuthenticated}
       />
-      <main className="flex flex-1">
+      <main className="flex flex-col flex-1">
         <Outlet />
       </main>
     </div>
