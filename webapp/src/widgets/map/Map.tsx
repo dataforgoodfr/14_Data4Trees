@@ -1,6 +1,5 @@
 import { API_URL } from "@shared/api/client";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
-// @ts-expect-error No types from coordo
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
 import {
@@ -60,7 +59,6 @@ function useMap(containerSelector: string) {
         });
 
         // Update map settings
-        // @ts-expect-error Event not typed (missing from coordo)
         mapApiRef.current.addEventListener("move", (event) => {
           setMapSettings({
             zoom: event.target.getZoom(),
@@ -127,7 +125,7 @@ export const WidgetMap: FC = () => {
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-full">
       <div
         id="map"
         className="w-full h-full"
