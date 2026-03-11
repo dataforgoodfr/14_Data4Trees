@@ -2,7 +2,11 @@ import { API_URL } from "@shared/api/client";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
-import "./Map.css";
+import {
+  BiodiversityIndicator,
+  type BiodiversityData,
+} from "@features/indicators/biodiversity";
+import { createRoot } from "react-dom/client";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -76,6 +80,38 @@ function useMap(containerSelector: string) {
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests } = useMap("#map");
+
+  useEffect(() => {
+    if (!isReady || !mapApiRef.current) return;
+
+    const renderPopup = (properties: BiodiversityData) => {
+      const container = document.createElement("div");
+      const root = createRoot(container);
+      root.render(
+        <BiodiversityIndicator
+          data={properties}
+          onClose={() => root.unmount()}
+          className="w-[300px] max-h-[350px]"
+        />,
+      );
+      return container;
+    };
+
+    // Set the popup for the "inventaire" layer
+    mapApiRef.current.setLayerPopup<BiodiversityData>({
+      layerId: "inventaire",
+      trigger: "click",
+      renderCallback: renderPopup,
+      popupConfig: {
+        className: "bg-background/90 rounded-md",
+        closeButton: false,
+        closeOnClick: true,
+        closeOnMove: false,
+        maxWidth: "300px",
+        anchor: "center",
+      },
+    });
+  }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters("inventaire", {

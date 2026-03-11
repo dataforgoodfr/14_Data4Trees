@@ -33,4 +33,9 @@
     border-color: var(--border);
     outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.5);
   }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
 }

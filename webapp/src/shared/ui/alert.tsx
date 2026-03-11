@@ -14,6 +14,7 @@ const alertVariants = cva(
         default: "bg-background text-foreground",
         destructive:
           "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        info: "bg-info text-info-foreground  [&>svg]:text-info-foreground",
       },
     },
     defaultVariants: {
@@ -59,4 +60,15 @@ const AlertDescription = React.forwardRef<
 ));
 AlertDescription.displayName = "AlertDescription";
 
-export { Alert, AlertTitle, AlertDescription };
+const AlertAction = ({ className, ...props }: React.ComponentProps<"div">) => {
+  return (
+    <div
+      data-slot="alert-action"
+      className={cn("absolute top-2 right-2", className)}
+      {...props}
+    />
+  );
+};
+AlertAction.displayName = "AlertAction";
+
+export { Alert, AlertAction, AlertTitle, AlertDescription };
