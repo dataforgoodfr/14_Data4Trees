@@ -58,7 +58,7 @@ Vous pouvez vous référrer au [README](./src/shared/i18n/README.md) du dossier 
    ```tsx
    import { useTranslation } from "@shared/i18n";
 
-   const MyComponent = () => {
+   const MyComponent = () → {
      const { t } = useTranslation("translations");
 
      const myString = t("key.in.the.jsonFile");
@@ -129,3 +129,51 @@ className = "text-foreground hover:text-primary bg-background";
    > --aspect-_ Aspect ratio utilities like aspect-video
    > --ease-_ Transition timing function utilities like ease-out
    > --animate-_ Animation utilities like animate-spin
+
+## Gérer la configuration Biome
+
+[Biome](https://biomejs.dev/guides/getting-started/) est un outil qui permet de linter, formatter et réorganiser le code. Toute la configuration tient dans le fichier [biome.json](./biome.json).
+
+### Linter
+
+Config path: `linter`.
+
+Par défaut, Biome est servi avec tout un tas de règles regroupées dans des catégories prédéfinies:
+
+- [a11y](https://biomejs.dev/linter/javascript/rules/#a11y) (accessibility) → respect des patterns d'accessibilité
+- [complexity](https://biomejs.dev/linter/javascript/rules/#complexity) → code maintenable et non complexe. Exemple: taille d'une fonction limitée.
+- [correctness](https://biomejs.dev/linter/javascript/rules/#correctness) → pas d'anti-pattern
+- [nursery](https://biomejs.dev/linter/javascript/rules/#nursery) → toutes les règles expérimentales
+- [performance](https://biomejs.dev/linter/javascript/rules/#performance) → pour optimiser le code
+- [security](https://biomejs.dev/linter/javascript/rules/#security) → règles de sécurité de base
+- [style](https://biomejs.dev/linter/javascript/rules/#style) → style d'écriture moderne du code
+- [suspicious](https://biomejs.dev/linter/javascript/rules/#suspicious) → pour éviter des bad practices ou patterns qui peuvent être problématiques. Exemple: console, enums, ...
+- [recommended](https://biomejs.dev/linter/javascript/rules/#recommended-rules) → la base
+
+### Formatter
+
+Biome remplace prettier, avec des configurations similaires.
+Il est possible de mettre en place une configuration globale (`formatter`) ou propre à chaque language (`{language}.formatter`).
+
+### Assist
+
+Dans l'assist, on peut configurer des règles supplémentaires, notamment sur de l'ordering:
+
+- des props
+- des keys
+- et aussi des imports
+
+Pour comprendre comment configurer les imports, quelques lectures:
+
+- [la documentation officielle](https://biomejs.dev/assist/actions/organize-imports/).
+- [cet article](https://dev.to/realchakrawarti/biome-v2-taming-your-imports-for-perfect-order-5g80) qui explicite quelques détails importants.
+
+Notamment, les imports commençant par `@blabla` sont considérés comme des third party libraries → nos alias sont donc mal interprétés par Biome. 2 solution: filter out nos alias du groupe des packages (solution choisie), ou renommer les alias en passant de `@` à `@/` en préfix.
+
+### Commandes
+
+- `biome format` → prettier
+- `biome lint` → linter
+- `biome check` → linter + prettier + assist
+
+Check permet d'appliquer le sorting des keys et des imports, tout en formattant. Il est possible de disable le linter pour faire une réelle commande de format (cf `format`): `biome check ./src --write --linter-enabled=false`
