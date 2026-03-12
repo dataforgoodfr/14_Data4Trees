@@ -19,9 +19,9 @@ export function AdminRoute({ children }: AdminRouteProps) {
   if (isAuthLoading) {
     return (
       <div
-        role="status"
         aria-live="polite"
         className="w-screen h-screen flex items-center justify-center"
+        role="status"
       >
         {t("common.loading")}
       </div>
@@ -31,9 +31,9 @@ export function AdminRoute({ children }: AdminRouteProps) {
   if (!isAuthenticated) {
     return (
       <Navigate
-        to="/login"
-        state={{ from: location }}
         replace={true}
+        state={{ from: location }}
+        to="/login"
       />
     );
   }

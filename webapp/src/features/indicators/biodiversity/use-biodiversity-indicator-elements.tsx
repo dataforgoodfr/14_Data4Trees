@@ -1,8 +1,10 @@
-import type { UseIndicatorReturnType } from "../components/types";
-import { IndicatorRawValue } from "../components/indicator-raw-value";
+import { BinocularsIcon, HeartPulseIcon, InfoIcon } from "lucide-react";
+
 import { useTranslation } from "@i18n";
-import { HeartPulseIcon, InfoIcon, BinocularsIcon } from "lucide-react";
+
 import { ICON_SIZE } from "../components/constants";
+import { IndicatorRawValue } from "../components/indicator-raw-value";
+import type { UseIndicatorReturnType } from "../components/types";
 import { ChartForestPotential } from "./chart-forest-potential";
 import type { FormattedData } from "./format-data";
 
@@ -12,11 +14,9 @@ export const useBiodiversityIndicatorElements = (
   const { t } = useTranslation("translations");
 
   return [
-    { type: "date", date: data.date },
+    { date: data.date, type: "date" },
     { type: "divider" },
     {
-      type: "section",
-      title: t("indicators.biodiversity.sections.biomass.title"),
       children: (
         <>
           <IndicatorRawValue
@@ -25,24 +25,24 @@ export const useBiodiversityIndicatorElements = (
           />
           <IndicatorRawValue
             dataName={t("indicators.biodiversity.sections.biomass.density")}
-            value={data.biomass.density}
             iconStart={<InfoIcon size={ICON_SIZE} />}
+            value={data.biomass.density}
           />
         </>
       ),
+      title: t("indicators.biodiversity.sections.biomass.title"),
+      type: "section",
     },
     { type: "divider" },
     {
-      type: "section",
-      title: t("indicators.biodiversity.sections.treeDiversity.title"),
       children: (
         <>
           <IndicatorRawValue
             dataName={t(
               "indicators.biodiversity.sections.treeDiversity.speciesRichness",
             )}
-            value={data.treeDiversity.speciesRichness}
             iconStart={<HeartPulseIcon size={ICON_SIZE} />}
+            value={data.treeDiversity.speciesRichness}
           />
           <IndicatorRawValue
             dataName={t(
@@ -52,12 +52,11 @@ export const useBiodiversityIndicatorElements = (
           />
         </>
       ),
+      title: t("indicators.biodiversity.sections.treeDiversity.title"),
+      type: "section",
     },
     { type: "divider" },
     {
-      type: "section",
-      title: t("indicators.biodiversity.sections.indicatorSpecies.title"),
-      iconStart: <BinocularsIcon size={ICON_SIZE} />,
       children: (
         <>
           <IndicatorRawValue
@@ -98,11 +97,12 @@ export const useBiodiversityIndicatorElements = (
           />
         </>
       ),
+      iconStart: <BinocularsIcon size={ICON_SIZE} />,
+      title: t("indicators.biodiversity.sections.indicatorSpecies.title"),
+      type: "section",
     },
     { type: "divider" },
     {
-      type: "section",
-      title: t("indicators.biodiversity.sections.forestPotentialLevel.title"),
       children: (
         <ChartForestPotential
           data={{
@@ -111,6 +111,8 @@ export const useBiodiversityIndicatorElements = (
           }}
         />
       ),
+      title: t("indicators.biodiversity.sections.forestPotentialLevel.title"),
+      type: "section",
     },
   ];
 };

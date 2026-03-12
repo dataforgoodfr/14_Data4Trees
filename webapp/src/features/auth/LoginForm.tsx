@@ -15,7 +15,6 @@ import {
 } from "@ui/card";
 import { Input } from "@ui/input";
 import { Label } from "@ui/label";
-
 import { fetchToken } from "./authClient";
 import { useAuth } from "./useAuth";
 
@@ -63,8 +62,8 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
         </CardHeader>
         <CardContent>
           <form
-            onSubmit={handleSubmit}
             aria-describedby={error ? "error-login" : undefined}
+            onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
@@ -73,11 +72,11 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
                 </Label>
                 <Input
                   id="username"
-                  type="text"
-                  placeholder="admin"
-                  value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  placeholder="admin"
                   required={true}
+                  type="text"
+                  value={username}
                 />
               </div>
               <div className="grid gap-2">
@@ -86,16 +85,16 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
                 </Label>
                 <Input
                   id="password"
-                  type="password"
-                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required={true}
+                  type="password"
+                  value={password}
                 />
               </div>
               {error && (
                 <Alert
-                  variant="destructive"
                   id="error-login"
+                  variant="destructive"
                 >
                   <AlertCircle className="h-4 w-4" />
                   <AlertDescription>{error}</AlertDescription>
@@ -103,9 +102,9 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
               )}
 
               <Button
-                type="submit"
                 className="w-full"
                 disabled={isLoading}
+                type="submit"
               >
                 {isLoading
                   ? t("auth.loginForm.button.pendingLogin")

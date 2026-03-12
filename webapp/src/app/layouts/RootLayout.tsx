@@ -16,9 +16,9 @@ export const RootLayout: FC = () => {
   return (
     <div className="flex flex-col h-svh">
       <Header
+        isAuthenticated={isAuthenticated}
         onLogin={() => navigate("/login")}
         onLogout={() => logout()}
-        isAuthenticated={isAuthenticated}
       />
       <main className="flex flex-col flex-1">
         <Outlet />

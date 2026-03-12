@@ -1,4 +1,19 @@
 {
+  "auth": {
+    "loginForm": {
+      "button": {
+        "login": "Connexion",
+        "pendingLogin": "Connexion..."
+      },
+      "credentialsError": "Identifiants invalides",
+      "description": "Renseignez votre nom d'utilisateur ci-dessous pour vous connecter",
+      "field": {
+        "password": "Mot de passe",
+        "username": "Nom d'utilisateur"
+      },
+      "title": "Connexion"
+    }
+  },
   "common": {
     "loading": "Chargement..."
   },
@@ -8,73 +23,58 @@
       "logout": "Déconnexion"
     },
     "colorModeSelector": {
-      "light": "Clair",
       "dark": "Sombre",
+      "light": "Clair",
       "system": "Système"
     }
   },
-  "auth": {
-    "loginForm": {
-      "credentialsError": "Identifiants invalides",
-      "title": "Connexion",
-      "description": "Renseignez votre nom d'utilisateur ci-dessous pour vous connecter",
-      "field": {
-        "username": "Nom d'utilisateur",
-        "password": "Mot de passe"
-      },
-      "button": {
-        "login": "Connexion",
-        "pendingLogin": "Connexion..."
-      }
-    }
-  },
   "indicators": {
+    "biodiversity": {
+      "sections": {
+        "biomass": {
+          "density": "Densité arborée",
+          "title": "Biomasse du peuplement",
+          "volume": "Volume de biomasse"
+        },
+        "forestPotentialLevel": {
+          "density": "Densité arborée",
+          "diameterDistribution": "Distribution diamétrale",
+          "diversity": "Diversité arborée",
+          "masterHeight": "Hauteur dominante",
+          "microhabitat": "Dendro-microhabitats",
+          "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
+          "spatialDistribution": "Distribution spatiale",
+          "title": "Indice d’écopotentialité forestière",
+          "verticalDistribution": "Distribution verticale"
+        },
+        "indicatorSpecies": {
+          "abundanceTaxon1": "Abondance taxon n°1",
+          "abundanceTaxon2": "Abondance taxon n°2",
+          "abundanceTaxon3": "Abondance taxon n°3",
+          "speciesRichnessTaxon1": "Richesse spécifique taxon n°1",
+          "speciesRichnessTaxon2": "Richesse spécifique taxon n°2",
+          "speciesRichnessTaxon3": "Richesse spécifique taxon n°3",
+          "title": "Espèces indicatrices"
+        },
+        "treeDiversity": {
+          "shannon": "Indice de shannon",
+          "speciesRichness": "Richesse spécifique",
+          "title": "Diversité arborée"
+        }
+      },
+      "title": "Données biodiversité"
+    },
     "common": {
-      "date": "Date enquête",
+      "beneficiary": "Bénef.",
       "control": "Témoin",
-      "beneficiary": "Bénef."
+      "date": "Date enquête"
     },
     "units": {
-      "tonPerHectare": "{{ value }} t/ha",
       "individualPerHectare": "{{ value }} ind/ha",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
-      "speciesCount_other": "{{ count }} espèces inventoriées"
-    },
-    "biodiversity": {
-      "title": "Données biodiversité",
-      "sections": {
-        "biomass": {
-          "title": "Biomasse du peuplement",
-          "volume": "Volume de biomasse",
-          "density": "Densité arborée"
-        },
-        "treeDiversity": {
-          "title": "Diversité arborée",
-          "speciesRichness": "Richesse spécifique",
-          "shannon": "Indice de shannon"
-        },
-        "indicatorSpecies": {
-          "title": "Espèces indicatrices",
-          "abundanceTaxon1": "Abondance taxon n°1",
-          "speciesRichnessTaxon1": "Richesse spécifique taxon n°1",
-          "abundanceTaxon2": "Abondance taxon n°2",
-          "speciesRichnessTaxon2": "Richesse spécifique taxon n°2",
-          "abundanceTaxon3": "Abondance taxon n°3",
-          "speciesRichnessTaxon3": "Richesse spécifique taxon n°3"
-        },
-        "forestPotentialLevel": {
-          "title": "Indice d’écopotentialité forestière",
-          "density": "Densité arborée",
-          "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
-          "diversity": "Diversité arborée",
-          "spatialDistribution": "Distribution spatiale",
-          "diameterDistribution": "Distribution diamétrale",
-          "verticalDistribution": "Distribution verticale",
-          "masterHeight": "Hauteur dominante",
-          "microhabitat": "Dendro-microhabitats"
-        }
-      }
+      "speciesCount_other": "{{ count }} espèces inventoriées",
+      "tonPerHectare": "{{ value }} t/ha"
     }
   }
 }

@@ -3,14 +3,13 @@ import { AdminLink } from "@features/admin/AdminLink";
 import { useTranslation } from "@shared/i18n";
 
 import { Button } from "@ui/button";
-
 import { LanguageSelecor } from "./LanguageSelector";
 import { ModeToggle } from "./ModeToggle";
 
 interface HeaderProps {
-  onLogout: () => void;
-  onLogin: () => void;
   isAuthenticated: boolean;
+  onLogin: () => void;
+  onLogout: () => void;
 }
 
 export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
@@ -21,9 +20,9 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
       <div className="mx-auto max-w-screen-2xl">
         <div className="flex items-center justify-between gap-md">
           <img
-            src="/logo_all4trees.png"
             alt="Logo"
             className="h-12"
+            src="/logo_all4trees.png"
           />
 
           <div className="flex items-center gap-4">
@@ -31,16 +30,16 @@ export function Header({ onLogout, onLogin, isAuthenticated }: HeaderProps) {
             {isAuthenticated ? (
               <Button
                 onClick={onLogout}
-                variant="default"
                 size="default"
+                variant="default"
               >
                 {t("header.button.logout")}
               </Button>
             ) : (
               <Button
                 onClick={onLogin}
-                variant="default"
                 size="default"
+                variant="default"
               >
                 {t("header.button.login")}
               </Button>

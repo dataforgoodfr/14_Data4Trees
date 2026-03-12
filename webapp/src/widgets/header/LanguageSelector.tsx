@@ -1,7 +1,7 @@
 import { LanguagesIcon } from "lucide-react";
 import type { FC } from "react";
 
-import { LANGUAGES, i18nInstance } from "@shared/i18n";
+import { i18nInstance, LANGUAGES } from "@shared/i18n";
 
 import { Button } from "@ui/button";
 import {
@@ -13,14 +13,14 @@ import {
 
 const LANGUAGES_CONFIGS = [
   {
-    identifier: LANGUAGES.FRENCH,
-    fullString: "Français",
     flag: "🇫🇷",
+    fullString: "Français",
+    identifier: LANGUAGES.FRENCH,
   },
   {
-    identifier: LANGUAGES.ENGLISH,
-    fullString: "English",
     flag: "🇬🇧",
+    fullString: "English",
+    identifier: LANGUAGES.ENGLISH,
   },
 ] as const;
 
@@ -28,9 +28,9 @@ export const LanguageSelecor: FC = () => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild={true}>
       <Button
-        variant="outline"
-        size="icon"
         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+        size="icon"
+        variant="outline"
       >
         <LanguagesIcon className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">{i18nInstance.language.toUpperCase()}</span>
@@ -38,8 +38,8 @@ export const LanguageSelecor: FC = () => (
     </DropdownMenuTrigger>
 
     <DropdownMenuContent
-      className="bg-background"
       align="end"
+      className="bg-background"
     >
       {LANGUAGES_CONFIGS.map((config) => (
         <DropdownMenuItem

@@ -13,15 +13,15 @@ export function MapSidebar() {
       <RadioGroup defaultValue="option-one">
         <div className="flex items-center gap-3">
           <RadioGroupItem
-            value="option-one"
             id="option-one"
+            value="option-one"
           />
           <Label htmlFor="option-one">Option Une</Label>
         </div>
         <div className="flex items-center gap-3">
           <RadioGroupItem
-            value="option-two"
             id="option-two"
+            value="option-two"
           />
           <Label htmlFor="option-two">Option Deux</Label>
         </div>
@@ -32,10 +32,10 @@ export function MapSidebar() {
           </div>
           <Slider
             id="slider-1"
-            value={value}
-            onValueChange={setValue}
             max={100}
+            onValueChange={setValue}
             step={1}
+            value={value}
           />
         </div>
       </RadioGroup>
