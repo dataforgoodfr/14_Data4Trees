@@ -7,13 +7,13 @@ import { Button } from "@ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover";
 
 export interface DashboardProps {
+  dataType: string;
   graphData: {
     clientByName: {
       fullName: GraphConsoElecProps["name"];
       consumptionSet: GraphConsoElecProps["chartData"];
     };
   };
-  dataType: string;
 }
 
 export function DashboardPopover({ graphData, dataType }: DashboardProps) {
@@ -33,8 +33,8 @@ export function DashboardPopover({ graphData, dataType }: DashboardProps) {
           <div className="grid gap-2">
             {graphData && dataType === "example" && (
               <ExampleGraph
-                name={graphData.clientByName?.fullName}
                 chartData={graphData.clientByName?.consumptionSet}
+                name={graphData.clientByName?.fullName}
               />
             )}
           </div>

@@ -2,9 +2,9 @@ import { API_URL } from "@shared/api/client";
 
 export const fetchToken = async (username: string, password: string) => {
   const res = await fetch(`${API_URL}/auth/token/`, {
-    method: "POST",
+    body: JSON.stringify({ password, username }),
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    method: "POST",
   });
   if (!res.ok) {
     throw new Error(`Erreur de connexion: ${res.status} ${res.statusText}`);
@@ -16,9 +16,9 @@ export const fetchToken = async (username: string, password: string) => {
 
 export const verifyToken = async (token: string) => {
   const res = await fetch(`${API_URL}/auth/verify/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token }),
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
   });
   if (!res.ok) {
     console.error(`Token invalide: ${res.status} ${res.statusText}`);
