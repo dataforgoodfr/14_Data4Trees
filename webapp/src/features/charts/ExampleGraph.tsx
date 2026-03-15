@@ -18,28 +18,28 @@ import {
 export const description = "A line chart with custom dots";
 
 interface DataPoint {
-  year: number;
-  month: number;
   kwhConsumed: number;
+  month: number;
+  year: number;
 }
 
 export interface GraphConsoElecProps {
-  name: string;
   chartData: DataPoint[];
+  name: string;
 }
 
 const chartConfig = {
-  year: {
-    label: "Année",
-    color: "var(--chart-1)",
+  kwhConsumed: {
+    color: "var(--chart-3)",
+    label: "kWh Consommés",
   },
   month: {
-    label: "Mois",
     color: "var(--chart-2)",
+    label: "Mois",
   },
-  kwhConsumed: {
-    label: "kWh Consommés",
-    color: "var(--chart-3)",
+  year: {
+    color: "var(--chart-1)",
+    label: "Année",
   },
 } satisfies ChartConfig;
 
@@ -70,43 +70,43 @@ export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              xAxisId={0}
+              axisLine={false}
               dataKey="month"
               tickLine={false}
-              axisLine={false}
               tickMargin={8}
+              xAxisId={0}
             />
             <XAxis
-              xAxisId={1}
-              dataKey="year"
               allowDuplicatedCategory={false}
-              tickLine={false}
               axisLine={false}
+              dataKey="year"
+              tickLine={false}
               tickMargin={8}
+              xAxisId={1}
             />
             <ChartTooltip
-              cursor={false}
               content={<ChartTooltipContent hideLabel={true} />}
+              cursor={false}
             />
             <Line
               dataKey="kwhConsumed"
-              type="natural"
-              stroke="var(--color-kwhConsumed)"
-              strokeWidth={2}
               dot={({ cx, cy, payload }) => {
                 const r = payload.kwhConsumed / 20;
                 return (
                   <GitCommitVertical
+                    fill="hsl(var(--background))"
+                    height={r}
                     key={`${payload.year} / ${payload.month}`}
+                    stroke="var(--color-kwhConsumed)"
+                    width={r}
                     x={cx - r / 2}
                     y={cy - r / 2}
-                    width={r}
-                    height={r}
-                    fill="hsl(var(--background))"
-                    stroke="var(--color-kwhConsumed)"
                   />
                 );
               }}
+              stroke="var(--color-kwhConsumed)"
+              strokeWidth={2}
+              type="natural"
             />
           </LineChart>
         </ChartContainer>

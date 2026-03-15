@@ -8,8 +8,8 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
   setTheme: () => null,
+  theme: "system",
 };
 
 export const ThemeContext = createContext<ThemeProviderState>(initialState);

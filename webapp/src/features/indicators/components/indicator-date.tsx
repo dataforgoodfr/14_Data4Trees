@@ -1,6 +1,8 @@
-import type { FC } from "react";
 import { CalendarIcon } from "lucide-react";
+import type { FC } from "react";
+
 import { useTranslation } from "@i18n";
+
 import { ICON_SIZE } from "./constants";
 
 type IndicatorDateProps = {

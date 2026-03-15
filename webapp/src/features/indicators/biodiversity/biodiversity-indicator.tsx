@@ -1,13 +1,15 @@
-import type { FC } from "react";
-import { IndicatorContainer } from "../components/indicator-container";
 import { TreesIcon } from "lucide-react";
+import type { FC } from "react";
+
 import { useTranslation } from "@i18n";
-import { useBiodiversityIndicatorElements } from "./use-biodiversity-indicator-elements";
+
 import { ICON_SIZE_HEADER } from "../components/constants";
+import { IndicatorContainer } from "../components/indicator-container";
 import {
-  useFormatBiodiversityData,
   type BiodiversityData,
+  useFormatBiodiversityData,
 } from "./format-data";
+import { useBiodiversityIndicatorElements } from "./use-biodiversity-indicator-elements";
 
 type BiodiversityIndicatorProps = {
   onClose: () => void;
@@ -26,12 +28,12 @@ export const BiodiversityIndicator: FC<BiodiversityIndicatorProps> = ({
 
   return (
     <IndicatorContainer
-      onCrossClick={onClose}
-      title={formattedData.title}
-      subtitle={t("indicators.biodiversity.title")}
-      icon={<TreesIcon size={ICON_SIZE_HEADER} />}
-      elements={elements}
       className={className}
+      elements={elements}
+      icon={<TreesIcon size={ICON_SIZE_HEADER} />}
+      onCrossClick={onClose}
+      subtitle={t("indicators.biodiversity.title")}
+      title={formattedData.title}
     />
   );
 };

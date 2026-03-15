@@ -17,11 +17,11 @@ export const AdminLink: FC = () => {
   const createAdminSession = async () => {
     try {
       await fetch(`${API_URL}/admin-session/`, {
-        method: "POST",
+        credentials: "include",
         headers: {
           Authorization: `Bearer ${authContext.token}`,
         },
-        credentials: "include",
+        method: "POST",
       });
 
       window.open(API_URL.replace("/api", "/admin"));

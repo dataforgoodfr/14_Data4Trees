@@ -4,7 +4,6 @@ import type { FC, ReactNode } from "react";
 
 import type { Theme } from "@shared/contexts/ThemeContext";
 import { useTheme } from "@shared/hooks/useTheme";
-
 import { useTranslation } from "@i18n";
 
 import { Button } from "@ui/button";
@@ -27,8 +26,8 @@ export const ModeToggle: FC = () => {
     {
       icon: (className) => (
         <Sun
-          key="icon-light"
           className={className ?? ""}
+          key="icon-light"
         />
       ),
       identifier: "light",
@@ -37,8 +36,8 @@ export const ModeToggle: FC = () => {
     {
       icon: (className) => (
         <Moon
-          key="icon-dark"
           className={className ?? ""}
+          key="icon-dark"
         />
       ),
       identifier: "dark",
@@ -47,8 +46,8 @@ export const ModeToggle: FC = () => {
     {
       icon: (className) => (
         <MonitorCog
-          key="icon-system"
           className={className ?? ""}
+          key="icon-system"
         />
       ),
       identifier: "system",
@@ -60,9 +59,9 @@ export const ModeToggle: FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true}>
         <Button
-          variant="outline"
-          size="icon"
           className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+          size="icon"
+          variant="outline"
         >
           <div className="h-[16px] w-[16px] relative">
             {colorModes.map((config) =>
@@ -79,14 +78,14 @@ export const ModeToggle: FC = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="bg-background "
         align="end"
+        className="bg-background "
       >
         {colorModes.map((config) => (
           <DropdownMenuItem
+            className="gap-sm"
             key={config.identifier}
             onClick={() => setTheme(config.identifier)}
-            className="gap-sm"
           >
             {config.icon()}
             {config.label}

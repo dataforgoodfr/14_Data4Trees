@@ -17,8 +17,8 @@ export const fetchWithAuth = async (
   if (!res.ok) {
     console.error(`Erreur API: ${res.status} ${res.statusText}`);
     const errorData = await res.json().catch(() => ({
-      error: "Erreur de communication",
       details: [res.statusText],
+      error: "Erreur de communication",
     }));
     console.error("Détails de l'erreur:", JSON.stringify(errorData, null, 2));
 

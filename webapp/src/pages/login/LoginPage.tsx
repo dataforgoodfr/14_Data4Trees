@@ -24,8 +24,8 @@ export function LoginPage() {
   if (isAuthenticated) {
     return (
       <Navigate
-        to={redirectTo}
         replace={true}
+        to={redirectTo}
       />
     );
   }

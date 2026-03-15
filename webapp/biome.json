@@ -7,25 +7,35 @@
           "level": "on",
           "options": {
             "groups": [
-              ["builtin", "external"],
-              ["^@radix-ui/(.*)$"],
-              ["^@/(.*)$"],
-              ["^@app/(.*)$"],
-              ["^@pages"],
-              ["^@pages/(.*)$"],
-              ["^@widgets"],
-              ["^@widgets/(.*)$"],
-              ["^@features"],
-              ["^@features/(.*)$"],
-              ["^@shared"],
-              ["^@shared/(.*)$"],
-              ["^@libs"],
-              ["^@libs/(.*)$"],
-              ["^@i18n"],
-              ["^@i18n/(.*)$"],
-              ["^@ui"],
-              ["^@ui/(.*)$"],
-              ["parent", "sibling", "index"]
+              [
+                ":PACKAGE:",
+                ":NODE:",
+                ":PACKAGE_WITH_PROTOCOL:",
+                ":BUN:",
+                "!@app/**",
+                "!@pages/**",
+                "!@widgets/**",
+                "!@features/**",
+                "!@shared/**",
+                "!@lib/**",
+                "!@i18n",
+                "!@ui/**"
+              ],
+              ":BLANK_LINE:",
+              [":ALIAS:", "@/**"],
+              "@app/**",
+              ":BLANK_LINE:",
+              "@pages/**",
+              ":BLANK_LINE:",
+              "@widgets/**",
+              ":BLANK_LINE:",
+              "@features/**",
+              ":BLANK_LINE:",
+              "@shared/**",
+              "@lib/**",
+              "@i18n",
+              ":BLANK_LINE:",
+              "@ui/**"
             ]
           }
         },
@@ -37,7 +47,7 @@
       }
     },
     "enabled": true,
-    "includes": ["!package.json"]
+    "includes": ["src/**/*"]
   },
   "css": {
     "parser": {

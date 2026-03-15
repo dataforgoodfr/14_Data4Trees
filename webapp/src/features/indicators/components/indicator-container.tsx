@@ -1,20 +1,21 @@
-import { Button } from "@shared/ui/button";
-import type { FC, ReactNode } from "react";
+import { cx } from "class-variance-authority";
 import { XIcon } from "lucide-react";
+import type { FC, ReactNode } from "react";
 
+import { cn } from "@shared/lib/utils";
 import {
   Alert,
-  AlertTitle,
-  AlertDescription,
   AlertAction,
+  AlertDescription,
+  AlertTitle,
 } from "@shared/ui/alert";
-import { cn } from "@shared/lib/utils";
-import type { UseIndicatorReturnType } from "./types";
+import { Button } from "@shared/ui/button";
+
+import { ICON_SIZE_HEADER } from "./constants";
 import { Divider } from "./divider";
 import { IndicatorDate } from "./indicator-date";
 import { IndicatorSection } from "./indicator-section";
-import { ICON_SIZE_HEADER } from "./constants";
-import { cx } from "class-variance-authority";
+import type { UseIndicatorReturnType } from "./types";
 
 type IndicatorContainerProps = {
   title: string;
@@ -50,11 +51,11 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
 
         <AlertAction>
           <Button
-            variant="ghost"
             aria-label="close-popover"
+            className="text-muted-foreground hover:text-info-foreground"
             onClick={onCrossClick}
             size="icon"
-            className="text-muted-foreground hover:text-info-foreground"
+            variant="ghost"
           >
             <XIcon size={ICON_SIZE_HEADER} />
           </Button>
@@ -67,8 +68,8 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
           "overflow-y-scroll custom-scrollbar",
         )}
         style={{
-          "--scrollbar-track": "var(--background)",
           "--scrollbar-thumb": "var(--info-foreground)",
+          "--scrollbar-track": "var(--background)",
         }}
       >
         {elements.map((config, index) => {
@@ -80,8 +81,8 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
           if (config.type === "date") {
             return (
               <IndicatorDate
-                key={`element-date-${config.date}`}
                 date={config.date}
+                key={`element-date-${config.date}`}
               />
             );
           }
@@ -89,9 +90,9 @@ export const IndicatorContainer: FC<IndicatorContainerProps> = ({
           if (config.type === "section") {
             return (
               <IndicatorSection
+                iconStart={config.iconStart}
                 key={`element-section-${config.title}`}
                 title={config.title}
-                iconStart={config.iconStart}
               >
                 {config.children}
               </IndicatorSection>

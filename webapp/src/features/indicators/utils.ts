@@ -1,9 +1,9 @@
 import { useTranslation } from "@shared/i18n";
 
 export const UNITS = {
-  tonPerHectare: "tonPerHectare",
   individualPerHectare: "individualPerHectare",
   speciesCount: "speciesCount",
+  tonPerHectare: "tonPerHectare",
 } as const;
 
 export type Unit = keyof typeof UNITS;
