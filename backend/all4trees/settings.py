@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost', 'data4trees.services.d4g.fr']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic', # see https://whitenoise.readthedocs.io/en/stable/django.html#using-whitenoise-in-development
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -143,4 +145,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage", # see https://whitenoise.readthedocs.io/en/stable/django.html#add-compression-and-caching-support
+    },
 }
