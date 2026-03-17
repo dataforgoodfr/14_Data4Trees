@@ -19,6 +19,7 @@
   },
   "header": {
     "button": {
+      "goToAdmin": "Espace Admin",
       "login": "Connexion",
       "logout": "Déconnexion"
     },

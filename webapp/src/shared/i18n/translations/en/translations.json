@@ -19,6 +19,7 @@
   },
   "header": {
     "button": {
+      "goToAdmin": "Admin",
       "login": "Login",
       "logout": "Logout"
     },
