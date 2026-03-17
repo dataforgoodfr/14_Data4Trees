@@ -119,7 +119,7 @@ celerybeat-schedule
 celerybeat.pid
 
 # Fichiers de backup
-*.bak 
+*.bak
 
 # SageMath parsed files
 *.sage.py
@@ -166,3 +166,6 @@ cython_debug/
 
 # Precommit hooks: ruff cache
 .ruff_cache
+
+# backend static files
+backend/static/
