@@ -1,16 +1,16 @@
 import json
 
-from coordo.config import MapConfig
+from coordo.map import Map
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 config_path = settings.BASE_DIR / "data" / "config.json"
-parser = MapConfig.from_file(config_path)
+parser = Map.from_file(config_path)
 
 
 def style_json(request):
-    return JsonResponse(parser.to_maplibre(base_url="/api/maps/layers"))
+    return JsonResponse(parser.get_maplibre_style())
 
 
 @csrf_exempt
