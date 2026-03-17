@@ -31,13 +31,13 @@ export function MainPage() {
     <>
       {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}
       <ResizablePanelGroup
-        direction="horizontal"
         className="bg-background"
+        direction="horizontal"
       >
         <SidebarProvider>
           <ResizablePanel
-            defaultSize={20}
             className="h-full p-4"
+            defaultSize={20}
           >
             <MapSidebar />
           </ResizablePanel>
@@ -47,9 +47,9 @@ export function MainPage() {
               <ResizablePanel defaultSize={10}>
                 <div className="flex h-full items-center justify-center p-6">
                   <DashboardPopover
+                    dataType="example"
                     /** @ts-expect-error Need to type data */
                     graphData={data}
-                    dataType="example"
                   />
                 </div>
               </ResizablePanel>

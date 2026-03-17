@@ -1,12 +1,14 @@
-import { API_URL } from "@shared/api/client";
-import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { createMap } from "coordo";
 import { type FC, useEffect, useRef, useState } from "react";
-import {
-  BiodiversityIndicator,
-  type BiodiversityData,
-} from "@features/indicators/biodiversity";
 import { createRoot } from "react-dom/client";
+
+import {
+  type BiodiversityData,
+  BiodiversityIndicator,
+} from "@features/indicators/biodiversity";
+
+import { API_URL } from "@shared/api/client";
+import { useLocalStorage } from "@shared/hooks/use-local-storage";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -19,8 +21,8 @@ type MapSettings = {
 
 // The default settings are set to show africa and madagascar on the map
 const DEFAULT_MAP_SETTINGS: MapSettings = {
-  zoom: 3.8,
   center: [34.1246, -23.0758],
+  zoom: 3.8,
 };
 
 function useMap(containerSelector: string) {
@@ -61,8 +63,8 @@ function useMap(containerSelector: string) {
         // Update map settings
         mapApiRef.current.addEventListener("move", (event) => {
           setMapSettings({
-            zoom: event.target.getZoom(),
             center: event.target.getCenter().toArray(),
+            zoom: event.target.getZoom(),
           });
         });
       } catch (error) {
@@ -75,7 +77,7 @@ function useMap(containerSelector: string) {
     };
   }, [containerSelector, mapSettings, setMapSettings]);
 
-  return { isReady, mapApiRef, forests };
+  return { forests, isReady, mapApiRef };
 }
 
 export const WidgetMap: FC = () => {
@@ -89,9 +91,9 @@ export const WidgetMap: FC = () => {
       const root = createRoot(container);
       root.render(
         <BiodiversityIndicator
+          className="w-[300px] max-h-[350px]"
           data={properties}
           onClose={() => root.unmount()}
-          className="w-[300px] max-h-[350px]"
         />,
       );
       return container;
@@ -100,23 +102,23 @@ export const WidgetMap: FC = () => {
     // Set the popup for the "inventaire" layer
     mapApiRef.current.setLayerPopup<BiodiversityData>({
       layerId: "inventaire",
-      trigger: "click",
-      renderCallback: renderPopup,
       popupConfig: {
+        anchor: "center",
         className: "bg-background/90 rounded-md",
         closeButton: false,
         closeOnClick: true,
         closeOnMove: false,
         maxWidth: "300px",
-        anchor: "center",
       },
+      renderCallback: renderPopup,
+      trigger: "click",
     });
   }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters("inventaire", {
-      op: "=",
       args: [{ property: "for" }, forestId],
+      op: "=",
     });
   };
 
@@ -127,8 +129,8 @@ export const WidgetMap: FC = () => {
   return (
     <div className="relative w-full h-full">
       <div
-        id="map"
         className="w-full h-full"
+        id="map"
       ></div>
       {!isReady && (
         <div className="map-loader absolute inset-0 z-50 flex items-center justify-center bg-background/80">
@@ -139,16 +141,16 @@ export const WidgetMap: FC = () => {
         <div className="absolute top-4 left-12 z-10 bg-white rounded shadow p-2 flex gap-2">
           {forests.map((forest) => (
             <button
+              className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
               key={forest.value}
               onClick={() => filterByForest(forest.value)}
-              className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
             >
               {forest.label}
             </button>
           ))}
           <button
-            onClick={resetFilter}
             className="px-3 py-1 bg-gray-500 text-white rounded text-sm hover:bg-gray-600"
+            onClick={resetFilter}
           >
             Toutes
           </button>

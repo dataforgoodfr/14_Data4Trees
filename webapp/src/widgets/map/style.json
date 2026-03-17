@@ -1,155 +1,155 @@
 {
-  "version": 8,
+  "layers": [
+    { "id": "satellite", "source": "Esri.WorldImagery", "type": "raster" },
+    {
+      "filter": ["all", ["==", ["get", "class"], "village"]],
+      "id": "villages",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "type": "line"
+    },
+    {
+      "filter": ["all", ["==", ["get", "class"], "town"]],
+      "id": "towns",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "type": "line"
+    },
+    {
+      "filter": ["all", ["==", ["get", "admin_level"], 2]],
+      "id": "boundaries",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "type": "line"
+    },
+    {
+      "id": "placettes",
+      "metadata": {
+        "popup": {
+          "html": "<h1>Placette {{ cod }}</h1>Richesse: {{ richness }}<br>Hauteur dominante: {{ dominant_height }}<br>Structure du sol: ",
+          "trigger": "click"
+        }
+      },
+      "source": "placettes",
+      "type": "circle"
+    }
+  ],
+  "metadata": {
+    "controls": [
+      { "position": "top-left", "type": "compass" },
+      { "position": "top-right", "type": "layer" },
+      { "position": "bottom-left", "type": "scale" }
+    ]
+  },
   "sources": {
     "Esri.WorldImagery": {
-      "type": "raster",
       "tiles": [
         "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-      ]
+      ],
+      "type": "raster"
     },
     "openmaptiles": {
       "type": "vector",
       "url": "https://tiles.openfreemap.org/planet"
     },
     "placettes": {
-      "type": "geojson",
       "data": {
-        "type": "FeatureCollection",
         "features": [
           {
+            "geometry": {
+              "coordinates": [14.304208, -16.3296615],
+              "type": "Point"
+            },
             "id": "1",
-            "type": "Feature",
             "properties": {
-              "richness": 16,
-              "dominant_height": 7.416666666666667
+              "dominant_height": 7.416666666666667,
+              "richness": 16
             },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.304208, -16.3296615]
-            }
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [14.224087333333332, -16.348617],
+              "type": "Point"
+            },
             "id": "2",
-            "type": "Feature",
-            "properties": { "richness": 15, "dominant_height": 18.0 },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.224087333333332, -16.348617]
-            }
+            "properties": { "dominant_height": 18.0, "richness": 15 },
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [14.224867333333334, -16.350167333333335],
+              "type": "Point"
+            },
             "id": "3",
-            "type": "Feature",
-            "properties": { "richness": 14, "dominant_height": 16.375 },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.224867333333334, -16.350167333333335]
-            }
+            "properties": { "dominant_height": 16.375, "richness": 14 },
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [14.30056225, -16.3261955],
+              "type": "Point"
+            },
             "id": "4",
-            "type": "Feature",
             "properties": {
-              "richness": 12,
-              "dominant_height": 12.181818181818182
+              "dominant_height": 12.181818181818182,
+              "richness": 12
             },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.30056225, -16.3261955]
-            }
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [14.211029333333334, -16.349709333333333],
+              "type": "Point"
+            },
             "id": "5",
-            "type": "Feature",
             "properties": {
-              "richness": 8,
-              "dominant_height": 10.666666666666666
+              "dominant_height": 10.666666666666666,
+              "richness": 8
             },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.211029333333334, -16.349709333333333]
-            }
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [14.208482000000002, -16.349846333333332],
+              "type": "Point"
+            },
             "id": "6",
-            "type": "Feature",
-            "properties": { "richness": 7, "dominant_height": 8.0 },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.208482000000002, -16.349846333333332]
-            }
+            "properties": { "dominant_height": 8.0, "richness": 7 },
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [14.206586666666666, -16.367971999999998],
+              "type": "Point"
+            },
             "id": "7",
-            "type": "Feature",
-            "properties": { "richness": 14, "dominant_height": 16.625 },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [14.206586666666666, -16.367971999999998]
-            }
+            "properties": { "dominant_height": 16.625, "richness": 14 },
+            "type": "Feature"
           },
           {
+            "geometry": {
+              "coordinates": [13.996415, -16.367266],
+              "type": "Point"
+            },
             "id": "8",
-            "type": "Feature",
-            "properties": { "richness": 4, "dominant_height": 8.0 },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [13.996415, -16.367266]
-            }
+            "properties": { "dominant_height": 8.0, "richness": 4 },
+            "type": "Feature"
           },
           {
-            "id": "9",
-            "type": "Feature",
-            "properties": { "richness": 3, "dominant_height": 11.0 },
             "geometry": {
-              "type": "Point",
-              "coordinates": [14.048034, -16.335574]
-            }
+              "coordinates": [14.048034, -16.335574],
+              "type": "Point"
+            },
+            "id": "9",
+            "properties": { "dominant_height": 11.0, "richness": 3 },
+            "type": "Feature"
           }
-        ]
-      }
+        ],
+        "type": "FeatureCollection"
+      },
+      "type": "geojson"
     }
   },
-  "layers": [
-    { "id": "satellite", "type": "raster", "source": "Esri.WorldImagery" },
-    {
-      "id": "villages",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "filter": ["all", ["==", ["get", "class"], "village"]]
-    },
-    {
-      "id": "towns",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "filter": ["all", ["==", ["get", "class"], "town"]]
-    },
-    {
-      "id": "boundaries",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "boundary",
-      "filter": ["all", ["==", ["get", "admin_level"], 2]]
-    },
-    {
-      "id": "placettes",
-      "type": "circle",
-      "source": "placettes",
-      "metadata": {
-        "popup": {
-          "trigger": "click",
-          "html": "<h1>Placette {{ cod }}</h1>Richesse: {{ richness }}<br>Hauteur dominante: {{ dominant_height }}<br>Structure du sol: "
-        }
-      }
-    }
-  ],
-  "metadata": {
-    "controls": [
-      { "type": "compass", "position": "top-left" },
-      { "type": "layer", "position": "top-right" },
-      { "type": "scale", "position": "bottom-left" }
-    ]
-  }
+  "version": 8
 }

@@ -15,16 +15,16 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="login"
           element={<LoginPage />}
+          path="login"
         />
         <Route
-          path="/"
           element={<RootLayout />}
+          path="/"
         >
           <Route
-            index
             element={<MainPage />}
+            index
           />
         </Route>
         <Route
@@ -35,8 +35,8 @@ export function AppRouter() {
           }
         >
           <Route
-            path="admin"
             element={<AdminPage />}
+            path="admin"
           />
         </Route>
       </Routes>
