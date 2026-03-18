@@ -23,7 +23,7 @@
       "path": "catalog/inventaire_id",
       "resource": "inventaire_id",
       "groupby": ["for"],
-      "aggregate": {
+      "columns": {
         "geometry": "centroid(gps)",
         "richness": "count(unique(ind.ess_arb))",
         "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))"
