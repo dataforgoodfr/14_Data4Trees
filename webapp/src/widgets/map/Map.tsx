@@ -1,9 +1,10 @@
 import { type FC, useEffect } from "react";
-import {
-  BiodiversityIndicator,
-  type BiodiversityData,
-} from "@features/indicators/biodiversity";
 import { createRoot } from "react-dom/client";
+
+import {
+  type BiodiversityData,
+  BiodiversityIndicator,
+} from "@features/indicators/biodiversity";
 
 import { useMap } from "@shared/hooks/useMap";
 
@@ -44,15 +45,15 @@ export const WidgetMap: FC = () => {
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters({
+      filters: { args: [{ property: "for" }, forestId], op: "=" },
       layerId: "inventaire",
-      filters: { op: "=", args: [{ property: "for" }, forestId] },
     });
   };
 
   const resetFilter = () => {
     mapApiRef.current?.setLayerFilters({
-      layerId: "inventaire",
       filters: null,
+      layerId: "inventaire",
     });
   };
 
