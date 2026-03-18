@@ -1,6 +1,5 @@
 import { type ReactNode, useRef, useState } from "react";
 
-// @ts-expect-error No types for the coordo lib
 import type { createMap } from "coordo";
 
 import { MapContext, type Category } from "@shared/contexts/MapContext";

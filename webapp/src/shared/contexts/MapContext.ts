@@ -1,6 +1,5 @@
 import { createContext, type RefObject } from "react";
 
-// @ts-expect-error No types for the coordo lib
 import type { createMap } from "coordo";
 
 export type Category = { value: string; label: string };
