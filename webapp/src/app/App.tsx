@@ -1,4 +1,9 @@
-import { ApiProvider, AuthProvider, ThemeProvider } from "./providers";
+import {
+  ApiProvider,
+  AuthProvider,
+  MapProvider,
+  ThemeProvider,
+} from "./providers";
 import { AppRouter } from "./routes/AppRouter";
 import "./styles/globals.css";
 import "./styles/index.css";
@@ -11,7 +16,9 @@ function App() {
     >
       <AuthProvider>
         <ApiProvider>
-          <AppRouter />
+          <MapProvider>
+            <AppRouter />
+          </MapProvider>
         </ApiProvider>
       </AuthProvider>
     </ThemeProvider>

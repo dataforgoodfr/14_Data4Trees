@@ -1,11 +1,8 @@
 {
-  "name": "inventaire_id",
   "resources": [
     {
       "name": "reg",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "reg.parquet",
       "schema": {
         "fields": [
           {
@@ -18,7 +15,11 @@
           },
           {
             "name": "ess_reg",
+            "type": "string",
             "title": "Essence",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -1040,16 +1041,12 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "nomb_pet",
-            "title": "Nombre de pieds dans la classe d'hauteur 0-50 cm",
             "type": "integer",
+            "title": "Nombre de pieds dans la classe d'hauteur 0-50 cm",
             "constraints": {
               "required": false,
               "minimum": 0,
@@ -1058,8 +1055,8 @@
           },
           {
             "name": "nomb_moy",
-            "title": "Nombre de pieds dans la classe d'hauteur 51-100 cm",
             "type": "integer",
+            "title": "Nombre de pieds dans la classe d'hauteur 51-100 cm",
             "constraints": {
               "required": false,
               "minimum": 0,
@@ -1068,8 +1065,8 @@
           },
           {
             "name": "nom_gr",
-            "title": "Nombre de pieds dans la classe d'hauteur >100 cm",
             "type": "integer",
+            "title": "Nombre de pieds dans la classe d'hauteur >100 cm",
             "constraints": {
               "required": false,
               "minimum": 0,
@@ -1077,18 +1074,19 @@
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -1096,9 +1094,7 @@
     },
     {
       "name": "ind",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "ind.parquet",
       "schema": {
         "fields": [
           {
@@ -1111,7 +1107,11 @@
           },
           {
             "name": "zon",
+            "type": "string",
             "title": "Zone",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -1129,15 +1129,15 @@
                 "value": "4",
                 "label": "Zone D (Nord-Ouest)"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "etat",
+            "type": "string",
             "title": "Etat",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -1151,15 +1151,15 @@
                 "value": "3",
                 "label": "Bois mort au sol"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "decomp",
+            "type": "string",
             "title": "Stade de décomposition",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -1181,15 +1181,15 @@
                 "value": "5",
                 "label": "Bois vermoulu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "ess_arb",
+            "type": "string",
             "title": "Essence",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -2211,41 +2211,37 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "autr",
-            "title": "Autre : merci de préciser laquelle",
             "type": "string",
+            "title": "Autre : merci de préciser laquelle",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "haut",
-            "title": "Hauteur (en m)",
             "type": "number",
+            "title": "Hauteur (en m)",
             "constraints": {
               "required": true,
-              "maximum": 130
+              "maximum": 130.0
             }
           },
           {
             "name": "longueur",
-            "title": "Longueur (en m)",
             "type": "number",
+            "title": "Longueur (en m)",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "tig",
-            "title": "Nombre de tiges (≥ 5 cm)",
             "type": "integer",
+            "title": "Nombre de tiges (≥ 5 cm)",
             "constraints": {
               "required": true,
               "minimum": 0
@@ -2253,111 +2249,115 @@
           },
           {
             "name": "dhp1",
-            "title": "DHP 1 (en cm)",
             "type": "number",
+            "title": "DHP 1 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp2",
-            "title": "DHP 2 (en cm)",
             "type": "number",
+            "title": "DHP 2 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp3",
-            "title": "DHP 3 (en cm)",
             "type": "number",
+            "title": "DHP 3 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp4",
-            "title": "DHP 4 (en cm)",
             "type": "number",
+            "title": "DHP 4 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp5",
-            "title": "DHP 5 (en cm)",
             "type": "number",
+            "title": "DHP 5 (en cm)",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "dhp6",
-            "title": "DHP 6 (en cm)",
             "type": "number",
+            "title": "DHP 6 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp7",
-            "title": "DHP 7 (en cm)",
             "type": "number",
+            "title": "DHP 7 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp8",
-            "title": "DHP 8 (en cm)",
             "type": "number",
+            "title": "DHP 8 (en cm)",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "dhp9",
-            "title": "DHP 9 (en cm)",
             "type": "number",
+            "title": "DHP 9 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp10",
-            "title": "DHP 10 (en cm)",
             "type": "number",
+            "title": "DHP 10 (en cm)",
             "constraints": {
               "required": true,
-              "maximum": 3000
+              "maximum": 3000.0
             }
           },
           {
             "name": "dhp_b",
-            "title": "Diamètre à la base (en cm)",
             "type": "number",
+            "title": "Diamètre à la base (en cm)",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "dhp_e",
-            "title": "Diamètre à l'extrémité (en cm)",
             "type": "number",
+            "title": "Diamètre à l'extrémité (en cm)",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "dmh",
+            "type": "list",
             "title": "Dendromicrohabitats observés",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -2423,25 +2423,22 @@
                 "value": "16",
                 "label": "Sève ou résine"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -2449,9 +2446,7 @@
     },
     {
       "name": "tsbf_001",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "tsbf_001.parquet",
       "schema": {
         "fields": [
           {
@@ -2464,7 +2459,11 @@
           },
           {
             "name": "tax1_tsbf",
+            "type": "string",
             "title": "Taxon",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -2506,23 +2505,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "autr1_tsbf",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax2_tsbf",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -2584,23 +2583,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr2_tsbf",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax3_tsbf",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -2666,50 +2665,47 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr3_tsbf",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "esp_tsbf",
-            "title": "Espèce",
             "type": "string",
+            "title": "Espèce",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "nomb_tsbf",
-            "title": "Nombre d'individus",
             "type": "integer",
+            "title": "Nombre d'individus",
             "constraints": {
               "required": true,
               "minimum": 0
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -2717,9 +2713,7 @@
     },
     {
       "name": "barba_001",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "barba_001.parquet",
       "schema": {
         "fields": [
           {
@@ -2732,7 +2726,11 @@
           },
           {
             "name": "tax1_barbA",
+            "type": "string",
             "title": "Taxon",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -2774,23 +2772,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "autr1_barbA",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax2_barbA",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -2852,23 +2850,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr2_barbA",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax3_barbA",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -2934,50 +2932,47 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "aut31_barbA",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "esp_barbA",
-            "title": "Espèce",
             "type": "string",
+            "title": "Espèce",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "nomb_barbA",
-            "title": "Nombre d'individus",
             "type": "integer",
+            "title": "Nombre d'individus",
             "constraints": {
               "required": true,
               "minimum": 0
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -2985,9 +2980,7 @@
     },
     {
       "name": "barbb_001",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "barbb_001.parquet",
       "schema": {
         "fields": [
           {
@@ -3000,7 +2993,11 @@
           },
           {
             "name": "tax1_barbB",
+            "type": "string",
             "title": "Taxon",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "0",
@@ -3042,23 +3039,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr1_barbB",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax2_barbB",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -3120,23 +3117,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr2_barbB",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax3_barbB",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -3202,50 +3199,47 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "aut31_barbB",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "esp_barbB",
-            "title": "Espèce",
             "type": "string",
+            "title": "Espèce",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "nomb_barbB",
-            "title": "Nombre d'individus",
             "type": "integer",
+            "title": "Nombre d'individus",
             "constraints": {
               "required": false,
               "minimum": 0
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -3253,9 +3247,7 @@
     },
     {
       "name": "barbc_001",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "barbc_001.parquet",
       "schema": {
         "fields": [
           {
@@ -3268,7 +3260,11 @@
           },
           {
             "name": "tax1_barbC",
+            "type": "string",
             "title": "Taxon",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "0",
@@ -3310,23 +3306,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr1_barbC",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax2_barbC",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -3388,23 +3384,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr2_barbC",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax3_barbC",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -3470,50 +3466,47 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "aut31_barbC",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "esp_barbC",
-            "title": "Espèce",
             "type": "string",
+            "title": "Espèce",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "nomb_barbC",
-            "title": "Nombre d'individus",
             "type": "integer",
+            "title": "Nombre d'individus",
             "constraints": {
               "required": false,
               "minimum": 0
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -3521,9 +3514,7 @@
     },
     {
       "name": "barbd_001",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "barbd_001.parquet",
       "schema": {
         "fields": [
           {
@@ -3536,7 +3527,11 @@
           },
           {
             "name": "tax1_barbD",
+            "type": "string",
             "title": "Taxon",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "0",
@@ -3578,23 +3573,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr1_barbD",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax2_barbD",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -3656,23 +3651,23 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "autr2_barbD",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "tax3_barbD",
+            "type": "string",
             "title": "Merci de préciser",
+            "constraints": {
+              "required": false
+            },
             "categories": [
               {
                 "value": "1",
@@ -3738,50 +3733,47 @@
                 "value": "999",
                 "label": "Inconnu"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": false
-            }
+            ]
           },
           {
             "name": "aut31_barbD",
-            "title": "Autre : merci de préciser",
             "type": "string",
+            "title": "Autre : merci de préciser",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "esp_barbD",
-            "title": "Espèce",
             "type": "string",
+            "title": "Espèce",
             "constraints": {
               "required": false
             }
           },
           {
             "name": "nomb_barbD",
-            "title": "Nombre d'individus",
             "type": "integer",
+            "title": "Nombre d'individus",
             "constraints": {
               "required": false,
               "minimum": 0
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
+        "primaryKey": [
+          "_id"
+        ],
         "foreignKeys": [
           {
             "fields": [
               "parent_id"
             ],
             "reference": {
-              "resource": "inventaire_id",
               "fields": [
                 "_id"
-              ]
+              ],
+              "resource": "inventaire_id"
             }
           }
         ]
@@ -3789,9 +3781,7 @@
     },
     {
       "name": "inventaire_id",
-      "path": "db.sqlite",
-      "format": "sqlite",
-      "dialect": {},
+      "path": "inventaire_id.parquet",
       "schema": {
         "fields": [
           {
@@ -3807,15 +3797,19 @@
           },
           {
             "name": "nom",
-            "title": "Nom du chef d'équipe",
             "type": "string",
+            "title": "Nom du chef d'équipe",
             "constraints": {
               "required": true
             }
           },
           {
             "name": "for",
+            "type": "string",
             "title": "Nom de la forêt",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -3833,16 +3827,12 @@
                 "value": "4",
                 "label": "Takkite"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "cod",
-            "title": "Code de la placette",
             "type": "integer",
+            "title": "Code de la placette",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3851,7 +3841,11 @@
           },
           {
             "name": "typ_inv",
+            "type": "string",
             "title": "Type d'inventaire",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -3861,16 +3855,12 @@
                 "value": "1",
                 "label": "Inventaire forestier et pédologique"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "veg",
-            "title": "Couvert végétal",
             "type": "integer",
+            "title": "Couvert végétal",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3879,7 +3869,11 @@
           },
           {
             "name": "eros_eo",
+            "type": "string",
             "title": "Signes d'érosion éolienne",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -3897,15 +3891,15 @@
                 "value": "3",
                 "label": "Erosion importante"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "eros_hy",
+            "type": "string",
             "title": "Signes d'érosion hydrique",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -3923,16 +3917,12 @@
                 "value": "3",
                 "label": "Erosion importante"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "pent",
-            "title": "Pente (en °)",
             "type": "integer",
+            "title": "Pente (en °)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3941,8 +3931,8 @@
           },
           {
             "name": "beer1",
-            "title": "Vitesse d'infiltration 1 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 1 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3951,8 +3941,8 @@
           },
           {
             "name": "beer2",
-            "title": "Vitesse d'infiltration 2 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 2 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3961,8 +3951,8 @@
           },
           {
             "name": "beer3",
-            "title": "Vitesse d'infiltration 3 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 3 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3971,8 +3961,8 @@
           },
           {
             "name": "beer4",
-            "title": "Vitesse d'infiltration 4 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 4 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3981,8 +3971,8 @@
           },
           {
             "name": "beer5",
-            "title": "Vitesse d'infiltration 5 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 5 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -3991,8 +3981,8 @@
           },
           {
             "name": "beer6",
-            "title": "Vitesse d'infiltration 6 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 6 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -4001,8 +3991,8 @@
           },
           {
             "name": "beer7",
-            "title": "Vitesse d'infiltration 7 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 7 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -4011,8 +4001,8 @@
           },
           {
             "name": "beer8",
-            "title": "Vitesse d'infiltration 8 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 8 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -4021,8 +4011,8 @@
           },
           {
             "name": "beer9",
-            "title": "Vitesse d'infiltration 9 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 9 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -4031,8 +4021,8 @@
           },
           {
             "name": "beer10",
-            "title": "Vitesse d'infiltration 10 (en sec)",
             "type": "integer",
+            "title": "Vitesse d'infiltration 10 (en sec)",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -4041,7 +4031,11 @@
           },
           {
             "name": "slak1",
+            "type": "string",
             "title": "Conservation agrégat 1",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -4067,15 +4061,15 @@
                 "value": "5",
                 "label": "c > 75 % après 5 immersions"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "slak2",
+            "type": "string",
             "title": "Conservation agrégat 2",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -4101,15 +4095,15 @@
                 "value": "5",
                 "label": "c > 75 % après 5 immersions"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "slak3",
+            "type": "string",
             "title": "Conservation agrégat 3",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "0",
@@ -4135,16 +4129,12 @@
                 "value": "5",
                 "label": "c > 75 % après 5 immersions"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "hor",
-            "title": "Nombre d'horizons visibles",
             "type": "integer",
+            "title": "Nombre d'horizons visibles",
             "constraints": {
               "required": true,
               "minimum": 0,
@@ -4153,8 +4143,8 @@
           },
           {
             "name": "ep1",
-            "title": "Epaisseur de l'horizon 1 (en mm)",
             "type": "integer",
+            "title": "Epaisseur de l'horizon 1 (en mm)",
             "constraints": {
               "required": true,
               "minimum": 0
@@ -4162,7 +4152,11 @@
           },
           {
             "name": "not1",
+            "type": "string",
             "title": "Qualité de la structure de l'horizon 1",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -4184,16 +4178,12 @@
                 "value": "5",
                 "label": "Très compact"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "ep2",
-            "title": "Epaisseur de l'horizon 2 (en mm)",
             "type": "integer",
+            "title": "Epaisseur de l'horizon 2 (en mm)",
             "constraints": {
               "required": true,
               "minimum": 0
@@ -4201,7 +4191,11 @@
           },
           {
             "name": "not2",
+            "type": "string",
             "title": "Qualité de la structure de l'horizon 2",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -4223,16 +4217,12 @@
                 "value": "5",
                 "label": "Très compact"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "ep3",
-            "title": "Epaisseur de l'horizon 3 (en mm)",
             "type": "integer",
+            "title": "Epaisseur de l'horizon 3 (en mm)",
             "constraints": {
               "required": true,
               "minimum": 0
@@ -4240,7 +4230,11 @@
           },
           {
             "name": "not3",
+            "type": "string",
             "title": "Qualité de la structure de l'horizon 3",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -4262,16 +4256,12 @@
                 "value": "5",
                 "label": "Très compact"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "ep4",
-            "title": "Epaisseur de l'horizon 4 (en mm)",
             "type": "integer",
+            "title": "Epaisseur de l'horizon 4 (en mm)",
             "constraints": {
               "required": true,
               "minimum": 0
@@ -4279,7 +4269,11 @@
           },
           {
             "name": "not4",
+            "type": "string",
             "title": "Qualité de la structure de l'horizon 4",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -4301,16 +4295,12 @@
                 "value": "5",
                 "label": "Très compact"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "ep5",
-            "title": "Epaisseur de l'horizon 5 (en mm)",
             "type": "integer",
+            "title": "Epaisseur de l'horizon 5 (en mm)",
             "constraints": {
               "required": true,
               "minimum": 0
@@ -4318,7 +4308,11 @@
           },
           {
             "name": "not5",
+            "type": "string",
             "title": "Qualité de la structure de l'horizon 5",
+            "constraints": {
+              "required": true
+            },
             "categories": [
               {
                 "value": "1",
@@ -4340,25 +4334,22 @@
                 "value": "5",
                 "label": "Très compact"
               }
-            ],
-            "type": "string",
-            "constraints": {
-              "required": true
-            }
+            ]
           },
           {
             "name": "com_001",
-            "title": "Commentaires (optionnel)",
             "type": "string",
+            "title": "Commentaires (optionnel)",
             "constraints": {
               "required": false
             }
           }
         ],
-        "missingValues": [],
-        "primaryKey": "_id",
-        "foreignKeys": []
+        "primaryKey": [
+          "_id"
+        ]
       }
     }
-  ]
+  ],
+  "name": "datapackage.json"
 }
