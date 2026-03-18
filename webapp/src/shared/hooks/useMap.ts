@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 
-// @ts-expect-error No types for the coordo lib
 import { createMap } from "coordo";
 
 import { API_URL } from "@shared/api/client";
