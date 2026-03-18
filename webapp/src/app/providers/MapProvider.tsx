@@ -1,8 +1,7 @@
+import type { createMap } from "coordo";
 import { type ReactNode, useRef, useState } from "react";
 
-import type { createMap } from "coordo";
-
-import { MapContext, type Category } from "@shared/contexts/MapContext";
+import { type Category, MapContext } from "@shared/contexts/MapContext";
 
 interface MapProviderProps {
   children: ReactNode;
@@ -14,7 +13,7 @@ export function MapProvider({ children }: MapProviderProps) {
   const [forests, setForests] = useState<Category[]>([]);
 
   return (
-    <MapContext value={{ isReady, mapApiRef, forests, setIsReady, setForests }}>
+    <MapContext value={{ forests, isReady, mapApiRef, setForests, setIsReady }}>
       {children}
     </MapContext>
   );

@@ -1,6 +1,5 @@
-import { useContext, useEffect } from "react";
-
 import { createMap } from "coordo";
+import { useContext, useEffect } from "react";
 
 import { API_URL } from "@shared/api/client";
 import { MapContext } from "@shared/contexts/MapContext";
@@ -14,8 +13,8 @@ type MapSettings = {
 };
 
 const DEFAULT_MAP_SETTINGS: MapSettings = {
-  zoom: 3.8,
   center: [34.1246, -23.0758],
+  zoom: 3.8,
 };
 
 export function useMap(containerSelector?: string) {
@@ -27,6 +26,7 @@ export function useMap(containerSelector?: string) {
     DEFAULT_MAP_SETTINGS,
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional init-once effect
   useEffect(() => {
     if (!containerSelector) return;
     const el = document.querySelector(containerSelector);
@@ -36,7 +36,8 @@ export function useMap(containerSelector?: string) {
       context.setIsReady(true);
       // @todo ADD TYPES TO THE LIBRARY
       // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
-      const metadata: any = context.mapApiRef.current?.getLayerMetadata("inventaire");
+      const metadata: any =
+        context.mapApiRef.current?.getLayerMetadata("inventaire");
       const forestField = metadata?.schema?.fields?.find(
         (f: { name: string }) => f.name === "for",
       );
@@ -57,8 +58,8 @@ export function useMap(containerSelector?: string) {
         // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
         context.mapApiRef.current.addEventListener("move", (event: any) => {
           setMapSettings({
-            zoom: event.target.getZoom(),
             center: event.target.getCenter().toArray(),
+            zoom: event.target.getZoom(),
           });
         });
       } catch (error) {
