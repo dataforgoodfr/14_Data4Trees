@@ -3,16 +3,19 @@ FROM python:3.14-slim-bookworm
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     git \
-    gdal-bin \
-    libgdal-dev \
-    libsqlite3-mod-spatialite && \
+    curl \
+    unzip && \
     rm -rf /var/lib/apt/lists/*
 
-ENV VIRTUAL_ENV=/opt/venv
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install
+
+ENV VIRTUAL_ENV=opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-WORKDIR /app
+WORKDIR /app/
 
 COPY . /app
 

@@ -10,7 +10,6 @@ export const fetchToken = async (username: string, password: string) => {
     throw new Error(`Erreur de connexion: ${res.status} ${res.statusText}`);
   }
   const data = await res.json();
-  console.log("Token reçu:", data);
   return data.access;
 };
 
