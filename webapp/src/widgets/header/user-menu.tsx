@@ -1,4 +1,4 @@
-import { LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
+import { DatabaseIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,8 +13,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@ui/dropdown-menu";
+
+import { LanguageSelector } from "./LanguageSelector";
+import { ModeToggle } from "./ModeToggle";
 
 export const UserMenu: FC = () => {
   const { t } = useTranslation("translations");
@@ -23,51 +27,69 @@ export const UserMenu: FC = () => {
   const { isAuthenticated, logout, token } = useAuth();
   const { isLoading, createAdminSession } = useCreateAdminSession(token);
 
-  if (!isAuthenticated) {
-    return (
-      <Button
-        onClick={() => navigate(URLS.LOGIN)}
-        variant="default"
-      >
-        <UserIcon className="h-[1.2rem] w-[1.2rem]" />
-        <span>{t("header.button.login")}</span>
-      </Button>
-    );
-  }
+  const onLogin = () => navigate(URLS.LOGIN);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true}>
         <Button
           className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
-          variant="default"
+          variant="outline"
         >
-          <UserIcon className="h-[1.2rem] w-[1.2rem]" />
-          <span>John Doe</span>
+          <SettingsIcon className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">User menu</span>
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
         align="end"
-        className="bg-background "
+        className="bg-background"
       >
-        <DropdownMenuItem
-          className="gap-sm"
-          disabled={isLoading}
-          onClick={createAdminSession}
-        >
-          <SettingsIcon />
-          {t("header.button.goToAdmin")}
-        </DropdownMenuItem>
+        <LanguageSelector />
 
-        <DropdownMenuItem
-          className="gap-sm"
-          onClick={logout}
-        >
-          <LogOutIcon />
-          {t("header.button.logout")}
-        </DropdownMenuItem>
+        <ModeToggle />
+
+        <DropdownMenuSeparator />
+
+        {isAuthenticated ? (
+          <>
+            <DropdownMenuItem
+              className="gap-sm"
+              disabled={isLoading}
+              onClick={createAdminSession}
+            >
+              <SettingsIcon />
+              {t("header.button.goToAdmin")}
+            </DropdownMenuItem>
+
+            <DropdownMenuItem
+              className="gap-sm"
+              disabled={isLoading}
+              onClick={() => alert("Not implemented yet")}
+            >
+              <DatabaseIcon />
+              See database
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              className="gap-sm"
+              onClick={logout}
+            >
+              <LogOutIcon />
+              {t("header.button.logout")}
+            </DropdownMenuItem>
+          </>
+        ) : (
+          <DropdownMenuItem
+            className="gap-sm"
+            onClick={onLogin}
+          >
+            <UserIcon />
+            {t("header.button.login")}
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,5 +1,3 @@
-import { LanguageSelecor } from "./LanguageSelector";
-import { ModeToggle } from "./ModeToggle";
 import { UserMenu } from "./user-menu";
 
 export function Header() {
@@ -14,8 +12,6 @@ export function Header() {
           />
 
           <div className="flex items-center gap-3">
-            <ModeToggle />
-            <LanguageSelecor />
             <UserMenu />
           </div>
         </div>

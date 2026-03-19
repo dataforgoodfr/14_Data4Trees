@@ -20,8 +20,10 @@
   "header": {
     "button": {
       "goToAdmin": "Admin",
+      "language": "Language",
       "login": "Login",
-      "logout": "Logout"
+      "logout": "Logout",
+      "mode": "Mode"
     },
     "colorModeSelector": {
       "dark": "Dark",
