@@ -17,8 +17,8 @@ import {
   DropdownMenuTrigger,
 } from "@ui/dropdown-menu";
 
-import { LanguageSelector } from "./LanguageSelector";
-import { ModeToggle } from "./ModeToggle";
+import { LanguageSelector } from "./language-selector";
+import { ModeToggle } from "./mode-toggle";
 
 export const UserMenu: FC = () => {
   const { t } = useTranslation("translations");
