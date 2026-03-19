@@ -34,6 +34,7 @@ export const UserMenu: FC = () => {
       <DropdownMenuTrigger asChild={true}>
         <Button
           className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+          size="icon"
           variant="outline"
         >
           <SettingsIcon className="h-[1.2rem] w-[1.2rem]" />

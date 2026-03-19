@@ -1,3 +1,5 @@
+import { DashboardPopover } from "@widgets/DashboardPopover";
+
 import { UserMenu } from "./user-menu";
 
 export function Header() {
@@ -12,6 +14,7 @@ export function Header() {
           />
 
           <div className="flex items-center gap-3">
+            <DashboardPopover dataType="example" />
             <UserMenu />
           </div>
         </div>
