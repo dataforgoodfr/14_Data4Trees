@@ -38,10 +38,8 @@ Le Frontend est en ReactJS + Vite, dans le dossier [webapp](./webapp).
 Il est possible de déployer l'application localement en mode développement, avec:
 
 ```bash
-docker compose up [--build]
+docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up [--build]
 ```
-
-Cette commande va automatiquement charger les fichiers `docker-compose.yaml` et `docker-compose.override.yaml`.
 
 NB: pour installer docker + docker compose, voir [Install Docker Engine](https://docs.docker.com/engine/install/)
 
@@ -49,7 +47,7 @@ NB: pour installer docker + docker compose, voir [Install Docker Engine](https:/
 
 Data4Good utilise [Coolify](https://coolify.io/) pour le déploiement de ses applications en mode staging. Si vous avez un compte sur le Coolify de Data4Good, vous pouvez accéder à la [configuration de l'application de staging de Data4Trees](https://coolify.services.d4g.fr/project/j00ocs0s48wcwsos4so04kck/environment/rkw0kk88808wow0sow0owc8w/application/d00kogcs8kggc088wk0ss8ks).
 
-Le déploiement de staging va utiliser les fichiers `docker-compose.yaml` et `docker-compose.staging.yaml`.
+Le déploiement de staging va utiliser les fichiers `docker/compose.yaml` et `docker/compose.staging.yaml`.
 L'application de staging est disponible à l'adresse: [https://data4trees.services.d4g.fr/](https://data4trees.services.d4g.fr/).
 
 ## Règles de collaboration :
