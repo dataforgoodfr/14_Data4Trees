@@ -1,0 +1,64 @@
+{
+  "layers": [
+    {
+      "id": "satellite",
+      "type": "xyzservices",
+      "provider": "Esri.WorldImagery"
+    },
+    {
+      "id": "villages",
+      "type": "openmaptiles",
+      "layer": "place",
+      "filters": { "class": "village" }
+    },
+    {
+      "id": "towns",
+      "type": "openmaptiles",
+      "layer": "place",
+      "filters": { "class": "town" }
+    },
+    {
+      "id": "boundaries",
+      "type": "openmaptiles",
+      "layer": "boundary",
+      "filters": { "admin_level": 2 },
+      "style": { "paint": { "line-color": "hsl(248,7%,66%)" } }
+    },
+    {
+      "id": "inventaire",
+      "type": "datapackage",
+      "path": "../catalog/inventaire/datapackage.json",
+      "resource": "inventaire_id",
+      "groupby": ["for"],
+      "columns": {
+        "geom": "centroid(gps)",
+        "total_trees": "count(ind.ess_arb)",
+        "richness": "count(unique(ind.ess_arb))",
+        "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))",
+        "soil_structure": "avg((ep1*not1 + ep2*not2 + ep3*not3 + ep4*not4 + ep5*not5) / 250)",
+        "diversity": "shannon(ind.ess_arb) / 5 * 10",
+        "biomass": "sum(0.0673 * pow(ind.dens_bois.value * pow(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4, 2) * ind.haut, 0.976))",
+        "density": "count(1 if ind.etat = 1) / 0.1257",
+        "vertical_distribution": "gini(ind.haut) * 10",
+        "dendro": "list_unique(flatten(list(ind.dmh))) / 16 * 10"
+      },
+      "popup": {
+        "trigger": "click"
+      }
+    }
+  ],
+  "controls": [
+    {
+      "type": "compass",
+      "position": "top-left"
+    },
+    {
+      "type": "layer",
+      "position": "top-right"
+    },
+    {
+      "type": "scale",
+      "position": "bottom-left"
+    }
+  ]
+}
