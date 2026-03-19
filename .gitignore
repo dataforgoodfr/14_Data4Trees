@@ -4,6 +4,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Data Folder
+data/
+catalog/
+
 # C extensions
 *.so
 

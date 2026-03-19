@@ -42,12 +42,22 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-### Données cartographiques
+### Map Data
 
-Le catalogue SpatiaLite (`data/catalog/inventaire_id/`) est déjà inclus dans le repo. Pour le regénérer à partir des fichiers Excel :
+To generate the data Catalog (`catalog/inventaire_id/`), first you must download data from our secured S3 storage server with the following command:
 
 ```bash
-coordo load data/20250213_Inventaire_ID_QuestionnaireK.xlsx data/20251017_Inventaire_ID_Donnees.xlsx --output data/catalog/inventaire_id
+AWS_ACCESS_KEY_ID=<access_key_id> AWS_SECRET_ACCESS_KEY=<secret_access_key> aws s3 sync s3://coordonnees-upload ./data --delete --endpoint-url https://s3.fr-par.scw.cloud --region fr-par
+```
+You can get the keys from the Tech Leads.
+
+Then generate the catalog using coordo-cli command like this:   
+
+```bash
+coordo load kobotoolbox data/20250213_Inventaire_ID_QuestionnaireK.xlsx data/20251017_Inventaire_ID_Donnees.xlsx --package catalog/inventaire
+coordo load file data/dens_bois.csv --package catalog/inventaire
+coordo add-foreignkey ind.ess_arb dens_bois.ess_arb --package catalog/inventaire
+coordo load kobotoolbox data/20240808_EnqueteMenage_CDF_QuestionnaireK.xlsx data/20241007_EnqueteMenage_CDF_Donnees.csv --package catalog/enquete
 ```
 
 ### Launch the backend
