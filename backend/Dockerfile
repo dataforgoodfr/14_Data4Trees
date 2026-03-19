@@ -4,9 +4,12 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     git \
     gdal-bin \
-    libgdal-dev \
-    libsqlite3-mod-spatialite && \
+    libgdal-dev && \
     rm -rf /var/lib/apt/lists/*
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install
 
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
