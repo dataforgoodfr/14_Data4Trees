@@ -51,7 +51,7 @@
   --info: var(--custom-color-blue-light);
   --info-foreground: var(--custom-color-blue-dark);
 
-  --border: #e5e7ebaa;
+  --border: rgba(0, 0, 0, 0.15);
   --input: #ffffff;
   --ring: var(--a4t-color-vert-kelly);
 
