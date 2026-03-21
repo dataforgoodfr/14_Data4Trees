@@ -17,6 +17,13 @@
   "common": {
     "loading": "Loading..."
   },
+  "filters": {
+    "sidebarLayout": {
+      "groupCategory": "Categories",
+      "groupFilters": "Filters",
+      "title": "Filter panel"
+    }
+  },
   "header": {
     "button": {
       "goToAdmin": "Admin",

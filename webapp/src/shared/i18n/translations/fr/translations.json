@@ -17,6 +17,13 @@
   "common": {
     "loading": "Chargement..."
   },
+  "filters": {
+    "sidebarLayout": {
+      "groupCategory": "Catégories",
+      "groupFilters": "Filtres",
+      "title": "Panneau de filtrage"
+    }
+  },
   "header": {
     "button": {
       "goToAdmin": "Espace Admin",

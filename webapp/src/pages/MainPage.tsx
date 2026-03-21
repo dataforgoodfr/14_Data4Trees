@@ -23,7 +23,7 @@ export function MainPage() {
       >
         <SidebarProvider>
           <ResizablePanel
-            className="h-full p-4"
+            className="h-full"
             defaultSize={20}
           >
             <MapSidebar />
