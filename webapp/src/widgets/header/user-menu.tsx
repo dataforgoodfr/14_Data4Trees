@@ -69,7 +69,7 @@ export const UserMenu: FC = () => {
               onClick={() => alert("Not implemented yet")}
             >
               <DatabaseIcon />
-              See database
+              {t("header.button.seeDatabase")}
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />

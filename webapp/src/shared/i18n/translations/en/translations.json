@@ -23,7 +23,8 @@
       "language": "Language",
       "login": "Login",
       "logout": "Logout",
-      "mode": "Mode"
+      "mode": "Mode",
+      "seeDatabase": "See Database"
     },
     "colorModeSelector": {
       "dark": "Dark",
