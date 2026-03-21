@@ -29,7 +29,7 @@
   }
 
   * {
-    outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.5);
+    outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.2);
     border-color: var(--border);
   }
 
