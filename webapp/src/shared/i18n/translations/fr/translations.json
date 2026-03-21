@@ -23,7 +23,8 @@
       "language": "Langue",
       "login": "Connexion",
       "logout": "Déconnexion",
-      "mode": "Mode"
+      "mode": "Mode",
+      "seeDatabase": "Voir les données"
     },
     "colorModeSelector": {
       "dark": "Sombre",
