@@ -43,6 +43,7 @@ function useMap(containerSelector: string) {
       // @todo ADD TYPES TO THE LIBRARY
       // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
       const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
+      console.log("metadata", metadata);
       const forestField = metadata?.schema?.fields?.find(
         (field: { name: string }) => field.name === "for",
       );
@@ -91,7 +92,7 @@ export const WidgetMap: FC = () => {
       const root = createRoot(container);
       root.render(
         <BiodiversityIndicator
-          className="w-[300px] max-h-[350px]"
+          className="w-75 max-h-87.5"
           data={properties}
           onClose={() => root.unmount()}
         />,
@@ -116,14 +117,14 @@ export const WidgetMap: FC = () => {
   }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
-    mapApiRef.current?.setLayerFilters("inventaire", {
+    mapApiRef.current?.setLayerFilters({"layerId": "inventaire", "filters": {
       args: [{ property: "for" }, forestId],
       op: "=",
-    });
+    }});
   };
 
   const resetFilter = () => {
-    mapApiRef.current?.setLayerFilters("inventaire", null);
+    mapApiRef.current?.setLayerFilters({ "layerId": "inventaire", "filters": {}});
   };
 
   return (
