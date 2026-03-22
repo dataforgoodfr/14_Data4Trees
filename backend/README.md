@@ -15,6 +15,10 @@ Endpoints
 - `http://localhost:8000/api/maps/style.json`: retourne le style MapLibre (configuration de la carte, sources et layers).
 - `http://localhost:8000/api/maps/layers/<layer_id>`: retourne les données GeoJSON d'un layer. Supporte le POST avec un filtre CQL2-JSON.
 
+>[!IMPORTANT]
+>Si de nouveaux endpoints sont rajoutés, veuillez vérifier que leurs contextes racine sont bien dans la liste autorisée par Traefik pour l'application de staging.
+>Cette liste est contenue dans le `PathRegexp(...)` dans le fichier [compose.staging.yaml](../docker/compose.staging.yaml#L7).
+
 Plus d'infos sur la gestion des tokens:
 https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html
 
