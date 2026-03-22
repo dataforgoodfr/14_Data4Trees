@@ -1,5 +1,5 @@
-import { MapSidebar } from "@widgets/MapSidebar";
 import { WidgetMap } from "@widgets/map";
+import { MapSidebar } from "@widgets/map-sidebar";
 
 import { SidebarProvider } from "@shared/ui/sidebar";
 

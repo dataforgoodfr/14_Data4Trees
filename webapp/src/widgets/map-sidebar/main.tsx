@@ -14,7 +14,7 @@ import {
   FILTER_KIND,
   type FilterKind,
   FilterKindSelector,
-} from "./map-sidebar/filter-kind-selector";
+} from "./filter-kind-selector";
 
 export function MapSidebar() {
   const { t } = useTranslation("translations");
