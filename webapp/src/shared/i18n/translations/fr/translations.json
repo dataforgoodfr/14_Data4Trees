@@ -18,6 +18,27 @@
     "loading": "Chargement..."
   },
   "filters": {
+    "categories": {
+      "actions": {
+        "forestInventary": "Inventaire forestier",
+        "socioEco": "Socio-éco",
+        "title": "Actions menées",
+        "treeDiversity": "Diversité arborée"
+      },
+      "data": {
+        "ground": "Terrain",
+        "model": "Modèle",
+        "satellite": "Satellite",
+        "title": "Type de données"
+      },
+      "system": {
+        "forestPrimary": "Forêt primaire",
+        "forestSecondary": "Forêt secondaire",
+        "mangroveHigh": "Mangrove haute",
+        "mangroveLow": "Mangrove basse",
+        "title": "Écosystème"
+      }
+    },
     "sidebarLayout": {
       "groupCategory": "Catégories",
       "groupFilters": "Filtres",
