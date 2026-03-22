@@ -1,3 +1,4 @@
+import { ListFilterIcon } from "lucide-react";
 import { useState } from "react";
 
 import {
@@ -37,8 +38,9 @@ export function MapSidebar() {
     });
 
   return (
-    <div className="">
-      <h3 className="px-4 py-2 font-semibold">
+    <div>
+      <h3 className="px-4 py-2 font-semibold flex flex-row items-center flex-start gap-sm">
+        <ListFilterIcon size={18} />
         {t("filters.sidebarLayout.title")}
       </h3>
 
