@@ -37,18 +37,20 @@ export function MapSidebar() {
     });
 
   return (
-    <>
+    <div className="">
       <h3 className="px-4 py-2 font-semibold">
         {t("filters.sidebarLayout.title")}
       </h3>
+
       <Separator />
 
-      <div className="px-4 py-2">
-        <FilterKindSelector
-          setValue={setSelectedFilterKind}
-          value={selectedFilterKind}
-        />
+      <FilterKindSelector
+        className="mx-4 my-md"
+        setValue={setSelectedFilterKind}
+        value={selectedFilterKind}
+      />
 
+      <div className="mx-4 mb-md">
         {selectedFilterKind === FILTER_KIND.category && (
           <CategoriesFilters
             setState={setCategoriesState}
@@ -56,6 +58,6 @@ export function MapSidebar() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

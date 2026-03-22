@@ -36,17 +36,17 @@ export const CategoriesCheckboxGroup: FC<CategoriesCheckboxGroupProps> = ({
           >
             <Checkbox
               checked={getIsChecked(item.identifier)}
+              className="cursor-pointer"
               disabled={disabled}
               id={FIELD_HTML_ID(item.identifier)}
               onCheckedChange={getOnCheckedChange(item.identifier)}
             />
 
-            {item.icon}
-
             <FieldLabel
-              className="font-normal"
+              className="font-normal cursor-pointer gap-sm items-center"
               htmlFor={FIELD_HTML_ID(item.identifier)}
             >
+              {item.icon}
               {item.label}
             </FieldLabel>
           </Field>
