@@ -117,14 +117,17 @@ export const WidgetMap: FC = () => {
   }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
-    mapApiRef.current?.setLayerFilters({"layerId": "inventaire", "filters": {
-      args: [{ property: "for" }, forestId],
-      op: "=",
-    }});
+    mapApiRef.current?.setLayerFilters({
+      filters: {
+        args: [{ property: "for" }, forestId],
+        op: "=",
+      },
+      layerId: "inventaire",
+    });
   };
 
   const resetFilter = () => {
-    mapApiRef.current?.setLayerFilters({ "layerId": "inventaire", "filters": {}});
+    mapApiRef.current?.setLayerFilters({ filters: {}, layerId: "inventaire" });
   };
 
   return (
