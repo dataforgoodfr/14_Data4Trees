@@ -26,3 +26,5 @@ const Checkbox = React.forwardRef<
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
+
+export type { CheckedState } from "@radix-ui/react-checkbox";

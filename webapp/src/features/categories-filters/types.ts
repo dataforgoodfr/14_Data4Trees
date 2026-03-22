@@ -7,7 +7,7 @@ export type CategoryIdentifier =
 
 export type CategoryGroupItem = {
   icon?: ReactNode;
-  identifier: string;
+  identifier: CategoryIdentifier;
   label: string;
 };
 

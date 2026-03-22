@@ -1,13 +1,17 @@
 import type { FC } from "react";
 
-import { Checkbox } from "@ui/checkbox";
+import { Checkbox, type CheckedState } from "@ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "@ui/field";
-import type { CategoryGroupItem } from "./types";
+import type { CategoryGroupItem, CategoryIdentifier } from "./types";
 
 type CategoriesCheckboxGroupProps = {
   title: string;
   items: CategoryGroupItem[];
-  isUpdating: boolean;
+  disabled?: boolean;
+  getIsChecked: (identifier: CategoryIdentifier) => boolean;
+  getOnCheckedChange: (
+    identifier: CategoryIdentifier,
+  ) => (nextValue: CheckedState) => void;
 };
 
 const FIELD_HTML_ID = (identifier: string) =>
@@ -16,7 +20,9 @@ const FIELD_HTML_ID = (identifier: string) =>
 export const CategoriesCheckboxGroup: FC<CategoriesCheckboxGroupProps> = ({
   title,
   items,
-  isUpdating,
+  disabled,
+  getIsChecked,
+  getOnCheckedChange,
 }) => {
   return (
     <section>
@@ -29,10 +35,10 @@ export const CategoriesCheckboxGroup: FC<CategoriesCheckboxGroupProps> = ({
             orientation="horizontal"
           >
             <Checkbox
-              checked={true}
-              disabled={isUpdating}
+              checked={getIsChecked(item.identifier)}
+              disabled={disabled}
               id={FIELD_HTML_ID(item.identifier)}
-              onCheckedChange={console.log}
+              onCheckedChange={getOnCheckedChange(item.identifier)}
             />
 
             {item.icon}
