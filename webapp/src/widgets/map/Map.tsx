@@ -91,7 +91,7 @@ export const WidgetMap: FC = () => {
       const root = createRoot(container);
       root.render(
         <BiodiversityIndicator
-          className="w-[300px] max-h-[350px]"
+          className="w-75 max-h-87.5"
           data={properties}
           onClose={() => root.unmount()}
         />,
@@ -116,14 +116,17 @@ export const WidgetMap: FC = () => {
   }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
-    mapApiRef.current?.setLayerFilters("inventaire", {
-      args: [{ property: "for" }, forestId],
-      op: "=",
+    mapApiRef.current?.setLayerFilters({
+      filters: {
+        args: [{ property: "for" }, forestId],
+        op: "=",
+      },
+      layerId: "inventaire",
     });
   };
 
   const resetFilter = () => {
-    mapApiRef.current?.setLayerFilters("inventaire", null);
+    mapApiRef.current?.setLayerFilters({ filters: {}, layerId: "inventaire" });
   };
 
   return (
