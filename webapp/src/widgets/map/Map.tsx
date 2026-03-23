@@ -43,7 +43,6 @@ function useMap(containerSelector: string) {
       // @todo ADD TYPES TO THE LIBRARY
       // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
       const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
-      console.log("metadata", metadata);
       const forestField = metadata?.schema?.fields?.find(
         (field: { name: string }) => field.name === "for",
       );
