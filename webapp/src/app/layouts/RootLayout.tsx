@@ -1,13 +1,12 @@
 import type { FC } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import { Header } from "@widgets/header";
 
 import { useAuth } from "@features/auth";
 
 export const RootLayout: FC = () => {
-  const { isAuthenticated, isAuthLoading, logout } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthLoading } = useAuth();
 
   if (isAuthLoading) {
     return null;
@@ -15,11 +14,7 @@ export const RootLayout: FC = () => {
 
   return (
     <div className="flex flex-col h-svh">
-      <Header
-        isAuthenticated={isAuthenticated}
-        onLogin={() => navigate("/login")}
-        onLogout={() => logout()}
-      />
+      <Header />
       <main className="flex flex-col flex-1">
         <Outlet />
       </main>

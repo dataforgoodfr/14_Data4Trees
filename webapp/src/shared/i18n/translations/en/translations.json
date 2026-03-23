@@ -19,8 +19,12 @@
   },
   "header": {
     "button": {
+      "goToAdmin": "Admin",
+      "language": "Language",
       "login": "Login",
-      "logout": "Logout"
+      "logout": "Logout",
+      "mode": "Mode",
+      "seeDatabase": "See Database"
     },
     "colorModeSelector": {
       "dark": "Dark",

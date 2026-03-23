@@ -35,7 +35,9 @@
               "@lib/**",
               "@i18n",
               ":BLANK_LINE:",
-              "@ui/**"
+              "@ui/**",
+              ":BLANK_LINE:",
+              ":PATH:"
             ]
           }
         },

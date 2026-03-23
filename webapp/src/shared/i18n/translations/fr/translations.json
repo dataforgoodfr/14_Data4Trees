@@ -19,8 +19,12 @@
   },
   "header": {
     "button": {
+      "goToAdmin": "Espace Admin",
+      "language": "Langue",
       "login": "Connexion",
-      "logout": "Déconnexion"
+      "logout": "Déconnexion",
+      "mode": "Mode",
+      "seeDatabase": "Voir les données"
     },
     "colorModeSelector": {
       "dark": "Sombre",

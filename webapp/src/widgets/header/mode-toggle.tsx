@@ -6,12 +6,12 @@ import type { Theme } from "@shared/contexts/ThemeContext";
 import { useTheme } from "@shared/hooks/useTheme";
 import { useTranslation } from "@i18n";
 
-import { Button } from "@ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
 } from "@ui/dropdown-menu";
 
 export const ModeToggle: FC = () => {
@@ -56,42 +56,35 @@ export const ModeToggle: FC = () => {
   ];
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild={true}>
-        <Button
-          className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
-          size="icon"
-          variant="outline"
-        >
-          <div className="h-[16px] w-[16px] relative">
-            {colorModes.map((config) =>
-              config.icon(
-                cx("transition-all absolute", {
-                  "scale-0 rotate-90": config.identifier !== theme,
-                  "scale-100 rotate-0": config.identifier === theme,
-                }),
-              ),
-            )}
-          </div>
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>
+        <div className="h-[16px] w-[16px] relative">
+          {colorModes.map((config) =>
+            config.icon(
+              cx("transition-all absolute h-[16px] w-[16px]", {
+                "scale-0 rotate-90": config.identifier !== theme,
+                "scale-100 rotate-0": config.identifier === theme,
+              }),
+            ),
+          )}
+        </div>
+        {t("header.button.mode")}
+      </DropdownMenuSubTrigger>
 
-      <DropdownMenuContent
-        align="end"
-        className="bg-background "
-      >
-        {colorModes.map((config) => (
-          <DropdownMenuItem
-            className="gap-sm"
-            key={config.identifier}
-            onClick={() => setTheme(config.identifier)}
-          >
-            {config.icon()}
-            {config.label}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      <DropdownMenuPortal>
+        <DropdownMenuSubContent className="bg-background">
+          {colorModes.map((config) => (
+            <DropdownMenuItem
+              className="gap-sm"
+              key={config.identifier}
+              onClick={() => setTheme(config.identifier)}
+            >
+              {config.icon()}
+              {config.label}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuSubContent>
+      </DropdownMenuPortal>
+    </DropdownMenuSub>
   );
 };

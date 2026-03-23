@@ -10,6 +10,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@ui/chart";
+
 import type { FormattedData } from "./format-data";
 
 const radarConfig = {
