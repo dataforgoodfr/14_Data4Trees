@@ -35,13 +35,25 @@ Le Frontend est en ReactJS + Vite, dans le dossier [webapp](./webapp).
 
 ## Docker compose
 
-Il est possible de déployer l'application localement en mode développement, avec:
+Il est possible de déployer l'application localement en mode développement en utilisant docker compose.
 
+>[!TIP]
+>Pour installer docker + docker compose, voir [Install Docker Engine](https://docs.docker.com/engine/install/)
+
+Avant toute chose, il faut créer un fichier `.env` à la racine du projet, qui doit contenir:
+```
+S3_ACCESS_KEY_ID="<key id>"
+S3_SECRET_ACCESS_KEY="<access key>"
+```
+La `key id` et l'`access key` sont à demander aux tech leads.
+
+Il n'y a ensuite plus qu'à tout lancer avec:
 ```bash
-docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up [--build]
+docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up
 ```
 
-NB: pour installer docker + docker compose, voir [Install Docker Engine](https://docs.docker.com/engine/install/)
+Vous pouvez accéder à l'application en tapant `http://localhost:5173/` dans la barre d'adresse de votre navigateur.
+
 
 ## Déploiement
 
