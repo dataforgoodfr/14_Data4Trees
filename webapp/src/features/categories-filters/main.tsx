@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { useTranslation } from "@i18n";
 
 import type { CheckedState } from "@ui/checkbox";
+
 import { CategoriesCheckboxGroup } from "./categories-checkbox-group";
 import type { CategoryFiltersState, CategoryIdentifier } from "./types";
 import { useCategoriesConfig } from "./use-categories-config";

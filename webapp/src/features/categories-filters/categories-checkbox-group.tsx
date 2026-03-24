@@ -2,6 +2,7 @@ import type { FC } from "react";
 
 import { Checkbox, type CheckedState } from "@ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "@ui/field";
+
 import type { CategoryGroupItem, CategoryIdentifier } from "./types";
 
 type CategoriesCheckboxGroupProps = {

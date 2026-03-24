@@ -11,6 +11,7 @@ import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { useTranslation } from "@i18n";
 
 import { Separator } from "@ui/separator";
+
 import {
   FILTER_KIND,
   type FilterKind,
@@ -38,7 +39,7 @@ export function MapSidebar() {
     });
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <h3 className="px-4 py-2 font-semibold flex flex-row items-center flex-start gap-sm">
         <ListFilterIcon size={18} />
         {t("filters.sidebarLayout.title")}
@@ -52,7 +53,7 @@ export function MapSidebar() {
         value={selectedFilterKind}
       />
 
-      <div className="mx-4 mb-md">
+      <div className="px-4 mb-md overflow-y-scroll custom-scrollbar flex-1">
         {selectedFilterKind === FILTER_KIND.category && (
           <CategoriesFilters
             setState={setCategoriesState}
