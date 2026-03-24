@@ -10,6 +10,7 @@ services:
       - DJANGO_SUPERUSER_EMAIL=john.doe@example.com
       - DJANGO_SUPERUSER_PASSWORD=doe
       - WHITENOISE_AUTOREFRESH=True
+    env_file: "../.env"
 
   webapp:
     volumes:
