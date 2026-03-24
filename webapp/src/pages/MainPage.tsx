@@ -1,5 +1,5 @@
-import { MapSidebar } from "@widgets/MapSidebar";
 import { WidgetMap } from "@widgets/map";
+import { MapSidebar } from "@widgets/map-sidebar";
 
 import { SidebarProvider } from "@shared/ui/sidebar";
 
@@ -23,7 +23,7 @@ export function MainPage() {
       >
         <SidebarProvider>
           <ResizablePanel
-            className="h-full p-4"
+            className="h-full"
             defaultSize={20}
           >
             <MapSidebar />

@@ -13,9 +13,9 @@ export const RootLayout: FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-svh">
+    <div className="h-svh flex flex-col">
       <Header />
-      <main className="flex flex-col flex-1">
+      <main className="flex-1 overflow-y-hidden">
         <Outlet />
       </main>
     </div>

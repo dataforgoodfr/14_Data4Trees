@@ -17,6 +17,34 @@
   "common": {
     "loading": "Loading..."
   },
+  "filters": {
+    "categories": {
+      "actions": {
+        "forestInventary": "Forest inventory",
+        "socioEco": "Socio-economic",
+        "title": "Actions taken",
+        "treeDiversity": "Tree diversity"
+      },
+      "data": {
+        "ground": "Field",
+        "model": "Model",
+        "satellite": "Satellite",
+        "title": "Data type"
+      },
+      "system": {
+        "forestPrimary": "Primary forest",
+        "forestSecondary": "Secondary forest",
+        "mangroveHigh": "High mangrove",
+        "mangroveLow": "Low mangrove",
+        "title": "Ecosystem"
+      }
+    },
+    "sidebarLayout": {
+      "groupCategory": "Categories",
+      "groupFilters": "Filters",
+      "title": "Filtering panel"
+    }
+  },
   "header": {
     "button": {
       "goToAdmin": "Admin",
