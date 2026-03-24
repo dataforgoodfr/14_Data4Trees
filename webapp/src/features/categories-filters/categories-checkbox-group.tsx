@@ -45,6 +45,7 @@ export const CategoriesCheckboxGroup: FC<CategoriesCheckboxGroupProps> = ({
 
             <FieldLabel
               className="font-normal cursor-pointer gap-sm items-center"
+              // Ensures that the label is correctly associated with the checkbox input field
               htmlFor={FIELD_HTML_ID(item.identifier)}
             >
               {item.icon}

@@ -25,7 +25,7 @@ export function MapSidebar() {
   );
 
   const [categoriesState, setCategoriesState] =
-    useLocalStorage<CategoryFiltersState>("categories-filers", {
+    useLocalStorage<CategoryFiltersState>("categories-filters", {
       [CATEGORY_IDENTIFIERS.ACTION_DIVERSITY]: true,
       [CATEGORY_IDENTIFIERS.ACTION_INVENTARY]: true,
       [CATEGORY_IDENTIFIERS.ACTION_SOCIO]: true,
@@ -53,7 +53,13 @@ export function MapSidebar() {
         value={selectedFilterKind}
       />
 
-      <div className="px-4 mb-md overflow-y-scroll custom-scrollbar flex-1">
+      <div
+        className="px-4 mb-md overflow-y-scroll custom-scrollbar flex-1"
+        style={{
+          "--scrollbar-thumb": "var(--info-foreground)",
+          "--scrollbar-track": "var(--background)",
+        }}
+      >
         {selectedFilterKind === FILTER_KIND.category && (
           <CategoriesFilters
             setState={setCategoriesState}
