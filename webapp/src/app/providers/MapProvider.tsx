@@ -30,43 +30,40 @@ export function MapProvider({ children }: MapProviderProps) {
     DEFAULT_MAP_SETTINGS,
   );
 
-  const mapContainerRef = useCallback(
-    (node: HTMLElement | null) => {
-      if (!node || mapApiRef.current) return;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: map init should only run once when the container mounts
+  const mapContainerRef = useCallback((node: HTMLElement | null) => {
+    if (!node || mapApiRef.current) return;
 
-      const handleReady = () => {
-        setIsReady(true);
-        // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
-        const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
-        const forestField = metadata?.schema?.fields?.find(
-          (f: { name: string }) => f.name === "for",
-        );
-        if (forestField?.categories) setForests(forestField.categories);
-      };
+    const handleReady = () => {
+      setIsReady(true);
+      // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
+      const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
+      const forestField = metadata?.schema?.fields?.find(
+        (f: { name: string }) => f.name === "for",
+      );
+      if (forestField?.categories) setForests(forestField.categories);
+    };
 
-      node.addEventListener("map:ready", handleReady);
+    node.addEventListener("map:ready", handleReady);
 
-      try {
-        mapApiRef.current = createMap(`#${node.id}`, STYLE_URL, {
-          center: mapSettings.center,
-          zoom: mapSettings.zoom,
+    try {
+      mapApiRef.current = createMap(`#${node.id}`, STYLE_URL, {
+        center: mapSettings.center,
+        zoom: mapSettings.zoom,
+      });
+      // biome-ignore lint/suspicious/noExplicitAny : debug only
+      (window as any).__map__ = mapApiRef.current?.mapInstance;
+      // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
+      mapApiRef.current.addEventListener("move", (event: any) => {
+        setMapSettings({
+          center: event.target.getCenter().toArray(),
+          zoom: event.target.getZoom(),
         });
-        // biome-ignore lint/suspicious/noExplicitAny : debug only
-        (window as any).__map__ = mapApiRef.current?.mapInstance;
-        // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
-        mapApiRef.current.addEventListener("move", (event: any) => {
-          setMapSettings({
-            center: event.target.getCenter().toArray(),
-            zoom: event.target.getZoom(),
-          });
-        });
-      } catch (error) {
-        console.error("Erreur lors de l'initialisation de la carte:", error);
-      }
-    },
-    // biome-ignore lint/correctness/useExhaustiveDependencies: map init should only run once when the container mounts
-    [],
-  );
+      });
+    } catch (error) {
+      console.error("Erreur lors de l'initialisation de la carte:", error);
+    }
+  }, []);
 
   return (
     <MapContext
