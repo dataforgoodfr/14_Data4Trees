@@ -27,7 +27,7 @@
     {
       "id": "inventaire",
       "type": "datapackage",
-      "path": "../catalog/inventaire/datapackage.json",
+      "path": "../catalog/inventaire",
       "resource": "inventaire_id",
       "groupby": ["for"],
       "columns": {

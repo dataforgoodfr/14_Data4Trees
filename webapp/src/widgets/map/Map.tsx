@@ -9,7 +9,7 @@ import {
 import { useMap } from "@shared/hooks/useMap";
 
 export const WidgetMap: FC = () => {
-  const { isReady, mapApiRef, forests } = useMap("#map");
+  const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
@@ -62,6 +62,7 @@ export const WidgetMap: FC = () => {
       <div
         className="w-full h-full"
         id="map"
+        ref={mapContainerRef}
       ></div>
       {!isReady && (
         <div className="map-loader absolute inset-0 z-50 flex items-center justify-center bg-background/80">
