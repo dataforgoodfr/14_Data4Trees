@@ -29,7 +29,7 @@
       "type": "datapackage",
       "path": "../catalog/inventaire",
       "resource": "inventaire_id",
-      "groupby": ["for"],
+      "groupby": ["cod"],
       "columns": {
         "geom": "centroid(gps)",
         "total_trees": "count(ind.ess_arb)",
