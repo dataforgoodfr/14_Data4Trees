@@ -4,8 +4,21 @@ import { UNITS, useFormatterWithUnit } from "../utils";
 
 export type BiodiversityData = {
   for: string;
+  cod: number;
+  total_trees: number;
+  biomass_volume: number;
+  tree_density: number;
   richness: number;
-  dominant_height: number;
+  epf_tree_density: number;
+  epf_necro_biomass_ratio: number;
+  epf_tree_diversity: number;
+  epf_spatial_distribution: number;
+  epf_diameter_distribution: number;
+  epf_vertical_distribution: number;
+  epf_dominant_height: number;
+  epf_microhabitats: number;
+  soil_structure: number;
+  soil_composition: number;
 };
 
 /**
@@ -16,8 +29,8 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
 
   return {
     biomass: {
-      density: formatWithUnit(120, UNITS.individualPerHectare), // replace hardcoded value
-      volume: formatWithUnit(5, UNITS.tonPerHectare), // replace hardcoded value
+      density: formatWithUnit(data.tree_density, UNITS.individualPerHectare),
+      volume: formatWithUnit(data.biomass_volume, UNITS.tonPerHectare),
     },
     date: Intl.DateTimeFormat(i18nInstance.language, {
       dateStyle: "short",
@@ -25,24 +38,24 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
     // replace hardcoded value
     forestPotentialLevel: {
       benef: {
-        density: 70,
-        diameterDistribution: 22,
-        diversity: data.richness,
-        masterHeight: data.dominant_height,
-        microhabitat: 2,
-        ratioDeathmassBiomass: 85,
-        spatialDistribution: 43,
-        verticalDistribution: 67,
+        density: data.epf_tree_density,
+        ratioDeathmassBiomass: data.epf_necro_biomass_ratio,
+        diversity: data.epf_tree_diversity,
+        spatialDistribution: data.epf_spatial_distribution,
+        diameterDistribution: data.epf_diameter_distribution,
+        verticalDistribution: data.epf_vertical_distribution,
+        dominantHeight: data.epf_dominant_height,
+        microhabitat: data.epf_microhabitats,
       },
       temoin: {
         density: 80,
-        diameterDistribution: 32,
-        diversity: 47,
-        masterHeight: 98,
-        microhabitat: 22,
         ratioDeathmassBiomass: 45,
+        diversity: 47,
         spatialDistribution: 39,
+        diameterDistribution: 32,
         verticalDistribution: 67,
+        dominantHeight: 98,
+        microhabitat: 22,
       },
     },
     // replace hardcoded value
@@ -54,10 +67,10 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon2: 23,
       speciesRichnessTaxon3: 24,
     },
-    title: "Point #se-4", // to replace
+    title: `Placette n°${data.cod}`,
     treeDiversity: {
-      shannon: 1.1, // replace hardcoded value
-      speciesRichness: formatWithUnit(1257, UNITS.speciesCount), // replace hardcoded value
+      relative_abundance: 1, // replace hardcoded value
+      speciesRichness: data.richness,
     },
   };
 };

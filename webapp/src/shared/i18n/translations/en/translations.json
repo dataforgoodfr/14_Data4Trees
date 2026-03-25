@@ -72,7 +72,7 @@
           "density": "Tree density",
           "diameterDistribution": "Diameter distribution",
           "diversity": "Tree diversity",
-          "masterHeight": "Dominant height",
+          "dominantHeight": "Dominant height",
           "microhabitat": "Dendro-microhabitats",
           "ratioDeathmassBiomass": "Deadwood/biomass ratio",
           "spatialDistribution": "Spatial distribution",
@@ -89,7 +89,7 @@
           "title": "Indicator Species"
         },
         "treeDiversity": {
-          "shannon": "Shannon index",
+          "relativeAbundance": "Relative abundance",
           "speciesRichness": "Species richness",
           "title": "Tree Diversity"
         }
