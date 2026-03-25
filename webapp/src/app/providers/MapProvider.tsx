@@ -64,13 +64,20 @@ export function MapProvider({ children }: MapProviderProps) {
         console.error("Erreur lors de l'initialisation de la carte:", error);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: map init should only run once when the container mounts
     [],
   );
 
   return (
     <MapContext
-      value={{ forests, isReady, mapApiRef, mapContainerRef, setForests, setIsReady }}
+      value={{
+        forests,
+        isReady,
+        mapApiRef,
+        mapContainerRef,
+        setForests,
+        setIsReady,
+      }}
     >
       {children}
     </MapContext>
