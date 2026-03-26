@@ -104,6 +104,7 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
       },
     ];
 
+  console.log("Chart data:", chartData);
   return (
     <Card>
       <CardContent className="p-2 mx-2">
@@ -124,12 +125,12 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
               stroke="var(--color-benef)"
               {...radarConfig}
             />
-            {/*<Radar
+            {<Radar
               dataKey="temoin"
               fill="var(--color-temoin)"
               stroke="var(--color-temoin)"
               {...radarConfig}
-            />*/}
+            />}
           </RadarChart>
         </ChartContainer>
       </CardContent>
