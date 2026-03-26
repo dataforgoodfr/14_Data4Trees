@@ -58,7 +58,6 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
   indicatorKeys.forEach((key) => {
     const value = data[key];
     data[key] = precise(value) as BiodiversityData[typeof key];
-    console.log(`Formatted ${key}: ${data[key]} , ${typeof data[key]}`);
   });
 
   return {
@@ -91,7 +90,7 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
         verticalDistribution: 2,
       },
     },
-    // replace hardcoded value
+    // replace hardcoded value when data will be available
     indicatorSpecies: {
       abundanceTaxon1: 43,
       abundanceTaxon2: 56,
@@ -100,9 +99,9 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon2: 23,
       speciesRichnessTaxon3: 24,
     },
-    title: `Placette n°${data.cod} dans la forêt ${forests.find((f) => f.value === data.for)?.label || data.for}`,
+    title: `Placette n°${data.cod} dans la forêt ${forests.find((f) => f.value === data.for)?.label || "n°" + data.for}`,
     treeDiversity: {
-      relative_abundance: 1, // replace hardcoded value
+      relative_abundance: 1, // replace hardcoded value when data will be available
       speciesRichness: data.richness,
     },
   };
