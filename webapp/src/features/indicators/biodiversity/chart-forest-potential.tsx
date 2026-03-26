@@ -125,12 +125,14 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
               stroke="var(--color-benef)"
               {...radarConfig}
             />
-            {<Radar
-              dataKey="temoin"
-              fill="var(--color-temoin)"
-              stroke="var(--color-temoin)"
-              {...radarConfig}
-            />}
+            {
+              <Radar
+                dataKey="temoin"
+                fill="var(--color-temoin)"
+                stroke="var(--color-temoin)"
+                {...radarConfig}
+              />
+            }
           </RadarChart>
         </ChartContainer>
       </CardContent>

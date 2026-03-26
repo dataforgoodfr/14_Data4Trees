@@ -27,34 +27,34 @@ type NumericKeys<T> = {
 }[keyof T];
 
 const indicatorKeys: NumericKeys<BiodiversityData>[] = [
-    "biomass_volume",
-    "tree_density",
-    "richness",
-    "epf_tree_density",
-    "epf_necro_biomass_ratio",
-    "epf_tree_diversity",
-    "epf_spatial_distribution",
-    "epf_diameter_distribution",
-    "epf_vertical_distribution",
-    "epf_dominant_height",
-    "epf_microhabitats",
-    "soil_structure",
-    "soil_composition",
+  "biomass_volume",
+  "tree_density",
+  "richness",
+  "epf_tree_density",
+  "epf_necro_biomass_ratio",
+  "epf_tree_diversity",
+  "epf_spatial_distribution",
+  "epf_diameter_distribution",
+  "epf_vertical_distribution",
+  "epf_dominant_height",
+  "epf_microhabitats",
+  "soil_structure",
+  "soil_composition",
 ];
 
 const forests = [
-  { value: "1", label: "Djilor" },
-  { value: "2", label: "Malka" },
-  { value: "3", label: "Samba Dia" },
-  { value: "4", label: "Takkite" },
-]
+  { label: "Djilor", value: "1" },
+  { label: "Malka", value: "2" },
+  { label: "Samba Dia", value: "3" },
+  { label: "Takkite", value: "4" },
+];
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
   const { formatWithUnit } = useFormatterWithUnit();
-  
+
   indicatorKeys.forEach((key) => {
     const value = data[key];
     data[key] = precise(value) as BiodiversityData[typeof key];
@@ -72,23 +72,23 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
     forestPotentialLevel: {
       benef: {
         density: data.epf_tree_density,
-        ratioDeathmassBiomass: data.epf_necro_biomass_ratio,
-        diversity: data.epf_tree_diversity,
-        spatialDistribution: data.epf_spatial_distribution,
         diameterDistribution: data.epf_diameter_distribution,
-        verticalDistribution: data.epf_vertical_distribution,
+        diversity: data.epf_tree_diversity,
         dominantHeight: data.epf_dominant_height,
         microhabitat: data.epf_microhabitats,
+        ratioDeathmassBiomass: data.epf_necro_biomass_ratio,
+        spatialDistribution: data.epf_spatial_distribution,
+        verticalDistribution: data.epf_vertical_distribution,
       },
       temoin: {
         density: 0.02,
-        ratioDeathmassBiomass: 1,
-        diversity: 1,
-        spatialDistribution: 1,
         diameterDistribution: 3,
-        verticalDistribution: 2,
+        diversity: 1,
         dominantHeight: 4,
         microhabitat: 0.5,
+        ratioDeathmassBiomass: 1,
+        spatialDistribution: 1,
+        verticalDistribution: 2,
       },
     },
     // replace hardcoded value
