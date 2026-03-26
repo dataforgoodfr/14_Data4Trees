@@ -19,7 +19,7 @@ export const WidgetMap: FC = () => {
       const root = createRoot(container);
       root.render(
         <BiodiversityIndicator
-          className="w-[300px] max-h-[350px]"
+          className="w-75 max-h-87.5"
           data={properties}
           onClose={() => root.unmount()}
         />,

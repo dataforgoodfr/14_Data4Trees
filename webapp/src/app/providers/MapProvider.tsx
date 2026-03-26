@@ -51,8 +51,10 @@ export function MapProvider({ children }: MapProviderProps) {
           center: mapSettings.center,
           zoom: mapSettings.zoom,
         });
-        // biome-ignore lint/suspicious/noExplicitAny : debug only
-        (window as any).__map__ = mapApiRef.current?.mapInstance;
+        if (import.meta.env.DEV) {
+          // biome-ignore lint/suspicious/noExplicitAny : debug only
+          (window as any).__map__ = mapApiRef.current?.mapInstance;
+        }
         // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
         mapApiRef.current.addEventListener("move", (event: any) => {
           setMapSettings({
