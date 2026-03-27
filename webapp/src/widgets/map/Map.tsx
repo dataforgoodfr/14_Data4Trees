@@ -1,5 +1,4 @@
-import { createMap } from "coordo";
-import { type FC, useEffect, useRef, useState } from "react";
+import { type FC, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 
 import {
@@ -7,81 +6,10 @@ import {
   BiodiversityIndicator,
 } from "@features/indicators/biodiversity";
 
-import { API_URL } from "@shared/api/client";
-import { useLocalStorage } from "@shared/hooks/use-local-storage";
-
-const STYLE_URL = `${API_URL}/maps/style.json`;
-
-type Category = { value: string; label: string };
-
-type MapSettings = {
-  zoom: number;
-  center: [number, number];
-};
-
-// The default settings are set to show africa and madagascar on the map
-const DEFAULT_MAP_SETTINGS: MapSettings = {
-  center: [34.1246, -23.0758],
-  zoom: 3.8,
-};
-
-function useMap(containerSelector: string) {
-  const [isReady, setIsReady] = useState(false);
-  const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
-  const [forests, setForests] = useState<Category[]>([]);
-  const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
-    "map-settings",
-    DEFAULT_MAP_SETTINGS,
-  );
-
-  useEffect(() => {
-    const el = document.querySelector(containerSelector);
-    if (!el) return;
-
-    const handleReady = () => {
-      setIsReady(true);
-      // @todo ADD TYPES TO THE LIBRARY
-      // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
-      const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
-      const forestField = metadata?.schema?.fields?.find(
-        (field: { name: string }) => field.name === "for",
-      );
-      if (forestField?.categories) {
-        setForests(forestField.categories);
-      }
-    };
-
-    el.addEventListener("map:ready", handleReady);
-
-    if (!mapApiRef.current) {
-      try {
-        mapApiRef.current = createMap(containerSelector, STYLE_URL, {
-          center: mapSettings.center,
-          zoom: mapSettings.zoom,
-        });
-
-        // Update map settings
-        mapApiRef.current.addEventListener("move", (event) => {
-          setMapSettings({
-            center: event.target.getCenter().toArray(),
-            zoom: event.target.getZoom(),
-          });
-        });
-      } catch (error) {
-        console.error("Erreur lors de l'initialisation de la carte:", error);
-      }
-    }
-
-    return () => {
-      el.removeEventListener("map:ready", handleReady);
-    };
-  }, [containerSelector, mapSettings, setMapSettings]);
-
-  return { forests, isReady, mapApiRef };
-}
+import { useMap } from "@shared/hooks/useMap";
 
 export const WidgetMap: FC = () => {
-  const { isReady, mapApiRef, forests } = useMap("#map");
+  const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
@@ -117,16 +45,16 @@ export const WidgetMap: FC = () => {
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters({
-      filters: {
-        args: [{ property: "for" }, forestId],
-        op: "=",
-      },
+      filters: { args: [{ property: "for" }, forestId], op: "=" },
       layerId: "inventaire",
     });
   };
 
   const resetFilter = () => {
-    mapApiRef.current?.setLayerFilters({ filters: {}, layerId: "inventaire" });
+    mapApiRef.current?.setLayerFilters({
+      filters: null,
+      layerId: "inventaire",
+    });
   };
 
   return (
@@ -134,6 +62,7 @@ export const WidgetMap: FC = () => {
       <div
         className="w-full h-full"
         id="map"
+        ref={mapContainerRef}
       ></div>
       {!isReady && (
         <div className="map-loader absolute inset-0 z-50 flex items-center justify-center bg-background/80">
