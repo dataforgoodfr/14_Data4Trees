@@ -1,10 +1,7 @@
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
-import {
-  CATEGORY_IDENTIFIERS,
-  type CategoriesFiltersState,
-  parseLayerId,
-} from "@shared/api/categories-filters";
+import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
+
 import { API_URL } from "@shared/api/client";
 import { type Category, MapContext } from "@shared/contexts/MapContext";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
@@ -39,19 +36,12 @@ export function MapProvider({ children }: MapProviderProps) {
     DEFAULT_MAP_SETTINGS,
   );
 
-  const [categoriesFilters, setCategoriesFilters] =
-    useLocalStorage<CategoriesFiltersState>("categories-filters", {
-      [CATEGORY_IDENTIFIERS.ACTION_DIVERSITY]: true,
-      [CATEGORY_IDENTIFIERS.ACTION_INVENTARY]: true,
-      [CATEGORY_IDENTIFIERS.ACTION_SOCIO]: true,
-      [CATEGORY_IDENTIFIERS.DATA_GROUND]: true,
-      [CATEGORY_IDENTIFIERS.DATA_MODEL]: true,
-      [CATEGORY_IDENTIFIERS.DATA_SATELLITE]: true,
-      [CATEGORY_IDENTIFIERS.SYSTEM_FOREST_PRIMARY]: true,
-      [CATEGORY_IDENTIFIERS.SYSTEM_FOREST_SECONDARY]: true,
-      [CATEGORY_IDENTIFIERS.SYSTEM_MANGROVE_HIGH]: true,
-      [CATEGORY_IDENTIFIERS.SYSTEM_MANGROVE_LOW]: true,
-    });
+  const {
+    addCategoriesFiltersEventListener,
+    categoriesFilters,
+    setCategoriesFilters,
+    syncInitialCategoriesFilters,
+  } = useCategoriesFilters();
 
   // Callback ref pattern — called by React when the DOM node mounts/unmounts.
   // See: https://dev.to/gilfink/quick-tip-using-callback-refs-in-react-4gef
@@ -71,46 +61,15 @@ export function MapProvider({ children }: MapProviderProps) {
       }
 
       // On first mount, sync the map state with the local storage state of "categories-filters"
-      Object.entries(categoriesFilters).forEach(([identifier, isActive]) => {
-        const layerId = parseLayerId(identifier);
-        if (!layerId) {
-          return;
-        }
-
-        if (isActive) {
-          mapApiRef?.current?.showLayer(layerId);
-        } else {
-          mapApiRef?.current?.hideLayer(layerId);
-        }
+      syncInitialCategoriesFilters({
+        hideLayer: mapApiRef.current?.hideLayer,
+        showLayer: mapApiRef.current?.showLayer,
       });
     };
 
     node.addEventListener(EVENTS.MAP_READY, handleReady);
 
-    Object.values(CATEGORY_IDENTIFIERS).forEach((identifier) => {
-      const layerId = parseLayerId(identifier);
-      if (!layerId) {
-        return;
-      }
-
-      node.addEventListener(EVENTS.LAYER_SHOW(layerId), (e) => {
-        setCategoriesFilters((prev) => {
-          return {
-            ...prev,
-            [identifier]: true,
-          };
-        });
-      });
-
-      node.addEventListener(EVENTS.LAYER_HIDE(layerId), (e) => {
-        setCategoriesFilters((prev) => {
-          return {
-            ...prev,
-            [identifier]: false,
-          };
-        });
-      });
-    });
+    addCategoriesFiltersEventListener(node);
 
     try {
       mapApiRef.current = createMap(`#${node.id}`, STYLE_URL, {

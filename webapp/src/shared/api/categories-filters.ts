@@ -20,7 +20,7 @@ export const parseLayerId = (name: string) => {
   const parts = name.split("_");
 
   return parts.length > 1 ? parts[1] : null;
-}
+};
 
 export type CategoryIdentifier =
   (typeof CATEGORY_IDENTIFIERS)[keyof typeof CATEGORY_IDENTIFIERS];

@@ -12,9 +12,7 @@ export interface MapContextType {
   isReady: boolean;
   mapApiRef: RefObject<ReturnType<typeof createMap> | null>;
   mapContainerRef: RefCallback<HTMLElement>;
-  setCategoriesFilters: (
-    setter: SetValue<CategoriesFiltersState>,
-  ) => void;
+  setCategoriesFilters: (setter: SetValue<CategoriesFiltersState>) => void;
   setForests: (forests: Category[]) => void;
   setIsReady: (isReady: boolean) => void;
 }
