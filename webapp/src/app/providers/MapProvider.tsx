@@ -66,7 +66,23 @@ export function MapProvider({ children }: MapProviderProps) {
       const forestField = metadata?.schema?.fields?.find(
         (f: { name: string }) => f.name === "for",
       );
-      if (forestField?.categories) setForests(forestField.categories);
+      if (forestField?.categories) {
+        setForests(forestField.categories);
+      }
+
+      // On first mount, sync the map state with the local storage state of "categories-filters"
+      Object.entries(categoriesFilters).forEach(([identifier, isActive]) => {
+        const layerId = parseLayerId(identifier);
+        if (!layerId) {
+          return;
+        }
+
+        if (isActive) {
+          mapApiRef?.current?.showLayer(layerId);
+        } else {
+          mapApiRef?.current?.hideLayer(layerId);
+        }
+      });
     };
 
     node.addEventListener(EVENTS.MAP_READY, handleReady);
