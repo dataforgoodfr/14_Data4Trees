@@ -6,6 +6,7 @@
   "packageManager": "npm@11.10.1",
   "scripts": {
     "dev": "npm run translations:update && vite",
+    "dev:staging": "npm run translations:update && vite --mode staging",
     "build": "npm run translations:update && tsc -b && vite build",
     "preview": "vite preview",
     "docker:dev": "npm run translations:update && vite --host 0.0.0.0",
