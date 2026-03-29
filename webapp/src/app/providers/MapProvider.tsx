@@ -69,7 +69,32 @@ export function MapProvider({ children }: MapProviderProps) {
       if (forestField?.categories) setForests(forestField.categories);
     };
 
-    node.addEventListener("map:ready", handleReady);
+    node.addEventListener(EVENTS.MAP_READY, handleReady);
+
+    Object.values(CATEGORY_IDENTIFIERS).forEach((identifier) => {
+      const layerId = parseLayerId(identifier);
+      if (!layerId) {
+        return;
+      }
+
+      node.addEventListener(EVENTS.LAYER_SHOW(layerId), (e) => {
+        setCategoriesFilters((prev) => {
+          return {
+            ...prev,
+            [identifier]: true,
+          };
+        });
+      });
+
+      node.addEventListener(EVENTS.LAYER_HIDE(layerId), (e) => {
+        setCategoriesFilters((prev) => {
+          return {
+            ...prev,
+            [identifier]: false,
+          };
+        });
+      });
+    });
 
     try {
       mapApiRef.current = createMap(`#${node.id}`, STYLE_URL, {
