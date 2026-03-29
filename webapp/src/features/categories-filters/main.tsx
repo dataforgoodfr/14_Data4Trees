@@ -27,7 +27,23 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
       setCategoriesFilters((prev) => ({
         ...prev,
         [identifier]: checkedState,
-      });
+      }));
+      // Update coordo map
+      const layerId = parseLayerId(identifier);
+
+      if (!layerId || !mapApiRef.current) {
+        return;
+      }
+
+      try {
+        if (checkedState) {
+          mapApiRef.current.showLayer(layerId);
+        } else {
+          mapApiRef.current.hideLayer(layerId);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
   };
 
