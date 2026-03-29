@@ -46,7 +46,6 @@
       "columns": {
         "geom": "centroid(gps)",
         "chefs": "list(nom)",
-        "total_trees": "count(ind.ess_arb)",
         "biomass_volume": "sum(0.0673 * pow(ind.dens_bois.value * pow(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4 + ind.dhp5 + ind.dhp6 + ind.dhp7 + ind.dhp8 + ind.dhp9 + ind.dhp10, 2) * ind.haut, 0.976) if ind.etat = 1) / 1257",
         "tree_density": "count(1 if ind.etat = 1) / 0.1257",
         "richness": "count(unique(ind.ess_arb))",

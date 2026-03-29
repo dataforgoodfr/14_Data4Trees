@@ -101,6 +101,7 @@
       "control": "Témoin",
       "date": "Date enquête"
     },
+    "title": "Placette n°{{ code }} dans la forêt {{ label }}",
     "units": {
       "individualPerHectare": "{{ value }} ind/ha",
       "speciesCount": "",

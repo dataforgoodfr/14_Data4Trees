@@ -1,4 +1,4 @@
-import { i18nInstance } from "@shared/i18n";
+import { i18nInstance, useTranslation } from "@shared/i18n";
 import { precise } from "@shared/lib/utils";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
@@ -53,31 +53,39 @@ const forests = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
+  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
-  indicatorKeys.forEach((key) => {
-    const value = data[key];
-    data[key] = precise(value) as BiodiversityData[typeof key];
-  });
+  const safeData = Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
+        ? precise(Number(value))
+        : value,
+    ]),
+  ) as BiodiversityData;
 
   return {
     biomass: {
-      density: formatWithUnit(data.tree_density, UNITS.individualPerHectare),
-      volume: formatWithUnit(data.biomass_volume, UNITS.tonPerHectare),
+      density: formatWithUnit(
+        safeData.tree_density,
+        UNITS.individualPerHectare,
+      ),
+      volume: formatWithUnit(safeData.biomass_volume, UNITS.tonPerHectare),
     },
     date: Intl.DateTimeFormat(i18nInstance.language, {
       dateStyle: "short",
     }).format(new Date()), // to replace
     forestPotentialLevel: {
       benef: {
-        density: data.epf_tree_density,
-        diameterDistribution: data.epf_diameter_distribution,
-        diversity: data.epf_tree_diversity,
-        dominantHeight: data.epf_dominant_height,
-        microhabitat: data.epf_microhabitats,
-        ratioDeathmassBiomass: data.epf_necro_biomass_ratio,
-        spatialDistribution: data.epf_spatial_distribution,
-        verticalDistribution: data.epf_vertical_distribution,
+        density: safeData.epf_tree_density,
+        diameterDistribution: safeData.epf_diameter_distribution,
+        diversity: safeData.epf_tree_diversity,
+        dominantHeight: safeData.epf_dominant_height,
+        microhabitat: safeData.epf_microhabitats,
+        ratioDeathmassBiomass: safeData.epf_necro_biomass_ratio,
+        spatialDistribution: safeData.epf_spatial_distribution,
+        verticalDistribution: safeData.epf_vertical_distribution,
       },
       temoin: {
         density: 0.02,
@@ -99,7 +107,11 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon2: 23,
       speciesRichnessTaxon3: 24,
     },
-    title: `Placette n°${data.cod} dans la forêt ${forests.find((f) => f.value === data.for)?.label || "n°" + data.for}`,
+    title: t("indicators.title", {
+      code: data.cod,
+      label:
+        forests.find((f) => f.value === data.for)?.label || `n°${data.for}`,
+    }),
     treeDiversity: {
       relative_abundance: 1, // replace hardcoded value when data will be available
       speciesRichness: data.richness,

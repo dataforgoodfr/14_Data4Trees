@@ -101,6 +101,7 @@
       "control": "Control",
       "date": "Survey date"
     },
+    "title": "Plot n°{{ code }} in {{ label }} forest",
     "units": {
       "individualPerHectare": "{{ value }} ind/ha",
       "speciesCount": "",
