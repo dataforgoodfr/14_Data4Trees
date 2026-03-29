@@ -1,9 +1,6 @@
 import type { ReactNode } from "react";
 
-import type { CATEGORY_IDENTIFIERS } from "./constants";
-
-export type CategoryIdentifier =
-  (typeof CATEGORY_IDENTIFIERS)[keyof typeof CATEGORY_IDENTIFIERS];
+import type { CategoryIdentifier } from "@shared/api/categories-filters";
 
 export type CategoryGroupItem = {
   icon?: ReactNode;
@@ -11,4 +8,4 @@ export type CategoryGroupItem = {
   label: string;
 };
 
-export type CategoryFiltersState = Record<CategoryIdentifier, boolean>;
+export type { CategoryIdentifier } from "@shared/api/categories-filters";

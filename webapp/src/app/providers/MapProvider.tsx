@@ -1,9 +1,18 @@
-import { createMap } from "coordo";
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
+import {
+  CATEGORY_IDENTIFIERS,
+  type CategoriesFiltersState,
+  parseLayerId,
+} from "@shared/api/categories-filters";
 import { API_URL } from "@shared/api/client";
 import { type Category, MapContext } from "@shared/contexts/MapContext";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
+
+import {
+  createMap,
+  EVENTS,
+} from "../../../../../Coordonnees/coordo-ts/src/index";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -29,6 +38,20 @@ export function MapProvider({ children }: MapProviderProps) {
     "map-settings",
     DEFAULT_MAP_SETTINGS,
   );
+
+  const [categoriesFilters, setCategoriesFilters] =
+    useLocalStorage<CategoriesFiltersState>("categories-filters", {
+      [CATEGORY_IDENTIFIERS.ACTION_DIVERSITY]: true,
+      [CATEGORY_IDENTIFIERS.ACTION_INVENTARY]: true,
+      [CATEGORY_IDENTIFIERS.ACTION_SOCIO]: true,
+      [CATEGORY_IDENTIFIERS.DATA_GROUND]: true,
+      [CATEGORY_IDENTIFIERS.DATA_MODEL]: true,
+      [CATEGORY_IDENTIFIERS.DATA_SATELLITE]: true,
+      [CATEGORY_IDENTIFIERS.SYSTEM_FOREST_PRIMARY]: true,
+      [CATEGORY_IDENTIFIERS.SYSTEM_FOREST_SECONDARY]: true,
+      [CATEGORY_IDENTIFIERS.SYSTEM_MANGROVE_HIGH]: true,
+      [CATEGORY_IDENTIFIERS.SYSTEM_MANGROVE_LOW]: true,
+    });
 
   // Callback ref pattern — called by React when the DOM node mounts/unmounts.
   // See: https://dev.to/gilfink/quick-tip-using-callback-refs-in-react-4gef
@@ -72,10 +95,12 @@ export function MapProvider({ children }: MapProviderProps) {
   return (
     <MapContext
       value={{
+        categoriesFilters,
         forests,
         isReady,
         mapApiRef,
         mapContainerRef,
+        setCategoriesFilters,
         setForests,
         setIsReady,
       }}
