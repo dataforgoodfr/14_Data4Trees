@@ -101,7 +101,6 @@
       "control": "Control",
       "date": "Survey date"
     },
-    "title": "Plot n°{{ code }} in {{ label }} forest",
     "units": {
       "individualPerHectare": "{{ value }} ind/ha",
       "speciesCount": "",
@@ -109,5 +108,8 @@
       "speciesCount_other": "{{ count }} species inventoried",
       "tonPerHectare": "{{ value }} t/ha"
     }
+  },
+  "popup": {
+    "title": "Plot n°{{ code }} in {{ label }} forest"
   }
 }

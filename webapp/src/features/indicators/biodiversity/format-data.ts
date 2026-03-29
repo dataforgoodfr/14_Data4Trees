@@ -107,7 +107,7 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon2: 23,
       speciesRichnessTaxon3: 24,
     },
-    title: t("indicators.title", {
+    title: t("popup.title", {
       code: data.cod,
       label:
         forests.find((f) => f.value === data.for)?.label || `n°${data.for}`,
