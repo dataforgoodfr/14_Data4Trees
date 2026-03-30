@@ -25,12 +25,14 @@
         "title": "Actions menées",
         "treeDiversity": "Diversité arborée"
       },
+      "all": "Tout",
       "data": {
         "ground": "Terrain",
         "model": "Modèle",
         "satellite": "Satellite",
         "title": "Type de données"
       },
+      "none": "Aucun",
       "system": {
         "forestPrimary": "Forêt primaire",
         "forestSecondary": "Forêt secondaire",

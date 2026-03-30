@@ -25,12 +25,14 @@
         "title": "Actions taken",
         "treeDiversity": "Tree diversity"
       },
+      "all": "All",
       "data": {
         "ground": "Field",
         "model": "Model",
         "satellite": "Satellite",
         "title": "Data type"
       },
+      "none": "None",
       "system": {
         "forestPrimary": "Primary forest",
         "forestSecondary": "Secondary forest",
