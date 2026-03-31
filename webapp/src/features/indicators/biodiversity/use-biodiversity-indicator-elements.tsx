@@ -46,9 +46,9 @@ export const useBiodiversityIndicatorElements = (
           />
           <IndicatorRawValue
             dataName={t(
-              "indicators.biodiversity.sections.treeDiversity.shannon",
+              "indicators.biodiversity.sections.treeDiversity.relativeAbundance",
             )}
-            value={data.treeDiversity.shannon}
+            value={data.treeDiversity.relative_abundance}
           />
         </>
       ),

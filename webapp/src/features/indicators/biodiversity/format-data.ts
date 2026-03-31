@@ -1,51 +1,104 @@
-import { i18nInstance } from "@shared/i18n";
+import { i18nInstance, useTranslation } from "@shared/i18n";
+import { precise } from "@shared/lib/utils";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
 
 export type BiodiversityData = {
   for: string;
+  cod: number;
+  total_trees: number;
+  biomass_volume: number;
+  tree_density: number;
   richness: number;
-  dominant_height: number;
+  epf_tree_density: number;
+  epf_necro_biomass_ratio: number;
+  epf_tree_diversity: number;
+  epf_spatial_distribution: number;
+  epf_diameter_distribution: number;
+  epf_vertical_distribution: number;
+  epf_dominant_height: number;
+  epf_microhabitats: number;
+  soil_structure: number;
+  soil_composition: number;
 };
+
+type NumericKeys<T> = {
+  [K in keyof T]: T[K] extends number ? K : never;
+}[keyof T];
+
+const indicatorKeys: NumericKeys<BiodiversityData>[] = [
+  "biomass_volume",
+  "tree_density",
+  "richness",
+  "epf_tree_density",
+  "epf_necro_biomass_ratio",
+  "epf_tree_diversity",
+  "epf_spatial_distribution",
+  "epf_diameter_distribution",
+  "epf_vertical_distribution",
+  "epf_dominant_height",
+  "epf_microhabitats",
+  "soil_structure",
+  "soil_composition",
+];
+
+const forests = [
+  { label: "Djilor", value: "1" },
+  { label: "Malka", value: "2" },
+  { label: "Samba Dia", value: "3" },
+  { label: "Takkite", value: "4" },
+];
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
+  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
+
+  const safeData = Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
+        ? precise(Number(value))
+        : value,
+    ]),
+  ) as BiodiversityData;
 
   return {
     biomass: {
-      density: formatWithUnit(120, UNITS.individualPerHectare), // replace hardcoded value
-      volume: formatWithUnit(5, UNITS.tonPerHectare), // replace hardcoded value
+      density: formatWithUnit(
+        safeData.tree_density,
+        UNITS.individualPerHectare,
+      ),
+      volume: formatWithUnit(safeData.biomass_volume, UNITS.tonPerHectare),
     },
     date: Intl.DateTimeFormat(i18nInstance.language, {
       dateStyle: "short",
     }).format(new Date()), // to replace
-    // replace hardcoded value
     forestPotentialLevel: {
       benef: {
-        density: 70,
-        diameterDistribution: 22,
-        diversity: data.richness,
-        masterHeight: data.dominant_height,
-        microhabitat: 2,
-        ratioDeathmassBiomass: 85,
-        spatialDistribution: 43,
-        verticalDistribution: 67,
+        density: safeData.epf_tree_density,
+        diameterDistribution: safeData.epf_diameter_distribution,
+        diversity: safeData.epf_tree_diversity,
+        dominantHeight: safeData.epf_dominant_height,
+        microhabitat: safeData.epf_microhabitats,
+        ratioDeathmassBiomass: safeData.epf_necro_biomass_ratio,
+        spatialDistribution: safeData.epf_spatial_distribution,
+        verticalDistribution: safeData.epf_vertical_distribution,
       },
       temoin: {
-        density: 80,
-        diameterDistribution: 32,
-        diversity: 47,
-        masterHeight: 98,
-        microhabitat: 22,
-        ratioDeathmassBiomass: 45,
-        spatialDistribution: 39,
-        verticalDistribution: 67,
+        density: 0.02,
+        diameterDistribution: 3,
+        diversity: 1,
+        dominantHeight: 4,
+        microhabitat: 0.5,
+        ratioDeathmassBiomass: 1,
+        spatialDistribution: 1,
+        verticalDistribution: 2,
       },
     },
-    // replace hardcoded value
+    // replace hardcoded value when data will be available
     indicatorSpecies: {
       abundanceTaxon1: 43,
       abundanceTaxon2: 56,
@@ -54,10 +107,14 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon2: 23,
       speciesRichnessTaxon3: 24,
     },
-    title: "Point #se-4", // to replace
+    title: t("popup.title", {
+      code: data.cod,
+      label:
+        forests.find((f) => f.value === data.for)?.label || `n°${data.for}`,
+    }),
     treeDiversity: {
-      shannon: 1.1, // replace hardcoded value
-      speciesRichness: formatWithUnit(1257, UNITS.speciesCount), // replace hardcoded value
+      relative_abundance: 1, // replace hardcoded value when data will be available
+      speciesRichness: data.richness,
     },
   };
 };

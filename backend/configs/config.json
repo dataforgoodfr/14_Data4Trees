@@ -9,38 +9,58 @@
       "id": "villages",
       "type": "openmaptiles",
       "layer": "place",
-      "filters": { "class": "village" }
+      "filters": {
+        "class": "village"
+      }
     },
     {
       "id": "towns",
       "type": "openmaptiles",
       "layer": "place",
-      "filters": { "class": "town" }
+      "filters": {
+        "class": "town"
+      }
     },
     {
       "id": "boundaries",
       "type": "openmaptiles",
       "layer": "boundary",
-      "filters": { "admin_level": 2 },
-      "style": { "paint": { "line-color": "hsl(248,7%,66%)" } }
+      "filters": {
+        "admin_level": 2
+      },
+      "style": {
+        "paint": {
+          "line-color": "hsl(248,7%,66%)"
+        }
+      }
     },
     {
       "id": "inventaire",
       "type": "datapackage",
       "path": "../catalog/inventaire",
       "resource": "inventaire_id",
-      "groupby": ["for"],
+      "groupby": [
+        "for",
+        "cod"
+      ],
       "columns": {
         "geom": "centroid(gps)",
-        "total_trees": "count(ind.ess_arb)",
+        "chefs": "list(nom)",
+        "biomass_volume": "sum(0.0673 * pow(ind.dens_bois.value * pow(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4 + ind.dhp5 + ind.dhp6 + ind.dhp7 + ind.dhp8 + ind.dhp9 + ind.dhp10, 2) * ind.haut, 0.976) if ind.etat = 1) / 1257",
+        "tree_density": "count(1 if ind.etat = 1) / 0.1257",
         "richness": "count(unique(ind.ess_arb))",
-        "dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80))",
-        "soil_structure": "avg((ep1*not1 + ep2*not2 + ep3*not3 + ep4*not4 + ep5*not5) / 250)",
-        "diversity": "shannon(ind.ess_arb) / 5 * 10",
-        "biomass": "sum(0.0673 * pow(ind.dens_bois.value * pow(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4, 2) * ind.haut, 0.976))",
-        "density": "count(1 if ind.etat = 1) / 0.1257",
-        "vertical_distribution": "gini(ind.haut) * 10",
-        "dendro": "list_unique(flatten(list(ind.dmh))) / 16 * 10"
+        "epf_tree_density": "count(1 if ind.etat = 1) / 1257",
+        "epf_necromass_pied": "count(1 if ind.etat = 2)",
+        "epf_necromass_sol": "count(1 if ind.etat = 3)",
+        "epf_necro_biomass_ratio": "((sum(0.0673 * pow(ind.dens_bois.value * pow(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4 + ind.dhp5 + ind.dhp6 + ind.dhp7 + ind.dhp8 + ind.dhp9 + ind.dhp10, 2) * ind.haut, 0.976) if ind.etat = 2) + sum(3.1415926535 / 3 * (pow(ind.dhp_b / 2 , 2) + pow(ind.dhp_e / 2, 2) + ind.dhp_b / 2 + ind.dhp_e / 2) * ind.longueur * ind.dens_bois.value if ind.etat = 3)) / 1257) / (sum(0.0673 * pow(ind.dens_bois.value * pow(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4 + ind.dhp5 + ind.dhp6 + ind.dhp7 + ind.dhp8 + ind.dhp9 + ind.dhp10, 2) * ind.haut, 0.976) if ind.etat = 1) / 1257) * 10",
+        "epf_tree_diversity": "shannon(ind.ess_arb) / 5 * 10",
+        "epf_spatial_distribution": "count(1020)",
+        "epf_diameter_distribution": "gini(ind.dhp1 + ind.dhp2 + ind.dhp3 + ind.dhp4 + ind.dhp5 + ind.dhp6 + ind.dhp7 + ind.dhp8 + ind.dhp9 + ind.dhp10) * 10",
+        "epf_vertical_distribution": "gini(ind.haut) * 10",
+        "epf_dominant_height": "avg(ind.haut if ind.haut > percentile(ind.haut, 80)) / 4",
+        "epf_microhabitats": "list_unique(flatten(list(ind.dmh))) / 1.6",
+        "soil_structure": "sum(ep1*not1 + ep2*not2 + ep3*not3 + ep4*not4 + ep5*not5) / sum(ep1 + ep2 + ep3 + ep4 + ep5) * 2",
+        "soil_composition": "count(1020)"
       },
       "popup": {
         "trigger": "click"

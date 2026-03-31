@@ -68,11 +68,11 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
         temoin: temoin.diameterDistribution,
       },
       {
-        benef: benef.masterHeight,
+        benef: benef.dominantHeight,
         indicator: t(
-          "indicators.biodiversity.sections.forestPotentialLevel.masterHeight",
+          "indicators.biodiversity.sections.forestPotentialLevel.dominantHeight",
         ),
-        temoin: temoin.masterHeight,
+        temoin: temoin.dominantHeight,
       },
       {
         benef: benef.microhabitat,
@@ -108,7 +108,7 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
     <Card>
       <CardContent className="p-2 mx-2">
         <ChartContainer
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-62.5"
           config={chartConfig}
         >
           <RadarChart data={chartData}>

@@ -72,7 +72,7 @@
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
-          "masterHeight": "Hauteur dominante",
+          "dominantHeight": "Hauteur dominante",
           "microhabitat": "Dendro-microhabitats",
           "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
           "spatialDistribution": "Distribution spatiale",
@@ -89,7 +89,7 @@
           "title": "Espèces indicatrices"
         },
         "treeDiversity": {
-          "shannon": "Indice de shannon",
+          "relativeAbundance": "Abondance relative",
           "speciesRichness": "Richesse spécifique",
           "title": "Diversité arborée"
         }
@@ -108,5 +108,8 @@
       "speciesCount_other": "{{ count }} espèces inventoriées",
       "tonPerHectare": "{{ value }} t/ha"
     }
+  },
+  "popup": {
+    "title": "Placette n°{{ code }} dans la forêt {{ label }}"
   }
 }
