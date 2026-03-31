@@ -4,7 +4,7 @@ services:
       - 8000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.backend.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|admin-session|token|layers)`)
+      - traefik.http.routers.backend.rule=Host(`data4trees.services.d4g.fr`) && PathPrefix(`/static`, `/api`, `/api-auth`, `/auth`, `/admin`, `/admin-session`, `/token`, `/layers`)   
       - traefik.http.routers.backend.entryPoints=webtls
       - traefik.http.routers.backend.tls=true
       - traefik.docker.network=d4g-internal
