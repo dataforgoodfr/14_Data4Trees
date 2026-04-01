@@ -87,7 +87,27 @@
       ],
       "columns": {
         "geom": "centroid(merge(point(socio_eco_gps.long, socio_eco_gps.latit)))",
-        "population": "sum(hab)"
+        "population": "sum(hab)",
+        "collectedWoodEnergy": "count(1)",
+        "boughtWoodEnergy": "count(1)",
+        "coalEnergy": "count(1)",
+        "organicWasteEnergy": "count(1)",
+        "animalWasteEnergy": "count(1)",
+        "gasEnergy": "count(1)",
+        "otherEnergy": "count(1)",
+        "woodEnergyConsumption": "count(1)",
+        "woodEnergyNeeds": "count(1)",
+        "woodCollectionTime:": "count(1)",
+        "lumberNeeds": "count(1)",
+        "foodDiversity": "count(1)",
+        "autoConsumtionNeeds": "count(1)",
+        "hungryGap": "count(1)",
+        "incomeSources": "count(1)",
+        "incomeEvolution": "count(1)",
+        "estateIndex": "count(1)",
+        "livingConditionsPercreption": "count(1)",
+        "conflictIndex": "count(1)",
+        "beneficialPractices": "count(1)"
       },
       "popup": {
         "trigger": "click"

@@ -7,6 +7,7 @@ import {
 } from "@features/indicators/forest-inventory";
 
 import { useMap } from "@shared/hooks/useMap";
+import { SocioEcoIndicator, type SocioEcoData } from "@features/indicators/socio-eco";
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
@@ -14,11 +15,24 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const renderPopup = (properties: ForestInventoryData) => {
+    const renderInventPopup = (properties: ForestInventoryData) => {
       const container = document.createElement("div");
       const root = createRoot(container);
       root.render(
         <ForestInventoryPopupContent
+          className="w-75 max-h-87.5"
+          data={properties}
+          onClose={() => root.unmount()}
+        />,
+      );
+      return container;
+    };
+    
+    const renderEnquetePopup = (properties: SocioEcoData) => {
+      const container = document.createElement("div");
+      const root = createRoot(container);
+      root.render(
+        <SocioEcoIndicator
           className="w-75 max-h-87.5"
           data={properties}
           onClose={() => root.unmount()}
@@ -38,10 +52,29 @@ export const WidgetMap: FC = () => {
         closeOnMove: false,
         maxWidth: "300px",
       },
-      renderCallback: renderPopup,
+      renderCallback: renderInventPopup,
       trigger: "click",
     });
+
+    // Set the popup for the "enquete" layer
+    mapApiRef.current.setLayerPopup<SocioEcoData>({
+      layerId: "enquete",
+      popupConfig: {
+        anchor: "center",
+        className: "bg-background/90 rounded-md",
+        closeButton: false,
+        closeOnClick: true,
+        closeOnMove: false,
+        maxWidth: "300px",
+      },
+      renderCallback: renderEnquetePopup,
+      trigger: "click",
+    });
+
+
   }, [isReady, mapApiRef]);
+
+
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters({

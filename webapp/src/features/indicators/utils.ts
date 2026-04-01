@@ -7,6 +7,7 @@ export const UNITS = {
   individualPerTrap: "individualPerTrap",
   speciesCount: "speciesCount",
   tonPerHectare: "tonPerHectare",
+  m3PerHabPerYear: "m3PerHabPerYear",
 } as const;
 
 export type Unit = keyof typeof UNITS;
@@ -40,6 +41,8 @@ export const useFormatterWithUnit = () => {
         });
       case UNITS.tonPerHectare:
         return t("indicators.units.tonPerHectare", { value });
+      case UNITS.m3PerHabPerYear:
+        return t("indicators.units.m3PerHabPerYear", { value });
       default:
         return null;
     }

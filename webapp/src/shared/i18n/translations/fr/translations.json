@@ -98,6 +98,30 @@
       },
       "title": "Données biodiversité"
     },
+    "socio-eco": {
+      "title": "Enquête auprès des ménages",
+      "sections": {
+        "wood": {
+          "title": "Ressources en bois",
+          "energySources": {
+            "title": "Sources d’énergie utilisées",
+            "collectedWood": "Bois collecté",
+            "boughtWood": "Bois acheté",
+            "coal": "Charbon",
+            "organicWaste": "Déchets végétaux",
+            "animalWaste": "Déchets animaux",
+            "gas": "Gaz",
+            "other": "Autres"
+          },
+          "energyConsumption": "Consommation de bois-énergie",
+          "woodEnergyNeeds": {
+            "title": "Satisfaction des besoins en bois-énergie"
+          },
+          "collectionTime": "Temps de collecte du bois",
+          "lumberNeeds": "Satisfaction des besoins en bois d’œuvre"
+        }
+      }
+    },
     "common": {
       "abundance": "Abondance relative",
       "beneficiary": "Bénef.",
@@ -146,10 +170,12 @@
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
-      "tonPerHectare": "{{ value }} t/ha"
+      "tonPerHectare": "{{ value }} t/ha",
+      "m3PerHabPerYear": "{{ value }} m3/hab/an"
     }
   },
   "popup": {
-    "title": "Placette n°{{ code }} dans la forêt {{ label }}"
+    "biodiversity.title": "Placette n°{{ code }} dans la forêt {{ label }}",
+    "socio-eco.title": "Village {{ village }}"
   }
 }

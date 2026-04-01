@@ -11,7 +11,7 @@ import {
   ChartTooltipContent,
 } from "@ui/chart";
 
-import type { FormattedData } from "./format-data";
+import type { FormattedData } from "@features/indicators/biodiversity/format-data";
 
 const radarConfig = {
   dot: {
