@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { RootLayout } from "@app/layouts/RootLayout";
+import { MapProvider } from "@app/providers";
 
 import { MainPage } from "@pages/MainPage";
 
@@ -19,7 +20,11 @@ export function AppRouter() {
           path="login"
         />
         <Route
-          element={<RootLayout />}
+          element={
+            <MapProvider>
+              <RootLayout />
+            </MapProvider>
+          }
           path="/"
         >
           <Route
