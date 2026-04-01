@@ -108,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "data4trees.services.d4g.fr",
 ]
 
 # Enable credentials (e.g., cookies) if needed
