@@ -2,9 +2,9 @@ import { type FC, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 
 import {
-  type BiodiversityData,
-  BiodiversityIndicator,
-} from "@features/indicators/biodiversity";
+  type ForestInventoryData,
+  ForestInventoryPopupContent,
+} from "@features/indicators/forest-inventory";
 
 import { useMap } from "@shared/hooks/useMap";
 
@@ -14,11 +14,11 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const renderPopup = (properties: BiodiversityData) => {
+    const renderPopup = (properties: ForestInventoryData) => {
       const container = document.createElement("div");
       const root = createRoot(container);
       root.render(
-        <BiodiversityIndicator
+        <ForestInventoryPopupContent
           className="w-75 max-h-87.5"
           data={properties}
           onClose={() => root.unmount()}
@@ -28,7 +28,7 @@ export const WidgetMap: FC = () => {
     };
 
     // Set the popup for the "inventaire" layer
-    mapApiRef.current.setLayerPopup<BiodiversityData>({
+    mapApiRef.current.setLayerPopup<ForestInventoryData>({
       layerId: "inventaire",
       popupConfig: {
         anchor: "center",

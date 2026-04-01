@@ -1,26 +1,8 @@
-import { i18nInstance, useTranslation } from "@shared/i18n";
+import { i18nInstance } from "@shared/i18n";
 import { precise } from "@shared/lib/utils";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
-
-export type BiodiversityData = {
-  for: string;
-  cod: number;
-  total_trees: number;
-  biomass_volume: number;
-  tree_density: number;
-  richness: number;
-  epf_tree_density: number;
-  epf_necro_biomass_ratio: number;
-  epf_tree_diversity: number;
-  epf_spatial_distribution: number;
-  epf_diameter_distribution: number;
-  epf_vertical_distribution: number;
-  epf_dominant_height: number;
-  epf_microhabitats: number;
-  soil_structure: number;
-  soil_composition: number;
-};
+import type { BiodiversityData } from "./types";
 
 type NumericKeys<T> = {
   [K in keyof T]: T[K] extends number ? K : never;
@@ -38,22 +20,12 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "epf_vertical_distribution",
   "epf_dominant_height",
   "epf_microhabitats",
-  "soil_structure",
-  "soil_composition",
-];
-
-const forests = [
-  { label: "Djilor", value: "1" },
-  { label: "Malka", value: "2" },
-  { label: "Samba Dia", value: "3" },
-  { label: "Takkite", value: "4" },
 ];
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
-  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
   const safeData = Object.fromEntries(
@@ -107,11 +79,6 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon2: 23,
       speciesRichnessTaxon3: 24,
     },
-    title: t("popup.title", {
-      code: data.cod,
-      label:
-        forests.find((f) => f.value === data.for)?.label || `n°${data.for}`,
-    }),
     treeDiversity: {
       relative_abundance: 1, // replace hardcoded value when data will be available
       speciesRichness: data.richness,
