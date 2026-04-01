@@ -4,13 +4,13 @@ services:
       - 8000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.backend.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|admin-session|token|layers|verify)/.*`)
+      - traefik.http.routers.backend.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|admin-session|token|layers)`)
       - traefik.http.routers.backend.entryPoints=webtls
       - traefik.http.routers.backend.tls=true
       - traefik.docker.network=d4g-internal
       - traefik.http.services.backend.loadbalancer.server.port=8000
     volumes:
-      - backend_db:/app/db # Persist data directory
+      - backend_db:/app/db # Persist user db
     networks:
       - d4g-internal
 
