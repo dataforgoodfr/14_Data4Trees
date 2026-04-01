@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'data4trees.services.d4g.fr']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://data4trees.services.d4g.fr",
+]
 
 # Application definition
 
