@@ -99,12 +99,49 @@
       "title": "Biodiversity Data"
     },
     "common": {
-      "beneficiary": "Benef.",
+      "abundance": "Relative abundance",
+      "beneficiary": "Beneficiary",
       "control": "Control",
-      "date": "Survey date"
+      "date": "Survey date",
+      "density": "Density",
+      "speciesRichness": "Species richness"
+    },
+    "soil": {
+      "sections": {
+        "erosion": {
+          "aquatic": {
+            "slope": "Slope",
+            "soilCover": "Soil cover",
+            "stability": "Stability",
+            "title": "Aquatic erosion resistance index",
+            "waterSeepage": "Rainfall regime"
+          },
+          "title": "Soil erosion",
+          "wind": {
+            "soilCover": "Soil cover",
+            "speed": "Wind speed",
+            "stability": "Stability",
+            "title": "Wind erosion resistance index"
+          }
+        },
+        "soilFauna": {
+          "title": "Soil macrofauna"
+        },
+        "structuration": {
+          "composition": "Physico-chemical composition",
+          "structure": "Structure index",
+          "title": "Soil structuring and composition"
+        },
+        "surfaceFauna": {
+          "title": "Surface macrofauna"
+        }
+      },
+      "title": "Soil data"
     },
     "units": {
+      "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
+      "individualPerTrap": "{{ value }} ind/trap",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} species inventoried",
       "speciesCount_other": "{{ count }} species inventoried",

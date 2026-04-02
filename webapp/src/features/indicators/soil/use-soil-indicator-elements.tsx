@@ -1,0 +1,85 @@
+import { useTranslation } from "@i18n";
+
+import { IndicatorRawValue } from "../components/indicator-raw-value";
+import type { UseIndicatorReturnType } from "../components/types";
+import { useFormatSoilData } from "./format-data";
+import type { SoilData } from "./types";
+
+export const useSoilIndicatorElements = (
+  rawData: SoilData,
+): UseIndicatorReturnType => {
+  const { t } = useTranslation("translations");
+
+  const data = useFormatSoilData(rawData);
+
+  return [
+    {
+      children: (
+        <>
+          <IndicatorRawValue
+            dataName={t("indicators.soil.sections.structuration.composition")}
+            value={data.soil_composition}
+          />
+          <IndicatorRawValue
+            dataName={t("indicators.soil.sections.structuration.structure")}
+            value={data.soil_structure}
+          />
+        </>
+      ),
+      identifier: "structuration",
+      title: t("indicators.soil.sections.structuration.title"),
+      type: "section",
+    },
+    { type: "divider" },
+    {
+      children: <>Put graph</>,
+      identifier: "erosion",
+      title: t("indicators.soil.sections.erosion.title"),
+      type: "section",
+    },
+    { type: "divider" },
+    {
+      children: (
+        <>
+          <IndicatorRawValue
+            dataName={t("indicators.common.density")}
+            value={data.soil_fauna_density}
+          />
+          <IndicatorRawValue
+            dataName={t("indicators.common.speciesRichness")}
+            value={data.soil_fauna_diversity}
+          />
+          <IndicatorRawValue
+            dataName={t("indicators.common.abundance")}
+            value={data.soil_fauna_abundance}
+          />
+        </>
+      ),
+      identifier: "soil-fauna",
+      title: t("indicators.soil.sections.soilFauna.title"),
+      type: "section",
+    },
+    { type: "divider" },
+    {
+      children: (
+        <>
+          <IndicatorRawValue
+            dataName={t("indicators.common.density")}
+            value={data.surface_fauna_density}
+          />
+          <IndicatorRawValue
+            dataName={t("indicators.common.speciesRichness")}
+            value={data.surface_fauna_diversity}
+          />
+          <IndicatorRawValue
+            dataName={t("indicators.common.abundance")}
+            value={data.surface_fauna_abundance}
+          />
+        </>
+      ),
+      identifier: "surface-fauna",
+      title: t("indicators.soil.sections.surfaceFauna.title"),
+      type: "section",
+    },
+  ];
+};

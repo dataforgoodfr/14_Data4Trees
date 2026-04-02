@@ -4,11 +4,13 @@ import type { FC } from "react";
 
 import { useTranslation } from "@i18n";
 
-import { useFormatBiodiversityData } from "../biodiversity/format-data";
 import { useBiodiversityIndicatorElements } from "../biodiversity/use-biodiversity-indicator-elements";
 import { ICON_SIZE_HEADER } from "../components/constants";
 import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
+import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
+import { useSoilIndicatorElements } from "../soil";
+import { useDateElement } from "../use-date-element";
 import { FORESTS } from "./constants";
 import type { ForestInventoryData } from "./types";
 
@@ -22,9 +24,10 @@ export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
 > = ({ onClose, data, className }) => {
   const { t } = useTranslation("translations");
-  const biodiversityData = useFormatBiodiversityData(data);
-  const biodiversityElements =
-    useBiodiversityIndicatorElements(biodiversityData);
+
+  const dateElement = useDateElement();
+  const biodiversityElements = useBiodiversityIndicatorElements(data);
+  const soilElements = useSoilIndicatorElements(data);
 
   const forestMap = new Map<string, (typeof FORESTS)[number]>();
   FORESTS.forEach((forest) => {
@@ -44,7 +47,11 @@ export const ForestInventoryPopupContent: FC<
         subtitle={t("indicators.biodiversity.title")}
         title={title}
       />
-      <IndicatorElements elements={biodiversityElements} />
+      <IndicatorScrollContainer>
+        <IndicatorElements elements={dateElement} />
+        <IndicatorElements elements={biodiversityElements} />
+        <IndicatorElements elements={soilElements} />
+      </IndicatorScrollContainer>
     </div>
   );
 };
