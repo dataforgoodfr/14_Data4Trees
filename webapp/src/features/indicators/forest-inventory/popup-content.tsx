@@ -1,7 +1,8 @@
 import { cx } from "class-variance-authority";
 import { TreesIcon } from "lucide-react";
-import type { FC } from "react";
+import { Activity, type FC, useState } from "react";
 
+import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
 import { useBiodiversityIndicatorElements } from "../biodiversity/use-biodiversity-indicator-elements";
@@ -20,10 +21,18 @@ type ForestInventoryPopupContentProps = {
   className?: string;
 };
 
+type TabKind = "biodiversity" | "soil";
+
+const TABS: Record<string, TabKind> = {
+  BIODIVERSITY: "biodiversity",
+  SOIL: "soil",
+} as const;
+
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
 > = ({ onClose, data, className }) => {
   const { t } = useTranslation("translations");
+  const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
   const dateElement = useDateElement();
   const biodiversityElements = useBiodiversityIndicatorElements(data);
@@ -39,18 +48,48 @@ export const ForestInventoryPopupContent: FC<
     label: forestMap.get(data.for)?.label || `n°${data.for}`,
   });
 
+  const subtitles = {
+    [TABS.BIODIVERSITY]: t("indicators.biodiversity.title"),
+    [TABS.SOIL]: t("indicators.soil.title"),
+  };
+
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={t("indicators.biodiversity.title")}
+        subtitle={subtitles[selectedTab] ?? ""}
         title={title}
       />
+
+      <GridSelector
+        className="m-sm"
+        onChange={(value) => setSelectedTab(value as TabKind)}
+        options={[
+          {
+            id: TABS.BIODIVERSITY,
+            label: subtitles[TABS.BIODIVERSITY],
+          },
+          {
+            id: TABS.SOIL,
+            label: subtitles[TABS.SOIL],
+          },
+        ]}
+        value={selectedTab}
+      />
+
       <IndicatorScrollContainer>
         <IndicatorElements elements={dateElement} />
-        <IndicatorElements elements={biodiversityElements} />
-        <IndicatorElements elements={soilElements} />
+
+        <Activity
+          mode={selectedTab === TABS.BIODIVERSITY ? "visible" : "hidden"}
+        >
+          <IndicatorElements elements={biodiversityElements} />
+        </Activity>
+
+        <Activity mode={selectedTab === TABS.SOIL ? "visible" : "hidden"}>
+          <IndicatorElements elements={soilElements} />
+        </Activity>
       </IndicatorScrollContainer>
     </div>
   );

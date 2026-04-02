@@ -29,7 +29,7 @@ export function MapSidebar() {
       <Separator />
 
       <GridSelector
-        className="mx-4 my-md"
+        className="mx-sm my-md"
         onChange={(value) => setSelectedFilterKind(value)}
         options={[
           {
