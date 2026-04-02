@@ -3,19 +3,19 @@ import { useState } from "react";
 
 import { CategoriesFilters } from "@features/categories-filters";
 
+import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
 import { Separator } from "@ui/separator";
 
-import {
-  FILTER_KIND,
-  type FilterKind,
-  FilterKindSelector,
-} from "./filter-kind-selector";
+export const FILTER_KIND = {
+  category: "category",
+  filtersPerCategory: "filtersPerCategory",
+} as const;
 
 export function MapSidebar() {
   const { t } = useTranslation("translations");
-  const [selectedFilterKind, setSelectedFilterKind] = useState<FilterKind>(
+  const [selectedFilterKind, setSelectedFilterKind] = useState<string>(
     FILTER_KIND.category,
   );
 
@@ -28,9 +28,19 @@ export function MapSidebar() {
 
       <Separator />
 
-      <FilterKindSelector
+      <GridSelector
         className="mx-4 my-md"
-        setValue={setSelectedFilterKind}
+        onChange={(value) => setSelectedFilterKind(value)}
+        options={[
+          {
+            id: FILTER_KIND.category,
+            label: t("filters.sidebarLayout.groupCategory"),
+          },
+          {
+            id: FILTER_KIND.filtersPerCategory,
+            label: t("filters.sidebarLayout.groupFilters"),
+          },
+        ]}
         value={selectedFilterKind}
       />
 
