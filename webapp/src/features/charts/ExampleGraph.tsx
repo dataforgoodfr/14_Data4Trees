@@ -1,5 +1,4 @@
-import { GitCommitVertical } from "lucide-react";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, ErrorBar, Line, LineChart, XAxis } from "recharts";
 
 import {
   Card,
@@ -90,24 +89,17 @@ export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
             />
             <Line
               dataKey="kwhConsumed"
-              dot={({ cx, cy, payload }) => {
-                const r = payload.kwhConsumed / 20;
-                return (
-                  <GitCommitVertical
-                    fill="hsl(var(--background))"
-                    height={r}
-                    key={`${payload.year} / ${payload.month}`}
-                    stroke="var(--color-kwhConsumed)"
-                    width={r}
-                    x={cx - r / 2}
-                    y={cy - r / 2}
-                  />
-                );
-              }}
               stroke="var(--color-kwhConsumed)"
               strokeWidth={2}
               type="natural"
-            />
+            >
+              <ErrorBar
+                dataKey={(data) => data.kwhConsumed * 0.1}
+                direction="y"
+                stroke="red"
+                width={5}
+              />
+            </Line>
           </LineChart>
         </ChartContainer>
       </CardContent>
