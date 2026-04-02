@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'data4trees.services.d4g.fr']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://data4trees.services.d4g.fr",
+]
 
 # Application definition
 
@@ -83,7 +86,7 @@ WSGI_APPLICATION = 'all4trees.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db' / 'db.sqlite3',
     }
 }
 
@@ -108,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://data4trees.services.d4g.fr",
 ]
 
 # Enable credentials (e.g., cookies) if needed
