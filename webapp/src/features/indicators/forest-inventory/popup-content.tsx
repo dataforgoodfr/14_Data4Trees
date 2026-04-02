@@ -1,3 +1,4 @@
+import { cx } from "class-variance-authority";
 import { TreesIcon } from "lucide-react";
 import type { FC } from "react";
 
@@ -6,7 +7,8 @@ import { useTranslation } from "@i18n";
 import { useFormatBiodiversityData } from "../biodiversity/format-data";
 import { useBiodiversityIndicatorElements } from "../biodiversity/use-biodiversity-indicator-elements";
 import { ICON_SIZE_HEADER } from "../components/constants";
-import { IndicatorContainer } from "../components/indicator-container";
+import { IndicatorElements } from "../components/indicator-elements";
+import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { FORESTS } from "./constants";
 import type { ForestInventoryData } from "./types";
 
@@ -35,13 +37,14 @@ export const ForestInventoryPopupContent: FC<
   });
 
   return (
-    <IndicatorContainer
-      className={className}
-      elements={biodiversityElements}
-      icon={<TreesIcon size={ICON_SIZE_HEADER} />}
-      onCrossClick={onClose}
-      subtitle={t("indicators.biodiversity.title")}
-      title={title}
-    />
+    <div className={cx("flex flex-col", className ?? "")}>
+      <IndicatorPopupHeader
+        icon={<TreesIcon size={ICON_SIZE_HEADER} />}
+        onCrossClick={onClose}
+        subtitle={t("indicators.biodiversity.title")}
+        title={title}
+      />
+      <IndicatorElements elements={biodiversityElements} />
+    </div>
   );
 };
