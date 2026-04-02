@@ -38,7 +38,7 @@ export const ForestInventoryPopupContent: FC<
   const biodiversityElements = useBiodiversityIndicatorElements(data);
   const soilElements = useSoilIndicatorElements(data);
 
-  const title = t("popup.title", {
+  const title = t("popup.forest-inventory.title", {
     code: data.cod,
     label: FORESTS_MAP.get(data.for)?.label || `n°${data.for}`,
   });

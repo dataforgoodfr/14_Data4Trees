@@ -5,9 +5,12 @@ import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
 } from "@features/indicators/forest-inventory";
+import {
+  type SocioEcoData,
+  SocioEcoIndicator,
+} from "@features/indicators/socio-eco";
 
 import { useMap } from "@shared/hooks/useMap";
-import { SocioEcoIndicator, type SocioEcoData } from "@features/indicators/socio-eco";
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
@@ -27,7 +30,7 @@ export const WidgetMap: FC = () => {
       );
       return container;
     };
-    
+
     const renderEnquetePopup = (properties: SocioEcoData) => {
       const container = document.createElement("div");
       const root = createRoot(container);
@@ -70,11 +73,7 @@ export const WidgetMap: FC = () => {
       renderCallback: renderEnquetePopup,
       trigger: "click",
     });
-
-
   }, [isReady, mapApiRef]);
-
-
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters({

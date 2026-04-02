@@ -98,30 +98,6 @@
       },
       "title": "Données biodiversité"
     },
-    "socio-eco": {
-      "title": "Enquête auprès des ménages",
-      "sections": {
-        "wood": {
-          "title": "Ressources en bois",
-          "energySources": {
-            "title": "Sources d’énergie utilisées",
-            "collectedWood": "Bois collecté",
-            "boughtWood": "Bois acheté",
-            "coal": "Charbon",
-            "organicWaste": "Déchets végétaux",
-            "animalWaste": "Déchets animaux",
-            "gas": "Gaz",
-            "other": "Autres"
-          },
-          "energyConsumption": "Consommation de bois-énergie",
-          "woodEnergyNeeds": {
-            "title": "Satisfaction des besoins en bois-énergie"
-          },
-          "collectionTime": "Temps de collecte du bois",
-          "lumberNeeds": "Satisfaction des besoins en bois d’œuvre"
-        }
-      }
-    },
     "common": {
       "abundance": "Abondance relative",
       "beneficiary": "Bénef.",
@@ -129,6 +105,46 @@
       "date": "Date enquête",
       "density": "Densité",
       "speciesRichness": "Richesse spécifique"
+    },
+    "economy": {
+      "title": "Modèle économique et gouvernance"
+    },
+    "resources": {
+      "title": "Ressources des ménages"
+    },
+    "socio-eco": {
+      "sections": {
+        "wood": {
+          "collectionTime": "Temps de collecte du bois",
+          "energyConsumption": "Consommation de bois-énergie",
+          "energyNeeds": {
+            "difficultToMeet": "Difficile à satisfaire",
+            "dontKnow": "Ne sait pas",
+            "easyToMeet": "Facile à satisfaire",
+            "moderateToMeet": "Modéré à satisfaire",
+            "title": "Satisfaction des besoins en bois-énergie"
+          },
+          "energySources": {
+            "animalWaste": "Déchets animaux",
+            "boughtWood": "Bois acheté",
+            "coal": "Charbon",
+            "collectedWood": "Bois collecté",
+            "gas": "Gaz",
+            "organicWaste": "Déchets végétaux",
+            "other": "Autres",
+            "title": "Sources d’énergie utilisées"
+          },
+          "lumberNeeds": {
+            "difficultToMeet": "Difficile à satisfaire",
+            "dontKnow": "Ne sait pas",
+            "easyToMeet": "Facile à satisfaire",
+            "moderateToMeet": "Modéré à satisfaire",
+            "title": "Satisfaction des besoins en bois d’œuvre"
+          },
+          "title": "Ressources en bois"
+        }
+      },
+      "title": "Enquête auprès des ménages"
     },
     "soil": {
       "sections": {
@@ -167,15 +183,15 @@
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
+      "m3PerHabPerYear": "{{ value }} m3/hab/an",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
-      "tonPerHectare": "{{ value }} t/ha",
-      "m3PerHabPerYear": "{{ value }} m3/hab/an"
+      "tonPerHectare": "{{ value }} t/ha"
     }
   },
   "popup": {
-    "biodiversity.title": "Placette n°{{ code }} dans la forêt {{ label }}",
+    "forest-inventory.title": "Placette n°{{ code }} dans la forêt {{ label }}",
     "socio-eco.title": "Village {{ village }}"
   }
 }

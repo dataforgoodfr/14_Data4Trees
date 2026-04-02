@@ -88,7 +88,7 @@
       "columns": {
         "geom": "centroid(merge(point(socio_eco_gps.long, socio_eco_gps.latit)))",
         "population": "sum(hab)",
-        "collectedWoodEnergy": "count(1)",
+        "energyType": "count(ener)",
         "boughtWoodEnergy": "count(1)",
         "coalEnergy": "count(1)",
         "organicWasteEnergy": "count(1)",

@@ -1,6 +1,8 @@
 import type { FC } from "react";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
+import type { FormattedData } from "@features/indicators/biodiversity/format-data";
+
 import { useTranslation } from "@i18n";
 
 import { Card, CardContent } from "@ui/card";
@@ -10,8 +12,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@ui/chart";
-
-import type { FormattedData } from "@features/indicators/biodiversity/format-data";
 
 const radarConfig = {
   dot: {

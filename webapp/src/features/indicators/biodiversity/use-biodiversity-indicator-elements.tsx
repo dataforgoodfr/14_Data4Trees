@@ -1,7 +1,8 @@
 import { BinocularsIcon, HeartPulseIcon, InfoIcon } from "lucide-react";
 
-import { useTranslation } from "@i18n";
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
+
+import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";

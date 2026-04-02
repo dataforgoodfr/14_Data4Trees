@@ -1,9 +1,16 @@
+import {
+  ChartEnergySources,
+  ChartWoodEnergyNeeds,
+} from "@features/charts/socio-eco";
+import { ChartLumberNeeds } from "@features/charts/socio-eco/chart-lumber-needs";
+
 import { useTranslation } from "@i18n";
+import { ICON_SIZE } from "../components/constants";
 
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import type { FormattedData } from "./format-data";
-import { ChartEnergySources, ChartWoodEnergyNeeds } from "@features/charts/socio-eco";
+import { BinocularsIcon } from "lucide-react";
 
 export const useSocioEcoIndicatorElements = (
   data: FormattedData,
@@ -16,31 +23,24 @@ export const useSocioEcoIndicatorElements = (
     {
       children: (
         <>
-          <ChartEnergySources
-            data={data.wood.energySources}
-          />
+          <ChartEnergySources data={data.wood.energySources} />
           <IndicatorRawValue
-            dataName={t(
-              "indicators.socio-eco.sections.wood.energyConsumption",
-            )}
-            value={data.wood.woodEnergyConsumption}
+            dataName={t("indicators.socio-eco.sections.wood.energyConsumption")}
+            value={data.wood.energyConsumption}
           />
-          <ChartWoodEnergyNeeds data={data.wood.woodEnergyNeeds} />
+          <ChartWoodEnergyNeeds data={data.wood.energyNeeds} />
           <IndicatorRawValue
-            dataName={t(
-              "indicators.socio-eco.sections.wood.collectionTime",
-            )}
-            value={data.wood.woodCollectionTime}
+            dataName={t("indicators.socio-eco.sections.wood.collectionTime")}
+            value={data.wood.collectionTime}
           />
-          <ChartWoodEnergyNeeds
-            data={data.wood.lumberNeeds}
-          />
+          <ChartLumberNeeds data={data.wood.lumberNeeds} />
         </>
-        
       ),
+      iconStart: <BinocularsIcon size={ICON_SIZE} />,
+      identifier: "indicator-wood",
       title: t("indicators.socio-eco.sections.wood.title"),
       type: "section",
     },
-    { type: "divider" }
+    { type: "divider" },
   ];
 };
