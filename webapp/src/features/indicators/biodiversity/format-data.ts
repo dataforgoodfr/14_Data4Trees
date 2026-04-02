@@ -1,4 +1,3 @@
-import { i18nInstance } from "@shared/i18n";
 import { precise } from "@shared/lib/utils";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
@@ -45,9 +44,6 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       ),
       volume: formatWithUnit(safeData.biomass_volume, UNITS.tonPerHectare),
     },
-    date: Intl.DateTimeFormat(i18nInstance.language, {
-      dateStyle: "short",
-    }).format(new Date()), // to replace
     forestPotentialLevel: {
       benef: {
         density: safeData.epf_tree_density,
@@ -85,5 +81,3 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
     },
   };
 };
-
-export type FormattedData = ReturnType<typeof useFormatBiodiversityData>;

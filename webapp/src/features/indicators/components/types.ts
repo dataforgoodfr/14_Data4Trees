@@ -9,6 +9,7 @@ type IndicatorSection = {
   title: string;
   iconStart?: ReactNode;
   children: ReactNode;
+  identifier: string;
 };
 
 type IndicatorCustomNode = { type: "customNode"; children: ReactNode };
