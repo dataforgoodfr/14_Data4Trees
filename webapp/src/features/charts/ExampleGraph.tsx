@@ -43,12 +43,15 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
-  chartData.sort((a, b) => {
-    if (a.year === b.year) {
-      return a.month - b.month;
-    }
-    return a.year - b.year;
-  });
+  const sortedData = chartData
+    .slice()
+    .filter((value) => value.year === 2023)
+    .sort((a, b) => {
+      if (a.year === b.year) {
+        return a.month - b.month;
+      }
+      return a.year - b.year;
+    });
   return (
     <Card>
       <CardHeader>
@@ -61,10 +64,10 @@ export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
         <ChartContainer config={chartConfig}>
           <LineChart
             accessibilityLayer={true}
-            data={chartData}
+            data={sortedData}
             margin={{
-              left: 12,
-              right: 12,
+              left: 0,
+              right: 0,
             }}
           >
             <CartesianGrid vertical={false} />
@@ -94,7 +97,7 @@ export function ExampleGraph({ name, chartData }: GraphConsoElecProps) {
               type="natural"
             >
               <ErrorBar
-                dataKey={(data) => data.kwhConsumed * 0.1}
+                dataKey={(data) => data.kwhConsumed * 0.2}
                 direction="y"
                 stroke="red"
                 width={5}
