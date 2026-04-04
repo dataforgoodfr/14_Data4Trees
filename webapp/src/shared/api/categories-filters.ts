@@ -16,6 +16,10 @@ export const CATEGORY_IDENTIFIERS = {
   SYSTEM_MANGROVE_LOW: "system-mangrove-low",
 } as const;
 
+/**
+ * Parse from a category identifier the related backend layer name.
+ * Return null if it can't retrieve the layer id.
+ */
 export const parseLayerId = (name: string) => {
   const parts = name.split("_");
 

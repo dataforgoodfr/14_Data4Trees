@@ -23,8 +23,11 @@ export const useCategoriesFilters = () => {
       [CATEGORY_IDENTIFIERS.SYSTEM_MANGROVE_LOW]: true,
     });
 
-  // Use useEffectEvent for the event handlers and to make sure they use the
-  // latest version of prev (avoid the state disclosure problem)
+  /**
+   * Use useEffectEvent for the event handlers and to make sure they use the
+   * latest version of prev (avoid the state disclosure problem)
+   * @link https://react.dev/learn/separating-events-from-effects#extracting-non-reactive-logic-out-of-effects
+   */
   const onLayerShow = useEffectEvent((identifier: string) => {
     setCategoriesFilters((prev) => ({
       ...prev,

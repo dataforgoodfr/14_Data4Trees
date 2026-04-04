@@ -51,7 +51,7 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
     <div className="flex flex-col gap-md">
       <CategoriesCheckboxGroup
         disabled={disabled}
-        getIsChecked={(identifier) => categoriesFilters?.[identifier]}
+        getIsChecked={(identifier) => categoriesFilters[identifier]}
         getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
         items={actions}
         title={t("filters.categories.actions.title")}
@@ -59,7 +59,7 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
 
       <CategoriesCheckboxGroup
         disabled={disabled}
-        getIsChecked={(identifier) => categoriesFilters?.[identifier]}
+        getIsChecked={(identifier) => categoriesFilters[identifier]}
         getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
         items={data}
         title={t("filters.categories.data.title")}
@@ -67,7 +67,7 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
 
       <CategoriesCheckboxGroup
         disabled={disabled}
-        getIsChecked={(identifier) => categoriesFilters?.[identifier]}
+        getIsChecked={(identifier) => categoriesFilters[identifier]}
         getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
         items={system}
         title={t("filters.categories.system.title")}
