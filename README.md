@@ -42,8 +42,8 @@ Il est possible de déployer l'application localement en mode développement en 
 
 Avant toute chose, il faut créer un fichier `.env` à la racine du projet, qui doit contenir:
 ```
-S3_ACCESS_KEY_ID="<key id>"
-S3_SECRET_ACCESS_KEY="<access key>"
+S3_ACCESS_KEY_ID=<key id>
+S3_SECRET_ACCESS_KEY=<access key>
 ```
 La `key id` et l'`access key` sont à demander aux tech leads.
 
@@ -53,6 +53,19 @@ docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up
 ```
 
 Vous pouvez accéder à l'application en tapant `http://localhost:5173/` dans la barre d'adresse de votre navigateur.
+
+>[!TIP]
+>Pour forcer le build complet des applications (si vous ajoutez une dépendance par exemple):
+>```bash
+>docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up --build
+>```
+
+>[!TIP]
+>Pour ne lancer que le backend:
+>```bash
+>docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up backend
+>```
+
 
 
 ## Déploiement
