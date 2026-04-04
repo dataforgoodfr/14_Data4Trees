@@ -35,6 +35,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic', # see https://whitenoise.readthedocs.io/en/stable/django.html#using-whitenoise-in-development
+    'users',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
@@ -108,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
