@@ -1,3 +1,6 @@
+import { ChartAquaticErosion } from "@features/charts/soil/chart-aquatic-erosion";
+import { ChartWindErosion } from "@features/charts/soil/chart-wind-erosion";
+
 import { useTranslation } from "@i18n";
 
 import { IndicatorRawValue } from "../components/indicator-raw-value";
@@ -32,7 +35,26 @@ export const useSoilIndicatorElements = (
     },
     { type: "divider" },
     {
-      children: <>Put graph</>,
+      children: (
+        <div className="flex flex-col gap-sm">
+          <ChartAquaticErosion
+            benef={{
+              rainfall: data.ero_rainfall,
+              slope: data.ero_slope,
+              soilCover: data.ero_soil_cover,
+              soilStability: data.ero_soil_stability,
+              waterSeepage: data.ero_water_seepage,
+            }}
+          />
+          <ChartWindErosion
+            benef={{
+              soilCover: data.ero_soil_cover,
+              soilStability: data.ero_soil_stability,
+              wind: data.ero_wind,
+            }}
+          />
+        </div>
+      ),
       identifier: "erosion",
       title: t("indicators.soil.sections.erosion.title"),
       type: "section",

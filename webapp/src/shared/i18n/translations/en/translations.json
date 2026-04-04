@@ -110,11 +110,12 @@
       "sections": {
         "erosion": {
           "aquatic": {
+            "rainfall": "Rainfall regime",
             "slope": "Slope",
             "soilCover": "Soil cover",
             "stability": "Stability",
             "title": "Aquatic erosion resistance index",
-            "waterSeepage": "Rainfall regime"
+            "waterSeepage": "Seepage speed"
           },
           "title": "Soil erosion",
           "wind": {

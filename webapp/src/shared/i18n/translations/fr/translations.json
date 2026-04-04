@@ -110,11 +110,12 @@
       "sections": {
         "erosion": {
           "aquatic": {
+            "rainfall": "Régime pluviométrique",
             "slope": "Pente",
             "soilCover": "Couverture du sol",
             "stability": "Stabilité",
             "title": "Indice de résistance à l'érosion hydrique",
-            "waterSeepage": "Régime pluviométrique"
+            "waterSeepage": "Vitesse d'infiltration"
           },
           "title": "Érosion du sol",
           "wind": {
