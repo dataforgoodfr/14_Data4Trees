@@ -67,3 +67,5 @@ export const useFormatSoilData = (data: SoilData) => {
     ),
   };
 };
+
+export type SoilFormattedData = ReturnType<typeof useFormatSoilData>;

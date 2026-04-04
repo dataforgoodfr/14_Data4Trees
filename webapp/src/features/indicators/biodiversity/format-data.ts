@@ -81,3 +81,5 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
     },
   };
 };
+
+export type FormattedData = ReturnType<typeof useFormatBiodiversityData>;

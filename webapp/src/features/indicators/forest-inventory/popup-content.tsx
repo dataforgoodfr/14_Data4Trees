@@ -12,7 +12,7 @@ import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "../soil";
 import { useDateElement } from "../use-date-element";
-import { FORESTS } from "./constants";
+import { FORESTS_MAP } from "./constants";
 import type { ForestInventoryData } from "./types";
 
 type ForestInventoryPopupContentProps = {
@@ -38,14 +38,9 @@ export const ForestInventoryPopupContent: FC<
   const biodiversityElements = useBiodiversityIndicatorElements(data);
   const soilElements = useSoilIndicatorElements(data);
 
-  const forestMap = new Map<string, (typeof FORESTS)[number]>();
-  FORESTS.forEach((forest) => {
-    forestMap.set(forest.value, forest);
-  });
-
   const title = t("popup.title", {
     code: data.cod,
-    label: forestMap.get(data.for)?.label || `n°${data.for}`,
+    label: FORESTS_MAP.get(data.for)?.label || `n°${data.for}`,
   });
 
   const subtitles = {
