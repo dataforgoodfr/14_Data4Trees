@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type SetValue<T> = T | ((val: T) => T);
+export type SetValue<T> = T | ((val: T) => T);
 
 /**
  * Hook to manage a value in localStorage.

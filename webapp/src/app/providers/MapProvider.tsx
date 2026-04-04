@@ -1,5 +1,7 @@
-import { createMap } from "coordo";
+import { createMap, EVENTS } from "coordo";
 import { type ReactNode, useCallback, useRef, useState } from "react";
+
+import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
 
 import { API_URL } from "@shared/api/client";
 import { type Category, MapContext } from "@shared/contexts/MapContext";
@@ -30,6 +32,13 @@ export function MapProvider({ children }: MapProviderProps) {
     DEFAULT_MAP_SETTINGS,
   );
 
+  const {
+    addCategoriesFiltersEventListener,
+    categoriesFilters,
+    setCategoriesFilters,
+    syncInitialCategoriesFilters,
+  } = useCategoriesFilters();
+
   // Callback ref pattern — called by React when the DOM node mounts/unmounts.
   // See: https://dev.to/gilfink/quick-tip-using-callback-refs-in-react-4gef
   // biome-ignore lint/correctness/useExhaustiveDependencies: map init should run only once on mount
@@ -43,10 +52,20 @@ export function MapProvider({ children }: MapProviderProps) {
       const forestField = metadata?.schema?.fields?.find(
         (f: { name: string }) => f.name === "for",
       );
-      if (forestField?.categories) setForests(forestField.categories);
+      if (forestField?.categories) {
+        setForests(forestField.categories);
+      }
+
+      // On first mount, sync the map state with the local storage state of "categories-filters"
+      syncInitialCategoriesFilters({
+        hideLayer: mapApiRef.current?.hideLayer,
+        showLayer: mapApiRef.current?.showLayer,
+      });
     };
 
-    node.addEventListener("map:ready", handleReady);
+    node.addEventListener(EVENTS.MAP_READY, handleReady);
+
+    addCategoriesFiltersEventListener(node);
 
     try {
       mapApiRef.current = createMap(`#${node.id}`, STYLE_URL, {
@@ -72,10 +91,12 @@ export function MapProvider({ children }: MapProviderProps) {
   return (
     <MapContext
       value={{
+        categoriesFilters,
         forests,
         isReady,
         mapApiRef,
         mapContainerRef,
+        setCategoriesFilters,
         setForests,
         setIsReady,
       }}
