@@ -27,15 +27,14 @@ Vous pouvez accéder à l'application en tapant `http://localhost:5173/` dans la
 >```bash
 >docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up --build
 >```
-
->[!TIP]
+>
 >Pour ne lancer que le backend:
 >```bash
 >docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up backend
 >```
 
 >[!IMPORTANT]
->Si vous voulez vous conencter en tant qu'admin à l'application locale, le nom d'utilisateur ainsi que le mot de passe sont >dans l'[entrypoint](./backend/entrypoint.sh#L8).
+>Si vous voulez vous connecter en tant qu'admin à l'application locale, le nom d'utilisateur ainsi que le mot de passe sont >accessibles dans l'[entrypoint](../backend/entrypoint.sh#L8).
 
 
 ## Environnement de staging

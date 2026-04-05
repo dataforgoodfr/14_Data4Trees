@@ -10,7 +10,7 @@ services:
       - traefik.docker.network=d4g-internal
       - traefik.http.services.backend.loadbalancer.server.port=8000
     #volumes:
-    #  - backend_db:/app/db # Persist user db
+    #  - backend_db:/app/db # Persist user db: uncomment when application is stable enough
     networks:
       - d4g-internal
 
