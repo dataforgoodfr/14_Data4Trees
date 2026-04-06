@@ -5,6 +5,7 @@ RUN apt-get update && \
     git \
     curl \
     unzip && \
+    make && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
