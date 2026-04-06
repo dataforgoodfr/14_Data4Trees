@@ -10,6 +10,14 @@
 npm ci
 ```
 
+### Coordo Lib
+
+Durant le dévloppement, vous serez souvent amenés à devoir réinstaller la lib coordo, en forçant la mise à jour puisque le versioning n'est pas encore géré. Il suffit de lancer la commande suivante:
+
+```bash
+npm install coordo
+```
+
 ## Démarrer le serveur
 
 ```

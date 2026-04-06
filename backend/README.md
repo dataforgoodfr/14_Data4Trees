@@ -34,6 +34,14 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Coordo package
+
+When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command:
+
+```bash
+pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git#subdirectory=coordo-py
+```
+
 ### Prepare the database
 
 1. Migrate database tables into the database
@@ -55,15 +63,10 @@ AWS_ACCESS_KEY_ID=<access_key_id> AWS_SECRET_ACCESS_KEY=<secret_access_key> aws 
 ```
 You can get the keys from the Tech Leads.
 
-Then generate the catalog using coordo-cli command like this:   
+Then generate the catalog using the Makefile like this:   
 
 ```bash
-coordo load kobotoolbox data/20250213_Inventaire_ID_QuestionnaireK.xlsx data/20251017_Inventaire_ID_Donnees.xlsx --package catalog/inventaire
-coordo load file data/dens_bois.csv --package catalog/inventaire
-coordo add-foreignkey ind.ess_arb dens_bois.ess_arb --package catalog/inventaire
-coordo load kobotoolbox data/20240808_EnqueteMenage_CDF_QuestionnaireK.xlsx data/20241007_EnqueteMenage_CDF_Donnees.csv --package catalog/enquete
-coordo load file data/socio_eco_gps.csv --package catalog/enquete
-coordo add-foreignkey enquete_menage_cdf.admi2 socio_eco_gps.admi2 --package catalog/enquete
+make catalog
 ```
 
 ### Launch the backend
