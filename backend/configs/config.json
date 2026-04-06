@@ -39,11 +39,9 @@
       "type": "datapackage",
       "path": "../catalog/inventaire",
       "resource": "inventaire_id",
-      "groupby": [
-        "for",
-        "cod"
-      ],
       "columns": {
+        "for": "for",
+        "cod": "cod",
         "geom": "gps.merge().centroid()",
         "biomass_volume": "ind.sum(0.0673 * (dens_bois.value * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 1) / (20^2 * pi() / 10000) / 1000",
         "tree_density": "count(1 if ind.etat = 1) / (20^2 * pi() / 10000)",
@@ -60,18 +58,20 @@
         "epf_microhabitats": "ind.list(dmh).flatten().list_unique() * 10 / 16",
         "soil_structure": "sum(ep1*int(not1) + ep2*int(not2) + ep3*int(not3) + ep4*int(not4) + ep5*int(not5)) / sum(ep1 + ep2 + ep3 + ep4 + ep5) * 2",
         "soil_composition": "count(1)",
-        "ero_rainfall": "meteo.pluv",
-        "ero_wind": "1",
-        "ero_soil_cover": "1",
-        "ero_slope": "inventaire_external.pent",
+        "ero_rainfall_and_wind": "meteo.concat_ws('-', pluv, vent)",
+        "ero_couv_slope_and_cover": "inventaire_external.concat_ws('-', pent, couv)",
         "ero_soil_stability": "(int(slak1) + int(slak2) + int(slak3)) / 3",
         "ero_water_seepage": "600 * 300 / ((beer1 + beer2 + beer3 + beer4 + beer5 + beer6 + beer7 + beer8 + beer9 + beer10) * pi() * 30^2) if beer1 != 0 else 0",
-        "soil_fauna_density": "count(1)",
-        "soil_fauna_diversity": "count(1)",
-        "soil_fauna_abundance": "list_aggregate(list(tsbf_001.concat_ws('-', tax1_tsbf, tax2_tsbf, tax3_tsbf)), 'histogram')",
-        "surface_fauna_density": "count(1)",
-        "surface_fauna_diversity": "count(1)",
-        "surface_fauna_abundance": "list_aggregate(list_concat(list(barba_001.concat_ws('-', tax1_barbA, tax2_barbA, tax3_barbA)), list(barbb_001.concat_ws('-', tax1_barbB, tax2_barbB, tax3_barbB)), list(barbc_001.concat_ws('-', tax1_barbC, tax2_barbC, tax3_barbC))), 'histogram')"
+        "soil_fauna_density": "sum(tsbf_001.nomb_tsbf) / (20^2 * pi() / 10000)",
+        "soil_fauna_diversity": "list_unique(list(tsbf_001.concat_ws('-', tax1_tsbf, tax2_tsbf, tax3_tsbf)))",
+        "soil_fauna_abundance_tax1": "histogram(tsbf_001.tax1_tsbf)",
+        "soil_fauna_abundance_tax2": "histogram(tsbf_001.tax2_tsbf)",
+        "soil_fauna_abundance_tax3": "histogram(tsbf_001.tax3_tsbf)",
+        "surface_fauna_density": "sum(barba_001.nomb_barbA + barbb_001.nomb_barbB + barbc_001.nomb_barbC + barbd_001.nomb_barbD) / (20^2 * pi() / 10000)",
+        "surface_fauna_diversity": "list_unique(list_concat(list(barba_001.concat_ws('-', tax1_barbA, tax2_barbA, tax3_barbA)), list(barbb_001.concat_ws('-', tax1_barbB, tax2_barbB, tax3_barbB)), list(barbc_001.concat_ws('-', tax1_barbC, tax2_barbC, tax3_barbC)), list(barbd_001.concat_ws('-', tax1_barbD, tax2_barbD, tax3_barbD))))",
+        "surface_fauna_abundance_tax1": "list_aggregate(list_concat(list(barba_001.tax1_barbA), list(barbb_001.tax1_barbB), list(barbc_001.tax1_barbC), list(barbd_001.tax1_barbD)), 'histogram')",
+        "surface_fauna_abundance_tax2": "list_aggregate(list_concat(list(barba_001.tax2_barbA), list(barbb_001.tax2_barbB), list(barbc_001.tax2_barbC), list(barbd_001.tax2_barbD)), 'histogram')",
+        "surface_fauna_abundance_tax3": "list_aggregate(list_concat(list(barba_001.tax3_barbA), list(barbb_001.tax3_barbB), list(barbc_001.tax3_barbC), list(barbd_001.tax3_barbD)), 'histogram')"
       },
       "popup": {
         "trigger": "click"
