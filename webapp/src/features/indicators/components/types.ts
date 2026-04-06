@@ -1,14 +1,15 @@
 import type { ReactNode } from "react";
 
-type IndicatorDivider = { type: "divider" };
+export type IndicatorDivider = { type: "divider" };
 
-type IndicatorDate = { type: "date"; date: string };
+export type IndicatorDate = { type: "date"; date: string };
 
 type IndicatorSection = {
   type: "section";
   title: string;
   iconStart?: ReactNode;
   children: ReactNode;
+  identifier: string;
 };
 
 type IndicatorCustomNode = { type: "customNode"; children: ReactNode };

@@ -6,16 +6,16 @@ import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import { ChartForestPotential } from "./chart-forest-potential";
-import type { FormattedData } from "./format-data";
+import { useFormatBiodiversityData } from "./format-data";
+import type { BiodiversityData } from "./types";
 
 export const useBiodiversityIndicatorElements = (
-  data: FormattedData,
+  rawData: BiodiversityData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("translations");
+  const data = useFormatBiodiversityData(rawData);
 
   return [
-    { date: data.date, type: "date" },
-    { type: "divider" },
     {
       children: (
         <>
@@ -30,6 +30,7 @@ export const useBiodiversityIndicatorElements = (
           />
         </>
       ),
+      identifier: "biomass",
       title: t("indicators.biodiversity.sections.biomass.title"),
       type: "section",
     },
@@ -52,6 +53,7 @@ export const useBiodiversityIndicatorElements = (
           />
         </>
       ),
+      identifier: "tree-diversity",
       title: t("indicators.biodiversity.sections.treeDiversity.title"),
       type: "section",
     },
@@ -98,6 +100,7 @@ export const useBiodiversityIndicatorElements = (
         </>
       ),
       iconStart: <BinocularsIcon size={ICON_SIZE} />,
+      identifier: "indicator-species",
       title: t("indicators.biodiversity.sections.indicatorSpecies.title"),
       type: "section",
     },
@@ -111,6 +114,7 @@ export const useBiodiversityIndicatorElements = (
           }}
         />
       ),
+      identifier: "forest-potential-level",
       title: t("indicators.biodiversity.sections.forestPotentialLevel.title"),
       type: "section",
     },

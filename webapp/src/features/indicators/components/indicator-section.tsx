@@ -14,7 +14,7 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
     <section className="flex flex-col w-full gap-sm">
       <div className="flex flex-row items-center gap-xs">
         {iconStart}
-        <h5 className="text-xs">{title}</h5>
+        <h5 className="font-medium text-xs">{title}</h5>
       </div>
       {children}
     </section>
