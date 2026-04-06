@@ -64,14 +64,14 @@
         "ero_wind": "count(1)",
         "ero_soil_cover": "count(1)",
         "ero_slope": "count(1)",
-        "ero_soil_stability": "count(1)",
-        "ero_water_seepage": "count(1)",
+        "ero_soil_stability": "(int(slak1) + int(slak2) + int(slak3)) / 3",
+        "ero_water_seepage": "600 * 300 / ((beer1 + beer2 + beer3 + beer4 + beer5 + beer6 + beer7 + beer8 + beer9 + beer10) * pi() * 30^2) if beer1 != 0 else 0",
         "soil_fauna_density": "count(1)",
         "soil_fauna_diversity": "count(1)",
-        "soil_fauna_abundance": "count(1)",
+        "soil_fauna_abundance": "list_aggregate(list(tsbf_001.concat_ws('-', tax1_tsbf, tax2_tsbf, tax3_tsbf)), 'histogram')",
         "surface_fauna_density": "count(1)",
         "surface_fauna_diversity": "count(1)",
-        "surface_fauna_abundance": "count(1)"
+        "surface_fauna_abundance": "list_aggregate(list_concat(list(barba_001.concat_ws('-', tax1_barbA, tax2_barbA, tax3_barbA)), list(barbb_001.concat_ws('-', tax1_barbB, tax2_barbB, tax3_barbB)), list(barbc_001.concat_ws('-', tax1_barbC, tax2_barbC, tax3_barbC)), list(barbd_001.concat_ws('-', tax1_barbD, tax2_barbD, tax3_barbD))), 'histogram')"
       },
       "popup": {
         "trigger": "click"
@@ -88,6 +88,22 @@
       "columns": {
         "geom": "centroid(merge(point(socio_eco_gps.long, socio_eco_gps.latit)))",
         "population": "sum(hab)"
+      },
+      "popup": {
+        "trigger": "click"
+      }
+    },
+    {
+      "id": "seed",
+      "type": "datapackage",
+      "path": "../catalog/seed/datapackage.json",
+      "resource": "survey",
+      "columns": {
+        "geom": "centroid(geom)",
+        "orga": "votre_orga",
+        "responsable": "nom_du_res",
+        "date_plantation": "date_de_pl",
+        "prelevement_mangrove": "trace_de_p"
       },
       "popup": {
         "trigger": "click"

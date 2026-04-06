@@ -64,6 +64,7 @@ coordo add-foreignkey ind.ess_arb dens_bois.ess_arb --package catalog/inventaire
 coordo load kobotoolbox data/20240808_EnqueteMenage_CDF_QuestionnaireK.xlsx data/20241007_EnqueteMenage_CDF_Donnees.csv --package catalog/enquete
 coordo load file data/socio_eco_gps.csv --package catalog/enquete
 coordo add-foreignkey enquete_menage_cdf.admi2 socio_eco_gps.admi2 --package catalog/enquete
+coordo load file data/survey.zip --package catalog/seed
 ```
 
 ### Launch the backend
