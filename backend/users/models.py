@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import AutoField
+from django.db.models import AutoField, CharField
 
 class CustomUser(AbstractUser):
     id = AutoField(primary_key=True)
