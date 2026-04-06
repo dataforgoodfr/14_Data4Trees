@@ -33,3 +33,6 @@ services:
 networks:
   d4g-internal:
     external: true
+
+volumes:
+  backend_db:
