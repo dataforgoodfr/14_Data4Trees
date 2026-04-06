@@ -5,7 +5,7 @@ if [ -d "data" ]; then
 else
     echo "Data directory does not exist, downloading from S3."
     AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY aws s3 sync s3://coordonnees-upload ./data --delete --endpoint-url https://s3.fr-par.scw.cloud --region fr-par
-fi 
+fi
 
 if [ -d "catalog" ]; then
     echo "Catalog directory already exists, skipping data loading."
@@ -26,6 +26,9 @@ else
     python manage.py collectstatic
 fi
 
+echo "Migrating database..."
 python manage.py migrate
+echo "Creating superuser..."
 python manage.py createsuperuser --noinput
+echo "Starting server..."
 python manage.py runserver 0.0.0.0:8000

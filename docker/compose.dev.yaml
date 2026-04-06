@@ -1,8 +1,7 @@
 services:
   backend:
     volumes:
-      - ../backend:/app
-      - /app/.venv # anonymous volume: to avoid python environment from being erased during the mapping
+      - ../backend:/app # map local backend directory to container's /app directory for reactive development
     ports:
       - "8000:8000"
     environment:
