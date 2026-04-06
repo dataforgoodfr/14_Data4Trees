@@ -34,6 +34,14 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Coordo package
+
+When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command:
+
+```bash
+pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git#subdirectory=coordo-py
+```
+
 ### Prepare the database
 
 1. Migrate database tables into the database
