@@ -9,6 +9,7 @@ import { useTranslation } from "@i18n";
 
 import type { CheckedState } from "@ui/checkbox";
 
+import { AllOrNoneSelector } from "./all-or-none-selector";
 import { CategoriesCheckboxGroup } from "./categories-checkbox-group";
 import { useCategoriesConfig } from "./use-categories-config";
 
@@ -49,6 +50,8 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
 
   return (
     <div className="flex flex-col gap-md">
+      <AllOrNoneSelector />
+
       <CategoriesCheckboxGroup
         disabled={disabled}
         getIsChecked={(identifier) => categoriesFilters[identifier]}

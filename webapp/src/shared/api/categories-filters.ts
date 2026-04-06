@@ -6,7 +6,7 @@ import { LAYERS } from "./layers";
 export const CATEGORY_IDENTIFIERS = {
   ACTION_DIVERSITY: "action-tree-diversity",
   ACTION_INVENTARY: `action-forest_${LAYERS.INVENTARY}`,
-  ACTION_SOCIO: "action-socio-eco",
+  ACTION_SOCIO: `action-socio-eco_${LAYERS.ENQUETE}`,
   DATA_GROUND: "data-ground",
   DATA_MODEL: "data-model",
   DATA_SATELLITE: `data_${LAYERS.SATELLITE}`,
