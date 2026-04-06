@@ -3,6 +3,7 @@ from django.db.models import AutoField
 
 class CustomUser(AbstractUser):
     id = AutoField(primary_key=True)
+    project = CharField("projet", max_length=30, blank=True, null=True)
 
     class Meta:
         verbose_name = "User"
