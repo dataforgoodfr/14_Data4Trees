@@ -1,12 +1,26 @@
 import { i18nInstance } from "@shared/i18n";
 
-import type { UseIndicatorReturnType } from "./components/types";
+import type { IndicatorDate, IndicatorDivider } from "./components/types";
 
-export const useDateElement = (): UseIndicatorReturnType => {
+type UseDateElementProps = {
+  withDivider?: boolean;
+};
+
+export const useDateElement = ({
+  withDivider,
+}: UseDateElementProps):
+  | [IndicatorDate]
+  | [IndicatorDate, IndicatorDivider] => {
   /** @todo Replace with date from backend data */
   const date = Intl.DateTimeFormat(i18nInstance.language, {
     dateStyle: "short",
   }).format(new Date());
 
-  return [{ date: date, type: "date" }, { type: "divider" }];
+  const dateElement = { date: date, type: "date" } as const;
+
+  if (withDivider) {
+    return [dateElement, { type: "divider" }];
+  }
+
+  return [dateElement];
 };

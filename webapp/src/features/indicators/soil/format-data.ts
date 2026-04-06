@@ -1,11 +1,8 @@
 import { precise } from "@shared/lib/utils";
+import type { NumericKeys } from "@shared/types";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
 import type { SoilData } from "./types";
-
-type NumericKeys<T> = {
-  [K in keyof T]: T[K] extends number ? K : never;
-}[keyof T];
 
 const indicatorsToPrecise: NumericKeys<SoilData>[] = [
   "soil_structure",

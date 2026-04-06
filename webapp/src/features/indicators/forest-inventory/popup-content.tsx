@@ -34,7 +34,7 @@ export const ForestInventoryPopupContent: FC<
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
-  const dateElement = useDateElement();
+  const dateElement = useDateElement({ withDivider: false });
   const biodiversityElements = useBiodiversityIndicatorElements(data);
   const soilElements = useSoilIndicatorElements(data);
 
@@ -53,7 +53,7 @@ export const ForestInventoryPopupContent: FC<
       <IndicatorPopupHeader
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={subtitles[selectedTab] ?? ""}
+        subtitle={dateElement[0].date}
         title={title}
       />
 
@@ -74,8 +74,6 @@ export const ForestInventoryPopupContent: FC<
       />
 
       <IndicatorScrollContainer>
-        <IndicatorElements elements={dateElement} />
-
         <Activity
           mode={selectedTab === TABS.BIODIVERSITY ? "visible" : "hidden"}
         >
