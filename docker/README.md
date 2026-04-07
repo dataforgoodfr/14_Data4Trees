@@ -22,19 +22,33 @@ docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up
 
 Vous pouvez accéder à l'application en tapant `http://localhost:5173/` dans la barre d'adresse de votre navigateur.
 
->[!TIP]
->Pour forcer le build complet des applications (si vous ajoutez une dépendance par exemple):
->```bash
->docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up --build
->```
->
->Pour ne lancer que le backend:
->```bash
->docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up backend
->```
-
 >[!IMPORTANT]
 >Si vous voulez vous connecter en tant qu'admin à l'application locale, le nom d'utilisateur ainsi que le mot de passe sont accessibles [ici](./compose.dev.yaml#L8).
+
+## Tips
+
+Pour forcer le build complet des applications (si vous ajoutez une dépendance par exemple):
+```bash
+docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up --build
+```
+
+Pour ne lancer que le backend:
+```bash
+docker compose -f docker/compose.yaml -f docker/compose.dev.yaml up backend
+```
+
+>[!NOTE]
+>`docker` garde un build cache afin de ne pas avoir à tout télécharger chaque chaque fois et ainsi rendre le `build` plus rapide.
+>De ce fait, si des changements ont été fait côté `coordo`, il se pourrait que `docker` ne les télécharge pas automatiquement.
+>Dans ce cas, vous pouvez forcer le `build` complet avec:
+>```bash
+>docker compose -f docker/compose.dev.yaml build --no-cache
+>```
+>et relancer l'application
+>Si vous avez toujours un problème, vous pouvez tenter de supprimer les containers / images et volumes avec:
+>```
+>docker system prune -a --volumes
+>```
 
 
 ## Environnement de staging
