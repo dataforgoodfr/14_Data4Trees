@@ -37,7 +37,9 @@ docker compose -f docker/compose.dev.yaml up --build
 ```
 
 >[!NOTE]
->`docker` garde un build cache afin de ne pas avoir à tout télécharger chaque chaque fois et ainsi rendre le `build` plus rapide. De ce fait, >si >des changements ont été fait côté `coordo`, il se pourrait que `docker` ne les télécharge pas automatiquement. Dans ce cas, vous pouvez forcer >le >`build` complet avec:
+>`docker` garde un build cache afin de ne pas avoir à tout télécharger chaque chaque fois et ainsi rendre le `build` plus rapide. 
+>De ce fait, si des changements ont été fait côté `coordo`, il se pourrait que `docker` ne les télécharge pas automatiquement. 
+>Dans ce cas, vous pouvez forcer le `build` complet avec:
 >```bash
 >docker compose -f docker/compose.dev.yaml build --no-cache
 >```
