@@ -32,7 +32,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   className,
 }) => {
   const { t } = useTranslation("translations");
-  const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
+  const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
 
   const dateElement = useDateElement({ withDivider: false });
   const formattedData = useFormatSocioEcoData(data);
@@ -61,16 +61,12 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
         onChange={(value) => setSelectedTab(value as TabKind)}
         options={[
           {
-            id: TABS.WOOD,
-            label: subtitles[TABS.WOOD],
+            id: TABS.RESOURCES,
+            label: subtitles[TABS.RESOURCES],
           },
           {
-            id: TABS.FOOD,
-            label: subtitles[TABS.FOOD],
-          },
-          {
-            id: TABS.SOIL,
-            label: subtitles[TABS.SOIL],
+            id: TABS.ECONOMY,
+            label: subtitles[TABS.ECONOMY],
           },
         ]}
         value={selectedTab}

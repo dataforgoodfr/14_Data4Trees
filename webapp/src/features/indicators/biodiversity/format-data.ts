@@ -1,4 +1,4 @@
-import { precise } from "@shared/lib/utils";
+import { preciseNumericIndicators } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
@@ -24,14 +24,7 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
   const { formatWithUnit } = useFormatterWithUnit();
 
-  const safeData = Object.fromEntries(
-    Object.entries(data).map(([key, value]) => [
-      key,
-      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value))
-        : value,
-    ]),
-  ) as BiodiversityData;
+  const safeData = preciseNumericIndicators(data, indicatorKeys);
 
   return {
     biomass: {

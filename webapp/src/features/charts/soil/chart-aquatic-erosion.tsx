@@ -55,6 +55,8 @@ export const ChartAquaticErosion: FC<ChartAquaticErosionProps> = ({
     },
   ];
 
+
+  console.log("chartData for aqautic erosion", chartData);
   return (
     <ChartRadarWithBenefAndControl
       chartData={chartData}

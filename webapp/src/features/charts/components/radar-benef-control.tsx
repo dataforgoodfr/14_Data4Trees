@@ -37,6 +37,8 @@ export const ChartRadarWithBenefAndControl: FC<
     },
   };
 
+  console.log("chartConfig", chartConfig);
+  console.log("chartData", chartData);
   return (
     <Card>
       <CardHeader className="items-center">
@@ -74,7 +76,7 @@ export const ChartRadarWithBenefAndControl: FC<
             {withTemoin && (
               <ChartLegend
                 className="mt-md"
-                content={<ChartLegendContent />}
+                content={<ChartLegendContent payload={undefined} />}
               />
             )}
           </RadarChart>

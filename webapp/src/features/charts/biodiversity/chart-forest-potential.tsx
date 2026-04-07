@@ -104,6 +104,9 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
       },
     ];
 
+  
+  console.log("chartConfig for forest potential", chartConfig);
+  console.log("chartData for forest potential", chartData);
   return (
     <Card>
       <CardContent className="p-2 mx-2">

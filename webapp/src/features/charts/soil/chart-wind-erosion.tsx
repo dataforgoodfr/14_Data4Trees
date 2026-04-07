@@ -43,6 +43,8 @@ export const ChartWindErosion: FC<ChartWindErosionProps> = ({
     },
   ];
 
+
+  console.log("chartData for wind erosion", chartData);
   return (
     <ChartRadarWithBenefAndControl
       chartData={chartData}

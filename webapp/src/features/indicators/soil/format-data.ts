@@ -7,17 +7,11 @@ import type { SoilData } from "./types";
 const indicatorsToPrecise: NumericKeys<SoilData>[] = [
   "soil_structure",
   "soil_composition",
-  "ero_rainfall",
-  "ero_wind",
-  "ero_soil_cover",
-  "ero_slope",
   "ero_soil_stability",
   "ero_water_seepage",
   "soil_fauna_density",
   "soil_fauna_diversity",
-  "soil_fauna_abundance",
   "surface_fauna_density",
-  "surface_fauna_abundance",
   "surface_fauna_diversity",
 ] as const;
 
@@ -35,12 +29,15 @@ export const useFormatSoilData = (data: SoilData) => {
     surface_fauna_density,
     ...safeData
   } = Object.fromEntries(
-    Object.entries(data).map(([key, value]) => [
+    Object.entries(data).map(([key, value]) => {
+      console.log(`Processing soil data key: ${key}, value: ${value}`);
+      return [
       key,
       indicatorsToPrecise.includes(key as (typeof indicatorsToPrecise)[number])
         ? precise(Number(value))
-        : value,
-    ]),
+        : value || 'Donnée non renseignée',
+    ]
+    }),
   ) as SoilData;
 
   return {
