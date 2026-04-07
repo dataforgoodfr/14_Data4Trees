@@ -10,7 +10,7 @@ services:
       - traefik.docker.network=d4g-internal
       - traefik.http.services.backend.loadbalancer.server.port=8000
     volumes:
-      - backend_db:/app/db # Persist user db
+      - backend_db_test:/app/db # Persist user db
     networks:
       - d4g-internal
 
@@ -35,4 +35,4 @@ networks:
     external: true
 
 volumes:
-  backend_db:
+  backend_db_test:
