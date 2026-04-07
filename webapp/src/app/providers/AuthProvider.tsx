@@ -8,18 +8,19 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAuthLoading, setIsAuthLoading] = useState(false);
+  // Why isAuthLoading true by default ? Prevent mounting #map too early, since the map ref needs to be attached once
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
     if (!storedToken) {
+      setIsAuthLoading(false);
       return;
     }
 
     async function checkToken(token: string) {
-      setIsAuthLoading(true);
       try {
         const isValid = await verifyToken(token);
         if (isValid) {
