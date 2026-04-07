@@ -1,5 +1,6 @@
 services:
   backend:
+    build: ../backend
     ports:
       - 8000
     labels:
@@ -13,8 +14,24 @@ services:
       - backend_db:/app/db # Persist user db
     networks:
       - d4g-internal
+    healthcheck:
+      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in Django
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m" # adjust as needed
+        max-file: "3"
 
   webapp:
+    build: ../webapp
+    depends_on:
+      backend:
+        condition: service_healthy
     ports:
       - 5173
     labels:
@@ -29,6 +46,18 @@ services:
       - d4g-internal
     environment:
       - VITE_API_URL=/api
+    healthcheck:
+      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in frontend
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m" # adjust as needed
+        max-file: "3"
 
 networks:
   d4g-internal:
