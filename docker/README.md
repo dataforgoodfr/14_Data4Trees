@@ -62,7 +62,7 @@ Data4Good utilise [Coolify](https://coolify.io/) pour le déploiement de ses app
 
 En premier lieu, pour chaque PR, il convient de déployer le code de la branche sur l'environnement de test.
 Le déploiement de staging va utiliser les fichiers `docker/compose.yaml` et `docker/compose.test.yaml`.
-L'application de staging est disponible à l'adresse: [https://test.data4trees.services.d4g.fr/](https://test.data4trees.services.d4g.fr/).
+L'application de staging est disponible à l'adresse: [https://test-data4trees.services.d4g.fr/](https://test-data4trees.services.d4g.fr/).
 
 
 ### Déploiement en staging

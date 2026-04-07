@@ -23,7 +23,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     allowedHosts: [
-      "test.data4trees.services.d4g.fr",
+      "test-data4trees.services.d4g.fr",
       "data4trees.services.d4g.fr",
     ],
   },
