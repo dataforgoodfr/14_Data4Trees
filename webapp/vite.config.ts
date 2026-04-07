@@ -24,7 +24,7 @@ export default defineConfig({
   server: {
     allowedHosts: [
       "test.data4trees.services.d4g.fr",
-      "staging.data4trees.services.d4g.fr",
+      "data4trees.services.d4g.fr",
     ],
   },
 });

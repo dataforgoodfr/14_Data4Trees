@@ -67,7 +67,7 @@ L'application de staging est disponible à l'adresse: [https://test.data4trees.s
 
 ### Déploiement en staging
 
-Pour les asociations, une vraie application de staging est dispo à l'adresse [https://staging.data4trees.services.d4g.fr/](https://staging.data4trees.services.d4g.fr/)
+Pour les asociations, une vraie application de staging est dispo à l'adresse [https://data4trees.services.d4g.fr/](https://data4trees.services.d4g.fr/)
 Le déploiement de staging va utiliser les fichiers `docker/compose.yaml` et `docker/compose.staging.yaml`.
 
 ### Session admin

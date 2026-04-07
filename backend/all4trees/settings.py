@@ -28,12 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "test.data4trees.services.d4g.fr",
-    "staging.data4trees.services.d4g.fr",
+    "data4trees.services.d4g.fr",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://test.data4trees.services.d4g.fr",
-    "https://staging.data4trees.services.d4g.fr",
+    "https://data4trees.services.d4g.fr",
 ]
 
 # Application definition
@@ -120,7 +120,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://test.data4trees.services.d4g.fr",
-    "https://staging.data4trees.services.d4g.fr",
+    "https://data4trees.services.d4g.fr",
 ]
 
 # Enable credentials (e.g., cookies) if needed
