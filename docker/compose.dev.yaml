@@ -1,5 +1,6 @@
 services:
   backend:
+    build: ../backend
     volumes:
       - ../backend:/app # map local backend directory to container's /app directory for reactive development
     ports:
@@ -10,11 +11,39 @@ services:
       - DJANGO_SUPERUSER_PASSWORD=doe
       - WHITENOISE_AUTOREFRESH=True
     env_file: "../.env"
+    healthcheck:
+      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in Django
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m" # adjust as needed
+        max-file: "3"
 
   webapp:
+    build: ../webapp
+    depends_on:
+      backend:
+        condition: service_healthy
     volumes:
       - ../webapp:/app
       - /app/node_modules # anonymous volume: to avoid node modules from being erased during the mapping
     ports:
       - "5173:5173"
     command: ["npm", "run", "docker:dev"]
+    healthcheck:
+      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in frontend
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m" # adjust as needed
+        max-file: "3"
