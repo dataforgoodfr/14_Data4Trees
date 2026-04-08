@@ -74,7 +74,7 @@ export const ChartRadarWithBenefAndControl: FC<
             {withTemoin && (
               <ChartLegend
                 className="mt-md"
-                content={<ChartLegendContent payload={undefined} />}
+                content={<ChartLegendContent />}
               />
             )}
           </RadarChart>
