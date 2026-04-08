@@ -58,6 +58,7 @@ export const ChartEnergySources: FC<BarChartProps> = ({ data }) => {
     },
   ];
 
+  console.log("Chart data for energy sources:", chartData);
   return (
     <div className="flex flex-col justify-between gap-sm flex-1">
       <p className="text-muted-foreground">

@@ -1,3 +1,5 @@
+import { BinocularsIcon } from "lucide-react";
+
 import {
   ChartEnergySources,
   ChartWoodEnergyNeeds,
@@ -5,12 +7,11 @@ import {
 import { ChartLumberNeeds } from "@features/charts/socio-eco/chart-lumber-needs";
 
 import { useTranslation } from "@i18n";
-import { ICON_SIZE } from "../components/constants";
 
+import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import type { FormattedData } from "./format-data";
-import { BinocularsIcon } from "lucide-react";
 
 export const useSocioEcoIndicatorElements = (
   data: FormattedData,

@@ -34,12 +34,10 @@ export const ForestInventoryPopupContent: FC<
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
-  console.log("Received data for Forest Inventory Popup:", data);
   const dateElement = useDateElement({ withDivider: false });
   const biodiversityElements = useBiodiversityIndicatorElements(data);
   const soilElements = useSoilIndicatorElements(data);
 
-  console.log(`Displaying Popup for place for:${data.for} with cod:${data.cod}`);
   const title = t("popup.forest-inventory.title", {
     code: data.cod,
     label: FORESTS_MAP.get(data.for)?.label || `n°${data.for}`,

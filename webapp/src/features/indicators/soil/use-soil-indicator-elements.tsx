@@ -14,7 +14,7 @@ export const useSoilIndicatorElements = (
   const { t } = useTranslation("translations");
 
   console.log("Raw soil data received for formatting:", rawData);
-  
+
   const data = useFormatSoilData(rawData);
 
   console.log("Formatted soil data for UI:", data);

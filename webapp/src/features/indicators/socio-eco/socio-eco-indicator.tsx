@@ -38,6 +38,9 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const formattedData = useFormatSocioEcoData(data);
   const socioEcoElements = useSocioEcoIndicatorElements(formattedData);
 
+  console.log("Raw socio-economic data received for formatting:", data);
+  console.log("Formatted socio-economic data for UI:", formattedData);
+  console.log("Socio-economic indicator elements for UI:", socioEcoElements);
   const title = t("popup.socio-eco.title", {
     village: data.admi2,
   });

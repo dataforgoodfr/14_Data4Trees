@@ -1,4 +1,3 @@
-import { i18nInstance, useTranslation } from "@shared/i18n";
 import { precise } from "@shared/lib/utils";
 
 import { UNITS, useFormatterWithUnit } from "../utils";
@@ -59,7 +58,6 @@ const indicatorKeys: NumericKeys<SocioEcoData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatSocioEcoData = (data: SocioEcoData) => {
-  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
   const safeData = Object.fromEntries(
@@ -72,9 +70,6 @@ export const useFormatSocioEcoData = (data: SocioEcoData) => {
   ) as SocioEcoData;
 
   return {
-    date: Intl.DateTimeFormat(i18nInstance.language, {
-      dateStyle: "short",
-    }).format(new Date()), // to replace
     economy: {
       estateIndex: 0,
       incomeEvolution: 0,
@@ -109,9 +104,6 @@ export const useFormatSocioEcoData = (data: SocioEcoData) => {
       },
       conflictIndex: 0,
     },
-    title: t("popup.socio-eco.title", {
-      village: data.admi2,
-    }),
     wood: {
       collectionTime: 0,
       energyConsumption: formatWithUnit(0, UNITS.m3PerHabPerYear),

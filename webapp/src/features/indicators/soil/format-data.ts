@@ -30,13 +30,14 @@ export const useFormatSoilData = (data: SoilData) => {
     ...safeData
   } = Object.fromEntries(
     Object.entries(data).map(([key, value]) => {
-      console.log(`Processing soil data key: ${key}, value: ${value}`);
       return [
-      key,
-      indicatorsToPrecise.includes(key as (typeof indicatorsToPrecise)[number])
-        ? precise(Number(value))
-        : value || 'Donnée non renseignée',
-    ]
+        key,
+        indicatorsToPrecise.includes(
+          key as (typeof indicatorsToPrecise)[number],
+        )
+          ? precise(Number(value))
+          : value || "Donnée non renseignée",
+      ];
     }),
   ) as SoilData;
 

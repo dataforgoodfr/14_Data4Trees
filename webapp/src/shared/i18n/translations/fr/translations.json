@@ -71,6 +71,7 @@
           "volume": "Volume de biomasse"
         },
         "forestPotentialLevel": {
+          "chart-title": "Indice d’écopotentialité forestière",
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
@@ -78,7 +79,7 @@
           "microhabitat": "Dendro-microhabitats",
           "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
           "spatialDistribution": "Distribution spatiale",
-          "title": "Indice d’écopotentialité forestière",
+          "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
         },
         "indicatorSpecies": {

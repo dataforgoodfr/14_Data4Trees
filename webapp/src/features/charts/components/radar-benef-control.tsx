@@ -37,8 +37,6 @@ export const ChartRadarWithBenefAndControl: FC<
     },
   };
 
-  console.log("chartConfig", chartConfig);
-  console.log("chartData", chartData);
   return (
     <Card>
       <CardHeader className="items-center">

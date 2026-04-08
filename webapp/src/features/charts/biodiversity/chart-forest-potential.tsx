@@ -1,26 +1,10 @@
 import type { FC } from "react";
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 import type { FormattedData } from "@features/indicators/biodiversity/format-data";
 
 import { useTranslation } from "@i18n";
 
-import { Card, CardContent } from "@ui/card";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@ui/chart";
-
-const radarConfig = {
-  dot: {
-    fillOpacity: 1,
-    r: 2,
-  },
-  fillOpacity: 0.5,
-  strokeWidth: 2,
-} as const;
+import { ChartRadarWithBenefAndControl } from "../components/radar-benef-control";
 
 type ChartForestPotentialProps = {
   data: FormattedData["forestPotentialLevel"];
@@ -31,18 +15,6 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
 }) => {
   const { t } = useTranslation("translations");
   const { benef, temoin } = data;
-
-  const chartConfig: ChartConfig = {
-    benef: {
-      color: "var(--chart-1)",
-      label: "Benef.", // todo: i18n
-    },
-    temoin: {
-      color: "var(--chart-2)",
-      // todo: change name
-      label: "Temoin", // todo: i18n
-    },
-  };
 
   const chartData: Array<{ indicator: string; benef: number; temoin: number }> =
     [
@@ -104,38 +76,13 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
       },
     ];
 
-  
-  console.log("chartConfig for forest potential", chartConfig);
-  console.log("chartData for forest potential", chartData);
   return (
-    <Card>
-      <CardContent className="p-2 mx-2">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-62.5"
-          config={chartConfig}
-        >
-          <RadarChart data={chartData}>
-            <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
-              cursor={true}
-            />
-            <PolarAngleAxis dataKey="indicator" />
-            <PolarGrid radialLines={true} />
-            <Radar
-              dataKey="benef"
-              fill="var(--color-benef)"
-              stroke="var(--color-benef)"
-              {...radarConfig}
-            />
-            <Radar
-              dataKey="temoin"
-              fill="var(--color-temoin)"
-              stroke="var(--color-temoin)"
-              {...radarConfig}
-            />
-          </RadarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <ChartRadarWithBenefAndControl
+      chartData={chartData}
+      title={t(
+        "indicators.biodiversity.sections.forestPotentialLevel.chart-title",
+      )}
+      withTemoin={!!temoin}
+    />
   );
 };
