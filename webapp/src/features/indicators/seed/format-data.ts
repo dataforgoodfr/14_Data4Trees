@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export type SeedData = {
   id: string;
   orga: string;
@@ -11,10 +13,11 @@ export type SeedData = {
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatSeedData = (data: SeedData) => {
+  const { t } = useTranslation("translations");
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,
-      value || "Donnée non renseignée",
+      value || t('indicators.undefined'),
     ]),
   ) as SeedData;
 };

@@ -118,8 +118,9 @@
       "type": "datapackage",
       "path": "../catalog/seed/datapackage.json",
       "resource": "survey",
+      "minzoom": 13,
       "columns": {
-        "geom": "centroid(geom)",
+        "geom": "geom",
         "id": "OGC_FID",
         "orga": "votre_orga",
         "responsable": "nom_du_res",
@@ -127,6 +128,19 @@
         "type_plant": "type_de_pl",
         "prelevement_mangrove": "trace_de_p"
       },
+      "popup": {
+        "trigger": "click"
+      }
+    },
+    {
+      "id": "seed_point",
+      "type": "datapackage",
+      "path": "../catalog/seed/datapackage.json",
+      "resource": "survey",
+      "columns": {
+        "geom": "centroid(geom)"
+      },
+      "maxzoom": 13,
       "popup": {
         "trigger": "click"
       }

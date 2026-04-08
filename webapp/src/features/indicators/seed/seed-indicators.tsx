@@ -1,4 +1,5 @@
 import { cx } from "class-variance-authority";
+import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import type { FC } from "react";
 
@@ -15,6 +16,7 @@ import { useSeedIndicatorElements } from "./use-seed-indicator-elements";
 type SeedIndicatorProps = {
   onClose: () => void;
   data: SeedData;
+  metadata: LayerMetadata;
   className?: string;
 };
 

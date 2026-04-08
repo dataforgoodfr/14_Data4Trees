@@ -1,35 +1,7 @@
-import { precise } from "@shared/lib/utils";
-
-import { UNITS, useFormatterWithUnit } from "../utils";
-
-export type SocioEcoData = {
-  admi2: string;
-  population: number;
-  collectedWoodEnergy: number;
-  boughtWoodEnergy: number;
-  coalEnergy: number;
-  organicWasteEnergy: number;
-  animalWasteEnergy: number;
-  gasEnergy: number;
-  otherEnergy: number;
-  woodEnergyConsumption: number;
-  woodEnergyNeeds: number[];
-  woodCollectionTime: number;
-  lumberNeeds: number;
-  foodDiversity: number;
-  autoConsumtionNeeds: number;
-  hungryGap: number;
-  incomeSources: number;
-  incomeEvolution: number;
-  estateIndex: number;
-  livingConditionsPercreption: number;
-  conflictIndex: number;
-  beneficialPractices: number;
-};
-
-type NumericKeys<T> = {
-  [K in keyof T]: T[K] extends number ? K : never;
-}[keyof T];
+import { preciseNumericIndicators, UNITS, useFormatterWithUnit } from "../utils";
+import { useTranslation } from "react-i18next";
+import type { NumericKeys } from "@shared/types";
+import type { SocioEcoData } from "./types";
 
 const indicatorKeys: NumericKeys<SocioEcoData>[] = [
   "population",
@@ -58,28 +30,25 @@ const indicatorKeys: NumericKeys<SocioEcoData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatSocioEcoData = (data: SocioEcoData) => {
+  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
-  const safeData = Object.fromEntries(
-    Object.entries(data).map(([key, value]) => [
-      key,
-      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value))
-        : value,
-    ]),
-  ) as SocioEcoData;
+  const safeData = preciseNumericIndicators<SocioEcoData>(data, indicatorKeys, t('indicators.undefined'))
 
   return {
     economy: {
       estateIndex: 0,
-      incomeEvolution: 0,
-      incomeNbOfSources: 0,
+      incomeEvolution: [],
+      incomeNbOfSources: 1,
       livingConditionsPerception: {
-        dontKnow: 0,
-        gotBetter: 0,
-        gotWorse: 0,
-        stayedTheSame: 0,
+        dontKnow: 2,
+        gotBetter: 1,
+        gotWorse: 5,
+        stayedTheSame: 3,
       },
+      nbAdditionalIncomes: 0,
+      sectorBenefits: 1000,
+      sectorEcoParticipation: 300,
     },
     food: {
       autoConsumptionNeeds: 0,

@@ -180,6 +180,7 @@
       },
       "title": "Données sol"
     },
+    "undefined": "Donnée non renseignée",
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
@@ -194,7 +195,8 @@
   "popup": {
     "forest-inventory.title": "Placette n°{{ code }} dans la forêt {{ label }}",
     "seed.title": "Placette n°{{ id}}",
-    "socio-eco.title": "Village {{ village }}"
+    "socio-eco.title": "Village {{ village }}",
+    "undefined": "non trouvée"
   },
   "seed": {
     "indicator": {

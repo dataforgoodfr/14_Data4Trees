@@ -1,3 +1,4 @@
+import type { LayerMetadata } from "coordo";
 import { type FC, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 
@@ -19,39 +20,48 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const renderInventPopup = (properties: ForestInventoryData) => {
+    const renderInventPopup = (
+      properties: ForestInventoryData,
+      metadata: LayerMetadata,
+    ) => {
       const container = document.createElement("div");
       const root = createRoot(container);
       root.render(
         <ForestInventoryPopupContent
           className="w-75 max-h-87.5"
           data={properties}
+          metadata={metadata}
           onClose={() => root.unmount()}
         />,
       );
       return container;
     };
 
-    const renderEnquetePopup = (properties: SocioEcoData) => {
+    const renderEnquetePopup = (
+      properties: SocioEcoData,
+      metadata: LayerMetadata,
+    ) => {
       const container = document.createElement("div");
       const root = createRoot(container);
       root.render(
         <SocioEcoIndicator
           className="w-75 max-h-87.5"
           data={properties}
+          metadata={metadata}
           onClose={() => root.unmount()}
         />,
       );
       return container;
     };
 
-    const renderSeedPopup = (properties: SeedData) => {
+    const renderSeedPopup = (properties: SeedData, metadata: LayerMetadata) => {
       const container = document.createElement("div");
       const root = createRoot(container);
       root.render(
         <SeedIndicator
           className="w-75 max-h-87.5"
           data={properties}
+          metadata={metadata}
           onClose={() => root.unmount()}
         />,
       );

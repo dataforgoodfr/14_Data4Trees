@@ -1,8 +1,8 @@
-import { preciseNumericIndicators } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
-import { UNITS, useFormatterWithUnit } from "../utils";
+import { preciseNumericIndicators, UNITS, useFormatterWithUnit } from "../utils";
 import type { BiodiversityData } from "./types";
+import { useTranslation } from "react-i18next";
 
 const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "biomass_volume",
@@ -22,9 +22,10 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
+  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
-  const safeData = preciseNumericIndicators(data, indicatorKeys);
+  const safeData = preciseNumericIndicators<BiodiversityData>(data, indicatorKeys, t('indicators.undefined'));
 
   return {
     biomass: {

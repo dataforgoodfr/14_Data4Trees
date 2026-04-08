@@ -1,4 +1,5 @@
 import { cx } from "class-variance-authority";
+import type { LayerMetadata } from "coordo";
 import { TreesIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
@@ -12,12 +13,12 @@ import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "../soil";
 import { useDateElement } from "../use-date-element";
-import { FORESTS_MAP } from "./constants";
 import type { ForestInventoryData } from "./types";
 
 type ForestInventoryPopupContentProps = {
   onClose: () => void;
   data: ForestInventoryData;
+  metadata: LayerMetadata;
   className?: string;
 };
 
@@ -30,7 +31,7 @@ const TABS: Record<string, TabKind> = {
 
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
-> = ({ onClose, data, className }) => {
+> = ({ onClose, data, metadata, className }) => {
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
@@ -40,7 +41,11 @@ export const ForestInventoryPopupContent: FC<
 
   const title = t("popup.forest-inventory.title", {
     code: data.cod,
-    label: FORESTS_MAP.get(data.for)?.label || `n°${data.for}`,
+    label:
+      metadata.schema?.fields
+        .find((f) => f.name === "for")
+        ?.categories?.find((c) => c.value === data.for)?.label ||
+      t("popup.undefined"),
   });
 
   const subtitles = {

@@ -1,4 +1,5 @@
 import { cx } from "class-variance-authority";
+import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
@@ -10,12 +11,13 @@ import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import { useDateElement } from "../use-date-element";
-import type { SocioEcoData } from "./format-data";
 import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
+import type { SocioEcoData } from "./types";
 
 type SocioEcoIndicatorProps = {
   onClose: () => void;
   data: SocioEcoData;
+  metadata: LayerMetadata;
   className?: string;
 };
 

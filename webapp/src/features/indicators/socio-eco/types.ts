@@ -1,0 +1,24 @@
+export type SocioEcoData = {
+  admi2: string;
+  population: number;
+  collectedWoodEnergy: number;
+  boughtWoodEnergy: number;
+  coalEnergy: number;
+  organicWasteEnergy: number;
+  animalWasteEnergy: number;
+  gasEnergy: number;
+  otherEnergy: number;
+  woodEnergyConsumption: number;
+  woodEnergyNeeds: number[];
+  woodCollectionTime: number;
+  lumberNeeds: number;
+  foodDiversity: number;
+  autoConsumtionNeeds: number;
+  hungryGap: number;
+  incomeSources: number;
+  incomeEvolution: number;
+  estateIndex: number;
+  livingConditionsPercreption: number;
+  conflictIndex: number;
+  beneficialPractices: number;
+};
