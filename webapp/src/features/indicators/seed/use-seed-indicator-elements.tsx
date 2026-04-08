@@ -2,7 +2,7 @@ import { useTranslation } from "@i18n";
 
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
-import { type SeedData } from "./format-data";
+import type { SeedData } from "./format-data";
 
 export const useSeedIndicatorElements = (
   data: SeedData,

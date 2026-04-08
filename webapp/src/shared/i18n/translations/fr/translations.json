@@ -193,17 +193,17 @@
   },
   "popup": {
     "forest-inventory.title": "Placette n°{{ code }} dans la forêt {{ label }}",
-    "socio-eco.title": "Village {{ village }}",
-    "seed.title": "Placette n°{{ id}}"
+    "seed.title": "Placette n°{{ id}}",
+    "socio-eco.title": "Village {{ village }}"
   },
   "seed": {
     "indicator": {
       "reboisement": {
-        "title": "Reboisement",
         "orga": "Nom de l'organisation",
+        "prelevement_mangrove": "Prélèvement sur mangrove ?",
         "responsable": "Nom du responsable",
-        "type_plant": "Type de plant",
-        "prelevement_mangrove": "Prélèvement sur mangrove ?"
+        "title": "Reboisement",
+        "type_plant": "Type de plant"
       }
     }
   }

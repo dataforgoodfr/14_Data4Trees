@@ -5,13 +5,13 @@ import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
 } from "@features/indicators/forest-inventory";
+import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   type SocioEcoData,
   SocioEcoIndicator,
 } from "@features/indicators/socio-eco";
 
 import { useMap } from "@shared/hooks/useMap";
-import { SeedIndicator, type SeedData } from "@features/indicators/seed";
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
 import { Card, CardContent, CardHeader, CardTitle } from "@shared/ui/card";

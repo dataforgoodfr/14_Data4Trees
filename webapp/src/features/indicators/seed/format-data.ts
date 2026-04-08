@@ -14,7 +14,7 @@ export const useFormatSeedData = (data: SeedData) => {
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,
-      value || "Donnée non renseignée"
+      value || "Donnée non renseignée",
     ]),
   ) as SeedData;
 };

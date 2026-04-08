@@ -1,6 +1,6 @@
 import { cx } from "class-variance-authority";
 import { UsersIcon } from "lucide-react";
-import { type FC } from "react";
+import type { FC } from "react";
 
 import { useTranslation } from "@i18n";
 
@@ -25,7 +25,10 @@ export const SeedIndicator: FC<SeedIndicatorProps> = ({
 }) => {
   const { t } = useTranslation("translations");
 
-  const dateElement = useDateElement({ withDivider: false, dateStr: data.date_plantation });
+  const dateElement = useDateElement({
+    dateStr: data.date_plantation,
+    withDivider: false,
+  });
   const seedElements = useSeedIndicatorElements(data);
 
   console.log("Raw socio-economic data received for formatting:", data);
@@ -44,7 +47,7 @@ export const SeedIndicator: FC<SeedIndicatorProps> = ({
       />
 
       <IndicatorScrollContainer>
-          <IndicatorElements elements={seedElements} />
+        <IndicatorElements elements={seedElements} />
       </IndicatorScrollContainer>
     </div>
   );
