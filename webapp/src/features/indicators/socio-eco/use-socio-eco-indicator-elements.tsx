@@ -8,7 +8,8 @@ import { useTranslation } from "@i18n";
 
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
-import { type SocioEcoData, useFormatSocioEcoData } from "./format-data";
+import { useFormatSocioEcoData } from "./format-data";
+import type { SocioEcoData } from "./types";
 
 export const useSocioEcoIndicatorElements = (
   rawData: SocioEcoData,
