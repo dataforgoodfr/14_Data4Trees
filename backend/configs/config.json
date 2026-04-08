@@ -120,9 +120,11 @@
       "resource": "survey",
       "columns": {
         "geom": "centroid(geom)",
+        "id": "OGC_FID",
         "orga": "votre_orga",
         "responsable": "nom_du_res",
         "date_plantation": "date_de_pl",
+        "type_plant": "type_de_pl",
         "prelevement_mangrove": "trace_de_p"
       },
       "popup": {

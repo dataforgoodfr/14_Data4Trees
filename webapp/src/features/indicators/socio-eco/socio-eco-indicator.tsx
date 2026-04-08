@@ -1,6 +1,6 @@
 import { cx } from "class-variance-authority";
-import { Activity, UsersIcon } from "lucide-react";
-import { type FC, useState } from "react";
+import { UsersIcon } from "lucide-react";
+import { Activity, type FC, useState } from "react";
 
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
@@ -10,7 +10,7 @@ import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import { useDateElement } from "../use-date-element";
-import { type SocioEcoData, useFormatSocioEcoData } from "./format-data";
+import type { SocioEcoData } from "./format-data";
 import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
 
 type SocioEcoIndicatorProps = {
@@ -35,12 +35,8 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
 
   const dateElement = useDateElement({ withDivider: false });
-  const formattedData = useFormatSocioEcoData(data);
-  const socioEcoElements = useSocioEcoIndicatorElements(formattedData);
+  const socioEcoElements = useSocioEcoIndicatorElements(data);
 
-  console.log("Raw socio-economic data received for formatting:", data);
-  console.log("Formatted socio-economic data for UI:", formattedData);
-  console.log("Socio-economic indicator elements for UI:", socioEcoElements);
   const title = t("popup.socio-eco.title", {
     village: data.admi2,
   });
@@ -81,7 +77,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
         </Activity>
 
         <Activity mode={selectedTab === TABS.ECONOMY ? "visible" : "hidden"}>
-          <IndicatorElements elements={socioEcoElements} />
+          <h1>Elements</h1>
         </Activity>
       </IndicatorScrollContainer>
     </div>

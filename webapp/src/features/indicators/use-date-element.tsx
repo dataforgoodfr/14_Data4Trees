@@ -4,17 +4,19 @@ import type { IndicatorDate, IndicatorDivider } from "./components/types";
 
 type UseDateElementProps = {
   withDivider?: boolean;
+  dateStr?: string;
 };
 
 export const useDateElement = ({
   withDivider,
+  dateStr,
 }: UseDateElementProps):
   | [IndicatorDate]
   | [IndicatorDate, IndicatorDivider] => {
   /** @todo Replace with date from backend data */
   const date = Intl.DateTimeFormat(i18nInstance.language, {
     dateStyle: "short",
-  }).format(new Date());
+  }).format(dateStr ? new Date(dateStr) : new Date());
 
   const dateElement = { date: date, type: "date" } as const;
 

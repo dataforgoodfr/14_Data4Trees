@@ -1,34 +1,13 @@
-import { type FC, useEffect, useState } from "react";
-
-import { getChartData } from "@features/charts/chartClient";
-import {
-  ExampleGraph,
-  type GraphConsoElecProps,
-} from "@features/charts/ExampleGraph";
+import type { FC } from "react";
 
 import { Button } from "@ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover";
-
-type GraphData = {
-  clientByName: {
-    fullName: GraphConsoElecProps["name"];
-    consumptionSet: GraphConsoElecProps["chartData"];
-  };
-};
 
 export type DashboardPopoverProps = {
   dataType: string;
 };
 
 export const DashboardPopover: FC<DashboardPopoverProps> = ({ dataType }) => {
-  const [graphData, setGraphData] = useState<GraphData | null>(null);
-
-  useEffect(() => {
-    getChartData("exampleData")
-      .then((json) => setGraphData(json.data))
-      .catch((err) => console.error("fetchData error", err));
-  }, []);
-
   return (
     <Popover>
       <PopoverTrigger asChild={true}>
@@ -39,17 +18,10 @@ export const DashboardPopover: FC<DashboardPopoverProps> = ({ dataType }) => {
           <div className="space-y-2">
             <h4 className="leading-none font-medium">Dashboard</h4>
             <p className="text-muted-foreground text-sm">
-              Simple graphs to represent data
+              Simple graphs to represent data {dataType}
             </p>
           </div>
-          <div className="grid gap-2">
-            {graphData && dataType === "example" && (
-              <ExampleGraph
-                chartData={graphData.clientByName?.consumptionSet}
-                name={graphData.clientByName?.fullName}
-              />
-            )}
-          </div>
+          <div className="grid gap-2"></div>
         </div>
       </PopoverContent>
     </Popover>

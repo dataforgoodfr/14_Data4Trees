@@ -1,5 +1,3 @@
-import { BinocularsIcon } from "lucide-react";
-
 import {
   ChartEnergySources,
   ChartWoodEnergyNeeds,
@@ -8,19 +6,17 @@ import { ChartLumberNeeds } from "@features/charts/socio-eco/chart-lumber-needs"
 
 import { useTranslation } from "@i18n";
 
-import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
-import type { FormattedData } from "./format-data";
+import { type SocioEcoData, useFormatSocioEcoData } from "./format-data";
 
 export const useSocioEcoIndicatorElements = (
-  data: FormattedData,
+  rawData: SocioEcoData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("translations");
+  const data = useFormatSocioEcoData(rawData);
 
   return [
-    { date: data.date, type: "date" },
-    { type: "divider" },
     {
       children: (
         <>
@@ -37,11 +33,9 @@ export const useSocioEcoIndicatorElements = (
           <ChartLumberNeeds data={data.wood.lumberNeeds} />
         </>
       ),
-      iconStart: <BinocularsIcon size={ICON_SIZE} />,
       identifier: "indicator-wood",
       title: t("indicators.socio-eco.sections.wood.title"),
       type: "section",
     },
-    { type: "divider" },
   ];
 };

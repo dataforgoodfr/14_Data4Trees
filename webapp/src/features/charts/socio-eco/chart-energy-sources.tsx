@@ -1,16 +1,14 @@
 import type { FC } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
+import { Card, CardContent, CardHeader, CardTitle } from "@shared/ui/card";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@shared/ui/chart";
 
 type BarChartProps = {
   data: {
@@ -26,6 +24,13 @@ type BarChartProps = {
 
 export const ChartEnergySources: FC<BarChartProps> = ({ data }) => {
   const { t } = useTranslation("translations");
+
+  const chartConfig = {
+    value: {
+      color: "var(--chart-1)",
+      label: "% ménages utilisant la ressource",
+    },
+  } satisfies ChartConfig;
 
   const chartData = [
     {
@@ -60,38 +65,41 @@ export const ChartEnergySources: FC<BarChartProps> = ({ data }) => {
 
   console.log("Chart data for energy sources:", chartData);
   return (
-    <div className="flex flex-col justify-between gap-sm flex-1">
-      <p className="text-muted-foreground">
-        {t("indicators.socio-eco.sections.wood.energySources.title")}
-      </p>
-      <ResponsiveContainer
-        height={300}
-        width="100%"
-      >
-        <BarChart
-          accessibilityLayer
-          data={chartData}
-          height={300}
-          margin={{
-            bottom: 5,
-            left: 0,
-            right: 0,
-            top: 5,
-          }}
-          width="100%"
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          {t("indicators.socio-eco.sections.wood.energySources.title")}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="pb-0">
+        <ChartContainer
+          className="mx-auto max-h-62.5"
+          config={chartConfig}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis width="auto" />
-          <Tooltip />
-          <Legend />
-          <Bar
-            dataKey="value"
-            fill="var(--chart-1)"
-            radius={[10, 10, 0, 0]}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              axisLine={false}
+              dataKey="name"
+              tickFormatter={(value) => value.slice(0, 3)}
+              tickLine={false}
+              tickMargin={10}
+            />
+            <ChartTooltip
+              content={<ChartTooltipContent />}
+              cursor={false}
+            />
+            <Bar
+              dataKey="value"
+              fill="var(--chart-3)"
+              radius={8}
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 };

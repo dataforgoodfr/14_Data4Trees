@@ -11,6 +11,7 @@ import {
 } from "@features/indicators/socio-eco";
 
 import { useMap } from "@shared/hooks/useMap";
+import { SeedIndicator, type SeedData } from "@features/indicators/seed";
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
@@ -36,6 +37,19 @@ export const WidgetMap: FC = () => {
       const root = createRoot(container);
       root.render(
         <SocioEcoIndicator
+          className="w-75 max-h-87.5"
+          data={properties}
+          onClose={() => root.unmount()}
+        />,
+      );
+      return container;
+    };
+
+    const renderSeedPopup = (properties: SeedData) => {
+      const container = document.createElement("div");
+      const root = createRoot(container);
+      root.render(
+        <SeedIndicator
           className="w-75 max-h-87.5"
           data={properties}
           onClose={() => root.unmount()}
@@ -71,6 +85,21 @@ export const WidgetMap: FC = () => {
         maxWidth: "300px",
       },
       renderCallback: renderEnquetePopup,
+      trigger: "click",
+    });
+
+    // Set the popup for the Seed data layer
+    mapApiRef.current.setLayerPopup<SeedData>({
+      layerId: "seed",
+      popupConfig: {
+        anchor: "center",
+        className: "bg-background/90 rounded-md",
+        closeButton: false,
+        closeOnClick: true,
+        closeOnMove: false,
+        maxWidth: "300px",
+      },
+      renderCallback: renderSeedPopup,
       trigger: "click",
     });
   }, [isReady, mapApiRef]);

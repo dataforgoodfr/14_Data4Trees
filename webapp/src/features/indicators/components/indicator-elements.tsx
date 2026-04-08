@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import type { FC } from "react";
 
 import { IndicatorDate } from "./indicator-date";
@@ -14,6 +15,8 @@ export const IndicatorElements: FC<IndicatorContainerProps> = ({
   return (
     <>
       {elements.map((config, index) => {
+        console.log("Rendering indicator element with config:", config);
+        X;
         if (config.type === "divider") {
           return (
             <hr
