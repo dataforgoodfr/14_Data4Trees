@@ -52,9 +52,11 @@ export const useFormatterWithUnit = () => {
   return { formatWithUnit };
 };
 
-export function preciseNumericIndicators<
-  T extends Record<string, any>,
->(data: T, indicatorKeys: NumericKeys<T>[], defaultValue: string): T {
+export function preciseNumericIndicators<T extends Record<string, any>>(
+  data: T,
+  indicatorKeys: NumericKeys<T>[],
+  defaultValue: string,
+): T {
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,

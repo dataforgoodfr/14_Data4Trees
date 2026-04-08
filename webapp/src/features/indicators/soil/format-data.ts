@@ -1,8 +1,13 @@
+import { useTranslation } from "react-i18next";
+
 import type { NumericKeys } from "@shared/types";
 
-import { preciseNumericIndicators, UNITS, useFormatterWithUnit } from "../utils";
+import {
+  preciseNumericIndicators,
+  UNITS,
+  useFormatterWithUnit,
+} from "../utils";
 import type { SoilData } from "./types";
-import { useTranslation } from "react-i18next";
 
 const indicatorsToPrecise: NumericKeys<SoilData>[] = [
   "soil_structure",
@@ -29,7 +34,11 @@ export const useFormatSoilData = (data: SoilData) => {
     surface_fauna_diversity,
     surface_fauna_density,
     ...safeData
-  } = preciseNumericIndicators<SoilData>(data, indicatorsToPrecise, t('indicators.undefined'))
+  } = preciseNumericIndicators<SoilData>(
+    data,
+    indicatorsToPrecise,
+    t("indicators.undefined"),
+  );
 
   return {
     ...safeData,

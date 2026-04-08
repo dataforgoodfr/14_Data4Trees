@@ -11,8 +11,8 @@ import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import { useDateElement } from "../use-date-element";
-import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
 import type { SocioEcoData } from "./types";
+import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
 
 type SocioEcoIndicatorProps = {
   onClose: () => void;

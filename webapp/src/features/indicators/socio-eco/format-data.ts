@@ -1,6 +1,12 @@
-import { preciseNumericIndicators, UNITS, useFormatterWithUnit } from "../utils";
 import { useTranslation } from "react-i18next";
+
 import type { NumericKeys } from "@shared/types";
+
+import {
+  preciseNumericIndicators,
+  UNITS,
+  useFormatterWithUnit,
+} from "../utils";
 import type { SocioEcoData } from "./types";
 
 const indicatorKeys: NumericKeys<SocioEcoData>[] = [
@@ -33,7 +39,11 @@ export const useFormatSocioEcoData = (data: SocioEcoData) => {
   const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
-  const safeData = preciseNumericIndicators<SocioEcoData>(data, indicatorKeys, t('indicators.undefined'))
+  const safeData = preciseNumericIndicators<SocioEcoData>(
+    data,
+    indicatorKeys,
+    t("indicators.undefined"),
+  );
 
   return {
     economy: {
