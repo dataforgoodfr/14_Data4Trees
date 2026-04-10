@@ -16,7 +16,7 @@ const indicatorsToPreciseWithFallBack: NumericKeys<SoilData>[] = [
   "surface_fauna_density",
 ] as const;
 
-// Radar indicators does not need a fallback value other than 0. 
+// Radar indicators does not need a fallback value other than 0.
 // Only 2 of them needs precision, the others are manually set in the form as integer between 0 and 10.
 const indicatorsToPreciseWithoutFallBack: NumericKeys<SoilData>[] = [
   "ero_soil_stability",
