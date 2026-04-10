@@ -1,34 +1,63 @@
 services:
-  backend:
+  backend_test:
+    build: ../backend
     ports:
       - 8000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.backend.rule=Host(`test-data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|token)`)
-      - traefik.http.routers.backend.entryPoints=webtls
-      - traefik.http.routers.backend.tls=true
+      - traefik.http.routers.backend-data4trees-test.rule=Host(`test-data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|token)`)
+      - traefik.http.routers.backend-data4trees-test.entryPoints=webtls
+      - traefik.http.routers.backend-data4trees-test.tls=true
       - traefik.docker.network=d4g-internal
-      - traefik.http.services.backend.loadbalancer.server.port=8000
+      - traefik.http.services.backend-data4trees-test.loadbalancer.server.port=8000
     volumes:
       - backend_db_test:/app/db # Persist user db
     networks:
       - d4g-internal
+    healthcheck:
+      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in Django
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m" # adjust as needed
+        max-file: "3"
 
-  webapp:
+  webapp_test:
+    build: ../webapp
+    depends_on:
+      backend_test:
+        condition: service_healthy
     ports:
       - 5173
     labels:
       - traefik.enable=true
-      - traefik.http.routers.data4trees.rule=Host(`test-data4trees.services.d4g.fr`)
-      - traefik.http.routers.data4trees.entryPoints=webtls
-      - traefik.http.routers.data4trees.tls=true
+      - traefik.http.routers.data4trees-test.rule=Host(`test-data4trees.services.d4g.fr`)
+      - traefik.http.routers.data4trees-test.entryPoints=webtls
+      - traefik.http.routers.data4trees-test.tls=true
       - traefik.docker.network=d4g-internal
-      - traefik.http.services.data4trees.loadbalancer.server.port=5173
+      - traefik.http.services.data4trees-test.loadbalancer.server.port=5173
     command: ["npm", "run", "docker:prod"]
     networks:
       - d4g-internal
     environment:
       - VITE_API_URL=/api
+    healthcheck:
+      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in frontend
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m" # adjust as needed
+        max-file: "3"
 
 networks:
   d4g-internal:
@@ -36,3 +65,4 @@ networks:
 
 volumes:
   backend_db_test:
+    external: true
