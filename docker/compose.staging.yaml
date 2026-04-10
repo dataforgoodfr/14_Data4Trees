@@ -5,11 +5,11 @@ services:
       - 8000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.backend.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|token)`)
-      - traefik.http.routers.backend.entryPoints=webtls
-      - traefik.http.routers.backend.tls=true
+      - traefik.http.routers.backend-data4trees-staging.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|token)`)
+      - traefik.http.routers.backend-data4trees-staging.entryPoints=webtls
+      - traefik.http.routers.backend-data4trees-staging.tls=true
       - traefik.docker.network=d4g-internal
-      - traefik.http.services.backend.loadbalancer.server.port=8000
+      - traefik.http.services.backend-data4trees-staging.loadbalancer.server.port=8000
     volumes:
       - backend_db:/app/db # Persist user db
     networks:
@@ -36,11 +36,11 @@ services:
       - 5173
     labels:
       - traefik.enable=true
-      - traefik.http.routers.data4trees.rule=Host(`data4trees.services.d4g.fr`)
-      - traefik.http.routers.data4trees.entryPoints=webtls
-      - traefik.http.routers.data4trees.tls=true
+      - traefik.http.routers.data4trees-staging.rule=Host(`data4trees.services.d4g.fr`)
+      - traefik.http.routers.data4trees-staging.entryPoints=webtls
+      - traefik.http.routers.data4trees-staging.tls=true
       - traefik.docker.network=d4g-internal
-      - traefik.http.services.data4trees.loadbalancer.server.port=5173
+      - traefik.http.services.data4trees-staging.loadbalancer.server.port=5173
     command: ["npm", "run", "docker:prod"]
     networks:
       - d4g-internal
