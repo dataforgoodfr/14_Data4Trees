@@ -16,4 +16,6 @@ export type SoilData = {
   surface_fauna_density: number;
   surface_fauna_diversity: number;
   surface_fauna_abundance: number;
+  ero_couv_slope_and_cover: string;
+  ero_rainfall_and_wind: string;
 };

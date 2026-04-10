@@ -1,6 +1,4 @@
-import type { LayerMetadata } from "coordo";
 import { type FC, useEffect } from "react";
-import { createRoot } from "react-dom/client";
 
 import {
   type ForestInventoryData,
@@ -11,6 +9,10 @@ import {
   type SocioEcoData,
   SocioEcoIndicator,
 } from "@features/indicators/socio-eco";
+import {
+  DEFAULT_POPUP_CONFIG,
+  getRenderPopupLayer,
+} from "@features/popup/renderPopup";
 
 import { useMap } from "@shared/hooks/useMap";
 
@@ -20,96 +22,29 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const renderInventPopup = (
-      properties: ForestInventoryData,
-      metadata: LayerMetadata,
-    ) => {
-      const container = document.createElement("div");
-      const root = createRoot(container);
-      root.render(
-        <ForestInventoryPopupContent
-          className="w-75 max-h-87.5"
-          data={properties}
-          metadata={metadata}
-          onClose={() => root.unmount()}
-        />,
-      );
-      return container;
-    };
-
-    const renderEnquetePopup = (
-      properties: SocioEcoData,
-      metadata: LayerMetadata,
-    ) => {
-      const container = document.createElement("div");
-      const root = createRoot(container);
-      root.render(
-        <SocioEcoIndicator
-          className="w-75 max-h-87.5"
-          data={properties}
-          metadata={metadata}
-          onClose={() => root.unmount()}
-        />,
-      );
-      return container;
-    };
-
-    const renderSeedPopup = (properties: SeedData, metadata: LayerMetadata) => {
-      const container = document.createElement("div");
-      const root = createRoot(container);
-      root.render(
-        <SeedIndicator
-          className="w-75 max-h-87.5"
-          data={properties}
-          metadata={metadata}
-          onClose={() => root.unmount()}
-        />,
-      );
-      return container;
-    };
-
     // Set the popup for the "inventaire" layer
     mapApiRef.current.setLayerPopup<ForestInventoryData>({
       layerId: "inventaire",
-      popupConfig: {
-        anchor: "center",
-        className: "bg-background/90 rounded-md",
-        closeButton: false,
-        closeOnClick: true,
-        closeOnMove: false,
-        maxWidth: "300px",
-      },
-      renderCallback: renderInventPopup,
+      popupConfig: { ...DEFAULT_POPUP_CONFIG },
+      renderCallback: getRenderPopupLayer<ForestInventoryData>(
+        ForestInventoryPopupContent,
+      ),
       trigger: "click",
     });
 
     // Set the popup for the "enquete" layer
     mapApiRef.current.setLayerPopup<SocioEcoData>({
       layerId: "enquete",
-      popupConfig: {
-        anchor: "center",
-        className: "bg-background/90 rounded-md",
-        closeButton: false,
-        closeOnClick: true,
-        closeOnMove: false,
-        maxWidth: "300px",
-      },
-      renderCallback: renderEnquetePopup,
+      popupConfig: { ...DEFAULT_POPUP_CONFIG },
+      renderCallback: getRenderPopupLayer<SocioEcoData>(SocioEcoIndicator),
       trigger: "click",
     });
 
     // Set the popup for the Seed data layer
     mapApiRef.current.setLayerPopup<SeedData>({
       layerId: "seed",
-      popupConfig: {
-        anchor: "center",
-        className: "bg-background/90 rounded-md",
-        closeButton: false,
-        closeOnClick: true,
-        closeOnMove: false,
-        maxWidth: "300px",
-      },
-      renderCallback: renderSeedPopup,
+      popupConfig: { ...DEFAULT_POPUP_CONFIG },
+      renderCallback: getRenderPopupLayer<SeedData>(SeedIndicator),
       trigger: "click",
     });
   }, [isReady, mapApiRef]);

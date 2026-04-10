@@ -22,11 +22,11 @@ export const useSeedIndicatorElements = (
             value={data.responsable}
           />
           <IndicatorRawValue
-            dataName={t("seed.indicator.reboisement.type_plant")}
+            dataName={t("seed.indicator.reboisement.typePlant")}
             value={data.type_plant}
           />
           <IndicatorRawValue
-            dataName={t("seed.indicator.reboisement.prelevement_mangrove")}
+            dataName={t("seed.indicator.reboisement.prelevementMangrove")}
             value={data.prelevement_mangrove}
           />
         </>

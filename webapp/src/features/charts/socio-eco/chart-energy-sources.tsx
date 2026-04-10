@@ -28,7 +28,7 @@ export const ChartEnergySources: FC<BarChartProps> = ({ data }) => {
   const chartConfig = {
     value: {
       color: "var(--chart-1)",
-      label: "% ménages utilisant la ressource",
+      label: t("indicators.socio-eco.sections.wood.energySources.legend"),
     },
   } satisfies ChartConfig;
 
@@ -63,7 +63,6 @@ export const ChartEnergySources: FC<BarChartProps> = ({ data }) => {
     },
   ];
 
-  console.log("Chart data for energy sources:", chartData);
   return (
     <Card>
       <CardHeader>

@@ -3,6 +3,7 @@ import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
+import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
@@ -10,7 +11,6 @@ import { ICON_SIZE_HEADER } from "../components/constants";
 import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
-import { useDateElement } from "../use-date-element";
 import type { SocioEcoData } from "./types";
 import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
 
@@ -36,10 +36,9 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
 
-  const dateElement = useDateElement({ withDivider: false });
   const socioEcoElements = useSocioEcoIndicatorElements(data);
 
-  const title = t("popup.socio-eco.title", {
+  const title = t("popup.socioEco", {
     village: data.admi2,
   });
 
@@ -53,7 +52,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
       <IndicatorPopupHeader
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={dateElement[0].date}
+        subtitle={formatDate(new Date())}
         title={title}
       />
 

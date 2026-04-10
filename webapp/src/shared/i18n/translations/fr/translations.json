@@ -71,13 +71,13 @@
           "volume": "Volume de biomasse"
         },
         "forestPotentialLevel": {
-          "chart-title": "Indice d’écopotentialité forestière",
+          "chartTitle": "Indice d’écopotentialité forestière",
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
           "dominantHeight": "Hauteur dominante",
           "microhabitat": "Dendro-microhabitats",
-          "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
+          "ratioDeathmassBiomass": "Rapport nécromasse / biomasse",
           "spatialDistribution": "Distribution spatiale",
           "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
@@ -131,6 +131,7 @@
             "coal": "Charbon",
             "collectedWood": "Bois collecté",
             "gas": "Gaz",
+            "legend": "% ménages utilisant la ressource",
             "organicWaste": "Déchets végétaux",
             "other": "Autres",
             "title": "Sources d’énergie utilisées"
@@ -185,7 +186,7 @@
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
-      "m3PerHabPerYear": "{{ value }} m3/hab/an",
+      "m3PerHabPerYear": "{{ value }} m³/hab/an",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
@@ -193,19 +194,19 @@
     }
   },
   "popup": {
-    "forest-inventory.title": "Placette n°{{ code }} dans la forêt {{ label }}",
-    "seed.title": "Placette n°{{ id}}",
-    "socio-eco.title": "Village {{ village }}",
+    "forestInventory": "Placette n°{{ code }} dans la forêt {{ label }}",
+    "seed": "Placette n°{{ id}}",
+    "socioEco": "Village {{ village }}",
     "undefined": "non trouvée"
   },
   "seed": {
     "indicator": {
       "reboisement": {
         "orga": "Nom de l'organisation",
-        "prelevement_mangrove": "Prélèvement sur mangrove ?",
+        "prelevementMangrove": "Prélèvement sur mangrove ?",
         "responsable": "Nom du responsable",
         "title": "Reboisement",
-        "type_plant": "Type de plant"
+        "typePlant": "Type de plant"
       }
     }
   }

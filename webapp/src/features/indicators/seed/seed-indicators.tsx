@@ -3,13 +3,13 @@ import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import type { FC } from "react";
 
+import { formatDate } from "@shared/lib/utils";
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE_HEADER } from "../components/constants";
 import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
-import { useDateElement } from "../use-date-element";
 import type { SeedData } from "./format-data";
 import { useSeedIndicatorElements } from "./use-seed-indicator-elements";
 
@@ -27,15 +27,9 @@ export const SeedIndicator: FC<SeedIndicatorProps> = ({
 }) => {
   const { t } = useTranslation("translations");
 
-  const dateElement = useDateElement({
-    dateStr: data.date_plantation,
-    withDivider: false,
-  });
   const seedElements = useSeedIndicatorElements(data);
 
-  console.log("Raw socio-economic data received for formatting:", data);
-  console.log("Socio-economic indicator elements for UI:", seedElements);
-  const title = t("popup.seed.title", {
+  const title = t("popup.seed", {
     id: data.id,
   });
 
@@ -44,7 +38,7 @@ export const SeedIndicator: FC<SeedIndicatorProps> = ({
       <IndicatorPopupHeader
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={dateElement[0].date}
+        subtitle={formatDate(data.date_plantation)}
         title={title}
       />
 

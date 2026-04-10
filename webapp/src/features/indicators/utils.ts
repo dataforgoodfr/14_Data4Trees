@@ -55,14 +55,14 @@ export const useFormatterWithUnit = () => {
 export function preciseNumericIndicators<T extends Record<string, any>>(
   data: T,
   indicatorKeys: NumericKeys<T>[],
-  defaultValue: string,
+  defaultValue?: string,
 ): T {
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,
       indicatorKeys.includes(key as (typeof indicatorKeys)[number])
         ? precise(Number(value))
-        : value || defaultValue,
+        : (value ?? defaultValue),
     ]),
   ) as T;
 }
