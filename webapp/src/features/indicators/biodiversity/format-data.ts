@@ -1,7 +1,12 @@
-import { precise } from "@shared/lib/utils";
+import { useTranslation } from "react-i18next";
+
 import type { NumericKeys } from "@shared/types";
 
-import { UNITS, useFormatterWithUnit } from "../utils";
+import {
+  preciseNumericIndicators,
+  UNITS,
+  useFormatterWithUnit,
+} from "../utils";
 import type { BiodiversityData } from "./types";
 
 const indicatorKeys: NumericKeys<BiodiversityData>[] = [
@@ -22,16 +27,14 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
+  const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
-  const safeData = Object.fromEntries(
-    Object.entries(data).map(([key, value]) => [
-      key,
-      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value))
-        : value,
-    ]),
-  ) as BiodiversityData;
+  const safeData = preciseNumericIndicators<BiodiversityData>(
+    data,
+    indicatorKeys,
+    t("indicators.undefined"),
+  );
 
   return {
     biomass: {
@@ -47,20 +50,10 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
         diameterDistribution: safeData.epf_diameter_distribution,
         diversity: safeData.epf_tree_diversity,
         dominantHeight: safeData.epf_dominant_height,
-        microhabitat: safeData.epf_microhabitats,
+        microHabitat: safeData.epf_microhabitats,
         ratioDeathmassBiomass: safeData.epf_necro_biomass_ratio,
         spatialDistribution: safeData.epf_spatial_distribution,
         verticalDistribution: safeData.epf_vertical_distribution,
-      },
-      temoin: {
-        density: 0.02,
-        diameterDistribution: 3,
-        diversity: 1,
-        dominantHeight: 4,
-        microhabitat: 0.5,
-        ratioDeathmassBiomass: 1,
-        spatialDistribution: 1,
-        verticalDistribution: 2,
       },
     },
     // replace hardcoded value when data will be available

@@ -1,7 +1,9 @@
 import { cx } from "class-variance-authority";
+import type { LayerMetadata } from "coordo";
 import { TreesIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
+import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
@@ -11,13 +13,12 @@ import { IndicatorElements } from "../components/indicator-elements";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "../soil";
-import { useDateElement } from "../use-date-element";
-import { FORESTS_MAP } from "./constants";
 import type { ForestInventoryData } from "./types";
 
 type ForestInventoryPopupContentProps = {
   onClose: () => void;
   data: ForestInventoryData;
+  metadata: LayerMetadata;
   className?: string;
 };
 
@@ -30,17 +31,20 @@ const TABS: Record<string, TabKind> = {
 
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
-> = ({ onClose, data, className }) => {
+> = ({ onClose, data, metadata, className }) => {
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
-  const dateElement = useDateElement({ withDivider: false });
   const biodiversityElements = useBiodiversityIndicatorElements(data);
   const soilElements = useSoilIndicatorElements(data);
 
-  const title = t("popup.title", {
+  const title = t("popup.forestInventory", {
     code: data.cod,
-    label: FORESTS_MAP.get(data.for)?.label || `n°${data.for}`,
+    label:
+      metadata?.schema?.fields
+        .find((f) => f.name === "for")
+        ?.categories?.find((c) => c.value === data.for)?.label ||
+      t("popup.undefined"),
   });
 
   const subtitles = {
@@ -53,7 +57,7 @@ export const ForestInventoryPopupContent: FC<
       <IndicatorPopupHeader
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={dateElement[0].date}
+        subtitle={formatDate(new Date())}
         title={title}
       />
 

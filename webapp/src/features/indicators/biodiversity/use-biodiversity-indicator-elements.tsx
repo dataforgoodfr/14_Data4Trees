@@ -1,11 +1,12 @@
 import { BinocularsIcon, HeartPulseIcon, InfoIcon } from "lucide-react";
 
+import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
+
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
-import { ChartForestPotential } from "./chart-forest-potential";
 import { useFormatBiodiversityData } from "./format-data";
 import type { BiodiversityData } from "./types";
 
@@ -107,12 +108,7 @@ export const useBiodiversityIndicatorElements = (
     { type: "divider" },
     {
       children: (
-        <ChartForestPotential
-          data={{
-            benef: data.forestPotentialLevel.benef,
-            temoin: data.forestPotentialLevel.temoin,
-          }}
-        />
+        <ChartForestPotential benef={data.forestPotentialLevel.benef} />
       ),
       identifier: "forest-potential-level",
       title: t("indicators.biodiversity.sections.forestPotentialLevel.title"),

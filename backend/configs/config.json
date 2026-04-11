@@ -46,7 +46,7 @@
         "biomass_volume": "ind.sum(0.0673 * (dens_bois.value * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 1) / (20^2 * pi() / 10000) / 1000",
         "tree_density": "count(1 if ind.etat = 1) / (20^2 * pi() / 10000)",
         "richness": "count(unique(ind.ess_arb))",
-        "epf_tree_density": "count(1 if ind.etat = 1) / (20^2 * pi() / 10000) / 1000",
+        "epf_tree_density": "count(1 if ind.etat = 1) / (20^2 * pi() / 10000) / 100",
         "epf_necromass_pied": "ind.sum(0.0673 * (dens_bois_mort.dens_bois * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 2)",
         "epf_necromass_sol": "ind.sum(3.1415926535 / 3 * ((dhp_b / 2)^2 + ((dhp_e / 2)^2 + dhp_b / 2 + dhp_e / 2) * longueur * dens_bois_mort.dens_bois) if etat = 3)",
         "epf_necro_biomass_ratio": "((ind.sum(0.0673 * (dens_bois_mort.dens_bois * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 2) + ind.sum(3.1415926535 / 3 * ((dhp_b / 2)^2 + ((dhp_e / 2)^2 + dhp_b / 2 + dhp_e / 2) * longueur * dens_bois_mort.dens_bois) if etat = 3)) / ind.sum(0.0673 * (dens_bois.value * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 1)) * 10",
@@ -87,7 +87,27 @@
       ],
       "columns": {
         "geom": "centroid(merge(point(socio_eco_gps.long, socio_eco_gps.latit)))",
-        "population": "sum(hab)"
+        "population": "sum(hab)",
+        "energyType": "count(ener)",
+        "boughtWoodEnergy": "count(1)",
+        "coalEnergy": "count(1)",
+        "organicWasteEnergy": "count(1)",
+        "animalWasteEnergy": "count(1)",
+        "gasEnergy": "count(1)",
+        "otherEnergy": "count(1)",
+        "woodEnergyConsumption": "count(1)",
+        "woodEnergyNeeds": "count(1)",
+        "woodCollectionTime:": "count(1)",
+        "timberNeeds": "count(1)",
+        "foodDiversity": "count(1)",
+        "autoConsumtionNeeds": "count(1)",
+        "hungryGap": "count(1)",
+        "incomeSources": "count(1)",
+        "incomeEvolution": "count(1)",
+        "estateIndex": "count(1)",
+        "livingConditionsPercreption": "count(1)",
+        "conflictIndex": "count(1)",
+        "beneficialPractices": "count(1)"
       },
       "popup": {
         "trigger": "click"
@@ -98,16 +118,43 @@
       "type": "datapackage",
       "path": "../catalog/seed/datapackage.json",
       "resource": "survey",
+      "minzoom": 13,
       "columns": {
-        "geom": "centroid(geom)",
+        "geom": "geom",
+        "id": "OGC_FID",
         "orga": "votre_orga",
         "responsable": "nom_du_res",
         "date_plantation": "date_de_pl",
-        "prelevement_mangrove": "trace_de_p"
+        "type_plant": "type_de_pl",
+        "prelevement_mangrove": "trace_de_p",
+        "test": "round(random() * 4 ) + 1"
+      },
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["number", ["get", "test"]],
+          1, "#2DC4B2",
+          2, "#3BB3C3",
+          3, "#669EC4",
+          4, "#A2719B",
+          5, "#AA5E79"
+        ],
+        "fill-opacity": 0.8
       },
       "popup": {
         "trigger": "click"
       }
+    },
+    {
+      "id": "seed_point",
+      "type": "datapackage",
+      "path": "../catalog/seed/datapackage.json",
+      "resource": "survey",
+      "columns": {
+        "geom": "centroid(geom)"
+      },
+      "maxzoom": 13
     }
   ],
   "controls": [

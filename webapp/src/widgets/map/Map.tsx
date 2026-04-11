@@ -1,10 +1,18 @@
 import { type FC, useEffect } from "react";
-import { createRoot } from "react-dom/client";
 
 import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
 } from "@features/indicators/forest-inventory";
+import { type SeedData, SeedIndicator } from "@features/indicators/seed";
+import {
+  type SocioEcoData,
+  SocioEcoIndicator,
+} from "@features/indicators/socio-eco";
+import {
+  DEFAULT_POPUP_CONFIG,
+  getRenderPopupLayer,
+} from "@features/popup/renderPopup";
 
 import { useMap } from "@shared/hooks/useMap";
 
@@ -14,31 +22,29 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const renderPopup = (properties: ForestInventoryData) => {
-      const container = document.createElement("div");
-      const root = createRoot(container);
-      root.render(
-        <ForestInventoryPopupContent
-          className="w-75 max-h-87.5"
-          data={properties}
-          onClose={() => root.unmount()}
-        />,
-      );
-      return container;
-    };
-
     // Set the popup for the "inventaire" layer
     mapApiRef.current.setLayerPopup<ForestInventoryData>({
       layerId: "inventaire",
-      popupConfig: {
-        anchor: "center",
-        className: "bg-background/90 rounded-md",
-        closeButton: false,
-        closeOnClick: true,
-        closeOnMove: false,
-        maxWidth: "300px",
-      },
-      renderCallback: renderPopup,
+      popupConfig: { ...DEFAULT_POPUP_CONFIG },
+      renderCallback: getRenderPopupLayer<ForestInventoryData>(
+        ForestInventoryPopupContent,
+      ),
+      trigger: "click",
+    });
+
+    // Set the popup for the "enquete" layer
+    mapApiRef.current.setLayerPopup<SocioEcoData>({
+      layerId: "enquete",
+      popupConfig: { ...DEFAULT_POPUP_CONFIG },
+      renderCallback: getRenderPopupLayer<SocioEcoData>(SocioEcoIndicator),
+      trigger: "click",
+    });
+
+    // Set the popup for the Seed data layer
+    mapApiRef.current.setLayerPopup<SeedData>({
+      layerId: "seed",
+      popupConfig: { ...DEFAULT_POPUP_CONFIG },
+      renderCallback: getRenderPopupLayer<SeedData>(SeedIndicator),
       trigger: "click",
     });
   }, [isReady, mapApiRef]);

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+import { PolarGrid, PolarRadiusAxis, Radar, RadarChart } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
 
@@ -14,6 +14,7 @@ import {
 } from "@ui/chart";
 
 import { RADAR_CONFIG } from "../constants";
+import { PolarAngleAxisMultiline } from "./polar-angle-axis-multi";
 
 type ChartRadarWithBenefAndControlProps = {
   title: string;
@@ -44,15 +45,22 @@ export const ChartRadarWithBenefAndControl: FC<
       </CardHeader>
       <CardContent className="pb-0">
         <ChartContainer
-          className="mx-auto aspect-square max-h-62.5"
+          className="mx-auto aspect-square max-h-100"
           config={chartConfig}
         >
-          <RadarChart data={chartData}>
+          <RadarChart
+            data={chartData}
+            outerRadius="70%"
+          >
             <ChartTooltip
               content={<ChartTooltipContent indicator="line" />}
               cursor={true}
             />
-            <PolarAngleAxis dataKey="indicator" />
+            <PolarRadiusAxis
+              domain={[0, 10]}
+              tickCount={6}
+            />
+            <PolarAngleAxisMultiline dataKey="indicator" />
             <PolarGrid radialLines />
 
             <Radar

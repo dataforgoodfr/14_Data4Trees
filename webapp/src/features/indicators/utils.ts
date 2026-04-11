@@ -1,10 +1,12 @@
 import { useTranslation } from "@shared/i18n";
 import { precise } from "@shared/lib/utils";
+import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
   individualPerCubicMeter: "individualPerCubicMeter",
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
+  m3PerHabPerYear: "m3PerHabPerYear",
   speciesCount: "speciesCount",
   tonPerHectare: "tonPerHectare",
 } as const;
@@ -40,6 +42,8 @@ export const useFormatterWithUnit = () => {
         });
       case UNITS.tonPerHectare:
         return t("indicators.units.tonPerHectare", { value });
+      case UNITS.m3PerHabPerYear:
+        return t("indicators.units.m3PerHabPerYear", { value });
       default:
         return null;
     }
@@ -47,3 +51,18 @@ export const useFormatterWithUnit = () => {
 
   return { formatWithUnit };
 };
+
+export function preciseNumericIndicators<T extends Record<string, any>>(
+  data: T,
+  indicatorKeys: NumericKeys<T>[],
+  defaultValue?: string,
+): T {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
+        ? precise(Number(value))
+        : (value ?? defaultValue),
+    ]),
+  ) as T;
+}

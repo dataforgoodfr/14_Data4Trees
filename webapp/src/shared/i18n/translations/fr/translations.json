@@ -71,14 +71,15 @@
           "volume": "Volume de biomasse"
         },
         "forestPotentialLevel": {
+          "chartTitle": "Indice d’écopotentialité forestière",
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
           "dominantHeight": "Hauteur dominante",
           "microhabitat": "Dendro-microhabitats",
-          "ratioDeathmassBiomass": "Rapport nécromasse/biomasse",
+          "ratioDeathmassBiomass": "Rapport nécromasse / biomasse",
           "spatialDistribution": "Distribution spatiale",
-          "title": "Indice d’écopotentialité forestière",
+          "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
         },
         "indicatorSpecies": {
@@ -105,6 +106,47 @@
       "date": "Date enquête",
       "density": "Densité",
       "speciesRichness": "Richesse spécifique"
+    },
+    "economy": {
+      "title": "Modèle économique et gouvernance"
+    },
+    "resources": {
+      "title": "Ressources des ménages"
+    },
+    "socio-eco": {
+      "sections": {
+        "wood": {
+          "collectionTime": "Temps de collecte du bois",
+          "energyConsumption": "Consommation de bois-énergie",
+          "energyNeeds": {
+            "difficultToMeet": "Difficile à satisfaire",
+            "dontKnow": "Ne sait pas",
+            "easyToMeet": "Facile à satisfaire",
+            "moderateToMeet": "Modéré à satisfaire",
+            "title": "Satisfaction des besoins en bois-énergie"
+          },
+          "energySources": {
+            "animalWaste": "Déchets animaux",
+            "boughtWood": "Bois acheté",
+            "coal": "Charbon",
+            "collectedWood": "Bois collecté",
+            "gas": "Gaz",
+            "legend": "ménages utilisant la ressource (en %):",
+            "organicWaste": "Déchets végétaux",
+            "other": "Autres",
+            "title": "Sources d’énergie utilisées"
+          },
+          "timberNeeds": {
+            "difficultToMeet": "Difficile à satisfaire",
+            "dontKnow": "Ne sait pas",
+            "easyToMeet": "Facile à satisfaire",
+            "moderateToMeet": "Modéré à satisfaire",
+            "title": "Satisfaction des besoins en bois d’œuvre"
+          },
+          "title": "Ressources en bois"
+        }
+      },
+      "title": "Enquête auprès des ménages"
     },
     "soil": {
       "sections": {
@@ -139,10 +181,12 @@
       },
       "title": "Données sol"
     },
+    "undefined": "Donnée non renseignée",
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
+      "m3PerHabPerYear": "{{ value }} m³/hab/an",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
@@ -150,6 +194,20 @@
     }
   },
   "popup": {
-    "title": "Placette n°{{ code }} dans la forêt {{ label }}"
+    "forestInventory": "Placette n°{{ code }} dans la forêt {{ label }}",
+    "seed": "Placette n°{{ id}}",
+    "socioEco": "Village {{ village }}",
+    "undefined": "non trouvée"
+  },
+  "seed": {
+    "indicator": {
+      "reboisement": {
+        "orga": "Nom de l'organisation",
+        "prelevementMangrove": "Prélèvement sur mangrove ?",
+        "responsable": "Nom du responsable",
+        "title": "Reboisement",
+        "typePlant": "Type de plant"
+      }
+    }
   }
 }
