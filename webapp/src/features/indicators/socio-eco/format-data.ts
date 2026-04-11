@@ -20,7 +20,7 @@ const indicatorKeys: NumericKeys<SocioEcoData>[] = [
   "otherEnergy",
   "woodEnergyConsumption",
   "woodCollectionTime",
-  "lumberNeeds",
+  "timberNeeds",
   "foodDiversity",
   "autoConsumtionNeeds",
   "hungryGap",
@@ -101,7 +101,7 @@ export const useFormatSocioEcoData = (data: SocioEcoData) => {
         organicWaste: 3,
         other: 1,
       },
-      lumberNeeds: {
+      timberNeeds: {
         difficultToMeet: 2,
         dontKnow: 1,
         easyToMeet: 4,

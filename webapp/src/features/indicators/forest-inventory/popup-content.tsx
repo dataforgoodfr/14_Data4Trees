@@ -41,7 +41,7 @@ export const ForestInventoryPopupContent: FC<
   const title = t("popup.forestInventory", {
     code: data.cod,
     label:
-      metadata.schema?.fields
+      metadata?.schema?.fields
         .find((f) => f.name === "for")
         ?.categories?.find((c) => c.value === data.for)?.label ||
       t("popup.undefined"),

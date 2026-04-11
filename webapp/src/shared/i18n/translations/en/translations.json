@@ -71,14 +71,15 @@
           "volume": "Biomass volume"
         },
         "forestPotentialLevel": {
+          "chartTitle": "Forest Ecopotentiality Index",
           "density": "Tree density",
           "diameterDistribution": "Diameter distribution",
           "diversity": "Tree diversity",
           "dominantHeight": "Dominant height",
           "microhabitat": "Dendro-microhabitats",
-          "ratioDeathmassBiomass": "Deadwood/biomass ratio",
+          "ratioDeathmassBiomass": "Deadmass / biomass ratio",
           "spatialDistribution": "Spatial distribution",
-          "title": "Forest Ecopotentiality Index",
+          "title": "Indirect indicators",
           "verticalDistribution": "Vertical distribution"
         },
         "indicatorSpecies": {
@@ -105,6 +106,47 @@
       "date": "Survey date",
       "density": "Density",
       "speciesRichness": "Species richness"
+    },
+    "economy": {
+      "title": "Economy and governance"
+    },
+    "resources": {
+      "title": "Households resources"
+    },
+    "socio-eco": {
+      "sections": {
+        "wood": {
+          "collectionTime": "Wood collection time",
+          "energyConsumption": "Wood-energy consumption",
+          "energyNeeds": {
+            "difficultToMeet": "Difficult to meet",
+            "dontKnow": "Don't know",
+            "easyToMeet": "Easy to meet",
+            "moderateToMeet": "Moderate to meet",
+            "title": "Wood-energy needs satisfaction"
+          },
+          "energySources": {
+            "animalWaste": "Animal waste",
+            "boughtWood": "Bought wood",
+            "coal": "Coal",
+            "collectedWood": "Collected wood",
+            "gas": "Gas",
+            "legend": "households using the resource (%):",
+            "organicWaste": "Organic waste",
+            "other": "Other",
+            "title": "Energy sources usage"
+          },
+          "timberNeeds": {
+            "difficultToMeet": "Difficult to meet",
+            "dontKnow": "Don't know",
+            "easyToMeet": "Easy to meet",
+            "moderateToMeet": "Moderate to meet",
+            "title": "Timber needs satisfaction"
+          },
+          "title": "Wood resources"
+        }
+      },
+      "title": "Household survey"
     },
     "soil": {
       "sections": {
@@ -139,10 +181,12 @@
       },
       "title": "Soil data"
     },
+    "undefined": "Data not provided",
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
+      "m3PerHabPerYear": "{{ value }} m³/inhab/year",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} species inventoried",
       "speciesCount_other": "{{ count }} species inventoried",
@@ -150,6 +194,20 @@
     }
   },
   "popup": {
-    "title": "Plot n°{{ code }} in {{ label }} forest"
+    "forestInventory": "Plot n°{{ code }} in {{ label }} forest",
+    "seed": "Plot n°{{ id}}",
+    "socioEco": "Village {{ village }}",
+    "undefined": "not found"
+  },
+  "seed": {
+    "indicator": {
+      "reboisement": {
+        "orga": "Organization name",
+        "prelevementMangrove": "Debit on mangrove ?",
+        "responsable": "Name of supervisor",
+        "title": "Reforestation",
+        "typePlant": "Plant type"
+      }
+    }
   }
 }

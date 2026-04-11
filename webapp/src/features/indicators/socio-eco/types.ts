@@ -11,7 +11,7 @@ export type SocioEcoData = {
   woodEnergyConsumption: number;
   woodEnergyNeeds: number[];
   woodCollectionTime: number;
-  lumberNeeds: number;
+  timberNeeds: number;
   foodDiversity: number;
   autoConsumtionNeeds: number;
   hungryGap: number;

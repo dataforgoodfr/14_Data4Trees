@@ -2,7 +2,7 @@ import {
   ChartEnergySources,
   ChartWoodEnergyNeeds,
 } from "@features/charts/socio-eco";
-import { ChartLumberNeeds } from "@features/charts/socio-eco/chart-lumber-needs";
+import { ChartTimberNeeds } from "@features/charts/socio-eco/chart-timber-needs";
 
 import { useTranslation } from "@i18n";
 
@@ -31,7 +31,7 @@ export const useSocioEcoIndicatorElements = (
             dataName={t("indicators.socio-eco.sections.wood.collectionTime")}
             value={data.wood.collectionTime}
           />
-          <ChartLumberNeeds data={data.wood.lumberNeeds} />
+          <ChartTimberNeeds data={data.wood.timberNeeds} />
         </>
       ),
       identifier: "indicator-wood",

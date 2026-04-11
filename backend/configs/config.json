@@ -98,7 +98,7 @@
         "woodEnergyConsumption": "count(1)",
         "woodEnergyNeeds": "count(1)",
         "woodCollectionTime:": "count(1)",
-        "lumberNeeds": "count(1)",
+        "timberNeeds": "count(1)",
         "foodDiversity": "count(1)",
         "autoConsumtionNeeds": "count(1)",
         "hungryGap": "count(1)",

@@ -71,7 +71,7 @@ export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
             data={chartData}
             dataKey="value"
           />
-          <Tooltip defaultIndex={3} />
+          <Tooltip />
         </PieChart>
       </ResponsiveContainer>
     </div>

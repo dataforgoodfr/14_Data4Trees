@@ -1,4 +1,4 @@
-import { i18nInstance } from "@shared/i18n";
+import { formatDate } from "@shared/lib/utils";
 
 import type { IndicatorDate, IndicatorDivider } from "./components/types";
 
@@ -15,9 +15,7 @@ export const useDateElement = ({
   | [IndicatorDate]
   | [IndicatorDate, IndicatorDivider] => {
   /** @todo Replace with date from backend data */
-  const date = Intl.DateTimeFormat(i18nInstance.language, {
-    dateStyle: "short",
-  }).format(dateStr ? new Date(dateStr) : new Date());
+  const date = formatDate(dateStr || new Date());
 
   const dateElement = { date: date, type: "date" } as const;
 

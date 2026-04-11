@@ -12,27 +12,27 @@ type PieChartProps = {
   };
 };
 
-export const ChartLumberNeeds: FC<PieChartProps> = ({ data }) => {
+export const ChartTimberNeeds: FC<PieChartProps> = ({ data }) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
       fill: "var(--chart-4)",
-      name: t("indicators.socio-eco.sections.wood.lumberNeeds.easyToMeet"),
+      name: t("indicators.socio-eco.sections.wood.timberNeeds.easyToMeet"),
       value: data.easyToMeet,
     },
     {
       fill: "var(--chart-3)",
-      name: t("indicators.socio-eco.sections.wood.lumberNeeds.moderateToMeet"),
+      name: t("indicators.socio-eco.sections.wood.timberNeeds.moderateToMeet"),
       value: data.moderateToMeet,
     },
     {
       fill: "var(--chart-2)",
-      name: t("indicators.socio-eco.sections.wood.lumberNeeds.difficultToMeet"),
+      name: t("indicators.socio-eco.sections.wood.timberNeeds.difficultToMeet"),
       value: data.difficultToMeet,
     },
     {
       fill: "var(--chart-1)",
-      name: t("indicators.socio-eco.sections.wood.lumberNeeds.dontKnow"),
+      name: t("indicators.socio-eco.sections.wood.timberNeeds.dontKnow"),
       value: data.dontKnow,
     },
   ];
@@ -40,7 +40,7 @@ export const ChartLumberNeeds: FC<PieChartProps> = ({ data }) => {
   return (
     <div className="flex flex-col justify-between gap-sm flex-1">
       <p className="text-muted-foreground">
-        {t("indicators.socio-eco.sections.wood.lumberNeeds.title")}
+        {t("indicators.socio-eco.sections.wood.timberNeeds.title")}
       </p>
       <ResponsiveContainer
         height={200}
@@ -71,7 +71,7 @@ export const ChartLumberNeeds: FC<PieChartProps> = ({ data }) => {
             data={chartData}
             dataKey="value"
           />
-          <Tooltip defaultIndex={3} />
+          <Tooltip />
         </PieChart>
       </ResponsiveContainer>
     </div>
