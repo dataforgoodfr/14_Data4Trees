@@ -14,6 +14,8 @@ import {
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
 
+import { LAYERS } from "@shared/api/layers";
+import { getSpriteIconId, SPRITE_MAPLIBRE } from "@shared/api/sprites";
 import { useMap } from "@shared/hooks/useMap";
 
 export const WidgetMap: FC = () => {
@@ -22,9 +24,35 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
+    const pictoEnquete = new URL("/picto-enquete.png", import.meta.url).href;
+    const pictoInventaire = new URL("/picto-inventaire.png", import.meta.url)
+      .href;
+
+    mapApiRef.current.setLayerSymbol({
+      iconSize: 0.3,
+      imageUrl: pictoInventaire,
+      layerId: LAYERS.INVENTARY,
+    });
+
+    mapApiRef.current.setLayerSymbol({
+      iconSize: 2,
+      imageUrl: pictoEnquete,
+      layerId: LAYERS.ENQUETE,
+    });
+
+    mapApiRef.current.setLayerSymbol({
+      iconSize: 2,
+      layerId: LAYERS.SEED,
+      spriteId: getSpriteIconId({
+        iconId: "park_11",
+        spriteId: SPRITE_MAPLIBRE.id,
+      }),
+    });
+
     // Set the popup for the "inventaire" layer
     mapApiRef.current.setLayerPopup<ForestInventoryData>({
-      layerId: "inventaire",
+      centerOnClick: true,
+      layerId: LAYERS.INVENTARY,
       popupConfig: { ...DEFAULT_POPUP_CONFIG },
       renderCallback: getRenderPopupLayer<ForestInventoryData>(
         ForestInventoryPopupContent,
@@ -34,7 +62,8 @@ export const WidgetMap: FC = () => {
 
     // Set the popup for the "enquete" layer
     mapApiRef.current.setLayerPopup<SocioEcoData>({
-      layerId: "enquete",
+      centerOnClick: true,
+      layerId: LAYERS.ENQUETE,
       popupConfig: { ...DEFAULT_POPUP_CONFIG },
       renderCallback: getRenderPopupLayer<SocioEcoData>(SocioEcoIndicator),
       trigger: "click",
@@ -42,7 +71,8 @@ export const WidgetMap: FC = () => {
 
     // Set the popup for the Seed data layer
     mapApiRef.current.setLayerPopup<SeedData>({
-      layerId: "seed",
+      centerOnClick: true,
+      layerId: LAYERS.SEED,
       popupConfig: { ...DEFAULT_POPUP_CONFIG },
       renderCallback: getRenderPopupLayer<SeedData>(SeedIndicator),
       trigger: "click",
