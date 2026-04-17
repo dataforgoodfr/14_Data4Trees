@@ -18,13 +18,14 @@ import { LAYERS } from "@shared/api/layers";
 import { getSpriteIconId, SPRITE_MAPLIBRE } from "@shared/api/sprites";
 import { useMap } from "@shared/hooks/useMap";
 
+import pictoSocioEco from "./socio-eco-icon.svg";
+
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const pictoEnquete = new URL("/picto-enquete.png", import.meta.url).href;
     const pictoInventaire = new URL("/picto-inventaire.png", import.meta.url)
       .href;
 
@@ -35,9 +36,9 @@ export const WidgetMap: FC = () => {
     });
 
     mapApiRef.current.setLayerSymbol({
-      iconSize: 2,
-      imageUrl: pictoEnquete,
+      iconSize: 0.7,
       layerId: LAYERS.ENQUETE,
+      svg: pictoSocioEco,
     });
 
     mapApiRef.current.setLayerSymbol({
