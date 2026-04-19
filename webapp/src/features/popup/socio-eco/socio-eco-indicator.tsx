@@ -3,16 +3,18 @@ import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
+import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import { IndicatorElements } from "@features/indicators/components/indicator-elements";
+import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+import { useEconomicIndicatorElements } from "@features/indicators/economy";
+import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
+import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
+
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
-import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
-import { IndicatorElements } from "@features/indicators/components/indicator-elements";
-import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
-import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+
 import type { SocioEcoData } from "./types";
-import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
-import { useEconomicIndicatorElements } from "@features/indicators/economy";
 
 type SocioEcoIndicatorProps = {
   onClose: () => void;

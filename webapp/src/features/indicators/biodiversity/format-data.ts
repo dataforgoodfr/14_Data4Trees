@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next";
 
-import type { NumericKeys } from "@shared/types";
-
 import {
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
 } from "@features/indicators/utils";
+
+import type { NumericKeys } from "@shared/types";
+
 import type { BiodiversityData } from "./types";
 
 const indicatorKeys: NumericKeys<BiodiversityData>[] = [

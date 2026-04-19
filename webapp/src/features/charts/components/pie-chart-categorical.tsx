@@ -1,43 +1,18 @@
 import type { FC } from "react";
 import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { useTranslation } from "@shared/i18n";
-
 type PieChartCategoricalProps = {
   title: string;
-  chartData: Array<{indicator: string, benef: string, temoin?: string}>
+  chartData: Array<{ name: string; value: unknown; fill: string }>;
 };
 
-export const PieChartCategorical: FC<PieChartProps> = ({ data }) => {
-  const { t } = useTranslation("translations");
-  const chartData = [
-    {
-      fill: "var(--chart-4)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.easyToMeet"),
-      value: data.easyToMeet,
-    },
-    {
-      fill: "var(--chart-3)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.moderateToMeet"),
-      value: data.moderateToMeet,
-    },
-    {
-      fill: "var(--chart-2)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.difficultToMeet"),
-      value: data.difficultToMeet,
-    },
-    {
-      fill: "var(--chart-1)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.dontKnow"),
-      value: data.dontKnow,
-    },
-  ];
-
+export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
+  title,
+  chartData,
+}) => {
   return (
     <div className="flex flex-col justify-between gap-sm flex-1">
-      <p className="text-muted-foreground">
-        {t("indicators.socioEco.sections.wood.timberNeeds.title")}
-      </p>
+      <p className="text-muted-foreground">{title}</p>
       <ResponsiveContainer
         height={200}
         width="100%"

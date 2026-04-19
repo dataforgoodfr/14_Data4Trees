@@ -116,48 +116,48 @@
     "socioEco": {
       "sections": {
         "economy": {
-          "title": "Modèle économique",
-          "incomeSourceNb": "Nombre de sources de revenus par ménage",
-          "revenueChange": "Evolution du montant des revenus",
           "assetsIndex": "Indice de patrimoine",
-          "livingPerception" : {
+          "incomeSourceNb": "Nombre de sources de revenus par ménage",
+          "livingPerception": {
+            "dontKnow": "Ne sait pas",
             "improvement": "Amélioration",
+            "refuse": "Refuse de répondre",
             "regression": "Dégradation",
             "stable": "Pas de changement",
-            "dontKnow": "Ne sait pas",
-            "refuse": "Refuse de répondre",
             "title": "Perception de l’évolution des conditions de vie"
-          }
-        },
-        "governance": {
-          "title": "Gouvernance",
-          "conflictIndex": "Indice de conflictualité",
-          "beneficialPractices": {
-            "title": "Pratiques bénéfiques adoptées",
-            "improvedHousehold": "Utilisation d'un foyer amélioré",
-            "rna": "Pratique de la RNA",
-            "treePlanting": "Plantation d'arbres",
-            "defense": "Mise en défense",
-            "legend": "ménages ayant adopté cette pratique (en %): "
-          }
+          },
+          "revenueChange": "Evolution du montant des revenus",
+          "title": "Modèle économique"
         },
         "food": {
           "autoConso": "Satsifaction des besoins en auto-consommation",
-          "leanPeriod": "Durée de la pérode de soudure",
-          "diversityScore": "Score de diversité alimentaire",
           "diversity": {
             "cereals": "Céréales",
             "eggs": "Œufs",
             "fish": "Poisson",
             "fruits": "Fruits",
+            "legend": "ménages consommant ce groupe alimentaire (en %):",
             "meat": "Viande",
             "roots": "Racines",
             "seeds": "Graines",
-            "vegetables": "Légumes",
-            "legend": "ménages consommant ce groupe alimentaire (en %):",
-            "title": "Groupes alimentaires consommés"
+            "title": "Groupes alimentaires consommés",
+            "vegetables": "Légumes"
           },
+          "diversityScore": "Score de diversité alimentaire",
+          "leanPeriod": "Durée de la pérode de soudure",
           "title": "Ressources alimentaires"
+        },
+        "governance": {
+          "beneficialPractices": {
+            "defense": "Mise en défense",
+            "improvedHousehold": "Utilisation d'un foyer amélioré",
+            "legend": "ménages ayant adopté cette pratique (en %): ",
+            "rna": "Pratique de la RNA",
+            "title": "Pratiques bénéfiques adoptées",
+            "treePlanting": "Plantation d'arbres"
+          },
+          "conflictIndex": "Indice de conflictualité",
+          "title": "Gouvernance"
         },
         "wood": {
           "collectionTime": "Temps de collecte du bois",
@@ -231,12 +231,12 @@
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
+      "monthPerYear": "{{ value }} mois/an",
+      "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
-      "tonPerHectare": "{{ value }} t/ha",
-      "monthPerYear": "{{ value }} mois/an",
-      "percentFoodRequirements": "{{ value }} % des besoins alimentaires"
+      "tonPerHectare": "{{ value }} t/ha"
     }
   },
   "popup": {

@@ -29,9 +29,7 @@ export const ChartFoodDiversity: FC<ChartFoodDiversityProps> = ({
   const chartData = [
     {
       benef: benef.cereals,
-      indicator: t(
-        "indicators.socioEco.sections.food.diversity.cereals",
-      ),
+      indicator: t("indicators.socioEco.sections.food.diversity.cereals"),
       temoin: temoin?.cereals,
     },
     {
@@ -46,16 +44,12 @@ export const ChartFoodDiversity: FC<ChartFoodDiversityProps> = ({
     },
     {
       benef: benef.meat,
-      indicator: t(
-        "indicators.socioEco.sections.food.diversity.meat",
-      ),
+      indicator: t("indicators.socioEco.sections.food.diversity.meat"),
       temoin: temoin?.meat,
     },
     {
       benef: benef.fruits,
-      indicator: t(
-        "indicators.socioEco.sections.food.diversity.fruits",
-      ),
+      indicator: t("indicators.socioEco.sections.food.diversity.fruits"),
       temoin: temoin?.fruits,
     },
     {

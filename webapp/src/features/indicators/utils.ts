@@ -7,10 +7,10 @@ export const UNITS = {
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
   m3PerHabPerYear: "m3PerHabPerYear",
-  speciesCount: "speciesCount",
-  tonPerHectare: "tonPerHectare",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
+  speciesCount: "speciesCount",
+  tonPerHectare: "tonPerHectare",
 } as const;
 
 export type Unit = keyof typeof UNITS;

@@ -5,10 +5,10 @@ import { useTranslation } from "@shared/i18n";
 import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-control";
 
 type Data = {
-    defense: number;
-        improvedHousehold: number;
-        rna: number;
-        treePlanting: number;
+  defense: number;
+  improvedHousehold: number;
+  rna: number;
+  treePlanting: number;
 };
 
 type ChartBeneficialPracticesProps = {
@@ -32,12 +32,16 @@ export const ChartBeneficialPractices: FC<ChartBeneficialPracticesProps> = ({
     },
     {
       benef: benef.improvedHousehold,
-      indicator: t("indicators.socioEco.sections.governance.beneficialPractices.improvedHousehold"),
+      indicator: t(
+        "indicators.socioEco.sections.governance.beneficialPractices.improvedHousehold",
+      ),
       temoin: temoin?.improvedHousehold,
     },
     {
       benef: benef.rna,
-      indicator: t("indicators.socioEco.sections.governance.beneficialPractices.rna"),
+      indicator: t(
+        "indicators.socioEco.sections.governance.beneficialPractices.rna",
+      ),
       temoin: temoin?.rna,
     },
     {
@@ -46,14 +50,18 @@ export const ChartBeneficialPractices: FC<ChartBeneficialPracticesProps> = ({
         "indicators.socioEco.sections.governance.beneficialPractices.treePlanting",
       ),
       temoin: temoin?.treePlanting,
-    }
+    },
   ];
 
   return (
     <BarCharWithBenefAndControl
       chartData={chartData}
-      legendLabel={t("indicators.socioEco.sections.governance.beneficialPractices.legend")}
-      title={t("indicators.socioEco.sections.governance.beneficialPractices.title")}
+      legendLabel={t(
+        "indicators.socioEco.sections.governance.beneficialPractices.legend",
+      )}
+      title={t(
+        "indicators.socioEco.sections.governance.beneficialPractices.title",
+      )}
       withTemoin={!!temoin}
     />
   );

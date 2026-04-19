@@ -42,7 +42,6 @@ export const useFormatSocialData = (data: SocialData) => {
   return {
     food: {
       autoConsumptionNeeds: `${formatWithUnit(34, UNITS.percentFoodRequirements)} (±${4})`,
-      foodDiversityScore: `${7.6}/10`,
       foodDiversity: {
         cereals: 99,
         eggs: 4,
@@ -53,10 +52,8 @@ export const useFormatSocialData = (data: SocialData) => {
         seeds: 50,
         vegetables: 87,
       },
-      leanPeriod: formatWithUnit(
-        3,
-        UNITS.monthPerYear,
-      ),
+      foodDiversityScore: `${7.6}/10`,
+      leanPeriod: formatWithUnit(3, UNITS.monthPerYear),
     },
     wood: {
       collectionTime: safeData.woodCollectionTime,

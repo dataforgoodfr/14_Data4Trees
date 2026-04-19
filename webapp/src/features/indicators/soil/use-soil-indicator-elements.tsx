@@ -1,10 +1,10 @@
 import { ChartAquaticErosion } from "@features/charts/soil/chart-aquatic-erosion";
 import { ChartWindErosion } from "@features/charts/soil/chart-wind-erosion";
+import type { UseIndicatorReturnType } from "@features/indicators//components/types";
+import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
 
 import { useTranslation } from "@i18n";
 
-import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
-import type { UseIndicatorReturnType } from "@features/indicators//components/types";
 import { useFormatSoilData } from "./format-data";
 import type { SoilData } from "./types";
 

@@ -3,16 +3,17 @@ import type { LayerMetadata } from "coordo";
 import { TreesIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
+import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import { IndicatorElements } from "@features/indicators/components/indicator-elements";
+import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+import { useSoilIndicatorElements } from "@features/indicators/soil";
+import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
+
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
 import { useBiodiversityIndicatorElements } from "../../indicators/biodiversity/use-biodiversity-indicator-elements";
-import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
-import { IndicatorElements } from "@features/indicators/components/indicator-elements";
-import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
-import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
-import { useSoilIndicatorElements } from "@features/indicators/soil";
 import type { ForestInventoryData } from "./types";
 
 type ForestInventoryPopupContentProps = {

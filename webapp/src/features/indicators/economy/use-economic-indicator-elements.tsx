@@ -1,11 +1,12 @@
+import { ChartBeneficialPractices } from "@features/charts/socio-eco/chart-beneficial-practices";
+import { ChartLivingPerception } from "@features/charts/socio-eco/chart-living-perception";
+
 import { useTranslation } from "@i18n";
 
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
-import { ChartLivingPerception } from "@features/charts/socio-eco/chart-living-perception";
-import type { EconomicData } from "./types";
 import { useFormatEconomicData } from "./format-data";
-import { ChartBeneficialPractices } from "@features/charts/socio-eco/chart-beneficial-practices";
+import type { EconomicData } from "./types";
 
 export const useEconomicIndicatorElements = (
   rawData: EconomicData,
@@ -29,7 +30,9 @@ export const useEconomicIndicatorElements = (
             dataName={t("indicators.socioEco.sections.economy.assetsIndex")}
             value={data.economy.assetsIndex}
           />
-          <ChartLivingPerception data={data.economy.livingConditionsPerception} />
+          <ChartLivingPerception
+            data={data.economy.livingConditionsPerception}
+          />
         </>
       ),
       identifier: "indicator-economy",
@@ -40,15 +43,19 @@ export const useEconomicIndicatorElements = (
       children: (
         <>
           <IndicatorRawValue
-            dataName={t("indicators.socioEco.sections.governance.conflictIndex")}
+            dataName={t(
+              "indicators.socioEco.sections.governance.conflictIndex",
+            )}
             value={data.governance.conflictIndex}
           />
-        <ChartBeneficialPractices benef={data.governance.beneficialPractices} />
+          <ChartBeneficialPractices
+            benef={data.governance.beneficialPractices}
+          />
         </>
       ),
       identifier: "indicator-governance",
       title: t("indicators.socioEco.sections.governance.title"),
       type: "section",
-    }
+    },
   ];
 };
