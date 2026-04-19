@@ -115,6 +115,24 @@
     },
     "socio-eco": {
       "sections": {
+        "food": {
+          "autoconso": "Satsifaction des besoins en auto-consommation",
+          "leanPeriod": "Durée de la pérode de soudure",
+          "diversityScore": "Score de diversité alimentaire",
+          "diversity": {
+            "cereals": "Céréales",
+            "eggs": "Œufs",
+            "fish": "Poisson",
+            "fruits": "Fruits",
+            "meat": "Viande",
+            "roots": "Racines",
+            "seeds": "Graines",
+            "vegetables": "Légumes",
+            "legend": "ménages consommant ce groupe alimentaire (en %):",
+            "title": "Groupes alimentaires consommés"
+          },
+          "title": "Ressources alimentaires"
+        },
         "wood": {
           "collectionTime": "Temps de collecte du bois",
           "energyConsumption": "Consommation de bois-énergie",

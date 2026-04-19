@@ -47,7 +47,7 @@ export const useFormatSocioEcoData = (data: SocioEcoData) => {
 
   return {
     economy: {
-      estateIndex: 0,
+      estateIndex: 13,
       incomeEvolution: [],
       incomeNbOfSources: 1,
       livingConditionsPerception: {
@@ -56,21 +56,22 @@ export const useFormatSocioEcoData = (data: SocioEcoData) => {
         gotWorse: 5,
         stayedTheSame: 3,
       },
-      nbAdditionalIncomes: 0,
+      nbAdditionalIncomes: 1,
       sectorBenefits: 1000,
       sectorEcoParticipation: 300,
     },
     food: {
       autoConsumptionNeeds: 0,
+      foodDiversityScore: safeData.foodDiversity,
       foodDiversity: {
-        cereals: safeData.foodDiversity,
-        eggs: 0,
-        fish: 0,
-        fruits: 0,
-        meat: 0,
-        roots: 0,
-        seeds: 0,
-        vegetables: 0,
+        cereals: 99,
+        eggs: 4,
+        fish: 23,
+        fruits: 24,
+        meat: 14,
+        roots: 92,
+        seeds: 50,
+        vegetables: 87,
       },
       hungryGab: 0,
     },

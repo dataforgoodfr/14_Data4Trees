@@ -1,104 +1,82 @@
 import type { FC } from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
-import { Card, CardContent, CardHeader, CardTitle } from "@shared/ui/card";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@shared/ui/chart";
 
-type BarChartProps = {
-  data: {
-    collectedWood: number;
-    boughtWood: number;
-    coal: number;
-    organicWaste: number;
-    animalWaste: number;
-    gas: number;
-    other: number;
-  };
+import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-control";
+
+type Data = {
+  collectedWood: number;
+  boughtWood: number;
+  coal: number;
+  organicWaste: number;
+  animalWaste: number;
+  gas: number;
+  other: number;
 };
 
-export const ChartEnergySources: FC<BarChartProps> = ({ data }) => {
-  const { t } = useTranslation("translations");
+type ChartEnergySourcesProps = {
+  benef: Data;
+  temoin?: Data;
+};
 
-  const chartConfig = {
-    value: {
-      color: "var(--chart-1)",
-      label: t("indicators.socio-eco.sections.wood.energySources.legend"),
-    },
-  } satisfies ChartConfig;
+export const ChartEnergySources: FC<ChartEnergySourcesProps> = ({
+  benef,
+  temoin,
+}) => {
+  const { t } = useTranslation("translations");
 
   const chartData = [
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.collectedWood"),
-      value: data.collectedWood,
+      benef: benef.collectedWood,
+      indicator: t(
+        "indicators.socio-eco.sections.wood.energySources.collectedWood",
+      ),
+      temoin: temoin?.collectedWood,
     },
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.boughtWood"),
-      value: data.boughtWood,
+      benef: benef.boughtWood,
+      indicator: t(
+        "indicators.socio-eco.sections.wood.energySources.boughtWood",
+      ),
+      temoin: temoin?.boughtWood,
     },
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.coal"),
-      value: data.coal,
+      benef: benef.coal,
+      indicator: t("indicators.socio-eco.sections.wood.energySources.coal"),
+      temoin: temoin?.coal,
     },
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.organicWaste"),
-      value: data.organicWaste,
+      benef: benef.organicWaste,
+      indicator: t(
+        "indicators.socio-eco.sections.wood.energySources.organicWaste",
+      ),
+      temoin: temoin?.organicWaste,
     },
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.animalWaste"),
-      value: data.animalWaste,
+      benef: benef.animalWaste,
+      indicator: t(
+        "indicators.socio-eco.sections.wood.energySources.animalWaste",
+      ),
+      temoin: temoin?.animalWaste,
     },
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.gas"),
-      value: data.gas,
+      benef: benef.gas,
+      indicator: t("indicators.socio-eco.sections.wood.energySources.gas"),
+      temoin: temoin?.gas,
     },
     {
-      name: t("indicators.socio-eco.sections.wood.energySources.other"),
-      value: data.other,
+      benef: benef.other,
+      indicator: t("indicators.socio-eco.sections.wood.energySources.other"),
+      temoin: temoin?.other,
     },
   ];
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          {t("indicators.socio-eco.sections.wood.energySources.title")}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto max-h-62.5"
-          config={chartConfig}
-        >
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              axisLine={false}
-              dataKey="name"
-              tickFormatter={(value) => value.slice(0, 3)}
-              tickLine={false}
-              tickMargin={10}
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-              cursor={false}
-            />
-            <Bar
-              dataKey="value"
-              fill="var(--chart-3)"
-              radius={8}
-            />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <BarCharWithBenefAndControl
+      chartData={chartData}
+      legendLabel={t("indicators.socio-eco.sections.wood.energySources.legend")}
+      title={t("indicators.socio-eco.sections.wood.energySources.title")}
+      withTemoin={!!temoin}
+    />
   );
 };
