@@ -4,7 +4,6 @@ import { type ReactNode, useCallback, useRef, useState } from "react";
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
 
 import { API_URL } from "@shared/api/client";
-import { SPRITE_MAPLIBRE } from "@shared/api/sprites";
 import { type Category, MapContext } from "@shared/contexts/MapContext";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 
@@ -62,9 +61,6 @@ export function MapProvider({ children }: MapProviderProps) {
         hideLayer: mapApiRef.current?.hideLayer,
         showLayer: mapApiRef.current?.showLayer,
       });
-
-      // addSprite => can handle multiple sprites
-      mapApiRef.current?.addSprite(SPRITE_MAPLIBRE.id, SPRITE_MAPLIBRE.url);
     };
 
     node.addEventListener(EVENTS.MAP_READY, handleReady);

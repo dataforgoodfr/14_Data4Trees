@@ -1,8 +1,16 @@
+/**
+ * Example for sprite usage
+ */
+
 type SpriteSheet = {
   id: string;
   url: string;
 };
 
+/**
+ * This can be added this way to the style of the map
+ * mapApiRef.current.addSprite(SPRITE_MAPLIBRE.id, SPRITE_MAPLIBRE.url);
+ */
 export const SPRITE_MAPLIBRE: SpriteSheet = {
   id: "sprite-maplibre",
   url: "https://demotiles.maplibre.org/styles/osm-bright-gl-style/sprite",
