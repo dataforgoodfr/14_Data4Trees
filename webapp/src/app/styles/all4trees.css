@@ -39,9 +39,12 @@
   --custom-color-green-dark: #1a2420;
   --custom-color-green-main: #007a55;
   --custom-color-green-pastel: #d0fae5;
-  --custom-color-grey-light: #f2e5e5;
+  --custom-color-grey-light: #e5e7eb;
   --custom-color-blue-dark: #192637;
   --custom-color-blue-light: #52a4ff;
+
+  --custom-color-socio-eco: #1447e6; /* Same as in socio-eco-icon */
+  --custom-color-inventaire: #009966; /* Same as in inventaire-icon */
 
   /* ========================================================================
      TYPOGRAPHIE - CHARTE ALL4TREES

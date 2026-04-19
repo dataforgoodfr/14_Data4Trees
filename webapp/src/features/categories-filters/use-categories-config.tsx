@@ -23,7 +23,7 @@ export const useCategoriesConfig = (): {
   const actionInventary: CategoryGroupItem = {
     icon: (
       <TreePineIcon
-        className="text-accent"
+        className="text-inventaire"
         size={ICON_SIZE}
       />
     ),
@@ -34,7 +34,7 @@ export const useCategoriesConfig = (): {
   const actionDiversity: CategoryGroupItem = {
     icon: (
       <LeafIcon
-        className="text-accent"
+        className="text-inventaire"
         size={ICON_SIZE}
       />
     ),
@@ -45,7 +45,7 @@ export const useCategoriesConfig = (): {
   const actionSocioEco: CategoryGroupItem = {
     icon: (
       <UsersIcon
-        className="text-info-foreground"
+        className="text-socio-eco"
         size={ICON_SIZE}
       />
     ),

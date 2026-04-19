@@ -39,6 +39,7 @@
       "type": "datapackage",
       "path": "../catalog/inventaire",
       "resource": "inventaire_id",
+      "layerType": "symbol",
       "columns": {
         "for": "for",
         "cod": "cod",
@@ -82,9 +83,8 @@
       "type": "datapackage",
       "path": "../catalog/enquete",
       "resource": "enquete_menage_cdf",
-      "groupby": [
-        "admi2"
-      ],
+      "layerType": "symbol",
+      "groupby": ["admi2"],
       "columns": {
         "geom": "centroid(merge(point(socio_eco_gps.long, socio_eco_gps.latit)))",
         "population": "sum(hab)",

@@ -14,7 +14,27 @@ import {
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
 
+import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/useMap";
+
+import pictoInventaire from "./assets/inventaire-icon.svg";
+import pictoSocioEco from "./assets/socio-eco-icon.svg";
+
+function getIconSize({
+  assetSize,
+  targetSize,
+}: {
+  assetSize: number;
+  targetSize: number;
+}) {
+  if (!assetSize) {
+    return 1;
+  }
+  return targetSize / assetSize;
+}
+
+const TARGET_SIZE = 48;
+const SVG_SIZE = 72;
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
@@ -22,9 +42,22 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
+    mapApiRef.current.setLayerSymbol({
+      iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
+      layerId: LAYERS.INVENTARY,
+      svg: pictoInventaire,
+    });
+
+    mapApiRef.current.setLayerSymbol({
+      iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
+      layerId: LAYERS.ENQUETE,
+      svg: pictoSocioEco,
+    });
+
     // Set the popup for the "inventaire" layer
     mapApiRef.current.setLayerPopup<ForestInventoryData>({
-      layerId: "inventaire",
+      centerOnClick: true,
+      layerId: LAYERS.INVENTARY,
       popupConfig: { ...DEFAULT_POPUP_CONFIG },
       renderCallback: getRenderPopupLayer<ForestInventoryData>(
         ForestInventoryPopupContent,
@@ -34,7 +67,8 @@ export const WidgetMap: FC = () => {
 
     // Set the popup for the "enquete" layer
     mapApiRef.current.setLayerPopup<SocioEcoData>({
-      layerId: "enquete",
+      centerOnClick: true,
+      layerId: LAYERS.ENQUETE,
       popupConfig: { ...DEFAULT_POPUP_CONFIG },
       renderCallback: getRenderPopupLayer<SocioEcoData>(SocioEcoIndicator),
       trigger: "click",
@@ -42,7 +76,8 @@ export const WidgetMap: FC = () => {
 
     // Set the popup for the Seed data layer
     mapApiRef.current.setLayerPopup<SeedData>({
-      layerId: "seed",
+      centerOnClick: true,
+      layerId: LAYERS.SEED,
       popupConfig: { ...DEFAULT_POPUP_CONFIG },
       renderCallback: getRenderPopupLayer<SeedData>(SeedIndicator),
       trigger: "click",
