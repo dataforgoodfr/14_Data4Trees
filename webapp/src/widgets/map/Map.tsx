@@ -15,10 +15,26 @@ import {
 } from "@features/popup/renderPopup";
 
 import { LAYERS } from "@shared/api/layers";
-import { getSpriteIconId, SPRITE_MAPLIBRE } from "@shared/api/sprites";
 import { useMap } from "@shared/hooks/useMap";
 
-import pictoSocioEco from "./socio-eco-icon.svg";
+import pictoInventaire from "./assets/inventaire-icon.svg";
+import pictoSocioEco from "./assets/socio-eco-icon.svg";
+
+function getIconSize({
+  assetSize,
+  targetSize,
+}: {
+  assetSize: number;
+  targetSize: number;
+}) {
+  if (!assetSize) {
+    return 1;
+  }
+  return targetSize / assetSize;
+}
+
+const TARGET_SIZE = 48;
+const SVG_SIZE = 72;
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
@@ -26,28 +42,16 @@ export const WidgetMap: FC = () => {
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
 
-    const pictoInventaire = new URL("/picto-inventaire.png", import.meta.url)
-      .href;
-
     mapApiRef.current.setLayerSymbol({
-      iconSize: 0.3,
-      imageUrl: pictoInventaire,
+      iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
       layerId: LAYERS.INVENTARY,
+      svg: pictoInventaire,
     });
 
     mapApiRef.current.setLayerSymbol({
-      iconSize: 0.7,
+      iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
       layerId: LAYERS.ENQUETE,
       svg: pictoSocioEco,
-    });
-
-    mapApiRef.current.setLayerSymbol({
-      iconSize: 2,
-      layerId: LAYERS.SEED,
-      spriteId: getSpriteIconId({
-        iconId: "park_11",
-        spriteId: SPRITE_MAPLIBRE.id,
-      }),
     });
 
     // Set the popup for the "inventaire" layer

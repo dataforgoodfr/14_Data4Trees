@@ -45,7 +45,7 @@ export const useCategoriesConfig = (): {
   const actionSocioEco: CategoryGroupItem = {
     icon: (
       <UsersIcon
-        className="text-info-foreground"
+        className="text-info"
         size={ICON_SIZE}
       />
     ),

@@ -2,6 +2,9 @@
   <!-- Background circle -->
   <circle cx="36" cy="26" r="24" fill="#DBEAFE" fill-opacity="0.9" shape-rendering="crispEdges"/>
 
+  <!-- Outer border circle -->
+  <circle cx="36" cy="26" r="24" fill="none" stroke="#1447E6" stroke-width="2"/>
+
   <!-- Icon paths -->
   <path d="M39.3332 33.5V31.8333C39.3332 30.9493 38.982 30.1014 38.3569 29.4763C37.7317 28.8512 36.8839 28.5 35.9998 28.5H30.9998C30.1158 28.5 29.2679 28.8512 28.6428 29.4763C28.0177 30.1014 27.6665 30.9493 27.6665 31.8333V33.5" stroke="#1447E6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M39.3335 18.6064C40.0483 18.7918 40.6813 19.2092 41.1332 19.7932C41.5851 20.3772 41.8303 21.0947 41.8303 21.8331C41.8303 22.5715 41.5851 23.2891 41.1332 23.8731C40.6813 24.4571 40.0483 24.8745 39.3335 25.0598" stroke="#1447E6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
