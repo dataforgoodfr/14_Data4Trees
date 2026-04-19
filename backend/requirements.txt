@@ -1,5 +1,5 @@
 asgiref==3.8.1
-coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git#subdirectory=coordo-py
+coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@0.2.1#subdirectory=coordo-py
 Django>=4.2.27
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.1
