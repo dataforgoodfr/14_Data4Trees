@@ -5,34 +5,40 @@ import { useTranslation } from "@shared/i18n";
 
 type PieChartProps = {
   data: {
-    easyToMeet: number;
-    moderateToMeet: number;
-    difficultToMeet: number;
+        improvement: number;
+        stable: number;
+    regression: number;
     dontKnow: number;
+    refuse: number;
   };
 };
 
-export const ChartTimberNeeds: FC<PieChartProps> = ({ data }) => {
+export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
       fill: "var(--chart-4)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.easyToMeet"),
-      value: data.easyToMeet,
+      name: t("indicators.socioEco.sections.economy.livingPerception.improvement"),
+      value: data.improvement,
     },
     {
       fill: "var(--chart-3)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.moderateToMeet"),
-      value: data.moderateToMeet,
+      name: t("indicators.socioEco.sections.economy.livingPerception.stable"),
+      value: data.stable,
     },
     {
       fill: "var(--chart-2)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.difficultToMeet"),
-      value: data.difficultToMeet,
+      name: t("indicators.socioEco.sections.economy.livingPerception.regression"),
+      value: data.regression,
     },
+      {
+          fill: "var(--chart-5)",
+          name: t("indicators.socioEco.sections.economy.livingPerception.refuse"),
+          value: data.refuse,
+      },
     {
       fill: "var(--chart-1)",
-      name: t("indicators.socioEco.sections.wood.timberNeeds.dontKnow"),
+      name: t("indicators.socioEco.sections.economy.livingPerception.dontKnow"),
       value: data.dontKnow,
     },
   ];
@@ -40,7 +46,7 @@ export const ChartTimberNeeds: FC<PieChartProps> = ({ data }) => {
   return (
     <div className="flex flex-col justify-between gap-sm flex-1">
       <p className="text-muted-foreground">
-        {t("indicators.socioEco.sections.wood.timberNeeds.title")}
+        {t("indicators.socioEco.sections.economy.livingPerception.title")}
       </p>
       <ResponsiveContainer
         height={200}

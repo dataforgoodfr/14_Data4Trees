@@ -30,47 +30,47 @@ export const ChartFoodDiversity: FC<ChartFoodDiversityProps> = ({
     {
       benef: benef.cereals,
       indicator: t(
-        "indicators.socio-eco.sections.food.diversity.cereals",
+        "indicators.socioEco.sections.food.diversity.cereals",
       ),
       temoin: temoin?.cereals,
     },
     {
       benef: benef.eggs,
-      indicator: t("indicators.socio-eco.sections.food.diversity.eggs"),
+      indicator: t("indicators.socioEco.sections.food.diversity.eggs"),
       temoin: temoin?.eggs,
     },
     {
       benef: benef.fish,
-      indicator: t("indicators.socio-eco.sections.food.diversity.fish"),
+      indicator: t("indicators.socioEco.sections.food.diversity.fish"),
       temoin: temoin?.fish,
     },
     {
       benef: benef.meat,
       indicator: t(
-        "indicators.socio-eco.sections.food.diversity.meat",
+        "indicators.socioEco.sections.food.diversity.meat",
       ),
       temoin: temoin?.meat,
     },
     {
       benef: benef.fruits,
       indicator: t(
-        "indicators.socio-eco.sections.food.diversity.fruits",
+        "indicators.socioEco.sections.food.diversity.fruits",
       ),
       temoin: temoin?.fruits,
     },
     {
       benef: benef.vegetables,
-      indicator: t("indicators.socio-eco.sections.food.diversity.vegetables"),
+      indicator: t("indicators.socioEco.sections.food.diversity.vegetables"),
       temoin: temoin?.vegetables,
     },
     {
       benef: benef.roots,
-      indicator: t("indicators.socio-eco.sections.food.diversity.roots"),
+      indicator: t("indicators.socioEco.sections.food.diversity.roots"),
       temoin: temoin?.roots,
     },
     {
       benef: benef.seeds,
-      indicator: t("indicators.socio-eco.sections.food.diversity.seeds"),
+      indicator: t("indicators.socioEco.sections.food.diversity.seeds"),
       temoin: temoin?.seeds,
     },
   ];
@@ -78,8 +78,8 @@ export const ChartFoodDiversity: FC<ChartFoodDiversityProps> = ({
   return (
     <BarCharWithBenefAndControl
       chartData={chartData}
-      legendLabel={t("indicators.socio-eco.sections.food.diversity.legend")}
-      title={t("indicators.socio-eco.sections.food.diversity.title")}
+      legendLabel={t("indicators.socioEco.sections.food.diversity.legend")}
+      title={t("indicators.socioEco.sections.food.diversity.title")}
       withTemoin={!!temoin}
     />
   );

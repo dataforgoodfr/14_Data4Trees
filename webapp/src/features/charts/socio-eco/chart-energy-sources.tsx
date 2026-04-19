@@ -29,44 +29,44 @@ export const ChartEnergySources: FC<ChartEnergySourcesProps> = ({
     {
       benef: benef.collectedWood,
       indicator: t(
-        "indicators.socio-eco.sections.wood.energySources.collectedWood",
+        "indicators.socioEco.sections.wood.energySources.collectedWood",
       ),
       temoin: temoin?.collectedWood,
     },
     {
       benef: benef.boughtWood,
       indicator: t(
-        "indicators.socio-eco.sections.wood.energySources.boughtWood",
+        "indicators.socioEco.sections.wood.energySources.boughtWood",
       ),
       temoin: temoin?.boughtWood,
     },
     {
       benef: benef.coal,
-      indicator: t("indicators.socio-eco.sections.wood.energySources.coal"),
+      indicator: t("indicators.socioEco.sections.wood.energySources.coal"),
       temoin: temoin?.coal,
     },
     {
       benef: benef.organicWaste,
       indicator: t(
-        "indicators.socio-eco.sections.wood.energySources.organicWaste",
+        "indicators.socioEco.sections.wood.energySources.organicWaste",
       ),
       temoin: temoin?.organicWaste,
     },
     {
       benef: benef.animalWaste,
       indicator: t(
-        "indicators.socio-eco.sections.wood.energySources.animalWaste",
+        "indicators.socioEco.sections.wood.energySources.animalWaste",
       ),
       temoin: temoin?.animalWaste,
     },
     {
       benef: benef.gas,
-      indicator: t("indicators.socio-eco.sections.wood.energySources.gas"),
+      indicator: t("indicators.socioEco.sections.wood.energySources.gas"),
       temoin: temoin?.gas,
     },
     {
       benef: benef.other,
-      indicator: t("indicators.socio-eco.sections.wood.energySources.other"),
+      indicator: t("indicators.socioEco.sections.wood.energySources.other"),
       temoin: temoin?.other,
     },
   ];
@@ -74,8 +74,8 @@ export const ChartEnergySources: FC<ChartEnergySourcesProps> = ({
   return (
     <BarCharWithBenefAndControl
       chartData={chartData}
-      legendLabel={t("indicators.socio-eco.sections.wood.energySources.legend")}
-      title={t("indicators.socio-eco.sections.wood.energySources.title")}
+      legendLabel={t("indicators.socioEco.sections.wood.energySources.legend")}
+      title={t("indicators.socioEco.sections.wood.energySources.title")}
       withTemoin={!!temoin}
     />
   );

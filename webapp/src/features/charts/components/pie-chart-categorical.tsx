@@ -3,16 +3,12 @@ import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
 
-type PieChartProps = {
-  data: {
-    easyToMeet: number;
-    moderateToMeet: number;
-    difficultToMeet: number;
-    dontKnow: number;
-  };
+type PieChartCategoricalProps = {
+  title: string;
+  chartData: Array<{indicator: string, benef: string, temoin?: string}>
 };
 
-export const ChartTimberNeeds: FC<PieChartProps> = ({ data }) => {
+export const PieChartCategorical: FC<PieChartProps> = ({ data }) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {

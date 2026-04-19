@@ -8,7 +8,7 @@ import { useTranslation } from "@i18n";
 
 import { ICON_SIZE_HEADER } from "../components/constants";
 import { IndicatorElements } from "../components/indicator-elements";
-import { IndicatorPopupHeader } from "../components/indicator-popup-header";
+import { IndicatorPopupHeader } from "../../popup/components/indicator-popup-header";
 import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import type { SeedData } from "./format-data";
 import { useSeedIndicatorElements } from "./use-seed-indicator-elements";

@@ -6,13 +6,13 @@ import { Activity, type FC, useState } from "react";
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
-
-import { ICON_SIZE_HEADER } from "../components/constants";
-import { IndicatorElements } from "../components/indicator-elements";
-import { IndicatorPopupHeader } from "../components/indicator-popup-header";
-import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
+import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import { IndicatorElements } from "@features/indicators/components/indicator-elements";
+import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
+import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import type { SocioEcoData } from "./types";
-import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
+import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
+import { useEconomicIndicatorElements } from "@features/indicators/economy";
 
 type SocioEcoIndicatorProps = {
   onClose: () => void;
@@ -36,7 +36,8 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
 
-  const socioEcoElements = useSocioEcoIndicatorElements(data);
+  const socialElements = useSocialIndicatorElements(data);
+  const economicElements = useEconomicIndicatorElements(data);
 
   const title = t("popup.socioEco", {
     village: data.admi2,
@@ -74,11 +75,11 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
 
       <IndicatorScrollContainer>
         <Activity mode={selectedTab === TABS.RESOURCES ? "visible" : "hidden"}>
-          <IndicatorElements elements={socioEcoElements} />
+          <IndicatorElements elements={socialElements} />
         </Activity>
 
         <Activity mode={selectedTab === TABS.ECONOMY ? "visible" : "hidden"}>
-          <h1>Elements</h1>
+          <IndicatorElements elements={economicElements} />
         </Activity>
       </IndicatorScrollContainer>
     </div>

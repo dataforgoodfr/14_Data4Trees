@@ -6,17 +6,17 @@ import { ChartTimberNeeds } from "@features/charts/socio-eco/chart-timber-needs"
 
 import { useTranslation } from "@i18n";
 
-import { IndicatorRawValue } from "../components/indicator-raw-value";
-import type { UseIndicatorReturnType } from "../components/types";
-import { useFormatSocioEcoData } from "./format-data";
-import type { SocioEcoData } from "./types";
+import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
+import type { UseIndicatorReturnType } from "@features/indicators/components/types";
+import { useFormatSocialData } from "./format-data";
+import type { SocialData } from "./types";
 import { ChartFoodDiversity } from "@features/charts/socio-eco/chart-food-diversity";
 
-export const useSocioEcoIndicatorElements = (
-  rawData: SocioEcoData,
+export const useSocialIndicatorElements = (
+  rawData: SocialData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("translations");
-  const data = useFormatSocioEcoData(rawData);
+  const data = useFormatSocialData(rawData);
 
   return [
     {
@@ -24,41 +24,41 @@ export const useSocioEcoIndicatorElements = (
         <>
           <ChartEnergySources benef={data.wood.energySources} />
           <IndicatorRawValue
-            dataName={t("indicators.socio-eco.sections.wood.energyConsumption")}
+            dataName={t("indicators.socioEco.sections.wood.energyConsumption")}
             value={data.wood.energyConsumption}
           />
           <ChartWoodEnergyNeeds data={data.wood.energyNeeds} />
           <IndicatorRawValue
-            dataName={t("indicators.socio-eco.sections.wood.collectionTime")}
+            dataName={t("indicators.socioEco.sections.wood.collectionTime")}
             value={data.wood.collectionTime}
           />
           <ChartTimberNeeds data={data.wood.timberNeeds} />
         </>
       ),
       identifier: "indicator-wood",
-      title: t("indicators.socio-eco.sections.wood.title"),
+      title: t("indicators.socioEco.sections.wood.title"),
       type: "section",
     },
     {
       children: (
         <>
           <IndicatorRawValue
-            dataName={t("indicators.socio-eco.sections.food.diversityScore")}
+            dataName={t("indicators.socioEco.sections.food.diversityScore")}
             value={data.food.foodDiversityScore}
           />
         <ChartFoodDiversity benef={data.food.foodDiversity} />
           <IndicatorRawValue
-            dataName={t("indicators.socio-eco.sections.food.diversityScore")}
-            value={data.food.foodDiversityScore}
+            dataName={t("indicators.socioEco.sections.food.autoConso")}
+            value={data.food.autoConsumptionNeeds}
           />
           <IndicatorRawValue
-            dataName={t("indicators.socio-eco.sections.food.diversityScore")}
-            value={data.food.foodDiversityScore}
+            dataName={t("indicators.socioEco.sections.food.leanPeriod")}
+            value={data.food.leanPeriod}
           />
         </>
       ),
       identifier: "indicator-food",
-      title: t("indicators.socio-eco.sections.food.title"),
+      title: t("indicators.socioEco.sections.food.title"),
       type: "section",
     }
   ];

@@ -9,6 +9,8 @@ export const UNITS = {
   m3PerHabPerYear: "m3PerHabPerYear",
   speciesCount: "speciesCount",
   tonPerHectare: "tonPerHectare",
+  monthPerYear: "monthPerYear",
+  percentFoodRequirements: "percentFoodRequirements",
 } as const;
 
 export type Unit = keyof typeof UNITS;
@@ -31,11 +33,11 @@ export const useFormatterWithUnit = () => {
 
     switch (unit) {
       case UNITS.individualPerCubicMeter:
-        return t("indicators.units.individualPerHectare", { value });
+        return t("indicators.units.individualPerCubicMeter", { value });
       case UNITS.individualPerHectare:
         return t("indicators.units.individualPerHectare", { value });
       case UNITS.individualPerTrap:
-        return t("indicators.units.individualPerHectare", { value });
+        return t("indicators.units.individualPerTrap", { value });
       case UNITS.speciesCount:
         return t("indicators.units.speciesCount", {
           count: parseInt(formattedValue, 10),
@@ -44,6 +46,10 @@ export const useFormatterWithUnit = () => {
         return t("indicators.units.tonPerHectare", { value });
       case UNITS.m3PerHabPerYear:
         return t("indicators.units.m3PerHabPerYear", { value });
+      case UNITS.monthPerYear:
+        return t("indicators.units.monthPerYear", { value });
+      case UNITS.percentFoodRequirements:
+        return t("indicators.units.percentFoodRequirements", { value });
       default:
         return null;
     }

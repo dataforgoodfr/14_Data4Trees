@@ -10,7 +10,7 @@ import {
 } from "@shared/ui/alert";
 import { Button } from "@shared/ui/button";
 
-import { ICON_SIZE_HEADER } from "./constants";
+import { ICON_SIZE_HEADER } from "../../indicators/components/constants";
 
 type IndicatorPopupHeaderProps = {
   icon: ReactNode;

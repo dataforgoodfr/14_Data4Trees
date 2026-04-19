@@ -6,7 +6,7 @@ import {
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
-} from "../utils";
+} from "@features/indicators/utils";
 import type { BiodiversityData } from "./types";
 
 const indicatorKeys: NumericKeys<BiodiversityData>[] = [

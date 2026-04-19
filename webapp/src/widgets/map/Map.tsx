@@ -3,12 +3,12 @@ import { type FC, useEffect } from "react";
 import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
-} from "@features/indicators/forest-inventory";
+} from "@features/popup/forest-inventory";
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   type SocioEcoData,
   SocioEcoIndicator,
-} from "@features/indicators/socio-eco";
+} from "@features/popup/socio-eco";
 import {
   DEFAULT_POPUP_CONFIG,
   getRenderPopupLayer,

@@ -113,10 +113,36 @@
     "resources": {
       "title": "Ressources des ménages"
     },
-    "socio-eco": {
+    "socioEco": {
       "sections": {
+        "economy": {
+          "title": "Modèle économique",
+          "incomeSourceNb": "Nombre de sources de revenus par ménage",
+          "revenueChange": "Evolution du montant des revenus",
+          "assetsIndex": "Indice de patrimoine",
+          "livingPerception" : {
+            "improvement": "Amélioration",
+            "regression": "Dégradation",
+            "stable": "Pas de changement",
+            "dontKnow": "Ne sait pas",
+            "refuse": "Refuse de répondre",
+            "title": "Perception de l’évolution des conditions de vie"
+          }
+        },
+        "governance": {
+          "title": "Gouvernance",
+          "conflictIndex": "Indice de conflictualité",
+          "beneficialPractices": {
+            "title": "Pratiques bénéfiques adoptées",
+            "improvedHousehold": "Utilisation d'un foyer amélioré",
+            "rna": "Pratique de la RNA",
+            "treePlanting": "Plantation d'arbres",
+            "defense": "Mise en défense",
+            "legend": "ménages ayant adopté cette pratique (en %): "
+          }
+        },
         "food": {
-          "autoconso": "Satsifaction des besoins en auto-consommation",
+          "autoConso": "Satsifaction des besoins en auto-consommation",
           "leanPeriod": "Durée de la pérode de soudure",
           "diversityScore": "Score de diversité alimentaire",
           "diversity": {
@@ -208,7 +234,9 @@
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
-      "tonPerHectare": "{{ value }} t/ha"
+      "tonPerHectare": "{{ value }} t/ha",
+      "monthPerYear": "{{ value }} mois/an",
+      "percentFoodRequirements": "{{ value }} % des besoins alimentaires"
     }
   },
   "popup": {

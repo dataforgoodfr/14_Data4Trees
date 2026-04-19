@@ -3,8 +3,8 @@ import { ChartWindErosion } from "@features/charts/soil/chart-wind-erosion";
 
 import { useTranslation } from "@i18n";
 
-import { IndicatorRawValue } from "../components/indicator-raw-value";
-import type { UseIndicatorReturnType } from "../components/types";
+import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
+import type { UseIndicatorReturnType } from "@features/indicators//components/types";
 import { useFormatSoilData } from "./format-data";
 import type { SoilData } from "./types";
 

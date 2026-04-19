@@ -17,22 +17,22 @@ export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
   const chartData = [
     {
       fill: "var(--chart-4)",
-      name: t("indicators.socio-eco.sections.wood.energyNeeds.easyToMeet"),
+      name: t("indicators.socioEco.sections.wood.energyNeeds.easyToMeet"),
       value: data.easyToMeet,
     },
     {
       fill: "var(--chart-3)",
-      name: t("indicators.socio-eco.sections.wood.energyNeeds.moderateToMeet"),
+      name: t("indicators.socioEco.sections.wood.energyNeeds.moderateToMeet"),
       value: data.moderateToMeet,
     },
     {
       fill: "var(--chart-2)",
-      name: t("indicators.socio-eco.sections.wood.energyNeeds.difficultToMeet"),
+      name: t("indicators.socioEco.sections.wood.energyNeeds.difficultToMeet"),
       value: data.difficultToMeet,
     },
     {
       fill: "var(--chart-1)",
-      name: t("indicators.socio-eco.sections.wood.energyNeeds.dontKnow"),
+      name: t("indicators.socioEco.sections.wood.energyNeeds.dontKnow"),
       value: data.dontKnow,
     },
   ];
@@ -40,7 +40,7 @@ export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
   return (
     <div className="flex flex-col justify-between gap-sm flex-1">
       <p className="text-muted-foreground">
-        {t("indicators.socio-eco.sections.wood.energyNeeds.title")}
+        {t("indicators.socioEco.sections.wood.energyNeeds.title")}
       </p>
       <ResponsiveContainer
         height={200}
