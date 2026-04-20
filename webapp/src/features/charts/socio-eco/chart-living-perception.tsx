@@ -26,9 +26,7 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
     },
     {
       fill: "var(--chart-3)",
-      name: t(
-        "indicators.socioEco.sections.economy.livingPerception.stable",
-      ),
+      name: t("indicators.socioEco.sections.economy.livingPerception.stable"),
       value: data.stable,
     },
     {
@@ -40,16 +38,12 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
     },
     {
       fill: "var(--chart-5)",
-      name: t(
-        "indicators.socioEco.sections.economy.livingPerception.refuse",
-      ),
+      name: t("indicators.socioEco.sections.economy.livingPerception.refuse"),
       value: data.refuse,
     },
     {
       fill: "var(--chart-1)",
-      name: t(
-        "indicators.socioEco.sections.economy.livingPerception.dontKnow",
-      ),
+      name: t("indicators.socioEco.sections.economy.livingPerception.dontKnow"),
       value: data.dontKnow,
     },
   ];

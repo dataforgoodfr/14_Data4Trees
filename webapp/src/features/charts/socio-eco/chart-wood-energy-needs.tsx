@@ -23,16 +23,12 @@ export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
     },
     {
       fill: "var(--chart-3)",
-      name: t(
-        "indicators.socioEco.sections.wood.energyNeeds.moderateToMeet",
-      ),
+      name: t("indicators.socioEco.sections.wood.energyNeeds.moderateToMeet"),
       value: data.moderateToMeet,
     },
     {
       fill: "var(--chart-2)",
-      name: t(
-        "indicators.socioEco.sections.wood.energyNeeds.difficultToMeet",
-      ),
+      name: t("indicators.socioEco.sections.wood.energyNeeds.difficultToMeet"),
       value: data.difficultToMeet,
     },
     {
