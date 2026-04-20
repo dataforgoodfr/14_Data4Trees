@@ -46,7 +46,7 @@ export const ChartRadarWithBenefAndControl: FC<
 
   return (
     <Card>
-      <CardHeader className="items-center">
+      <CardHeader className="items-center pb-0">
         <CardDescription>{title}</CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
