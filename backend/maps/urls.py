@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
 urlpatterns = [
-    path("<path:subpath>", views.my_map_view, name="maps-data"),
+    re_path(r"^(?!dashboard)(?P<subpath>\w+)", views.my_map_view, name="maps-data"),
+    path("dashboard/<layer_id>", views.dashboard_view, name="dashboard-data"),
 ]
