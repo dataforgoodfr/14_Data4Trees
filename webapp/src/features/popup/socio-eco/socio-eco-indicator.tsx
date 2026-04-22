@@ -30,9 +30,24 @@ const TABS: Record<string, TabKind> = {
   RESOURCES: "resources",
 } as const;
 
+const exctractVillageName = (metadata: LayerMetadata | undefined, data: SocioEcoData): string => {
+  const label = metadata?.schema?.fields
+    .find((f) => f.name === "admi2")
+    ?.categories?.find((c) => c.value === data.admi2)?.label;
+
+  let villageName;
+  if (label) {
+    const jsonLabel = JSON.parse(label);
+    villageName = jsonLabel["Malagasy(mg)"] ?? undefined;
+  }
+
+  return villageName || data.admi2;
+}
+
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   onClose,
   data,
+  metadata,
   className,
 }) => {
   const { t } = useTranslation("translations");
@@ -42,7 +57,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const economicElements = useEconomicIndicatorElements(data);
 
   const title = t("popup.socioEco", {
-    village: data.admi2,
+    village: exctractVillageName(metadata, data),
   });
 
   const subtitles = {
