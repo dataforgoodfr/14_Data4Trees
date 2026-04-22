@@ -1,3 +1,5 @@
+from django.http import HttpResponseBadRequest
+
 from coordo.map import Map
 from django.conf import settings
 from django.http import JsonResponse
@@ -23,15 +25,21 @@ def dashboard_view(request, layer_id):
             layer_id,
             request.body)
 
-    df = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
+    if (layer_id == "inventaire"):
+        df = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
 
-    # keys we want to drop from the dataframe before converting to numeric, as they are not relevant for the statistics
-    fieldToDrop = ["for", "cod"]
+        # keys we want to drop from the dataframe before converting to numeric, as they are not relevant for the statistics
+        fieldToDrop = ["for", "cod"]
 
-    numeric = df.drop(columns=fieldToDrop, errors="ignore").apply(pd.to_numeric, errors="coerce")
-    stats = pd.DataFrame({
-        "mean": numeric.mean(numeric_only=True).round(2),
-        "std": numeric.std(numeric_only=True).round(2),
-    })
-    return JsonResponse(stats.to_dict())
+        numeric = df.drop(columns=fieldToDrop, errors="ignore").apply(pd.to_numeric, errors="coerce")
+        stats = {
+            col : {
+            "value": numeric[col].mean(),
+            "error": numeric[col].std(),
+            }
+            for col in numeric.columns
+        }
+        return JsonResponse(stats)
+    
+    return HttpResponseBadRequest(f'Layer "{layer_id}" not yet supported', status=501)
 
