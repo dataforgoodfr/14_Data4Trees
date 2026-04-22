@@ -1,5 +1,11 @@
 import type { FC } from "react";
-import { PolarGrid, PolarRadiusAxis, Radar, RadarChart } from "recharts";
+import {
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+} from "recharts";
 
 import { useTranslation } from "@shared/i18n";
 
@@ -14,7 +20,7 @@ import {
 } from "@ui/chart";
 
 import { RADAR_CONFIG } from "../constants";
-import { PolarAngleAxisMultiline } from "./polar-angle-axis-multi";
+import { renderPolarAngleTick } from "./render-polar-angle-tick";
 
 type ChartRadarWithBenefAndControlProps = {
   title: string;
@@ -40,7 +46,7 @@ export const ChartRadarWithBenefAndControl: FC<
 
   return (
     <Card>
-      <CardHeader className="items-center">
+      <CardHeader className="items-center pb-0">
         <CardDescription>{title}</CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
@@ -50,7 +56,7 @@ export const ChartRadarWithBenefAndControl: FC<
         >
           <RadarChart
             data={chartData}
-            outerRadius="70%"
+            outerRadius="68%"
           >
             <ChartTooltip
               content={<ChartTooltipContent indicator="line" />}
@@ -60,16 +66,17 @@ export const ChartRadarWithBenefAndControl: FC<
               domain={[0, 10]}
               tickCount={6}
             />
-            <PolarAngleAxisMultiline dataKey="indicator" />
+            <PolarAngleAxis
+              dataKey="indicator"
+              tick={renderPolarAngleTick}
+            />
             <PolarGrid radialLines />
-
             <Radar
               dataKey="benef"
               fill="var(--color-benef)"
               stroke="var(--color-benef)"
               {...RADAR_CONFIG}
             />
-
             {withTemoin && (
               <Radar
                 dataKey="temoin"
@@ -78,13 +85,10 @@ export const ChartRadarWithBenefAndControl: FC<
                 {...RADAR_CONFIG}
               />
             )}
-
-            {withTemoin && (
-              <ChartLegend
-                className="mt-md"
-                content={<ChartLegendContent />}
-              />
-            )}
+            <ChartLegend
+              className="mt-md"
+              content={<ChartLegendContent />}
+            />
           </RadarChart>
         </ChartContainer>
       </CardContent>

@@ -1,5 +1,3 @@
-import { PolarAngleAxis } from "recharts";
-
 import { lineBreakLabel } from "../utils";
 
 export const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
@@ -25,14 +23,5 @@ export const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
         </tspan>
       ))}
     </text>
-  );
-};
-
-export const PolarAngleAxisMultiline = (props: any) => {
-  return (
-    <PolarAngleAxis
-      tick={renderPolarAngleTick}
-      {...props}
-    />
   );
 };
