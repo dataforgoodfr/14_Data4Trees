@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import type { LayerMetadata } from "coordo";
 import { twMerge } from "tailwind-merge";
 
 import { i18nInstance } from "@shared/i18n";
@@ -21,4 +22,27 @@ export function formatDate(date: Date | string) {
   return Intl.DateTimeFormat(i18nInstance.language, {
     dateStyle: "short",
   }).format(typeof date === "string" ? new Date(date) : (date as Date));
+}
+
+export function findCategoricalLabel(
+  metadata: LayerMetadata,
+  fieldName: string,
+  fieldValue: any,
+): string | undefined {
+  const resourceLabel = metadata?.resource?.schema?.fields
+    .find((f) => f.name === fieldName)
+    ?.categories?.find((c) => c.value === fieldValue)?.label;
+
+  if (resourceLabel) {
+    return resourceLabel;
+  }
+
+  return metadata?.references
+    ?.find((ref) =>
+      ref.schema.fields
+        .find((f) => f.name === fieldName)
+        ?.categories?.some((c) => c.value === fieldValue),
+    )
+    ?.schema.fields.find((f) => f.name === fieldName)
+    ?.categories?.find((c) => c.value === fieldValue)?.label;
 }

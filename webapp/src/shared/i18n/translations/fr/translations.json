@@ -92,7 +92,7 @@
           "title": "Espèces indicatrices"
         },
         "treeDiversity": {
-          "relativeAbundance": "Abondance relative",
+          "relativeAbundance": "Abondance relative par essence (en % du nombre total d'arbres inventoriés)",
           "speciesRichness": "Richesse spécifique",
           "title": "Diversité arborée"
         }

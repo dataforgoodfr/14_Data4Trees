@@ -10,7 +10,7 @@ import { useEconomicIndicatorElements } from "@features/indicators/economy";
 import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
-import { formatDate } from "@shared/lib/utils";
+import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
@@ -30,19 +30,20 @@ const TABS: Record<string, TabKind> = {
   RESOURCES: "resources",
 } as const;
 
-const exctractVillageName = (metadata: LayerMetadata | undefined, data: SocioEcoData): string => {
-  const label = metadata?.schema?.fields
-    .find((f) => f.name === "admi2")
-    ?.categories?.find((c) => c.value === data.admi2)?.label;
+const exctractVillageName = (
+  metadata: LayerMetadata,
+  data: SocioEcoData,
+): string => {
+  const label = findCategoricalLabel(metadata, "admi2", data.admi2);
 
-  let villageName;
+  let villageName: string | undefined;
   if (label) {
     const jsonLabel = JSON.parse(label);
     villageName = jsonLabel["Malagasy(mg)"] ?? undefined;
   }
 
   return villageName || data.admi2;
-}
+};
 
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   onClose,

@@ -9,7 +9,7 @@ import { IndicatorScrollContainer } from "@features/indicators/components/indica
 import { useSoilIndicatorElements } from "@features/indicators/soil";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
-import { formatDate } from "@shared/lib/utils";
+import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
@@ -36,16 +36,13 @@ export const ForestInventoryPopupContent: FC<
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
-  const biodiversityElements = useBiodiversityIndicatorElements(data);
+  const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
   const soilElements = useSoilIndicatorElements(data);
 
   const title = t("popup.forestInventory", {
     code: data.cod,
     label:
-      metadata?.schema?.fields
-        .find((f) => f.name === "for")
-        ?.categories?.find((c) => c.value === data.for)?.label ||
-      t("popup.undefined"),
+      findCategoricalLabel(metadata, "for", data.for) || t("popup.undefined"),
   });
 
   const subtitles = {

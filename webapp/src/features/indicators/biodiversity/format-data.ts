@@ -6,6 +6,7 @@ import {
   useFormatterWithUnit,
 } from "@features/indicators/utils";
 
+import { precise } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
 import type { BiodiversityData } from "./types";
@@ -24,10 +25,23 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "epf_microhabitats",
 ];
 
+const formatRelativeAbundance = (
+  relativeAbundance: BiodiversityData["relative_abundance"],
+  treePop: number,
+) =>
+  Object.entries(relativeAbundance).map(
+    ([key, value]) =>
+      [key, Number(precise((Number(value) * 100) / treePop))] as [
+        string,
+        number,
+      ],
+  );
+
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
+  console.log("Fomratting data", data);
   const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
@@ -67,8 +81,12 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       speciesRichnessTaxon3: 24,
     },
     treeDiversity: {
-      relative_abundance: 1, // replace hardcoded value when data will be available
+      relative_abundance: formatRelativeAbundance(
+        data.relative_abundance,
+        data.tree_pop,
+      ),
       speciesRichness: data.richness,
+      tree_pop: data.tree_pop,
     },
   };
 };

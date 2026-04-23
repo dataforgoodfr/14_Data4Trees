@@ -1,6 +1,8 @@
+import type { LayerMetadata } from "coordo";
 import { BinocularsIcon, HeartPulseIcon, InfoIcon } from "lucide-react";
 
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
+import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
 
 import { useTranslation } from "@i18n";
 
@@ -12,6 +14,7 @@ import type { BiodiversityData } from "./types";
 
 export const useBiodiversityIndicatorElements = (
   rawData: BiodiversityData,
+  metadata: LayerMetadata,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("translations");
   const data = useFormatBiodiversityData(rawData);
@@ -46,11 +49,9 @@ export const useBiodiversityIndicatorElements = (
             iconStart={<HeartPulseIcon size={ICON_SIZE} />}
             value={data.treeDiversity.speciesRichness}
           />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.treeDiversity.relativeAbundance",
-            )}
-            value={data.treeDiversity.relative_abundance}
+          <ChartRelativeAbundance
+            data={data.treeDiversity.relative_abundance}
+            metadata={metadata}
           />
         </>
       ),
