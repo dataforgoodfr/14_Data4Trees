@@ -3,6 +3,7 @@ import type { FC } from "react";
 
 import { useTranslation } from "@shared/i18n";
 import { findCategoricalLabel } from "@shared/lib/utils";
+import type { ChartConfig } from "@shared/ui/chart";
 
 import { PieChartCategorical } from "../components/pie-chart-categorical";
 
@@ -15,21 +16,38 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
   data,
   metadata,
 }) => {
-  console.log("Relative abundance", data);
   const { t } = useTranslation("translations");
   const chartData = data.map((element, index) => ({
     fill: `var(--chart-${(index % 4) + 1})`,
-    name: findCategoricalLabel(metadata, "ess_arb", element[0]) || "other",
+    name: element[0],
     value: element[1],
   }));
 
-  console.log("Chart data", chartData);
+  let chartConfig: ChartConfig = {};
+  data.forEach((element) => {
+    chartConfig = {
+      ...chartConfig,
+      [element[0]]: {
+        label:
+          findCategoricalLabel(metadata, "ess_arb", element[0]) ||
+          t(
+            "indicators.biodiversity.sections.treeDiversity.relativeAbundance.other",
+          ),
+      },
+    };
+  });
+
   return (
     <PieChartCategorical
+      chartConfig={chartConfig}
       chartData={chartData}
-      title={t(
-        "indicators.biodiversity.sections.treeDiversity.relativeAbundance",
+      description={t(
+        "indicators.biodiversity.sections.treeDiversity.relativeAbundance.description",
       )}
+      title={t(
+        "indicators.biodiversity.sections.treeDiversity.relativeAbundance.title",
+      )}
+      withLabel
     />
   );
 };

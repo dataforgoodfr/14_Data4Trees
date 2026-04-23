@@ -1,50 +1,54 @@
 import type { FC } from "react";
-import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Pie, PieChart, type PieLabel } from "recharts";
 
-type PieChartCategoricalProps = {
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@ui/card";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@ui/chart";
+
+export const description = "A pie chart with a label";
+
+export type PieChartCategoricalProps = {
   title: string;
-  chartData: Array<{ name: string; value: unknown; fill: string }>;
+  chartData: Array<{ name: string; value: number; fill: string }>;
+  chartConfig: any;
+  description?: string;
+  withLabel?: PieLabel;
 };
 
 export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
-  title,
   chartData,
+  chartConfig,
+  title,
+  description,
+  withLabel,
 }) => {
   return (
-    <div className="flex flex-col justify-between gap-sm flex-1">
-      <p className="text-muted-foreground">{title}</p>
-      <ResponsiveContainer
-        height={200}
-        width="100%"
-      >
-        <PieChart
-          accessibilityLayer
-          barCategoryGap="10%"
-          barGap={4}
-          cx="50%"
-          cy="50%"
-          data={chartData}
-          endAngle={360}
-          innerRadius={0}
-          layout="centric"
-          margin={{
-            bottom: 0,
-            left: 0,
-            right: 0,
-            top: 0,
-          }}
-          outerRadius="80%"
-          stackOffset="none"
-          startAngle={0}
-          syncMethod="index"
+    <Card className="flex flex-col">
+      <CardHeader className="items-center">
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1 pb-0">
+        <ChartContainer
+          className="mx-auto aspect-square max-h-90 pb-0 [&_.recharts-pie-label-text]:fill-foreground"
+          config={chartConfig}
         >
-          <Pie
-            data={chartData}
-            dataKey="value"
-          />
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
+          <PieChart>
+            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+            <Pie
+              data={chartData}
+              dataKey="value"
+              label={withLabel}
+              nameKey="name"
+            />
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 };

@@ -82,17 +82,12 @@
           "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
         },
-        "indicatorSpecies": {
-          "abundanceTaxon1": "Abondance taxon n°1",
-          "abundanceTaxon2": "Abondance taxon n°2",
-          "abundanceTaxon3": "Abondance taxon n°3",
-          "speciesRichnessTaxon1": "Richesse spécifique taxon n°1",
-          "speciesRichnessTaxon2": "Richesse spécifique taxon n°2",
-          "speciesRichnessTaxon3": "Richesse spécifique taxon n°3",
-          "title": "Espèces indicatrices"
-        },
         "treeDiversity": {
-          "relativeAbundance": "Abondance relative par essence (en % du nombre total d'arbres inventoriés)",
+          "relativeAbundance": {
+            "description": "(en % du nombre total d'arbres inventoriés)",
+            "other": "Autre",
+            "title": "Abondance relative par essence"
+          },
           "speciesRichness": "Richesse spécifique",
           "title": "Diversité arborée"
         }
@@ -163,10 +158,6 @@
           "collectionTime": "Temps de collecte du bois",
           "energyConsumption": "Consommation de bois-énergie",
           "energyNeeds": {
-            "difficultToMeet": "Difficile à satisfaire",
-            "dontKnow": "Ne sait pas",
-            "easyToMeet": "Facile à satisfaire",
-            "moderateToMeet": "Modéré à satisfaire",
             "title": "Satisfaction des besoins en bois-énergie"
           },
           "energySources": {
@@ -180,11 +171,13 @@
             "other": "Autres",
             "title": "Sources d’énergie utilisées"
           },
-          "timberNeeds": {
+          "needs": {
             "difficultToMeet": "Difficile à satisfaire",
             "dontKnow": "Ne sait pas",
             "easyToMeet": "Facile à satisfaire",
-            "moderateToMeet": "Modéré à satisfaire",
+            "moderateToMeet": "Modéré à satisfaire"
+          },
+          "timberNeeds": {
             "title": "Satisfaction des besoins en bois d’œuvre"
           },
           "title": "Ressources en bois"

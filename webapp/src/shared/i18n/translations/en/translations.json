@@ -119,10 +119,6 @@
           "collectionTime": "Wood collection time",
           "energyConsumption": "Wood-energy consumption",
           "energyNeeds": {
-            "difficultToMeet": "Difficult to meet",
-            "dontKnow": "Don't know",
-            "easyToMeet": "Easy to meet",
-            "moderateToMeet": "Moderate to meet",
             "title": "Wood-energy needs satisfaction"
           },
           "energySources": {
@@ -136,11 +132,13 @@
             "other": "Other",
             "title": "Energy sources usage"
           },
-          "timberNeeds": {
+          "needs": {
             "difficultToMeet": "Difficult to meet",
             "dontKnow": "Don't know",
             "easyToMeet": "Easy to meet",
-            "moderateToMeet": "Moderate to meet",
+            "moderateToMeet": "Moderate to meet"
+          },
+          "timberNeeds": {
             "title": "Timber needs satisfaction"
           },
           "title": "Wood resources"
