@@ -68,31 +68,26 @@
         "biomass": {
           "density": "Tree density",
           "title": "Stand Biomass",
-          "volume": "Biomass volume"
+          "volume": "Volume of above-ground biomass"
         },
         "forestPotentialLevel": {
-          "chartTitle": "Forest Ecopotentiality Index",
+          "chartTitle": "Tropical Biodiversity Index",
           "density": "Tree density",
-          "diameterDistribution": "Diameter distribution",
+          "diameterDistribution": "Diametric distribution",
           "diversity": "Tree diversity",
           "dominantHeight": "Dominant height",
-          "microhabitat": "Dendro-microhabitats",
-          "ratioDeathmassBiomass": "Deadmass / biomass ratio",
+          "microhabitat": "Tree related microhabitats ",
+          "deadWood": "Deadwood",
           "spatialDistribution": "Spatial distribution",
           "title": "Indirect indicators",
           "verticalDistribution": "Vertical distribution"
         },
-        "indicatorSpecies": {
-          "abundanceTaxon1": "Abundance taxon #1",
-          "abundanceTaxon2": "Abundance taxon #2",
-          "abundanceTaxon3": "Abundance taxon #3",
-          "speciesRichnessTaxon1": "Species richness taxon #1",
-          "speciesRichnessTaxon2": "Species richness taxon #2",
-          "speciesRichnessTaxon3": "Species richness taxon #3",
-          "title": "Indicator Species"
-        },
         "treeDiversity": {
-          "relativeAbundance": "Relative abundance",
+          "relativeAbundance": {
+            "description": "(in % of the total number of trees)",
+            "other": "Other",
+            "title": "Relative abundance"
+          },
           "speciesRichness": "Species richness",
           "title": "Tree Diversity"
         }
@@ -113,13 +108,57 @@
     "resources": {
       "title": "Households resources"
     },
-    "socio-eco": {
+    "socioEco": {
       "sections": {
+        "economy": {
+          "assetsIndex": "Material assets index",
+          "incomeSourceNb": "Number of sources of income per household",
+          "livingPerception": {
+            "dontKnow": "Don't know",
+            "improvement": "Improvement",
+            "refuse": "Refuse to respond",
+            "regression": "Regression",
+            "stable": "No change",
+            "title": "Perception of changes in living conditions"
+          },
+          "revenueChange": "Revenue changes",
+          "title": "Economic model"
+        },
+        "food": {
+          "autoConso": "Food self-sufficiency",
+          "diversity": {
+            "cereals": "Cereals",
+            "eggs": "Eggs",
+            "fish": "Fish",
+            "fruits": "Fruits",
+            "legend": "households consuming this food group (%):",
+            "meat": "Meat",
+            "roots": "Roots",
+            "seeds": "Seeds",
+            "title": "Food groups consumed",
+            "vegetables": "Vegetables"
+          },
+          "diversityScore": "Dietary diversity score",
+          "leanPeriod": "Duration of the lean season",
+          "title": "Food resources"
+        },
+        "governance": {
+          "beneficialPractices": {
+            "defense": "Defense",
+            "improvedHousehold": "Use of improved stoves",
+            "legend": "households that adopted this practice (in %): ",
+            "rna": "Practice of RNA",
+            "title": "Adoption of good practices",
+            "treePlanting": "Tree planting"
+          },
+          "conflictIndex": "Conflict Index",
+          "title": "Governance"
+        },
         "wood": {
-          "collectionTime": "Wood collection time",
-          "energyConsumption": "Wood-energy consumption",
+          "collectionTime": "Time spent on firewood collection",
+          "energyConsumption": "Wood fuel consumption",
           "energyNeeds": {
-            "title": "Wood-energy needs satisfaction"
+            "title": "Satisfaction of wood energy needs"
           },
           "energySources": {
             "animalWaste": "Animal waste",
@@ -139,7 +178,7 @@
             "moderateToMeet": "Moderate to meet"
           },
           "timberNeeds": {
-            "title": "Timber needs satisfaction"
+            "title": "Satisfaction of timber needs"
           },
           "title": "Wood resources"
         }
@@ -150,12 +189,12 @@
       "sections": {
         "erosion": {
           "aquatic": {
-            "rainfall": "Rainfall regime",
-            "slope": "Slope",
-            "soilCover": "Soil cover",
-            "stability": "Stability",
-            "title": "Aquatic erosion resistance index",
-            "waterSeepage": "Seepage speed"
+            "rainfall": "rainfall",
+            "slope": "slope",
+            "soilCover": "ground cover",
+            "stability": "soil stability",
+            "title": "Water erosion resistance index",
+            "waterSeepage": "water infiltration rate"
           },
           "title": "Soil erosion",
           "wind": {
@@ -188,7 +227,9 @@
       "speciesCount": "",
       "speciesCount_one": "{{ count }} species inventoried",
       "speciesCount_other": "{{ count }} species inventoried",
-      "tonPerHectare": "{{ value }} t/ha"
+      "tonPerHectare": "{{ value }} t/ha",
+      "monthPerYear": "{{ value }} month/year",
+      "percentFoodRequirements": "{{ value }} % of food needs"
     }
   },
   "popup": {

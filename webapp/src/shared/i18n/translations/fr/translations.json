@@ -68,16 +68,16 @@
         "biomass": {
           "density": "Densité arborée",
           "title": "Biomasse du peuplement",
-          "volume": "Volume de biomasse"
+          "volume": "Volume de biomasse aérienne"
         },
         "forestPotentialLevel": {
-          "chartTitle": "Indice d’écopotentialité forestière",
+          "chartTitle": "Indice de biodiversité tropicale",
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
           "dominantHeight": "Hauteur dominante",
           "microhabitat": "Dendro-microhabitats",
-          "ratioDeathmassBiomass": "Rapport nécromasse / biomasse",
+          "deadWood": "Bois mort",
           "spatialDistribution": "Distribution spatiale",
           "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
@@ -189,18 +189,18 @@
       "sections": {
         "erosion": {
           "aquatic": {
-            "rainfall": "Régime pluviométrique",
+            "rainfall": "Pluviométrie",
             "slope": "Pente",
             "soilCover": "Couverture du sol",
-            "stability": "Stabilité",
+            "stability": "Stabilité du sol",
             "title": "Indice de résistance à l'érosion hydrique",
-            "waterSeepage": "Vitesse d'infiltration"
+            "waterSeepage": "Vitesse d'infiltration de l'eau"
           },
           "title": "Érosion du sol",
           "wind": {
             "soilCover": "Couverture du sol",
             "speed": "Vitesse du vent",
-            "stability": "Stabilité",
+            "stability": "Stabilité du sol",
             "title": "Indice de résistance à l'érosion éolienne"
           }
         },
