@@ -32,14 +32,18 @@ def dashboard_view(request, layer_id):
         fieldToDrop = ["for", "cod"]
 
         numeric = df.drop(columns=fieldToDrop, errors="ignore").apply(pd.to_numeric, errors="coerce")
-        stats = {
-            col : {
-            "value": numeric[col].mean(),
-            "error": numeric[col].std(),
+        means = numeric.mean(numeric_only=True)
+        stds = numeric.std(numeric_only=True)
+
+        result = {
+            key: {
+                "value": None if pd.isna(means[key]) else means[key],
+                "error": None if pd.isna(stds[key]) else stds[key],
             }
-            for col in numeric.columns
+            for key in means.index
         }
-        return JsonResponse(stats)
+
+        return JsonResponse(result)
     
     return HttpResponseBadRequest(f'Layer "{layer_id}" not yet supported', status=501)
 
