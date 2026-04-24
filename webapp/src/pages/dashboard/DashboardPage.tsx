@@ -11,6 +11,8 @@ import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest
 
 import { useApi } from "@shared/hooks/useApi";
 import type { ApiClient } from "@shared/api/client";
+import { UserMenu } from "@widgets/header/user-menu";
+import { Header } from "@widgets/header";
 
 // request API pour récupérer les données du back, utilisée dans useEffect [window.onload] à terme
 async function request(api:ApiClient) {
@@ -265,8 +267,8 @@ export function DashboardPage() {
   }, [data])
 
   return (
-    <div>
-
+    <div className="bg-white w-full">
+      <Header />
       <ChartForestPotential benef={benefChartPotential} />
 
     </div>
