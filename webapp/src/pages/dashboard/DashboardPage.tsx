@@ -262,7 +262,6 @@ export function DashboardPage() {
       spatialDistribution: data.epf_spatial_distribution.value,
       verticalDistribution: data.epf_vertical_distribution.value
     })
-
   }, [data])
 
   return (
