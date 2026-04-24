@@ -209,5 +209,9 @@
         "typePlant": "Type de plant"
       }
     }
+  },
+  "buttonHeader": {
+    "toDashboard": "Montrer le dashboard",
+    "toHome": "Montrer la carte"
   }
 }
