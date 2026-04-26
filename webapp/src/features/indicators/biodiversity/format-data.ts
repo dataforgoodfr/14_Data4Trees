@@ -16,7 +16,7 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "tree_density",
   "richness",
   "epf_tree_density",
-  "epf_necro_biomass_ratio",
+  "epf_deadWood",
   "epf_tree_diversity",
   "epf_spatial_distribution",
   "epf_diameter_distribution",
@@ -41,7 +41,6 @@ const formatRelativeAbundance = (
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
-  console.log("Fomratting data", data);
   const { t } = useTranslation("translations");
   const { formatWithUnit } = useFormatterWithUnit();
 
@@ -61,12 +60,12 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
     },
     forestPotentialLevel: {
       benef: {
+        deadWood: safeData.epf_deadWood,
         density: safeData.epf_tree_density,
         diameterDistribution: safeData.epf_diameter_distribution,
         diversity: safeData.epf_tree_diversity,
         dominantHeight: safeData.epf_dominant_height,
         microHabitat: safeData.epf_microhabitats,
-        ratioDeathmassBiomass: safeData.epf_necro_biomass_ratio,
         spatialDistribution: safeData.epf_spatial_distribution,
         verticalDistribution: safeData.epf_vertical_distribution,
       },

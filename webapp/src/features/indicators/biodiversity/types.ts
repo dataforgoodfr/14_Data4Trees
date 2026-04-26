@@ -6,7 +6,7 @@ export type BiodiversityData = {
   tree_pop: number;
   relative_abundance: any;
   epf_tree_density: number;
-  epf_necro_biomass_ratio: number;
+  epf_deadWood: number;
   epf_tree_diversity: number;
   epf_spatial_distribution: number;
   epf_diameter_distribution: number;

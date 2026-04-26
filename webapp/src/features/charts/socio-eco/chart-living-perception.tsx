@@ -82,7 +82,7 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
 
 // TODO: Would be nice to display labels correctly but there is not enough space in chart card.
 //@ts-expect-error
-const renderLabel =
+const _renderLabel =
   (chartConfig: any) =>
   ({
     payload,

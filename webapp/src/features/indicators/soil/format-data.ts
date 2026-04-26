@@ -61,6 +61,7 @@ export const useFormatSoilData = (data: SoilData) => {
     ero_soil_stability: ero_soil_stability,
     ero_water_seepage: ero_water_seepage,
     ero_wind: Number(ero_rainfall_and_wind.split("-")[1]),
+    soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(
       soil_fauna_density,
       UNITS.individualPerTrap,
@@ -70,6 +71,7 @@ export const useFormatSoilData = (data: SoilData) => {
       UNITS.speciesCount,
     ),
     soil_structure: `${soil_structure}/10`,
+    surface_fauna_abundance: safeData.surface_fauna_abundance,
     surface_fauna_density: formatWithUnit(
       surface_fauna_density,
       UNITS.individualPerCubicMeter,

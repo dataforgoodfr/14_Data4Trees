@@ -214,7 +214,8 @@
         },
         "surfaceFauna": {
           "title": "Macrofaune de surface"
-        }
+        },
+        "unknownTaxon": "Taxon inconnu"
       },
       "title": "Données sol"
     },

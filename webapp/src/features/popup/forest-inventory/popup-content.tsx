@@ -37,7 +37,7 @@ export const ForestInventoryPopupContent: FC<
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
   const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
-  const soilElements = useSoilIndicatorElements(data);
+  const soilElements = useSoilIndicatorElements(data, metadata);
 
   const title = t("popup.forestInventory", {
     code: data.cod,

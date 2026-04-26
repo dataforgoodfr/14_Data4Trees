@@ -10,7 +10,7 @@ type Data = {
   diameterDistribution: number;
   dominantHeight: number;
   microHabitat: number;
-  ratioDeathmassBiomass: number;
+  deadWood: number;
   spatialDistribution: number;
   verticalDistribution: number;
 };
@@ -67,11 +67,11 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
       temoin: temoin?.microHabitat,
     },
     {
-      benef: benef.ratioDeathmassBiomass,
+      benef: benef.deadWood,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.ratioDeathmassBiomass",
+        "indicators.biodiversity.sections.forestPotentialLevel.deadWood",
       ),
-      temoin: temoin?.ratioDeathmassBiomass,
+      temoin: temoin?.deadWood,
     },
     {
       benef: benef.spatialDistribution,

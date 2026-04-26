@@ -52,7 +52,7 @@
         "epf_tree_density": "count(1 if ind.etat = 1) / (20^2 * pi() / 10000) / 100",
         "epf_necromass_pied": "ind.sum(0.0673 * (dens_bois_mort.dens_bois * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 2)",
         "epf_necromass_sol": "ind.sum(3.1415926535 / 3 * ((dhp_b / 2)^2 + ((dhp_e / 2)^2 + dhp_b / 2 + dhp_e / 2) * longueur * dens_bois_mort.dens_bois) if etat = 3)",
-        "epf_necro_biomass_ratio": "((ind.sum(0.0673 * (dens_bois_mort.dens_bois * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 2) + ind.sum(3.1415926535 / 3 * ((dhp_b / 2)^2 + ((dhp_e / 2)^2 + dhp_b / 2 + dhp_e / 2) * longueur * dens_bois_mort.dens_bois) if etat = 3)) / ind.sum(0.0673 * (dens_bois.value * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 1)) * 10",
+        "epf_deadWood": "((ind.sum(0.0673 * (dens_bois_mort.dens_bois * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 2) + ind.sum(3.1415926535 / 3 * ((dhp_b / 2)^2 + ((dhp_e / 2)^2 + dhp_b / 2 + dhp_e / 2) * longueur * dens_bois_mort.dens_bois) if etat = 3)) / ind.sum(0.0673 * (dens_bois.value * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 1)) * 10",
         "epf_tree_diversity": "shannon(ind.ess_arb) / 5 * 10",
         "epf_spatial_distribution": "ind.categorical_gini(zon) * 10",
         "epf_diameter_distribution": "ind.gini(dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10) * 10",
@@ -74,7 +74,9 @@
         "surface_fauna_diversity": "list_unique(list_concat(list(barba_001.concat_ws('-', tax1_barbA, tax2_barbA, tax3_barbA)), list(barbb_001.concat_ws('-', tax1_barbB, tax2_barbB, tax3_barbB)), list(barbc_001.concat_ws('-', tax1_barbC, tax2_barbC, tax3_barbC)), list(barbd_001.concat_ws('-', tax1_barbD, tax2_barbD, tax3_barbD))))",
         "surface_fauna_abundance_tax1": "list_aggregate(list_concat(list(barba_001.tax1_barbA), list(barbb_001.tax1_barbB), list(barbc_001.tax1_barbC), list(barbd_001.tax1_barbD)), 'histogram')",
         "surface_fauna_abundance_tax2": "list_aggregate(list_concat(list(barba_001.tax2_barbA), list(barbb_001.tax2_barbB), list(barbc_001.tax2_barbC), list(barbd_001.tax2_barbD)), 'histogram')",
-        "surface_fauna_abundance_tax3": "list_aggregate(list_concat(list(barba_001.tax3_barbA), list(barbb_001.tax3_barbB), list(barbc_001.tax3_barbC), list(barbd_001.tax3_barbD)), 'histogram')"
+        "surface_fauna_abundance_tax3": "list_aggregate(list_concat(list(barba_001.tax3_barbA), list(barbb_001.tax3_barbB), list(barbc_001.tax3_barbC), list(barbd_001.tax3_barbD)), 'histogram')",
+        "surface_fauna_abundance": "list_aggregate(list_concat(list(barba_001.concat_ws('-', tax1_barbA, tax2_barbA, tax3_barbA)), list(barbb_001.concat_ws('-', tax1_barbB, tax2_barbB, tax3_barbB)), list(barbc_001.concat_ws('-', tax1_barbC, tax2_barbC, tax3_barbC)), list(barbd_001.concat_ws('-', tax1_barbD, tax2_barbD, tax3_barbD))), 'histogram')",
+        "soil_fauna_abundance": "list_aggregate(list(tsbf_001.concat_ws('-', tax1_tsbf, tax2_tsbf, tax3_tsbf)), 'histogram')"
       },
       "popup": {
         "trigger": "click"
