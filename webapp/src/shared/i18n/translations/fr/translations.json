@@ -72,12 +72,12 @@
         },
         "forestPotentialLevel": {
           "chartTitle": "Indice de biodiversité tropicale",
+          "deadWood": "Bois mort",
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
           "dominantHeight": "Hauteur dominante",
           "microhabitat": "Dendro-microhabitats",
-          "deadWood": "Bois mort",
           "spatialDistribution": "Distribution spatiale",
           "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"

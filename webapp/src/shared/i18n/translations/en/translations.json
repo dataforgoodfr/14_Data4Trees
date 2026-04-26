@@ -72,12 +72,12 @@
         },
         "forestPotentialLevel": {
           "chartTitle": "Tropical Biodiversity Index",
+          "deadWood": "Deadwood",
           "density": "Tree density",
           "diameterDistribution": "Diametric distribution",
           "diversity": "Tree diversity",
           "dominantHeight": "Dominant height",
           "microhabitat": "Tree related microhabitats ",
-          "deadWood": "Deadwood",
           "spatialDistribution": "Spatial distribution",
           "title": "Indirect indicators",
           "verticalDistribution": "Vertical distribution"
@@ -224,12 +224,12 @@
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
       "m3PerHabPerYear": "{{ value }} m³/inhab/year",
+      "monthPerYear": "{{ value }} month/year",
+      "percentFoodRequirements": "{{ value }} % of food needs",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} species inventoried",
       "speciesCount_other": "{{ count }} species inventoried",
-      "tonPerHectare": "{{ value }} t/ha",
-      "monthPerYear": "{{ value }} month/year",
-      "percentFoodRequirements": "{{ value }} % of food needs"
+      "tonPerHectare": "{{ value }} t/ha"
     }
   },
   "popup": {
