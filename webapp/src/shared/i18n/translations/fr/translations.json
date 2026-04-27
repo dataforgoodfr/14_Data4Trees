@@ -220,7 +220,6 @@
       },
       "title": "Données sol"
     },
-    "undefined": "Donnée non renseignée",
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",

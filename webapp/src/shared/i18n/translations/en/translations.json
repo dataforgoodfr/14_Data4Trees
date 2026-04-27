@@ -220,7 +220,6 @@
       },
       "title": "Soil data"
     },
-    "undefined": "Data not provided",
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",

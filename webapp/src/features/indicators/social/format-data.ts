@@ -36,7 +36,7 @@ export const useFormatSocialData = (data: SocialData) => {
   const safeData = preciseNumericIndicators<SocialData>(
     data,
     indicatorKeys,
-    t("indicators.undefined"),
+    t("indicators.common.noData"),
   );
 
   return {

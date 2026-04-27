@@ -49,7 +49,7 @@ export const useFormatSoilData = (data: SoilData) => {
   } = preciseNumericIndicators<SoilData>(
     data,
     indicatorsToPreciseWithFallBack,
-    t("indicators.undefined"),
+    t("indicators.common.noData"),
   );
 
   return {

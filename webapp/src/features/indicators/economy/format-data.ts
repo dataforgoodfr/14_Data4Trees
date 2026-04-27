@@ -23,7 +23,7 @@ export const useFormatEconomicData = (data: EconomicData) => {
   const safeData = preciseNumericIndicators<EconomicData>(
     data,
     indicatorKeys,
-    t("indicators.undefined"),
+    t("indicators.common.noData"),
   );
 
   return {

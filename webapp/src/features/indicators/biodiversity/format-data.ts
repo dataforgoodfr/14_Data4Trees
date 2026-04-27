@@ -47,7 +47,7 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
   const safeData = preciseNumericIndicators<BiodiversityData>(
     data,
     indicatorKeys,
-    t("indicators.undefined"),
+    t("indicators.common.noData"),
   );
 
   return {
