@@ -68,31 +68,26 @@
         "biomass": {
           "density": "Densité arborée",
           "title": "Biomasse du peuplement",
-          "volume": "Volume de biomasse"
+          "volume": "Volume de biomasse aérienne"
         },
         "forestPotentialLevel": {
-          "chartTitle": "Indice d’écopotentialité forestière",
+          "chartTitle": "Indice de biodiversité tropicale",
+          "deadWood": "Bois mort",
           "density": "Densité arborée",
           "diameterDistribution": "Distribution diamétrale",
           "diversity": "Diversité arborée",
           "dominantHeight": "Hauteur dominante",
           "microhabitat": "Dendro-microhabitats",
-          "ratioDeathmassBiomass": "Rapport nécromasse / biomasse",
           "spatialDistribution": "Distribution spatiale",
           "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
         },
-        "indicatorSpecies": {
-          "abundanceTaxon1": "Abondance taxon n°1",
-          "abundanceTaxon2": "Abondance taxon n°2",
-          "abundanceTaxon3": "Abondance taxon n°3",
-          "speciesRichnessTaxon1": "Richesse spécifique taxon n°1",
-          "speciesRichnessTaxon2": "Richesse spécifique taxon n°2",
-          "speciesRichnessTaxon3": "Richesse spécifique taxon n°3",
-          "title": "Espèces indicatrices"
-        },
         "treeDiversity": {
-          "relativeAbundance": "Abondance relative",
+          "relativeAbundance": {
+            "description": "(en % du nombre total d'arbres inventoriés)",
+            "other": "Autre",
+            "title": "Abondance relative par essence"
+          },
           "speciesRichness": "Richesse spécifique",
           "title": "Diversité arborée"
         }
@@ -105,6 +100,7 @@
       "control": "Témoin",
       "date": "Date enquête",
       "density": "Densité",
+      "noData": "Données non disponibles",
       "speciesRichness": "Richesse spécifique"
     },
     "economy": {
@@ -113,16 +109,56 @@
     "resources": {
       "title": "Ressources des ménages"
     },
-    "socio-eco": {
+    "socioEco": {
       "sections": {
+        "economy": {
+          "assetsIndex": "Indice de patrimoine",
+          "incomeSourceNb": "Nombre de sources de revenus par ménage",
+          "livingPerception": {
+            "dontKnow": "Ne sait pas",
+            "improvement": "Amélioration",
+            "refuse": "Refuse de répondre",
+            "regression": "Dégradation",
+            "stable": "Pas de changement",
+            "title": "Perception de l’évolution des conditions de vie"
+          },
+          "revenueChange": "Evolution du montant des revenus",
+          "title": "Modèle économique"
+        },
+        "food": {
+          "autoConso": "Satsifaction des besoins en auto-consommation",
+          "diversity": {
+            "cereals": "Céréales",
+            "eggs": "Œufs",
+            "fish": "Poisson",
+            "fruits": "Fruits",
+            "legend": "ménages consommant ce groupe alimentaire (en %):",
+            "meat": "Viande",
+            "roots": "Racines",
+            "seeds": "Graines",
+            "title": "Groupes alimentaires consommés",
+            "vegetables": "Légumes"
+          },
+          "diversityScore": "Score de diversité alimentaire",
+          "leanPeriod": "Durée de la pérode de soudure",
+          "title": "Ressources alimentaires"
+        },
+        "governance": {
+          "beneficialPractices": {
+            "defense": "Mise en défense",
+            "improvedHousehold": "Utilisation d'un foyer amélioré",
+            "legend": "ménages ayant adopté cette pratique (en %): ",
+            "rna": "Pratique de la RNA",
+            "title": "Pratiques bénéfiques adoptées",
+            "treePlanting": "Plantation d'arbres"
+          },
+          "conflictIndex": "Indice de conflictualité",
+          "title": "Gouvernance"
+        },
         "wood": {
           "collectionTime": "Temps de collecte du bois",
           "energyConsumption": "Consommation de bois-énergie",
           "energyNeeds": {
-            "difficultToMeet": "Difficile à satisfaire",
-            "dontKnow": "Ne sait pas",
-            "easyToMeet": "Facile à satisfaire",
-            "moderateToMeet": "Modéré à satisfaire",
             "title": "Satisfaction des besoins en bois-énergie"
           },
           "energySources": {
@@ -136,11 +172,13 @@
             "other": "Autres",
             "title": "Sources d’énergie utilisées"
           },
-          "timberNeeds": {
+          "needs": {
             "difficultToMeet": "Difficile à satisfaire",
             "dontKnow": "Ne sait pas",
             "easyToMeet": "Facile à satisfaire",
-            "moderateToMeet": "Modéré à satisfaire",
+            "moderateToMeet": "Modéré à satisfaire"
+          },
+          "timberNeeds": {
             "title": "Satisfaction des besoins en bois d’œuvre"
           },
           "title": "Ressources en bois"
@@ -152,18 +190,18 @@
       "sections": {
         "erosion": {
           "aquatic": {
-            "rainfall": "Régime pluviométrique",
+            "rainfall": "Pluviométrie",
             "slope": "Pente",
             "soilCover": "Couverture du sol",
-            "stability": "Stabilité",
+            "stability": "Stabilité du sol",
             "title": "Indice de résistance à l'érosion hydrique",
-            "waterSeepage": "Vitesse d'infiltration"
+            "waterSeepage": "Vitesse d'infiltration de l'eau"
           },
           "title": "Érosion du sol",
           "wind": {
             "soilCover": "Couverture du sol",
             "speed": "Vitesse du vent",
-            "stability": "Stabilité",
+            "stability": "Stabilité du sol",
             "title": "Indice de résistance à l'érosion éolienne"
           }
         },
@@ -177,16 +215,18 @@
         },
         "surfaceFauna": {
           "title": "Macrofaune de surface"
-        }
+        },
+        "unknownTaxon": "Taxon inconnu"
       },
       "title": "Données sol"
     },
-    "undefined": "Donnée non renseignée",
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
+      "monthPerYear": "{{ value }} mois/an",
+      "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",

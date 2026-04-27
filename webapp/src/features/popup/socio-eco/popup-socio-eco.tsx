@@ -3,16 +3,18 @@ import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
-import { formatDate } from "@shared/lib/utils";
+import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import { IndicatorElements } from "@features/indicators/components/indicator-elements";
+import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+import { useEconomicIndicatorElements } from "@features/indicators/economy";
+import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
+import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
+
+import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
-import { ICON_SIZE_HEADER } from "../components/constants";
-import { IndicatorElements } from "../components/indicator-elements";
-import { IndicatorPopupHeader } from "../components/indicator-popup-header";
-import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
 import type { SocioEcoData } from "./types";
-import { useSocioEcoIndicatorElements } from "./use-socio-eco-indicator-elements";
 
 type SocioEcoIndicatorProps = {
   onClose: () => void;
@@ -28,18 +30,35 @@ const TABS: Record<string, TabKind> = {
   RESOURCES: "resources",
 } as const;
 
+const exctractVillageName = (
+  metadata: LayerMetadata,
+  data: SocioEcoData,
+): string => {
+  const label = findCategoricalLabel(metadata, "admi2", data.admi2);
+
+  let villageName: string | undefined;
+  if (label) {
+    const jsonLabel = JSON.parse(label);
+    villageName = jsonLabel["Malagasy(mg)"] ?? undefined;
+  }
+
+  return villageName || data.admi2;
+};
+
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   onClose,
   data,
+  metadata,
   className,
 }) => {
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
 
-  const socioEcoElements = useSocioEcoIndicatorElements(data);
+  const socialElements = useSocialIndicatorElements(data);
+  const economicElements = useEconomicIndicatorElements(data);
 
   const title = t("popup.socioEco", {
-    village: data.admi2,
+    village: exctractVillageName(metadata, data),
   });
 
   const subtitles = {
@@ -74,11 +93,11 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
 
       <IndicatorScrollContainer>
         <Activity mode={selectedTab === TABS.RESOURCES ? "visible" : "hidden"}>
-          <IndicatorElements elements={socioEcoElements} />
+          <IndicatorElements elements={socialElements} />
         </Activity>
 
         <Activity mode={selectedTab === TABS.ECONOMY ? "visible" : "hidden"}>
-          <h1>Elements</h1>
+          <IndicatorElements elements={economicElements} />
         </Activity>
       </IndicatorScrollContainer>
     </div>

@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 
 export const DEFAULT_POPUP_CONFIG: PopupOptions = {
   anchor: "center",
-  className: "bg-background/90 rounded-md",
+  className: "rounded-2xl border border-border bg-popover/95 shadow-2xl",
   closeButton: false,
   closeOnClick: true,
   closeOnMove: false,

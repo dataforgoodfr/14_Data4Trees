@@ -1,6 +1,8 @@
-import { BinocularsIcon, HeartPulseIcon, InfoIcon } from "lucide-react";
+import type { LayerMetadata } from "coordo";
+import { HeartPulseIcon, InfoIcon } from "lucide-react";
 
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
+import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
 
 import { useTranslation } from "@i18n";
 
@@ -12,6 +14,7 @@ import type { BiodiversityData } from "./types";
 
 export const useBiodiversityIndicatorElements = (
   rawData: BiodiversityData,
+  metadata: LayerMetadata,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("translations");
   const data = useFormatBiodiversityData(rawData);
@@ -46,63 +49,14 @@ export const useBiodiversityIndicatorElements = (
             iconStart={<HeartPulseIcon size={ICON_SIZE} />}
             value={data.treeDiversity.speciesRichness}
           />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.treeDiversity.relativeAbundance",
-            )}
-            value={data.treeDiversity.relative_abundance}
+          <ChartRelativeAbundance
+            data={data.treeDiversity.relative_abundance}
+            metadata={metadata}
           />
         </>
       ),
       identifier: "tree-diversity",
       title: t("indicators.biodiversity.sections.treeDiversity.title"),
-      type: "section",
-    },
-    { type: "divider" },
-    {
-      children: (
-        <>
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.abundanceTaxon1",
-            )}
-            value={data.indicatorSpecies.abundanceTaxon1}
-          />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.speciesRichnessTaxon1",
-            )}
-            value={data.indicatorSpecies.speciesRichnessTaxon1}
-          />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.abundanceTaxon2",
-            )}
-            value={data.indicatorSpecies.abundanceTaxon2}
-          />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.speciesRichnessTaxon2",
-            )}
-            value={data.indicatorSpecies.speciesRichnessTaxon2}
-          />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.abundanceTaxon3",
-            )}
-            value={data.indicatorSpecies.abundanceTaxon3}
-          />
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.indicatorSpecies.speciesRichnessTaxon3",
-            )}
-            value={data.indicatorSpecies.speciesRichnessTaxon3}
-          />
-        </>
-      ),
-      iconStart: <BinocularsIcon size={ICON_SIZE} />,
-      identifier: "indicator-species",
-      title: t("indicators.biodiversity.sections.indicatorSpecies.title"),
       type: "section",
     },
     { type: "divider" },

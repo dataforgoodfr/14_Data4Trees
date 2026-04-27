@@ -1,15 +1,19 @@
-import { ChartAquaticErosion } from "@features/charts/soil/chart-aquatic-erosion";
-import { ChartWindErosion } from "@features/charts/soil/chart-wind-erosion";
+import type { LayerMetadata } from "coordo";
+
+import { ChartAquaticErosion } from "@features/charts/soil/ui/chart-aquatic-erosion";
+import { ChartTaxonAbundance } from "@features/charts/soil/ui/chart-taxon-abundance";
+import { ChartWindErosion } from "@features/charts/soil/ui/chart-wind-erosion";
+import type { UseIndicatorReturnType } from "@features/indicators//components/types";
+import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
 
 import { useTranslation } from "@i18n";
 
-import { IndicatorRawValue } from "../components/indicator-raw-value";
-import type { UseIndicatorReturnType } from "../components/types";
 import { useFormatSoilData } from "./format-data";
 import type { SoilData } from "./types";
 
 export const useSoilIndicatorElements = (
   rawData: SoilData,
+  metadata: LayerMetadata,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("translations");
 
@@ -71,9 +75,10 @@ export const useSoilIndicatorElements = (
             dataName={t("indicators.common.speciesRichness")}
             value={data.soil_fauna_diversity}
           />
-          <IndicatorRawValue
-            dataName={t("indicators.common.abundance")}
-            value={data.soil_fauna_abundance}
+          <ChartTaxonAbundance
+            data={data.soil_fauna_abundance}
+            dataType="tsbf"
+            metadata={metadata}
           />
         </>
       ),
@@ -93,9 +98,10 @@ export const useSoilIndicatorElements = (
             dataName={t("indicators.common.speciesRichness")}
             value={data.surface_fauna_diversity}
           />
-          <IndicatorRawValue
-            dataName={t("indicators.common.abundance")}
-            value={data.surface_fauna_abundance}
+          <ChartTaxonAbundance
+            data={data.surface_fauna_abundance}
+            dataType="barbA"
+            metadata={metadata}
           />
         </>
       ),

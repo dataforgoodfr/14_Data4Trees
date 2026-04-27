@@ -1,18 +1,18 @@
 import { type FC, useEffect } from "react";
 
+import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
-} from "@features/indicators/forest-inventory";
-import { type SeedData, SeedIndicator } from "@features/indicators/seed";
-import {
-  type SocioEcoData,
-  SocioEcoIndicator,
-} from "@features/indicators/socio-eco";
+} from "@features/popup/forest-inventory";
 import {
   DEFAULT_POPUP_CONFIG,
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
+import {
+  type SocioEcoData,
+  SocioEcoIndicator,
+} from "@features/popup/socio-eco";
 
 import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/useMap";

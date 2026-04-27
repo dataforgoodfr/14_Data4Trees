@@ -1,4 +1,4 @@
-export type SocioEcoData = {
+export type SocialData = {
   admi2: string;
   population: number;
   collectedWoodEnergy: number;
@@ -14,11 +14,5 @@ export type SocioEcoData = {
   timberNeeds: number;
   foodDiversity: number;
   autoConsumtionNeeds: number;
-  hungryGap: number;
-  incomeSources: number;
-  incomeEvolution: number;
-  estateIndex: number;
-  livingConditionsPercreption: number;
-  conflictIndex: number;
-  beneficialPractices: number;
+  leanPeriod: number;
 };

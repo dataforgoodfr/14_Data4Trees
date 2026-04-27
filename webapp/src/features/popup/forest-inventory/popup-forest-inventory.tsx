@@ -3,16 +3,17 @@ import type { LayerMetadata } from "coordo";
 import { TreesIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
-import { formatDate } from "@shared/lib/utils";
+import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import { IndicatorElements } from "@features/indicators/components/indicator-elements";
+import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+import { useSoilIndicatorElements } from "@features/indicators/soil";
+import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
+
+import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
-import { useBiodiversityIndicatorElements } from "../biodiversity/use-biodiversity-indicator-elements";
-import { ICON_SIZE_HEADER } from "../components/constants";
-import { IndicatorElements } from "../components/indicator-elements";
-import { IndicatorPopupHeader } from "../components/indicator-popup-header";
-import { IndicatorScrollContainer } from "../components/indicator-scroll-container";
-import { useSoilIndicatorElements } from "../soil";
+import { useBiodiversityIndicatorElements } from "../../indicators/biodiversity/use-biodiversity-indicator-elements";
 import type { ForestInventoryData } from "./types";
 
 type ForestInventoryPopupContentProps = {
@@ -35,16 +36,13 @@ export const ForestInventoryPopupContent: FC<
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
-  const biodiversityElements = useBiodiversityIndicatorElements(data);
-  const soilElements = useSoilIndicatorElements(data);
+  const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
+  const soilElements = useSoilIndicatorElements(data, metadata);
 
   const title = t("popup.forestInventory", {
     code: data.cod,
     label:
-      metadata?.schema?.fields
-        .find((f) => f.name === "for")
-        ?.categories?.find((c) => c.value === data.for)?.label ||
-      t("popup.undefined"),
+      findCategoricalLabel(metadata, "for", data.for) || t("popup.undefined"),
   });
 
   const subtitles = {

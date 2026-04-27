@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { useTranslation } from "@shared/i18n";
 
-import { ChartRadarWithBenefAndControl } from "../components/radar-benef-control";
+import { ChartRadarWithBenefAndControl } from "../../components/radar-benef-control";
 
 type Data = {
   rainfall: number;
