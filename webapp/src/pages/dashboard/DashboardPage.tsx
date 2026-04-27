@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useApi } from "@shared/hooks/useApi";
 import type { ApiClient } from "@shared/api/client";
@@ -193,7 +192,6 @@ const fakeData: RawData = {
 
 
 export function DashboardPage() {
-  const navigate = useNavigate();
   const [data, setData] = useState<RawData>({
   biomass_volume: emptyField,
   tree_density: emptyField,
@@ -240,22 +238,22 @@ export function DashboardPage() {
   const api = useApi();
 
   useEffect (() => {
-    setData(twoDecimals(fakeData));
-    // rawData = request(api);
-    // setData(twoDecimals(rawData));
+    // setData(twoDecimals(fakeData));
+    const rawData = request(api);
+    setData(twoDecimals(rawData));
   }, [])
 
   useEffect (() => {
     console.log("Data:", data);
     setBenefChartPotential({
-      density: data.epf_tree_density.value,
-      diversity: data.epf_tree_diversity.value,
-      diameterDistribution: data.epf_diameter_distribution.value,
-      dominantHeight: data.epf_dominant_height.value,
-      microHabitat: data.epf_microhabitats.value,
-      ratioDeathmassBiomass: data.epf_necro_biomass_ratio.value,
-      spatialDistribution: data.epf_spatial_distribution.value,
-      verticalDistribution: data.epf_vertical_distribution.value
+      density: data.epf_tree_density.value || 0,
+      diversity: data.epf_tree_diversity.value || 0,
+      diameterDistribution: data.epf_diameter_distribution.value || 0,
+      dominantHeight: data.epf_dominant_height.value || 0,
+      microHabitat: data.epf_microhabitats.value || 0,
+      ratioDeathmassBiomass: data.epf_necro_biomass_ratio.value || 0,
+      spatialDistribution: data.epf_spatial_distribution.value || 0,
+      verticalDistribution: data.epf_vertical_distribution.value || 0
     })
   }, [data])
 

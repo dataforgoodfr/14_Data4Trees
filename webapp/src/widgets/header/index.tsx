@@ -1,4 +1,4 @@
-import { DashboardPopover } from "@widgets/DashboardPopover";
+// import { DashboardPopover } from "@widgets/DashboardPopover";
 
 import { UserMenu } from "./user-menu";
 import { Button } from "@shared/ui/button";
