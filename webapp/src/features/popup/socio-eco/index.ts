@@ -1,2 +1,2 @@
-export { SocioEcoIndicator } from "./socio-eco-indicator";
+export { SocioEcoIndicator } from "./popup-socio-eco";
 export type { SocioEcoData } from "./types";

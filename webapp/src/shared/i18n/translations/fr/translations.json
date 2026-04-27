@@ -100,6 +100,7 @@
       "control": "Témoin",
       "date": "Date enquête",
       "density": "Densité",
+      "noData": "Données non disponibles",
       "speciesRichness": "Richesse spécifique"
     },
     "economy": {

@@ -100,6 +100,7 @@
       "control": "Control",
       "date": "Survey date",
       "density": "Density",
+      "noData": "No data available",
       "speciesRichness": "Species richness"
     },
     "economy": {
