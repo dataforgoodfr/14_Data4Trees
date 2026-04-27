@@ -1,18 +1,11 @@
-import {
-  type Location,
-  Navigate,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-import { useAuth } from "@features/auth/useAuth";
-import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
-
 import { useApi } from "@shared/hooks/useApi";
 import type { ApiClient } from "@shared/api/client";
-import { UserMenu } from "@widgets/header/user-menu";
+
 import { Header } from "@widgets/header";
+import { DashBoardHead } from "@widgets/dashboard/head";
+import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
 
 // request API pour récupérer les données du back, utilisée dans useEffect [window.onload] à terme
 async function request(api:ApiClient) {
@@ -267,9 +260,14 @@ export function DashboardPage() {
   }, [data])
 
   return (
-    <div className="bg-white w-full">
+    <div>
       <Header />
-      <ChartForestPotential benef={benefChartPotential} />
+      <div className="px-7">
+        <DashBoardHead />
+        <div className="mt-4 space-y-4">
+          <ChartForestPotential benef={benefChartPotential} />
+        </div>
+      </div>
 
     </div>
   );
