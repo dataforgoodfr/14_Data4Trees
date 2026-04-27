@@ -18,7 +18,6 @@ catalog:
 
 	# Seed - Survey
 	coordo load file --action add data/seed/survey.zip --package catalog/seed
-	coordo load file --action add data/seed/survey.zip --package catalog/seed
 	coordo load file --action add data/seed/suivi_sites_reboises.zip --package catalog/seed
 	coordo load file --action add data/seed/ident_sites.zip --package catalog/seed
 	coordo load file --action add data/seed/reboisement_id.zip --package catalog/seed
