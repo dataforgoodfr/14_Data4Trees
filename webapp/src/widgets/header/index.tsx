@@ -1,8 +1,31 @@
-import { DashboardPopover } from "@widgets/DashboardPopover";
+// import { DashboardPopover } from "@widgets/DashboardPopover";
 
 import { UserMenu } from "./user-menu";
+import { Button } from "@shared/ui/button";
+import { URLS } from "@shared/urls";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "@shared/i18n";
+import { useEffect, useState } from "react";
 
 export function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname;
+  const { t } = useTranslation("translations");
+  const [buttonText, setButtonText] = useState("")
+
+  function navDashboard() {
+    if (path === "/") {
+      navigate(URLS.DASHBOARD);
+    } else if (path === "/dashboard") {
+      navigate(URLS.HOME)
+    }
+  }
+
+  useEffect(() => {
+    path === "/" ? setButtonText(t("buttonHeader.toDashboard")) : setButtonText(t("buttonHeader.toHome"));
+  })
+
   return (
     <header className="bg-background border-b border-border p-3 relative z-40 flex-0">
       <div className="mx-auto max-w-screen-2xl">
@@ -14,7 +37,9 @@ export function Header() {
           />
 
           <div className="flex items-center gap-3">
-            <DashboardPopover dataType="example" />
+             <Button variant="default" onClick={navDashboard}>
+                {buttonText}
+             </Button>
             <UserMenu />
           </div>
         </div>
