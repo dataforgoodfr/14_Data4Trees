@@ -36,10 +36,10 @@ pip install -r requirements.txt
 
 ### Coordo package
 
-When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command:
+When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command, replacing '<tag-name>' by the tag or branch name you want to point at on Coordo repository.
 
 ```bash
-pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git#subdirectory=coordo-py
+pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-name>#subdirectory=coordo-py
 ```
 
 ### Prepare the database
@@ -63,7 +63,7 @@ AWS_ACCESS_KEY_ID=<access_key_id> AWS_SECRET_ACCESS_KEY=<secret_access_key> aws 
 ```
 You can get the keys from the Tech Leads.
 
-Then generate the catalog using the Makefile like this:   
+Then generate the catalog using the Makefile. Note that it wont work if your folder catalog already exists, even if it is empty. Either remove it entirely or run only the commands you need.
 
 ```bash
 make catalog
