@@ -4,7 +4,6 @@
 
 export type SoilData = {
   soil_structure: number;
-  soil_composition: number;
   ero_rainfall: number;
   ero_wind: number;
   ero_soil_cover: number;

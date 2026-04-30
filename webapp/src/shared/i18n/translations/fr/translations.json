@@ -92,7 +92,7 @@
           "title": "Diversité arborée"
         }
       },
-      "title": "Données biodiversité"
+      "title": "Biodiversité"
     },
     "common": {
       "abundance": "Abondance relative",
@@ -126,7 +126,7 @@
           "title": "Modèle économique"
         },
         "food": {
-          "autoConso": "Satsifaction des besoins en auto-consommation",
+          "autoConso": "Satisfaction des besoins en auto-consommation",
           "diversity": {
             "cereals": "Céréales",
             "eggs": "Œufs",
@@ -218,7 +218,7 @@
         },
         "unknownTaxon": "Taxon inconnu"
       },
-      "title": "Données sol"
+      "title": "Sol"
     },
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
@@ -230,6 +230,9 @@
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
+      "essenceCount": "",
+      "essenceCount_one": "{{ count }} essence inventoriée",
+      "essenceCount_other": "{{ count }} essences inventoriées",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },

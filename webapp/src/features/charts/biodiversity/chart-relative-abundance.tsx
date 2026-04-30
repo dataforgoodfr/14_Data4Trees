@@ -41,9 +41,6 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
     <PieChartCategorical
       chartConfig={chartConfig}
       chartData={chartData}
-      description={t(
-        "indicators.biodiversity.sections.treeDiversity.relativeAbundance.description",
-      )}
       title={t(
         "indicators.biodiversity.sections.treeDiversity.relativeAbundance.title",
       )}

@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
-import { Card, CardContent, CardHeader, CardTitle } from "@shared/ui/card";
+import { ChartComponent } from "./chart-component";
 import {
   type ChartConfig,
   ChartContainer,
@@ -36,47 +36,42 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
   } satisfies ChartConfig;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto max-h-62.5"
-          config={chartConfig}
+    <ChartComponent title={title}>
+      <ChartContainer
+        className="mx-auto max-h-62.5"
+        config={chartConfig}
+      >
+        <BarChart
+          accessibilityLayer
+          data={chartData}
         >
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              axisLine={false}
-              dataKey="indicator"
-              tickFormatter={(value) => value.slice(0, 4)}
-              tickLine={false}
-              tickMargin={10}
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-              cursor={false}
-            />
+          <CartesianGrid vertical={false} />
+          <XAxis
+            axisLine={false}
+            dataKey="indicator"
+            tickFormatter={(value) => value.slice(0, 4)}
+            tickLine={false}
+            tickMargin={10}
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent />}
+            cursor={false}
+          />
+          <Bar
+            dataKey="benef"
+            fill="var(--chart-3)"
+            radius={8}
+          />
+
+          {withTemoin && (
             <Bar
-              dataKey="benef"
-              fill="var(--chart-3)"
+              dataKey="temoin"
+              fill="var(--chart-4)"
               radius={8}
             />
-
-            {withTemoin && (
-              <Bar
-                dataKey="temoin"
-                fill="var(--chart-4)"
-                radius={8}
-              />
-            )}
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+          )}
+        </BarChart>
+      </ChartContainer>
+    </ChartComponent>
   );
 };

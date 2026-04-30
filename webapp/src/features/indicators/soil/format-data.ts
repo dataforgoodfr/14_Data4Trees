@@ -12,7 +12,6 @@ import type { SoilData } from "./types";
 
 const indicatorsToPreciseWithFallBack: NumericKeys<SoilData>[] = [
   "soil_structure",
-  "soil_composition",
   "soil_fauna_density",
   "surface_fauna_density",
 ] as const;

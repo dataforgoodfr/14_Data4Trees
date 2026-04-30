@@ -9,7 +9,7 @@ import {
 
 import { useTranslation } from "@shared/i18n";
 
-import { Card, CardContent, CardDescription, CardHeader } from "@ui/card";
+import { ChartComponent } from "./chart-component";
 import {
   type ChartConfig,
   ChartContainer,
@@ -45,53 +45,50 @@ export const ChartRadarWithBenefAndControl: FC<
   };
 
   return (
-    <Card>
-      <CardHeader className="items-center pb-0">
-        <CardDescription>{title}</CardDescription>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-100"
-          config={chartConfig}
+    <ChartComponent title={title}>
+      <ChartContainer
+        className="mx-auto aspect-square max-h-100"
+        config={chartConfig}
+      >
+        <RadarChart
+          data={chartData}
+          outerRadius="68%"
         >
-          <RadarChart
-            data={chartData}
-            outerRadius="68%"
-          >
-            <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
-              cursor={true}
-            />
-            <PolarRadiusAxis
-              domain={[0, 10]}
-              tickCount={6}
-            />
-            <PolarAngleAxis
-              dataKey="indicator"
-              tick={renderPolarAngleTick}
-            />
-            <PolarGrid radialLines />
+          <ChartTooltip
+            content={<ChartTooltipContent indicator="line" />}
+            cursor={true}
+          />
+          <PolarRadiusAxis
+            domain={[0, 10]}
+            tickCount={6}
+          />
+          <PolarAngleAxis
+            dataKey="indicator"
+            tick={renderPolarAngleTick}
+          />
+          <PolarGrid radialLines />
+          <Radar
+            dataKey="benef"
+            fill="var(--color-benef)"
+            stroke="var(--color-benef)"
+            {...RADAR_CONFIG}
+          />
+          {withTemoin && (<>
             <Radar
-              dataKey="benef"
-              fill="var(--color-benef)"
-              stroke="var(--color-benef)"
+              dataKey="temoin"
+              fill="var(--color-temoin)"
+              stroke="var(--color-temoin)"
               {...RADAR_CONFIG}
             />
-            {withTemoin && (
-              <Radar
-                dataKey="temoin"
-                fill="var(--color-temoin)"
-                stroke="var(--color-temoin)"
-                {...RADAR_CONFIG}
-              />
-            )}
-            <ChartLegend
-              className="mt-md"
-              content={<ChartLegendContent />}
-            />
-          </RadarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+
+          <ChartLegend
+            className="mt-md"
+            content={<ChartLegendContent />}
+          />
+            </>
+          )}
+        </RadarChart>
+      </ChartContainer>
+    </ChartComponent>
   );
 };
