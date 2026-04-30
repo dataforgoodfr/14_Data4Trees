@@ -10,6 +10,7 @@ export const UNITS = {
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
   speciesCount: "speciesCount",
+  essenceCount: "essenceCount",
   tonPerHectare: "tonPerHectare",
 } as const;
 
@@ -40,6 +41,10 @@ export const useFormatterWithUnit = () => {
         return t("indicators.units.individualPerTrap", { value });
       case UNITS.speciesCount:
         return t("indicators.units.speciesCount", {
+          count: parseInt(formattedValue, 10),
+        });
+      case UNITS.essenceCount:
+        return t("indicators.units.essenceCount", {
           count: parseInt(formattedValue, 10),
         });
       case UNITS.tonPerHectare:

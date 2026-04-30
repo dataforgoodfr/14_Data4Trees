@@ -70,21 +70,12 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
         verticalDistribution: safeData.epf_vertical_distribution,
       },
     },
-    // replace hardcoded value when data will be available
-    indicatorSpecies: {
-      abundanceTaxon1: 43,
-      abundanceTaxon2: 56,
-      abundanceTaxon3: 33,
-      speciesRichnessTaxon1: 47,
-      speciesRichnessTaxon2: 23,
-      speciesRichnessTaxon3: 24,
-    },
     treeDiversity: {
       relative_abundance: formatRelativeAbundance(
         data.relative_abundance,
         data.tree_pop,
       ),
-      speciesRichness: data.richness,
+      speciesRichness: formatWithUnit(safeData.richness, UNITS.essenceCount),
       tree_pop: data.tree_pop,
     },
   };

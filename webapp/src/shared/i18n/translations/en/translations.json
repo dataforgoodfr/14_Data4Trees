@@ -92,7 +92,7 @@
           "title": "Tree Diversity"
         }
       },
-      "title": "Biodiversity Data"
+      "title": "Biodiversity"
     },
     "common": {
       "abundance": "Relative abundance",
@@ -218,7 +218,7 @@
         },
         "unknownTaxon": "Unknown taxon"
       },
-      "title": "Soil data"
+      "title": "Soil"
     },
     "units": {
       "individualPerCubicMeter": "{{ value }} ind/m³",
@@ -227,9 +227,8 @@
       "m3PerHabPerYear": "{{ value }} m³/inhab/year",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
-      "speciesCount": "",
-      "speciesCount_one": "{{ count }} species inventoried",
-      "speciesCount_other": "{{ count }} species inventoried",
+      "speciesCount": "{{ count }} species inventoried",
+      "essenceCount": "{{ count }} essences inventoried",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },

@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@shared/ui/card";
 import type { FC, ReactNode } from "react";
 
 type IndicatorRawValueProps = {
@@ -16,7 +17,9 @@ export const IndicatorRawValue: FC<IndicatorRawValueProps> = ({
   }
 
   return (
-    <div className="flex flex-row items-center justify-between gap-sm flex-1">
+        <Card>
+      <CardContent>
+                  <div className="flex flex-row items-center justify-between gap-sm flex-1 mt-5">
       <div className="flex flex-row items-center gap-xs text-muted-foreground">
         {iconStart}
         <p>{dataName}</p>
@@ -25,5 +28,9 @@ export const IndicatorRawValue: FC<IndicatorRawValueProps> = ({
         {typeof value === "string" ? value : String(value)}
       </p>
     </div>
+      </CardContent>
+
+</Card>
+
   );
 };

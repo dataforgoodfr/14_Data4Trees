@@ -55,11 +55,12 @@
   --input: #ffffff;
   --ring: var(--a4t-color-vert-kelly);
 
-  --chart-1: var(--a4t-color-bleu);
-  --chart-2: var(--a4t-color-vert-de-gris);
-  --chart-3: var(--a4t-color-vert-kelly);
-  --chart-4: var(--a4t-color-citrouille);
-  --chart-5: var(--a4t-color-jaune-vert);
+
+  --chart-1: var(--a4t-color-vert-kelly);
+  --chart-2: var(--a4t-color-citrouille);
+  --chart-3: var(--custom-color-inventaire);
+  --chart-4: var(--a4t-color-brunswick-green);
+  --chart-5: var(--a4t-color-onyx);
 
   --sidebar: var(--a4t-color-alabaster);
   --sidebar-foreground: var(--a4t-color-alabaster);
@@ -75,7 +76,7 @@
   --background: var(--custom-color-green-dark);
   --foreground: var(--a4t-color-alabaster);
 
-  --card: var(--a4t-color-nuit);
+  --card: var(--custom-color-green-dark);
   --card-foreground: var(--a4t-color-alabaster);
 
   --popover: var(--a4t-color-nuit);

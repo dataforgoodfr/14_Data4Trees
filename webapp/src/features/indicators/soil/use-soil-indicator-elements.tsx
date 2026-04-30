@@ -24,10 +24,6 @@ export const useSoilIndicatorElements = (
       children: (
         <>
           <IndicatorRawValue
-            dataName={t("indicators.soil.sections.structuration.composition")}
-            value={data.soil_composition}
-          />
-          <IndicatorRawValue
             dataName={t("indicators.soil.sections.structuration.structure")}
             value={data.soil_structure}
           />

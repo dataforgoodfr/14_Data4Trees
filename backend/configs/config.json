@@ -41,9 +41,11 @@
       "resource": "inventaire_id",
       "layerType": "symbol",
       "columns": {
+        "geom": "gps.merge().centroid()",
         "for": "for",
         "cod": "cod",
-        "geom": "gps.merge().centroid()",
+        "taille_placette": "20^2*pi()/10000",
+        "projet": "trim('A Kob Ale')",
         "biomass_volume": "ind.sum(0.0673 * (dens_bois.value * (dhp1 + dhp2 + dhp3 + dhp4 + dhp5 + dhp6 + dhp7 + dhp8 + dhp9 + dhp10)^2 * haut)^0.976 if etat = 1) / (20^2 * pi() / 10000) / 1000",
         "tree_density": "count(1 if ind.etat = 1) / (20^2 * pi() / 10000)",
         "tree_pop": "count(1 if ind.etat = 1)",
