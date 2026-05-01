@@ -42,6 +42,7 @@
       "layerType": "symbol",
       "columns": {
         "geom": "gps.merge().centroid()",
+        "id": "_id",
         "for": "for",
         "cod": "cod",
         "taille_placette": "20^2*pi()/10000",
@@ -93,6 +94,7 @@
       "groupby": ["admi2"],
       "columns": {
         "geom": "centroid(merge(point(socio_eco_gps.long, socio_eco_gps.latit)))",
+        "household_nb": "count(_id)",
         "population": "sum(hab)",
         "energyType": "count(ener)",
         "boughtWoodEnergy": "count(1)",
@@ -103,7 +105,7 @@
         "otherEnergy": "count(1)",
         "woodEnergyConsumption": "count(1)",
         "woodEnergyNeeds": "count(1)",
-        "woodCollectionTime:": "count(1)",
+        "woodCollectionTime": "count(1)",
         "timberNeeds": "count(1)",
         "foodDiversity": "count(1)",
         "autoConsumtionNeeds": "count(1)",

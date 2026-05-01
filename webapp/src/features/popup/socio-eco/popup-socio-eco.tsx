@@ -57,11 +57,17 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const socialElements = useSocialIndicatorElements(data);
   const economicElements = useEconomicIndicatorElements(data);
 
-  const title = t("popup.socioEco", {
+  const title = t("popup.socioEco.title", {
     village: exctractVillageName(metadata, data),
   });
-
-  const subtitles = {
+  const subtitle = (
+    <div>
+      <span>{t("popup.socioEco.subtitleCount", { count: data.household_nb })}</span>
+      <br />
+      <span>{t("popup.socioEco.date", { date: formatDate(new Date()) })}</span>
+    </div>
+  )
+  const tabs = {
     [TABS.RESOURCES]: t("indicators.resources.title"),
     [TABS.ECONOMY]: t("indicators.economy.title"),
   };
@@ -71,7 +77,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
       <IndicatorPopupHeader
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={formatDate(new Date())}
+        subtitle={subtitle}
         title={title}
       />
 
@@ -81,11 +87,11 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
         options={[
           {
             id: TABS.RESOURCES,
-            label: subtitles[TABS.RESOURCES],
+            label: tabs[TABS.RESOURCES],
           },
           {
             id: TABS.ECONOMY,
-            label: subtitles[TABS.ECONOMY],
+            label: tabs[TABS.ECONOMY],
           },
         ]}
         value={selectedTab}

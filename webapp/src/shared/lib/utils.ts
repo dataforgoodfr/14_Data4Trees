@@ -29,6 +29,8 @@ export function findCategoricalLabel(
   fieldName: string,
   fieldValue: any,
 ): string | undefined {
+
+  // Search field category in main resource schema
   const resourceLabel = metadata?.resource?.schema?.fields
     .find((f) => f.name === fieldName)
     ?.categories?.find((c) => c.value === fieldValue)?.label;
@@ -37,6 +39,7 @@ export function findCategoricalLabel(
     return resourceLabel;
   }
 
+  // Search field category in main resource's references' schemas
   return metadata?.references
     ?.find((ref) =>
       ref.schema.fields

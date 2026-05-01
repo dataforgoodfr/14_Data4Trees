@@ -1,5 +1,5 @@
 import { XIcon } from "lucide-react";
-import type { FC, ReactNode } from "react";
+import type { FC, ReactElement, ReactNode } from "react";
 
 import { cn } from "@shared/lib/utils";
 import {
@@ -15,7 +15,7 @@ import { ICON_SIZE_HEADER } from "../../indicators/components/constants";
 type IndicatorPopupHeaderProps = {
   icon: ReactNode;
   title: string;
-  subtitle?: string;
+  subtitle?: string | ReactElement;
   onCrossClick: () => void;
 };
 
