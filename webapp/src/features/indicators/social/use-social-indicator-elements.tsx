@@ -18,6 +18,7 @@ export const useSocialIndicatorElements = (
   const { t } = useTranslation("translations");
   const data = useFormatSocialData(rawData);
 
+  console.log("Formatted Data", data);
   return [
     {
       children: (

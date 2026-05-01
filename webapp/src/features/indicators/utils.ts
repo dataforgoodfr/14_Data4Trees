@@ -12,6 +12,7 @@ export const UNITS = {
   speciesCount: "speciesCount",
   essenceCount: "essenceCount",
   tonPerHectare: "tonPerHectare",
+  minPerHouseholdPerDay: "minPerHouseholdPerDay",
 } as const;
 
 export type Unit = keyof typeof UNITS;
@@ -30,6 +31,7 @@ export const useFormatterWithUnit = () => {
       return null;
     }
 
+    console.log(`Formatting value ${value} with unit ${unit}`)
     const formattedValue = typeof value === "number" ? precise(value) : value;
 
     switch (unit) {
@@ -55,6 +57,8 @@ export const useFormatterWithUnit = () => {
         return t("indicators.units.monthPerYear", { value });
       case UNITS.percentFoodRequirements:
         return t("indicators.units.percentFoodRequirements", { value });
+      case UNITS.minPerHouseholdPerDay:
+        return t("indicators.units.minPerHhPerDay", { value });
       default:
         return null;
     }

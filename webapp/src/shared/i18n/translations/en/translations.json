@@ -104,10 +104,10 @@
       "speciesRichness": "Species richness"
     },
     "economy": {
-      "title": "Economy and governance"
+      "title": "Local Population"
     },
     "resources": {
-      "title": "Households resources"
+      "title": "Resources & Territory"
     },
     "socioEco": {
       "sections": {
@@ -228,14 +228,25 @@
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
       "speciesCount": "{{ count }} species inventoried",
-      "essenceCount": "{{ count }} essences inventoried",
-      "tonPerHectare": "{{ value }} t/ha"
+      "essenceCount": "{{ count }} species inventoried",
+      "tonPerHectare": "{{ value }} t/ha",
+      "minPerHhPerDay": "min/household/day"
     }
   },
   "popup": {
-    "forestInventory": "Plot n°{{ code }} in {{ label }} forest",
+    "forestInventory": {
+      "title": "Plot n°{{ id }}",
+      "subtitle": "{{ for }} forest",
+      "date": "Site survey date : {{ date }}"
+    },
     "seed": "Plot n°{{ id}}",
-    "socioEco": "Village {{ village }}",
+    "socioEco": {
+      "title": "{{ village }}",
+      "subtitleCount": "",
+      "subtitleCount_one": "{{ count }} household surveyed",
+      "subtitleCount_other": "{{ count }} households surveyed",
+      "date":"Survey date: {{ date }}"
+    },
     "undefined": "not found"
   },
   "seed": {

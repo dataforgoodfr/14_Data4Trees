@@ -10,7 +10,6 @@ import {
 import type { SocialData } from "./types";
 
 const indicatorKeys: NumericKeys<SocialData>[] = [
-  "population",
   "collectedWoodEnergy",
   "boughtWoodEnergy",
   "coalEnergy",
@@ -56,7 +55,7 @@ export const useFormatSocialData = (data: SocialData) => {
       leanPeriod: formatWithUnit(3, UNITS.monthPerYear),
     },
     wood: {
-      collectionTime: safeData.woodCollectionTime,
+      collectionTime: formatWithUnit(safeData.woodCollectionTime, UNITS.minPerHouseholdPerDay),
       energyConsumption: formatWithUnit(0, UNITS.m3PerHabPerYear),
       energyNeeds: {
         difficultToMeet: 3,

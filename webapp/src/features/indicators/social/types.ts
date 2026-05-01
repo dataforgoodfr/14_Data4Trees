@@ -1,6 +1,4 @@
 export type SocialData = {
-  admi2: string;
-  population: number;
   collectedWoodEnergy: number;
   boughtWoodEnergy: number;
   coalEnergy: number;

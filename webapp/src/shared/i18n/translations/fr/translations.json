@@ -104,10 +104,10 @@
       "speciesRichness": "Richesse spécifique"
     },
     "economy": {
-      "title": "Modèle économique et gouvernance"
+      "title": "Population locale"
     },
     "resources": {
-      "title": "Ressources des ménages"
+      "title": "Ressources et territoires"
     },
     "socioEco": {
       "sections": {
@@ -233,13 +233,24 @@
       "essenceCount": "",
       "essenceCount_one": "{{ count }} essence inventoriée",
       "essenceCount_other": "{{ count }} essences inventoriées",
-      "tonPerHectare": "{{ value }} t/ha"
+      "tonPerHectare": "{{ value }} t/ha",
+      "minPerHhPerDay": "min/ménage/jour"
     }
   },
   "popup": {
-    "forestInventory": "Placette n°{{ code }} dans la forêt {{ label }}",
+    "forestInventory": {
+      "title": "Placette n°{{ id }}",
+      "subtitle": "Forêt {{ for }}",
+      "date":"Date relevé: {{ date }}"
+    },
     "seed": "Placette n°{{ id}}",
-    "socioEco": "Village {{ village }}",
+    "socioEco": {
+      "title": "{{ village }}",
+      "subtitleCount": "",
+      "subtitleCount_one": "{{ count }} ménage enquêté",
+      "subtitleCount_other": "{{ count }} ménages enquêtés",
+      "date":"Date relevé: {{ date }}"
+    },
     "undefined": "non trouvée"
   },
   "seed": {
