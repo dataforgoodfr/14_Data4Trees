@@ -8,7 +8,7 @@ export const DEFAULT_POPUP_CONFIG: PopupOptions = {
   closeButton: false,
   closeOnClick: true,
   closeOnMove: false,
-  maxWidth: "500px",
+  maxWidth: "560px",
 };
 
 export function getRenderPopupLayer<Properties>(
@@ -24,7 +24,7 @@ export function getRenderPopupLayer<Properties>(
     const root = createRoot(container);
     root.render(
       <Element
-        className="w-120 max-h-120"
+        className="w-full max-w-136 max-h-150"
         data={properties}
         metadata={metadata}
         onClose={() => root.unmount()}

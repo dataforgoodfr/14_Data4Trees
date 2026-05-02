@@ -9,7 +9,6 @@ import {
 
 import { useTranslation } from "@shared/i18n";
 
-import { ChartComponent } from "./chart-component";
 import {
   type ChartConfig,
   ChartContainer,
@@ -20,7 +19,8 @@ import {
 } from "@ui/chart";
 
 import { RADAR_CONFIG } from "../constants";
-import { renderPolarAngleTick } from "./render-polar-angle-tick";
+import { lineBreakLabel } from "../utils";
+import { ChartComponent } from "./chart-component";
 
 type ChartRadarWithBenefAndControlProps = {
   title: string;
@@ -73,22 +73,49 @@ export const ChartRadarWithBenefAndControl: FC<
             stroke="var(--color-benef)"
             {...RADAR_CONFIG}
           />
-          {withTemoin && (<>
-            <Radar
-              dataKey="temoin"
-              fill="var(--color-temoin)"
-              stroke="var(--color-temoin)"
-              {...RADAR_CONFIG}
-            />
+          {withTemoin && (
+            <>
+              <Radar
+                dataKey="temoin"
+                fill="var(--color-temoin)"
+                stroke="var(--color-temoin)"
+                {...RADAR_CONFIG}
+              />
 
-          <ChartLegend
-            className="mt-md"
-            content={<ChartLegendContent />}
-          />
+              <ChartLegend
+                className="mt-md"
+                content={<ChartLegendContent />}
+              />
             </>
           )}
         </RadarChart>
       </ChartContainer>
     </ChartComponent>
+  );
+};
+
+const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
+  const label = String(payload?.value ?? "");
+  const lines = lineBreakLabel(label);
+
+  return (
+    <text
+      fill="#9c9798"
+      fontSize={12}
+      textAnchor={textAnchor}
+      x={x}
+      y={y}
+    >
+      {lines.map((line, index) => (
+        <tspan
+          dy={index === 0 ? 0 : 16}
+          // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
+          key={index}
+          x={x}
+        >
+          {line}
+        </tspan>
+      ))}
+    </text>
   );
 };

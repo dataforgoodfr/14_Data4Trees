@@ -42,11 +42,19 @@ export const ForestInventoryPopupContent: FC<
   const title = t("popup.forestInventory.title", { id: data.id });
   const subtitle = (
     <div>
-      <span>{t("popup.forestInventory.subtitle", { for: findCategoricalLabel(metadata, "for", data.for) || t('popup.undefined') })}</span>
+      <span>
+        {t("popup.forestInventory.subtitle", {
+          for:
+            findCategoricalLabel(metadata, "for", data.for) ||
+            t("popup.undefined"),
+        })}
+      </span>
       <br />
-      <span>{t("popup.forestInventory.date", { date: formatDate(new Date()) })}</span>
+      <span>
+        {t("popup.forestInventory.date", { date: formatDate(new Date()) })}
+      </span>
     </div>
-  )
+  );
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title"),
     [TABS.SOIL]: t("indicators.soil.title"),

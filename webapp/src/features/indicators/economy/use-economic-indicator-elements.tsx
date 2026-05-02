@@ -42,13 +42,13 @@ export const useEconomicIndicatorElements = (
     {
       children: (
         <>
-          { /* Not implemented yet, waiting for All4Trees to better define this indicator.
+          {/* Not implemented yet, waiting for All4Trees to better define this indicator.
           <IndicatorRawValue
             dataName={t(
               "indicators.socioEco.sections.governance.conflictIndex",
             )}
             value={data.governance.conflictIndex}
-          /> */ }
+          /> */}
           <ChartBeneficialPractices
             benef={data.governance.beneficialPractices}
           />

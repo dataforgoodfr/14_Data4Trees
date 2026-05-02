@@ -55,7 +55,10 @@ export const useFormatSocialData = (data: SocialData) => {
       leanPeriod: formatWithUnit(3, UNITS.monthPerYear),
     },
     wood: {
-      collectionTime: formatWithUnit(safeData.woodCollectionTime, UNITS.minPerHouseholdPerDay),
+      collectionTime: formatWithUnit(
+        safeData.woodCollectionTime,
+        UNITS.minPerHouseholdPerDay,
+      ),
       energyConsumption: formatWithUnit(0, UNITS.m3PerHabPerYear),
       energyNeeds: {
         difficultToMeet: 3,

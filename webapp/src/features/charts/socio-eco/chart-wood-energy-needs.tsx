@@ -59,7 +59,8 @@ export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
       chartConfig={chartConfig}
       chartData={chartData}
       title={t("indicators.socioEco.sections.wood.timberNeeds.title")}
-      withLabel={/*renderLabel(chartConfig)*/ false}
+      unit="%"
+      withLabel
     />
   );
 };

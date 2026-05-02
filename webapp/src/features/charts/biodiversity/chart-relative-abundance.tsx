@@ -17,19 +17,21 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
   metadata,
 }) => {
   const { t } = useTranslation("translations");
-  const chartData = data.map((element, index) => ({
-    fill: `var(--chart-${(index % 4) + 1})`,
-    name: element[0],
-    value: element[1],
-  }));
+  const chartData = data
+    .filter(([name, _]) => name != "0")
+    .map((element, index) => ({
+      fill: `var(--chart-${(index % 4) + 1})`,
+      name: element[0],
+      value: element[1],
+    }));
 
   let chartConfig: ChartConfig = {};
-  data.forEach((element) => {
+  chartData.forEach((element) => {
     chartConfig = {
       ...chartConfig,
-      [element[0]]: {
+      [element.name]: {
         label:
-          findCategoricalLabel(metadata, "ess_arb", element[0]) ||
+          findCategoricalLabel(metadata, "ess_arb", element.name) ||
           t(
             "indicators.biodiversity.sections.treeDiversity.relativeAbundance.other",
           ),
@@ -44,6 +46,7 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
       title={t(
         "indicators.biodiversity.sections.treeDiversity.relativeAbundance.title",
       )}
+      unit="%"
       withLabel
     />
   );

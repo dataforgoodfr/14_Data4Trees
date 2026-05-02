@@ -25,7 +25,9 @@ export const ChartComponent: FC<ChartComponentProps> = ({
       {(title || description) && (
         <CardHeader className="items-center">
           {title ? <CardTitle>{title}</CardTitle> : null}
-          {description ? <CardDescription>{description}</CardDescription> : null}
+          {description ? (
+            <CardDescription>{description}</CardDescription>
+          ) : null}
         </CardHeader>
       )}
       <CardContent className="flex-1 pb-0">{children}</CardContent>
