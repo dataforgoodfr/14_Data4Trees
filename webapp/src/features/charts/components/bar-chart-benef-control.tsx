@@ -1,14 +1,15 @@
 import type { FC } from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
-import { ChartComponent } from "./chart-component";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@shared/ui/chart";
+
+import { ChartComponent } from "./chart-component";
 
 type BarChartProps = {
   title: string;
@@ -38,7 +39,7 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
   return (
     <ChartComponent title={title}>
       <ChartContainer
-        className="mx-auto max-h-62.5"
+        className="mx-auto h-80 max-h-80 w-full max-w-full"
         config={chartConfig}
       >
         <BarChart
@@ -49,9 +50,19 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
           <XAxis
             axisLine={false}
             dataKey="indicator"
-            tickFormatter={(value) => value.slice(0, 4)}
+            height={90}
+            interval={0}
+            tick={renderXAxisTick}
             tickLine={false}
             tickMargin={10}
+          />
+          <YAxis
+            axisLine={false}
+            tick={{ fontSize: 10 }}
+            tickFormatter={(value) => `${value}%`}
+            tickLine={false}
+            tickMargin={-2}
+            width={24}
           />
           <ChartTooltip
             content={<ChartTooltipContent />}
@@ -75,3 +86,25 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
     </ChartComponent>
   );
 };
+
+const renderXAxisTick = ({
+  x,
+  y,
+  payload,
+}: {
+  x: number;
+  y: number;
+  payload: { value: string | number };
+}) => (
+  <text
+    dy={16}
+    fill="var(--text-muted)"
+    fontSize={10}
+    textAnchor="end"
+    transform={`rotate(-45 ${x} ${y})`}
+    x={x}
+    y={y}
+  >
+    {payload.value}
+  </text>
+);

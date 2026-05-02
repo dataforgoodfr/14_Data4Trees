@@ -3,16 +3,16 @@ import { precise } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
+  essenceCount: "essenceCount",
   individualPerCubicMeter: "individualPerCubicMeter",
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
   m3PerHabPerYear: "m3PerHabPerYear",
+  minPerHouseholdPerDay: "minPerHouseholdPerDay",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
   speciesCount: "speciesCount",
-  essenceCount: "essenceCount",
   tonPerHectare: "tonPerHectare",
-  minPerHouseholdPerDay: "minPerHouseholdPerDay",
 } as const;
 
 export type Unit = keyof typeof UNITS;
@@ -31,7 +31,6 @@ export const useFormatterWithUnit = () => {
       return null;
     }
 
-    console.log(`Formatting value ${value} with unit ${unit}`)
     const formattedValue = typeof value === "number" ? precise(value) : value;
 
     switch (unit) {

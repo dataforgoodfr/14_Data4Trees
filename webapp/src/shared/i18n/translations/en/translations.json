@@ -104,10 +104,10 @@
       "speciesRichness": "Species richness"
     },
     "economy": {
-      "title": "Local Population"
+      "title": "Local Residents"
     },
     "resources": {
-      "title": "Resources & Territory"
+      "title": "Resources & Territories"
     },
     "socioEco": {
       "sections": {
@@ -221,31 +221,31 @@
       "title": "Soil"
     },
     "units": {
+      "essenceCount": "{{ count }} species inventoried",
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
       "m3PerHabPerYear": "{{ value }} m³/inhab/year",
+      "minPerHhPerDay": "min/household/day",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
       "speciesCount": "{{ count }} species inventoried",
-      "essenceCount": "{{ count }} species inventoried",
-      "tonPerHectare": "{{ value }} t/ha",
-      "minPerHhPerDay": "min/household/day"
+      "tonPerHectare": "{{ value }} t/ha"
     }
   },
   "popup": {
     "forestInventory": {
-      "title": "Plot n°{{ id }}",
+      "date": "Site survey date : {{ date }}",
       "subtitle": "{{ for }} forest",
-      "date": "Site survey date : {{ date }}"
+      "title": "Plot n°{{ id }}"
     },
     "seed": "Plot n°{{ id}}",
     "socioEco": {
-      "title": "{{ village }}",
+      "date": "Survey date: {{ date }}",
       "subtitleCount": "",
       "subtitleCount_one": "{{ count }} household surveyed",
       "subtitleCount_other": "{{ count }} households surveyed",
-      "date":"Survey date: {{ date }}"
+      "title": "{{ village }}"
     },
     "undefined": "not found"
   },

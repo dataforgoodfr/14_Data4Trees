@@ -1,5 +1,5 @@
-import React from "react";
 import type { FC, PropsWithChildren, ReactNode } from "react";
+import React from "react";
 
 type IndicatorSectionProps = PropsWithChildren<{
   title: string;
@@ -38,7 +38,9 @@ const flattenChildren = (node: ReactNode): ReactNode[] => {
 
   if (node.type === React.Fragment) {
     const element = node as React.ReactElement<{ children?: ReactNode }>;
-    return React.Children.toArray(element.props.children).flatMap(flattenChildren);
+    return React.Children.toArray(element.props.children).flatMap(
+      flattenChildren,
+    );
   }
 
   return [node];
@@ -49,11 +51,11 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
   iconStart,
   children,
 }) => {
-  const childrenArray = React.Children.toArray(children).flatMap(flattenChildren);
-  const [valueChildren, chartChildren] = childrenArray.reduce<[
-    ReactNode[],
-    ReactNode[],
-  ]>(
+  const childrenArray =
+    React.Children.toArray(children).flatMap(flattenChildren);
+  const [valueChildren, chartChildren] = childrenArray.reduce<
+    [ReactNode[], ReactNode[]]
+  >(
     ([values, charts], child) => {
       return isChartElement(child)
         ? [values, [...charts, child]]
@@ -72,7 +74,10 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
       {valueChildren.length > 0 && (
         <div className="grid w-full grid-cols-1 gap-sm sm:grid-cols-2">
           {valueChildren.map((child, index) => (
-            <div key={`value-indicator-${index}`} className="col-span-1 min-w-0">
+            <div
+              className="col-span-1 min-w-0"
+              key={`value-indicator-${index}`}
+            >
               {child}
             </div>
           ))}
@@ -82,7 +87,10 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
       {chartChildren.length > 0 && (
         <div className="flex flex-col w-full gap-sm">
           {chartChildren.map((child, index) => (
-            <div key={`chart-indicator-${index}`} className="w-full">
+            <div
+              className="w-full"
+              key={`chart-indicator-${index}`}
+            >
               {child}
             </div>
           ))}

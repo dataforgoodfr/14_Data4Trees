@@ -2,8 +2,9 @@ import type { Data as PlotlyData } from "plotly.js";
 import type { FC } from "react";
 import Plot from "react-plotly.js";
 
-import { useTranslation } from "@shared/i18n";
 import { ChartComponent } from "@features/charts/components/chart-component";
+
+import { useTranslation } from "@shared/i18n";
 
 import { SUNBURST_LAYOUT } from "../config";
 import { buildNodeColors, buildSunburstNodes } from "../lib/sunburst";
@@ -20,8 +21,10 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
   let sunburstData: PlotlyData[] = [];
   const cardHeight = hasTaxonData ? "min-h-105" : "min-h-40";
   if (hasTaxonData) {
-    // Remove taxon entries with "Aucun" value 
-    const filteredDataEntries = dataEntries.filter(([key]) => key.trim() !== "0");
+    // Remove taxon entries with "Aucun" value
+    const filteredDataEntries = dataEntries.filter(
+      ([key]) => key.trim() !== "0",
+    );
     const nodes = buildSunburstNodes(filteredDataEntries, metadata, dataType);
     const nodeColors = buildNodeColors(nodes);
 
@@ -42,8 +45,8 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
   }
   return (
     <ChartComponent
-      title={t("indicators.common.abundance")}
       className={cardHeight}
+      title={t("indicators.common.abundance")}
     >
       <div className="flex h-full w-full items-center justify-center">
         {hasTaxonData && (

@@ -62,11 +62,13 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   });
   const subtitle = (
     <div>
-      <span>{t("popup.socioEco.subtitleCount", { count: data.household_nb })}</span>
+      <span>
+        {t("popup.socioEco.subtitleCount", { count: data.household_nb })}
+      </span>
       <br />
       <span>{t("popup.socioEco.date", { date: formatDate(new Date()) })}</span>
     </div>
-  )
+  );
   const tabs = {
     [TABS.RESOURCES]: t("indicators.resources.title"),
     [TABS.ECONOMY]: t("indicators.economy.title"),

@@ -221,35 +221,35 @@
       "title": "Sol"
     },
     "units": {
+      "essenceCount": "",
+      "essenceCount_one": "{{ count }} essence inventoriée",
+      "essenceCount_other": "{{ count }} essences inventoriées",
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
+      "minPerHhPerDay": "min/ménage/jour",
       "monthPerYear": "{{ value }} mois/an",
       "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
       "speciesCount": "",
       "speciesCount_one": "{{ count }} espèce inventoriée",
       "speciesCount_other": "{{ count }} espèces inventoriées",
-      "essenceCount": "",
-      "essenceCount_one": "{{ count }} essence inventoriée",
-      "essenceCount_other": "{{ count }} essences inventoriées",
-      "tonPerHectare": "{{ value }} t/ha",
-      "minPerHhPerDay": "min/ménage/jour"
+      "tonPerHectare": "{{ value }} t/ha"
     }
   },
   "popup": {
     "forestInventory": {
-      "title": "Placette n°{{ id }}",
+      "date": "Date relevé: {{ date }}",
       "subtitle": "Forêt {{ for }}",
-      "date":"Date relevé: {{ date }}"
+      "title": "Placette n°{{ id }}"
     },
     "seed": "Placette n°{{ id}}",
     "socioEco": {
-      "title": "{{ village }}",
+      "date": "Date relevé: {{ date }}",
       "subtitleCount": "",
       "subtitleCount_one": "{{ count }} ménage enquêté",
       "subtitleCount_other": "{{ count }} ménages enquêtés",
-      "date":"Date relevé: {{ date }}"
+      "title": "{{ village }}"
     },
     "undefined": "non trouvée"
   },
