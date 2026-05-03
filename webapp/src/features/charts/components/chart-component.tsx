@@ -23,7 +23,7 @@ export const ChartComponent: FC<ChartComponentProps> = ({
   return (
     <Card className={`flex flex-col ${className ?? ""}`}>
       {(title || description) && (
-        <CardHeader className="items-center">
+        <CardHeader className="items-center text-base">
           {title ? <CardTitle>{title}</CardTitle> : null}
           {description ? (
             <CardDescription>{description}</CardDescription>

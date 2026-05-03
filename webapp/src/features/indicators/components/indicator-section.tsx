@@ -70,7 +70,7 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
     <section className="flex flex-col w-full gap-sm">
       <div className="flex flex-row items-center gap-xs">
         {iconStart}
-        <h5 className="px-5 pb-2 font-bold text-sm">{title}</h5>
+        <h5 className="px-5 pb-2 font-bold text-base">{title}</h5>
       </div>
 
       {valueChildren.length > 0 && (

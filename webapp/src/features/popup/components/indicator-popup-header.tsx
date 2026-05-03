@@ -32,14 +32,14 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
 }) => {
   return (
     <Alert
-      className="w-full rounded-t-md rounded-b-none border-none text-sm py-lg"
+      className="w-full rounded-t-md rounded-b-none border-none text-xl py-lg"
       variant="info"
     >
       {icon}
       <AlertTitle className={cn("text-foreground")}>{title}</AlertTitle>
 
       {(subtitle || date) && (
-        <AlertDescription className={cn("text-muted-foreground text-xs")}>
+        <AlertDescription className={cn("text-muted-foreground text-sm")}>
           <div>
             {subtitle && (
               <>
