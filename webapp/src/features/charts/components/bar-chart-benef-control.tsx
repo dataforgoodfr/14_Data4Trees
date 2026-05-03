@@ -16,13 +16,15 @@ type BarChartProps = {
   chartData: Array<{ indicator: string; benef: unknown; temoin?: unknown }>;
   legendLabel: string;
   withTemoin?: boolean;
+  layout?: { chartHeight: number; chartXAxisHeight: number };
 };
 
 export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
   title,
   chartData,
   legendLabel,
-  withTemoin,
+  withTemoin = false,
+  layout = { chartHeight: 80, chartXAxisHeight: 90 },
 }) => {
   const { t } = useTranslation("translations");
   const chartConfig = {
@@ -39,7 +41,7 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
   return (
     <ChartComponent title={title}>
       <ChartContainer
-        className="mx-auto h-80 max-h-80 w-full max-w-full"
+        className={`mx-auto h-${layout.chartHeight} max-h-${layout.chartHeight} w-full max-w-full`}
         config={chartConfig}
       >
         <BarChart
@@ -50,7 +52,7 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
           <XAxis
             axisLine={false}
             dataKey="indicator"
-            height={90}
+            height={layout.chartXAxisHeight}
             interval={0}
             tick={renderXAxisTick}
             tickLine={false}

@@ -48,9 +48,10 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
       className={cardHeight}
       title={t("indicators.common.abundance")}
     >
-      <div className="flex h-full w-full items-center justify-center">
+      <div className="flex items-center justify-center">
         {hasTaxonData && (
           <Plot
+            className="pl-15  "
             config={{ displayModeBar: false, responsive: true }}
             data={sunburstData}
             layout={SUNBURST_LAYOUT}
@@ -59,7 +60,7 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
         )}
         {!hasTaxonData && (
           <div
-            className="text-muted-foreground opacity-70 text-sm italic"
+            className="text-muted-foreground opacity-70 text-sm italic pt-5"
             style={{ transform: "rotate(-20deg)" }}
           >
             {t("indicators.common.noData")}

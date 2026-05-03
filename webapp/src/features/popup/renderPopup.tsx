@@ -24,7 +24,7 @@ export function getRenderPopupLayer<Properties>(
     const root = createRoot(container);
     root.render(
       <Element
-        className="w-full max-w-136 max-h-150"
+        className="w-130 max-w-130 max-h-150"
         data={properties}
         metadata={metadata}
         onClose={() => root.unmount()}

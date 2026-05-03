@@ -1,5 +1,5 @@
 import type { LayerMetadata } from "coordo";
-import { HeartPulseIcon, InfoIcon } from "lucide-react";
+import { Gem, TreePine, Trees } from "lucide-react";
 
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
 import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
@@ -25,11 +25,12 @@ export const useBiodiversityIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t("indicators.biodiversity.sections.biomass.volume")}
+            iconStart={<TreePine size={ICON_SIZE} />}
             value={data.biomass.volume}
           />
           <IndicatorRawValue
             dataName={t("indicators.biodiversity.sections.biomass.density")}
-            iconStart={<InfoIcon size={ICON_SIZE} />}
+            iconStart={<Trees size={ICON_SIZE} />}
             value={data.biomass.density}
           />
         </>
@@ -46,7 +47,7 @@ export const useBiodiversityIndicatorElements = (
             dataName={t(
               "indicators.biodiversity.sections.treeDiversity.speciesRichness",
             )}
-            iconStart={<HeartPulseIcon size={ICON_SIZE} />}
+            iconStart={<Gem size={ICON_SIZE} />}
             value={data.treeDiversity.speciesRichness}
           />
           <ChartRelativeAbundance

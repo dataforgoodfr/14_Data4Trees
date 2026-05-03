@@ -228,7 +228,7 @@
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
-      "minPerHhPerDay": "min/ménage/jour",
+      "minPerHhPerDay": "{{ value }} min/ménage/jour",
       "monthPerYear": "{{ value }} mois/an",
       "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
       "speciesCount": "",
