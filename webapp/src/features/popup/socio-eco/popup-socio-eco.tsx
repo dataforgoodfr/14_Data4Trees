@@ -60,15 +60,6 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const title = t("popup.socioEco.title", {
     village: exctractVillageName(metadata, data),
   });
-  const subtitle = (
-    <div>
-      <span>
-        {t("popup.socioEco.subtitleCount", { count: data.household_nb })}
-      </span>
-      <br />
-      <span>{t("popup.socioEco.date", { date: formatDate(new Date()) })}</span>
-    </div>
-  );
   const tabs = {
     [TABS.RESOURCES]: t("indicators.resources.title"),
     [TABS.ECONOMY]: t("indicators.economy.title"),
@@ -77,9 +68,12 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
+        date={t("popup.socioEco.date", { date: formatDate(new Date()) })}
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={subtitle}
+        subtitle={t("popup.socioEco.subtitleCount", {
+          count: data.household_nb,
+        })}
         title={title}
       />
 

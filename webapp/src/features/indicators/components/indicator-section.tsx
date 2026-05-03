@@ -1,6 +1,8 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 
+import { Card, CardContent } from "@shared/ui/card";
+
 type IndicatorSectionProps = PropsWithChildren<{
   title: string;
   iconStart?: ReactNode;
@@ -68,20 +70,13 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
     <section className="flex flex-col w-full gap-sm">
       <div className="flex flex-row items-center gap-xs">
         {iconStart}
-        <h5 className="font-bold text-base">{title}</h5>
+        <h5 className="px-5 pb-2 font-bold text-sm">{title}</h5>
       </div>
 
       {valueChildren.length > 0 && (
-        <div className="grid w-full grid-cols-1 gap-sm sm:grid-cols-2">
-          {valueChildren.map((child, index) => (
-            <div
-              className="col-span-1 min-w-0"
-              key={`value-indicator-${index}`}
-            >
-              {child}
-            </div>
-          ))}
-        </div>
+        <Card>
+          <CardContent>{valueChildren}</CardContent>
+        </Card>
       )}
 
       {chartChildren.length > 0 && (
@@ -89,6 +84,7 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
           {chartChildren.map((child, index) => (
             <div
               className="w-full"
+              // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
               key={`chart-indicator-${index}`}
             >
               {child}

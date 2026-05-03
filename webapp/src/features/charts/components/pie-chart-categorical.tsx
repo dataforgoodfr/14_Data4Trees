@@ -119,6 +119,7 @@ const renderLabel = ({
         {lines.map((line, index) => (
           <tspan
             dy={index === 0 ? 0 : 11}
+            // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
             key={index}
             x={labelX}
           >

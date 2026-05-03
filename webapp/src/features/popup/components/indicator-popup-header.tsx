@@ -1,5 +1,5 @@
-import { XIcon } from "lucide-react";
-import type { FC, ReactElement, ReactNode } from "react";
+import { Calendar, XIcon } from "lucide-react";
+import type { FC, ReactNode } from "react";
 
 import { cn } from "@shared/lib/utils";
 import {
@@ -10,12 +10,16 @@ import {
 } from "@shared/ui/alert";
 import { Button } from "@shared/ui/button";
 
-import { ICON_SIZE_HEADER } from "../../indicators/components/constants";
+import {
+  ICON_SIZE,
+  ICON_SIZE_HEADER,
+} from "../../indicators/components/constants";
 
 type IndicatorPopupHeaderProps = {
   icon: ReactNode;
   title: string;
-  subtitle?: string | ReactElement;
+  subtitle?: string;
+  date?: string;
   onCrossClick: () => void;
 };
 
@@ -23,6 +27,7 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
   icon,
   title,
   subtitle,
+  date,
   onCrossClick,
 }) => {
   return (
@@ -33,9 +38,22 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
       {icon}
       <AlertTitle className={cn("text-foreground")}>{title}</AlertTitle>
 
-      {subtitle && (
+      {(subtitle || date) && (
         <AlertDescription className={cn("text-muted-foreground text-xs")}>
-          {subtitle}
+          <div>
+            {subtitle && (
+              <>
+                <span>{subtitle}</span>
+                <br />
+              </>
+            )}
+            {date && (
+              <div className="flex flex-row items-center gap-xs text-muted-foreground">
+                <Calendar size={ICON_SIZE} />
+                <p className="pt-0.5">{date}</p>
+              </div>
+            )}
+          </div>
         </AlertDescription>
       )}
 

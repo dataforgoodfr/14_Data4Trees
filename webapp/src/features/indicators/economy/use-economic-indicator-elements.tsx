@@ -1,8 +1,11 @@
+import { ChartLine, HandCoins, Scroll } from "lucide-react";
+
 import { ChartBeneficialPractices } from "@features/charts/socio-eco/chart-beneficial-practices";
 import { ChartLivingPerception } from "@features/charts/socio-eco/chart-living-perception";
 
 import { useTranslation } from "@i18n";
 
+import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import { useFormatEconomicData } from "./format-data";
@@ -20,14 +23,17 @@ export const useEconomicIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.economy.incomeSourceNb")}
+            iconStart={<HandCoins size={ICON_SIZE} />}
             value={data.economy.incomeSourceNb}
           />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.economy.revenueChange")}
+            iconStart={<ChartLine size={ICON_SIZE} />}
             value={data.economy.revenueChange}
           />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.economy.assetsIndex")}
+            iconStart={<Scroll size={ICON_SIZE} />}
             value={data.economy.assetsIndex}
           />
           <ChartLivingPerception
