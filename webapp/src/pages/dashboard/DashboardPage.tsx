@@ -6,22 +6,16 @@ import { Header } from "@widgets/header";
 import { DashBoardHead } from "@widgets/dashboard/head";
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
 
+import {
+  preciseNumericIndicators,
+} from "@features/indicators/utils";
+
+import type { NumericKeys } from "@shared/types";
+
 // request API pour récupérer les données du back, utilisée dans useEffect [window.onload] à terme
 async function request(api:ApiClient) {
   const data = await api.getDashboardData();
   return data
-}
-
-function twoDecimals(data: Record<string, DataField>) {
-  return Object.fromEntries(
-    Object.entries(data).map(([key, { value, error }]) => [
-      key,
-      {
-        value: value === null || value === undefined ? 0 : Number(parseFloat(value).toFixed(2)),
-        error: error === null || value === undefined ? 0 : Number(parseFloat(error).toFixed(2)) ,
-      },
-    ])
-  );
 }
 
 type DataField = { value: number | null; error: number | null };
@@ -71,125 +65,6 @@ type ChartPotential = {
   verticalDistribution: number;
 };
 
-const fakeData: RawData = {
-  "biomass_volume": {
-    "value": null,
-    "error": null
-  },
-  "tree_density": {
-    "value": 191.095576570167,
-    "error": 165.238402454365
-  },
-  "richness": {
-    "value": 4.07712393017746,
-    "error": 2.5814518750596
-  },
-  "epf_tree_density": {
-    "value": 1.91095576570167,
-    "error": 1.65238402454365
-  },
-  "epf_necromass_pied": {
-    "value": null,
-    "error": null
-  },
-  "epf_necromass_sol": {
-    "value": 208.501348435867,
-    "error": 151.298726015167
-  },
-  "epf_necro_biomass_ratio": {
-    "value": null,
-    "error": null
-  },
-  "epf_tree_diversity": {
-    "value": 1.58786308798239,
-    "error": 1.18239125654929
-  },
-  "epf_spatial_distribution": {
-    "value": 3.79432407709241,
-    "error": 1.91339763493866
-  },
-  "epf_diameter_distribution": {
-    "value": null,
-    "error": null
-  },
-  "epf_vertical_distribution": {
-    "value": 1.87197322382213,
-    "error": 0.850973739884704
-  },
-  "epf_dominant_height": {
-    "value": 2.77146680888316,
-    "error": 1.04807137228201
-  },
-  "epf_microhabitats": {
-    "value": 2.45796262269716,
-    "error": 1.2825137863247
-  },
-  "soil_structure": {
-    "value": null,
-    "error": null
-  },
-  "soil_composition": {
-    "value": 1,
-    "error": 0
-  },
-  "ero_rainfall_and_wind": {
-    "value": null,
-    "error": null
-  },
-  "ero_couv_slope_and_cover": {
-    "value": null,
-    "error": null
-  },
-  "ero_soil_stability": {
-    "value": 3.61301785316609,
-    "error": 1.03530203632118
-  },
-  "ero_water_seepage": {
-    "value": 0.0105773064537853,
-    "error": 0.0190876236808545
-  },
-  "soil_fauna_density": {
-    "value": 35.4364475369042,
-    "error": 54.1157337750946
-  },
-  "soil_fauna_diversity": {
-    "value": 1.11305062617862,
-    "error": 0.322854726031543
-  },
-  "soil_fauna_abundance_tax1": {
-    "value": null,
-    "error": null
-  },
-  "soil_fauna_abundance_tax2": {
-    "value": null,
-    "error": null
-  },
-  "soil_fauna_abundance_tax3": {
-    "value": null,
-    "error": null
-  },
-  "surface_fauna_density": {
-    "value": 233487.710287447,
-    "error": 187362.916231765
-  },
-  "surface_fauna_diversity": {
-    "value": 2.27261737826991,
-    "error": 1.84248681478387
-  },
-  "surface_fauna_abundance_tax1": {
-    "value": null,
-    "error": null
-  },
-  "surface_fauna_abundance_tax2": {
-    "value": null,
-    "error": null
-  },
-  "surface_fauna_abundance_tax3": {
-    "value": null,
-    "error": null
-  }
-}
-
 
 export function DashboardPage() {
   const [data, setData] = useState<RawData>({
@@ -225,23 +100,23 @@ export function DashboardPage() {
 });
 
   const [benefChartPotential, setBenefChartPotential] = useState<ChartPotential>({
-  density: 0,
-  diversity: 0,
-  diameterDistribution: 0,
-  dominantHeight: 0,
-  microHabitat: 0,
-  ratioDeathmassBiomass: 0,
-  spatialDistribution: 0,
-  verticalDistribution: 0
-});
+    density: 0,
+    diversity: 0,
+    diameterDistribution: 0,
+    dominantHeight: 0,
+    microHabitat: 0,
+    ratioDeathmassBiomass: 0,
+    spatialDistribution: 0,
+    verticalDistribution: 0
+  });
+
+  const indicatorKeys = Object.keys(data) as (keyof typeof data)[] as NumericKeys<RawData>;
 
   const api = useApi();
 
   useEffect (() => {
-    // setData(twoDecimals(fakeData));
-    const rawData = request(api);
-    setData(twoDecimals(rawData));
-  }, [])
+    request(api).then((res) => setData(preciseNumericIndicators<RawData>(res, indicatorKeys, "N/A")))
+  }, [api, request])
 
   useEffect (() => {
     console.log("Data:", data);
