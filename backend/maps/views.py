@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import permission_required
 import pandas as pd
 import numpy as np
+import chardet
 
 config_path = settings.BASE_DIR / "configs" / "config.json"
 map = Map.from_file(config_path)
@@ -76,11 +77,19 @@ def add_data_view(request):
     uploaded_file = request.FILES['file']
     temp_file = Path(gettempdir()) / uploaded_file.name
 
+    # get file content
+    file_content = uploaded_file.read()
+    
+    # detect the encoding using chardet, decode the content and re-encode as UTF-8
+    encoding_info = chardet.detect(file_content)
+    detected_encoding = encoding_info['encoding']
+    decoded_content = file_content.decode(detected_encoding)
+    utf8_content = decoded_content.encode('utf-8')
+
     try:
         # save the file temporarily
-        with open(temp_file, 'wb+') as f:
-            for chunk in uploaded_file.chunks():
-                f.write(chunk)
+        with open(temp_file, 'wb') as f:
+            f.write(utf8_content)
     
         try:
             package = Path(request.POST["package"])
