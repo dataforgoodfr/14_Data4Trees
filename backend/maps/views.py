@@ -1,11 +1,10 @@
-from django.http import HttpResponseBadRequest
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 from coordo.loaders import FileLoader, ResourceAction
 from coordo.map import Map
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import permission_required
@@ -72,6 +71,7 @@ def add_data_view(request):
     uploaded_file = request.FILES['file']
     uploaded_file_suffix = Path(uploaded_file.name).suffix
     
+    # storing temporarily the uploaded file
     # NOTE: we do not use FileSystemStorage here, as it creates file name contanining both lower and upper case letters
     # but pydantic does not accept upper case letters in file names
     # furthermore, a temp file is more appropriate here because it is deleted automatically after context manager exits
