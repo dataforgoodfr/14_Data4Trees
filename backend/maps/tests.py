@@ -35,5 +35,6 @@ class FileUploadTest(TestCase):
         )
         
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(uploaded_file.name, response.json()['filename'])
         self.assertIn('File uploaded successfully', response.json()['message'])
         
