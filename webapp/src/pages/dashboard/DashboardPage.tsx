@@ -6,11 +6,12 @@ import type { NumericKeys } from "@shared/types";
 import { Header } from "@widgets/header";
 import { DashBoardHead } from "@widgets/dashboard/head";
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
+import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
+import { ChartBeneficialPractices } from "@features/charts/socio-eco/chart-beneficial-practices";
 
 import {
   preciseNumericIndicators,
 } from "@features/indicators/utils";
-import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
 
 // request API pour récupérer les données du back, utilisée dans useEffect [window.onload] à terme
 async function request(api:ApiClient) {
@@ -138,12 +139,12 @@ const indicatorKeys = Object.keys(valuesArray) as (keyof typeof valuesArray)[] a
   return (
     <div>
       <Header />
-      <div className="px-7">
+      <div className="px-7 pb-10">
         <DashBoardHead />
         <div className="mt-4 space-y-8 w-full">
           <ChartRelativeAbundance data={valuesArray.slice(0,6)} metadata={valuesArray.slice(0,6)} />
           <ChartForestPotential benef={benefChartPotential} />
-
+          <ChartBeneficialPractices benef={benefChartPotential} />
         </div>
       </div>
 
