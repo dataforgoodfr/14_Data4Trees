@@ -29,3 +29,6 @@ catalog:
 	coordo load file --action add data/seed/ident_sites.zip --package catalog/seed
 	coordo load file --action add data/seed/reboisement_id.zip --package catalog/seed
 	coordo load file --action add data/seed/sensib_communautaire.zip --package catalog/seed
+
+test:
+	python manage.py test

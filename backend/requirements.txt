@@ -6,3 +6,4 @@ djangorestframework_simplejwt==5.5.1
 django-cors-headers==4.9.0
 docutils==0.22
 whitenoise[brotli]==6.12.0
+chardet==7.4.3
