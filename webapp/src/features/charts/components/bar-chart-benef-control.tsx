@@ -33,7 +33,7 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
       label: `(${t("indicators.common.beneficiary")}) ` + legendLabel,
     },
     temoin: {
-      color: "var(--chart-2)",
+      color: "var(--chart-3)",
       label: `(${t("indicators.common.control")}) ` + legendLabel,
     },
   } satisfies ChartConfig;
@@ -72,14 +72,14 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
           />
           <Bar
             dataKey="benef"
-            fill="var(--chart-3)"
+            fill="var(--color-benef)"
             radius={8}
           />
 
           {withTemoin && (
             <Bar
               dataKey="temoin"
-              fill="var(--chart-4)"
+              fill="var(--color-temoin)"
               radius={8}
             />
           )}

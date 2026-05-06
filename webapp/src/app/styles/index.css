@@ -57,9 +57,10 @@
 
   --chart-1: var(--a4t-color-vert-kelly);
   --chart-2: var(--a4t-color-citrouille);
-  --chart-3: var(--custom-color-inventaire);
-  --chart-4: var(--a4t-color-brunswick-green);
-  --chart-5: var(--a4t-color-onyx);
+  --chart-3: var(--a4t-color-bleu);
+  --chart-4: #895bf5;
+  --chart-5: #f04646;
+  --chart-6: var(--a4t-color-onyx);
 
   --sidebar: var(--a4t-color-alabaster);
   --sidebar-foreground: var(--a4t-color-alabaster);

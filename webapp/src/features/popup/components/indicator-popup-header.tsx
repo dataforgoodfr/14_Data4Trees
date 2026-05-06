@@ -1,6 +1,11 @@
 import { Calendar, XIcon } from "lucide-react";
 import type { FC, ReactNode } from "react";
 
+import {
+  ICON_SIZE,
+  ICON_SIZE_HEADER,
+} from "@features/indicators/components/constants";
+
 import { cn } from "@shared/lib/utils";
 import {
   Alert,
@@ -9,11 +14,6 @@ import {
   AlertTitle,
 } from "@shared/ui/alert";
 import { Button } from "@shared/ui/button";
-
-import {
-  ICON_SIZE,
-  ICON_SIZE_HEADER,
-} from "../../indicators/components/constants";
 
 type IndicatorPopupHeaderProps = {
   icon: ReactNode;
@@ -39,21 +39,19 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
       <AlertTitle className={cn("text-foreground")}>{title}</AlertTitle>
 
       {(subtitle || date) && (
-        <AlertDescription className={cn("text-muted-foreground text-sm")}>
-          <div>
-            {subtitle && (
-              <>
-                <span>{subtitle}</span>
-                <br />
-              </>
-            )}
-            {date && (
-              <div className="flex flex-row items-center gap-xs text-muted-foreground">
-                <Calendar size={ICON_SIZE} />
-                <p className="pt-0.5">{date}</p>
-              </div>
-            )}
-          </div>
+        <AlertDescription
+          className={cn("text-muted-foreground text-sm", {
+            "flex flex-col gap-sm": subtitle && date,
+          })}
+        >
+          {subtitle && <span>{subtitle}</span>}
+
+          {date && (
+            <div className="flex flex-row items-center gap-xs text-muted-foreground">
+              <Calendar size={ICON_SIZE} />
+              <p className="pt-0.5">{date}</p>
+            </div>
+          )}
         </AlertDescription>
       )}
 

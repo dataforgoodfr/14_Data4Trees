@@ -32,12 +32,11 @@ export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
 }) => {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
+      const name = chartConfig[payload[0].name]?.label || payload[0].name;
+      const tooltip = `${name}: ${payload[0].value}${unit}`;
       return (
         <div className="rounded-lg border border-border bg-background p-2 shadow-md">
-          <p className="text-foreground font-medium">
-            {chartConfig[payload[0].name]?.label || payload[0].name}:{" "}
-            {payload[0].value} {unit}
-          </p>
+          <p className="text-foreground font-medium">{tooltip}</p>
         </div>
       );
     }
@@ -58,9 +57,9 @@ export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
             data={chartData}
             dataKey="value"
             label={
-              withLabel
+              withLabel === true
                 ? (props) => renderLabel({ ...props, chartConfig })
-                : false
+                : withLabel
             }
             labelLine={false}
             nameKey="name"
@@ -72,13 +71,14 @@ export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
   );
 };
 
-const renderLabel = ({
+export const renderLabel = ({
   payload,
   cx,
   cy,
   midAngle,
   outerRadius,
   chartConfig,
+  linebreak = 13,
 }: {
   payload: any;
   cx: number;
@@ -86,6 +86,7 @@ const renderLabel = ({
   midAngle: number;
   outerRadius: number;
   chartConfig: any;
+  linebreak: number;
 }): JSX.Element => {
   const label = chartConfig[payload.name]?.label || payload.name;
   const RADIAN = Math.PI / 180;
@@ -97,7 +98,7 @@ const renderLabel = ({
   const labelX = lineMidX + (lineMidX > cx ? 14 : -14);
   const labelY = lineMidY;
   const textAnchor = lineMidX > cx ? "start" : "end";
-  const lines = lineBreakLabel(label, 13);
+  const lines = lineBreakLabel(label, linebreak);
 
   return (
     <g>

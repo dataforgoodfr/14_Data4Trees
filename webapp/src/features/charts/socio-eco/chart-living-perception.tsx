@@ -19,7 +19,7 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
-      fill: "var(--chart-4)",
+      fill: "var(--chart-1)",
       name: "improvement",
       value: data.improvement,
     },
@@ -29,17 +29,17 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
       value: data.stable,
     },
     {
-      fill: "var(--chart-2)",
+      fill: "var(--chart-5)",
       name: "regression",
       value: data.regression,
     },
     {
-      fill: "var(--chart-5)",
+      fill: "var(--chart-6)",
       name: "refuse",
       value: data.refuse,
     },
     {
-      fill: "var(--chart-1)",
+      fill: "var(--chart-2)",
       name: "dontKnow",
       value: data.dontKnow,
     },

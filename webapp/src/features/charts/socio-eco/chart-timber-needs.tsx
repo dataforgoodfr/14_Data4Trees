@@ -3,7 +3,10 @@ import type { FC } from "react";
 import { useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
-import { PieChartCategorical } from "../components/pie-chart-categorical";
+import {
+  PieChartCategorical,
+  renderLabel,
+} from "../components/pie-chart-categorical";
 
 type PieChartProps = {
   data: {
@@ -18,22 +21,22 @@ export const ChartTimberNeeds: FC<PieChartProps> = ({ data }) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
-      fill: "var(--chart-4)",
+      fill: "var(--chart-1)",
       name: "easyToMeet",
       value: data.easyToMeet,
     },
     {
-      fill: "var(--chart-3)",
+      fill: "var(--chart-2)",
       name: "moderateToMeet",
       value: data.moderateToMeet,
     },
     {
-      fill: "var(--chart-2)",
+      fill: "var(--chart-5)",
       name: "difficultToMeet",
       value: data.difficultToMeet,
     },
     {
-      fill: "var(--chart-1)",
+      fill: "var(--chart-6)",
       name: "dontKnow",
       value: data.dontKnow,
     },
@@ -60,7 +63,9 @@ export const ChartTimberNeeds: FC<PieChartProps> = ({ data }) => {
       chartData={chartData}
       title={t("indicators.socioEco.sections.wood.timberNeeds.title")}
       unit="%"
-      withLabel
+      withLabel={(props) =>
+        renderLabel({ ...props, chartConfig, linebreak: 18 })
+      }
     />
   );
 };

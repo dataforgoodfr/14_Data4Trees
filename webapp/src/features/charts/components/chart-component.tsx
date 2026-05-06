@@ -1,4 +1,4 @@
-import type { ComponentType, FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 
 import {
   Card,
@@ -34,10 +34,3 @@ export const ChartComponent: FC<ChartComponentProps> = ({
     </Card>
   );
 };
-
-ChartComponent.displayName = "ChartComponent";
-
-export const markChartComponent = <P extends object>(
-  component: ComponentType<P>,
-): ComponentType<P> & { isChartComponent: boolean } =>
-  Object.assign(component, { isChartComponent: true });

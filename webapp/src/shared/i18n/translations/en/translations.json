@@ -236,7 +236,6 @@
   "popup": {
     "forestInventory": {
       "date": "Site survey date : {{ date }}",
-      "subtitle": "{{ for }} forest",
       "title": "Plot n°{{ id }}"
     },
     "seed": "Plot n°{{ id}}",

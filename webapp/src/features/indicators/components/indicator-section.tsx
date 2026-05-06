@@ -53,8 +53,7 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
   iconStart,
   children,
 }) => {
-  const childrenArray =
-    React.Children.toArray(children).flatMap(flattenChildren);
+  const childrenArray = flattenChildren(children);
   const [valueChildren, chartChildren] = childrenArray.reduce<
     [ReactNode[], ReactNode[]]
   >(
@@ -75,7 +74,7 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
 
       {valueChildren.length > 0 && (
         <Card>
-          <CardContent>{valueChildren}</CardContent>
+          <CardContent className="py-sm">{valueChildren}</CardContent>
         </Card>
       )}
 

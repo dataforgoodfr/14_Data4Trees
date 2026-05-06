@@ -39,7 +39,7 @@ export const ChartRadarWithBenefAndControl: FC<
       label: t("indicators.common.beneficiary"),
     },
     temoin: {
-      color: "var(--chart-4)",
+      color: "var(--chart-3)",
       label: t("indicators.common.control"),
     },
   };
@@ -100,7 +100,6 @@ const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
 
   return (
     <text
-      fill="#9c9798"
       fontSize={12}
       textAnchor={textAnchor}
       x={x}

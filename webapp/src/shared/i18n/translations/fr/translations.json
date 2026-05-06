@@ -176,7 +176,7 @@
             "difficultToMeet": "Difficile à satisfaire",
             "dontKnow": "Ne sait pas",
             "easyToMeet": "Facile à satisfaire",
-            "moderateToMeet": "Modéré à satisfaire"
+            "moderateToMeet": "Moyennement facile à satisfaire"
           },
           "timberNeeds": {
             "title": "Satisfaction des besoins en bois d’œuvre"
@@ -240,7 +240,6 @@
   "popup": {
     "forestInventory": {
       "date": "Date relevé: {{ date }}",
-      "subtitle": "Forêt {{ for }}",
       "title": "Placette n°{{ id }}"
     },
     "seed": "Placette n°{{ id}}",

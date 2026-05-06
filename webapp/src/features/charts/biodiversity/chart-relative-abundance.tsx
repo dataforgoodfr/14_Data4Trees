@@ -27,7 +27,7 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
   const chartData = data
     .filter(([name, value]) => name !== "0" && (data.length < 6 || value >= 5))
     .map((element, index) => ({
-      fill: `var(--chart-${(index % 4) + 1})`,
+      fill: `var(--chart-${(index % 5) + 1})`,
       name: element[0],
       value: element[1],
     }));
@@ -51,7 +51,7 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
 
   if (data.length >= 6 && smallCategoriesSum > 0) {
     chartData.push({
-      fill: `var(--chart-5)`,
+      fill: `var(--chart-6)`,
       name: "other",
       value: smallCategoriesSum,
     });

@@ -51,11 +51,10 @@ export const ForestInventoryPopupContent: FC<
         date={t("popup.forestInventory.date", { date: formatDate(new Date()) })}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={t("popup.forestInventory.subtitle", {
-          for:
-            findCategoricalLabel(metadata, "for", data.for) ||
-            t("popup.undefined"),
-        })}
+        subtitle={
+          findCategoricalLabel(metadata, "for", data.for) ||
+          t("popup.undefined")
+        }
         title={title}
       />
 

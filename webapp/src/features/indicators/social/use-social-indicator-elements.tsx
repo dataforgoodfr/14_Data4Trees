@@ -1,4 +1,4 @@
-import { Hourglass, InfoIcon, UserCheck, Wheat, Zap } from "lucide-react";
+import { Calendar, Hourglass, Soup, Wheat, Zap } from "lucide-react";
 
 import {
   ChartEnergySources,
@@ -49,18 +49,18 @@ export const useSocialIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.diversityScore")}
-            iconStart={<Wheat size={ICON_SIZE} />}
+            iconStart={<Soup size={ICON_SIZE} />}
             value={data.food.foodDiversityScore}
           />
           <ChartFoodDiversity benef={data.food.foodDiversity} />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.autoConso")}
-            iconStart={<UserCheck size={ICON_SIZE} />}
+            iconStart={<Wheat size={ICON_SIZE} />}
             value={data.food.autoConsumptionNeeds}
           />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.leanPeriod")}
-            iconStart={<InfoIcon size={ICON_SIZE} />}
+            iconStart={<Calendar size={ICON_SIZE} />}
             value={data.food.leanPeriod}
           />
         </>
