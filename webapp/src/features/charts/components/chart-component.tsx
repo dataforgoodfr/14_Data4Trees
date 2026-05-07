@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import {
   Card,
@@ -14,7 +14,15 @@ type ChartComponentProps = PropsWithChildren<{
   className?: string;
 }>;
 
-export const ChartComponent: FC<ChartComponentProps> = ({
+export type MarkedComponent<P = any> = React.ComponentType<P> & {
+  isChartComponent?: true;
+};
+
+export type ChartComponentType<P> = React.FC<P> & {
+  isChartComponent?: true;
+};
+
+export const ChartComponent: ChartComponentType<ChartComponentProps> = ({
   title,
   description,
   className,
@@ -34,3 +42,5 @@ export const ChartComponent: FC<ChartComponentProps> = ({
     </Card>
   );
 };
+
+ChartComponent.isChartComponent = true;

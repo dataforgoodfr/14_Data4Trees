@@ -1,8 +1,7 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
@@ -15,7 +14,9 @@ type PieChartProps = {
   };
 };
 
-export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
+export const ChartLivingPerception: ChartComponentType<PieChartProps> = ({
+  data,
+}) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
@@ -79,3 +80,5 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
     />
   );
 };
+
+ChartLivingPerception.isChartComponent = true;

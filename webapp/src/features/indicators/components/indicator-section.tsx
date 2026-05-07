@@ -1,6 +1,8 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 
+import { isChartElement } from "@features/charts/utils";
+
 import { Card, CardContent } from "@shared/ui/card";
 
 type IndicatorSectionProps = PropsWithChildren<{
@@ -8,31 +10,7 @@ type IndicatorSectionProps = PropsWithChildren<{
   iconStart?: ReactNode;
 }>;
 
-const isChartElement = (node: ReactNode): boolean => {
-  if (!React.isValidElement(node)) {
-    return false;
-  }
-
-  const element = node as React.ReactElement<{ children?: ReactNode }>;
-  const type = element.type as {
-    displayName?: string;
-    name?: string;
-    isChartComponent?: boolean;
-  };
-
-  const componentName = type.displayName || type.name;
-  if (type.isChartComponent || componentName?.includes("Chart")) {
-    return true;
-  }
-
-  const children = element.props.children;
-  if (!children) {
-    return false;
-  }
-
-  return React.Children.toArray(children).some(isChartElement);
-};
-
+// Put a node and all its children in the same array
 const flattenChildren = (node: ReactNode): ReactNode[] => {
   if (!React.isValidElement(node)) {
     return [node];
@@ -54,7 +32,11 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
   children,
 }) => {
   const childrenArray = flattenChildren(children);
-  const [valueChildren, chartChildren] = childrenArray.reduce<
+
+  // Divide indicator elements in 2 categories
+  // valueIndicators will be displayed inside a Card Component to improve visibility
+  // chartIndicators are already put (individually) inside a Card.
+  const [valueIndicators, chartIndicators] = childrenArray.reduce<
     [ReactNode[], ReactNode[]]
   >(
     ([values, charts], child) => {
@@ -72,15 +54,15 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
         <h5 className="px-5 pb-2 font-bold text-base">{title}</h5>
       </div>
 
-      {valueChildren.length > 0 && (
+      {valueIndicators.length > 0 && (
         <Card>
-          <CardContent className="py-sm">{valueChildren}</CardContent>
+          <CardContent className="py-sm">{valueIndicators}</CardContent>
         </Card>
       )}
 
-      {chartChildren.length > 0 && (
+      {chartIndicators.length > 0 && (
         <div className="flex flex-col w-full gap-sm">
-          {chartChildren.map((child, index) => (
+          {chartIndicators.map((child, index) => (
             <div
               className="w-full"
               // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>

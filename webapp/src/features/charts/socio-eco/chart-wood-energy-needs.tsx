@@ -1,8 +1,7 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "../components/chart-component";
 import {
   PieChartCategorical,
   renderLabel,
@@ -17,7 +16,9 @@ type PieChartProps = {
   };
 };
 
-export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
+export const ChartWoodEnergyNeeds: ChartComponentType<PieChartProps> = ({
+  data,
+}) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
@@ -69,3 +70,5 @@ export const ChartWoodEnergyNeeds: FC<PieChartProps> = ({ data }) => {
     />
   );
 };
+
+ChartWoodEnergyNeeds.isChartComponent = true;

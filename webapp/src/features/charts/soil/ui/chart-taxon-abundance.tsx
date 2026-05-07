@@ -1,8 +1,10 @@
 import type { Data as PlotlyData } from "plotly.js";
-import type { FC } from "react";
 import Plot from "react-plotly.js";
 
-import { ChartComponent } from "@features/charts/components/chart-component";
+import {
+  ChartComponent,
+  type ChartComponentType,
+} from "@features/charts/components/chart-component";
 
 import { useTranslation } from "@shared/i18n";
 
@@ -10,7 +12,7 @@ import { SUNBURST_LAYOUT } from "../config";
 import { buildNodeColors, buildSunburstNodes } from "../lib/sunburst";
 import type { PieChartProps, SunburstTrace } from "../types";
 
-export const ChartTaxonAbundance: FC<PieChartProps> = ({
+export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
   dataType,
@@ -70,3 +72,5 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
     </ChartComponent>
   );
 };
+
+ChartTaxonAbundance.isChartComponent = true;

@@ -1,8 +1,7 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@shared/i18n";
 
 import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-control";
+import type { ChartComponentType } from "../components/chart-component";
 
 type Data = {
   collectedWood: number;
@@ -19,10 +18,9 @@ type ChartEnergySourcesProps = {
   temoin?: Data;
 };
 
-export const ChartEnergySources: FC<ChartEnergySourcesProps> = ({
-  benef,
-  temoin,
-}) => {
+export const ChartEnergySources: ChartComponentType<
+  ChartEnergySourcesProps
+> = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
   const chartData = [
@@ -80,3 +78,5 @@ export const ChartEnergySources: FC<ChartEnergySourcesProps> = ({
     />
   );
 };
+
+ChartEnergySources.isChartComponent = true;

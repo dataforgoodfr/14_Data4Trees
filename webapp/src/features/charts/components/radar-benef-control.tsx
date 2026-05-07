@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -20,6 +19,7 @@ import {
 
 import { RADAR_CONFIG } from "../constants";
 import { lineBreakLabel } from "../utils";
+import type { ChartComponentType } from "./chart-component";
 import { ChartComponent } from "./chart-component";
 
 type ChartRadarWithBenefAndControlProps = {
@@ -28,7 +28,7 @@ type ChartRadarWithBenefAndControlProps = {
   chartData: Array<{ indicator: string; benef: unknown; temoin?: unknown }>;
 };
 
-export const ChartRadarWithBenefAndControl: FC<
+export const ChartRadarWithBenefAndControl: ChartComponentType<
   ChartRadarWithBenefAndControlProps
 > = ({ chartData, title, withTemoin }) => {
   const { t } = useTranslation("translations");
@@ -93,6 +93,8 @@ export const ChartRadarWithBenefAndControl: FC<
     </ChartComponent>
   );
 };
+
+ChartRadarWithBenefAndControl.isChartComponent = true;
 
 const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
   const label = String(payload?.value ?? "");

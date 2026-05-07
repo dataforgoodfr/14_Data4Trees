@@ -1,8 +1,7 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@shared/i18n";
 
 import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-control";
+import type { ChartComponentType } from "../components/chart-component";
 
 type Data = {
   defense: number;
@@ -16,10 +15,9 @@ type ChartBeneficialPracticesProps = {
   temoin?: Data;
 };
 
-export const ChartBeneficialPractices: FC<ChartBeneficialPracticesProps> = ({
-  benef,
-  temoin,
-}) => {
+export const ChartBeneficialPractices: ChartComponentType<
+  ChartBeneficialPracticesProps
+> = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
   const chartData = [
@@ -67,3 +65,5 @@ export const ChartBeneficialPractices: FC<ChartBeneficialPracticesProps> = ({
     />
   );
 };
+
+ChartBeneficialPractices.isChartComponent = true;

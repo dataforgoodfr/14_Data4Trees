@@ -1,9 +1,10 @@
-import type { FC, JSX } from "react";
+import type { JSX } from "react";
 import { Pie, PieChart, type PieLabel } from "recharts";
 
 import { ChartContainer, ChartTooltip } from "@ui/chart";
 
 import { lineBreakLabel } from "../utils";
+import type { ChartComponentType } from "./chart-component";
 import { ChartComponent } from "./chart-component";
 
 export const description = "A pie chart with a label";
@@ -22,14 +23,9 @@ export type PieChartCategoricalProps = {
   labelLine?: boolean;
 };
 
-export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
-  chartData,
-  chartConfig,
-  title,
-  description,
-  withLabel,
-  unit,
-}) => {
+export const PieChartCategorical: ChartComponentType<
+  PieChartCategoricalProps
+> = ({ chartData, chartConfig, title, description, withLabel, unit }) => {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const name = chartConfig[payload[0].name]?.label || payload[0].name;
@@ -70,6 +66,8 @@ export const PieChartCategorical: FC<PieChartCategoricalProps> = ({
     </ChartComponent>
   );
 };
+
+PieChartCategorical.isChartComponent = true;
 
 export const renderLabel = ({
   payload,

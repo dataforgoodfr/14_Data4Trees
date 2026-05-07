@@ -1,8 +1,7 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@shared/i18n";
 
 import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-control";
+import type { ChartComponentType } from "../components/chart-component";
 
 type Data = {
   cereals: number;
@@ -20,10 +19,9 @@ type ChartFoodDiversityProps = {
   temoin?: Data;
 };
 
-export const ChartFoodDiversity: FC<ChartFoodDiversityProps> = ({
-  benef,
-  temoin,
-}) => {
+export const ChartFoodDiversity: ChartComponentType<
+  ChartFoodDiversityProps
+> = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
   const chartData = [
@@ -78,3 +76,5 @@ export const ChartFoodDiversity: FC<ChartFoodDiversityProps> = ({
     />
   );
 };
+
+ChartFoodDiversity.isChartComponent = true;

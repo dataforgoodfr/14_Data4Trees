@@ -1,10 +1,10 @@
 import type { LayerMetadata } from "node_modules/coordo/coordo-ts/src/types";
-import type { FC } from "react";
 
 import { useTranslation } from "@shared/i18n";
 import { findCategoricalLabel, precise } from "@shared/lib/utils";
 import type { ChartConfig } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
@@ -12,7 +12,7 @@ type PieChartProps = {
   metadata: LayerMetadata;
 };
 
-export const ChartRelativeAbundance: FC<PieChartProps> = ({
+export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
 }) => {
@@ -69,3 +69,5 @@ export const ChartRelativeAbundance: FC<PieChartProps> = ({
     />
   );
 };
+
+ChartRelativeAbundance.isChartComponent = true;

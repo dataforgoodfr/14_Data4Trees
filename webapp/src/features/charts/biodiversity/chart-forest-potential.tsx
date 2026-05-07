@@ -1,7 +1,6 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@i18n";
 
+import type { ChartComponentType } from "../components/chart-component";
 import { ChartRadarWithBenefAndControl } from "../components/radar-benef-control";
 
 type Data = {
@@ -20,10 +19,9 @@ type ChartForestPotentialProps = {
   temoin?: Data;
 };
 
-export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
-  benef,
-  temoin,
-}) => {
+export const ChartForestPotential: ChartComponentType<
+  ChartForestPotentialProps
+> = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
   const chartData: Array<{
@@ -99,3 +97,5 @@ export const ChartForestPotential: FC<ChartForestPotentialProps> = ({
     />
   );
 };
+
+ChartForestPotential.isChartComponent = true;

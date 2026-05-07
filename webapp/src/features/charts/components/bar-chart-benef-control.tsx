@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
@@ -9,6 +8,7 @@ import {
   ChartTooltipContent,
 } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "./chart-component";
 import { ChartComponent } from "./chart-component";
 
 type BarChartProps = {
@@ -19,7 +19,7 @@ type BarChartProps = {
   layout?: { chartHeight: number; chartXAxisHeight: number };
 };
 
-export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
+export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   title,
   chartData,
   legendLabel,
@@ -88,6 +88,8 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
     </ChartComponent>
   );
 };
+
+BarCharWithBenefAndControl.isChartComponent = true;
 
 const renderXAxisTick = ({
   x,
