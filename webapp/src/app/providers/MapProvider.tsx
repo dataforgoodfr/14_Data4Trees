@@ -2,6 +2,7 @@ import { createMap, EVENTS } from "coordo";
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
+import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 
 import { API_URL } from "@shared/api/client";
 import { type Category, MapContext } from "@shared/contexts/MapContext";
@@ -70,6 +71,10 @@ export function MapProvider({ children }: MapProviderProps) {
     try {
       mapApiRef.current = createMap(`#${node.id}`, STYLE_URL, {
         center: mapSettings.center,
+        controlLayerProps: {
+          renderAnchor,
+          renderLayerRow,
+        },
         zoom: mapSettings.zoom,
       });
       if (import.meta.env.DEV) {
