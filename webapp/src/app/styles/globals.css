@@ -40,6 +40,7 @@
 
   /* MapLibre / Coordonnees popup override */
   .maplibregl-popup-content {
+    width: 100%;
     padding: 0 !important;
     overflow: hidden !important;
     color: var(--popover-foreground) !important;

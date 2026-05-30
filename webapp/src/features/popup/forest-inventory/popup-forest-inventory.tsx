@@ -1,5 +1,4 @@
 import { cx } from "class-variance-authority";
-import type { LayerMetadata } from "coordo";
 import { TreesIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
@@ -14,14 +13,10 @@ import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
 import { useBiodiversityIndicatorElements } from "../../indicators/biodiversity/use-biodiversity-indicator-elements";
+import type { RenderPopupProps } from "../renderPopup";
 import type { ForestInventoryData } from "./types";
 
-type ForestInventoryPopupContentProps = {
-  onClose: () => void;
-  data: ForestInventoryData;
-  metadata: LayerMetadata;
-  className?: string;
-};
+type ForestInventoryPopupContentProps = RenderPopupProps<ForestInventoryData>;
 
 type TabKind = "biodiversity" | "soil";
 
@@ -32,7 +27,7 @@ const TABS: Record<string, TabKind> = {
 
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
-> = ({ onClose, data, metadata, className }) => {
+> = ({ data, metadata, className, ...headerProps }) => {
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
@@ -50,12 +45,12 @@ export const ForestInventoryPopupContent: FC<
       <IndicatorPopupHeader
         date={t("popup.forestInventory.date", { date: formatDate(new Date()) })}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
-        onCrossClick={onClose}
         subtitle={
           findCategoricalLabel(metadata, "for", data.for) ||
           t("popup.undefined")
         }
         title={title}
+        {...headerProps}
       />
 
       <GridSelector

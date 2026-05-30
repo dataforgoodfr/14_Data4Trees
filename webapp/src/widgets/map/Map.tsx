@@ -1,4 +1,4 @@
-import { type FC, useEffect } from "react";
+import { type FC, useEffect, useState } from "react";
 
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
@@ -7,6 +7,7 @@ import {
 } from "@features/popup/forest-inventory";
 import {
   DEFAULT_POPUP_CONFIG,
+  getPopupSizeCustomVariables,
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
 import {
@@ -38,9 +39,12 @@ const SVG_SIZE = 72;
 
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
+  const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
+
+    const toggleShiftSize = () => setIsMaximizedPopupSize((prev) => !prev);
 
     mapApiRef.current.setLayerSymbol({
       iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
@@ -58,10 +62,11 @@ export const WidgetMap: FC = () => {
     mapApiRef.current.setLayerPopup<ForestInventoryData>({
       centerOnClick: true,
       layerId: LAYERS.INVENTARY,
-      popupConfig: { ...DEFAULT_POPUP_CONFIG },
-      renderCallback: getRenderPopupLayer<ForestInventoryData>(
-        ForestInventoryPopupContent,
-      ),
+      popupConfig: DEFAULT_POPUP_CONFIG,
+      renderCallback: getRenderPopupLayer<ForestInventoryData>({
+        Element: ForestInventoryPopupContent,
+        toggleShiftSize,
+      }),
       trigger: "click",
     });
 
@@ -69,8 +74,11 @@ export const WidgetMap: FC = () => {
     mapApiRef.current.setLayerPopup<SocioEcoData>({
       centerOnClick: true,
       layerId: LAYERS.ENQUETE,
-      popupConfig: { ...DEFAULT_POPUP_CONFIG },
-      renderCallback: getRenderPopupLayer<SocioEcoData>(SocioEcoIndicator),
+      popupConfig: DEFAULT_POPUP_CONFIG,
+      renderCallback: getRenderPopupLayer<SocioEcoData>({
+        Element: SocioEcoIndicator,
+        toggleShiftSize,
+      }),
       trigger: "click",
     });
 
@@ -78,8 +86,11 @@ export const WidgetMap: FC = () => {
     mapApiRef.current.setLayerPopup<SeedData>({
       centerOnClick: true,
       layerId: LAYERS.SEED,
-      popupConfig: { ...DEFAULT_POPUP_CONFIG },
-      renderCallback: getRenderPopupLayer<SeedData>(SeedIndicator),
+      popupConfig: DEFAULT_POPUP_CONFIG,
+      renderCallback: getRenderPopupLayer<SeedData>({
+        Element: SeedIndicator,
+        toggleShiftSize,
+      }),
       trigger: "click",
     });
   }, [isReady, mapApiRef]);
@@ -99,7 +110,10 @@ export const WidgetMap: FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div
+      className="relative w-full h-full"
+      style={getPopupSizeCustomVariables(isMaximizedPopupSize)}
+    >
       <div
         className="w-full h-full"
         id="map"

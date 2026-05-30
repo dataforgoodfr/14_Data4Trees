@@ -1,7 +1,8 @@
 import { cx } from "class-variance-authority";
-import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import type { FC } from "react";
+
+import type { RenderPopupProps } from "@features/popup/renderPopup";
 
 import { formatDate } from "@shared/lib/utils";
 import { useTranslation } from "@i18n";
@@ -13,17 +14,12 @@ import { IndicatorScrollContainer } from "../components/indicator-scroll-contain
 import type { SeedData } from "./format-data";
 import { useSeedIndicatorElements } from "./use-seed-indicator-elements";
 
-type SeedIndicatorProps = {
-  onClose: () => void;
-  data: SeedData;
-  metadata: LayerMetadata;
-  className?: string;
-};
+type SeedIndicatorProps = RenderPopupProps<SeedData>;
 
 export const SeedIndicator: FC<SeedIndicatorProps> = ({
-  onClose,
   data,
   className,
+  ...headerProps
 }) => {
   const { t } = useTranslation("translations");
 
@@ -37,9 +33,9 @@ export const SeedIndicator: FC<SeedIndicatorProps> = ({
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
-        onCrossClick={onClose}
         subtitle={formatDate(data.date_plantation)}
         title={title}
+        {...headerProps}
       />
 
       <IndicatorScrollContainer>
