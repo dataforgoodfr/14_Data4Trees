@@ -103,8 +103,8 @@ const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
 
   return (
     <text
-      fontSize={12}
       fill="var(--foreground)"
+      fontSize={12}
       textAnchor={textAnchor}
       x={x}
       y={y + verticalOffset}
