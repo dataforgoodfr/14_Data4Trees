@@ -1,6 +1,6 @@
 import { type FC, useEffect } from "react";
 
-import { type SeedData, SeedIndicator } from "@features/indicators/seed";
+// import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
@@ -74,7 +74,7 @@ export const WidgetMap: FC = () => {
       trigger: "click",
     });
 
-    // Set the popup for the Seed data layer
+    /* Set the popup for the Seed data layer
     mapApiRef.current.setLayerPopup<SeedData>({
       centerOnClick: true,
       layerId: LAYERS.SEED,
@@ -82,6 +82,7 @@ export const WidgetMap: FC = () => {
       renderCallback: getRenderPopupLayer<SeedData>(SeedIndicator),
       trigger: "click",
     });
+    */
   }, [isReady, mapApiRef]);
 
   const filterByForest = (forestId: string) => {
