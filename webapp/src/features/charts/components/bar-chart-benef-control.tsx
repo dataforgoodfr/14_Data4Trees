@@ -102,7 +102,6 @@ const renderXAxisTick = ({
 }) => (
   <text
     dy={16}
-    fill="var(--text-muted)"
     fontSize={10}
     textAnchor="end"
     transform={`rotate(-45 ${x} ${y})`}
