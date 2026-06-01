@@ -39,7 +39,7 @@ pip install -r requirements.txt
 When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command, replacing '<tag-name>' by the tag or branch name you want to point at on Coordo repository.
 
 ```bash
-pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-name>#subdirectory=coordo-py
+    pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-name>#subdirectory=coordo-py
 ```
 
 ### Prepare the database
