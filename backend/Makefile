@@ -24,11 +24,11 @@ catalog:
 	coordo add-foreignkey enquete_menage_cdf.code_bois volume_bois.cod_bois --package catalog/enquete
 
 	#  Seed - Survey
-# 	coordo load file --action add data/seed/survey.zip --package catalog/seed
-# 	coordo load file --action add data/seed/suivi_sites_reboises.zip --package catalog/seed
-# 	coordo load file --action add data/seed/ident_sites.zip --package catalog/seed
-# 	coordo load file --action add data/seed/reboisement_id.zip --package catalog/seed
-# 	coordo load file --action add data/seed/sensib_communautaire.zip --package catalog/seed
+	coordo load file --action add data/seed/survey.zip --package catalog/seed
+	coordo load file --action add data/seed/suivi_sites_reboises.zip --package catalog/seed
+	coordo load file --action add data/seed/ident_sites.zip --package catalog/seed
+	coordo load file --action add data/seed/reboisement_id.zip --package catalog/seed
+	coordo load file --action add data/seed/sensib_communautaire.zip --package catalog/seed
 
 test:
 	python manage.py test
