@@ -1,6 +1,6 @@
 import { type FC, useEffect } from "react";
 
-import { type SeedData, SeedIndicator } from "@features/indicators/seed";
+// import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
