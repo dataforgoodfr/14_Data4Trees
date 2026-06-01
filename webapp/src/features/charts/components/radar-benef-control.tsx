@@ -99,13 +99,15 @@ ChartRadarWithBenefAndControl.isChartComponent = true;
 const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
   const label = String(payload?.value ?? "");
   const lines = lineBreakLabel(label);
+  const verticalOffset = computeVerticalOffset(textAnchor, y);
 
   return (
     <text
+      fill="var(--foreground)"
       fontSize={12}
       textAnchor={textAnchor}
       x={x}
-      y={y}
+      y={y + verticalOffset}
     >
       {lines.map((line, index) => (
         <tspan
@@ -120,3 +122,10 @@ const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
     </text>
   );
 };
+
+function computeVerticalOffset(textAnchor: string, y: number) {
+  if (textAnchor === "middle") {
+    return y < 80 ? -15 : 15;
+  }
+  return 0;
+}
