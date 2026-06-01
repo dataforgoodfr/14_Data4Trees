@@ -1,10 +1,10 @@
 import type { LayerMetadata } from "node_modules/coordo/coordo-ts/src/types";
-import type { FC } from "react";
 
 import { useTranslation } from "@shared/i18n";
-import { findCategoricalLabel } from "@shared/lib/utils";
+import { findCategoricalLabel, precise } from "@shared/lib/utils";
 import type { ChartConfig } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
@@ -12,42 +12,62 @@ type PieChartProps = {
   metadata: LayerMetadata;
 };
 
-export const ChartRelativeAbundance: FC<PieChartProps> = ({
+export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
 }) => {
   const { t } = useTranslation("translations");
-  const chartData = data.map((element, index) => ({
-    fill: `var(--chart-${(index % 4) + 1})`,
-    name: element[0],
-    value: element[1],
-  }));
+  const smallCategoriesSum = Number(
+    precise(
+      data
+        .filter(([_, value]) => value < 5)
+        .reduce((acc, [_, value]) => acc + value, 0),
+    ),
+  );
+  const chartData = data
+    .filter(([name, value]) => name !== "0" && (data.length < 6 || value >= 5))
+    .map((element, index) => ({
+      fill: `var(--chart-${(index % 5) + 1})`,
+      name: element[0],
+      value: element[1],
+    }));
 
   let chartConfig: ChartConfig = {};
-  data.forEach((element) => {
+  chartData.forEach((element) => {
     chartConfig = {
       ...chartConfig,
-      [element[0]]: {
+      [element.name]: {
         label:
-          findCategoricalLabel(metadata, "ess_arb", element[0]) ||
-          t(
-            "indicators.biodiversity.sections.treeDiversity.relativeAbundance.other",
-          ),
+          findCategoricalLabel(metadata, "ess_arb", element.name) ||
+          element.name,
+      },
+      other: {
+        label: t(
+          "indicators.biodiversity.sections.treeDiversity.relativeAbundance.other",
+        ),
       },
     };
   });
+
+  if (data.length >= 6 && smallCategoriesSum > 0) {
+    chartData.push({
+      fill: `var(--chart-6)`,
+      name: "other",
+      value: smallCategoriesSum,
+    });
+  }
 
   return (
     <PieChartCategorical
       chartConfig={chartConfig}
       chartData={chartData}
-      description={t(
-        "indicators.biodiversity.sections.treeDiversity.relativeAbundance.description",
-      )}
       title={t(
         "indicators.biodiversity.sections.treeDiversity.relativeAbundance.title",
       )}
+      unit="%"
       withLabel
     />
   );
 };
+
+ChartRelativeAbundance.isChartComponent = true;

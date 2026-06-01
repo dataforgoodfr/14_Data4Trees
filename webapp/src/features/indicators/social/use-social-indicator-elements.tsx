@@ -1,3 +1,5 @@
+import { Calendar, Hourglass, Soup, Wheat, Zap } from "lucide-react";
+
 import {
   ChartEnergySources,
   ChartWoodEnergyNeeds,
@@ -9,6 +11,7 @@ import type { UseIndicatorReturnType } from "@features/indicators/components/typ
 
 import { useTranslation } from "@i18n";
 
+import { ICON_SIZE } from "../components/constants";
 import { useFormatSocialData } from "./format-data";
 import type { SocialData } from "./types";
 
@@ -25,11 +28,13 @@ export const useSocialIndicatorElements = (
           <ChartEnergySources benef={data.wood.energySources} />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.wood.energyConsumption")}
+            iconStart={<Zap size={ICON_SIZE} />}
             value={data.wood.energyConsumption}
           />
           <ChartWoodEnergyNeeds data={data.wood.energyNeeds} />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.wood.collectionTime")}
+            iconStart={<Hourglass size={ICON_SIZE} />}
             value={data.wood.collectionTime}
           />
           <ChartTimberNeeds data={data.wood.timberNeeds} />
@@ -44,15 +49,18 @@ export const useSocialIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.diversityScore")}
+            iconStart={<Soup size={ICON_SIZE} />}
             value={data.food.foodDiversityScore}
           />
           <ChartFoodDiversity benef={data.food.foodDiversity} />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.autoConso")}
+            iconStart={<Wheat size={ICON_SIZE} />}
             value={data.food.autoConsumptionNeeds}
           />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.leanPeriod")}
+            iconStart={<Calendar size={ICON_SIZE} />}
             value={data.food.leanPeriod}
           />
         </>

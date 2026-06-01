@@ -3,10 +3,12 @@ import { precise } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
+  essenceCount: "essenceCount",
   individualPerCubicMeter: "individualPerCubicMeter",
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
   m3PerHabPerYear: "m3PerHabPerYear",
+  minPerHouseholdPerDay: "minPerHouseholdPerDay",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
   speciesCount: "speciesCount",
@@ -42,6 +44,10 @@ export const useFormatterWithUnit = () => {
         return t("indicators.units.speciesCount", {
           count: parseInt(formattedValue, 10),
         });
+      case UNITS.essenceCount:
+        return t("indicators.units.essenceCount", {
+          count: parseInt(formattedValue, 10),
+        });
       case UNITS.tonPerHectare:
         return t("indicators.units.tonPerHectare", { value });
       case UNITS.m3PerHabPerYear:
@@ -50,6 +56,8 @@ export const useFormatterWithUnit = () => {
         return t("indicators.units.monthPerYear", { value });
       case UNITS.percentFoodRequirements:
         return t("indicators.units.percentFoodRequirements", { value });
+      case UNITS.minPerHouseholdPerDay:
+        return t("indicators.units.minPerHhPerDay", { value });
       default:
         return null;
     }

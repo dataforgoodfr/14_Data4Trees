@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { ChartComponentType } from "@features/charts/components/chart-component";
 
 import { useTranslation } from "@shared/i18n";
 
@@ -17,10 +17,9 @@ type ChartAquaticErosionProps = {
   temoin?: Data;
 };
 
-export const ChartAquaticErosion: FC<ChartAquaticErosionProps> = ({
-  benef,
-  temoin,
-}) => {
+export const ChartAquaticErosion: ChartComponentType<
+  ChartAquaticErosionProps
+> = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
   const chartData: Array<{
@@ -63,3 +62,5 @@ export const ChartAquaticErosion: FC<ChartAquaticErosionProps> = ({
     />
   );
 };
+
+ChartAquaticErosion.isChartComponent = true;

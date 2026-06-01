@@ -39,13 +39,8 @@ export const ForestInventoryPopupContent: FC<
   const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
   const soilElements = useSoilIndicatorElements(data, metadata);
 
-  const title = t("popup.forestInventory", {
-    code: data.cod,
-    label:
-      findCategoricalLabel(metadata, "for", data.for) || t("popup.undefined"),
-  });
-
-  const subtitles = {
+  const title = t("popup.forestInventory.title", { id: data.id });
+  const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title"),
     [TABS.SOIL]: t("indicators.soil.title"),
   };
@@ -53,9 +48,13 @@ export const ForestInventoryPopupContent: FC<
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
+        date={t("popup.forestInventory.date", { date: formatDate(new Date()) })}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={formatDate(new Date())}
+        subtitle={
+          findCategoricalLabel(metadata, "for", data.for) ||
+          t("popup.undefined")
+        }
         title={title}
       />
 
@@ -65,11 +64,11 @@ export const ForestInventoryPopupContent: FC<
         options={[
           {
             id: TABS.BIODIVERSITY,
-            label: subtitles[TABS.BIODIVERSITY],
+            label: tabs[TABS.BIODIVERSITY],
           },
           {
             id: TABS.SOIL,
-            label: subtitles[TABS.SOIL],
+            label: tabs[TABS.SOIL],
           },
         ]}
         value={selectedTab}

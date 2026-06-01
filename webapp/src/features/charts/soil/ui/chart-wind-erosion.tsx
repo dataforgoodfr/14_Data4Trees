@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { ChartComponentType } from "@features/charts/components/chart-component";
 
 import { useTranslation } from "@shared/i18n";
 
@@ -15,7 +15,7 @@ type ChartWindErosionProps = {
   temoin?: Data;
 };
 
-export const ChartWindErosion: FC<ChartWindErosionProps> = ({
+export const ChartWindErosion: ChartComponentType<ChartWindErosionProps> = ({
   benef,
   temoin,
 }) => {
@@ -51,3 +51,5 @@ export const ChartWindErosion: FC<ChartWindErosionProps> = ({
     />
   );
 };
+
+ChartWindErosion.isChartComponent = true;

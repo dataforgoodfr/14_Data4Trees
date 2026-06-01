@@ -57,11 +57,10 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const socialElements = useSocialIndicatorElements(data);
   const economicElements = useEconomicIndicatorElements(data);
 
-  const title = t("popup.socioEco", {
+  const title = t("popup.socioEco.title", {
     village: exctractVillageName(metadata, data),
   });
-
-  const subtitles = {
+  const tabs = {
     [TABS.RESOURCES]: t("indicators.resources.title"),
     [TABS.ECONOMY]: t("indicators.economy.title"),
   };
@@ -69,23 +68,26 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
+        date={t("popup.socioEco.date", { date: formatDate(new Date()) })}
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         onCrossClick={onClose}
-        subtitle={formatDate(new Date())}
+        subtitle={t("popup.socioEco.subtitleCount", {
+          count: data.household_nb,
+        })}
         title={title}
       />
 
       <GridSelector
-        className="m-sm"
+        className="m-sm text-base"
         onChange={(value) => setSelectedTab(value as TabKind)}
         options={[
           {
             id: TABS.RESOURCES,
-            label: subtitles[TABS.RESOURCES],
+            label: tabs[TABS.RESOURCES],
           },
           {
             id: TABS.ECONOMY,
-            label: subtitles[TABS.ECONOMY],
+            label: tabs[TABS.ECONOMY],
           },
         ]}
         value={selectedTab}

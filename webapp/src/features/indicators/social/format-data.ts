@@ -10,7 +10,6 @@ import {
 import type { SocialData } from "./types";
 
 const indicatorKeys: NumericKeys<SocialData>[] = [
-  "population",
   "collectedWoodEnergy",
   "boughtWoodEnergy",
   "coalEnergy",
@@ -56,28 +55,31 @@ export const useFormatSocialData = (data: SocialData) => {
       leanPeriod: formatWithUnit(3, UNITS.monthPerYear),
     },
     wood: {
-      collectionTime: safeData.woodCollectionTime,
+      collectionTime: formatWithUnit(
+        safeData.woodCollectionTime,
+        UNITS.minPerHouseholdPerDay,
+      ),
       energyConsumption: formatWithUnit(0, UNITS.m3PerHabPerYear),
       energyNeeds: {
-        difficultToMeet: 3,
-        dontKnow: 2,
-        easyToMeet: 4,
-        moderateToMeet: 7,
+        difficultToMeet: 48,
+        dontKnow: 4,
+        easyToMeet: 10,
+        moderateToMeet: 38,
       },
       energySources: {
-        animalWaste: 4,
-        boughtWood: 10,
-        coal: 5,
-        collectedWood: 18,
-        gas: 14,
-        organicWaste: 3,
-        other: 1,
+        animalWaste: 14,
+        boughtWood: 14,
+        coal: 57,
+        collectedWood: 100,
+        gas: 71,
+        organicWaste: 86,
+        other: 57,
       },
       timberNeeds: {
-        difficultToMeet: 2,
-        dontKnow: 1,
-        easyToMeet: 4,
-        moderateToMeet: 8,
+        difficultToMeet: 38,
+        dontKnow: 6,
+        easyToMeet: 16,
+        moderateToMeet: 40,
       },
     },
   };

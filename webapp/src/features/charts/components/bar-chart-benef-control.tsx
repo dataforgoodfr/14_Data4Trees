@@ -1,8 +1,6 @@
-import type { FC } from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
-import { Card, CardContent, CardHeader, CardTitle } from "@shared/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
@@ -10,18 +8,23 @@ import {
   ChartTooltipContent,
 } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "./chart-component";
+import { ChartComponent } from "./chart-component";
+
 type BarChartProps = {
   title: string;
   chartData: Array<{ indicator: string; benef: unknown; temoin?: unknown }>;
   legendLabel: string;
   withTemoin?: boolean;
+  layout?: { chartHeight: number; chartXAxisHeight: number };
 };
 
-export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
+export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   title,
   chartData,
   legendLabel,
-  withTemoin,
+  withTemoin = false,
+  layout = { chartHeight: 80, chartXAxisHeight: 90 },
 }) => {
   const { t } = useTranslation("translations");
   const chartConfig = {
@@ -30,53 +33,82 @@ export const BarCharWithBenefAndControl: FC<BarChartProps> = ({
       label: `(${t("indicators.common.beneficiary")}) ` + legendLabel,
     },
     temoin: {
-      color: "var(--chart-2)",
+      color: "var(--chart-3)",
       label: `(${t("indicators.common.control")}) ` + legendLabel,
     },
   } satisfies ChartConfig;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto max-h-62.5"
-          config={chartConfig}
+    <ChartComponent title={title}>
+      <ChartContainer
+        className={`mx-auto h-${layout.chartHeight} max-h-${layout.chartHeight} w-full max-w-full`}
+        config={chartConfig}
+      >
+        <BarChart
+          accessibilityLayer
+          data={chartData}
         >
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              axisLine={false}
-              dataKey="indicator"
-              tickFormatter={(value) => value.slice(0, 4)}
-              tickLine={false}
-              tickMargin={10}
-            />
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-              cursor={false}
-            />
+          <CartesianGrid vertical={false} />
+          <XAxis
+            axisLine={false}
+            dataKey="indicator"
+            height={layout.chartXAxisHeight}
+            interval={0}
+            tick={renderXAxisTick}
+            tickLine={false}
+            tickMargin={10}
+          />
+          <YAxis
+            axisLine={false}
+            tick={{ fontSize: 10 }}
+            tickFormatter={(value) => `${value}%`}
+            tickLine={false}
+            tickMargin={-2}
+            width={24}
+          />
+          <ChartTooltip
+            content={<ChartTooltipContent />}
+            cursor={false}
+          />
+          <Bar
+            dataKey="benef"
+            fill="var(--color-benef)"
+            radius={8}
+          />
+
+          {withTemoin && (
             <Bar
-              dataKey="benef"
-              fill="var(--chart-3)"
+              dataKey="temoin"
+              fill="var(--color-temoin)"
               radius={8}
             />
-
-            {withTemoin && (
-              <Bar
-                dataKey="temoin"
-                fill="var(--chart-4)"
-                radius={8}
-              />
-            )}
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+          )}
+        </BarChart>
+      </ChartContainer>
+    </ChartComponent>
   );
 };
+
+BarCharWithBenefAndControl.isChartComponent = true;
+
+const renderXAxisTick = ({
+  x,
+  y,
+  payload,
+}: {
+  x: number;
+  y: number;
+  payload: { value: string | number };
+}) => (
+  <text
+    dy={16}
+    fill="var(--text-muted)"
+    fontSize={10}
+    textAnchor="end"
+    transform={`rotate(-45 ${x} ${y})`}
+    x={x}
+    y={y}
+  >
+    {payload.value}
+  </text>
+);

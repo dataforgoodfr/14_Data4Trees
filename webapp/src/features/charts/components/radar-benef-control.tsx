@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -9,7 +8,6 @@ import {
 
 import { useTranslation } from "@shared/i18n";
 
-import { Card, CardContent, CardDescription, CardHeader } from "@ui/card";
 import {
   type ChartConfig,
   ChartContainer,
@@ -20,7 +18,9 @@ import {
 } from "@ui/chart";
 
 import { RADAR_CONFIG } from "../constants";
-import { renderPolarAngleTick } from "./render-polar-angle-tick";
+import { lineBreakLabel } from "../utils";
+import type { ChartComponentType } from "./chart-component";
+import { ChartComponent } from "./chart-component";
 
 type ChartRadarWithBenefAndControlProps = {
   title: string;
@@ -28,7 +28,7 @@ type ChartRadarWithBenefAndControlProps = {
   chartData: Array<{ indicator: string; benef: unknown; temoin?: unknown }>;
 };
 
-export const ChartRadarWithBenefAndControl: FC<
+export const ChartRadarWithBenefAndControl: ChartComponentType<
   ChartRadarWithBenefAndControlProps
 > = ({ chartData, title, withTemoin }) => {
   const { t } = useTranslation("translations");
@@ -39,59 +39,84 @@ export const ChartRadarWithBenefAndControl: FC<
       label: t("indicators.common.beneficiary"),
     },
     temoin: {
-      color: "var(--chart-4)",
+      color: "var(--chart-3)",
       label: t("indicators.common.control"),
     },
   };
 
   return (
-    <Card>
-      <CardHeader className="items-center pb-0">
-        <CardDescription>{title}</CardDescription>
-      </CardHeader>
-      <CardContent className="pb-0">
-        <ChartContainer
-          className="mx-auto aspect-square max-h-100"
-          config={chartConfig}
+    <ChartComponent title={title}>
+      <ChartContainer
+        className="mx-auto aspect-square max-h-100"
+        config={chartConfig}
+      >
+        <RadarChart
+          data={chartData}
+          outerRadius="68%"
         >
-          <RadarChart
-            data={chartData}
-            outerRadius="68%"
-          >
-            <ChartTooltip
-              content={<ChartTooltipContent indicator="line" />}
-              cursor={true}
-            />
-            <PolarRadiusAxis
-              domain={[0, 10]}
-              tickCount={6}
-            />
-            <PolarAngleAxis
-              dataKey="indicator"
-              tick={renderPolarAngleTick}
-            />
-            <PolarGrid radialLines />
-            <Radar
-              dataKey="benef"
-              fill="var(--color-benef)"
-              stroke="var(--color-benef)"
-              {...RADAR_CONFIG}
-            />
-            {withTemoin && (
+          <ChartTooltip
+            content={<ChartTooltipContent indicator="line" />}
+            cursor={true}
+          />
+          <PolarRadiusAxis
+            domain={[0, 10]}
+            tickCount={6}
+          />
+          <PolarAngleAxis
+            dataKey="indicator"
+            tick={renderPolarAngleTick}
+          />
+          <PolarGrid radialLines />
+          <Radar
+            dataKey="benef"
+            fill="var(--color-benef)"
+            stroke="var(--color-benef)"
+            {...RADAR_CONFIG}
+          />
+          {withTemoin && (
+            <>
               <Radar
                 dataKey="temoin"
                 fill="var(--color-temoin)"
                 stroke="var(--color-temoin)"
                 {...RADAR_CONFIG}
               />
-            )}
-            <ChartLegend
-              className="mt-md"
-              content={<ChartLegendContent />}
-            />
-          </RadarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+
+              <ChartLegend
+                className="mt-md"
+                content={<ChartLegendContent />}
+              />
+            </>
+          )}
+        </RadarChart>
+      </ChartContainer>
+    </ChartComponent>
+  );
+};
+
+ChartRadarWithBenefAndControl.isChartComponent = true;
+
+const renderPolarAngleTick = ({ payload, x, y, textAnchor }: any) => {
+  const label = String(payload?.value ?? "");
+  const lines = lineBreakLabel(label);
+
+  return (
+    <text
+      fontSize={12}
+      textAnchor={textAnchor}
+      x={x}
+      y={y}
+    >
+      {lines.map((line, index) => (
+        <tspan
+          dy={index === 0 ? 0 : 16}
+          // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
+          key={index}
+          x={x}
+        >
+          {line}
+        </tspan>
+      ))}
+    </text>
   );
 };

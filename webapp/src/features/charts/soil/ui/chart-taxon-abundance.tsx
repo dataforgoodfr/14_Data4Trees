@@ -1,15 +1,18 @@
 import type { Data as PlotlyData } from "plotly.js";
-import type { FC } from "react";
 import Plot from "react-plotly.js";
 
+import {
+  ChartComponent,
+  type ChartComponentType,
+} from "@features/charts/components/chart-component";
+
 import { useTranslation } from "@shared/i18n";
-import { Card, CardContent, CardHeader, CardTitle } from "@shared/ui/card";
 
 import { SUNBURST_LAYOUT } from "../config";
 import { buildNodeColors, buildSunburstNodes } from "../lib/sunburst";
 import type { PieChartProps, SunburstTrace } from "../types";
 
-export const ChartTaxonAbundance: FC<PieChartProps> = ({
+export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
   dataType,
@@ -20,7 +23,11 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
   let sunburstData: PlotlyData[] = [];
   const cardHeight = hasTaxonData ? "min-h-105" : "min-h-40";
   if (hasTaxonData) {
-    const nodes = buildSunburstNodes(dataEntries, metadata, dataType);
+    // Remove taxon entries with "Aucun" value
+    const filteredDataEntries = dataEntries.filter(
+      ([key]) => key.trim() !== "0",
+    );
+    const nodes = buildSunburstNodes(filteredDataEntries, metadata, dataType);
     const nodeColors = buildNodeColors(nodes);
 
     sunburstData = [
@@ -39,13 +46,14 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
     ] as unknown as PlotlyData[];
   }
   return (
-    <Card className={`flex flex-col ${cardHeight}`}>
-      <CardHeader className="items-center">
-        <CardTitle>{t("indicators.common.abundance")}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0 flex items-center justify-center">
+    <ChartComponent
+      className={cardHeight}
+      title={t("indicators.common.abundance")}
+    >
+      <div className="flex items-center justify-center">
         {hasTaxonData && (
           <Plot
+            className="pl-15  "
             config={{ displayModeBar: false, responsive: true }}
             data={sunburstData}
             layout={SUNBURST_LAYOUT}
@@ -54,13 +62,15 @@ export const ChartTaxonAbundance: FC<PieChartProps> = ({
         )}
         {!hasTaxonData && (
           <div
-            className="text-muted-foreground opacity-70 text-sm italic"
+            className="text-muted-foreground opacity-70 text-sm italic pt-5"
             style={{ transform: "rotate(-20deg)" }}
           >
             {t("indicators.common.noData")}
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </ChartComponent>
   );
 };
+
+ChartTaxonAbundance.isChartComponent = true;

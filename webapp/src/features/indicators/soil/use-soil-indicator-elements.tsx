@@ -1,4 +1,5 @@
 import type { LayerMetadata } from "coordo";
+import { Bug, Gem, Sprout } from "lucide-react";
 
 import { ChartAquaticErosion } from "@features/charts/soil/ui/chart-aquatic-erosion";
 import { ChartTaxonAbundance } from "@features/charts/soil/ui/chart-taxon-abundance";
@@ -8,6 +9,7 @@ import { IndicatorRawValue } from "@features/indicators/components/indicator-raw
 
 import { useTranslation } from "@i18n";
 
+import { ICON_SIZE } from "../components/constants";
 import { useFormatSoilData } from "./format-data";
 import type { SoilData } from "./types";
 
@@ -24,11 +26,8 @@ export const useSoilIndicatorElements = (
       children: (
         <>
           <IndicatorRawValue
-            dataName={t("indicators.soil.sections.structuration.composition")}
-            value={data.soil_composition}
-          />
-          <IndicatorRawValue
             dataName={t("indicators.soil.sections.structuration.structure")}
+            iconStart={<Sprout size={ICON_SIZE} />}
             value={data.soil_structure}
           />
         </>
@@ -69,10 +68,12 @@ export const useSoilIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t("indicators.common.density")}
+            iconStart={<Bug size={ICON_SIZE} />}
             value={data.soil_fauna_density}
           />
           <IndicatorRawValue
             dataName={t("indicators.common.speciesRichness")}
+            iconStart={<Gem size={ICON_SIZE} />}
             value={data.soil_fauna_diversity}
           />
           <ChartTaxonAbundance
@@ -92,10 +93,12 @@ export const useSoilIndicatorElements = (
         <>
           <IndicatorRawValue
             dataName={t("indicators.common.density")}
+            iconStart={<Bug size={ICON_SIZE} />}
             value={data.surface_fauna_density}
           />
           <IndicatorRawValue
             dataName={t("indicators.common.speciesRichness")}
+            iconStart={<Gem size={ICON_SIZE} />}
             value={data.surface_fauna_diversity}
           />
           <ChartTaxonAbundance

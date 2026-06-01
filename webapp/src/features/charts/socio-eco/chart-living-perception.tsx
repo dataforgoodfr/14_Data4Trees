@@ -1,10 +1,8 @@
-import type { FC } from "react";
-
 import { useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
+import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
-import { lineBreakLabel } from "../utils";
 
 type PieChartProps = {
   data: {
@@ -16,11 +14,13 @@ type PieChartProps = {
   };
 };
 
-export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
+export const ChartLivingPerception: ChartComponentType<PieChartProps> = ({
+  data,
+}) => {
   const { t } = useTranslation("translations");
   const chartData = [
     {
-      fill: "var(--chart-4)",
+      fill: "var(--chart-1)",
       name: "improvement",
       value: data.improvement,
     },
@@ -30,17 +30,17 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
       value: data.stable,
     },
     {
-      fill: "var(--chart-2)",
+      fill: "var(--chart-5)",
       name: "regression",
       value: data.regression,
     },
     {
-      fill: "var(--chart-5)",
+      fill: "var(--chart-6)",
       name: "refuse",
       value: data.refuse,
     },
     {
-      fill: "var(--chart-1)",
+      fill: "var(--chart-2)",
       name: "dontKnow",
       value: data.dontKnow,
     },
@@ -75,44 +75,10 @@ export const ChartLivingPerception: FC<PieChartProps> = ({ data }) => {
       chartConfig={chartConfig}
       chartData={chartData}
       title={t("indicators.socioEco.sections.economy.livingPerception.title")}
-      withLabel={/*renderLabel(chartConfig)*/ false}
+      unit="%"
+      withLabel
     />
   );
 };
 
-// TODO: Would be nice to display labels correctly but there is not enough space in chart card.
-//@ts-expect-error
-const _renderLabel =
-  (chartConfig: any) =>
-  ({
-    payload,
-    ...props
-  }: {
-    payload: { name: string; value: number };
-    [key: string]: any;
-  }) => {
-    const name = payload.name as keyof typeof chartConfig;
-    const label = `${chartConfig[name]?.label || payload.name}: ${payload.value}%`;
-    const lines = lineBreakLabel(label);
-
-    return (
-      <text
-        fill="#9c9798"
-        fontSize={12}
-        textAnchor={props.textAnchor}
-        x={props.x}
-        y={props.y}
-      >
-        {lines.map((line, index) => (
-          <tspan
-            dy={index === 0 ? 0 : 16}
-            // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
-            key={index}
-            x={props.x}
-          >
-            {line}
-          </tspan>
-        ))}
-      </text>
-    );
-  };
+ChartLivingPerception.isChartComponent = true;
