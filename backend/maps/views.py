@@ -8,8 +8,6 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import permission_required
-import pandas as pd
-import numpy as np
 import chardet
 
 from . import stats
