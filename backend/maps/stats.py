@@ -26,6 +26,11 @@ def compute_aggregation(data):
     df_source = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
     df_source['for'] = df_source['for'].astype(int)
 
+    # WORK AROUND split ero_rainfall_and_wind and ero_couv_slope_and_cover
+    df_source[['ero_rainfall','ero_wind']] = df_source['ero_rainfall_and_wind'].str.split('-', expand=True).astype(int)
+    df_source[['ero_couv_slope','ero_couv_cover']] = df_source['ero_couv_slope_and_cover'].str.split('-', expand=True).astype(int)
+    to_drop = ['ero_rainfall_and_wind','ero_couv_slope_and_cover']
+    df_source.drop(columns=to_drop, inplace=True)
 
     # INVENTAIRE meta data
 
