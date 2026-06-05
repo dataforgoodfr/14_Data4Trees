@@ -49,15 +49,17 @@ catalog:
 
 	# All 4 Trees - Enquête ménage
 	coordo load kobotoolbox --action add data/all4trees/enquete/20260519_EnqueteMenage_QuestionnaireK.xlsx data/all4trees/enquete/20260422_EnqueteMenage_DonneesK.csv --package catalog/enquete
-# 	coordo load file --action add data/all4trees/enquete/socio_eco_gps.csv --package catalog/enquete
-# 	coordo add-foreignkey enquete_menage_cdf.admi2 socio_eco_gps.admi2 --package catalog/enquete
-# 	coordo load file --action add data/all4trees/enquete/charbon.csv --package catalog/enquete
-# 	coordo add-foreignkey enquete_menage_cdf.char_un charbon.char_un --package catalog/enquete
-# 	coordo load file --action add data/all4trees/enquete/constants.csv --package catalog/enquete
-# 	coordo load file --action add data/all4trees/enquete/menage_ext.csv --package catalog/enquete
-# 	coordo add-foreignkey enquete_menage_cdf._id menage_ext.index --package catalog/enquete
-# 	coordo load file --action add data/all4trees/enquete/volume_bois.csv --package catalog/enquete
-# 	coordo add-foreignkey enquete_menage_cdf.code_bois volume_bois.cod_bois --package catalog/enquete
+	coordo load file --action add data/all4trees/enquete/samp.csv --package catalog/enquete
+	coordo add-foreignkey enquete_menage.proj samp.proj --package catalog/enquete
+	coordo load file --action add data/all4trees/enquete/pop.csv --package catalog/enquete
+	coordo add-foreignkey enquete_menage.typ pop.typ --package catalog/enquete
+	coordo load file --action add data/all4trees/enquete/gps.csv --package catalog/enquete
+	coordo add-foreignkey enquete_menage.loc2 gps.loc2 --package catalog/enquete
+	coordo load file --action add data/all4trees/enquete/fw.csv --package catalog/enquete
+	coordo add-foreignkey enquete_menage.fw_cod fw.fw_cod --package catalog/enquete
+	coordo load file --action add data/all4trees/enquete/coal.csv --package catalog/enquete
+	coordo add-foreignkey enquete_menage.coal_unit coal.coal_unit --package catalog/enquete
+	coordo load file --action add data/all4trees/enquete/choic.csv --package catalog/enquete
 
 	# Seed - Survey
 # 	coordo load file --action add data/seed/survey.zip --package catalog/seed
