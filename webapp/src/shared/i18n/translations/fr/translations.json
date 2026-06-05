@@ -237,6 +237,11 @@
       "tonPerHectare": "{{ value }} t/ha"
     }
   },
+  "layers": {
+    "boundaries": "Frontières",
+    "towns": "Villes",
+    "villages": "Villages"
+  },
   "popup": {
     "forestInventory": {
       "date": "Date relevé: {{ date }}",

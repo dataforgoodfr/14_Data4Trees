@@ -1,7 +1,7 @@
 import {
   DatabaseIcon,
-  EarthIcon,
   LeafIcon,
+  SatelliteIcon,
   TreePineIcon,
   UsersIcon,
 } from "lucide-react";
@@ -68,7 +68,7 @@ export const useCategoriesConfig = (): {
 
   const dataSatellite: CategoryGroupItem = {
     icon: (
-      <EarthIcon
+      <SatelliteIcon
         className="text-muted-foreground"
         size={ICON_SIZE}
       />

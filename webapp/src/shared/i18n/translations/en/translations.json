@@ -233,6 +233,11 @@
       "tonPerHectare": "{{ value }} t/ha"
     }
   },
+  "layers": {
+    "boundaries": "Boundaries",
+    "towns": "Towns",
+    "villages": "Villages"
+  },
   "popup": {
     "forestInventory": {
       "date": "Site survey date : {{ date }}",
