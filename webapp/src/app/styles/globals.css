@@ -52,3 +52,12 @@
     display: none !important;
   }
 }
+
+/**
+ * Override maplibre base css classes
+ */
+.maplibregl-ctrl-group {
+  color: var(--color-foreground) !important;
+  background-color: var(--color-background) !important;
+  border-radius: var(--radius-lg) !important;
+}

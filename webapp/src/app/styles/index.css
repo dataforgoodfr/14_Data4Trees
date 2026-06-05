@@ -124,6 +124,9 @@
   --spacing-md: calc(var(--spacing-base) * 3);
   --spacing-lg: calc(var(--spacing-base) * 4);
   --spacing-xl: calc(var(--spacing-base) * 5);
+  --spacing-2xl: calc(var(--spacing-base) * 6);
+  --spacing-3xl: calc(var(--spacing-base) * 8);
+  --spacing-4xl: calc(var(--spacing-base) * 10);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
