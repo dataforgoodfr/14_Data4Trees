@@ -4,8 +4,11 @@ import {
   type LayerControlRenderLayerRow,
 } from "coordo";
 import {
+  HouseIcon,
   LayersIcon,
   SatelliteIcon,
+  SchoolIcon,
+  SlashIcon,
   TreePineIcon,
   UsersIcon,
 } from "lucide-react";
@@ -32,13 +35,21 @@ function useLayerConfig(layerId: string) {
 
   switch (layerId) {
     case LAYERS.BOUNDARIES:
-      return { label: t("layers.boundaries") as string };
+      return {
+        label: t("layers.boundaries") as string,
+        renderIcon: (checked?: boolean) => (
+          <SlashIcon
+            className={checked ? "text-accent-foreground" : "text-muted"}
+            size={ICON_SIZE}
+          />
+        ),
+      };
     case LAYERS.ENQUETE:
       return {
         label: t("filters.categories.actions.socioEco") as string,
         renderIcon: (checked?: boolean) => (
           <UsersIcon
-            className={checked ? "text-socio-eco" : ""}
+            className={checked ? "text-socio-eco" : "text-muted"}
             size={ICON_SIZE}
           />
         ),
@@ -48,7 +59,7 @@ function useLayerConfig(layerId: string) {
         label: t("filters.categories.actions.forestInventary") as string,
         renderIcon: (checked?: boolean) => (
           <TreePineIcon
-            className={checked ? "text-inventaire" : ""}
+            className={checked ? "text-inventaire" : "text-muted"}
             size={ICON_SIZE}
           />
         ),
@@ -58,15 +69,31 @@ function useLayerConfig(layerId: string) {
         label: t("filters.categories.data.satellite") as string,
         renderIcon: (checked?: boolean) => (
           <SatelliteIcon
-            className={checked ? "text-accent-foreground" : ""}
+            className={checked ? "text-accent-foreground" : "text-muted"}
             size={ICON_SIZE}
           />
         ),
       };
     case LAYERS.VILLAGES:
-      return { label: t("layers.villages") as string };
+      return {
+        label: t("layers.villages") as string,
+        renderIcon: (checked?: boolean) => (
+          <HouseIcon
+            className={checked ? "text-accent-foreground" : "text-muted"}
+            size={ICON_SIZE}
+          />
+        ),
+      };
     case LAYERS.TOWNS:
-      return { label: t("layers.towns") as string };
+      return {
+        label: t("layers.towns") as string,
+        renderIcon: (checked?: boolean) => (
+          <SchoolIcon
+            className={checked ? "text-accent-foreground" : "text-muted"}
+            size={ICON_SIZE}
+          />
+        ),
+      };
     default:
       return { label: layerId };
   }
