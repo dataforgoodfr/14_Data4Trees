@@ -47,6 +47,13 @@ catalog:
 
 	# All 4 Trees - Inventaire Biologique
 	coordo load kobotoolbox --action add data/all4trees/inventaire_bio/20260519_InventaireBiologique_QuestionnaireK.xlsx data/all4trees/inventaire_bio/20260422_InventaireBiologique_DonneesK.xlsx --package catalog/inventaire_bio
+	coordo load file --action add data/all4trees/inventaire_bio/samp.csv --package catalog/inventaire_bio
+	coordo add-foreignkey inv_bio.proj samp.proj --package catalog/inventaire_bio
+	coordo load file --action add data/all4trees/inventaire_bio/pop.csv --package catalog/inventaire_bio
+	coordo add-foreignkey inv_bio.year pop.year --package catalog/inventaire_bio
+	coordo load file --action add data/all4trees/inventaire_bio/sp.csv --package catalog/inventaire_bio
+	coordo add-foreignkey inv_001.tax3 sp.tax3 --package catalog/inventaire_bio
+	coordo load file --action add data/all4trees/inventaire_bio/choic.csv --package catalog/inventaire_bio
 
 	# All 4 Trees - Enquête ménage
 	coordo load kobotoolbox --action add data/all4trees/enquete/20260519_EnqueteMenage_QuestionnaireK.xlsx data/all4trees/enquete/20260422_EnqueteMenage_DonneesK.csv --package catalog/enquete
@@ -63,11 +70,11 @@ catalog:
 	coordo load file --action add data/all4trees/enquete/choic.csv --package catalog/enquete
 
 	# Seed - Survey
-# 	coordo load file --action add data/seed/survey.zip --package catalog/seed
-# 	coordo load file --action add data/seed/suivi_sites_reboises.zip --package catalog/seed
-# 	coordo load file --action add data/seed/ident_sites.zip --package catalog/seed
-# 	coordo load file --action add data/seed/reboisement_id.zip --package catalog/seed
-# 	coordo load file --action add data/seed/sensib_communautaire.zip --package catalog/seed
+	coordo load file --action add data/seed/survey.zip --package catalog/seed
+	coordo load file --action add data/seed/suivi_sites_reboises.zip --package catalog/seed
+	coordo load file --action add data/seed/ident_sites.zip --package catalog/seed
+	coordo load file --action add data/seed/reboisement_id.zip --package catalog/seed
+	coordo load file --action add data/seed/sensib_communautaire.zip --package catalog/seed
 
 test:
 	python manage.py test
