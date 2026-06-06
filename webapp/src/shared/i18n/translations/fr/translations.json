@@ -14,8 +14,17 @@
       "title": "Connexion"
     }
   },
+  "buttonHeader": {
+    "toDashboard": "Montrer le dashboard",
+    "toHome": "Montrer la carte"
+  },
   "common": {
     "loading": "Chargement..."
+  },
+  "dashboard": {
+    "select": {
+      "year": "Année"
+    }
   },
   "filters": {
     "categories": {
@@ -267,9 +276,5 @@
         "typePlant": "Type de plant"
       }
     }
-  },
-  "buttonHeader": {
-    "toDashboard": "Montrer le dashboard",
-    "toHome": "Montrer la carte"
   }
 }

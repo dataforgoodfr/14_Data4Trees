@@ -1,5 +1,5 @@
 export const URLS = {
+  DASHBOARD: "/dashboard",
   HOME: "/",
   LOGIN: "/login",
-  DASHBOARD: "/dashboard"
 } as const;

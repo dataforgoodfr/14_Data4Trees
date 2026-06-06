@@ -1,30 +1,34 @@
 // import { DashboardPopover } from "@widgets/DashboardPopover";
 
-import { UserMenu } from "./user-menu";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { useTranslation } from "@shared/i18n";
 import { Button } from "@shared/ui/button";
 import { URLS } from "@shared/urls";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useTranslation } from "@shared/i18n";
-import { useEffect, useState } from "react";
+
+import { UserMenu } from "./user-menu";
 
 export function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const { t } = useTranslation("translations");
-  const [buttonText, setButtonText] = useState("")
+  const [buttonText, setButtonText] = useState("");
 
   function navDashboard() {
     if (path === "/") {
       navigate(URLS.DASHBOARD);
     } else if (path === "/dashboard") {
-      navigate(URLS.HOME)
+      navigate(URLS.HOME);
     }
   }
 
   useEffect(() => {
-    path === "/" ? setButtonText(t("buttonHeader.toDashboard")) : setButtonText(t("buttonHeader.toHome"));
-  })
+    path === "/"
+      ? setButtonText(t("buttonHeader.toDashboard"))
+      : setButtonText(t("buttonHeader.toHome"));
+  });
 
   return (
     <header className="bg-background border-b border-border p-3 relative z-40 flex-0">
@@ -37,9 +41,12 @@ export function Header() {
           />
 
           <div className="flex items-center gap-3">
-             <Button variant="default" onClick={navDashboard}>
-                {buttonText}
-             </Button>
+            <Button
+              onClick={navDashboard}
+              variant="default"
+            >
+              {buttonText}
+            </Button>
             <UserMenu />
           </div>
         </div>

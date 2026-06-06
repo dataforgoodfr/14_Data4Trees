@@ -20,7 +20,6 @@ import { useMap } from "@shared/hooks/useMap";
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 
-
 function getIconSize({
   assetSize,
   targetSize,
@@ -37,13 +36,8 @@ function getIconSize({
 const TARGET_SIZE = 48;
 const SVG_SIZE = 72;
 
-
-
 export const WidgetMap: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
-
-
-
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;

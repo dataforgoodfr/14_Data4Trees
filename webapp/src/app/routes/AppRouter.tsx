@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RootLayout } from "@app/layouts/RootLayout";
 import { MapProvider } from "@app/providers";
 
+import { DashboardPage } from "@pages/dashboard/DashboardPage";
 import { MainPage } from "@pages/MainPage";
 
 import { AdminRoute } from "./lib/AdminRoute";
-import { DashboardPage } from "@pages/dashboard/DashboardPage";
 
 const AdminPage = lazy(() => import("@pages/admin"));
 const LoginPage = lazy(() => import("@pages/login"));
@@ -46,8 +46,9 @@ export function AppRouter() {
           />
         </Route>
         <Route
-        element={<DashboardPage />}
-        path="dashboard" />
+          element={<DashboardPage />}
+          path="dashboard"
+        />
       </Routes>
     </BrowserRouter>
   );
