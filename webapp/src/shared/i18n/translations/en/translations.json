@@ -17,11 +17,6 @@
   "common": {
     "loading": "Loading..."
   },
-  "dashboard": {
-    "select": {
-      "year": "Year"
-    }
-  },
   "filters": {
     "categories": {
       "actions": {

@@ -20,7 +20,7 @@ import { fetchToken } from "./authClient";
 import { useAuth } from "./useAuth";
 
 interface LoginFormProps extends React.ComponentPropsWithoutRef<"div"> {
-  onSuccess: (username: string) => void;
+  onSuccess: () => void;
 }
 
 export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
@@ -41,7 +41,7 @@ export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
     try {
       const token = await fetchToken(username, password);
       login(token);
-      onSuccess(username);
+      onSuccess();
     } catch {
       setError(t("auth.loginForm.credentialsError"));
     } finally {

@@ -3,7 +3,7 @@ import { useTranslation } from "@i18n";
 import type { ChartComponentType } from "../components/chart-component";
 import { ChartRadarWithBenefAndControl } from "../components/radar-benef-control";
 
-export type ChartForestPotentialData = {
+type Data = {
   density: number;
   diversity: number;
   diameterDistribution: number;
@@ -15,8 +15,8 @@ export type ChartForestPotentialData = {
 };
 
 type ChartForestPotentialProps = {
-  benef: ChartForestPotentialData;
-  temoin?: ChartForestPotentialData;
+  benef: Data;
+  temoin?: Data;
 };
 
 export const ChartForestPotential: ChartComponentType<
@@ -24,7 +24,6 @@ export const ChartForestPotential: ChartComponentType<
 > = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
-  console.log("ChartForestPotential - benef:", benef);
   const chartData: Array<{
     indicator: string;
     benef: number;
