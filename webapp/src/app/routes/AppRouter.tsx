@@ -44,11 +44,12 @@ export function AppRouter() {
             element={<AdminPage />}
             path="admin"
           />
+
+          <Route
+            element={<DashboardPage />}
+            path="dashboard"
+          />
         </Route>
-        <Route
-          element={<DashboardPage />}
-          path="dashboard"
-        />
       </Routes>
     </BrowserRouter>
   );

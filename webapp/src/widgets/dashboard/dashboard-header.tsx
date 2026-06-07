@@ -21,16 +21,14 @@ export function DashboardHeader({
   onValueChange: onvalueChange,
 }: DashboardHeaderProps) {
   const { t } = useTranslation("translations");
+  const username = localStorage.getItem("username") || "";
   return (
     <div>
       <div className="mt-4 flex flex-nowrap justify-between items-center">
         <div>
           <h1 className="font-bold text-xl tracking-wide">
-            Bonjour, Liam Gallagher ! 👋
+            Bonjour{` ${username}`} ! 👋
           </h1>
-          <p className="mt-1 text-gray-600 text-sm tracking-tight">
-            Que recherchez-vous aujourd'hui ?
-          </p>
         </div>
         <p>⚠ Filtre</p>
       </div>

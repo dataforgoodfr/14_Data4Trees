@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
 import { DashboardHeader } from "@widgets/dashboard/dashboard-header";
-import { Header } from "@widgets/header";
 
 import {
   ChartForestPotential,
@@ -93,19 +92,16 @@ export function DashboardPage() {
   }
 
   return (
-    <div>
-      <Header />
-      <div className="px-7">
-        <DashboardHeader
-          onValueChange={handleYearChange}
-          selectedYear={selectedYear}
-          years={Object.keys(data).map(Number)}
+    <div className="px-7">
+      <DashboardHeader
+        onValueChange={handleYearChange}
+        selectedYear={selectedYear}
+        years={Object.keys(data).map(Number)}
+      />
+      <div className="mt-4 space-y-4">
+        <ChartForestPotential
+          benef={formatBeneficiaryData(twoDecimals(chartData))}
         />
-        <div className="mt-4 space-y-4">
-          <ChartForestPotential
-            benef={formatBeneficiaryData(twoDecimals(chartData))}
-          />
-        </div>
       </div>
     </div>
   );
