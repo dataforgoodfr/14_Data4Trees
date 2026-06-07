@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RootLayout } from "@app/layouts/RootLayout";
 import { MapProvider } from "@app/providers";
 
+import { DashboardPage } from "@pages/dashboard/DashboardPage";
 import { MainPage } from "@pages/MainPage";
 
 import { AdminRoute } from "./lib/AdminRoute";
@@ -42,6 +43,11 @@ export function AppRouter() {
           <Route
             element={<AdminPage />}
             path="admin"
+          />
+
+          <Route
+            element={<DashboardPage />}
+            path="dashboard"
           />
         </Route>
       </Routes>
