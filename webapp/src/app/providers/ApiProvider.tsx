@@ -1,5 +1,7 @@
 import { type ReactNode, useMemo } from "react";
 
+import { useAuth } from "@features/auth/useAuth";
+
 import { createApiClient } from "@shared/api/client";
 import { ApiContext } from "@shared/contexts/ApiContext";
 
@@ -8,7 +10,8 @@ interface ApiProviderProps {
 }
 
 export function ApiProvider({ children }: ApiProviderProps) {
-  const api = useMemo(() => createApiClient(), []);
+  const { token } = useAuth();
+  const api = useMemo(() => createApiClient(token), [token]);
 
   return <ApiContext value={api}>{children}</ApiContext>;
 }

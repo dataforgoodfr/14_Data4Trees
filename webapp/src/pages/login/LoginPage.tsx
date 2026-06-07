@@ -34,7 +34,8 @@ export function LoginPage() {
     <div className="flex flex-col h-screen items-center justify-center gap-4">
       <h1>Login Page</h1>
       <LoginForm
-        onSuccess={() => {
+        onSuccess={(username) => {
+          localStorage.setItem("username", username);
           navigate(redirectTo, { replace: true });
         }}
       />
