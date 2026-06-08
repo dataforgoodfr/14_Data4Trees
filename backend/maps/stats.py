@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def mrp_mean(series, weights):
+def mrp_mean(series, weights, population_size):
     """
     Computes means using weights.
     Returns the means and the standard errors.
@@ -11,12 +11,20 @@ def mrp_mean(series, weights):
     x = series[mask].astype(float)
     w = weights[mask].astype(float)
 
-    if len(x) == 0:
+    sample_size = len(x)
+
+    if sample_size == 0:
         return {"value": None, "error": None}
 
+    # Computing the weighted mean
     mean = np.average(x, weights=w) # equivalent to sum(x * weights) / sum(weights)
-    variance = np.average((x - mean) ** 2, weights=w) # still TODO because the formula expected for MRP is much more complex
-    std_error = np.sqrt(variance)
+    
+    # Computing the standard error
+    variance_simple = np.average((x - mean) ** 2)
+    variance_weighted = np.average((x - mean) ** 2, weights=w)
+    part1 = 1/sample_size * (1 - sample_size/population_size) * variance_weighted
+    part2 = 1/sample_size**2 * (population_size - sample_size) / (population_size - 1) * (variance_simple - variance_weighted)
+    std_error = np.sqrt(part1+part2)
 
     return {"value": mean, "error": std_error}
 
@@ -136,6 +144,7 @@ def compute_aggregation(data):
         usecols=['strat','Mh'],
         index_col='strat')
     weights_map = df_weights['Mh'].to_dict()
+    population_size = df_weights['Mh'].sum()
 
     # Grouping fields by aggregation function
     list_fields_average_value = [key for key, value in dict_fields_conf.items() if value == 'average-value']
@@ -160,7 +169,7 @@ def compute_aggregation(data):
             # Computing means and errors on fields with unique values
             df_case = df[list_fields_base+list_fields_average_value+['weight']].copy()
             result = {
-                field: mrp_mean(df_case[field], df_case["weight"])
+                field: mrp_mean(df_case[field], df_case["weight"], population_size)
                 for field in list_fields_average_value
             }
             
