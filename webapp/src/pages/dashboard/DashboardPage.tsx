@@ -87,7 +87,13 @@ export function DashboardPage() {
   }
 
   return (
-    <div className="px-7">
+    <div
+      className="px-7 overflow-y-scroll h-full pb-4 custom-scrollbar"
+      style={{
+        "--scrollbar-thumb": "var(--info-foreground)",
+        "--scrollbar-track": "var(--background)",
+      }}
+    >
       <DashboardHeader
         onValueChange={handleYearChange}
         selectedYear={selectedYear}
