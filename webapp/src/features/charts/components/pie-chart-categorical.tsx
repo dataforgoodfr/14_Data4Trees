@@ -44,7 +44,9 @@ export const PieChartCategorical: ChartComponentType<
       title={title}
     >
       <ChartContainer
-        className="mx-auto h-90 w-full max-w-full aspect-auto pb-0 [&_.recharts-pie-label-text]:fill-foreground"
+        // Style - Extend the width to the container, make aspect 5/4 with h auto (due to the legend, width should be superior)
+        // But limit width to 720px to avoid height > 600px (the chard wouldn't fit in the screen)
+        className="mx-auto max-h-full h-auto w-full max-w-180 aspect-5/4 pb-0 [&_.recharts-pie-label-text]:fill-foreground"
         config={chartConfig}
       >
         <PieChart>
@@ -59,7 +61,7 @@ export const PieChartCategorical: ChartComponentType<
             }
             labelLine={false}
             nameKey="name"
-            outerRadius={140}
+            // outerRadius -> Don't specify to adapt to available width
           />
         </PieChart>
       </ChartContainer>
