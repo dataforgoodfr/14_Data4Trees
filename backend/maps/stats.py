@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+from . import constants
+
 def mrp_mean(series, weights, population_size):
     """
     Computes means using weights.
@@ -57,58 +59,6 @@ def mrp_mean_dict(series, weights):
 
     return {"value": dict_result, "error": std_error}
 
-# Configuration of Proportion / Average / Total on value or dict of values
-dict_fields_conf = {
-    # Biodiversity
-    'biomass_volume': 'average-value',
-    'tree_density': 'average-value',
-    'tree_pop': 'average-value',
-    'richness': 'average-value',
-    'relative_abundance': 'average-dict',
-
-    # Biodiversity - Indirect indicators
-    'epf_tree_density': 'average-value',
-    'epf_deadWood': 'average-value',
-    'epf_tree_diversity': 'average-value',
-    'epf_necromass_pied': 'average-value',
-    'epf_necromass_sol': 'average-value',
-    'epf_spatial_distribution': 'average-value',
-    'epf_diameter_distribution': 'average-value',
-    'epf_vertical_distribution': 'average-value',
-    'epf_dominant_height': 'average-value',
-    'epf_microhabitats': 'average-value',
-
-    # Soil
-    'soil_structure': 'average-value',
-    'soil_composition': 'average-value',
-
-    # Soil erosion
-    'ero_rainfall': 'average-value',
-    'ero_wind': 'average-value',
-    'ero_couv_slope': 'average-value',
-    'ero_couv_cover': 'average-value',
-    'ero_soil_stability': 'average-value',
-    'ero_water_seepage': 'average-value',
-
-    # Soil macrofauna
-    'soil_fauna_density': 'average-value',
-    'soil_fauna_diversity': 'average-value',
-    'soil_fauna_abundance': 'average-dict',
-    'soil_fauna_abundance_tax1': 'average-dict',
-    'soil_fauna_abundance_tax2': 'average-dict',
-    'soil_fauna_abundance_tax3': 'average-dict',
-
-    # Missing density and diversity per taxon
-
-    # Surface macrofauna
-    'surface_fauna_density': 'average-value',
-    'surface_fauna_diversity': 'average-value',
-    'surface_fauna_abundance': 'average-dict',
-    'surface_fauna_abundance_tax1': 'average-dict',
-    'surface_fauna_abundance_tax2': 'average-dict',
-    'surface_fauna_abundance_tax3': 'average-dict',
-}
-
 def compute_aggregation(data):
 
     df_source = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
@@ -146,9 +96,11 @@ def compute_aggregation(data):
     weights_map = df_weights['Mh'].to_dict()
     population_size = df_weights['Mh'].sum()
 
+    dict_fields = constants.dict_fields_inventaire
+
     # Grouping fields by aggregation function
-    list_fields_average_value = [key for key, value in dict_fields_conf.items() if value == 'average-value']
-    list_fields_average_dict = [key for key, value in dict_fields_conf.items() if value == 'average-dict']
+    list_fields_average_value = [key for key, value in dict_fields.items() if value == 'average-value']
+    list_fields_average_dict = [key for key, value in dict_fields.items() if value == 'average-dict']
     list_fields_base = [field for field in df.columns.tolist() if field not in (list_fields_average_value + list_fields_average_dict)]
 
     # Loop on clusters year-sample and applying the related aggregation function
