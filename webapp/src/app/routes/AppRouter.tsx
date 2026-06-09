@@ -7,7 +7,7 @@ import { MapProvider } from "@app/providers";
 import { DashboardPage } from "@pages/dashboard/DashboardPage";
 import { MainPage } from "@pages/MainPage";
 
-import { AdminRoute } from "./lib/AdminRoute";
+import { AdminRoute } from "./admin-route";
 
 const AdminPage = lazy(() => import("@pages/admin"));
 const LoginPage = lazy(() => import("@pages/login"));
