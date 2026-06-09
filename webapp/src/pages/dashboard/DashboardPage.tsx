@@ -14,7 +14,6 @@ import { useApi } from "@shared/hooks/useApi";
 import type { DashboardData, DataField } from "./types";
 
 function twoDecimals(data: Record<string, DataField>) {
-  console.log("Data before formatting:", data);
   return Object.fromEntries(
     Object.entries(data).map(([key, { value, error }]) => [
       key,
@@ -29,7 +28,6 @@ function twoDecimals(data: Record<string, DataField>) {
 function formatBeneficiaryData(
   beneficiary: Record<string, DataField>,
 ): ChartForestPotentialData {
-  console.log("Beneficiary data before formatting:", beneficiary);
   return {
     deadWood: beneficiary.epf_deadWood.value ?? 0,
     density: beneficiary.epf_tree_density.value ?? 0,
@@ -44,7 +42,6 @@ function formatBeneficiaryData(
 
 export function DashboardPage() {
   const api = useApi();
-
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [data, setData] = useState<DashboardData>({});
   const [chartData, setChartData] = useState<Record<string, DataField>>({});
@@ -58,7 +55,6 @@ export function DashboardPage() {
   const loadDashboardData = async () => {
     try {
       const dashboardData = await api.getDashboardData(LAYERS.INVENTARY);
-      console.log("Dashboard data raw:", dashboardData);
       setData(dashboardData);
       setChartData(dashboardData[selectedYear]?.beneficiary ?? {});
     } catch (error) {
@@ -72,7 +68,6 @@ export function DashboardPage() {
     const numericYear = Number(year);
     if (!isNaN(numericYear)) {
       setSelectedYear(numericYear);
-      setLoading(true);
       setChartData(data[numericYear]?.beneficiary ?? {});
     } else {
       console.warn("Année sélectionnée invalide:", year);
