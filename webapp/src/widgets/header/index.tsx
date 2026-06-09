@@ -1,6 +1,3 @@
-// import { DashboardPopover } from "@widgets/DashboardPopover";
-
-import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "@shared/i18n";
@@ -12,40 +9,32 @@ import { UserMenu } from "./user-menu";
 export function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = location.pathname;
-  const { t } = useTranslation("translations");
-  const [buttonText, setButtonText] = useState("");
+  const isDashboardPage = location.pathname === URLS.DASHBOARD;
 
-  function navDashboard() {
-    if (path === "/") {
-      navigate(URLS.DASHBOARD);
-    } else if (path === "/dashboard") {
-      navigate(URLS.HOME);
-    }
+  const { t } = useTranslation("translations");
+
+  function onNavigationClick() {
+    navigate(isDashboardPage ? URLS.HOME : URLS.DASHBOARD);
   }
 
-  useEffect(() => {
-    path === "/"
-      ? setButtonText(t("buttonHeader.toDashboard"))
-      : setButtonText(t("buttonHeader.toHome"));
-  });
-
   return (
-    <header className="bg-background border-b border-border p-3 relative z-40 flex-0">
+    <header className="bg-background border-b border-border p-3 sm:px-2 sm:py-1 relative z-40 flex-0">
       <div className="mx-auto max-w-screen-2xl">
         <div className="flex items-center justify-between gap-md">
           <img
             alt="Logo"
-            className="h-12"
+            className="h-12 sm:h-8"
             src="/logo_all4trees.png"
           />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 sm:gap-2">
             <Button
-              onClick={navDashboard}
+              onClick={onNavigationClick}
               variant="default"
             >
-              {buttonText}
+              {isDashboardPage
+                ? t("buttonHeader.toHome")
+                : t("buttonHeader.toDashboard")}
             </Button>
             <UserMenu />
           </div>

@@ -15,8 +15,8 @@
     }
   },
   "buttonHeader": {
-    "toDashboard": "Montrer le dashboard",
-    "toHome": "Montrer la carte"
+    "toDashboard": "Dashboard",
+    "toHome": "Carte"
   },
   "common": {
     "loading": "Chargement..."

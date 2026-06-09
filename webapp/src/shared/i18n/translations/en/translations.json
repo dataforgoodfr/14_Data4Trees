@@ -14,6 +14,10 @@
       "title": "Login"
     }
   },
+  "buttonHeader": {
+    "toDashboard": "Dashboard",
+    "toHome": "Map"
+  },
   "common": {
     "loading": "Loading..."
   },
