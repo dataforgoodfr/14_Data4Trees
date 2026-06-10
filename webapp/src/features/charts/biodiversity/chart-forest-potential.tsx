@@ -24,7 +24,6 @@ export const ChartForestPotential: ChartComponentType<
 > = ({ benef, temoin }) => {
   const { t } = useTranslation("translations");
 
-  console.log("ChartForestPotential - benef:", benef);
   const chartData: Array<{
     indicator: string;
     benef: number;

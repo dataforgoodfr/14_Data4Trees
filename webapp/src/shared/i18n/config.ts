@@ -65,7 +65,7 @@ i18n
 
 i18n.on("languageChanged", (lng) => {
   /** @todo Update Intl Locale */
-  console.log("Language changed to ", lng);
+  console.info("Language changed to ", lng);
 });
 
 export default i18n;
