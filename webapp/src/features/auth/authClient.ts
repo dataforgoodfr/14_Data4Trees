@@ -23,6 +23,5 @@ export const verifyToken = async (token: string) => {
     console.error(`Token invalide: ${res.status} ${res.statusText}`);
     return false;
   }
-  console.log("Token vérifié avec succès");
   return true;
 };

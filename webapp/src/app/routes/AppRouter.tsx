@@ -7,7 +7,9 @@ import { MapProvider } from "@app/providers";
 import { DashboardPage } from "@pages/dashboard/DashboardPage";
 import { MainPage } from "@pages/MainPage";
 
-import { AdminRoute } from "./lib/AdminRoute";
+import { URLS } from "@shared/urls";
+
+import { AdminRoute } from "./admin-route";
 
 const AdminPage = lazy(() => import("@pages/admin"));
 const LoginPage = lazy(() => import("@pages/login"));
@@ -18,7 +20,7 @@ export function AppRouter() {
       <Routes>
         <Route
           element={<LoginPage />}
-          path="login"
+          path={URLS.LOGIN}
         />
         <Route
           element={
@@ -26,7 +28,7 @@ export function AppRouter() {
               <RootLayout />
             </MapProvider>
           }
-          path="/"
+          path={URLS.HOME}
         >
           <Route
             element={<MainPage />}
@@ -42,12 +44,12 @@ export function AppRouter() {
         >
           <Route
             element={<AdminPage />}
-            path="admin"
+            path={URLS.ADMIN}
           />
 
           <Route
             element={<DashboardPage />}
-            path="dashboard"
+            path={URLS.DASHBOARD}
           />
         </Route>
       </Routes>
