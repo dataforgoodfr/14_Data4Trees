@@ -14,14 +14,10 @@ import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
+import type { RenderPopupProps } from "../renderPopup";
 import type { SocioEcoData } from "./types";
 
-type SocioEcoIndicatorProps = {
-  onClose: () => void;
-  data: SocioEcoData;
-  metadata: LayerMetadata;
-  className?: string;
-};
+type SocioEcoIndicatorProps = RenderPopupProps<SocioEcoData>;
 
 type TabKind = "resources" | "economy";
 
@@ -46,10 +42,10 @@ const exctractVillageName = (
 };
 
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
-  onClose,
   data,
   metadata,
   className,
+  ...headerProps
 }) => {
   const { t } = useTranslation("translations");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
@@ -70,11 +66,11 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
       <IndicatorPopupHeader
         date={t("popup.socioEco.date", { date: formatDate(new Date()) })}
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
-        onCrossClick={onClose}
         subtitle={t("popup.socioEco.subtitleCount", {
           count: data.household_nb,
         })}
         title={title}
+        {...headerProps}
       />
 
       <GridSelector

@@ -24,7 +24,6 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   chartData,
   legendLabel,
   withTemoin = false,
-  layout = { chartHeight: 80, chartXAxisHeight: 90 },
 }) => {
   const { t } = useTranslation("translations");
   const chartConfig = {
@@ -41,7 +40,8 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   return (
     <ChartComponent title={title}>
       <ChartContainer
-        className={`mx-auto h-${layout.chartHeight} max-h-${layout.chartHeight} w-full max-w-full`}
+        // Style: Extend the width to the container, but enforce the height for XAxis alignment
+        className="mx-auto h-80 max-h-80 w-full max-w-full"
         config={chartConfig}
       >
         <BarChart
@@ -52,7 +52,7 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
           <XAxis
             axisLine={false}
             dataKey="indicator"
-            height={layout.chartXAxisHeight}
+            height={90}
             interval={0}
             tick={renderXAxisTick}
             tickLine={false}

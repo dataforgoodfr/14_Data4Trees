@@ -47,7 +47,9 @@ export const ChartRadarWithBenefAndControl: ChartComponentType<
   return (
     <ChartComponent title={title}>
       <ChartContainer
-        className="mx-auto aspect-square max-h-100"
+        // Style - Extend the width to the container, make aspect square with h auto to equal h and w
+        // But limit width to 600px to avoid height > 600px (the chard wouldn't fit in the screen)
+        className="mx-auto aspect-square max-h-full h-auto max-w-150 w-full"
         config={chartConfig}
       >
         <RadarChart

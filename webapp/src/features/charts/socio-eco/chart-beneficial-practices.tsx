@@ -54,7 +54,6 @@ export const ChartBeneficialPractices: ChartComponentType<
   return (
     <BarCharWithBenefAndControl
       chartData={chartData}
-      layout={{ chartHeight: 90, chartXAxisHeight: 130 }}
       legendLabel={t(
         "indicators.socioEco.sections.governance.beneficialPractices.legend",
       )}
