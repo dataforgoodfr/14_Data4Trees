@@ -18,16 +18,16 @@ export function Header() {
   }
 
   return (
-    <header className="bg-background border-b border-border p-3 sm:px-2 sm:py-1 relative z-40 flex-0">
+    <header className="bg-background border-b border-border md:p-3 p-2 relative z-40 flex-0">
       <div className="mx-auto max-w-screen-2xl">
         <div className="flex items-center justify-between gap-md">
           <img
             alt="Logo"
-            className="h-12 sm:h-8"
+            className="md:h-12 h-8"
             src="/logo_all4trees.png"
           />
 
-          <div className="flex items-center gap-3 sm:gap-2">
+          <div className="flex items-center gap-2 md:gap-3">
             <Button
               onClick={onNavigationClick}
               variant="default"
