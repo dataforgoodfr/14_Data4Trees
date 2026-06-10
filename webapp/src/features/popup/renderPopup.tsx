@@ -6,7 +6,7 @@ import type { IndicatorPopupHeaderProps } from "./components/indicator-popup-hea
 
 export const getPopupSizeCustomVariables = (isMaximizedPopupSize: boolean) => {
   return {
-    "--popup-height": isMaximizedPopupSize ? "100%" : "120",
+    "--popup-height": isMaximizedPopupSize ? "100%" : "500px",
     "--popup-max-width": isMaximizedPopupSize ? "100%" : "560px",
     "--popup-maximize-size-button-width": isMaximizedPopupSize ? 0 : "100%",
     "--popup-minimize-size-button-width": isMaximizedPopupSize ? "100%" : 0,
@@ -22,7 +22,7 @@ export const DEFAULT_POPUP_CONFIG: PopupOptions = {
   closeButton: false,
   closeOnClick: true,
   closeOnMove: false,
-  maxWidth: "var(--popup-max-width)",
+  maxWidth: "100%", // Make sure it does not overflow
 };
 
 export type RenderPopupProps<T> = {
@@ -42,7 +42,8 @@ export function getRenderPopupLayer<Properties>({
     const container = document.createElement("div");
     const root = createRoot(container);
 
-    container.className = "h-full w-full";
+    // Enforce custom/dynamic max-width at the inner container level
+    container.className = "h-full w-full max-w-[var(--popup-max-width)]";
 
     root.render(
       <Element
