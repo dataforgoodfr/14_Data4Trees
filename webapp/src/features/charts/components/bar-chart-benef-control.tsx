@@ -1,4 +1,3 @@
-import { cx } from "class-variance-authority";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
