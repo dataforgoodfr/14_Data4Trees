@@ -1,21 +1,16 @@
-import { ApiProvider, AuthProvider, ThemeProvider } from "./providers";
-import { AppRouter } from "./routes/AppRouter";
-import "./styles/globals.css";
-import "./styles/index.css";
+import type { ReactNode } from "react";
 
-function App() {
+import { ApiProvider, AuthProvider, ThemeProvider } from "./providers";
+
+export function AppWrapper({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider
       defaultTheme="dark"
       storageKey="vite-ui-theme"
     >
       <AuthProvider>
-        <ApiProvider>
-          <AppRouter />
-        </ApiProvider>
+        <ApiProvider>{children}</ApiProvider>
       </AuthProvider>
     </ThemeProvider>
   );
 }
-
-export default App;

@@ -16,7 +16,7 @@ import {
 } from "@features/popup/socio-eco";
 
 import { LAYERS } from "@shared/api/layers";
-import { useMap } from "@shared/hooks/useMap";
+import { useMapContext } from "@shared/contexts/map-context-all4trees";
 
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
@@ -38,7 +38,7 @@ const TARGET_SIZE = 48;
 const SVG_SIZE = 72;
 
 export const WidgetMap: FC = () => {
-  const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
+  const { isReady, mapApiRef, forests, mapContainerRef } = useMapContext();
   const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
   useEffect(() => {

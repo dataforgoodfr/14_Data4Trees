@@ -1,11 +1,12 @@
-import { lazy } from "react";
+import {
+  type JSX,
+  type LazyExoticComponent,
+  lazy,
+  type ReactNode,
+} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { RootLayout } from "@app/layouts/RootLayout";
-import { MapProvider } from "@app/providers";
-
-import { DashboardPage } from "@pages/dashboard/DashboardPage";
-import { MainPage } from "@pages/MainPage";
 
 import { URLS } from "@shared/urls";
 
@@ -14,7 +15,15 @@ import { AdminRoute } from "./admin-route";
 const AdminPage = lazy(() => import("@pages/admin"));
 const LoginPage = lazy(() => import("@pages/login"));
 
-export function AppRouter() {
+export function AppRouterBase({
+  DashboardPage,
+  MainPage,
+  MapProvider,
+}: {
+  DashboardPage?: LazyExoticComponent<() => JSX.Element>;
+  MainPage: LazyExoticComponent<() => JSX.Element>;
+  MapProvider: (props: { children: ReactNode }) => ReactNode;
+}) {
   return (
     <BrowserRouter>
       <Routes>
@@ -47,10 +56,12 @@ export function AppRouter() {
             path={URLS.ADMIN}
           />
 
-          <Route
-            element={<DashboardPage />}
-            path={URLS.DASHBOARD}
-          />
+          {DashboardPage && (
+            <Route
+              element={<DashboardPage />}
+              path={URLS.DASHBOARD}
+            />
+          )}
         </Route>
       </Routes>
     </BrowserRouter>

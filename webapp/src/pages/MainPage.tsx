@@ -13,7 +13,7 @@ export interface MainPageProps {
   userData?: unknown;
 }
 
-export function MainPage() {
+function MainPage() {
   return (
     <>
       {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}
@@ -39,3 +39,6 @@ export function MainPage() {
     </>
   );
 }
+
+// Default export for lazy loading import
+export default MainPage;

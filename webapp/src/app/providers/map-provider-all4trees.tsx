@@ -5,7 +5,10 @@ import { useCategoriesFilters } from "@features/categories-filters/use-categorie
 import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 
 import { API_URL } from "@shared/api/client";
-import { type Category, MapContext } from "@shared/contexts/MapContext";
+import {
+  type Category,
+  MapContext,
+} from "@shared/contexts/map-context-all4trees";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
@@ -20,16 +23,16 @@ const DEFAULT_MAP_SETTINGS: MapSettings = {
   zoom: 3.8,
 };
 
-interface MapProviderProps {
+type MapProviderAll4TreesProps = {
   children: ReactNode;
-}
+};
 
-export function MapProvider({ children }: MapProviderProps) {
+export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
   const [isReady, setIsReady] = useState(false);
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
   const [forests, setForests] = useState<Category[]>([]);
   const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
-    "map-settings",
+    "d4g:map-settings:all4trees",
     DEFAULT_MAP_SETTINGS,
   );
 
