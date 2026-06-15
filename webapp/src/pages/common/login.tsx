@@ -13,7 +13,7 @@ import { useAuth } from "@features/auth/useAuth";
  */
 type LocationState = { from?: Location };
 
-export function LoginPage() {
+export default function LoginPage() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();

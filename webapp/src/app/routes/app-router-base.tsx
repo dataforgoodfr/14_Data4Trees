@@ -12,8 +12,8 @@ import { URLS } from "@shared/urls";
 
 import { AdminRoute } from "./admin-route";
 
-const AdminPage = lazy(() => import("@pages/admin"));
-const LoginPage = lazy(() => import("@pages/login"));
+const AdminPage = lazy(() => import("@pages/common/admin"));
+const LoginPage = lazy(() => import("@pages/common/login"));
 
 export function AppRouterBase({
   DashboardPage,
