@@ -27,7 +27,7 @@ const indicatorsToPreciseWithoutFallBack: NumericKeys<SoilData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatSoilData = (data: SoilData) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 
   const { ero_soil_stability, ero_water_seepage } =
@@ -48,7 +48,7 @@ export const useFormatSoilData = (data: SoilData) => {
   } = preciseNumericIndicators<SoilData>(
     data,
     indicatorsToPreciseWithFallBack,
-    t("indicators.common.noData"),
+    t("dataManagement.noData"),
   );
 
   return {

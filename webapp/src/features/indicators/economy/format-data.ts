@@ -18,12 +18,12 @@ const indicatorKeys: NumericKeys<EconomicData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatEconomicData = (data: EconomicData) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
 
   const safeData = preciseNumericIndicators<EconomicData>(
     data,
     indicatorKeys,
-    t("indicators.common.noData"),
+    t("dataManagement.noData"),
   );
 
   return {

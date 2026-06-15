@@ -14,6 +14,13 @@
       "title": "Login"
     }
   },
+  "common": {
+    "loading": "Loading..."
+  },
+  "dataManagement": {
+    "noData": "No data available",
+    "undefined": "not found"
+  },
   "header": {
     "colorModeSelector": {
       "dark": "Dark",

@@ -41,13 +41,13 @@ const formatRelativeAbundance = (
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatBiodiversityData = (data: BiodiversityData) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 
   const safeData = preciseNumericIndicators<BiodiversityData>(
     data,
     indicatorKeys,
-    t("indicators.common.noData"),
+    t("dataManagement.noData"),
   );
 
   return {

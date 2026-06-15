@@ -1,7 +1,4 @@
 {
-  "common": {
-    "loading": "Chargement..."
-  },
   "dashboard": {
     "select": {
       "year": "Année"
@@ -75,7 +72,6 @@
       "control": "Témoin",
       "date": "Date enquête",
       "density": "Densité",
-      "noData": "Données non disponibles",
       "speciesRichness": "Richesse spécifique"
     },
     "economy": {
@@ -228,7 +224,6 @@
       "subtitleCount_one": "{{ count }} ménage enquêté",
       "subtitleCount_other": "{{ count }} ménages enquêtés",
       "title": "{{ village }}"
-    },
-    "undefined": "non trouvée"
+    }
   }
 }

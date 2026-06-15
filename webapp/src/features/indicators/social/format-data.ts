@@ -29,13 +29,13 @@ const indicatorKeys: NumericKeys<SocialData>[] = [
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatSocialData = (data: SocialData) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 
   const safeData = preciseNumericIndicators<SocialData>(
     data,
     indicatorKeys,
-    t("indicators.common.noData"),
+    t("dataManagement.noData"),
   );
 
   return {

@@ -13,11 +13,11 @@ export type SeedData = {
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
 export const useFormatSeedData = (data: SeedData) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,
-      value || t("indicators.common.noData"),
+      value || t("dataManagement.noData"),
     ]),
   ) as SeedData;
 };

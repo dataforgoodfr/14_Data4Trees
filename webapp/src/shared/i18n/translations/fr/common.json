@@ -14,6 +14,13 @@
       "title": "Connexion"
     }
   },
+  "common": {
+    "loading": "Chargement..."
+  },
+  "dataManagement": {
+    "noData": "Données non disponibles",
+    "undefined": "non trouvée"
+  },
   "header": {
     "colorModeSelector": {
       "dark": "Sombre",

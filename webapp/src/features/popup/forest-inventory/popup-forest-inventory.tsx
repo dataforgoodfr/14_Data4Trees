@@ -28,26 +28,36 @@ const TABS: Record<string, TabKind> = {
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
 > = ({ data, metadata, className, ...headerProps }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation(["common", "translations"]);
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
   const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
   const soilElements = useSoilIndicatorElements(data, metadata);
 
-  const title = t("popup.forestInventory.title", { id: data.id });
+  const title = t("popup.forestInventory.title", {
+    id: data.id,
+    ns: "translations",
+  });
   const tabs = {
-    [TABS.BIODIVERSITY]: t("indicators.biodiversity.title"),
-    [TABS.SOIL]: t("indicators.soil.title"),
+    [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {
+      ns: "translations",
+    }),
+    [TABS.SOIL]: t("indicators.soil.title", {
+      ns: "translations",
+    }),
   };
 
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.forestInventory.date", { date: formatDate(new Date()) })}
+        date={t("popup.forestInventory.date", {
+          date: formatDate(new Date()),
+          ns: "translations",
+        })}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         subtitle={
           findCategoricalLabel(metadata, "for", data.for) ||
-          t("popup.undefined")
+          t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}

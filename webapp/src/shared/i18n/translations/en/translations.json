@@ -1,7 +1,4 @@
 {
-  "common": {
-    "loading": "Loading..."
-  },
   "dashboard": {
     "select": {
       "year": "Year"
@@ -75,7 +72,6 @@
       "control": "Control",
       "date": "Survey date",
       "density": "Density",
-      "noData": "No data available",
       "speciesRichness": "Species richness"
     },
     "economy": {
@@ -224,7 +220,6 @@
       "subtitleCount_one": "{{ count }} household surveyed",
       "subtitleCount_other": "{{ count }} households surveyed",
       "title": "{{ village }}"
-    },
-    "undefined": "not found"
+    }
   }
 }

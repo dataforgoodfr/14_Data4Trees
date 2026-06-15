@@ -12,7 +12,7 @@ type AdminRouteProps = {
  * Redirect to login page if not authenticated.
  */
 export function AdminRoute({ children }: AdminRouteProps) {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
   const { isAuthenticated, isAuthLoading } = useAuth();
   const location = useLocation();
 
