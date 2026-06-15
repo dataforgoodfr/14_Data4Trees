@@ -1,19 +1,4 @@
 {
-  "auth": {
-    "loginForm": {
-      "button": {
-        "login": "Login",
-        "pendingLogin": "Logging in..."
-      },
-      "credentialsError": "Invalid credentials",
-      "description": "Enter your username below to log in",
-      "field": {
-        "password": "Password",
-        "username": "Username"
-      },
-      "title": "Login"
-    }
-  },
   "common": {
     "loading": "Loading..."
   },

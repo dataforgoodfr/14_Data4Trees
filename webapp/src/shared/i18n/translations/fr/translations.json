@@ -1,19 +1,4 @@
 {
-  "auth": {
-    "loginForm": {
-      "button": {
-        "login": "Connexion",
-        "pendingLogin": "Connexion..."
-      },
-      "credentialsError": "Identifiants invalides",
-      "description": "Renseignez votre nom d'utilisateur ci-dessous pour vous connecter",
-      "field": {
-        "password": "Mot de passe",
-        "username": "Nom d'utilisateur"
-      },
-      "title": "Connexion"
-    }
-  },
   "common": {
     "loading": "Chargement..."
   },
