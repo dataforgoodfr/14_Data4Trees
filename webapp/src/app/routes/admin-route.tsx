@@ -3,6 +3,8 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 import { useAuth } from "@features/auth/useAuth";
 
+import { URLS } from "@shared/urls";
+
 type AdminRouteProps = {
   children?: React.ReactNode;
 };
@@ -31,9 +33,10 @@ export function AdminRoute({ children }: AdminRouteProps) {
   if (!isAuthenticated) {
     return (
       <Navigate
+        relative="path"
         replace={true}
         state={{ from: location }}
-        to="/login"
+        to={`../${URLS.LOGIN}`}
       />
     );
   }

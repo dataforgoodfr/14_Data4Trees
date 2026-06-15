@@ -19,7 +19,7 @@ export default function LoginPage() {
   const location = useLocation();
 
   const state = location.state as LocationState | null;
-  const redirectTo = state?.from?.pathname ?? "/";
+  const redirectTo = state?.from?.pathname ?? "..";
 
   if (isAuthenticated) {
     return (

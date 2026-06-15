@@ -4,7 +4,7 @@ import {
   lazy,
   type ReactNode,
 } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { RootLayout, type RootLayoutProps } from "@app/layouts/RootLayout";
 
@@ -27,45 +27,43 @@ export function AppRouterBase({
   rootLayoutProps: RootLayoutProps;
 }) {
   return (
-    <BrowserRouter>
-      <Routes>
+    <Routes>
+      <Route
+        element={<LoginPage />}
+        path={URLS.LOGIN}
+      />
+      <Route
+        element={
+          <MapProvider>
+            <RootLayout {...rootLayoutProps} />
+          </MapProvider>
+        }
+        path="/"
+      >
         <Route
-          element={<LoginPage />}
-          path={URLS.LOGIN}
+          element={<MainPage />}
+          index
         />
+      </Route>
+      <Route
+        element={
+          <AdminRoute>
+            <RootLayout {...rootLayoutProps} />
+          </AdminRoute>
+        }
+      >
         <Route
-          element={
-            <MapProvider>
-              <RootLayout {...rootLayoutProps} />
-            </MapProvider>
-          }
-          path={URLS.HOME}
-        >
-          <Route
-            element={<MainPage />}
-            index
-          />
-        </Route>
-        <Route
-          element={
-            <AdminRoute>
-              <RootLayout {...rootLayoutProps} />
-            </AdminRoute>
-          }
-        >
-          <Route
-            element={<AdminPage />}
-            path={URLS.ADMIN}
-          />
+          element={<AdminPage />}
+          path={URLS.ADMIN}
+        />
 
-          {DashboardPage && (
-            <Route
-              element={<DashboardPage />}
-              path={URLS.DASHBOARD}
-            />
-          )}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        {DashboardPage && (
+          <Route
+            element={<DashboardPage />}
+            path={URLS.DASHBOARD}
+          />
+        )}
+      </Route>
+    </Routes>
   );
 }

@@ -14,12 +14,14 @@ export type HeaderProps = {
 export const Header: FC<HeaderProps> = ({ logoSrc }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isDashboardPage = location.pathname === URLS.DASHBOARD;
+  const isDashboardPage = location.pathname.endsWith(URLS.DASHBOARD);
 
   const { t } = useTranslation("common");
 
   function onNavigationClick() {
-    navigate(isDashboardPage ? URLS.HOME : URLS.DASHBOARD);
+    navigate(isDashboardPage ? URLS.HOME : URLS.DASHBOARD, {
+      relative: "path",
+    });
   }
 
   return (
