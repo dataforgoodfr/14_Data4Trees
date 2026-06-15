@@ -4,9 +4,13 @@
  * Define
  * - agnostic rules for all apps: tailwind plugins, dark/light selector
  * - inline theme to map apps token to tailwind classes
+ *
+ * ℹ️ Import this file in {app}.css files, where tailwindcss is imported
+ * Else the tailwind directives won't be applied.
+ * ⚠️ Don't import it in your main tsx file, import {app}.css instead
+ * ⚠️ Don't `@import "tailwindcss"` here, else tailwind classes will be
+ * loaded in 2 different css files (duplicate).
  */
-
-@import "tailwindcss";
 
 @plugin "tailwindcss-animate";
 

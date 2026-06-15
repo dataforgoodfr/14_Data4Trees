@@ -13,6 +13,9 @@
       --other-usage: rgba(var(--a4t-rgb-my-color), 0.3);
    ========================================================================== */
 
+@import "tailwindcss";
+@import "./index.css";
+
 :root {
   /* ========================================================================
      COULEURS PRINCIPALES - CHARTE ALL4TREES
