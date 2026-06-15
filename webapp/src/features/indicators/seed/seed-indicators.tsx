@@ -21,11 +21,11 @@ export const SeedIndicator: FC<SeedIndicatorProps> = ({
   className,
   ...headerProps
 }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("seed");
 
   const seedElements = useSeedIndicatorElements(data);
 
-  const title = t("popup.seed", {
+  const title = t("popup.title", {
     id: data.id,
   });
 

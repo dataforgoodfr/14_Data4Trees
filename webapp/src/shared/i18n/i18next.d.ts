@@ -2,7 +2,7 @@
 import "i18next";
 
 import type common from "./translations/fr/common.json";
-// import all namespaces (for the default language, only)
+import type seed from "./translations/fr/seed.json";
 import type translations from "./translations/fr/translations.json";
 
 // import namespace2 from "./translations/fr/namespace2.json"
@@ -16,7 +16,7 @@ declare module "i18next" {
     resources: {
       translations: typeof translations;
       common: typeof common;
-      // namespace2: typeof namespace2;
+      seed: typeof seed;
     };
   }
 }

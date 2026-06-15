@@ -218,7 +218,6 @@
       "date": "Site survey date : {{ date }}",
       "title": "Plot n°{{ id }}"
     },
-    "seed": "Plot n°{{ id}}",
     "socioEco": {
       "date": "Survey date: {{ date }}",
       "subtitleCount": "",
@@ -227,16 +226,5 @@
       "title": "{{ village }}"
     },
     "undefined": "not found"
-  },
-  "seed": {
-    "indicator": {
-      "reboisement": {
-        "orga": "Organization name",
-        "prelevementMangrove": "Debit on mangrove ?",
-        "responsable": "Name of supervisor",
-        "title": "Reforestation",
-        "typePlant": "Plant type"
-      }
-    }
   }
 }

@@ -222,7 +222,6 @@
       "date": "Date relevé: {{ date }}",
       "title": "Placette n°{{ id }}"
     },
-    "seed": "Placette n°{{ id}}",
     "socioEco": {
       "date": "Date relevé: {{ date }}",
       "subtitleCount": "",
@@ -231,16 +230,5 @@
       "title": "{{ village }}"
     },
     "undefined": "non trouvée"
-  },
-  "seed": {
-    "indicator": {
-      "reboisement": {
-        "orga": "Nom de l'organisation",
-        "prelevementMangrove": "Prélèvement sur mangrove ?",
-        "responsable": "Nom du responsable",
-        "title": "Reboisement",
-        "typePlant": "Type de plant"
-      }
-    }
   }
 }
