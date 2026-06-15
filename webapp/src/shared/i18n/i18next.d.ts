@@ -1,8 +1,9 @@
 // import the original type declarations
 import "i18next";
 
+import type common from "./translations/fr/common.json";
 // import all namespaces (for the default language, only)
-import translations from "./translations/fr/translations.json";
+import type translations from "./translations/fr/translations.json";
 
 // import namespace2 from "./translations/fr/namespace2.json"
 
@@ -14,6 +15,7 @@ declare module "i18next" {
     // custom resources type
     resources: {
       translations: typeof translations;
+      common: typeof common;
       // namespace2: typeof namespace2;
     };
   }

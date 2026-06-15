@@ -1,0 +1,21 @@
+{
+  "header": {
+    "colorModeSelector": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    },
+    "menu": {
+      "goToAdmin": "Admin",
+      "language": "Language",
+      "login": "Login",
+      "logout": "Logout",
+      "mode": "Mode",
+      "seeDatabase": "See Database"
+    },
+    "navigationButton": {
+      "toDashboard": "Dashboard",
+      "toHome": "Map"
+    }
+  }
+}

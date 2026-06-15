@@ -14,10 +14,6 @@
       "title": "Login"
     }
   },
-  "buttonHeader": {
-    "toDashboard": "Dashboard",
-    "toHome": "Map"
-  },
   "common": {
     "loading": "Loading..."
   },
@@ -54,21 +50,6 @@
       "groupCategory": "Categories",
       "groupFilters": "Filters",
       "title": "Filtering panel"
-    }
-  },
-  "header": {
-    "button": {
-      "goToAdmin": "Admin",
-      "language": "Language",
-      "login": "Login",
-      "logout": "Logout",
-      "mode": "Mode",
-      "seeDatabase": "See Database"
-    },
-    "colorModeSelector": {
-      "dark": "Dark",
-      "light": "Light",
-      "system": "System"
     }
   },
   "indicators": {

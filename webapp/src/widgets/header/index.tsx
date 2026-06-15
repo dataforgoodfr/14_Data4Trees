@@ -16,7 +16,7 @@ export const Header: FC<HeaderProps> = ({ logoSrc }) => {
   const location = useLocation();
   const isDashboardPage = location.pathname === URLS.DASHBOARD;
 
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
 
   function onNavigationClick() {
     navigate(isDashboardPage ? URLS.HOME : URLS.DASHBOARD);
@@ -38,8 +38,8 @@ export const Header: FC<HeaderProps> = ({ logoSrc }) => {
               variant="default"
             >
               {isDashboardPage
-                ? t("buttonHeader.toHome")
-                : t("buttonHeader.toDashboard")}
+                ? t("header.navigationButton.toHome")
+                : t("header.navigationButton.toDashboard")}
             </Button>
             <UserMenu />
           </div>

@@ -14,10 +14,6 @@
       "title": "Connexion"
     }
   },
-  "buttonHeader": {
-    "toDashboard": "Dashboard",
-    "toHome": "Carte"
-  },
   "common": {
     "loading": "Chargement..."
   },
@@ -54,21 +50,6 @@
       "groupCategory": "Catégories",
       "groupFilters": "Filtres",
       "title": "Panneau de filtrage"
-    }
-  },
-  "header": {
-    "button": {
-      "goToAdmin": "Espace Admin",
-      "language": "Langue",
-      "login": "Connexion",
-      "logout": "Déconnexion",
-      "mode": "Mode",
-      "seeDatabase": "Voir les données"
-    },
-    "colorModeSelector": {
-      "dark": "Sombre",
-      "light": "Clair",
-      "system": "Système"
     }
   },
   "indicators": {
