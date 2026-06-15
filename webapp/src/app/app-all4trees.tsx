@@ -3,6 +3,7 @@ import { AppRouterAll4Trees } from "./routes/app-router-all4trees";
 
 import "./styles/globals.css";
 import "./styles/index.css";
+import "./styles/all4trees.css";
 
 const AppAll4Trees = () => {
   return (

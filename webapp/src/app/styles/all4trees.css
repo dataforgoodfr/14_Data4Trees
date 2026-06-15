@@ -60,3 +60,101 @@
   --font-body-secondary:
     "Open Sans", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
+
+/* ========================================================================
+   THEME TOKEN CONFIGURATIONS ALL 4 TREES: light (root) and dark
+   Docs: https://ui.shadcn.com/docs/theming
+   ======================================================================== */
+:root {
+  /* LIGHT MODE SHADCN */
+  --background: var(--a4t-color-alabaster);
+  --foreground: var(--a4t-color-nuit);
+
+  --card: var(--custom-color-grey-light);
+  --card-foreground: var(--a4t-color-nuit);
+
+  --popover: var(--a4t-color-alabaster);
+  --popover-foreground: var(--a4t-color-nuit);
+
+  --primary: var(--a4t-color-vert-kelly);
+  --primary-foreground: var(--a4t-color-nuit);
+  --secondary: var(--a4t-color-jaune-vert);
+  --secondary-foreground: var(--a4t-color-nuit);
+
+  --muted: #e5e7eb;
+  --muted-foreground: var(--a4t-color-onyx);
+  --accent: var(--a4t-color-jaune-vert);
+  --accent-foreground: var(--a4t-color-nuit);
+  --destructive: #dc2626;
+  --info: var(--custom-color-blue-light);
+  --info-foreground: var(--custom-color-blue-dark);
+
+  --border: rgba(0, 0, 0, 0.15);
+  --input: #ffffff;
+  --ring: var(--a4t-color-vert-kelly);
+
+  --chart-1: var(--a4t-color-vert-kelly);
+  --chart-2: var(--a4t-color-citrouille);
+  --chart-3: var(--a4t-color-bleu);
+  --chart-4: #895bf5;
+  --chart-5: #f04646;
+  --chart-6: var(--a4t-color-onyx);
+
+  --sidebar: var(--a4t-color-alabaster);
+  --sidebar-foreground: var(--a4t-color-alabaster);
+  --sidebar-primary: var(--a4t-color-brunswick-green);
+  --sidebar-primary-foreground: var(--a4t-color-alabaster);
+  --sidebar-accent: var(--a4t-color-citrouille);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: var(--a4t-color-vert-kelly);
+}
+
+.dark {
+  --background: var(--custom-color-green-dark);
+  --foreground: var(--a4t-color-alabaster);
+
+  --card: var(--custom-color-blue-dark);
+  --card-foreground: var(--a4t-color-alabaster);
+
+  --popover: var(--a4t-color-nuit);
+  --popover-foreground: var(--a4t-color-alabaster);
+
+  --primary: var(--a4t-color-brunswick-green);
+  --primary-foreground: var(--custom-color-green-pastel);
+  --secondary: var(--a4t-color-vert-de-gris);
+  --secondary-foreground: var(--a4t-color-nuit);
+
+  --muted: var(--a4t-color-onyx);
+  --muted-foreground: #9ca3af;
+  --accent: var(--custom-color-green-main);
+  --accent-foreground: var(--custom-color-green-pastel);
+  --destructive: #ef4444;
+  --info: var(--custom-color-blue-dark);
+  --info-foreground: var(--custom-color-blue-light);
+
+  --border: rgba(255, 255, 255, 0.15);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: var(--a4t-color-jaune-vert);
+
+  --sidebar: var(--a4t-color-onyx);
+  --sidebar-foreground: var(--a4t-color-alabaster);
+  --sidebar-primary: var(--a4t-color-onyx);
+  --sidebar-primary-foreground: var(--a4t-color-vert-kelly);
+  --sidebar-accent: var(--a4t-color-citrouille);
+  --sidebar-accent-foreground: var(--a4t-color-nuit);
+  --sidebar-border: rgba(255, 255, 255, 0.15);
+  --sidebar-ring: var(--a4t-color-jaune-vert);
+}
+
+@theme inline {
+  --color-socio-eco: var(--custom-color-socio-eco);
+  --color-inventaire: var(--custom-color-inventaire);
+}
+
+@layer components {
+  * {
+    outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.2);
+    border-color: var(--border);
+  }
+}

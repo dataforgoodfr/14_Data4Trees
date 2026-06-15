@@ -28,11 +28,6 @@
     background-color: var(--background);
   }
 
-  * {
-    outline-color: rgba(var(--a4t-rgb-vert-kelly), 0.2);
-    border-color: var(--border);
-  }
-
   .custom-scrollbar {
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
     scrollbar-width: thin;
