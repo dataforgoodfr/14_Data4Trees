@@ -13,6 +13,9 @@ export const AppRouterAll4Trees = () => {
       DashboardPage={DashboardPage}
       MainPage={MainPage}
       MapProvider={MapProviderAll4Trees}
+      rootLayoutProps={{
+        logoSrc: "/logo_all4trees.png",
+      }}
     />
   );
 };

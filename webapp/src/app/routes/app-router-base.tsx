@@ -6,7 +6,7 @@ import {
 } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { RootLayout } from "@app/layouts/RootLayout";
+import { RootLayout, type RootLayoutProps } from "@app/layouts/RootLayout";
 
 import { URLS } from "@shared/urls";
 
@@ -19,10 +19,12 @@ export function AppRouterBase({
   DashboardPage,
   MainPage,
   MapProvider,
+  rootLayoutProps,
 }: {
   DashboardPage?: LazyExoticComponent<() => JSX.Element>;
   MainPage: LazyExoticComponent<() => JSX.Element>;
   MapProvider: (props: { children: ReactNode }) => ReactNode;
+  rootLayoutProps: RootLayoutProps;
 }) {
   return (
     <BrowserRouter>
@@ -34,7 +36,7 @@ export function AppRouterBase({
         <Route
           element={
             <MapProvider>
-              <RootLayout />
+              <RootLayout {...rootLayoutProps} />
             </MapProvider>
           }
           path={URLS.HOME}
@@ -47,7 +49,7 @@ export function AppRouterBase({
         <Route
           element={
             <AdminRoute>
-              <RootLayout />
+              <RootLayout {...rootLayoutProps} />
             </AdminRoute>
           }
         >
