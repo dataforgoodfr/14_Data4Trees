@@ -16,7 +16,7 @@ export const useCategoriesConfig = (): {
   data: CategoryGroupItem[];
   system: CategoryGroupItem[];
 } => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   // ----- Actions -----
 

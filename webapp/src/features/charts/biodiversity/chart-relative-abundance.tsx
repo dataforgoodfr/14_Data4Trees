@@ -16,7 +16,7 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
 }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const smallCategoriesSum = Number(
     precise(
       data

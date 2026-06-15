@@ -17,7 +17,7 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   metadata,
   dataType,
 }) => {
-  const { t } = useTranslation(["common", "translations"]);
+  const { t } = useTranslation(["common", "all4trees"]);
   const dataEntries = Object.entries(data);
   const hasTaxonData = dataEntries.some(([key]) => key.trim() !== "");
   let sunburstData: PlotlyData[] = [];
@@ -48,7 +48,7 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   return (
     <ChartComponent
       className={cardHeight}
-      title={t("indicators.common.abundance", { ns: "translations" })}
+      title={t("indicators.common.abundance", { ns: "all4trees" })}
     >
       <div className="flex items-center justify-center">
         {hasTaxonData && (

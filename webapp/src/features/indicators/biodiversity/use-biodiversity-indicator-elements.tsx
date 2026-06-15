@@ -16,7 +16,7 @@ export const useBiodiversityIndicatorElements = (
   rawData: BiodiversityData,
   metadata: LayerMetadata,
 ): UseIndicatorReturnType => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const data = useFormatBiodiversityData(rawData);
 
   return [

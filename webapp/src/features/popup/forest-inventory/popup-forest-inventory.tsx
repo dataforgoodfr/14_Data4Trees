@@ -28,7 +28,7 @@ const TABS: Record<string, TabKind> = {
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
 > = ({ data, metadata, className, ...headerProps }) => {
-  const { t } = useTranslation(["common", "translations"]);
+  const { t } = useTranslation(["common", "all4trees"]);
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
 
   const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
@@ -36,14 +36,14 @@ export const ForestInventoryPopupContent: FC<
 
   const title = t("popup.forestInventory.title", {
     id: data.id,
-    ns: "translations",
+    ns: "all4trees",
   });
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {
-      ns: "translations",
+      ns: "all4trees",
     }),
     [TABS.SOIL]: t("indicators.soil.title", {
-      ns: "translations",
+      ns: "all4trees",
     }),
   };
 
@@ -52,7 +52,7 @@ export const ForestInventoryPopupContent: FC<
       <IndicatorPopupHeader
         date={t("popup.forestInventory.date", {
           date: formatDate(new Date()),
-          ns: "translations",
+          ns: "all4trees",
         })}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         subtitle={

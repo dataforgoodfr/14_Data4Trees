@@ -19,7 +19,7 @@ type CategoriesFiltersProps = {
 
 export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
   const { actions, data, system } = useCategoriesConfig();
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const { mapApiRef, setCategoriesFilters, categoriesFilters } =
     useMapContext();
 

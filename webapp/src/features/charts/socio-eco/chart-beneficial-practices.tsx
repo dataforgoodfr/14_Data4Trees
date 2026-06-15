@@ -18,7 +18,7 @@ type ChartBeneficialPracticesProps = {
 export const ChartBeneficialPractices: ChartComponentType<
   ChartBeneficialPracticesProps
 > = ({ benef, temoin }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const chartData = [
     {

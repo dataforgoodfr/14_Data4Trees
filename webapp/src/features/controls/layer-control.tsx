@@ -31,7 +31,7 @@ export const renderAnchor: LayerControlRenderAnchor = () => {
 };
 
 function useLayerConfig(layerId: string) {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   switch (layerId) {
     case LAYERS.BOUNDARIES:

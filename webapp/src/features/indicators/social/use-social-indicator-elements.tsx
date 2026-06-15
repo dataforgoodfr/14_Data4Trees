@@ -18,7 +18,7 @@ import type { SocialData } from "./types";
 export const useSocialIndicatorElements = (
   rawData: SocialData,
 ): UseIndicatorReturnType => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const data = useFormatSocialData(rawData);
 
   return [

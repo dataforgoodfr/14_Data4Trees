@@ -19,7 +19,7 @@ type PieChartProps = {
 export const ChartWoodEnergyNeeds: ChartComponentType<PieChartProps> = ({
   data,
 }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const chartData = [
     {
       fill: "var(--chart-1)",

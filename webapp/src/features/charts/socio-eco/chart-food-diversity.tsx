@@ -22,7 +22,7 @@ type ChartFoodDiversityProps = {
 export const ChartFoodDiversity: ChartComponentType<
   ChartFoodDiversityProps
 > = ({ benef, temoin }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const chartData = [
     {

@@ -47,7 +47,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   className,
   ...headerProps
 }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
 
   const socialElements = useSocialIndicatorElements(data);

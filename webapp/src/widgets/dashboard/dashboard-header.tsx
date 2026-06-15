@@ -20,7 +20,7 @@ export function DashboardHeader({
   selectedYear,
   onValueChange: onvalueChange,
 }: DashboardHeaderProps) {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const username = localStorage.getItem("username") || "";
   return (
     <div>

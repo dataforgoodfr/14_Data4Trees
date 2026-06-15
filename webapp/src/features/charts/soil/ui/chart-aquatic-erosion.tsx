@@ -20,7 +20,7 @@ type ChartAquaticErosionProps = {
 export const ChartAquaticErosion: ChartComponentType<
   ChartAquaticErosionProps
 > = ({ benef, temoin }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const chartData: Array<{
     indicator: string;

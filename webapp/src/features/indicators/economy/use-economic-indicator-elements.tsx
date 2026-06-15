@@ -14,7 +14,7 @@ import type { EconomicData } from "./types";
 export const useEconomicIndicatorElements = (
   rawData: EconomicData,
 ): UseIndicatorReturnType => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const data = useFormatEconomicData(rawData);
 
   return [

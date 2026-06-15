@@ -25,7 +25,7 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   legendLabel,
   withTemoin = false,
 }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const chartConfig = {
     benef: {
       color: "var(--chart-1)",

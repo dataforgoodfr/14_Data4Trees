@@ -21,7 +21,7 @@ export type Unit = keyof typeof UNITS;
  * Return a function that appends the correct internationalized unit based on the `unit` input.
  */
 export const useFormatterWithUnit = () => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   function formatWithUnit(
     value: number | string | null | undefined,

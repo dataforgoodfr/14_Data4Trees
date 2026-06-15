@@ -67,7 +67,7 @@ Vous pouvez vous référrer au [README](./src/shared/i18n/README.md) du dossier 
    import { useTranslation } from "@shared/i18n";
 
    const MyComponent = () → {
-     const { t } = useTranslation("translations");
+     const { t } = useTranslation("all4trees");
 
      const myString = t("key.in.the.jsonFile");
      // ...

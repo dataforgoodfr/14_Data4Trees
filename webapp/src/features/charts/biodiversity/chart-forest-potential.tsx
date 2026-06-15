@@ -22,7 +22,7 @@ type ChartForestPotentialProps = {
 export const ChartForestPotential: ChartComponentType<
   ChartForestPotentialProps
 > = ({ benef, temoin }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const chartData: Array<{
     indicator: string;

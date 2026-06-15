@@ -14,7 +14,7 @@ import { CATEGORY_IDENTIFIERS } from "./constants";
 export const AllOrNoneSelector: FC = () => {
   const { mapApiRef, setCategoriesFilters, categoriesFilters } =
     useMapContext();
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const isAll = Object.values(categoriesFilters).every(Boolean);
   const isNone = Object.values(categoriesFilters).every((value) => !value);
