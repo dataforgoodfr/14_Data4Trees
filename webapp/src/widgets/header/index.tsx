@@ -9,12 +9,14 @@ import { UserMenu } from "./user-menu";
 
 export type HeaderProps = {
   logoSrc: string;
+  hasDashboard?: boolean;
 };
 
-export const Header: FC<HeaderProps> = ({ logoSrc }) => {
+export const Header: FC<HeaderProps> = ({ logoSrc, hasDashboard }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isDashboardPage = location.pathname.endsWith(URLS.DASHBOARD);
+  const isDashboardPage =
+    hasDashboard && location.pathname.endsWith(URLS.DASHBOARD);
 
   const { t } = useTranslation("common");
 
@@ -35,14 +37,16 @@ export const Header: FC<HeaderProps> = ({ logoSrc }) => {
           />
 
           <div className="flex items-center gap-2 md:gap-3">
-            <Button
-              onClick={onNavigationClick}
-              variant="default"
-            >
-              {isDashboardPage
-                ? t("header.navigationButton.toHome")
-                : t("header.navigationButton.toDashboard")}
-            </Button>
+            {hasDashboard && (
+              <Button
+                onClick={onNavigationClick}
+                variant="default"
+              >
+                {isDashboardPage
+                  ? t("header.navigationButton.toHome")
+                  : t("header.navigationButton.toDashboard")}
+              </Button>
+            )}
             <UserMenu />
           </div>
         </div>

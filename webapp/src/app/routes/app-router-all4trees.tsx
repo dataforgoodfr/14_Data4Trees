@@ -14,6 +14,7 @@ export const AppRouterAll4Trees = () => {
       MainPage={MainPage}
       MapProvider={MapProviderAll4Trees}
       rootLayoutProps={{
+        hasDashboard: true,
         logoSrc: "/logo_all4trees.png",
       }}
     />
