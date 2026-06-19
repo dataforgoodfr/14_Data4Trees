@@ -1,4 +1,4 @@
-import type { LayerMetadata } from "node_modules/coordo/coordo-ts/src/types";
+import type { LayerMetadata } from "coordo";
 
 import { useTranslation } from "@shared/i18n";
 import { findCategoricalLabel, precise } from "@shared/lib/utils";
