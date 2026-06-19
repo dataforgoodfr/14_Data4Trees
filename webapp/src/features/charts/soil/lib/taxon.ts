@@ -1,5 +1,4 @@
-import type { LayerMetadata } from "coordo";
-
+import type { LayerMetadata } from "@shared/lib/coordo";
 import { findCategoricalLabel } from "@shared/lib/utils";
 
 export function getTaxonLabels(

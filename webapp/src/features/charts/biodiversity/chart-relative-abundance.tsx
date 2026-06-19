@@ -1,6 +1,5 @@
-import type { LayerMetadata } from "coordo";
-
 import { useTranslation } from "@shared/i18n";
+import type { LayerMetadata } from "@shared/lib/coordo";
 import { findCategoricalLabel, precise } from "@shared/lib/utils";
 import type { ChartConfig } from "@shared/ui/chart";
 

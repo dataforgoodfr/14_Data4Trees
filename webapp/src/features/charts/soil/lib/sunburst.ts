@@ -1,5 +1,4 @@
-import type { LayerMetadata } from "coordo";
-
+import type { LayerMetadata } from "@shared/lib/coordo";
 import { getChartPalette } from "@shared/lib/palette";
 
 import type { SunburstNode } from "../types";

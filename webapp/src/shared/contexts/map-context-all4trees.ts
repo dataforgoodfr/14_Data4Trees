@@ -1,8 +1,8 @@
-import type { createMap } from "coordo";
 import { createContext, type RefCallback, type RefObject } from "react";
 
 import type { CategoriesFiltersState } from "@shared/api/categories-filters";
 import type { SetValue } from "@shared/hooks/use-local-storage";
+import type { createMap } from "@shared/lib/coordo";
 
 export type Category = { value: string; label: string };
 

@@ -1,6 +1,7 @@
-import type { LayerMetadata, PopupOptions } from "coordo";
 import type { FC } from "react";
 import { createRoot } from "react-dom/client";
+
+import type { LayerMetadata, PopupOptions } from "@shared/lib/coordo";
 
 import type { IndicatorPopupHeaderProps } from "./components/indicator-popup-header";
 

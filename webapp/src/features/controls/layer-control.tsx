@@ -1,9 +1,4 @@
 import {
-  LAYER_CONTROL_ELEMENTS,
-  type LayerControlRenderAnchor,
-  type LayerControlRenderLayerRow,
-} from "coordo";
-import {
   HouseIcon,
   LayersIcon,
   SatelliteIcon,
@@ -17,6 +12,11 @@ import { createRoot } from "react-dom/client";
 
 import { LAYERS } from "@shared/api/layers";
 import { useTranslation } from "@shared/i18n";
+import {
+  LAYER_CONTROL_ELEMENTS,
+  type LayerControlRenderAnchor,
+  type LayerControlRenderLayerRow,
+} from "@shared/lib/coordo";
 import { Checkbox } from "@shared/ui/checkbox";
 import { Field, FieldLabel } from "@shared/ui/field";
 

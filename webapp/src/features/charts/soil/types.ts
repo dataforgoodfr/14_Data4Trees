@@ -1,4 +1,4 @@
-import type { LayerMetadata } from "coordo";
+import type { LayerMetadata } from "@shared/lib/coordo";
 
 export type PieChartProps = {
   data: Record<string, number>;
