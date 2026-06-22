@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 import { useAuth } from "@features/auth/useAuth";
 
-import { URLS } from "@shared/urls";
+import { useAbsoluteUrls } from "@shared/urls";
 
 type AdminRouteProps = {
   children?: React.ReactNode;
@@ -17,6 +17,7 @@ export function AdminRoute({ children }: AdminRouteProps) {
   const { t } = useTranslation("common");
   const { isAuthenticated, isAuthLoading } = useAuth();
   const location = useLocation();
+  const absoluteUrls = useAbsoluteUrls();
 
   if (isAuthLoading) {
     return (
@@ -36,7 +37,7 @@ export function AdminRoute({ children }: AdminRouteProps) {
         relative="path"
         replace={true}
         state={{ from: location }}
-        to={`../${URLS.LOGIN}`}
+        to={absoluteUrls.LOGIN}
       />
     );
   }

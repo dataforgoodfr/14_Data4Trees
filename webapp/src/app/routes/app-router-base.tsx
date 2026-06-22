@@ -26,6 +26,11 @@ export function AppRouterBase({
   MapProvider: (props: { children: ReactNode }) => ReactNode;
   rootLayoutProps: RootLayoutProps;
 }) {
+  /**
+   * Declare relative path
+   * The routes will be created relatively to the predefined global router segment
+   * e.g. all4trees/login
+   */
   return (
     <Routes>
       <Route
@@ -38,7 +43,7 @@ export function AppRouterBase({
             <RootLayout {...rootLayoutProps} />
           </MapProvider>
         }
-        path="/"
+        path={URLS.HOME}
       >
         <Route
           element={<MainPage />}

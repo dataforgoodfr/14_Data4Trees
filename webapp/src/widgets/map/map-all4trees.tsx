@@ -15,7 +15,7 @@ import {
 } from "@features/popup/socio-eco";
 
 import { LAYERS } from "@shared/api/layers";
-import { useMapContext } from "@shared/contexts/map-context-all4trees";
+import { useMap } from "@shared/hooks/use-map-all4trees";
 
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
@@ -23,7 +23,7 @@ import { MapBase } from "./map-base";
 import { getIconSize } from "./utils";
 
 export const MapAll4Trees: FC = () => {
-  const { isReady, mapApiRef, forests, mapContainerRef } = useMapContext();
+  const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
   const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
   useEffect(() => {

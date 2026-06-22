@@ -4,7 +4,7 @@ import {
   type CategoriesFiltersState,
   parseLayerId,
 } from "@shared/api/categories-filters";
-import { useMapContext } from "@shared/contexts/map-context-all4trees";
+import { useMap } from "@shared/hooks/use-map-all4trees";
 import { cn } from "@shared/lib/utils";
 import { Button } from "@shared/ui/button";
 import { useTranslation } from "@i18n";
@@ -12,8 +12,7 @@ import { useTranslation } from "@i18n";
 import { CATEGORY_IDENTIFIERS } from "./constants";
 
 export const AllOrNoneSelector: FC = () => {
-  const { mapApiRef, setCategoriesFilters, categoriesFilters } =
-    useMapContext();
+  const { mapApiRef, setCategoriesFilters, categoriesFilters } = useMap();
   const { t } = useTranslation("all4trees");
 
   const isAll = Object.values(categoriesFilters).every(Boolean);

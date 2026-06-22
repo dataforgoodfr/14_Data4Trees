@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCreateAdminSession } from "@features/admin/use-create-admin-session";
 import { useAuth } from "@features/auth";
 
-import { URLS } from "@shared/urls";
+import { useAbsoluteUrls } from "@shared/urls";
 import { useTranslation } from "@i18n";
 
 import { Button } from "@ui/button";
@@ -27,7 +27,9 @@ export const UserMenu: FC = () => {
   const { isAuthenticated, logout, token } = useAuth();
   const { isLoading, createAdminSession } = useCreateAdminSession(token);
 
-  const onLogin = () => navigate(URLS.LOGIN);
+  const absoluteUrls = useAbsoluteUrls();
+
+  const onLogin = () => navigate(absoluteUrls.LOGIN);
 
   return (
     <DropdownMenu>

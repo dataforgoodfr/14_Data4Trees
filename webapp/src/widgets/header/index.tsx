@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "@shared/i18n";
 import { Button } from "@shared/ui/button";
-import { URLS } from "@shared/urls";
+import { URLS, useAbsoluteUrls } from "@shared/urls";
 
 import { UserMenu } from "./user-menu";
 
@@ -18,12 +18,12 @@ export const Header: FC<HeaderProps> = ({ logoSrc, hasDashboard }) => {
   const isDashboardPage =
     hasDashboard && location.pathname.endsWith(URLS.DASHBOARD);
 
+  const absoluteUrls = useAbsoluteUrls();
+
   const { t } = useTranslation("common");
 
   function onNavigationClick() {
-    navigate(isDashboardPage ? URLS.HOME : URLS.DASHBOARD, {
-      relative: "path",
-    });
+    navigate(isDashboardPage ? absoluteUrls.HOME : absoluteUrls.DASHBOARD);
   }
 
   return (

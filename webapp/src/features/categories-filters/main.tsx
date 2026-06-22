@@ -4,7 +4,7 @@ import {
   type CategoryIdentifier,
   parseLayerId,
 } from "@shared/api/categories-filters";
-import { useMapContext } from "@shared/contexts/map-context-all4trees";
+import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@i18n";
 
 import type { CheckedState } from "@ui/checkbox";
@@ -20,8 +20,7 @@ type CategoriesFiltersProps = {
 export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
   const { actions, data, system } = useCategoriesConfig();
   const { t } = useTranslation("all4trees");
-  const { mapApiRef, setCategoriesFilters, categoriesFilters } =
-    useMapContext();
+  const { mapApiRef, setCategoriesFilters, categoriesFilters } = useMap();
 
   const getOnCheckedChange = (identifier: CategoryIdentifier) => {
     return (checkedState: CheckedState) => {
