@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCreateAdminSession } from "@features/admin/use-create-admin-session";
 import { useAuth } from "@features/auth";
 
-import { URLS } from "@shared/urls";
+import { useAbsoluteUrls } from "@shared/urls";
 import { useTranslation } from "@i18n";
 
 import { Button } from "@ui/button";
@@ -21,13 +21,15 @@ import { LanguageSelector } from "./language-selector";
 import { ModeToggle } from "./mode-toggle";
 
 export const UserMenu: FC = () => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
 
   const navigate = useNavigate();
   const { isAuthenticated, logout, token } = useAuth();
   const { isLoading, createAdminSession } = useCreateAdminSession(token);
 
-  const onLogin = () => navigate(URLS.LOGIN);
+  const absoluteUrls = useAbsoluteUrls();
+
+  const onLogin = () => navigate(absoluteUrls.LOGIN);
 
   return (
     <DropdownMenu>
@@ -60,7 +62,7 @@ export const UserMenu: FC = () => {
               onClick={createAdminSession}
             >
               <SettingsIcon />
-              {t("header.button.goToAdmin")}
+              {t("header.menu.goToAdmin")}
             </DropdownMenuItem>
 
             <DropdownMenuItem
@@ -69,7 +71,7 @@ export const UserMenu: FC = () => {
               onClick={() => alert("Not implemented yet")}
             >
               <DatabaseIcon />
-              {t("header.button.seeDatabase")}
+              {t("header.menu.seeDatabase")}
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
@@ -79,7 +81,7 @@ export const UserMenu: FC = () => {
               onClick={logout}
             >
               <LogOutIcon />
-              {t("header.button.logout")}
+              {t("header.menu.logout")}
             </DropdownMenuItem>
           </>
         ) : (
@@ -88,7 +90,7 @@ export const UserMenu: FC = () => {
             onClick={onLogin}
           >
             <UserIcon />
-            {t("header.button.login")}
+            {t("header.menu.login")}
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

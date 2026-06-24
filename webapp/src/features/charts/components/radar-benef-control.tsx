@@ -31,7 +31,7 @@ type ChartRadarWithBenefAndControlProps = {
 export const ChartRadarWithBenefAndControl: ChartComponentType<
   ChartRadarWithBenefAndControlProps
 > = ({ chartData, title, withTemoin }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const chartConfig: ChartConfig = {
     benef: {

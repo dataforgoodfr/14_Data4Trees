@@ -3,6 +3,8 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 import { useAuth } from "@features/auth/useAuth";
 
+import { useAbsoluteUrls } from "@shared/urls";
+
 type AdminRouteProps = {
   children?: React.ReactNode;
 };
@@ -12,9 +14,10 @@ type AdminRouteProps = {
  * Redirect to login page if not authenticated.
  */
 export function AdminRoute({ children }: AdminRouteProps) {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
   const { isAuthenticated, isAuthLoading } = useAuth();
   const location = useLocation();
+  const absoluteUrls = useAbsoluteUrls();
 
   if (isAuthLoading) {
     return (
@@ -31,9 +34,10 @@ export function AdminRoute({ children }: AdminRouteProps) {
   if (!isAuthenticated) {
     return (
       <Navigate
+        relative="path"
         replace={true}
         state={{ from: location }}
-        to="/login"
+        to={absoluteUrls.LOGIN}
       />
     );
   }

@@ -1,20 +1,29 @@
+import type { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "@shared/i18n";
 import { Button } from "@shared/ui/button";
-import { URLS } from "@shared/urls";
+import { URLS, useAbsoluteUrls } from "@shared/urls";
 
 import { UserMenu } from "./user-menu";
 
-export function Header() {
+export type HeaderProps = {
+  logoSrc: string;
+  hasDashboard?: boolean;
+};
+
+export const Header: FC<HeaderProps> = ({ logoSrc, hasDashboard }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isDashboardPage = location.pathname === URLS.DASHBOARD;
+  const isDashboardPage =
+    hasDashboard && location.pathname.endsWith(URLS.DASHBOARD);
 
-  const { t } = useTranslation("translations");
+  const absoluteUrls = useAbsoluteUrls();
+
+  const { t } = useTranslation("common");
 
   function onNavigationClick() {
-    navigate(isDashboardPage ? URLS.HOME : URLS.DASHBOARD);
+    navigate(isDashboardPage ? absoluteUrls.HOME : absoluteUrls.DASHBOARD);
   }
 
   return (
@@ -24,22 +33,24 @@ export function Header() {
           <img
             alt="Logo"
             className="md:h-12 h-8"
-            src="/logo_all4trees.png"
+            src={logoSrc}
           />
 
           <div className="flex items-center gap-2 md:gap-3">
-            <Button
-              onClick={onNavigationClick}
-              variant="default"
-            >
-              {isDashboardPage
-                ? t("buttonHeader.toHome")
-                : t("buttonHeader.toDashboard")}
-            </Button>
+            {hasDashboard && (
+              <Button
+                onClick={onNavigationClick}
+                variant="default"
+              >
+                {isDashboardPage
+                  ? t("header.navigationButton.toHome")
+                  : t("header.navigationButton.toDashboard")}
+              </Button>
+            )}
             <UserMenu />
           </div>
         </div>
       </div>
     </header>
   );
-}
+};

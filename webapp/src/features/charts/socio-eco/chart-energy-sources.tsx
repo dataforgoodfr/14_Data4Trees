@@ -21,7 +21,7 @@ type ChartEnergySourcesProps = {
 export const ChartEnergySources: ChartComponentType<
   ChartEnergySourcesProps
 > = ({ benef, temoin }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const chartData = [
     {

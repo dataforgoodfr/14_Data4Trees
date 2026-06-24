@@ -25,12 +25,13 @@ const LANGUAGES_CONFIGS = [
 ] as const;
 
 export const LanguageSelector: FC = () => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
+
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger>
         <LanguagesIcon />
-        {t("header.button.language")}
+        {t("header.menu.language")}
       </DropdownMenuSubTrigger>
 
       <DropdownMenuPortal>

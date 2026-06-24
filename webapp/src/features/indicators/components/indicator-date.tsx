@@ -10,7 +10,7 @@ type IndicatorDateProps = {
 };
 
 export const IndicatorDate: FC<IndicatorDateProps> = ({ date }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   return (
     <div className="flex flex-row items-center justify-between gap-sm flex-1">

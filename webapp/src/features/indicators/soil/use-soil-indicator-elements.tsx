@@ -17,7 +17,7 @@ export const useSoilIndicatorElements = (
   rawData: SoilData,
   metadata: LayerMetadata,
 ): UseIndicatorReturnType => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
 
   const data = useFormatSoilData(rawData);
 

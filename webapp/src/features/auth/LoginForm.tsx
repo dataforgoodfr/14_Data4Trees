@@ -24,7 +24,7 @@ interface LoginFormProps extends React.ComponentPropsWithoutRef<"div"> {
 }
 
 export function LoginForm({ onSuccess, className, ...props }: LoginFormProps) {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

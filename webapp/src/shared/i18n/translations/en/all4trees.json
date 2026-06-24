@@ -1,26 +1,4 @@
 {
-  "auth": {
-    "loginForm": {
-      "button": {
-        "login": "Login",
-        "pendingLogin": "Logging in..."
-      },
-      "credentialsError": "Invalid credentials",
-      "description": "Enter your username below to log in",
-      "field": {
-        "password": "Password",
-        "username": "Username"
-      },
-      "title": "Login"
-    }
-  },
-  "buttonHeader": {
-    "toDashboard": "Dashboard",
-    "toHome": "Map"
-  },
-  "common": {
-    "loading": "Loading..."
-  },
   "dashboard": {
     "select": {
       "year": "Year"
@@ -54,21 +32,6 @@
       "groupCategory": "Categories",
       "groupFilters": "Filters",
       "title": "Filtering panel"
-    }
-  },
-  "header": {
-    "button": {
-      "goToAdmin": "Admin",
-      "language": "Language",
-      "login": "Login",
-      "logout": "Logout",
-      "mode": "Mode",
-      "seeDatabase": "See Database"
-    },
-    "colorModeSelector": {
-      "dark": "Dark",
-      "light": "Light",
-      "system": "System"
     }
   },
   "indicators": {
@@ -109,7 +72,6 @@
       "control": "Control",
       "date": "Survey date",
       "density": "Density",
-      "noData": "No data available",
       "speciesRichness": "Species richness"
     },
     "economy": {
@@ -252,25 +214,12 @@
       "date": "Site survey date : {{ date }}",
       "title": "Plot n°{{ id }}"
     },
-    "seed": "Plot n°{{ id}}",
     "socioEco": {
       "date": "Survey date: {{ date }}",
       "subtitleCount": "",
       "subtitleCount_one": "{{ count }} household surveyed",
       "subtitleCount_other": "{{ count }} households surveyed",
       "title": "{{ village }}"
-    },
-    "undefined": "not found"
-  },
-  "seed": {
-    "indicator": {
-      "reboisement": {
-        "orga": "Organization name",
-        "prelevementMangrove": "Debit on mangrove ?",
-        "responsable": "Name of supervisor",
-        "title": "Reforestation",
-        "typePlant": "Plant type"
-      }
     }
   }
 }

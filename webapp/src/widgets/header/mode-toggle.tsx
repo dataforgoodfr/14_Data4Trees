@@ -16,7 +16,7 @@ import {
 
 export const ModeToggle: FC = () => {
   const { setTheme, theme } = useTheme();
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("common");
 
   const colorModes: Array<{
     identifier: Theme;
@@ -68,7 +68,7 @@ export const ModeToggle: FC = () => {
             ),
           )}
         </div>
-        {t("header.button.mode")}
+        {t("header.menu.mode")}
       </DropdownMenuSubTrigger>
 
       <DropdownMenuPortal>

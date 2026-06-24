@@ -1,0 +1,14 @@
+{
+  "indicator": {
+    "reboisement": {
+      "orga": "Nom de l'organisation",
+      "prelevementMangrove": "Prélèvement sur mangrove ?",
+      "responsable": "Nom du responsable",
+      "title": "Reboisement",
+      "typePlant": "Type de plant"
+    }
+  },
+  "popup": {
+    "title": "Placette n°{{ id }}"
+  }
+}

@@ -1,11 +1,13 @@
 import type { FC } from "react";
 import { Outlet } from "react-router-dom";
 
-import { Header } from "@widgets/header";
+import { Header, type HeaderProps } from "@widgets/header";
 
 import { useAuth } from "@features/auth";
 
-export const RootLayout: FC = () => {
+export type RootLayoutProps = HeaderProps;
+
+export const RootLayout: FC<RootLayoutProps> = (props) => {
   const { isAuthLoading } = useAuth();
 
   if (isAuthLoading) {
@@ -14,7 +16,7 @@ export const RootLayout: FC = () => {
 
   return (
     <div className="h-svh flex flex-col">
-      <Header />
+      <Header {...props} />
       <main className="flex-1 overflow-y-hidden">
         <Outlet />
       </main>

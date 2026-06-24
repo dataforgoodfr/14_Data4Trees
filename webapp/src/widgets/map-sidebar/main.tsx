@@ -14,7 +14,7 @@ export const FILTER_KIND = {
 } as const;
 
 export function MapSidebar() {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const [selectedFilterKind, setSelectedFilterKind] = useState<string>(
     FILTER_KIND.category,
   );

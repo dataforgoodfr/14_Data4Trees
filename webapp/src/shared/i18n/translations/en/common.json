@@ -1,0 +1,43 @@
+{
+  "auth": {
+    "loginForm": {
+      "button": {
+        "login": "Login",
+        "pendingLogin": "Logging in..."
+      },
+      "credentialsError": "Invalid credentials",
+      "description": "Enter your username below to log in",
+      "field": {
+        "password": "Password",
+        "username": "Username"
+      },
+      "title": "Login"
+    }
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "dataManagement": {
+    "noData": "No data available",
+    "undefined": "not found"
+  },
+  "header": {
+    "colorModeSelector": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    },
+    "menu": {
+      "goToAdmin": "Admin",
+      "language": "Language",
+      "login": "Login",
+      "logout": "Logout",
+      "mode": "Mode",
+      "seeDatabase": "See Database"
+    },
+    "navigationButton": {
+      "toDashboard": "Dashboard",
+      "toHome": "Map"
+    }
+  }
+}

@@ -11,7 +11,12 @@ import {
 import { LAYERS } from "@shared/api/layers";
 import { useApi } from "@shared/hooks/useApi";
 
-import type { DashboardData, DataField } from "./types";
+export type DataField = { value: number | null; error: number | null };
+
+export type DashboardData = Record<
+  number,
+  { beneficiary: Record<string, DataField>; control: Record<string, DataField> }
+>;
 
 function twoDecimals(data: Record<string, DataField>) {
   return Object.fromEntries(
@@ -40,7 +45,7 @@ function formatBeneficiaryData(
   };
 }
 
-export function DashboardPage() {
+export default function DashboardPage() {
   const api = useApi();
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [data, setData] = useState<DashboardData>({});

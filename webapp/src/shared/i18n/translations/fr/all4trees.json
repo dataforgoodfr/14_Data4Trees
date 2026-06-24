@@ -1,26 +1,4 @@
 {
-  "auth": {
-    "loginForm": {
-      "button": {
-        "login": "Connexion",
-        "pendingLogin": "Connexion..."
-      },
-      "credentialsError": "Identifiants invalides",
-      "description": "Renseignez votre nom d'utilisateur ci-dessous pour vous connecter",
-      "field": {
-        "password": "Mot de passe",
-        "username": "Nom d'utilisateur"
-      },
-      "title": "Connexion"
-    }
-  },
-  "buttonHeader": {
-    "toDashboard": "Dashboard",
-    "toHome": "Carte"
-  },
-  "common": {
-    "loading": "Chargement..."
-  },
   "dashboard": {
     "select": {
       "year": "Année"
@@ -54,21 +32,6 @@
       "groupCategory": "Catégories",
       "groupFilters": "Filtres",
       "title": "Panneau de filtrage"
-    }
-  },
-  "header": {
-    "button": {
-      "goToAdmin": "Espace Admin",
-      "language": "Langue",
-      "login": "Connexion",
-      "logout": "Déconnexion",
-      "mode": "Mode",
-      "seeDatabase": "Voir les données"
-    },
-    "colorModeSelector": {
-      "dark": "Sombre",
-      "light": "Clair",
-      "system": "Système"
     }
   },
   "indicators": {
@@ -109,7 +72,6 @@
       "control": "Témoin",
       "date": "Date enquête",
       "density": "Densité",
-      "noData": "Données non disponibles",
       "speciesRichness": "Richesse spécifique"
     },
     "economy": {
@@ -256,25 +218,12 @@
       "date": "Date relevé: {{ date }}",
       "title": "Placette n°{{ id }}"
     },
-    "seed": "Placette n°{{ id}}",
     "socioEco": {
       "date": "Date relevé: {{ date }}",
       "subtitleCount": "",
       "subtitleCount_one": "{{ count }} ménage enquêté",
       "subtitleCount_other": "{{ count }} ménages enquêtés",
       "title": "{{ village }}"
-    },
-    "undefined": "non trouvée"
-  },
-  "seed": {
-    "indicator": {
-      "reboisement": {
-        "orga": "Nom de l'organisation",
-        "prelevementMangrove": "Prélèvement sur mangrove ?",
-        "responsable": "Nom du responsable",
-        "title": "Reboisement",
-        "typePlant": "Type de plant"
-      }
     }
   }
 }

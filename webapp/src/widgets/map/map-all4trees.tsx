@@ -7,7 +7,6 @@ import {
 } from "@features/popup/forest-inventory";
 import {
   DEFAULT_POPUP_CONFIG,
-  getPopupSizeCustomVariables,
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
 import {
@@ -16,28 +15,14 @@ import {
 } from "@features/popup/socio-eco";
 
 import { LAYERS } from "@shared/api/layers";
-import { useMap } from "@shared/hooks/useMap";
+import { useMap } from "@shared/hooks/use-map-all4trees";
 
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
+import { MapBase } from "./map-base";
+import { getIconSize } from "./utils";
 
-function getIconSize({
-  assetSize,
-  targetSize,
-}: {
-  assetSize: number;
-  targetSize: number;
-}) {
-  if (!assetSize) {
-    return 1;
-  }
-  return targetSize / assetSize;
-}
-
-const TARGET_SIZE = 48;
-const SVG_SIZE = 72;
-
-export const WidgetMap: FC = () => {
+export const MapAll4Trees: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
   const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
@@ -47,13 +32,13 @@ export const WidgetMap: FC = () => {
     const toggleShiftSize = () => setIsMaximizedPopupSize((prev) => !prev);
 
     mapApiRef.current.setLayerSymbol({
-      iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
+      iconSize: getIconSize({}),
       layerId: LAYERS.INVENTARY,
       svg: pictoInventaire,
     });
 
     mapApiRef.current.setLayerSymbol({
-      iconSize: getIconSize({ assetSize: SVG_SIZE, targetSize: TARGET_SIZE }),
+      iconSize: getIconSize({}),
       layerId: LAYERS.ENQUETE,
       svg: pictoSocioEco,
     });
@@ -110,20 +95,11 @@ export const WidgetMap: FC = () => {
   };
 
   return (
-    <div
-      className="relative w-full h-full"
-      style={getPopupSizeCustomVariables(isMaximizedPopupSize)}
+    <MapBase
+      isMaximizedPopupSize={isMaximizedPopupSize}
+      isReady={isReady}
+      mapContainerRef={mapContainerRef}
     >
-      <div
-        className="w-full h-full"
-        id="map"
-        ref={mapContainerRef}
-      ></div>
-      {!isReady && (
-        <div className="map-loader absolute inset-0 z-50 flex items-center justify-center bg-background/80">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-        </div>
-      )}
       {forests.length > 0 && (
         <div className="absolute top-4 left-12 z-10 bg-white rounded shadow p-2 flex gap-2">
           {forests.map((forest) => (
@@ -143,6 +119,6 @@ export const WidgetMap: FC = () => {
           </button>
         </div>
       )}
-    </div>
+    </MapBase>
   );
 };

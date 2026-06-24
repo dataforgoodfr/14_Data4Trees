@@ -1,4 +1,4 @@
-import { WidgetMap } from "@widgets/map";
+import { MapAll4Trees } from "@widgets/map/map-all4trees";
 import { MapSidebar } from "@widgets/map-sidebar";
 
 import { SidebarProvider } from "@shared/ui/sidebar";
@@ -13,7 +13,7 @@ export interface MainPageProps {
   userData?: unknown;
 }
 
-export function MainPage() {
+function MainPage() {
   return (
     <>
       {/* TODO: Integrate Sidebar with Resizable Panels smoothly: https://github.com/huntabyte/shadcn-svelte/discussions/1657 */}
@@ -32,10 +32,13 @@ export function MainPage() {
           <ResizableHandle />
 
           <ResizablePanel defaultSize={80}>
-            <WidgetMap />
+            <MapAll4Trees />
           </ResizablePanel>
         </SidebarProvider>
       </ResizablePanelGroup>
     </>
   );
 }
+
+// Default export for lazy loading import
+export default MainPage;

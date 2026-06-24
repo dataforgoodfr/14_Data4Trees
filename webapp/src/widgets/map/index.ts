@@ -1,1 +1,0 @@
-export { WidgetMap } from "./Map";

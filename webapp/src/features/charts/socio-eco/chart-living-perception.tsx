@@ -17,7 +17,7 @@ type PieChartProps = {
 export const ChartLivingPerception: ChartComponentType<PieChartProps> = ({
   data,
 }) => {
-  const { t } = useTranslation("translations");
+  const { t } = useTranslation("all4trees");
   const chartData = [
     {
       fill: "var(--chart-1)",

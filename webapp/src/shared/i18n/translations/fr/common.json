@@ -1,0 +1,43 @@
+{
+  "auth": {
+    "loginForm": {
+      "button": {
+        "login": "Connexion",
+        "pendingLogin": "Connexion..."
+      },
+      "credentialsError": "Identifiants invalides",
+      "description": "Renseignez votre nom d'utilisateur ci-dessous pour vous connecter",
+      "field": {
+        "password": "Mot de passe",
+        "username": "Nom d'utilisateur"
+      },
+      "title": "Connexion"
+    }
+  },
+  "common": {
+    "loading": "Chargement..."
+  },
+  "dataManagement": {
+    "noData": "Données non disponibles",
+    "undefined": "non trouvée"
+  },
+  "header": {
+    "colorModeSelector": {
+      "dark": "Sombre",
+      "light": "Clair",
+      "system": "Système"
+    },
+    "menu": {
+      "goToAdmin": "Espace Admin",
+      "language": "Langue",
+      "login": "Connexion",
+      "logout": "Déconnexion",
+      "mode": "Mode",
+      "seeDatabase": "Voir les données"
+    },
+    "navigationButton": {
+      "toDashboard": "Dashboard",
+      "toHome": "Carte"
+    }
+  }
+}

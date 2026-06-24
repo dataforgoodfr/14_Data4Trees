@@ -8,7 +8,7 @@ export const LANGUAGES = {
   FRENCH: "fr",
 } as const;
 
-const NAMESPACES = ["translations"];
+const NAMESPACES = ["all4trees", "common", "seed"];
 
 i18n
   /** Passes i18n down to react-i18next */
