@@ -7,27 +7,47 @@ import LoadedDashboard, {
 import { LAYERS } from "@shared/api/layers";
 import { useApi } from "@shared/hooks/useApi";
 
-// ✅ Cache the Promise so the same one is reused across renders
+type GetDashboardData = (layer: string) => Promise<DashboardData>;
+type Layer = (typeof LAYERS)[keyof typeof LAYERS];
+
+// ✅ Cache Promises so the same one is reused across renders
 // required by 'use()', see https://react.dev/reference/react/use#caching-promises-for-client-components
-const cache = new Map<
-  (typeof LAYERS)[keyof typeof LAYERS],
-  Promise<DashboardData>
+// Cache is scoped by API client (auth token) + layer to avoid leaking data across sessions.
+const cache = new WeakMap<
+  GetDashboardData,
+  Map<Layer, Promise<DashboardData>>
 >();
 
-// TODO: bettter typing (no "as")
+function getPerApiCache(getDashboardData: GetDashboardData) {
+  const perApiCache = cache.get(getDashboardData);
+  if (perApiCache) {
+    return perApiCache;
+  }
+  const newPerApiCache = new Map<Layer, Promise<DashboardData>>();
+  cache.set(getDashboardData, newPerApiCache);
+  return newPerApiCache;
+}
+
 export function fetchData({
   getDashboardData,
   layer,
 }: {
-  getDashboardData: (layerId: string) => Promise<DashboardData>;
-  layer: (typeof LAYERS)[keyof typeof LAYERS];
+  getDashboardData: GetDashboardData;
+  layer: Layer;
 }): Promise<DashboardData> {
+  const cache = getPerApiCache(getDashboardData);
   const cachedPromise = cache.get(layer);
+
   if (cachedPromise) {
     return cachedPromise;
   }
-  const promise = getDashboardData(layer);
+  const promise = getDashboardData(layer).catch((err) => {
+    // Don't cache failures forever; allow retries (e.g. after navigation / remount).
+    cache.delete(layer);
+    throw err;
+  });
   cache.set(layer, promise);
+
   return promise;
 }
 
