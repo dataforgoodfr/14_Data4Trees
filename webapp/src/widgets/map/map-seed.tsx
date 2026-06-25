@@ -9,9 +9,7 @@ import {
 import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/use-map-seed";
 
-import pictoSeed from "./assets/seed-icon.svg";
 import { MapBase } from "./map-base";
-import { getIconSize } from "./utils";
 
 export const MapSeed: FC = () => {
   const { isReady, mapContainerRef, mapApiRef } = useMap();
@@ -22,15 +20,9 @@ export const MapSeed: FC = () => {
 
     const toggleShiftSize = () => setIsMaximizedPopupSize((prev) => !prev);
 
-    mapApiRef.current.setLayerSymbol({
-      iconSize: getIconSize({}),
-      layerId: LAYERS.SEED,
-      svg: pictoSeed,
-    });
-
     mapApiRef.current.setLayerPopup<SeedData>({
       centerOnClick: true,
-      layerId: LAYERS.SEED,
+      layerId: LAYERS.SEED_POINT,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SeedData>({
         Element: SeedIndicator,
