@@ -1,5 +1,9 @@
 {
   "dashboard": {
+    "error": {
+      "title": "Erreur lors du chargement des données",
+      "unknownMessage": "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."
+    },
     "select": {
       "year": "Année"
     }

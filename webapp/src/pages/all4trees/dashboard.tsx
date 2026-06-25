@@ -1,4 +1,10 @@
-import { useEffect, useState } from "react";
+import type { TFunction } from "i18next";
+import { Suspense, use, useState } from "react";
+import {
+  ErrorBoundary,
+  type FallbackProps,
+  getErrorMessage,
+} from "react-error-boundary";
 import { ClipLoader } from "react-spinners";
 
 import { DashboardHeader } from "@widgets/dashboard/dashboard-header";
@@ -10,6 +16,7 @@ import {
 
 import { LAYERS } from "@shared/api/layers";
 import { useApi } from "@shared/hooks/useApi";
+import { useTranslation } from "@shared/i18n";
 
 export type DataField = { value: number | null; error: number | null };
 
@@ -45,51 +52,70 @@ function formatBeneficiaryData(
   };
 }
 
-export default function DashboardPage() {
+function Loading() {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <ClipLoader
+        color="#4A90E2"
+        loading={true}
+        size={50}
+      />
+    </div>
+  );
+}
+
+// ✅ Cache the Promise so the same one is reused across renders
+// required by 'use()', see https://react.dev/reference/react/use#caching-promises-for-client-components
+const cache = new Map<
+  (typeof LAYERS)[keyof typeof LAYERS],
+  Promise<DashboardData>
+>();
+
+// TODO: bettter typing (no "as")
+export function fetchData({
+  getDashboardData,
+  layer,
+}: {
+  getDashboardData: (layerId: string) => Promise<DashboardData>;
+  layer: (typeof LAYERS)[keyof typeof LAYERS];
+}): Promise<DashboardData> {
+  const cachedPromise = cache.get(layer);
+  if (cachedPromise) {
+    return cachedPromise;
+  }
+  const promise = getDashboardData(layer);
+  cache.set(layer, promise);
+  return promise;
+}
+
+function Dashboard() {
   const api = useApi();
+
+  const data = use(
+    fetchData({
+      getDashboardData: api.getDashboardData,
+      layer: LAYERS.INVENTARY,
+    }),
+  );
+
+  return <YearDashboard data={data} />;
+}
+
+function YearDashboard({ data }: { data: DashboardData }) {
   const [selectedYear, setSelectedYear] = useState<number>(2024);
-  const [data, setData] = useState<DashboardData>({});
-  const [chartData, setChartData] = useState<Record<string, DataField>>({});
-  const [loading, setLoading] = useState(true);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies : <no need to add dependency>
-  useEffect(() => {
-    loadDashboardData();
-  }, []);
-
-  const loadDashboardData = async () => {
-    try {
-      const dashboardData = await api.getDashboardData(LAYERS.INVENTARY);
-      setData(dashboardData);
-      setChartData(dashboardData[selectedYear]?.beneficiary ?? {});
-    } catch (error) {
-      console.error("Erreur lors du chargement des données:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const chartData = (data[selectedYear]?.beneficiary ?? {}) as Record<
+    string,
+    DataField
+  >;
 
   const handleYearChange = (year: string) => {
     const numericYear = Number(year);
     if (!Number.isNaN(numericYear)) {
       setSelectedYear(numericYear);
-      setChartData(data[numericYear]?.beneficiary ?? {});
     } else {
       console.warn("Année sélectionnée invalide:", year);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <ClipLoader
-          color="#4A90E2"
-          loading={loading}
-          size={50}
-        />
-      </div>
-    );
-  }
 
   return (
     <div
@@ -110,5 +136,36 @@ export default function DashboardPage() {
         />
       </div>
     </div>
+  );
+}
+
+// t must be passed to the fallback render function because the error boundary fallback component cannot call hooks like useTranslation
+function getFallbackRender({ t }: { t: TFunction<"all4trees", undefined> }) {
+  function FallbackRender({ error }: FallbackProps) {
+    const errorMessage =
+      getErrorMessage(error) ?? t("dashboard.error.unknownMessage");
+
+    return (
+      <div className="flex flex-col items-center pt-24 gap-4">
+        <h1 className="text-2xl font-bold text-destructive">
+          {t("dashboard.error.title")}
+        </h1>
+        <p className="mt-2">{errorMessage}</p>
+      </div>
+    );
+  }
+
+  return FallbackRender;
+}
+
+export default function DashboardPage() {
+  const { t } = useTranslation("all4trees");
+
+  return (
+    <ErrorBoundary fallbackRender={getFallbackRender({ t })}>
+      <Suspense fallback={<Loading />}>
+        <Dashboard />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
