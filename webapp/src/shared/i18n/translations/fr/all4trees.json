@@ -5,6 +5,12 @@
       "title": "Erreur lors du chargement des données",
       "unknownMessage": "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."
     },
+    "header": {
+      "catalog": "Catalogue des graphiques",
+      "greeting": "Bonjour {{username}} ! 👋",
+      "temporaryBeneficiary": "⚠ Bénéficiaire",
+      "temporaryFilter": "⚠ Filtre"
+    },
     "select": {
       "year": "Année"
     }

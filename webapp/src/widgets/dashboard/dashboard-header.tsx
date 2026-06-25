@@ -27,14 +27,14 @@ export function DashboardHeader({
       <div className="mt-4 flex flex-nowrap justify-between items-center">
         <div>
           <h1 className="font-bold text-xl tracking-wide">
-            Bonjour{` ${username}`} ! 👋
+            {t("dashboard.header.greeting", { username })}
           </h1>
         </div>
-        <p>⚠ Filtre</p>
+        <p>{t("dashboard.header.temporaryFilter")}</p>
       </div>
 
       <div className="mt-5 flex flex-nowrap justify-between">
-        <h2 className="font-bold text-xl">Catalogue des graphiques</h2>
+        <h2 className="font-bold text-xl">{t("dashboard.header.catalog")}</h2>
         <div>
           <Select
             onValueChange={onvalueChange}
@@ -56,7 +56,7 @@ export function DashboardHeader({
               </SelectGroup>
             </SelectContent>
           </Select>
-          <p className="inline">⚠ Bénéficiaire</p>
+          <p className="inline">{t("dashboard.header.temporaryBeneficiary")}</p>
         </div>
       </div>
     </div>

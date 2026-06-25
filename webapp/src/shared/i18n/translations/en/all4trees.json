@@ -5,6 +5,12 @@
       "title": "Error while loading data",
       "unknownMessage": "An unknown error occurred. Please try again later."
     },
+    "header": {
+      "catalog": "Charts catalog",
+      "greeting": "Hello {{username}}! 👋",
+      "temporaryBeneficiary": "⚠ Beneficiary",
+      "temporaryFilter": "⚠ Filter"
+    },
     "select": {
       "year": "Year"
     }
