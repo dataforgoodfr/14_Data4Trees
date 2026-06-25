@@ -71,7 +71,7 @@ export default function DashboardPage() {
 
   const handleYearChange = (year: string) => {
     const numericYear = Number(year);
-    if (!isNaN(numericYear)) {
+    if (!Number.isNaN(numericYear)) {
       setSelectedYear(numericYear);
       setChartData(data[numericYear]?.beneficiary ?? {});
     } else {
