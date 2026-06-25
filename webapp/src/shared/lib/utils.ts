@@ -10,6 +10,8 @@ export function cn(...inputs: ClassValue[]) {
 
 export function precise(value?: number | null) {
   if (!value || Number.isNaN(value)) {
+    // TODO: missing or erroneous values should not be considered as 0, but rather as null or undefined.
+    // when displayed, they should be shown as "N/A" or "No data", or the point could be omitted from the chart.
     return "0";
   }
   if (value > 999) {

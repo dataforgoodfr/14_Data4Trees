@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { useTranslation } from "@shared/i18n";
 
 import {
@@ -9,19 +11,32 @@ import {
   SelectValue,
 } from "@ui/select";
 
-export type DashboardHeaderProps = {
+export type HeaderProps = {
   years: number[];
   selectedYear: number;
-  onValueChange: (year: string) => void;
+  onYearChange: (year: number) => void;
 };
 
-export function DashboardHeader({
+export default function Header({
   years,
   selectedYear,
-  onValueChange: onvalueChange,
-}: DashboardHeaderProps) {
+  onYearChange,
+}: HeaderProps) {
   const { t } = useTranslation("all4trees");
   const username = localStorage.getItem("username") || "";
+
+  const onStringYearChange = useCallback(
+    (year: string) => {
+      const numericYear = Number(year);
+      if (!Number.isNaN(numericYear)) {
+        onYearChange(numericYear);
+      } else {
+        console.warn("Année sélectionnée invalide:", year);
+      }
+    },
+    [onYearChange],
+  );
+
   return (
     <div>
       <div className="mt-4 flex flex-nowrap justify-between items-center">
@@ -37,7 +52,7 @@ export function DashboardHeader({
         <h2 className="font-bold text-xl">{t("dashboard.header.catalog")}</h2>
         <div>
           <Select
-            onValueChange={onvalueChange}
+            onValueChange={onStringYearChange}
             value={selectedYear.toString()}
           >
             <SelectTrigger className="w-45">

@@ -57,7 +57,12 @@ export const ChartRadarWithBenefAndControl: ChartComponentType<
           outerRadius="68%"
         >
           <ChartTooltip
-            content={<ChartTooltipContent indicator="line" />}
+            content={
+              <ChartTooltipContent
+                indicator="line"
+                labelFormatter={(value) => `AAA ${value} BBB`}
+              />
+            }
             cursor={true}
           />
           <PolarRadiusAxis

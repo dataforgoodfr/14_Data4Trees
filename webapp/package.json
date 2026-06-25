@@ -55,7 +55,8 @@
     "react-resizable-panels": "^3.0.6",
     "react-router-dom": "^7.13.0",
     "react-spinners": "^0.17.0",
-    "recharts": "^2.15.4"
+    "recharts": "^2.15.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.4",

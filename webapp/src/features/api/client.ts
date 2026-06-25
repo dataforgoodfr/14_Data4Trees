@@ -1,47 +1,20 @@
-import { API_URL } from "@shared/api/client";
+import {
+  type DashboardData,
+  DashboardDataSchema,
+} from "@entities/dashboard/generic";
 
-const fetchWithAuth = async (
-  endpoint: string,
-  options: RequestInit = {},
-  authToken: string | null,
-) => {
-  const headers = new Headers(options.headers);
-  headers.set("Authorization", authToken ? `Bearer ${authToken}` : "");
-
-  const res = await fetch(`${API_URL}${endpoint}`, {
-    ...options,
-    headers,
-  });
-
-  if (!res.ok) {
-    console.error(`Erreur API: ${res.status} ${res.statusText}`);
-    const errorData = await res.json().catch(() => ({
-      details: [res.statusText],
-      error: "Erreur de communication",
-    }));
-    console.error("Détails de l'erreur:", JSON.stringify(errorData, null, 2));
-
-    const error = new Error(`Erreur API: ${res.status}`);
-
-    // @ts-expect-error Property 'response' does not exist on type 'Error'.
-    error.response = { data: errorData };
-
-    throw error;
-  }
-
-  return res;
-};
-
-const fetchJSONWithAuth = async (
-  endpoint: string,
-  options: RequestInit = {},
-  authToken: string | null,
-) => (await fetchWithAuth(endpoint, options, authToken)).json();
+import { fetchJSONWithAuth } from "@shared/api/client";
 
 export const createApiClient = (authToken: string | null) => ({
   // Bases
-  fetchDashboardData: (layerId: string) =>
-    fetchJSONWithAuth(`/maps/dashboard/${layerId}`, {}, authToken),
+  fetchDashboardData: async (layerId: string): Promise<DashboardData> => {
+    const json = await fetchJSONWithAuth(
+      `/maps/dashboard/${layerId}`,
+      {},
+      authToken,
+    );
+    return DashboardDataSchema.parse(json);
+  },
 });
 
 export type ApiClient = ReturnType<typeof createApiClient>;

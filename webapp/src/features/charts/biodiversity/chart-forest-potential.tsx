@@ -1,7 +1,9 @@
-import { useTranslation } from "@i18n";
+import type { ChartComponentType } from "@features/charts/components/chart-component";
+import { ChartRadarWithBenefAndControl } from "@features/charts/components/radar-benef-control";
 
-import type { ChartComponentType } from "../components/chart-component";
-import { ChartRadarWithBenefAndControl } from "../components/radar-benef-control";
+import type { EpfData } from "@entities/dashboard/epf";
+
+import { useTranslation } from "@i18n";
 
 export type ChartForestPotentialData = {
   density: number;
@@ -19,6 +21,18 @@ type ChartForestPotentialProps = {
   temoin?: ChartForestPotentialData;
 };
 
+export function fromEpfData(data: EpfData): ChartForestPotentialData {
+  return {
+    deadWood: data.bio_idx_deadWood.value ?? 0,
+    density: data.bio_idx_tree_density.value ?? 0,
+    diameterDistribution: data.bio_idx_diametric_distribution.value ?? 0,
+    diversity: data.bio_idx_tree_diversity.value ?? 0,
+    dominantHeight: data.bio_idx_dominant_height.value ?? 0,
+    microHabitat: data.bio_idx_microhabitats.value ?? 0,
+    spatialDistribution: data.bio_idx_spatial_distribution.value ?? 0,
+    verticalDistribution: data.bio_idx_vertical_distribution.value ?? 0,
+  };
+}
 export const ChartForestPotential: ChartComponentType<
   ChartForestPotentialProps
 > = ({ benef, temoin }) => {

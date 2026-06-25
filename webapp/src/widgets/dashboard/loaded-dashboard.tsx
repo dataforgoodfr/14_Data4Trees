@@ -1,45 +1,11 @@
-import { use, useState } from "react";
+import { use, useCallback, useState } from "react";
 
-import { DashboardHeader } from "@widgets/dashboard/dashboard-header";
+import Header from "@widgets/dashboard/header";
+import YearDashboard from "@widgets/dashboard/year-dashboard";
 
-import {
-  ChartForestPotential,
-  type ChartForestPotentialData,
-} from "@features/charts/biodiversity/chart-forest-potential";
+import type { DashboardData } from "@entities/dashboard/generic";
 
-export type DataField = { value: number | null; error: number | null };
-
-export type DashboardData = Record<
-  number,
-  { beneficiary: Record<string, DataField>; control: Record<string, DataField> }
->;
-
-function twoDecimals(data: Record<string, DataField>) {
-  return Object.fromEntries(
-    Object.entries(data).map(([key, { value, error }]) => [
-      key,
-      {
-        error: error == null ? 0 : Number(error.toFixed(2)),
-        value: value == null ? 0 : Number(value.toFixed(2)),
-      },
-    ]),
-  ) as Record<string, DataField>;
-}
-
-function formatBeneficiaryData(
-  beneficiary: Record<string, DataField>,
-): ChartForestPotentialData {
-  return {
-    deadWood: beneficiary.bio_idx_deadWood.value ?? 0,
-    density: beneficiary.bio_idx_tree_density.value ?? 0,
-    diameterDistribution: beneficiary.bio_idx_diametric_distribution.value ?? 0,
-    diversity: beneficiary.bio_idx_tree_diversity.value ?? 0,
-    dominantHeight: beneficiary.bio_idx_dominant_height.value ?? 0,
-    microHabitat: beneficiary.bio_idx_microhabitats.value ?? 0,
-    spatialDistribution: beneficiary.bio_idx_spatial_distribution.value ?? 0,
-    verticalDistribution: beneficiary.bio_idx_vertical_distribution.value ?? 0,
-  };
-}
+const INITIAL_YEAR = 2024;
 
 export default function LoadedDashboard({
   dataPromise,
@@ -47,21 +13,32 @@ export default function LoadedDashboard({
   dataPromise: Promise<DashboardData>;
 }) {
   const data = use(dataPromise);
+  const sortedYears = Object.keys(data)
+    .map(Number)
+    .filter((year) => !Number.isNaN(year))
+    .sort((a, b) => a - b);
+  const initialYear = sortedYears.includes(INITIAL_YEAR)
+    ? INITIAL_YEAR
+    : sortedYears[0];
+  const [selectedYear, setSelectedYear] = useState<number | undefined>(
+    initialYear,
+  );
 
-  const [selectedYear, setSelectedYear] = useState<number>(2024);
-  const chartData = (data[selectedYear]?.beneficiary ?? {}) as Record<
-    string,
-    DataField
-  >;
+  const handleYearChange = useCallback(
+    (year: number) => {
+      if (data[year]) {
+        setSelectedYear(year);
+      } else {
+        console.warn("Année sélectionnée non disponible:", year);
+      }
+    },
+    [data],
+  );
 
-  const handleYearChange = (year: string) => {
-    const numericYear = Number(year);
-    if (!Number.isNaN(numericYear)) {
-      setSelectedYear(numericYear);
-    } else {
-      console.warn("Année sélectionnée invalide:", year);
-    }
-  };
+  if (selectedYear === undefined || !data[selectedYear]) {
+    // TODO: maybe we could ensure this never occurs by validating the data structure and using types (such as  [T, ...T[]] for the years array)
+    return <div>Loading...</div>;
+  }
 
   return (
     <div
@@ -71,16 +48,12 @@ export default function LoadedDashboard({
         "--scrollbar-track": "var(--background)",
       }}
     >
-      <DashboardHeader
-        onValueChange={handleYearChange}
+      <Header
+        onYearChange={handleYearChange}
         selectedYear={selectedYear}
         years={Object.keys(data).map(Number)}
       />
-      <div className="mt-4 space-y-4">
-        <ChartForestPotential
-          benef={formatBeneficiaryData(twoDecimals(chartData))}
-        />
-      </div>
+      <YearDashboard data={data[selectedYear]} />
     </div>
   );
 }
