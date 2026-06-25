@@ -56,7 +56,12 @@ function Loading() {
   return (
     <div className="flex items-center justify-center h-screen">
       <ClipLoader
-        color="#4A90E2"
+        cssOverride={{
+          // see https://github.com/davidhu2000/react-spinners/blob/main/src/ClipLoader.tsx
+          borderLeftColor: "var(--accent)",
+          borderRightColor: "var(--accent)",
+          borderTopColor: "var(--accent)",
+        }}
         loading={true}
         size={50}
       />
