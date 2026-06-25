@@ -103,10 +103,10 @@ function Dashboard() {
     }),
   );
 
-  return <YearDashboard data={data} />;
+  return <LoadedDashboard data={data} />;
 }
 
-function YearDashboard({ data }: { data: DashboardData }) {
+function LoadedDashboard({ data }: { data: DashboardData }) {
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const chartData = (data[selectedYear]?.beneficiary ?? {}) as Record<
     string,
