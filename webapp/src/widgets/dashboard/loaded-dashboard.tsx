@@ -37,7 +37,7 @@ export default function LoadedDashboard({
 
   if (selectedYear === undefined || !data[selectedYear]) {
     // TODO: maybe we could ensure this never occurs by validating the data structure and using types (such as  [T, ...T[]] for the years array)
-    return <div>Loading...</div>;
+    return <div>No dashboard data available.</div>;
   }
 
   return (
