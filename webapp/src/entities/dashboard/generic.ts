@@ -16,7 +16,7 @@ export type DictionaryData = z.infer<typeof DictionaryDataSchema>;
 
 const MIN_YEAR = 1900;
 const MAX_YEAR = 2100;
-const YearSchema = z.number().int().min(MIN_YEAR).max(MAX_YEAR);
+const YearSchema = z.coerce.number().int().min(MIN_YEAR).max(MAX_YEAR);
 
 const YearDataSchema = z.object({
   beneficiary: DictionaryDataSchema,
