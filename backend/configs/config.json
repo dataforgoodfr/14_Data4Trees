@@ -40,6 +40,10 @@
       "path": "../catalog/inventaire_for",
       "resource": "inv_for",
       "layerType": "symbol",
+      "cluster": {
+        "radius": 50,
+        "maxZoom": 12.5
+      },
       "columns": {
         "id": "_id",
         "geom": "gps.merge().centroid()",
