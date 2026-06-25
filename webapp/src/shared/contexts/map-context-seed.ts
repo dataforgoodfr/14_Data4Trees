@@ -1,10 +1,5 @@
 import type { createMap } from "coordo";
-import {
-  createContext,
-  type RefCallback,
-  type RefObject,
-  useContext,
-} from "react";
+import { createContext, type RefCallback, type RefObject } from "react";
 
 export type Category = { value: string; label: string };
 
@@ -16,11 +11,3 @@ export interface MapContextType {
 }
 
 export const MapContext = createContext<MapContextType | undefined>(undefined);
-
-export function useMapContext() {
-  const context = useContext(MapContext);
-  if (!context) {
-    throw new Error("useMapContext must be used within a MapProvider");
-  }
-  return context;
-}

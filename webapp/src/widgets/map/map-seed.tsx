@@ -7,14 +7,14 @@ import {
 } from "@features/popup/renderPopup";
 
 import { LAYERS } from "@shared/api/layers";
-import { useMapContext } from "@shared/contexts/map-context-seed";
+import { useMap } from "@shared/hooks/use-map-seed";
 
 import pictoSeed from "./assets/seed-icon.svg";
 import { MapBase } from "./map-base";
 import { getIconSize } from "./utils";
 
 export const MapSeed: FC = () => {
-  const { isReady, mapContainerRef, mapApiRef } = useMapContext();
+  const { isReady, mapContainerRef, mapApiRef } = useMap();
   const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
   useEffect(() => {
