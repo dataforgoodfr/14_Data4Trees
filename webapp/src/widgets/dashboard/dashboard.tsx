@@ -11,41 +11,41 @@ import { LAYERS } from "@shared/api/layers";
 import { useApi } from "@shared/hooks/useApi";
 import { useTranslation } from "@shared/i18n";
 
-type GetDashboardData = (layer: string) => Promise<DashboardData>;
+type FetchDashboardData = (layer: string) => Promise<DashboardData>;
 type Layer = (typeof LAYERS)[keyof typeof LAYERS];
 
 // ✅ Cache Promises so the same one is reused across renders
 // required by 'use()', see https://react.dev/reference/react/use#caching-promises-for-client-components
 // Cache is scoped by API client (auth token) + layer to avoid leaking data across sessions.
 const cache = new WeakMap<
-  GetDashboardData,
+  FetchDashboardData,
   Map<Layer, Promise<DashboardData>>
 >();
 
-function getPerApiCache(getDashboardData: GetDashboardData) {
-  const perApiCache = cache.get(getDashboardData);
+function getPerApiCache(fetchDashboardData: FetchDashboardData) {
+  const perApiCache = cache.get(fetchDashboardData);
   if (perApiCache) {
     return perApiCache;
   }
   const newPerApiCache = new Map<Layer, Promise<DashboardData>>();
-  cache.set(getDashboardData, newPerApiCache);
+  cache.set(fetchDashboardData, newPerApiCache);
   return newPerApiCache;
 }
 
 function fetchData({
-  getDashboardData,
+  fetchDashboardData,
   layer,
 }: {
-  getDashboardData: GetDashboardData;
+  fetchDashboardData: FetchDashboardData;
   layer: Layer;
 }): Promise<DashboardData> {
-  const cache = getPerApiCache(getDashboardData);
+  const cache = getPerApiCache(fetchDashboardData);
   const cachedPromise = cache.get(layer);
 
   if (cachedPromise) {
     return cachedPromise;
   }
-  const promise = getDashboardData(layer).catch((err) => {
+  const promise = fetchDashboardData(layer).catch((err) => {
     // Don't cache failures forever; allow retries (e.g. after navigation / remount).
     cache.delete(layer);
     throw err;
@@ -57,14 +57,14 @@ function fetchData({
 
 export default function Dashboard() {
   const { t } = useTranslation("all4trees");
-  const api = useApi();
+  const { fetchDashboardData } = useApi();
   const fetch = useCallback(
     () =>
       fetchData({
-        getDashboardData: api.getDashboardData,
+        fetchDashboardData,
         layer: LAYERS.INVENTARY,
       }),
-    [api],
+    [fetchDashboardData],
   );
   const [dataPromise, setDataPromise] = useState(fetch);
 
