@@ -7,8 +7,9 @@ import LoadedDashboard, {
 } from "@widgets/dashboard/loaded-dashboard";
 import Loading from "@widgets/dashboard/loading";
 
+import { useApi } from "@features/hooks/useApi";
+
 import { LAYERS } from "@shared/api/layers";
-import { useApi } from "@shared/hooks/useApi";
 import { useTranslation } from "@shared/i18n";
 
 type FetchDashboardData = (layer: string) => Promise<DashboardData>;

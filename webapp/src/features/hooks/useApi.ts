@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ApiContext } from "@shared/contexts/ApiContext";
+import { ApiContext } from "@features/contexts/ApiContext";
 
 export function useApi() {
   const context = useContext(ApiContext);
