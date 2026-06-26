@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import {
+  computeScore,
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
@@ -54,7 +55,7 @@ export const useFormatSoilData = (data: SoilData) => {
     ...safeData,
     soil_eros_rainfall: Number(soil_eros_rainfall_and_wind.split("-")[0]),
     soil_eros_stability: soil_eros_stability,
-    soil_eros_water_infiltration: soil_eros_water_infiltration,
+    soil_eros_water_infiltration: computeScore(soil_eros_water_infiltration),
     soil_eros_wind: Number(soil_eros_rainfall_and_wind.split("-")[1]),
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(
