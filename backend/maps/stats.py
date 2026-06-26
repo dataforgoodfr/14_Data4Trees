@@ -3,32 +3,43 @@ import numpy as np
 
 from . import constants
 
-def mrp_mean(series, weights, population_size):
+def mrp_mean(df, weights_map):
     """
-    Computes means using weights.
+    Computes cluster means, then weighted means of cluster means.
     Returns the means and the standard errors.
-    Acts only on lines where both values and weights are defined and contain proper values.
+    Acts only on lines where data is defined.
     """
-    mask = series.notna() & weights.notna()
-    x = series[mask].astype(float)
-    w = weights[mask].astype(float)
 
-    sample_size = len(x)
+    df.rename(columns={df.columns[0]: "data", df.columns[1]: "stratum" }, inplace = True)
+    df = df.dropna(axis='index', how='any')
 
-    if sample_size == 0:
+    if len(df.index) == 0:
         return {"value": None, "error": None}
 
-    # Computing the weighted mean
-    mean = np.average(x, weights=w) # equivalent to sum(x * weights) / sum(weights)
+    # Computing aggregates by stratum
+    df_stratums = df.groupby(by='stratum').agg(
+        count=('data','count'),
+        mean=('data','mean'),
+        variance=('data','var'),)
+    df_stratums["weight"] = df_stratums.index.map(weights_map)
+
+    # Sample size and population size (for stratums with data only)
+    sample_size = df_stratums["count"].sum()
+    population_size = df_stratums["weight"].sum()
     
+    # Computing the weighted mean
+    mean_weighted = np.average(df_stratums["mean"], weights=df_stratums["weight"])
+    
+    # Computing the simple variance and the weighted variance
+    variance_simple = df_stratums["variance"].sum()
+    variance_weighted = np.average(df_stratums["variance"], weights=df_stratums["weight"])
+
     # Computing the standard error
-    variance_simple = np.average((x - mean) ** 2)
-    variance_weighted = np.average((x - mean) ** 2, weights=w)
     part1 = 1/sample_size * (1 - sample_size/population_size) * variance_weighted
     part2 = 1/sample_size**2 * (population_size - sample_size) / (population_size - 1) * (variance_simple - variance_weighted)
     std_error = np.sqrt(part1+part2)
 
-    return {"value": mean, "error": std_error}
+    return {"value": mean_weighted, "error": std_error}
 
 def mrp_mean_dict(series, weights):
     """
@@ -121,7 +132,7 @@ def compute_aggregation(data):
             # Computing means and errors on fields with unique values
             df_case = df[list_fields_base+list_fields_average_value+['weight']].copy()
             result = {
-                field: mrp_mean(df_case[field], df_case["weight"], population_size)
+                field: mrp_mean(df_case[[field, "for"]], weights_map)
                 for field in list_fields_average_value
             }
             
