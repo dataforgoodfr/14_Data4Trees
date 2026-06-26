@@ -82,6 +82,7 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
 }
 
 /*
+  Compute score based on the scale define in for_score external data (see backed/catalog/inventaire_for)
   Ideally should be conmputed in the config.json but for now we can't do it.
 */
 export function computeScore(value: number): number {
