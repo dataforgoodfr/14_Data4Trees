@@ -71,7 +71,7 @@
         "soil_fauna_density": "sum(tsbf_001.tsbf_no) / tsbf_samp",
         "soil_fauna_diversity": "list_unique(list(nullif(tsbf_001.concat_ws('-', tsbf_tax1, tsbf_tax2, tsbf_tax3), '')))",
         "soil_fauna_abundance": "list_aggregate(list(tsbf_001.concat_ws('-', tsbf_tax1, tsbf_tax2, tsbf_tax3)), 'histogram')",
-        "soil_surface_fauna_density": "sum(barba_001.barbA_no + barbb_001.barbB_no + barbc_001.barbC_no + barbd_001.barbD_no) / barb_samp",
+        "soil_surface_fauna_density": "(sum(barba_001.barbA_no) + sum(barbb_001.barbB_no) + sum(barbc_001.barbC_no) + sum(barbd_001.barbD_no)) / barb_samp",
         "soil_surface_fauna_diversity": "list_unique(list_concat(list(nullif(barba_001.concat_ws('-', barbA_tax1, barbA_tax2, barbA_tax3), '')), list(nullif(barbb_001.concat_ws('-', barbB_tax1, barbB_tax2, barbB_tax3), '')), list(nullif(barbc_001.concat_ws('-', barbC_tax1, barbC_tax2, barbC_tax3), '')), list(nullif(barbd_001.concat_ws('-', barbD_tax1, barbD_tax2, barbD_tax3), ''))))",
         "soil_surface_fauna_abundance": "list_aggregate(list_concat(list(barba_001.concat_ws('-', barbA_tax1, barbA_tax2, barbA_tax3)), list(barbb_001.concat_ws('-', barbB_tax1, barbB_tax2, barbB_tax3)), list(barbc_001.concat_ws('-', barbC_tax1, barbC_tax2, barbC_tax3)), list(barbd_001.concat_ws('-', barbD_tax1, barbD_tax2, barbD_tax3))), 'histogram')"
       },
