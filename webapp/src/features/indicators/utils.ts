@@ -4,7 +4,7 @@ import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
   essenceCount: "essenceCount",
-  individualPerCubicMeter: "individualPerCubicMeter",
+  individualPerSquaredMeter: "individualPerSquaredMeter",
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
   m3PerHabPerYear: "m3PerHabPerYear",
@@ -34,8 +34,8 @@ export const useFormatterWithUnit = () => {
     const formattedValue = typeof value === "number" ? precise(value) : value;
 
     switch (unit) {
-      case UNITS.individualPerCubicMeter:
-        return t("indicators.units.individualPerCubicMeter", { value });
+      case UNITS.individualPerSquaredMeter:
+        return t("indicators.units.individualPerSquaredMeter", { value });
       case UNITS.individualPerHectare:
         return t("indicators.units.individualPerHectare", { value });
       case UNITS.individualPerTrap:

@@ -1,16 +1,15 @@
 export type BiodiversityData = {
-  total_trees: number;
+  tree_pop: number;
   biomass_volume: number;
   tree_density: number;
   richness: number;
-  tree_pop: number;
   relative_abundance: any;
-  epf_tree_density: number;
-  epf_deadWood: number;
-  epf_tree_diversity: number;
-  epf_spatial_distribution: number;
-  epf_diameter_distribution: number;
-  epf_vertical_distribution: number;
-  epf_dominant_height: number;
-  epf_microhabitats: number;
+  bio_idx_tree_density: number;
+  bio_idx_deadWood: number;
+  bio_idx_tree_diversity: number;
+  bio_idx_spatial_distribution: number;
+  bio_idx_diametric_distribution: number;
+  bio_idx_vertical_distribution: number;
+  bio_idx_dominant_height: number;
+  bio_idx_microhabitats: number;
 };

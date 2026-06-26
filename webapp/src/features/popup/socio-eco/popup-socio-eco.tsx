@@ -30,15 +30,15 @@ const exctractVillageName = (
   metadata: LayerMetadata,
   data: SocioEcoData,
 ): string => {
-  const label = findCategoricalLabel(metadata, "admi2", data.admi2);
+  const label = findCategoricalLabel(metadata, "loc2", data.loc2);
 
   let villageName: string | undefined;
   if (label) {
     const jsonLabel = JSON.parse(label);
-    villageName = jsonLabel["Malagasy(mg)"] ?? undefined;
+    villageName = jsonLabel["Malagasy(mg)"] ?? jsonLabel["Fran\u00e7ais(fr)"] ?? undefined;
   }
 
-  return villageName || data.admi2;
+  return villageName || data.loc2;
 };
 
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({

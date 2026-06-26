@@ -9,11 +9,11 @@ export function getTaxonLabels(
 ): [string, string, string] {
   const [taxon1, taxon2, taxon3] = element.split("-");
   const taxon1Label =
-    findCategoricalLabel(metadata, `tax1_${dataType}`, taxon1) || taxon1;
+    findCategoricalLabel(metadata, `${dataType}_tax1`, taxon1) || taxon1;
   const taxon2Label =
-    findCategoricalLabel(metadata, `tax2_${dataType}`, taxon2) || taxon2;
+    findCategoricalLabel(metadata, `${dataType}_tax2`, taxon2) || taxon2;
   const taxon3Label =
-    findCategoricalLabel(metadata, `tax3_${dataType}`, taxon3) || taxon3;
+    findCategoricalLabel(metadata, `${dataType}_tax3`, taxon3) || taxon3;
   return [taxon1Label, taxon2Label, taxon3Label];
 }
 

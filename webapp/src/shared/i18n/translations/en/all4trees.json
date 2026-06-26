@@ -42,7 +42,7 @@
           "title": "Stand Biomass",
           "volume": "Volume of above-ground biomass"
         },
-        "forestPotentialLevel": {
+        "tropicalBiodivIndex": {
           "chartTitle": "Tropical Biodiversity Index",
           "deadWood": "Deadwood",
           "density": "Tree density",
@@ -193,7 +193,7 @@
     },
     "units": {
       "essenceCount": "{{ count }} species inventoried",
-      "individualPerCubicMeter": "{{ value }} ind/m³",
+      "individualPerSquaredMeter": "{{ value }} ind/m²",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
       "m3PerHabPerYear": "{{ value }} m³/inhab/year",

@@ -56,7 +56,7 @@ export const ForestInventoryPopupContent: FC<
         })}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         subtitle={
-          findCategoricalLabel(metadata, "for", data.for) ||
+          findCategoricalLabel(metadata, "loc2", data.for) ||
           t("dataManagement.undefined", { ns: "common" })
         }
         title={title}

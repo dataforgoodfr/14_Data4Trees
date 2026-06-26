@@ -42,7 +42,7 @@
           "title": "Biomasse du peuplement",
           "volume": "Volume de biomasse aérienne"
         },
-        "forestPotentialLevel": {
+        "tropicalBiodivIndex": {
           "chartTitle": "Indice de biodiversité tropicale",
           "deadWood": "Bois mort",
           "density": "Densité arborée",
@@ -195,7 +195,7 @@
       "essenceCount": "",
       "essenceCount_one": "{{ count }} essence inventoriée",
       "essenceCount_other": "{{ count }} essences inventoriées",
-      "individualPerCubicMeter": "{{ value }} ind/m³",
+      "individualPerSquaredMeter": "{{ value }} ind/m²",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
