@@ -52,12 +52,10 @@ export const useFormatSoilData = (data: SoilData) => {
 
   return {
     ...safeData,
-    // Temporary fix due to coordo bug
-    soil_structure_idx: `${soil_structure_idx}/10`,
     soil_eros_rainfall: Number(soil_eros_rainfall_and_wind.split("-")[0]),
-    soil_eros_wind: Number(soil_eros_rainfall_and_wind.split("-")[1]),
     soil_eros_stability: soil_eros_stability,
     soil_eros_water_infiltration: soil_eros_water_infiltration,
+    soil_eros_wind: Number(soil_eros_rainfall_and_wind.split("-")[1]),
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(
       soil_fauna_density,
@@ -67,6 +65,8 @@ export const useFormatSoilData = (data: SoilData) => {
       soil_fauna_diversity,
       UNITS.speciesCount,
     ),
+    // Temporary fix due to coordo bug
+    soil_structure_idx: `${soil_structure_idx}/10`,
     surface_fauna_abundance: safeData.soil_surface_fauna_abundance,
     surface_fauna_density: formatWithUnit(
       soil_surface_fauna_density,

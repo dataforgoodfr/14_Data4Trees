@@ -35,7 +35,8 @@ const exctractVillageName = (
   let villageName: string | undefined;
   if (label) {
     const jsonLabel = JSON.parse(label);
-    villageName = jsonLabel["Malagasy(mg)"] ?? jsonLabel["Fran\u00e7ais(fr)"] ?? undefined;
+    villageName =
+      jsonLabel["Malagasy(mg)"] ?? jsonLabel["Fran\u00e7ais(fr)"] ?? undefined;
   }
 
   return villageName || data.loc2;

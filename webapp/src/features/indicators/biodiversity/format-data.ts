@@ -58,6 +58,14 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       ),
       volume: formatWithUnit(safeData.biomass_volume, UNITS.tonPerHectare),
     },
+    treeDiversity: {
+      relative_abundance: formatRelativeAbundance(
+        data.relative_abundance,
+        data.tree_pop,
+      ),
+      speciesRichness: formatWithUnit(safeData.richness, UNITS.essenceCount),
+      tree_pop: data.tree_pop,
+    },
     tropicalBiodiversityIndex: {
       benef: {
         deadWood: safeData.bio_idx_deadWood,
@@ -69,14 +77,6 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
         spatialDistribution: safeData.bio_idx_spatial_distribution,
         verticalDistribution: safeData.bio_idx_vertical_distribution,
       },
-    },
-    treeDiversity: {
-      relative_abundance: formatRelativeAbundance(
-        data.relative_abundance,
-        data.tree_pop,
-      ),
-      speciesRichness: formatWithUnit(safeData.richness, UNITS.essenceCount),
-      tree_pop: data.tree_pop,
     },
   };
 };

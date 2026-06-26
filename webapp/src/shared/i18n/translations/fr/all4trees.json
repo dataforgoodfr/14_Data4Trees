@@ -42,6 +42,15 @@
           "title": "Biomasse du peuplement",
           "volume": "Volume de biomasse aérienne"
         },
+        "treeDiversity": {
+          "relativeAbundance": {
+            "description": "(en % du nombre total d'arbres inventoriés)",
+            "other": "Autre",
+            "title": "Abondance relative par essence"
+          },
+          "speciesRichness": "Richesse spécifique",
+          "title": "Diversité arborée"
+        },
         "tropicalBiodivIndex": {
           "chartTitle": "Indice de biodiversité tropicale",
           "deadWood": "Bois mort",
@@ -53,15 +62,6 @@
           "spatialDistribution": "Distribution spatiale",
           "title": "Indicateurs indirects",
           "verticalDistribution": "Distribution verticale"
-        },
-        "treeDiversity": {
-          "relativeAbundance": {
-            "description": "(en % du nombre total d'arbres inventoriés)",
-            "other": "Autre",
-            "title": "Abondance relative par essence"
-          },
-          "speciesRichness": "Richesse spécifique",
-          "title": "Diversité arborée"
         }
       },
       "title": "Biodiversité"
@@ -195,8 +195,8 @@
       "essenceCount": "",
       "essenceCount_one": "{{ count }} essence inventoriée",
       "essenceCount_other": "{{ count }} essences inventoriées",
-      "individualPerSquaredMeter": "{{ value }} ind/m²",
       "individualPerHectare": "{{ value }} ind/ha",
+      "individualPerSquaredMeter": "{{ value }} ind/m²",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
       "minPerHhPerDay": "{{ value }} min/ménage/jour",

@@ -61,10 +61,10 @@ export const ChartRadarWithBenefAndControl: ChartComponentType<
             cursor={true}
           />
           <PolarRadiusAxis
+            axisLine={{ stroke: "gray" }}
             domain={[0, 10]}
+            tick={{ fill: "gray" }} // Changes the color of the axis lines
             tickCount={6}
-            axisLine={{ stroke: 'gray' }}    // Changes the color of the axis lines
-            tick={{ fill: 'gray' }}
           />
           <PolarAngleAxis
             dataKey="indicator"
