@@ -66,7 +66,7 @@
         "ero_rainfall_and_wind": "for_weath.concat_ws('-', rain, wind)",
         "ero_couv_slope_and_cover": "concat_ws('-', '8', '10')",
         "ero_soil_stability": "(int(slak1) + int(slak2) + int(slak3)) / 3",
-        "ero_water_seepage": "concat_ws('','BEER data type changed from integer to datetime', '')",
+        "ero_water_seepage": "600 * 300 / ( (epoch(interval(beer1)) + epoch(interval(beer2)) + epoch(interval(beer3)) + epoch(interval(beer4)) + epoch(interval(beer5)) + epoch(interval(beer6)) + epoch(interval(beer7)) + epoch(interval(beer8)) + epoch(interval(beer9)) + epoch(interval(beer10)) ) / 10 * pi() * 9^2) if beer1 != '' else 0",
         "soil_fauna_density": "sum(tsbf_001.tsbf_no) / (20^2 * pi() / 10000)",
         "soil_fauna_diversity": "list_unique(list(tsbf_001.concat_ws('-', tsbf_tax1, tsbf_tax2, tsbf_tax3)))",
         "soil_fauna_abundance_tax1": "histogram(tsbf_001.tsbf_tax1)",
