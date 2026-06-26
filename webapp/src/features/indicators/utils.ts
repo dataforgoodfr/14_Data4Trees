@@ -4,8 +4,8 @@ import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
   essenceCount: "essenceCount",
-  individualPerHectare: "individualPerHectare",
   individualPerCubicMeter: "individualPerCubicMeter",
+  individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
   m3PerHabPerYear: "m3PerHabPerYear",
   minPerHouseholdPerDay: "minPerHouseholdPerDay",
