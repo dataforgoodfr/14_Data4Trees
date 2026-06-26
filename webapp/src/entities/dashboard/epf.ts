@@ -1,5 +1,6 @@
-// TODO: rename epf to something more meaningful, once I understand what it means.
 // > les epf regroupent tous les indicateurs indirects de biodiversité ("Tropical Biodiversity Index")
+// > epf = eco-potentialité forestière, l'ancien nom de l'indice de biodiversité tropicale
+// TODO: rename epf to something more meaningful?
 
 import * as z from "zod";
 
