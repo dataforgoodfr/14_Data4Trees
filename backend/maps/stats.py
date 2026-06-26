@@ -105,7 +105,6 @@ def compute_aggregation(data):
         usecols=['strat','Mh'],
         index_col='strat')
     weights_map = df_weights['Mh'].to_dict()
-    population_size = df_weights['Mh'].sum()
 
     dict_fields = constants.dict_fields_inventaire
 
