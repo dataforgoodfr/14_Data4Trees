@@ -194,7 +194,7 @@
     "units": {
       "essenceCount": "{{ count }} species inventoried",
       "individualPerHectare": "{{ value }} ind/ha",
-      "individualPerSquaredMeter": "{{ value }} ind/m²",
+      "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerTrap": "{{ value }} ind/trap",
       "m3PerHabPerYear": "{{ value }} m³/inhab/year",
       "minPerHhPerDay": "{{ value }} min/household/day",

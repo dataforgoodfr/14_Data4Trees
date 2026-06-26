@@ -60,7 +60,7 @@ export const useFormatSoilData = (data: SoilData) => {
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(
       soil_fauna_density,
-      UNITS.individualPerTrap,
+      UNITS.individualPerCubicMeter,
     ),
     soil_fauna_diversity: formatWithUnit(
       soil_fauna_diversity,
@@ -71,7 +71,7 @@ export const useFormatSoilData = (data: SoilData) => {
     surface_fauna_abundance: safeData.soil_surface_fauna_abundance,
     surface_fauna_density: formatWithUnit(
       soil_surface_fauna_density,
-      UNITS.individualPerSquaredMeter,
+      UNITS.individualPerTrap,
     ),
     surface_fauna_diversity: formatWithUnit(
       soil_surface_fauna_diversity,

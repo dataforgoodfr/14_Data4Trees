@@ -196,7 +196,7 @@
       "essenceCount_one": "{{ count }} essence inventoriée",
       "essenceCount_other": "{{ count }} essences inventoriées",
       "individualPerHectare": "{{ value }} ind/ha",
-      "individualPerSquaredMeter": "{{ value }} ind/m²",
+      "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerTrap": "{{ value }} ind/piège",
       "m3PerHabPerYear": "{{ value }} m³/hab/an",
       "minPerHhPerDay": "{{ value }} min/ménage/jour",
