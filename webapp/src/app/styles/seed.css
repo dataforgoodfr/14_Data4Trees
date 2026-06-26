@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Charte Graphique Seed - Variables CSS & Classes Utilitaires
+   --------------------------------------------------------------------------
+   -> Utiliser le préfix seed pour les variables de la charte graphique.
+   -> Utiliser le préfix custom pour les variables du Figma.
+   -> Pour utiliser les niveaux d'alpha, il faut utiliser la notation rgb
+      --seed-rgb-my-color: 123, 123, 123;
+      --seed-color-my-color: rgba(var(--seed-rgb-my-color), 1);
+      --other-usage: rgba(var(--seed-rgb-my-color), 0.3);
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "./index.css";
+
+:root {
+  /* ========================================================================
+     COULEURS PRINCIPALES - CHARTE SEED
+
+     /!\ WRONG VALUES AND TOKENS => THESE ARE FOR TESTING NOW
+     ======================================================================== */
+
+  --seed-color-nuit: #0f0f0f;
+  --seed-color-onyx: #424242;
+  --seed-color-brunswick-green: #224d41;
+  --seed-rgb-vert-kelly: 153, 207, 22;
+  --seed-color-vert-kelly: rgba(var(--seed-rgb-vert-kelly), 1);
+  --seed-color-jaune-vert: #99cf16;
+  --seed-color-citrouille: #e40000;
+  --seed-color-alabaster: #e1cd16;
+
+  /* ========================================================================
+  COULEURS LA FORET - CHARTE SEED
+  ======================================================================== */
+  --seed-color-bleu: #123762;
+  --seed-color-vert-de-gris: #7dabae;
+
+  /* ========================================================================
+  COULEURS AJUSTEES - POUR UNE MEILLEURE UI
+  ======================================================================== */
+  --custom-color-green-dark: #358055;
+  --custom-color-green-main: #0d1d18;
+  --custom-color-green-pastel: #31d181;
+  --custom-color-grey-light: #e5e7eb;
+  --custom-color-blue-dark: #207ee2;
+  --custom-color-blue-light: #52a4ff;
+
+  --custom-color-socio-eco: #1447e6; /* Same as in socio-eco-icon */
+  --custom-color-inventaire: #5e1a1a; /* Same as in inventaire-icon */
+
+  /* ========================================================================
+     TYPOGRAPHIE - CHARTE SEED
+     ======================================================================== */
+
+  --font-title-primary:
+    "Phosphate", "Phosphate Solid", Impact, "Arial Black", system-ui, sans-serif;
+  --font-body-primary: Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --font-title-secondary:
+    "Century Gothic", "Century Gothic Black", "Arial Black", system-ui,
+    sans-serif;
+  --font-body-secondary:
+    "Open Sans", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ========================================================================
+   THEME TOKEN CONFIGURATIONS ALL 4 TREES: light (root) and dark
+   Docs: https://ui.shadcn.com/docs/theming
+   ======================================================================== */
+:root {
+  /* LIGHT MODE SHADCN */
+  --background: var(--seed-color-alabaster);
+  --foreground: var(--seed-color-nuit);
+
+  --card: var(--custom-color-grey-light);
+  --card-foreground: var(--seed-color-nuit);
+
+  --popover: var(--seed-color-alabaster);
+  --popover-foreground: var(--seed-color-nuit);
+
+  --primary: var(--seed-color-vert-kelly);
+  --primary-foreground: var(--seed-color-nuit);
+  --secondary: var(--seed-color-jaune-vert);
+  --secondary-foreground: var(--seed-color-nuit);
+
+  --muted: #e5e7eb;
+  --muted-foreground: var(--seed-color-onyx);
+  --accent: var(--seed-color-jaune-vert);
+  --accent-foreground: var(--seed-color-nuit);
+  --destructive: #dc2626;
+  --info: var(--custom-color-blue-light);
+  --info-foreground: var(--custom-color-blue-dark);
+
+  --border: rgba(0, 0, 0, 0.15);
+  --input: #ffffff;
+  --ring: var(--seed-color-vert-kelly);
+
+  --chart-1: var(--seed-color-vert-kelly);
+  --chart-2: var(--seed-color-citrouille);
+  --chart-3: var(--seed-color-bleu);
+  --chart-4: #895bf5;
+  --chart-5: #f04646;
+  --chart-6: var(--seed-color-onyx);
+
+  --sidebar: var(--seed-color-alabaster);
+  --sidebar-foreground: var(--seed-color-alabaster);
+  --sidebar-primary: var(--seed-color-brunswick-green);
+  --sidebar-primary-foreground: var(--seed-color-alabaster);
+  --sidebar-accent: var(--seed-color-citrouille);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: var(--seed-color-vert-kelly);
+}
+
+.dark {
+  --background: var(--custom-color-green-dark);
+  --foreground: var(--seed-color-alabaster);
+
+  --card: var(--custom-color-blue-dark);
+  --card-foreground: var(--seed-color-alabaster);
+
+  --popover: var(--seed-color-nuit);
+  --popover-foreground: var(--seed-color-alabaster);
+
+  --primary: var(--seed-color-brunswick-green);
+  --primary-foreground: var(--custom-color-green-pastel);
+  --secondary: var(--seed-color-vert-de-gris);
+  --secondary-foreground: var(--seed-color-nuit);
+
+  --muted: var(--seed-color-onyx);
+  --muted-foreground: #9ca3af;
+  --accent: var(--custom-color-green-main);
+  --accent-foreground: var(--custom-color-green-pastel);
+  --destructive: #ef4444;
+  --info: var(--custom-color-blue-dark);
+  --info-foreground: var(--custom-color-blue-light);
+
+  --border: rgba(255, 255, 255, 0.15);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: var(--seed-color-jaune-vert);
+
+  --sidebar: var(--seed-color-onyx);
+  --sidebar-foreground: var(--seed-color-alabaster);
+  --sidebar-primary: var(--seed-color-onyx);
+  --sidebar-primary-foreground: var(--seed-color-vert-kelly);
+  --sidebar-accent: var(--seed-color-citrouille);
+  --sidebar-accent-foreground: var(--seed-color-nuit);
+  --sidebar-border: rgba(255, 255, 255, 0.15);
+  --sidebar-ring: var(--seed-color-jaune-vert);
+}
+
+@theme inline {
+  --color-socio-eco: var(--custom-color-socio-eco);
+  --color-inventaire: var(--custom-color-inventaire);
+}
+
+@layer components {
+  * {
+    outline-color: rgba(#a21111, 0.2);
+    border-color: var(--border);
+  }
+}
