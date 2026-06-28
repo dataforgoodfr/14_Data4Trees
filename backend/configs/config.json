@@ -42,7 +42,9 @@
       "layerType": "symbol",
       "cluster": {
         "radius": 50,
-        "maxZoom": 12.5
+        "maxZoom": 12.5,
+        "steps": [10, 20],
+        "colors": ["#99D6C2", "#009966", "#006B47"]
       },
       "columns": {
         "id": "_id",
@@ -90,6 +92,12 @@
       "resource": "enquete_menage",
       "layerType": "symbol",
       "groupby": ["loc2"],
+      "cluster": {
+        "radius": 50,
+        "maxZoom": 12.5,
+        "steps": [10, 20],
+        "colors": ["#A1B5F5", "#1447E6", "#0E32A1"]
+      },
       "columns": {
         "geom": "centroid(merge(point(enq_gps.long, enq_gps.latit)))",
         "household_nb": "count(_id)",
@@ -140,11 +148,16 @@
           "interpolate",
           ["linear"],
           ["number", ["get", "test"]],
-          1, "#2DC4B2",
-          2, "#3BB3C3",
-          3, "#669EC4",
-          4, "#A2719B",
-          5, "#AA5E79"
+          1,
+          "#2DC4B2",
+          2,
+          "#3BB3C3",
+          3,
+          "#669EC4",
+          4,
+          "#A2719B",
+          5,
+          "#AA5E79"
         ],
         "fill-opacity": 0.8
       },
