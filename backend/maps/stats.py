@@ -73,38 +73,49 @@ def mrp_mean_dict(series, weights):
 def compute_aggregation(data):
 
     df_source = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
-    df_source['for'] = df_source['for'].astype(int)
 
-    # WORK AROUND split ero_rainfall_and_wind and ero_couv_slope_and_cover
-    df_source[['ero_rainfall','ero_wind']] = df_source['ero_rainfall_and_wind'].str.split('-', expand=True).astype(int)
-    df_source[['ero_couv_slope','ero_couv_cover']] = df_source['ero_couv_slope_and_cover'].str.split('-', expand=True).astype(int)
-    to_drop = ['ero_rainfall_and_wind','ero_couv_slope_and_cover']
+    # WORK AROUND change column name, waiting for style.json update
+    df_source = df_source.rename(columns={"for": "loc2"})
+
+    # Data Type
+    df_source['loc2'] = df_source['loc2'].astype(int)
+
+    # WORK AROUND split soil_eros_rainfall_and_wind and typage soil_eros_slope
+    df_source[['soil_eros_rainfall','soil_eros_wind']] = df_source['soil_eros_rainfall_and_wind'].str.split('-', expand=True).astype(int)
+    to_drop = ['soil_eros_rainfall_and_wind']
     df_source.drop(columns=to_drop, inplace=True)
 
     # INVENTAIRE meta data
 
-    # Loading data for clustering (year, beneficiary group/control group, aggregation methods)
-    df_inventaire_meta = pd.read_csv(
-        './catalog/inventaire/inventaire_external.csv',
-        usecols=['index','loc','num','typ','coh','echant']).set_index('index')
-    df_inventaire_meta.rename(columns={"typ": "sample", "loc":"for", "num":"cod", "coh": "year", "echant":"method"}, inplace=True) # BEWARE loc:for and num:cod will be changed in the next data update
+    # Loading projects
+    df_for_samp = pd.read_parquet(
+        './catalog/inventaire_for/for_samp.parquet',
+        columns=['proj','samp','group1','group2','group3','_index'],
+    ).rename(columns={"_index": "index"}).set_index('index')
+
+    # Loading stratums details
+    df_for_pop = pd.read_parquet(
+        './catalog/inventaire_for/for_pop.parquet',
+    ).rename(columns={"_index": "index"}).set_index('index')
+
+    # Loading data for clustering (year, beneficiary group/control group)
+    df_inv_for = pd.read_parquet(
+        './catalog/inventaire_for/inv_for.parquet',
+        columns=['_id','loc1','loc2','ecos','cod','typ','coh','year']
+    ).rename(columns={"_id": "index"}).set_index('index')
+    df_inv_for = df_inv_for.astype('Int64')
 
     # Control group vs Beneficiary group
-    df_inventaire_meta.replace({'Restauration':'beneficiary','Préservation':'beneficiary','Témoin':'control'}, inplace=True)
+    #df_inv_for['typ'] = df_inv_for['typ'].replace({'1':'beneficiary','2':'beneficiary','0':'control'})
+    #df_inv_for.rename(columns={"typ": "sample"}, inplace=True)
 
     # Get clusters to build the result structure
-    df_clusters = df_inventaire_meta[['year','sample','method']].drop_duplicates(keep='first').reset_index(drop=True)
-    df_clusters.sort_values(by=['year','sample'], axis=0)
+    df_clusters = df_inv_for[['year','typ']].drop_duplicates(keep='first').reset_index(drop=True)
+    df_clusters.sort_values(by=['year','typ'], axis=0)
 
     df = df_source.copy()
 
-    # Loading weights from external data
-    # Weights are Mh (for now) /!\ Years are not taken into account
-    df_weights = pd.read_csv(
-        './catalog/inventaire/meteo.csv',
-        usecols=['strat','Mh'],
-        index_col='strat')
-    weights_map = df_weights['Mh'].to_dict()
+    # MAIN Loops
 
     dict_fields = constants.dict_fields_inventaire
 
@@ -117,26 +128,36 @@ def compute_aggregation(data):
     dict_result = {}
     for year in df_clusters['year'].unique():
         dict_result[str(year)] = {}
-        for sampling in ['beneficiary','control']: # also possible to loop on df_clusters['sample'] instead
+        for sampling in df_clusters['typ'].unique():
         
-            # Selecting entries of the current cluster
-            idx = df_inventaire_meta[(df_inventaire_meta['year']==year) & (df_inventaire_meta['sample']==sampling)].set_index(['for','cod']).index
-            df = df_source.copy().set_index(['for','cod'])
+            # Selecting corresponding weights
+            to_select = df_for_pop[
+                (df_for_pop['proj']=='A Kob Ale') &
+                (df_for_pop['year']==year) &
+                (df_for_pop['typ']==sampling)
+                ].index
+            df_weights = df_for_pop.loc[to_select].set_index('loc2')
+            weights_map = df_weights['area'].to_dict()
+            
+            # Selecting entries of the current cluster (with for+cod as unique id)
+            idx = df_inv_for[(df_inv_for['year']==year) & (df_inv_for['typ']==sampling)].set_index(['loc2','cod']).index
+            df = df_source.copy().set_index(['loc2','cod'])
             df = df.loc[idx].reset_index()
             
             # ## INCLUDE HERE a test to select the aggregation function to apply (MRP, etc.)
             # Mapping weights to values to compute MRP mean
-            df["weight"] = df["for"].map(weights_map)
+            df["weight"] = df["loc2"].map(weights_map)
             
             # Computing means and errors on fields with unique values
             df_case = df[list_fields_base+list_fields_average_value+['weight']].copy()
             result = {
-                field: mrp_mean(df_case[[field, "for"]], weights_map)
+                field: mrp_mean(df_case[[field, "loc2"]], weights_map)
                 for field in list_fields_average_value
             }
             
             # Computing means and errors on fields with values within dictionnaries
             df_case = df[list_fields_base+list_fields_average_dict+['weight']].copy()
+            display(df_case)
             result = result | {
                 field: mrp_mean_dict(df_case[field], df_case["weight"])
                 for field in list_fields_average_dict

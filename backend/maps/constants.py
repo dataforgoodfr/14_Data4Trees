@@ -8,44 +8,34 @@ dict_fields_inventaire = {
     'relative_abundance': 'average-dict',
 
     # Biodiversity - Indirect indicators
-    'epf_tree_density': 'average-value',
-    'epf_deadWood': 'average-value',
-    'epf_tree_diversity': 'average-value',
-    'epf_necromass_pied': 'average-value',
-    'epf_necromass_sol': 'average-value',
-    'epf_spatial_distribution': 'average-value',
-    'epf_diameter_distribution': 'average-value',
-    'epf_vertical_distribution': 'average-value',
-    'epf_dominant_height': 'average-value',
-    'epf_microhabitats': 'average-value',
+    'bio_idx_tree_density': 'average-value',
+    'bio_idx_deadWood': 'average-value',
+    'bio_idx_tree_diversity': 'average-value',
+    'bio_idx_spatial_distribution': 'average-value',
+    'bio_idx_diametric_distribution': 'average-value',
+    'bio_idx_vertical_distribution': 'average-value',
+    'bio_idx_dominant_height': 'average-value',
+    'bio_idx_microhabitats': 'average-value',
 
     # Soil
-    'soil_structure': 'average-value',
+    'soil_structure_idx': 'average-value',
     'soil_composition': 'average-value',
 
     # Soil erosion
-    'ero_rainfall': 'average-value',
-    'ero_wind': 'average-value',
-    'ero_couv_slope': 'average-value',
-    'ero_couv_cover': 'average-value',
-    'ero_soil_stability': 'average-value',
-    'ero_water_seepage': 'average-value',
+    'soil_eros_rainfall': 'average-value',
+    'soil_eros_wind': 'average-value',
+    'soil_eros_slope': 'average-value',
+    'soil_eros_cover': 'average-value',
+    'soil_eros_stability': 'average-value',
+    'soil_eros_water_infiltration': 'average-value',
 
     # Soil macrofauna
     'soil_fauna_density': 'average-value',
     'soil_fauna_diversity': 'average-value',
     'soil_fauna_abundance': 'average-dict',
-    'soil_fauna_abundance_tax1': 'average-dict',
-    'soil_fauna_abundance_tax2': 'average-dict',
-    'soil_fauna_abundance_tax3': 'average-dict',
-
-    # Missing density and diversity per taxon
 
     # Surface macrofauna
-    'surface_fauna_density': 'average-value',
-    'surface_fauna_diversity': 'average-value',
-    'surface_fauna_abundance': 'average-dict',
-    'surface_fauna_abundance_tax1': 'average-dict',
-    'surface_fauna_abundance_tax2': 'average-dict',
-    'surface_fauna_abundance_tax3': 'average-dict',
+    'soil_surface_fauna_density': 'average-value',
+    'soil_surface_fauna_diversity': 'average-value',
+    'soil_surface_fauna_abundance': 'average-dict',
 }
