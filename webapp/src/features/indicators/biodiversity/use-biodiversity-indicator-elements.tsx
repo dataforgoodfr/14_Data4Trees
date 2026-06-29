@@ -63,10 +63,10 @@ export const useBiodiversityIndicatorElements = (
     { type: "divider" },
     {
       children: (
-        <ChartForestPotential benef={data.forestPotentialLevel.benef} />
+        <ChartForestPotential benef={data.tropicalBiodiversityIndex.benef} />
       ),
       identifier: "forest-potential-level",
-      title: t("indicators.biodiversity.sections.forestPotentialLevel.title"),
+      title: t("indicators.biodiversity.sections.tropicalBiodivIndex.title"),
       type: "section",
     },
   ];

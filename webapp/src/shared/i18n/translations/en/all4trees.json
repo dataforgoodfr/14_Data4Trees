@@ -42,7 +42,16 @@
           "title": "Stand Biomass",
           "volume": "Volume of above-ground biomass"
         },
-        "forestPotentialLevel": {
+        "treeDiversity": {
+          "relativeAbundance": {
+            "description": "(in % of the total number of trees)",
+            "other": "Other",
+            "title": "Relative abundance"
+          },
+          "speciesRichness": "Species richness",
+          "title": "Tree Diversity"
+        },
+        "tropicalBiodivIndex": {
           "chartTitle": "Tropical Biodiversity Index",
           "deadWood": "Deadwood",
           "density": "Tree density",
@@ -53,15 +62,6 @@
           "spatialDistribution": "Spatial distribution",
           "title": "Indirect indicators",
           "verticalDistribution": "Vertical distribution"
-        },
-        "treeDiversity": {
-          "relativeAbundance": {
-            "description": "(in % of the total number of trees)",
-            "other": "Other",
-            "title": "Relative abundance"
-          },
-          "speciesRichness": "Species richness",
-          "title": "Tree Diversity"
         }
       },
       "title": "Biodiversity"

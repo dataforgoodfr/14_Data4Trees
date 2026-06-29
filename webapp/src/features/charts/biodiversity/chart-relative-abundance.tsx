@@ -38,7 +38,7 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
       ...chartConfig,
       [element.name]: {
         label:
-          findCategoricalLabel(metadata, "ess_arb", element.name) ||
+          findCategoricalLabel(metadata, "reg_sp", element.name) ||
           element.name,
       },
       other: {

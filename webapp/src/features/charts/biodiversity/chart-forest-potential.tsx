@@ -32,56 +32,56 @@ export const ChartForestPotential: ChartComponentType<
     {
       benef: benef.density,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.density",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.density",
       ),
       temoin: temoin?.density,
     },
     {
       benef: benef.diversity,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.diversity",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.diversity",
       ),
       temoin: temoin?.diversity,
     },
     {
       benef: benef.diameterDistribution,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.diameterDistribution",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.diameterDistribution",
       ),
       temoin: temoin?.diameterDistribution,
     },
     {
       benef: benef.dominantHeight,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.dominantHeight",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.dominantHeight",
       ),
       temoin: temoin?.dominantHeight,
     },
     {
       benef: benef.microHabitat,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.microhabitat",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.microhabitat",
       ),
       temoin: temoin?.microHabitat,
     },
     {
       benef: benef.deadWood,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.deadWood",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.deadWood",
       ),
       temoin: temoin?.deadWood,
     },
     {
       benef: benef.spatialDistribution,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.spatialDistribution",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.spatialDistribution",
       ),
       temoin: temoin?.spatialDistribution,
     },
     {
       benef: benef.verticalDistribution,
       indicator: t(
-        "indicators.biodiversity.sections.forestPotentialLevel.verticalDistribution",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.verticalDistribution",
       ),
       temoin: temoin?.verticalDistribution,
     },
@@ -91,7 +91,7 @@ export const ChartForestPotential: ChartComponentType<
     <ChartRadarWithBenefAndControl
       chartData={chartData}
       title={t(
-        "indicators.biodiversity.sections.forestPotentialLevel.chartTitle",
+        "indicators.biodiversity.sections.tropicalBiodivIndex.chartTitle",
       )}
       withTemoin={!!temoin}
     />

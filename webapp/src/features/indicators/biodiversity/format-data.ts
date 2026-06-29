@@ -15,14 +15,14 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "biomass_volume",
   "tree_density",
   "richness",
-  "epf_tree_density",
-  "epf_deadWood",
-  "epf_tree_diversity",
-  "epf_spatial_distribution",
-  "epf_diameter_distribution",
-  "epf_vertical_distribution",
-  "epf_dominant_height",
-  "epf_microhabitats",
+  "bio_idx_tree_density",
+  "bio_idx_deadWood",
+  "bio_idx_tree_diversity",
+  "bio_idx_spatial_distribution",
+  "bio_idx_diametric_distribution",
+  "bio_idx_vertical_distribution",
+  "bio_idx_dominant_height",
+  "bio_idx_microhabitats",
 ];
 
 const formatRelativeAbundance = (
@@ -58,18 +58,6 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       ),
       volume: formatWithUnit(safeData.biomass_volume, UNITS.tonPerHectare),
     },
-    forestPotentialLevel: {
-      benef: {
-        deadWood: safeData.epf_deadWood,
-        density: safeData.epf_tree_density,
-        diameterDistribution: safeData.epf_diameter_distribution,
-        diversity: safeData.epf_tree_diversity,
-        dominantHeight: safeData.epf_dominant_height,
-        microHabitat: safeData.epf_microhabitats,
-        spatialDistribution: safeData.epf_spatial_distribution,
-        verticalDistribution: safeData.epf_vertical_distribution,
-      },
-    },
     treeDiversity: {
       relative_abundance: formatRelativeAbundance(
         data.relative_abundance,
@@ -77,6 +65,18 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       ),
       speciesRichness: formatWithUnit(safeData.richness, UNITS.essenceCount),
       tree_pop: data.tree_pop,
+    },
+    tropicalBiodiversityIndex: {
+      benef: {
+        deadWood: safeData.bio_idx_deadWood,
+        density: safeData.bio_idx_tree_density,
+        diameterDistribution: safeData.bio_idx_diametric_distribution,
+        diversity: safeData.bio_idx_tree_diversity,
+        dominantHeight: safeData.bio_idx_dominant_height,
+        microHabitat: safeData.bio_idx_microhabitats,
+        spatialDistribution: safeData.bio_idx_spatial_distribution,
+        verticalDistribution: safeData.bio_idx_vertical_distribution,
+      },
     },
   };
 };

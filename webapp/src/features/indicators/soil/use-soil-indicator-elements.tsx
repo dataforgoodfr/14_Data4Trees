@@ -28,7 +28,7 @@ export const useSoilIndicatorElements = (
           <IndicatorRawValue
             dataName={t("indicators.soil.sections.structuration.structure")}
             iconStart={<Sprout size={ICON_SIZE} />}
-            value={data.soil_structure}
+            value={data.soil_structure_idx}
           />
         </>
       ),
@@ -42,18 +42,18 @@ export const useSoilIndicatorElements = (
         <div className="flex flex-col gap-sm">
           <ChartAquaticErosion
             benef={{
-              rainfall: data.ero_rainfall,
-              slope: data.ero_slope,
-              soilCover: data.ero_soil_cover,
-              soilStability: data.ero_soil_stability,
-              waterSeepage: data.ero_water_seepage,
+              rainfall: data.soil_eros_rainfall,
+              slope: data.soil_eros_slope,
+              soilCover: data.soil_eros_cover,
+              soilStability: data.soil_eros_stability,
+              waterSeepage: data.soil_eros_water_infiltration,
             }}
           />
           <ChartWindErosion
             benef={{
-              soilCover: data.ero_soil_cover,
-              soilStability: data.ero_soil_stability,
-              wind: data.ero_wind,
+              soilCover: data.soil_eros_cover,
+              soilStability: data.soil_eros_stability,
+              wind: data.soil_eros_wind,
             }}
           />
         </div>
