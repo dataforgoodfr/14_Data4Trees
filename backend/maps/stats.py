@@ -92,6 +92,7 @@ def compute_aggregation(data):
         './catalog/inventaire_for/for_samp.parquet',
         columns=['proj','samp','group1','group2','group3','_index'],
     ).rename(columns={"_index": "index"}).set_index('index')
+    df_for_samp['proj'] = df_for_samp['proj'].str.strip() # because project names may contain unwanted " "
 
     # Loading stratums details
     df_for_pop = pd.read_parquet(
@@ -115,7 +116,7 @@ def compute_aggregation(data):
 
     df = df_source.copy()
 
-    # MAIN Loops
+    # MAIN Loop
 
     dict_fields = constants.dict_fields_inventaire
 
@@ -126,44 +127,45 @@ def compute_aggregation(data):
 
     # Loop on clusters year-sample and applying the related aggregation function
     dict_result = {}
-    for year in df_clusters['year'].unique():
-        dict_result[str(year)] = {}
-        for sampling in df_clusters['typ'].unique():
-        
-            # Selecting corresponding weights
-            to_select = df_for_pop[
-                (df_for_pop['proj']=='A Kob Ale') &
-                (df_for_pop['year']==year) &
-                (df_for_pop['typ']==sampling)
-                ].index
-            df_weights = df_for_pop.loc[to_select].set_index('loc2')
-            weights_map = df_weights['area'].to_dict()
+    for project in df_for_samp['proj'].unique():
+        dict_result[project] = {}
+        for year in df_clusters['year'].unique():
+            dict_result[project][str(year)] = {}
+            for sampling in df_clusters['typ'].unique():
             
-            # Selecting entries of the current cluster (with for+cod as unique id)
-            idx = df_inv_for[(df_inv_for['year']==year) & (df_inv_for['typ']==sampling)].set_index(['loc2','cod']).index
-            df = df_source.copy().set_index(['loc2','cod'])
-            df = df.loc[idx].reset_index()
-            
-            # ## INCLUDE HERE a test to select the aggregation function to apply (MRP, etc.)
-            # Mapping weights to values to compute MRP mean
-            df["weight"] = df["loc2"].map(weights_map)
-            
-            # Computing means and errors on fields with unique values
-            df_case = df[list_fields_base+list_fields_average_value+['weight']].copy()
-            result = {
-                field: mrp_mean(df_case[[field, "loc2"]], weights_map)
-                for field in list_fields_average_value
-            }
-            
-            # Computing means and errors on fields with values within dictionnaries
-            df_case = df[list_fields_base+list_fields_average_dict+['weight']].copy()
-            display(df_case)
-            result = result | {
-                field: mrp_mean_dict(df_case[field], df_case["weight"])
-                for field in list_fields_average_dict
-            }
-            
-            dict_result[str(year)][sampling] = result
+                # Selecting corresponding weights
+                to_select = df_for_pop[
+                    (df_for_pop['proj']=='A Kob Ale') &
+                    (df_for_pop['year']==year) &
+                    (df_for_pop['typ']==sampling)
+                    ].index
+                df_weights = df_for_pop.loc[to_select].set_index('loc2')
+                weights_map = df_weights['area'].to_dict()
+                
+                # Selecting entries of the current cluster (with for+cod as unique id)
+                idx = df_inv_for[(df_inv_for['year']==year) & (df_inv_for['typ']==sampling)].set_index(['loc2','cod']).index
+                df = df_source.copy().set_index(['loc2','cod'])
+                df = df.loc[idx].reset_index()
+                
+                # ## INCLUDE HERE a test to select the aggregation function to apply (MRP, etc.)
+                # Mapping weights to values to compute MRP mean
+                df["weight"] = df["loc2"].map(weights_map)
+                
+                # Computing means and errors on fields with unique values
+                df_case = df[list_fields_base+list_fields_average_value+['weight']].copy()
+                result = {
+                    field: mrp_mean(df_case[[field, "loc2"]], weights_map)
+                    for field in list_fields_average_value
+                }
+                
+                # Computing means and errors on fields with values within dictionnaries
+                df_case = df[list_fields_base+list_fields_average_dict+['weight']].copy()
+                result = result | {
+                    field: mrp_mean_dict(df_case[field], df_case["weight"])
+                    for field in list_fields_average_dict
+                }
+                
+                dict_result[project][str(year)][sampling] = result
 
     print(dict_result)
     return dict_result
