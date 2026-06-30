@@ -82,6 +82,10 @@ export default function Dashboard() {
   return (
     <ErrorBoundary
       fallbackRender={fallbackRender}
+      onError={(error, info) => {
+        // Log the error to your error reporting service
+        console.error("Error in Dashboard:", error, info);
+      }}
       resetKeys={[dataPromise]}
     >
       <Suspense fallback={<Loading />}>
