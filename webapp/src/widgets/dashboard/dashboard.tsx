@@ -1,11 +1,15 @@
-import { use } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
+import { getFallbackRender } from "@widgets/dashboard/error-boundary-fallback";
 import LoadedDashboard, {
   type DashboardData,
 } from "@widgets/dashboard/loaded-dashboard";
+import Loading from "@widgets/dashboard/loading";
 
 import { LAYERS } from "@shared/api/layers";
 import { useApi } from "@shared/hooks/useApi";
+import { useTranslation } from "@shared/i18n";
 
 type GetDashboardData = (layer: string) => Promise<DashboardData>;
 type Layer = (typeof LAYERS)[keyof typeof LAYERS];
@@ -28,7 +32,7 @@ function getPerApiCache(getDashboardData: GetDashboardData) {
   return newPerApiCache;
 }
 
-export function fetchData({
+function fetchData({
   getDashboardData,
   layer,
 }: {
@@ -52,14 +56,31 @@ export function fetchData({
 }
 
 export default function Dashboard() {
+  const { t } = useTranslation("all4trees");
   const api = useApi();
+  const fetch = useCallback(
+    () =>
+      fetchData({
+        getDashboardData: api.getDashboardData,
+        layer: LAYERS.INVENTARY,
+      }),
+    [api],
+  );
+  const [dataPromise, setDataPromise] = useState(fetch);
 
-  const data = use(
-    fetchData({
-      getDashboardData: api.getDashboardData,
-      layer: LAYERS.INVENTARY,
-    }),
+  const retry = useCallback(() => {
+    setDataPromise(fetch());
+  }, [fetch]);
+  const fallbackRender = useMemo(
+    () => getFallbackRender({ retry, t }),
+    [retry, t],
   );
 
-  return <LoadedDashboard data={data} />;
+  return (
+    <ErrorBoundary fallbackRender={fallbackRender} resetKeys={[dataPromise]}>
+      <Suspense fallback={<Loading />}>
+        <LoadedDashboard dataPromise={dataPromise} />
+      </Suspense>
+    </ErrorBoundary>
+  );
 }

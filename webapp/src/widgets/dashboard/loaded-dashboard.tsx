@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
 import { DashboardHeader } from "@widgets/dashboard/dashboard-header";
 
@@ -41,7 +41,13 @@ function formatBeneficiaryData(
   };
 }
 
-export default function LoadedDashboard({ data }: { data: DashboardData }) {
+export default function LoadedDashboard({
+  dataPromise,
+}: {
+  dataPromise: Promise<DashboardData>;
+}) {
+  const data = use(dataPromise);
+
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const chartData = (data[selectedYear]?.beneficiary ?? {}) as Record<
     string,
