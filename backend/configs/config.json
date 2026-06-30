@@ -103,7 +103,7 @@
         "household_nb": "count(_id)",
         "population": "sum(res)",
         "fuel_sources": "list_aggregate(flatten(list(ener)), 'histogram')",
-        "wood_fuel_cons": "sum( 12 * ( ifnull(fw_qty * enq_fw.fw_vol * fw_freq, 0) + ifnull(coal_qty * enq_coal.coal_kg * coal_freq, 0) / enq_coal.coal_dens ) ) / sum(res)",
+        "wood_fuel_cons": "sum( 12 * ( ifnull(fw_qty * enq_fw.fw_vol * fw_freq, 0) + ifnull(coal_qty * enq_coal.coal_kg * coal_freq * enq_coal.coal_fw, 0) / enq_coal.coal_dens )) / sum(res)",
         "firewood_collec_time": "ifnull(avg(coll_freq * coll_dur)/30, 0)",
         "firewood_satis": "histogram(wf_satis if int(wf_satis) > 0)",
         "firewood_satis_tot": "count(1 if int(wf_satis) > 0)",
