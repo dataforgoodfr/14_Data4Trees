@@ -1,12 +1,10 @@
-// > les epf regroupent tous les indicateurs indirects de biodiversité ("Tropical Biodiversity Index")
-// > epf = eco-potentialité forestière, l'ancien nom de l'indice de biodiversité tropicale
-// TODO: rename epf to something more meaningful?
+// Tropical Biodiversity Index
 
 import * as z from "zod";
 
 import { ValueAndErrorSchema } from "@entities/dashboard/generic";
 
-export const EpfDataSchema = z.object({
+export const BiodiversityIndexSchema = z.object({
   bio_idx_deadWood: ValueAndErrorSchema,
   bio_idx_diametric_distribution: ValueAndErrorSchema,
   bio_idx_dominant_height: ValueAndErrorSchema,
@@ -17,4 +15,4 @@ export const EpfDataSchema = z.object({
   bio_idx_vertical_distribution: ValueAndErrorSchema,
 });
 
-export type EpfData = z.infer<typeof EpfDataSchema>;
+export type BiodiversityIndex = z.infer<typeof BiodiversityIndexSchema>;

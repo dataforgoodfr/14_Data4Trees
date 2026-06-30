@@ -1,9 +1,9 @@
 import {
   ChartForestPotential,
-  fromEpfData,
+  fromBiodiversityIndex,
 } from "@features/charts/biodiversity/chart-forest-potential";
 
-import { EpfDataSchema } from "@entities/dashboard/epf";
+import { BiodiversityIndexSchema } from "@entities/dashboard/biodiversity-index";
 import type { YearData } from "@entities/dashboard/generic";
 
 // TODO: don't do that! Pass the original values, and truncate only when displaying them,
@@ -23,16 +23,20 @@ import type { YearData } from "@entities/dashboard/generic";
 export default function YearDashboard({ data }: { data: YearData }) {
   // TODO: what to do if the data is not valid? Should we throw an error, or just display a message?
   // Note: it should not happen anyway, thanks to the defaults
-  const benefEpfData = EpfDataSchema.parse(data.beneficiary);
+  const benefBiodiversityIndex = BiodiversityIndexSchema.parse(
+    data.beneficiary,
+  );
 
   // TODO: ensure we have no need for calling twoDecimals here
-  // const benefEpfData = twoDecimals(EpfDataSchema.safeParse(data.beneficiary))
+  // const benefBiodiversityIndex = twoDecimals(BiodiversityIndexSchema.safeParse(data.beneficiary))
   // See item.value.toLocaleString() and following TODOs in shared/ui/chart.tsx for formatting details
   // pass a prop to format the item value? (e.g. d => d.toFixed(2).toLocaleString() to get the same result as before)
 
   return (
     <div className="mt-4 space-y-4">
-      <ChartForestPotential benef={fromEpfData(benefEpfData)} />
+      <ChartForestPotential
+        benef={fromBiodiversityIndex(benefBiodiversityIndex)}
+      />
     </div>
   );
 }

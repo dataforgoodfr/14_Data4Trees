@@ -1,7 +1,7 @@
 import type { ChartComponentType } from "@features/charts/components/chart-component";
 import { ChartRadarWithBenefAndControl } from "@features/charts/components/radar-benef-control";
 
-import type { EpfData } from "@entities/dashboard/epf";
+import type { BiodiversityIndex } from "@entities/dashboard/biodiversity-index";
 
 import { useTranslation } from "@i18n";
 
@@ -21,7 +21,9 @@ type ChartForestPotentialProps = {
   temoin?: ChartForestPotentialData;
 };
 
-export function fromEpfData(data: EpfData): ChartForestPotentialData {
+export function fromBiodiversityIndex(
+  data: BiodiversityIndex,
+): ChartForestPotentialData {
   return {
     deadWood: data.bio_idx_deadWood.value ?? 0,
     density: data.bio_idx_tree_density.value ?? 0,
