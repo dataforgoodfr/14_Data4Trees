@@ -59,22 +59,16 @@ function fetchData({
 
 export default function Dashboard() {
   const { t } = useTranslation("all4trees");
-  const api = useApi();
-  const fetch = useCallback(
-    ({ force }: { force?: boolean } = {}) =>
+  const { getDashboardData } = useApi();
+  const [reloadKey, setReloadKey] = useState(0);
+  const dataPromise = useMemo(
+    () =>
       fetchData({
-        force,
-        getDashboardData: api.getDashboardData,
+        force: reloadKey > 0,
+        getDashboardData,
         layer: LAYERS.INVENTARY,
       }),
-    [api],
-  );
-
-  const [reloadKey, setReloadKey] = useState(0);
-
-  const dataPromise = useMemo(
-    () => fetch({ force: reloadKey > 0 }),
-    [fetch, reloadKey],
+    [getDashboardData, reloadKey],
   );
 
   const retry = useCallback(() => {
