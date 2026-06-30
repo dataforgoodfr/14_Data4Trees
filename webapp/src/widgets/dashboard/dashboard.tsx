@@ -41,18 +41,18 @@ function fetchData({
   layer: Layer;
   force?: boolean;
 }): Promise<DashboardData> {
-  const cache = getPerApiCache(getDashboardData);
-  const cachedPromise = cache.get(layer);
+  const perLayerCache = getPerApiCache(getDashboardData);
+  const cachedPromise = perLayerCache.get(layer);
 
   if (cachedPromise && !force) {
     return cachedPromise;
   }
   const promise = getDashboardData(layer).catch((err) => {
     // Don't cache failures forever; allow retries (e.g. after navigation / remount).
-    cache.delete(layer);
+    perLayerCache.delete(layer);
     throw err;
   });
-  cache.set(layer, promise);
+  perLayerCache.set(layer, promise);
 
   return promise;
 }
