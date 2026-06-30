@@ -9,35 +9,38 @@ import {
 
 export type DataField = { value: number | null; error: number | null };
 
+const clientType = {
+  BENEF1: 1,
+  BENEF2: 2,
+  TEMOIN: 0,
+} as const;
+
 export type DashboardData = Record<
   number,
-  { beneficiary: Record<string, DataField>; control: Record<string, DataField> }
+  [
+    Record<string, DataField>, // temoin
+    Record<string, DataField>, // benef (?)
+    Record<string, DataField>, // benef (?)
+  ]
 >;
 
-function twoDecimals(data: Record<string, DataField>) {
-  return Object.fromEntries(
-    Object.entries(data).map(([key, { value, error }]) => [
-      key,
-      {
-        error: error == null ? 0 : Number(error.toFixed(2)),
-        value: value == null ? 0 : Number(value.toFixed(2)),
-      },
-    ]),
-  ) as Record<string, DataField>;
+function getValue({ value }: DataField) {
+  // only keep two decimals, and return 0 if value is null
+  return value == null ? 0 : Number(value.toFixed(2));
 }
 
 function formatBeneficiaryData(
   beneficiary: Record<string, DataField>,
 ): ChartForestPotentialData {
   return {
-    deadWood: beneficiary.bio_idx_deadWood.value ?? 0,
-    density: beneficiary.bio_idx_tree_density.value ?? 0,
-    diameterDistribution: beneficiary.bio_idx_diametric_distribution.value ?? 0,
-    diversity: beneficiary.bio_idx_tree_diversity.value ?? 0,
-    dominantHeight: beneficiary.bio_idx_dominant_height.value ?? 0,
-    microHabitat: beneficiary.bio_idx_microhabitats.value ?? 0,
-    spatialDistribution: beneficiary.bio_idx_spatial_distribution.value ?? 0,
-    verticalDistribution: beneficiary.bio_idx_vertical_distribution.value ?? 0,
+    deadWood: getValue(beneficiary.bio_idx_deadWood),
+    density: getValue(beneficiary.bio_idx_tree_density),
+    diameterDistribution: getValue(beneficiary.bio_idx_diametric_distribution),
+    diversity: getValue(beneficiary.bio_idx_tree_diversity),
+    dominantHeight: getValue(beneficiary.bio_idx_dominant_height),
+    microHabitat: getValue(beneficiary.bio_idx_microhabitats),
+    spatialDistribution: getValue(beneficiary.bio_idx_spatial_distribution),
+    verticalDistribution: getValue(beneficiary.bio_idx_vertical_distribution),
   };
 }
 
@@ -48,11 +51,8 @@ export default function LoadedDashboard({
 }) {
   const data = use(dataPromise);
 
-  const [selectedYear, setSelectedYear] = useState<number>(2024);
-  const chartData = (data[selectedYear]?.beneficiary ?? {}) as Record<
-    string,
-    DataField
-  >;
+  const [selectedYear, setSelectedYear] = useState<number>(2025);
+  const chartData = data[selectedYear][clientType.BENEF1];
 
   const handleYearChange = (year: string) => {
     const numericYear = Number(year);
@@ -77,9 +77,7 @@ export default function LoadedDashboard({
         years={Object.keys(data).map(Number)}
       />
       <div className="mt-4 space-y-4">
-        <ChartForestPotential
-          benef={formatBeneficiaryData(twoDecimals(chartData))}
-        />
+        <ChartForestPotential benef={formatBeneficiaryData(chartData)} />
       </div>
     </div>
   );
