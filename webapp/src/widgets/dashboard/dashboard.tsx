@@ -35,14 +35,16 @@ function getPerApiCache(getDashboardData: GetDashboardData) {
 function fetchData({
   getDashboardData,
   layer,
+  force,
 }: {
   getDashboardData: GetDashboardData;
   layer: Layer;
+  force?: boolean;
 }): Promise<DashboardData> {
   const cache = getPerApiCache(getDashboardData);
   const cachedPromise = cache.get(layer);
 
-  if (cachedPromise) {
+  if (cachedPromise && !force) {
     return cachedPromise;
   }
   const promise = getDashboardData(layer).catch((err) => {
@@ -59,8 +61,9 @@ export default function Dashboard() {
   const { t } = useTranslation("all4trees");
   const api = useApi();
   const fetch = useCallback(
-    () =>
+    ({ force }: { force?: boolean } = {}) =>
       fetchData({
+        force,
         getDashboardData: api.getDashboardData,
         layer: LAYERS.INVENTARY,
       }),
@@ -69,7 +72,7 @@ export default function Dashboard() {
   const [dataPromise, setDataPromise] = useState(fetch);
 
   const retry = useCallback(() => {
-    setDataPromise(fetch());
+    setDataPromise(fetch({ force: true }));
   }, [fetch]);
   const fallbackRender = useMemo(
     () => getFallbackRender({ retry, t }),
