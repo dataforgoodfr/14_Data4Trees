@@ -1,7 +1,6 @@
 import json
 import shutil
 
-import numpy as np
 import pandas as pd
 from django.contrib.auth.models import Permission
 from django.contrib.auth import get_user_model
