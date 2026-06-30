@@ -1,6 +1,8 @@
 import type { TFunction } from "i18next";
 import { type FallbackProps, getErrorMessage } from "react-error-boundary";
 
+import { Button } from "@ui/button";
+
 // t must be passed to the fallback render function because the error boundary fallback component cannot call hooks like useTranslation
 export function getFallbackRender({
   retry,
@@ -20,13 +22,12 @@ export function getFallbackRender({
         </h1>
         <p className="mt-2">{errorMessage}</p>
         {retry && (
-          <button
-            className="mt-4 border border-accent rounded px-4 py-2 bg-primary hover:bg-accent text-xl hover:cursor-pointer"
+          <Button
             onClick={retry}
             type="button"
           >
             {t("dashboard.error.retry")}
-          </button>
+          </Button>
         )}
       </div>
     );
