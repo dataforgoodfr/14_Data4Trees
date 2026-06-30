@@ -40,7 +40,6 @@ export const fetchJSONWithAuth = async (
 ) => (await fetchWithAuth(endpoint, options, authToken)).json();
 
 export const createApiClient = (authToken: string | null) => ({
-  // Bases
   getDashboardData: (layerId: string) =>
     fetchJSONWithAuth(`/maps/dashboard/${layerId}`, {}, authToken),
 });

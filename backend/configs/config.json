@@ -35,7 +35,7 @@
       }
     },
     {
-      "id": "inventaire",
+      "id": "inventaire_for",
       "type": "datapackage",
       "path": "../catalog/inventaire_for",
       "resource": "inv_for",

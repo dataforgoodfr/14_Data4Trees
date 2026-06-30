@@ -1,7 +1,27 @@
+import math
+
 import pandas as pd
 import numpy as np
 
 from . import constants
+
+
+def _to_serializable(value):
+    """Convert numpy/pandas-native values to JSON-serializable Python types."""
+    if isinstance(value, dict):
+        return {_to_serializable(k): _to_serializable(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_to_serializable(v) for v in value]
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, (pd.Timestamp, pd.Timedelta)):
+        return str(value)
+    if isinstance(value, float):
+        if math.isnan(value) or math.isinf(value):
+            return None
+        return value
+    return value
+
 
 def mrp_mean(df, weights_map):
     """
@@ -39,7 +59,7 @@ def mrp_mean(df, weights_map):
     part2 = 1/sample_size**2 * (population_size - sample_size) / (population_size - 1) * (variance_simple - variance_weighted)
     std_error = np.sqrt(part1+part2)
 
-    return {"value": mean_weighted, "error": std_error}
+    return {"value": _to_serializable(mean_weighted), "error": _to_serializable(std_error)}
 
 def mrp_mean_dict(series, weights):
     """
@@ -68,7 +88,7 @@ def mrp_mean_dict(series, weights):
     # TODO
     std_error = np.nan
 
-    return {"value": dict_result, "error": std_error}
+    return {"value": _to_serializable(dict_result), "error": _to_serializable(std_error)}
 
 def compute_aggregation(data):
 
@@ -167,5 +187,4 @@ def compute_aggregation(data):
                 
                 dict_result[project][str(year)][sampling] = result
 
-    print(dict_result)
-    return dict_result
+    return _to_serializable(dict_result['A Kob Ale'])

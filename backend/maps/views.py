@@ -31,7 +31,7 @@ def dashboard_view(request, layer_id):
             layer_id,
             request.body)
 
-    if (layer_id == "inventaire"):
+    if (layer_id == "inventaire_for"):
 
         result = stats.compute_aggregation(data)
 
