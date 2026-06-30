@@ -77,7 +77,10 @@ export default function Dashboard() {
   );
 
   return (
-    <ErrorBoundary fallbackRender={fallbackRender} resetKeys={[dataPromise]}>
+    <ErrorBoundary
+      fallbackRender={fallbackRender}
+      resetKeys={[dataPromise]}
+    >
       <Suspense fallback={<Loading />}>
         <LoadedDashboard dataPromise={dataPromise} />
       </Suspense>
