@@ -18,6 +18,6 @@ COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "./entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
 
 EXPOSE 8000
