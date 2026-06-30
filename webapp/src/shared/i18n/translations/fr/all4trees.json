@@ -1,6 +1,7 @@
 {
   "dashboard": {
     "error": {
+      "retry": "Réessayer",
       "title": "Erreur lors du chargement des données",
       "unknownMessage": "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."
     },
