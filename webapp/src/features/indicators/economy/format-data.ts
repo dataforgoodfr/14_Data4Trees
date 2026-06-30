@@ -44,7 +44,7 @@ export const useFormatEconomicData = (data: SocioEcoData) => {
 
   return {
     economy: {
-      assetsIndex: `${safeData.assets_idx}/24`,
+      assetsIndex: `${safeData.assets_idx}/10`,
       incomeSourceNb: safeData.nb_income_sources,
       livingConditionsPerception: {
         dontKnow: safeData.living_cond_perception["98"],
