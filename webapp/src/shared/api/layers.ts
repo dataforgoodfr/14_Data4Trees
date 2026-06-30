@@ -1,7 +1,7 @@
 export const LAYERS = {
   BOUNDARIES: "boundaries",
   ENQUETE: "enquete",
-  INVENTARY: "inventaire",
+  INVENTARY: "inventaire_for",
   SATELLITE: "satellite",
   SEED: "seed",
   SEED_POINT: "seed_point",

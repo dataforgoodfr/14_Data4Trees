@@ -35,7 +35,7 @@
       }
     },
     {
-      "id": "inventaire",
+      "id": "inventaire_for",
       "type": "datapackage",
       "path": "../catalog/inventaire_for",
       "resource": "inv_for",
@@ -64,7 +64,7 @@
         "soil_structure_idx": "(thk1*float(not1) + thk2*float(not2) + thk3*float(not3) + thk4*float(not4) + thk5*float(not5)) / (thk1 + thk2 + thk3 + thk4 + thk5) * 2",
         "soil_composition": "count(1)",
         "soil_eros_rainfall_and_wind": "for_weath.concat_ws('-', rain, wind)",
-        "soil_eros_slope": "10 - slop if slop < 10 else 0",
+        "soil_eros_slope": "int(10 - slop if slop < 10 else 0)",
         "soil_eros_cover": "veg",
         "soil_eros_stability": "(int(slak1) + int(slak2) + int(slak3)) / 3",
         "soil_eros_water_infiltration": "600 * 300 / ( (epoch(interval(beer1)) + epoch(interval(beer2)) + epoch(interval(beer3)) + epoch(interval(beer4)) + epoch(interval(beer5)) + epoch(interval(beer6)) + epoch(interval(beer7)) + epoch(interval(beer8)) + epoch(interval(beer9)) + epoch(interval(beer10)) ) / 10 * pi() * 9^2) if beer1 != '' else 0",

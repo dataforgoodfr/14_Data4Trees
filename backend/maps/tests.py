@@ -1,11 +1,32 @@
+import json
+import shutil
+
+import pandas as pd
 from django.contrib.auth.models import Permission
 from django.contrib.auth import get_user_model
-from django.test import TestCase, Client
+from django.test import TestCase, Client, SimpleTestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-import shutil 
+
+from maps.stats import mrp_mean
 
 TEST_DIR = 'catalog/test'
+class SerializationTest(SimpleTestCase):
+    def test_mrp_mean_returns_json_serializable_values(self):
+        df = pd.DataFrame(
+            {
+                "value": [1.0, 2.0, 3.0],
+                "stratum": ["a", "b", "a"],
+            }
+        )
+        result = mrp_mean(df, {"a": 1.0, "b": 1.0})
+
+        payload = json.dumps(result)
+
+        self.assertIn('"value"', payload)
+        self.assertIn('"error"', payload)
+
+
 class FileUploadTest(TestCase):
     def setUp(self):
         self.client = Client()
