@@ -5,7 +5,6 @@ import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@shared/ui/chart";
 
 import type { ChartComponentType } from "./chart-component";
@@ -15,6 +14,7 @@ type BarChartProps = {
   title: string;
   chartData: Array<{ indicator: string; benef: unknown; temoin?: unknown }>;
   legendLabel: string;
+  unit?: string;
   withTemoin?: boolean;
   layout?: { chartHeight: number; chartXAxisHeight: number };
 };
@@ -23,25 +23,43 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   title,
   chartData,
   legendLabel,
+  unit = "",
   withTemoin = false,
 }) => {
   const { t } = useTranslation("all4trees");
   const chartConfig = {
     benef: {
       color: "var(--chart-1)",
-      label: `(${t("indicators.common.beneficiary")}) ` + legendLabel,
+      label: legendLabel + ` (${t("indicators.common.beneficiary")})`,
     },
     temoin: {
       color: "var(--chart-3)",
-      label: `(${t("indicators.common.control")}) ` + legendLabel,
+      label: legendLabel + ` (${t("indicators.common.control")})`,
     },
   } satisfies ChartConfig;
+
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const tooltipConfig = chartConfig as Record<
+        string,
+        { color: string; label: string }
+      >;
+      const label = tooltipConfig[payload[0].name]?.label || payload[0].name;
+      const tooltip = `${payload[0].value}${unit} ${label}`;
+      return (
+        <div className="rounded-lg border border-border bg-background p-2 shadow-md">
+          <p className="text-foreground font-medium">{tooltip}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <ChartComponent title={title}>
       <ChartContainer
         // Style: Extend the width to the container, but enforce the height for XAxis alignment
-        className="mx-auto h-80 max-h-80 w-full max-w-full"
+        className="mx-auto h-110 max-h-110 w-full max-w-full"
         config={chartConfig}
       >
         <BarChart
@@ -52,7 +70,7 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
           <XAxis
             axisLine={false}
             dataKey="indicator"
-            height={90}
+            height={130}
             interval={0}
             tick={renderXAxisTick}
             tickLine={false}
@@ -67,7 +85,7 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
             width={24}
           />
           <ChartTooltip
-            content={<ChartTooltipContent />}
+            content={<CustomTooltip />}
             cursor={false}
           />
           <Bar

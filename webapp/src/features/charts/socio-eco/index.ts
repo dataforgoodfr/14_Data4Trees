@@ -1,2 +1,2 @@
-export { ChartEnergySources } from "./chart-energy-sources";
-export { ChartWoodEnergyNeeds } from "./chart-wood-energy-needs";
+export { ChartFuelSources as ChartEnergySources } from "./chart-energy-sources";
+export { ChartFireWoodNeeds as ChartWoodEnergyNeeds } from "./chart-wood-energy-needs";

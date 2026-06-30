@@ -8,15 +8,15 @@ import { ChartFoodDiversity } from "@features/charts/socio-eco/chart-food-divers
 import { ChartTimberNeeds } from "@features/charts/socio-eco/chart-timber-needs";
 import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "@features/indicators/components/types";
+import type { SocioEcoData } from "@features/popup/socio-eco";
 
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
 import { useFormatSocialData } from "./format-data";
-import type { SocialData } from "./types";
 
 export const useSocialIndicatorElements = (
-  rawData: SocialData,
+  rawData: SocioEcoData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatSocialData(rawData);
@@ -25,13 +25,13 @@ export const useSocialIndicatorElements = (
     {
       children: (
         <>
-          <ChartEnergySources benef={data.wood.energySources} />
+          <ChartEnergySources benef={data.wood.fuelSources} />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.wood.energyConsumption")}
             iconStart={<Zap size={ICON_SIZE} />}
             value={data.wood.energyConsumption}
           />
-          <ChartWoodEnergyNeeds data={data.wood.energyNeeds} />
+          <ChartWoodEnergyNeeds data={data.wood.firewoodNeeds} />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.wood.collectionTime")}
             iconStart={<Hourglass size={ICON_SIZE} />}
@@ -56,7 +56,7 @@ export const useSocialIndicatorElements = (
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.autoConso")}
             iconStart={<Wheat size={ICON_SIZE} />}
-            value={data.food.autoConsumptionNeeds}
+            value={data.food.foodSelfSufficiency}
           />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.leanPeriod")}

@@ -2,6 +2,7 @@ import { ChartLine, HandCoins, Scroll } from "lucide-react";
 
 import { ChartBeneficialPractices } from "@features/charts/socio-eco/chart-beneficial-practices";
 import { ChartLivingPerception } from "@features/charts/socio-eco/chart-living-perception";
+import type { SocioEcoData } from "@features/popup/socio-eco";
 
 import { useTranslation } from "@i18n";
 
@@ -9,10 +10,9 @@ import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import { useFormatEconomicData } from "./format-data";
-import type { EconomicData } from "./types";
 
 export const useEconomicIndicatorElements = (
-  rawData: EconomicData,
+  rawData: SocioEcoData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatEconomicData(rawData);

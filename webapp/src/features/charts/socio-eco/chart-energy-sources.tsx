@@ -4,13 +4,14 @@ import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-contro
 import type { ChartComponentType } from "../components/chart-component";
 
 type Data = {
-  collectedWood: number;
-  boughtWood: number;
+  fw_coll: number;
+  fw_pur: number;
+  fw_rec: number;
   coal: number;
-  organicWaste: number;
-  animalWaste: number;
-  gas: number;
-  other: number;
+  crop: number;
+  man: number;
+  gaz: number;
+  oth: number;
 };
 
 type ChartEnergySourcesProps = {
@@ -18,25 +19,31 @@ type ChartEnergySourcesProps = {
   temoin?: Data;
 };
 
-export const ChartEnergySources: ChartComponentType<
-  ChartEnergySourcesProps
-> = ({ benef, temoin }) => {
+export const ChartFuelSources: ChartComponentType<ChartEnergySourcesProps> = ({
+  benef,
+  temoin,
+}) => {
   const { t } = useTranslation("all4trees");
 
   const chartData = [
     {
-      benef: benef.collectedWood,
+      benef: benef.fw_coll,
       indicator: t(
         "indicators.socioEco.sections.wood.energySources.collectedWood",
       ),
-      temoin: temoin?.collectedWood,
+      temoin: temoin?.fw_coll,
     },
     {
-      benef: benef.boughtWood,
+      benef: benef.fw_pur,
       indicator: t(
         "indicators.socioEco.sections.wood.energySources.boughtWood",
       ),
-      temoin: temoin?.boughtWood,
+      temoin: temoin?.fw_pur,
+    },
+    {
+      benef: benef.fw_rec,
+      indicator: t("indicators.socioEco.sections.wood.energySources.recWood"),
+      temoin: temoin?.fw_rec,
     },
     {
       benef: benef.coal,
@@ -44,28 +51,28 @@ export const ChartEnergySources: ChartComponentType<
       temoin: temoin?.coal,
     },
     {
-      benef: benef.organicWaste,
+      benef: benef.crop,
       indicator: t(
         "indicators.socioEco.sections.wood.energySources.organicWaste",
       ),
-      temoin: temoin?.organicWaste,
+      temoin: temoin?.crop,
     },
     {
-      benef: benef.animalWaste,
+      benef: benef.man,
       indicator: t(
         "indicators.socioEco.sections.wood.energySources.animalWaste",
       ),
-      temoin: temoin?.animalWaste,
+      temoin: temoin?.man,
     },
     {
-      benef: benef.gas,
+      benef: benef.gaz,
       indicator: t("indicators.socioEco.sections.wood.energySources.gas"),
-      temoin: temoin?.gas,
+      temoin: temoin?.gaz,
     },
     {
-      benef: benef.other,
+      benef: benef.oth,
       indicator: t("indicators.socioEco.sections.wood.energySources.other"),
-      temoin: temoin?.other,
+      temoin: temoin?.oth,
     },
   ];
 
@@ -74,9 +81,10 @@ export const ChartEnergySources: ChartComponentType<
       chartData={chartData}
       legendLabel={t("indicators.socioEco.sections.wood.energySources.legend")}
       title={t("indicators.socioEco.sections.wood.energySources.title")}
+      unit="%"
       withTemoin={!!temoin}
     />
   );
 };
 
-ChartEnergySources.isChartComponent = true;
+ChartFuelSources.isChartComponent = true;

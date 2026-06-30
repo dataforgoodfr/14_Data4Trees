@@ -75,10 +75,23 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
     Object.entries(data).map(([key, value]) => [
       key,
       indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value))
+        ? precise(Number(value), defaultValue)
         : (value ?? defaultValue),
     ]),
   ) as T;
+}
+
+export function convertDictToPercentage(
+  data: Record<string, number>,
+  total: number,
+  defaultValue: string,
+): Record<string, number> {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      Number(precise(Number((value * 100) / total), defaultValue)),
+    ]),
+  );
 }
 
 /*
