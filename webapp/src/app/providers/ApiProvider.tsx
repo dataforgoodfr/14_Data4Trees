@@ -1,9 +1,8 @@
 import { type ReactNode, useMemo } from "react";
 
+import { createApiClient } from "@features/api/client";
 import { useAuth } from "@features/auth/useAuth";
-
-import { createApiClient } from "@shared/api/client";
-import { ApiContext } from "@shared/contexts/ApiContext";
+import { ApiContext } from "@features/contexts/ApiContext";
 
 interface ApiProviderProps {
   children: ReactNode;

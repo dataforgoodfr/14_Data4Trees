@@ -1,7 +1,7 @@
 export const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
-export const fetchWithAuth = async (
+const fetchWithAuth = async (
   endpoint: string,
   options: RequestInit = {},
   authToken: string | null,
@@ -37,12 +37,5 @@ export const fetchJSONWithAuth = async (
   endpoint: string,
   options: RequestInit = {},
   authToken: string | null,
-) => (await fetchWithAuth(endpoint, options, authToken)).json();
-
-export const createApiClient = (authToken: string | null) => ({
-  // Bases
-  getDashboardData: (layerId: string) =>
-    fetchJSONWithAuth(`/maps/dashboard/${layerId}`, {}, authToken),
-});
-
-export type ApiClient = ReturnType<typeof createApiClient>;
+): Promise<unknown> =>
+  (await fetchWithAuth(endpoint, options, authToken)).json();

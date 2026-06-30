@@ -48,11 +48,18 @@ export function buildSunburstNodes(
   return nodes;
 }
 
-export const getLevelPalettes = () => {
+type ThreeColorsPalette = [string, string, string];
+type ThreePalettes = [
+  ThreeColorsPalette,
+  ThreeColorsPalette,
+  ThreeColorsPalette,
+];
+
+export const getLevelPalettes = (): ThreePalettes => {
   const palette = getChartPalette();
 
   return [
-    palette.slice(0, 3),
+    [palette[0], palette[1], palette[2]],
     [palette[3], palette[4], palette[0]],
     [palette[1], palette[2], palette[3]],
   ];

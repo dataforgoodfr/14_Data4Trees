@@ -6,7 +6,14 @@ const getCssVarColor = (name: string, fallback: string) => {
   );
 };
 
-export const getChartPalette = () => [
+export const getChartPalette = (): [
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+] => [
   getCssVarColor("--chart-1", "#97cf17"),
   getCssVarColor("--chart-2", "#f98038"),
   getCssVarColor("--chart-3", "#2d6db4"),

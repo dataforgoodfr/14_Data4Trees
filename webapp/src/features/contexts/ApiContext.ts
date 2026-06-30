@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-import type { ApiClient } from "@shared/api/client";
+import type { ApiClient } from "@features/api/client";
 
 export const ApiContext = createContext<ApiClient | undefined>(undefined);

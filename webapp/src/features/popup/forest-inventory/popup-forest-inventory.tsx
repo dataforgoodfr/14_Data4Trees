@@ -20,7 +20,7 @@ type ForestInventoryPopupContentProps = RenderPopupProps<ForestInventoryData>;
 
 type TabKind = "biodiversity" | "soil";
 
-const TABS: Record<string, TabKind> = {
+const TABS = {
   BIODIVERSITY: "biodiversity",
   SOIL: "soil",
 } as const;

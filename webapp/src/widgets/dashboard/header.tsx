@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { useTranslation } from "@shared/i18n";
 
 import {
@@ -9,35 +11,48 @@ import {
   SelectValue,
 } from "@ui/select";
 
-export type DashboardHeaderProps = {
+export type HeaderProps = {
   years: number[];
   selectedYear: number;
-  onValueChange: (year: string) => void;
+  onYearChange: (year: number) => void;
 };
 
-export function DashboardHeader({
+export default function Header({
   years,
   selectedYear,
-  onValueChange: onvalueChange,
-}: DashboardHeaderProps) {
+  onYearChange,
+}: HeaderProps) {
   const { t } = useTranslation("all4trees");
   const username = localStorage.getItem("username") || "";
+
+  const onStringYearChange = useCallback(
+    (year: string) => {
+      const numericYear = Number(year);
+      if (!Number.isNaN(numericYear)) {
+        onYearChange(numericYear);
+      } else {
+        console.warn("Année sélectionnée invalide:", year);
+      }
+    },
+    [onYearChange],
+  );
+
   return (
     <div>
       <div className="mt-4 flex flex-nowrap justify-between items-center">
         <div>
           <h1 className="font-bold text-xl tracking-wide">
-            Bonjour{` ${username}`} ! 👋
+            {t("dashboard.header.greeting", { username })}
           </h1>
         </div>
-        <p>⚠ Filtre</p>
+        <p>{t("dashboard.header.temporaryFilter")}</p>
       </div>
 
       <div className="mt-5 flex flex-nowrap justify-between">
-        <h2 className="font-bold text-xl">Catalogue des graphiques</h2>
+        <h2 className="font-bold text-xl">{t("dashboard.header.catalog")}</h2>
         <div>
           <Select
-            onValueChange={onvalueChange}
+            onValueChange={onStringYearChange}
             value={selectedYear.toString()}
           >
             <SelectTrigger className="w-45">
@@ -56,7 +71,7 @@ export function DashboardHeader({
               </SelectGroup>
             </SelectContent>
           </Select>
-          <p className="inline">⚠ Bénéficiaire</p>
+          <p className="inline">{t("dashboard.header.temporaryBeneficiary")}</p>
         </div>
       </div>
     </div>

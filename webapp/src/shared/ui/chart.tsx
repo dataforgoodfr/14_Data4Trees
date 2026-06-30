@@ -244,6 +244,10 @@ const ChartTooltipContent = React.forwardRef<
                             {
                               /* Force a space between item label and value*/ "\xa0" +
                                 item.value.toLocaleString()
+                              // ^ TODO: why not using CSS to add a space between the label and the value?
+                              // ^ TODO: pass a prop to format the item value (e.g.: no more than 2 decimals, or other formatting rules)
+                              // ^ TODO: use the current locale to format the item value (e.g.: 1,000.00 in en-US, 1 000,00 in fr-FR, etc.)
+                              // ^ TODO: add the unit?
                             }
                           </span>
                         )}

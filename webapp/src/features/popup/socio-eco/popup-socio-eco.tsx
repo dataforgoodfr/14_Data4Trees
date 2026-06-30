@@ -21,7 +21,7 @@ type SocioEcoIndicatorProps = RenderPopupProps<SocioEcoData>;
 
 type TabKind = "resources" | "economy";
 
-const TABS: Record<string, TabKind> = {
+const TABS = {
   ECONOMY: "economy",
   RESOURCES: "resources",
 } as const;
