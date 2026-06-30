@@ -69,11 +69,17 @@ export default function Dashboard() {
       }),
     [api],
   );
-  const [dataPromise, setDataPromise] = useState(fetch);
+
+  const [reloadKey, setReloadKey] = useState(0);
+
+  const dataPromise = useMemo(
+    () => fetch({ force: reloadKey > 0 }),
+    [fetch, reloadKey],
+  );
 
   const retry = useCallback(() => {
-    setDataPromise(fetch({ force: true }));
-  }, [fetch]);
+    setReloadKey((k) => k + 1);
+  }, []);
   const fallbackRender = useMemo(
     () => getFallbackRender({ retry, t }),
     [retry, t],
