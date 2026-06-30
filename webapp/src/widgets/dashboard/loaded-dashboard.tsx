@@ -30,14 +30,14 @@ function formatBeneficiaryData(
   beneficiary: Record<string, DataField>,
 ): ChartForestPotentialData {
   return {
-    deadWood: beneficiary.epf_deadWood.value ?? 0,
-    density: beneficiary.epf_tree_density.value ?? 0,
-    diameterDistribution: beneficiary.epf_diameter_distribution.value ?? 0,
-    diversity: beneficiary.epf_tree_diversity.value ?? 0,
-    dominantHeight: beneficiary.epf_dominant_height.value ?? 0,
-    microHabitat: beneficiary.epf_microhabitats.value ?? 0,
-    spatialDistribution: beneficiary.epf_spatial_distribution.value ?? 0,
-    verticalDistribution: beneficiary.epf_vertical_distribution.value ?? 0,
+    deadWood: beneficiary.bio_idx_deadWood.value ?? 0,
+    density: beneficiary.bio_idx_tree_density.value ?? 0,
+    diameterDistribution: beneficiary.bio_idx_diametric_distribution.value ?? 0,
+    diversity: beneficiary.bio_idx_tree_diversity.value ?? 0,
+    dominantHeight: beneficiary.bio_idx_dominant_height.value ?? 0,
+    microHabitat: beneficiary.bio_idx_microhabitats.value ?? 0,
+    spatialDistribution: beneficiary.bio_idx_spatial_distribution.value ?? 0,
+    verticalDistribution: beneficiary.bio_idx_vertical_distribution.value ?? 0,
   };
 }
 
