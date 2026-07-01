@@ -11,6 +11,7 @@ import type { ForestInventoryData } from "@features/popup/forest-inventory/types
 import type { NumericKeys } from "@shared/types";
 
 import type { BiodiversityData } from "./types";
+import type { ForestInventoryData } from "@features/popup/forest-inventory/types";
 
 const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "biomass_volume",
