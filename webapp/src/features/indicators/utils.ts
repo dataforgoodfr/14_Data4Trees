@@ -27,45 +27,48 @@ export type Unit = keyof typeof UNITS;
  * Return a function that appends the correct internationalized unit based on the `unit` input.
  */
 export const useFormatterWithUnit = () => {
-  const { t } = useTranslation("all4trees");
+  const { t } = useTranslation(["common", "all4trees"]);
 
   function formatWithUnit(
     value: number | string | null | undefined,
     unit: Unit,
   ): string | null {
-    if (value == null) {
-      return null;
+    const noDataStr = t("dataManagement.noData", { ns: "common" });
+    if (value == null || value === noDataStr) {
+      return noDataStr;
     }
 
     const formattedValue = typeof value === "number" ? precise(value) : value;
 
     switch (unit) {
       case UNITS.individualPerCubicMeter:
-        return t("indicators.units.individualPerCubicMeter", { value });
+        return t("indicators.units.individualPerCubicMeter", { value, ns: "all4trees" });
       case UNITS.individualPerHectare:
-        return t("indicators.units.individualPerHectare", { value });
+        return t("indicators.units.individualPerHectare", { value, ns: "all4trees" });
       case UNITS.individualPerTrap:
-        return t("indicators.units.individualPerTrap", { value });
+        return t("indicators.units.individualPerTrap", { value, ns: "all4trees" });
       case UNITS.speciesCount:
         return t("indicators.units.speciesCount", {
           count: parseInt(formattedValue, 10),
+          ns: "all4trees"
         });
       case UNITS.essenceCount:
         return t("indicators.units.essenceCount", {
           count: parseInt(formattedValue, 10),
+          ns: "all4trees"
         });
       case UNITS.tonPerHectare:
-        return t("indicators.units.tonPerHectare", { value });
+        return t("indicators.units.tonPerHectare", { value, ns: "all4trees" });
       case UNITS.m3PerHabPerYear:
-        return t("indicators.units.m3PerHabPerYear", { value });
+        return t("indicators.units.m3PerHabPerYear", { value, ns: "all4trees" });
       case UNITS.monthPerYear:
-        return t("indicators.units.monthPerYear", { value });
+        return t("indicators.units.monthPerYear", { value, ns: "all4trees" });
       case UNITS.percentFoodRequirements:
-        return t("indicators.units.percentFoodRequirements", { value });
+        return t("indicators.units.percentFoodRequirements", { value, ns: "all4trees" });
       case UNITS.minPerHouseholdPerDay:
-        return t("indicators.units.minPerHhPerDay", { value });
+        return t("indicators.units.minPerHhPerDay", { value, ns: "all4trees" });
       default:
-        return null;
+        return noDataStr;
     }
   }
 
@@ -79,11 +82,12 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
 ): T {
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
-      key,
-      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value), defaultValue)
-        : (value ?? defaultValue),
-    ]),
+        key,
+        indicatorKeys.includes(key as (typeof indicatorKeys)[number])
+          ? precise(Number(value), defaultValue)
+        : value, // Keep the original value if it's not in the list of indicator keys
+      ]
+    ),
   ) as T;
 }
 
@@ -92,6 +96,9 @@ export function convertDictToPercentage(
   total: number,
   defaultValue: string,
 ): Record<string, number> {
+  if (!data) {
+    return {};
+  }
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,

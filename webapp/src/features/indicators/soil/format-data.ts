@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   computeScore,
+  convertDictToPercentage,
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
@@ -11,6 +12,7 @@ import type { ForestInventoryData } from "@features/popup/forest-inventory";
 import type { NumericKeys } from "@shared/types";
 
 import type { SoilData } from "./types";
+import type { ForestInventoryData } from "@features/popup/forest-inventory";
 
 const indicatorsToPreciseWithFallBack: NumericKeys<SoilData>[] = [
   "soil_structure_idx",
@@ -24,6 +26,21 @@ const indicatorsToPreciseWithoutFallBack: NumericKeys<SoilData>[] = [
   "soil_eros_stability",
   "soil_eros_water_infiltration",
 ] as const;
+
+function formatTaxonAbundance(abundancePop: string[], abundanceTotal: number) {
+  if (!abundanceTotal) {
+    return {};
+  }
+
+  let abundancePopRecord: Record<string, number> = {};
+  abundancePop.forEach((value) => {
+    const [ taxon, count ] = value.split(':');
+    const currentCount = abundancePopRecord[taxon] || 0;
+    abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+  });
+
+  return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
+}
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
@@ -51,12 +68,22 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     indicatorsToPreciseWithFallBack,
     t("dataManagement.noData"),
   );
+    
+  safeData.soil_surface_fauna_abundance = convertDictToPercentage(safeData.soil_surface_fauna_abundance, Object.values<number>(safeData.soil_surface_fauna_abundance || {}).reduce((a, b) => a + b, 0), "0") /*formatTaxonAbundance(
+    safeData.soil_surface_fauna_abundance_pop,
+    safeData.soil_surface_fauna_total_pop
+  )*/
+
+  safeData.soil_fauna_abundance = formatTaxonAbundance(
+    safeData.soil_fauna_abundance_pop,
+    safeData.soil_fauna_total_pop
+  )
 
   return {
     ...safeData,
     soil_eros_rainfall: Number(soil_eros_rainfall_and_wind.split("-")[0]),
     soil_eros_stability: soil_eros_stability,
-    soil_eros_water_infiltration: computeScore(soil_eros_water_infiltration),
+    soil_eros_water_infiltration: computeScore(Number(soil_eros_water_infiltration)),
     soil_eros_wind: Number(soil_eros_rainfall_and_wind.split("-")[1]),
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(

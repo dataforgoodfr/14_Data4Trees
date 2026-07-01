@@ -8,7 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function precise(value?: number | null, defaultValue: string = "0") {
-  if (!value || Number.isNaN(value)) {
+  // !value is true is value === 0.
+  if (value === null || value === undefined || Number.isNaN(value)) {
     return defaultValue;
   }
   if (value > 999) {

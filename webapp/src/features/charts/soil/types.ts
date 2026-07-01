@@ -17,6 +17,8 @@ export type SunburstTrace = {
   type: "sunburst";
   branchvalues: "total";
   extendsunburstcolorway: boolean;
+  hoverinfo?: string;
+  hovertext?: string[];
   ids: string[];
   labels: string[];
   parents: string[];
