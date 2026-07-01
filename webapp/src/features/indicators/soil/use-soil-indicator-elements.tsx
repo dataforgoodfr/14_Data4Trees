@@ -1,4 +1,3 @@
-import type { LayerMetadata } from "coordo";
 import { Bug, Gem, Sprout } from "lucide-react";
 
 import { ChartAquaticErosion } from "@features/charts/soil/ui/chart-aquatic-erosion";
@@ -7,6 +6,7 @@ import { ChartWindErosion } from "@features/charts/soil/ui/chart-wind-erosion";
 import type { UseIndicatorReturnType } from "@features/indicators//components/types";
 import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
 
+import type { LayerMetadata } from "@shared/lib/coordo";
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";

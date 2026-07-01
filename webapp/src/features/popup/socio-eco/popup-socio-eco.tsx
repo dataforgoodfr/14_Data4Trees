@@ -1,5 +1,4 @@
 import { cx } from "class-variance-authority";
-import type { LayerMetadata } from "coordo";
 import { UsersIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
@@ -10,6 +9,7 @@ import { useEconomicIndicatorElements } from "@features/indicators/economy";
 import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
+import type { LayerMetadata } from "@shared/lib/coordo";
 import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";

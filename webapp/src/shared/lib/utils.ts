@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
-import type { LayerMetadata } from "coordo";
 import { twMerge } from "tailwind-merge";
 
 import { i18nInstance } from "@shared/i18n";
+import type { LayerMetadata } from "@shared/lib/coordo";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
