@@ -14,7 +14,7 @@ type PieChartProps = {
   };
 };
 
-export const ChartLivingPerception: ChartComponentType<PieChartProps> = ({
+export const ChartLivingCondition: ChartComponentType<PieChartProps> = ({
   data,
 }) => {
   const { t } = useTranslation("all4trees");
@@ -81,4 +81,4 @@ export const ChartLivingPerception: ChartComponentType<PieChartProps> = ({
   );
 };
 
-ChartLivingPerception.isChartComponent = true;
+ChartLivingCondition.isChartComponent = true;
