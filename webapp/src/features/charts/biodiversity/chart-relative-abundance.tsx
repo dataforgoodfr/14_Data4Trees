@@ -23,7 +23,10 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
     .filter((value) => value < 5)
     .reduce((acc, value) => acc + value, 0);
   const chartData = Object.entries(data)
-    .filter(([name, value]) => name !== "0" && (Object.keys(data).length < 6 || value >= 5))
+    .filter(
+      ([name, value]) =>
+        name !== "0" && (Object.keys(data).length < 6 || value >= 5),
+    )
     .map(([name, value], index) => ({
       fill: `var(--chart-${(index % 5) + 1})`,
       name,

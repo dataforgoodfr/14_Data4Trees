@@ -42,31 +42,46 @@ export const useFormatterWithUnit = () => {
 
     switch (unit) {
       case UNITS.individualPerCubicMeter:
-        return t("indicators.units.individualPerCubicMeter", { value, ns: "all4trees" });
+        return t("indicators.units.individualPerCubicMeter", {
+          ns: "all4trees",
+          value,
+        });
       case UNITS.individualPerHectare:
-        return t("indicators.units.individualPerHectare", { value, ns: "all4trees" });
+        return t("indicators.units.individualPerHectare", {
+          ns: "all4trees",
+          value,
+        });
       case UNITS.individualPerTrap:
-        return t("indicators.units.individualPerTrap", { value, ns: "all4trees" });
+        return t("indicators.units.individualPerTrap", {
+          ns: "all4trees",
+          value,
+        });
       case UNITS.speciesCount:
         return t("indicators.units.speciesCount", {
           count: parseInt(formattedValue, 10),
-          ns: "all4trees"
+          ns: "all4trees",
         });
       case UNITS.essenceCount:
         return t("indicators.units.essenceCount", {
           count: parseInt(formattedValue, 10),
-          ns: "all4trees"
+          ns: "all4trees",
         });
       case UNITS.tonPerHectare:
-        return t("indicators.units.tonPerHectare", { value, ns: "all4trees" });
+        return t("indicators.units.tonPerHectare", { ns: "all4trees", value });
       case UNITS.m3PerHabPerYear:
-        return t("indicators.units.m3PerHabPerYear", { value, ns: "all4trees" });
+        return t("indicators.units.m3PerHabPerYear", {
+          ns: "all4trees",
+          value,
+        });
       case UNITS.monthPerYear:
-        return t("indicators.units.monthPerYear", { value, ns: "all4trees" });
+        return t("indicators.units.monthPerYear", { ns: "all4trees", value });
       case UNITS.percentFoodRequirements:
-        return t("indicators.units.percentFoodRequirements", { value, ns: "all4trees" });
+        return t("indicators.units.percentFoodRequirements", {
+          ns: "all4trees",
+          value,
+        });
       case UNITS.minPerHouseholdPerDay:
-        return t("indicators.units.minPerHhPerDay", { value, ns: "all4trees" });
+        return t("indicators.units.minPerHhPerDay", { ns: "all4trees", value });
       default:
         return noDataStr;
     }
@@ -82,12 +97,11 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
 ): T {
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
-        key,
-        indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-          ? precise(Number(value), defaultValue)
+      key,
+      indicatorKeys.includes(key as (typeof indicatorKeys)[number])
+        ? precise(Number(value), defaultValue)
         : value, // Keep the original value if it's not in the list of indicator keys
-      ]
-    ),
+    ]),
   ) as T;
 }
 
