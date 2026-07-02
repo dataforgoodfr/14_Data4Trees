@@ -6,7 +6,6 @@ import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 
 import { API_URL } from "@shared/api/client";
 import {
-  type Category,
   MapContext,
 } from "@shared/contexts/map-context-all4trees";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
@@ -33,7 +32,6 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
   const { isAuthenticated, token } = useAuth();
 
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
-  const [forests, setForests] = useState<Category[]>([]);
   const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
     "d4g:map-settings:all4trees",
     DEFAULT_MAP_SETTINGS,
@@ -54,14 +52,6 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
 
     const handleReady = () => {
       setIsReady(true);
-      // biome-ignore lint/suspicious/noExplicitAny : <no types from the lib coordo>
-      const metadata: any = mapApiRef.current?.getLayerMetadata("inventaire");
-      const forestField = metadata?.schema?.fields?.find(
-        (f: { name: string }) => f.name === "for",
-      );
-      if (forestField?.categories) {
-        setForests(forestField.categories);
-      }
 
       // On first mount, sync the map state with the local storage state of "categories-filters"
       syncInitialCategoriesFilters({
@@ -104,12 +94,10 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
     <MapContext
       value={{
         categoriesFilters,
-        forests,
         isReady,
         mapApiRef,
         mapContainerRef,
         setCategoriesFilters,
-        setForests,
         setIsReady,
       }}
     >

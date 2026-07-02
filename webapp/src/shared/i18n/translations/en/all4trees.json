@@ -7,7 +7,7 @@
   "filters": {
     "categories": {
       "actions": {
-        "forestInventary": "Forest inventory",
+        "forestInventory": "Forest inventory",
         "socioEco": "Socio-economic",
         "title": "Actions taken",
         "treeDiversity": "Tree diversity"
@@ -224,6 +224,10 @@
       "subtitleCount_one": "{{ count }} household surveyed",
       "subtitleCount_other": "{{ count }} households surveyed",
       "title": "{{ village }}"
+    },
+    "bioInventory": {
+      "date": "Survey date: {{ date }}",
+      "title": "Plot n°{{ id }}"
     }
   }
 }

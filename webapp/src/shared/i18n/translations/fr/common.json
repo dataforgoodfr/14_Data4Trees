@@ -19,7 +19,8 @@
   },
   "dataManagement": {
     "noData": "Données non disponibles",
-    "undefined": "non trouvée"
+    "undefined": "non trouvée",
+    "noUnit": "Unité non définie"
   },
   "error": {
     "pleaseLogin": "Veuillez vous connecter",

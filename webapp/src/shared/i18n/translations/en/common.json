@@ -19,7 +19,8 @@
   },
   "dataManagement": {
     "noData": "No data available",
-    "undefined": "not found"
+    "undefined": "not found",
+    "noUnit": "Unit undefined"
   },
   "error": {
     "pleaseLogin": "Please sign in",

@@ -92,6 +92,42 @@
       }
     },
     {
+      "id": "inventaire_bio",
+      "type": "datapackage",
+      "path": "../catalog/inventaire_bio",
+      "resource": "inv_bio",
+      "layerType": "symbol",
+      "cluster": {
+        "radius": 50,
+        "maxZoom": 50,
+        "steps": [10, 20],
+        "colors": ["#99D6C2", "#009966", "#006B47"]
+      },
+      "columns": {
+        "geom": "start_point.merge().centroid()",
+        "id": "_id",
+        "conf": "conf",
+        "proj": "proj",
+        "ecos": "ecos",
+        "region": "loc1",
+        "forest": "loc2",
+        "start_date": "coh",
+        "taxon": "'N/A'",
+        "type": "meth",
+        "samp_area": "inv_samp",
+        "samp_unit": "inv_unit",
+        "density": "int(sum(inv_001.no)) / inv_samp",
+        "dens_unit": "dens_unit",
+        "richness": "list_unique(list(nullif(inv_001.concat_ws('-', tax1, tax2, tax3), '')))",
+        "taxons_relative_abundance": "list_aggregate(list(nullif(inv_001.concat_ws('-', tax1, tax2, tax3), '')), 'histogram')",
+        "pop_by_taxon": "list_concat(list(inv_001.concat_ws(':', concat_ws('-',tax1, tax2, tax3), no) if inv_001.no > 0))",
+        "total_pop": "int(sum(inv_001.no))"
+      },
+      "popup": {
+        "trigger": "click"
+      }
+    },
+    {
       "id": "enquete",
       "type": "datapackage",
       "path": "../catalog/enquete",

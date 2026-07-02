@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   computeScore,
   convertDictToPercentage,
+  formatTaxonAbundance,
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
@@ -20,23 +21,6 @@ const indicatorsToPreciseWithFallBack: NumericKeys<SoilData>[] = [
   "soil_eros_water_infiltration",
   "soil_eros_stability",
 ] as const;
-
-function formatTaxonAbundance(abundancePop: string[], abundanceTotal: number) {
-  if (!abundanceTotal) {
-    return {};
-  }
-
-  const abundancePopRecord: Record<string, number> = {};
-  abundancePop.forEach((value) => {
-    if (value) {
-      const [taxon, count] = value.split(":");
-      const currentCount = abundancePopRecord[taxon] || 0;
-      abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
-    }
-  });
-
-  return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
-}
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
