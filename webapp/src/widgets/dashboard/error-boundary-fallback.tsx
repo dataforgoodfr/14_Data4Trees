@@ -4,6 +4,9 @@ import { type FallbackProps, getErrorMessage } from "react-error-boundary";
 import { Button } from "@ui/button";
 
 // t must be passed to the fallback render function because the error boundary fallback component cannot call hooks like useTranslation
+// See https://react.dev/warnings/invalid-hook-call-warning
+// > 🔴 Do not call Hooks in class components.
+// while ErrorBoundary is a class component: https://github.com/bvaughn/react-error-boundary/blob/main/lib/components/ErrorBoundary.tsx#L45
 export function getFallbackRender({
   retry,
   t,
