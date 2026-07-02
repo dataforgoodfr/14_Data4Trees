@@ -21,6 +21,11 @@
     "noData": "No data available",
     "undefined": "not found"
   },
+  "error": {
+    "retry": "Retry",
+    "title": "Error while loading data",
+    "unknownMessage": "An unknown error occurred. Please try again later."
+  },
   "header": {
     "colorModeSelector": {
       "dark": "Dark",
