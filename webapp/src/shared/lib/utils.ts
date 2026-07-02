@@ -8,9 +8,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function precise(value?: number | null) {
+export function precise(value?: number | null, defaultValue: string = "0") {
   if (!value || Number.isNaN(value)) {
-    return "0";
+    return defaultValue;
   }
   if (value > 999) {
     return value.toFixed(1);

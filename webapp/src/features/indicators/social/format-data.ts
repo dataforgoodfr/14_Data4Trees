@@ -1,8 +1,11 @@
 import { useTranslation } from "react-i18next";
 
+import type { SocioEcoData } from "@features/popup/socio-eco";
+
 import type { NumericKeys } from "@shared/types";
 
 import {
+  convertDictToPercentage,
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
@@ -10,25 +13,27 @@ import {
 import type { SocialData } from "./types";
 
 const indicatorKeys: NumericKeys<SocialData>[] = [
-  "collectedWoodEnergy",
-  "boughtWoodEnergy",
-  "coalEnergy",
-  "organicWasteEnergy",
-  "animalWasteEnergy",
-  "gasEnergy",
-  "otherEnergy",
-  "woodEnergyConsumption",
-  "woodCollectionTime",
-  "timberNeeds",
-  "foodDiversity",
-  "autoConsumtionNeeds",
-  "leanPeriod",
+  "wood_fuel_cons",
+  "firewood_collec_time",
+  "firewood_satis1",
+  "firewood_satis2",
+  "firewood_satis3",
+  "firewood_satis98",
+  "firewood_satis99",
+  "timber_satis1",
+  "timber_satis2",
+  "timber_satis3",
+  "timber_satis98",
+  "timber_satis99",
+  "lean_period",
+  "food_diversity_score",
+  "food_self_suff_score",
 ];
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
-export const useFormatSocialData = (data: SocialData) => {
+export const useFormatSocialData = (data: SocioEcoData) => {
   const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 
@@ -38,48 +43,50 @@ export const useFormatSocialData = (data: SocialData) => {
     t("dataManagement.noData"),
   );
 
+  safeData.food_diversity = convertDictToPercentage(
+    safeData.food_diversity,
+    data.household_nb,
+    "0",
+  );
+  safeData.fuel_sources = convertDictToPercentage(
+    safeData.fuel_sources,
+    data.household_nb,
+    "0",
+  );
+
   return {
     food: {
-      autoConsumptionNeeds: `${formatWithUnit(34, UNITS.percentFoodRequirements)} (±${4})`,
-      foodDiversity: {
-        cereals: 99,
-        eggs: 4,
-        fish: 23,
-        fruits: 24,
-        meat: 14,
-        roots: 92,
-        seeds: 50,
-        vegetables: 87,
-      },
-      foodDiversityScore: `${7.6}/10`,
-      leanPeriod: formatWithUnit(3, UNITS.monthPerYear),
+      foodDiversity: safeData.food_diversity,
+      foodDiversityScore: `${safeData.food_diversity_score}/10`,
+      foodSelfSufficiency: formatWithUnit(
+        safeData.food_self_suff_score,
+        UNITS.percentFoodRequirements,
+      ),
+      leanPeriod: formatWithUnit(safeData.lean_period, UNITS.monthPerYear),
     },
     wood: {
       collectionTime: formatWithUnit(
-        safeData.woodCollectionTime,
+        safeData.firewood_collec_time,
         UNITS.minPerHouseholdPerDay,
       ),
-      energyConsumption: formatWithUnit(0, UNITS.m3PerHabPerYear),
-      energyNeeds: {
-        difficultToMeet: 48,
-        dontKnow: 4,
-        easyToMeet: 10,
-        moderateToMeet: 38,
+      energyConsumption: formatWithUnit(
+        safeData.wood_fuel_cons,
+        UNITS.m3PerHabPerYear,
+      ),
+      firewoodNeeds: {
+        difficultToMeet: Number(safeData.firewood_satis3),
+        dontKnow: Number(safeData.firewood_satis98),
+        easyToMeet: Number(safeData.firewood_satis1),
+        moderateToMeet: Number(safeData.firewood_satis2),
+        refuse: Number(safeData.firewood_satis99),
       },
-      energySources: {
-        animalWaste: 14,
-        boughtWood: 14,
-        coal: 57,
-        collectedWood: 100,
-        gas: 71,
-        organicWaste: 86,
-        other: 57,
-      },
+      fuelSources: safeData.fuel_sources,
       timberNeeds: {
-        difficultToMeet: 38,
-        dontKnow: 6,
-        easyToMeet: 16,
-        moderateToMeet: 40,
+        difficultToMeet: Number(safeData.timber_satis3),
+        dontKnow: Number(safeData.timber_satis98),
+        easyToMeet: Number(safeData.timber_satis1),
+        moderateToMeet: Number(safeData.timber_satis2),
+        refuse: Number(safeData.timber_satis99),
       },
     },
   };

@@ -48,7 +48,7 @@ export function getRenderPopupLayer<Properties>({
 
     root.render(
       <Element
-        className="h-[var(--popup-height)] max-h-full"
+        className="h-(--popup-height) max-h-full"
         data={properties}
         metadata={metadata}
         onClose={() => root.unmount()}

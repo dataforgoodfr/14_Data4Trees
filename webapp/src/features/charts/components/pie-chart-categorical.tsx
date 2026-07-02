@@ -26,6 +26,7 @@ export type PieChartCategoricalProps = {
 export const PieChartCategorical: ChartComponentType<
   PieChartCategoricalProps
 > = ({ chartData, chartConfig, title, description, withLabel, unit }) => {
+  const filteredData = chartData.filter((item) => item.value > 0);
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const name = chartConfig[payload[0].name]?.label || payload[0].name;
@@ -38,6 +39,7 @@ export const PieChartCategorical: ChartComponentType<
     }
     return null;
   };
+
   return (
     <ChartComponent
       description={description}
@@ -52,7 +54,7 @@ export const PieChartCategorical: ChartComponentType<
         <PieChart>
           <ChartTooltip content={<CustomTooltip />} />
           <Pie
-            data={chartData}
+            data={filteredData}
             dataKey="value"
             label={
               withLabel === true
