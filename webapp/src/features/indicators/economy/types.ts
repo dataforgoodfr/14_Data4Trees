@@ -15,3 +15,11 @@ export type EconomicData = {
   benef_pract4: number;
   benef_pract5: number;
 };
+
+export const HISTOGRAM_KEYS = {
+  DONT_KNOW: "98",
+  IMPROVEMENT: "1",
+  REFUSE: "99",
+  REGRESSION: "3",
+  STABLE: "2",
+} as const;

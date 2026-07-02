@@ -30,11 +30,11 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   const chartConfig = {
     benef: {
       color: "var(--chart-1)",
-      label: legendLabel + ` (${t("indicators.common.beneficiary")})`,
+      label: `${legendLabel} (${t("indicators.common.beneficiary")})`,
     },
     temoin: {
       color: "var(--chart-3)",
-      label: legendLabel + ` (${t("indicators.common.control")})`,
+      label: `${legendLabel} (${t("indicators.common.control")})`,
     },
   } satisfies ChartConfig;
 

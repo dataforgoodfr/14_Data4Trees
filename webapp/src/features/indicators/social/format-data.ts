@@ -54,7 +54,6 @@ export const useFormatSocialData = (data: SocioEcoData) => {
     "0",
   );
 
-  console.log("Safe social Data", safeData);
   return {
     food: {
       foodDiversity: safeData.food_diversity,

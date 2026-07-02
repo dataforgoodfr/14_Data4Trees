@@ -5,7 +5,7 @@ import type { SocioEcoData } from "@features/popup/socio-eco";
 import type { NumericKeys } from "@shared/types";
 
 import { convertDictToPercentage, preciseNumericIndicators } from "../utils";
-import type { EconomicData } from "./types";
+import { type EconomicData, HISTOGRAM_KEYS } from "./types";
 
 const indicatorKeys: NumericKeys<EconomicData>[] = [
   "revenue_change",
@@ -47,11 +47,12 @@ export const useFormatEconomicData = (data: SocioEcoData) => {
       assetsIndex: `${safeData.assets_idx}/10`,
       incomeSourceNb: safeData.nb_income_sources,
       livingConditionsPerception: {
-        dontKnow: safeData.living_cond_perception["98"],
-        improvement: safeData.living_cond_perception["1"],
-        refuse: safeData.living_cond_perception["99"],
-        regression: safeData.living_cond_perception["3"],
-        stable: safeData.living_cond_perception["2"],
+        dontKnow: safeData.living_cond_perception[HISTOGRAM_KEYS.DONT_KNOW],
+        improvement:
+          safeData.living_cond_perception[HISTOGRAM_KEYS.IMPROVEMENT],
+        refuse: safeData.living_cond_perception[HISTOGRAM_KEYS.REFUSE],
+        regression: safeData.living_cond_perception[HISTOGRAM_KEYS.REGRESSION],
+        stable: safeData.living_cond_perception[HISTOGRAM_KEYS.STABLE],
       },
       revenueChange: `${safeData.revenue_change} %`,
     },
