@@ -100,10 +100,11 @@
           "autoConso": "Food self-sufficiency",
           "diversity": {
             "cereals": "Cereals",
+            "dairy": "Dairy",
             "eggs": "Eggs",
             "fish": "Fish",
             "fruits": "Fruits",
-            "legend": "households consuming this food group (%):",
+            "legend": "of households consume this food group",
             "meat": "Meat",
             "roots": "Roots",
             "seeds": "Seeds",
@@ -116,12 +117,13 @@
         },
         "governance": {
           "beneficialPractices": {
-            "defense": "Defense",
-            "improvedHousehold": "Use of improved stoves",
-            "legend": "households that adopted this practice (in %): ",
-            "rna": "Practice of RNA",
-            "title": "Adoption of good practices",
-            "treePlanting": "Tree planting"
+            "legend": "of households adopted this practice",
+            "pract1": "Tree planting",
+            "pract2": "Contour farming",
+            "pract3": "Intercropping",
+            "pract4": "Crop rotation",
+            "pract5": "Composting",
+            "title": "Adoption of good practices"
           },
           "conflictIndex": "Conflict Index",
           "title": "Governance"
@@ -138,9 +140,10 @@
             "coal": "Coal",
             "collectedWood": "Collected wood",
             "gas": "Gas",
-            "legend": "households using the resource (%):",
+            "legend": "of households use the resource",
             "organicWaste": "Organic waste",
             "other": "Other",
+            "recWood": "Received wood",
             "title": "Energy sources usage"
           },
           "needs": {

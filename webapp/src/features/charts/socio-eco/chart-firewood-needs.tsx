@@ -16,7 +16,7 @@ type PieChartProps = {
   };
 };
 
-export const ChartWoodEnergyNeeds: ChartComponentType<PieChartProps> = ({
+export const ChartFireWoodNeeds: ChartComponentType<PieChartProps> = ({
   data,
 }) => {
   const { t } = useTranslation("all4trees");
@@ -71,4 +71,4 @@ export const ChartWoodEnergyNeeds: ChartComponentType<PieChartProps> = ({
   );
 };
 
-ChartWoodEnergyNeeds.isChartComponent = true;
+ChartFireWoodNeeds.isChartComponent = true;
