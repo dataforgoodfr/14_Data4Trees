@@ -20,15 +20,15 @@ export const useCategoriesConfig = (): {
 
   // ----- Actions -----
 
-  const actionInventary: CategoryGroupItem = {
+  const actionInventory: CategoryGroupItem = {
     icon: (
       <TreePineIcon
         className="text-inventaire"
         size={ICON_SIZE}
       />
     ),
-    identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTARY,
-    label: t("filters.categories.actions.forestInventary"),
+    identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTORY,
+    label: t("filters.categories.actions.forestInventory"),
   };
 
   const actionDiversity: CategoryGroupItem = {
@@ -111,7 +111,7 @@ export const useCategoriesConfig = (): {
   };
 
   return {
-    actions: [actionInventary, actionDiversity, actionSocioEco],
+    actions: [actionInventory, actionDiversity, actionSocioEco],
     data: [dataGround, dataSatellite, dataModel],
     system: [
       systemMangroveHigh,

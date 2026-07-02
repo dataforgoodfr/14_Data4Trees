@@ -4,7 +4,7 @@ import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 import { getChartPalette } from "@shared/lib/palette";
 
-import type { SunburstNode } from "../types";
+import type { SunburstNode } from "../../soil/types";
 import { formatTaxonLevelLabel } from "./taxon";
 
 export function buildSunburstNodes(

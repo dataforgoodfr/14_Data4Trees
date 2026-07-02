@@ -122,6 +122,30 @@ export function convertDictToPercentage(
 }
 
 /*
+  Format taxon relative abundance by converting the sring array containing data like 'taxon:pop' by:
+  1. Sum all pop corresponding to same taxon
+  2. Convert the pop to percentage of total population
+  3. Return a record with taxon as key and percentage as value
+  Example:
+  Input: ['taxon1:10', 'taxon2:20', 'taxon1:30'], totalPopulation = 60
+  Output: { taxon1: 66.67, taxon2: 33.33 }
+*/
+export function formatTaxonAbundance(abundancePop: string[], abundanceTotal: number) {
+  if (!abundanceTotal) {
+    return {};
+  }
+
+  const abundancePopRecord: Record<string, number> = {};
+  abundancePop.forEach((value) => {
+    const [taxon, count] = value.split(":");
+    const currentCount = abundancePopRecord[taxon] || 0;
+    abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+  });
+
+  return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
+}
+
+/*
   Compute score based on the scale define in for_score external data (see backed/catalog/inventaire_for)
   Ideally should be conmputed in the config.json but for now we can't do it.
 */

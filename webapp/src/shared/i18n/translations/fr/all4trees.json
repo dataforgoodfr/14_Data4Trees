@@ -7,7 +7,7 @@
   "filters": {
     "categories": {
       "actions": {
-        "forestInventary": "Inventaire forestier",
+        "forestInventory": "Inventaire forestier",
         "socioEco": "Socio-éco",
         "title": "Actions menées",
         "treeDiversity": "Diversité arborée"
@@ -48,7 +48,6 @@
             "other": "Autre",
             "title": "Abondance relative par essence"
           },
-          "speciesRichness": "Richesse spécifique",
           "title": "Diversité arborée"
         },
         "tropicalBiodivIndex": {
@@ -65,6 +64,12 @@
         }
       },
       "title": "Biodiversité"
+    },
+    "bioinventory": {
+      "title": "Inventaire de faune",
+      "taxon": "Taxon cible",
+      "type": "Type de dispositif",
+      "sampArea": "Effort d'échantillonnage"
     },
     "common": {
       "abundance": "Abondance relative",
@@ -228,6 +233,10 @@
       "subtitleCount_one": "{{ count }} ménage enquêté",
       "subtitleCount_other": "{{ count }} ménages enquêtés",
       "title": "{{ village }}"
+    },
+    "bioInventory": {
+      "date": "Date relevé: {{ date }}",
+      "title": "Placette n°{{ id }}"
     }
   }
 }

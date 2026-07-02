@@ -22,9 +22,10 @@ import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
 import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
+import { BioInventoryPopupContent, type BioInventoryData } from "@features/popup/bio-inventory";
 
 export const MapAll4Trees: FC = () => {
-  const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
+  const { isReady, mapApiRef, mapContainerRef } = useMap();
   // We need to pass the api as prop to the popup content, so we can fetch data from the catalog.
   // We can't call useApi() from inside the popup as it is created dynamically and not part of the React tree.
   const api = useApi();
@@ -36,7 +37,7 @@ export const MapAll4Trees: FC = () => {
 
     mapApiRef.current.setLayerSymbol({
       iconSize: getIconSize({}),
-      layerId: LAYERS.INVENTARY,
+      layerId: LAYERS.INVENTORY_FOR,
       svg: pictoInventaire,
     });
 
@@ -46,14 +47,20 @@ export const MapAll4Trees: FC = () => {
       svg: pictoSocioEco,
     });
 
-    // Set the popup for the "inventaire" layer
+    mapApiRef.current.setLayerSymbol({
+      iconSize: getIconSize({}),
+      layerId: LAYERS.INVENTORY_BIO,
+      svg: pictoInventaire,
+    });
+
+    // Set the popup for the "inventaire_for" layer
     mapApiRef.current.setLayerPopup<ForestInventoryData>({
       centerOnClick: true,
-      layerId: LAYERS.INVENTARY,
+      layerId: LAYERS.INVENTORY_FOR,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<ForestInventoryData>({
         Element: ForestInventoryPopupContent,
-        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTARY, api),
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTORY_FOR, api),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -67,6 +74,19 @@ export const MapAll4Trees: FC = () => {
       renderCallback: getRenderPopupLayer<SocioEcoData>({
         Element: SocioEcoIndicator,
         getExternalData: getExternalDataPromiseByLayer(LAYERS.ENQUETE, api),
+        toggleShiftSize,
+      }),
+      trigger: "click",
+    });
+
+    // Set the popup for the "inventaire_bio" layer
+    mapApiRef.current.setLayerPopup<BioInventoryData>({
+      centerOnClick: true,
+      layerId: LAYERS.INVENTORY_BIO,
+      popupConfig: DEFAULT_POPUP_CONFIG,
+      renderCallback: getRenderPopupLayer<BioInventoryData>({
+        Element: BioInventoryPopupContent,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTORY_BIO, api),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -86,45 +106,11 @@ export const MapAll4Trees: FC = () => {
     });
   }, [isReady, mapApiRef, api]);
 
-  const filterByForest = (forestId: string) => {
-    mapApiRef.current?.setLayerFilters({
-      filters: { args: [{ property: "for" }, forestId], op: "=" },
-      layerId: "inventaire",
-    });
-  };
-
-  const resetFilter = () => {
-    mapApiRef.current?.setLayerFilters({
-      filters: null,
-      layerId: "inventaire",
-    });
-  };
-
   return (
     <MapBase
       isMaximizedPopupSize={isMaximizedPopupSize}
       isReady={isReady}
       mapContainerRef={mapContainerRef}
-    >
-      {forests.length > 0 && (
-        <div className="absolute top-4 left-12 z-10 bg-white rounded shadow p-2 flex gap-2">
-          {forests.map((forest) => (
-            <button
-              className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
-              key={forest.value}
-              onClick={() => filterByForest(forest.value)}
-            >
-              {forest.label}
-            </button>
-          ))}
-          <button
-            className="px-3 py-1 bg-gray-500 text-white rounded text-sm hover:bg-gray-600"
-            onClick={resetFilter}
-          >
-            Toutes
-          </button>
-        </div>
-      )}
-    </MapBase>
+    />
   );
 };
