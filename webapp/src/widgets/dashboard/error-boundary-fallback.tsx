@@ -9,24 +9,21 @@ export function getFallbackRender({
   t,
 }: {
   retry?: () => void;
-  t: TFunction<"all4trees", undefined>;
+  t: TFunction<"common", undefined>;
 }) {
   function FallbackRender({ error }: FallbackProps) {
-    const errorMessage =
-      getErrorMessage(error) ?? t("dashboard.error.unknownMessage");
+    const errorMessage = getErrorMessage(error) ?? t("error.unknownMessage");
 
     return (
       <div className="flex flex-col items-center pt-24 gap-4">
-        <h1 className="text-2xl font-bold text-accent">
-          {t("dashboard.error.title")}
-        </h1>
+        <h1 className="text-2xl font-bold text-accent">{t("error.title")}</h1>
         <p className="mt-2">{errorMessage}</p>
         {retry && (
           <Button
             onClick={retry}
             type="button"
           >
-            {t("dashboard.error.retry")}
+            {t("error.retry")}
           </Button>
         )}
       </div>

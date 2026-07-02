@@ -1,10 +1,5 @@
 {
   "dashboard": {
-    "error": {
-      "retry": "Retry",
-      "title": "Error while loading data",
-      "unknownMessage": "An unknown error occurred. Please try again later."
-    },
     "select": {
       "year": "Year"
     }

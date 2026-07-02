@@ -58,7 +58,7 @@ function fetchData({
 }
 
 export default function Dashboard() {
-  const { t } = useTranslation("all4trees");
+  const { t } = useTranslation("common");
   const { getDashboardData } = useApi();
   const [reloadKey, setReloadKey] = useState(0);
   const dataPromise = useMemo(
