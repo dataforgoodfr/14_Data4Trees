@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load variables from .env file into os.environ
+# Load variables from .env file into os.env
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
