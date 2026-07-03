@@ -17,12 +17,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
-
+from all4trees import views
 
 urlpatterns = [
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("users.urls")),
     path("api/maps/", include("maps.urls")),
+    path("api/catalog/<layer_id>/<resource_name>", views.catalog_view, name="catalog-data"),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
