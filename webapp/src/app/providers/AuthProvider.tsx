@@ -24,7 +24,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       try {
         const isValid = await verifyToken(token);
         if (isValid) {
-          setToken(storedToken);
+          setToken(token);
           setIsAuthenticated(true);
         } else {
           // Token invalide, nettoyer le localStorage

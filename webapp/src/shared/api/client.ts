@@ -40,6 +40,17 @@ export const fetchJSONWithAuth = async (
 ) => (await fetchWithAuth(endpoint, options, authToken)).json();
 
 export const createApiClient = (authToken: string | null) => ({
+  getCatalogResource: (layerId: string, resourceName: string) =>
+    fetchJSONWithAuth(`/catalog/${layerId}/${resourceName}`, {}, authToken),
+  getCatalogResourceList: (layerId: string, resourceList: string[]) =>
+    fetchJSONWithAuth(
+      `/catalog/${layerId}`,
+      {
+        body: JSON.stringify({ resources: resourceList }),
+        method: "POST",
+      },
+      authToken,
+    ),
   getDashboardData: (layerId: string) =>
     fetchJSONWithAuth(`/maps/dashboard/${layerId}`, {}, authToken),
 });

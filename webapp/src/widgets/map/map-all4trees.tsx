@@ -16,6 +16,7 @@ import {
 
 import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/use-map-all4trees";
+import { useApi } from "@shared/hooks/useApi";
 
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
@@ -24,6 +25,9 @@ import { getIconSize } from "./utils";
 
 export const MapAll4Trees: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
+  // We need to pass the api as prop to the popup content, so we can fetch data from the catalog.
+  // We can't call useApi() from inside the popup as it is created dynamically and not part of the React tree.
+  const api = useApi();
   const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
   useEffect(() => {
@@ -49,6 +53,7 @@ export const MapAll4Trees: FC = () => {
       layerId: LAYERS.INVENTARY,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<ForestInventoryData>({
+        api,
         Element: ForestInventoryPopupContent,
         toggleShiftSize,
       }),
@@ -61,6 +66,7 @@ export const MapAll4Trees: FC = () => {
       layerId: LAYERS.ENQUETE,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SocioEcoData>({
+        api,
         Element: SocioEcoIndicator,
         toggleShiftSize,
       }),
@@ -73,12 +79,13 @@ export const MapAll4Trees: FC = () => {
       layerId: LAYERS.SEED,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SeedData>({
+        api,
         Element: SeedIndicator,
         toggleShiftSize,
       }),
       trigger: "click",
     });
-  }, [isReady, mapApiRef]);
+  }, [isReady, mapApiRef, api]);
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters({

@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { createRoot } from "react-dom/client";
 
+import type { ApiClient } from "@shared/api/client";
 import type { LayerMetadata, PopupOptions } from "@shared/lib/coordo";
 
 import type { IndicatorPopupHeaderProps } from "./components/indicator-popup-header";
@@ -30,14 +31,17 @@ export type RenderPopupProps<T> = {
   className: string;
   data: T;
   metadata: LayerMetadata;
+  api: ApiClient;
 } & Pick<IndicatorPopupHeaderProps, "onClose" | "toggleShiftSize">;
 
 export function getRenderPopupLayer<Properties>({
   Element,
   toggleShiftSize,
+  api,
 }: {
   Element: FC<RenderPopupProps<Properties>>;
   toggleShiftSize: IndicatorPopupHeaderProps["toggleShiftSize"];
+  api?: any;
 }) {
   return (properties: Properties, metadata: LayerMetadata) => {
     const container = document.createElement("div");
@@ -48,6 +52,7 @@ export function getRenderPopupLayer<Properties>({
 
     root.render(
       <Element
+        api={api}
         className="h-(--popup-height) max-h-full"
         data={properties}
         metadata={metadata}
