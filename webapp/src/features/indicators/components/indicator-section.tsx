@@ -63,8 +63,14 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
       {chartIndicators.length > 0 && (
         <div className="flex flex-col w-full gap-sm">
           {chartIndicators.map((child, index) => (
+            // `w-0 min-w-full` makes each chart fill the available width without
+            // contributing to the popup's intrinsic (max-content) width. Charts
+            // are `w-full` and would otherwise pin the shrink-to-fit popup to
+            // their widest rendered size, so it could never shrink back after
+            // being maximized. This keeps the popup width driven by its textual
+            // content only, so toggling the size returns to the fit-content width.
             <div
-              className="w-full"
+              className="w-0 min-w-full"
               // biome-ignore lint/suspicious/noArrayIndexKey: <don't want to enforce id>
               key={`chart-indicator-${index}`}
             >
