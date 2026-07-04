@@ -103,5 +103,5 @@ def add_data_view(request):
     return Response({
         'message': 'File uploaded successfully',
         'filename': uploaded_file.name,
-    }, status=status.HTTP_201_CREATED)
+    }, status=status.HTTP_200_OK)
     

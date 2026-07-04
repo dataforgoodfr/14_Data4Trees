@@ -1,9 +1,11 @@
 asgiref==3.8.1
+chardet==7.4.3
 coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@0.6.2#subdirectory=coordo-py
 Django>=4.2.27
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.1
 django-cors-headers==4.9.0
 docutils==0.22
+pandas==3.0
+python-dotenv==1.2.2
 whitenoise[brotli]==6.12.0
-chardet==7.4.3
