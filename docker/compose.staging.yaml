@@ -14,6 +14,8 @@ services:
       - backend_db:/app/db # Persist user db
     networks:
       - d4g-internal
+    environment:
+      - DEBUG=False
     healthcheck:
       test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in Django
       interval: 10s

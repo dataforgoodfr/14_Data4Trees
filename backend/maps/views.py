@@ -4,10 +4,12 @@ from tempfile import gettempdir
 from coordo.loaders import FileLoader, ResourceAction
 from coordo.map import Map
 from django.conf import settings
-from django.http import JsonResponse, HttpResponseBadRequest
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import permission_required
+from django.http import JsonResponse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+
 import chardet
 
 from . import stats
@@ -15,7 +17,7 @@ from . import stats
 config_path = settings.BASE_DIR / "configs" / "config.json"
 map = Map.from_file(config_path)
 
-@csrf_exempt    
+
 def my_map_view(request, subpath):
     return JsonResponse(
         map.handle_request(
@@ -25,6 +27,7 @@ def my_map_view(request, subpath):
         )
     )
 
+
 def dashboard_view(request, layer_id):
     data = map.handle_request(
             'POST',
@@ -32,24 +35,30 @@ def dashboard_view(request, layer_id):
             request.body)
 
     if (layer_id == "inventaire_for"):
-
         result = stats.compute_aggregation(data)
-
         return JsonResponse(result)
-    
-    return HttpResponseBadRequest(f'Layer "{layer_id}" not yet supported', status=501)
 
-@require_POST
-@permission_required("users.add_data")
+    return Response({
+        "error": f'Layer "{layer_id}" not yet supported'
+    }, status=status.HTTP_501_NOT_IMPLEMENTED)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def add_data_view(request):
     """
     View for adding a file to a DataPackage.
     Expects a POST request with a body containing the 'file', 'package' and 'action' fields.
     The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
     """
+
+    # authorization: ensure user has the custom add_data permission
+    if not request.user.has_perm("users.add_data"):
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
     if 'file' not in request.FILES:
-        return JsonResponse({'error': 'No file provided'}, status=400)
-        
+        return Response({'error': 'No file provided'}, status=status.HTTP_400_BAD_REQUEST)
+       
     uploaded_file = request.FILES['file']
     temp_file = Path(gettempdir()) / uploaded_file.name
 
@@ -71,28 +80,28 @@ def add_data_view(request):
             package = Path(request.POST["package"])
             action = request.POST["action"]
         except KeyError:
-            return JsonResponse(
+            return Response(
                 {"error": "Invalid request format. The request must contain the 'package' and 'action' fields."}, 
-                status=400
+                status=status.HTTP_400_BAD_REQUEST,
             )
     
         if action not in ResourceAction:
-            return JsonResponse(
+            return Response(
                 {"error": "Invalid action. The action must be one of: " + ", ".join(ResourceAction)}, 
-                status=400
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         try:
             FileLoader(package, temp_file, action).etl()
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
     finally:
         # in any case, delete the temporary file
         temp_file.unlink(missing_ok=True)
     
-    return JsonResponse({
-            'message': 'File uploaded successfully',
-            'filename': uploaded_file.name
-        })
+    return Response({
+        'message': 'File uploaded successfully',
+        'filename': uploaded_file.name,
+    }, status=status.HTTP_200_OK)
     

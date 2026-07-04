@@ -10,4 +10,7 @@ class CustomUser(AbstractUser):
         verbose_name_plural = "Users"
         permissions = [
             ("add_data", "Can add data"),
+            ("view_data", "Can view data"),
+            ("change_data", "Can change data"),
+            ("delete_data", "Can delete data"),
         ]
