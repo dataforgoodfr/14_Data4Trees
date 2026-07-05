@@ -2,8 +2,8 @@
   "auth": {
     "loginForm": {
       "button": {
-        "login": "Login",
-        "pendingLogin": "Logging in..."
+        "login": "Sign in",
+        "pendingLogin": "Connecting..."
       },
       "credentialsError": "Invalid credentials",
       "description": "Enter your username below to log in",
@@ -22,6 +22,7 @@
     "undefined": "not found"
   },
   "error": {
+    "pleaseLogon": "Please sign in",
     "retry": "Retry",
     "title": "Error while loading data",
     "unknownMessage": "An unknown error occurred. Please try again later."

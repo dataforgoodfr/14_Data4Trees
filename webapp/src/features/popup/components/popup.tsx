@@ -1,10 +1,14 @@
 import { type FC, Suspense, useCallback, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import Loading from "@widgets/dashboard/loading";
 
 import { getFallbackRender } from "@features/fallback/error-boundary-fallback";
+
+import type { APIError } from "@shared/lib/types";
+import { useAbsoluteUrls } from "@shared/urls";
 
 import type { RenderPopupProps } from "../renderPopup";
 
@@ -22,6 +26,7 @@ export const Popup: FC<PopupProps> = ({
   childrenProps,
 }) => {
   const { t } = useTranslation("common");
+
   // Retrieve external data before rendering popup
   const [reloadKey, setReloadKey] = useState(0);
   const externalDataPromise = useMemo(
@@ -45,10 +50,6 @@ export const Popup: FC<PopupProps> = ({
   return (
     <ErrorBoundary
       fallbackRender={fallbackRender}
-      onError={(error, info) => {
-        // Log the error to your error reporting service
-        console.error("Error in forest invetory popup:", error, info);
-      }}
       resetKeys={[externalDataPromise]}
     >
       <Suspense fallback={<Loading />}>
@@ -80,7 +81,6 @@ function fetchData({
     cache.delete(promiseFunc);
     throw err;
   });
-  console.log("fetching new external data...");
   cache.set(promiseFunc, promise);
 
   return promise;
