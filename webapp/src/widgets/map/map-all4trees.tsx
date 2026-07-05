@@ -32,7 +32,6 @@ export const MapAll4Trees: FC = () => {
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
-
     const toggleShiftSize = () => setIsMaximizedPopupSize((prev) => !prev);
 
     mapApiRef.current.setLayerSymbol({

@@ -9,7 +9,7 @@ import { IndicatorElements } from "@features/indicators/components/indicator-ele
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "@features/indicators/soil";
 
-import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
+import { findLabelInExternalData, formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
@@ -32,7 +32,6 @@ export const ForestInventoryPopupContent: FC<
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
   const externalData = use(externalDataPromise);
 
-  console.log("Loaded external data : ", externalData);
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {
       ns: "all4trees",
@@ -48,11 +47,19 @@ export const ForestInventoryPopupContent: FC<
   });
 
   const subtitle =
-    findCategoricalLabel(metadata, "loc2", data.for) ||
-    t("dataManagement.undefined", { ns: "common" });
+    findLabelInExternalData(
+      externalData,
+      "for_label",
+      data.projet,
+      "loc2",
+      Number(data.for),
+    ) || t("dataManagement.undefined", { ns: "common" });
 
-  const biodiversityElements = useBiodiversityIndicatorElements(data, metadata);
-  const soilElements = useSoilIndicatorElements(data, metadata);
+  const biodiversityElements = useBiodiversityIndicatorElements(
+    data,
+    externalData,
+  );
+  const soilElements = useSoilIndicatorElements(data, externalData);
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader

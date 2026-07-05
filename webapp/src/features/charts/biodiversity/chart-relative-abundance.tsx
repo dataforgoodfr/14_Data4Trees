@@ -1,19 +1,22 @@
+import type { ExternalData } from "@features/popup/forest-inventory/types";
+
 import { useTranslation } from "@shared/i18n";
-import type { LayerMetadata } from "@shared/lib/coordo";
-import { findCategoricalLabel, precise } from "@shared/lib/utils";
+import { findLabelInExternalData, precise } from "@shared/lib/utils";
 import type { ChartConfig } from "@shared/ui/chart";
 
 import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
+  proj: string;
   data: [string, number][];
-  metadata: LayerMetadata;
+  externalData: ExternalData;
 };
 
 export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
+  proj,
   data,
-  metadata,
+  externalData,
 }) => {
   const { t } = useTranslation("all4trees");
   const smallCategoriesSum = Number(
@@ -37,8 +40,13 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
       ...chartConfig,
       [element.name]: {
         label:
-          findCategoricalLabel(metadata, "reg_sp", element.name) ||
-          element.name,
+          findLabelInExternalData(
+            externalData,
+            "for_label",
+            proj,
+            "ess",
+            Number(element.name),
+          ) || element.name,
       },
       other: {
         label: t(

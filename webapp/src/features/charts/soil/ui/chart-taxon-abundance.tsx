@@ -7,7 +7,7 @@ import {
   type ChartComponentType,
 } from "@features/charts/components/chart-component";
 
-import { useTranslation } from "@shared/i18n";
+import { i18nInstance, useTranslation } from "@shared/i18n";
 
 import { SUNBURST_LAYOUT } from "../config";
 import { buildNodeColors, buildSunburstNodes } from "../lib/sunburst";
@@ -16,7 +16,7 @@ import type { PieChartProps, SunburstTrace } from "../types";
 export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
-  dataType,
+  proj,
 }) => {
   const { t } = useTranslation(["common", "all4trees"]);
 
@@ -30,7 +30,7 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
     const filteredDataEntries = dataEntries.filter(
       ([key]) => key.trim() !== "0",
     );
-    const nodes = buildSunburstNodes(filteredDataEntries, metadata, dataType);
+    const nodes = buildSunburstNodes(filteredDataEntries, metadata, proj);
     const nodeColors = buildNodeColors(nodes);
 
     sunburstData = [

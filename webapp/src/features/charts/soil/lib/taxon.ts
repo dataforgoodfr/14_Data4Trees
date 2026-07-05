@@ -1,30 +1,49 @@
-import type { LayerMetadata } from "@shared/lib/coordo";
-import { findCategoricalLabel } from "@shared/lib/utils";
+import type { ExternalData } from "@features/popup/forest-inventory/types";
+
+import { findLabelInExternalData } from "@shared/lib/utils";
 
 export function getTaxonLabels(
   element: string,
-  metadata: LayerMetadata,
-  dataType: "tsbf" | "barbA",
+  metadata: ExternalData,
+  proj: string,
 ): [string, string, string] {
   const [taxon1, taxon2, taxon3] = element.split("-");
   const taxon1Label =
-    findCategoricalLabel(metadata, `${dataType}_tax1`, taxon1) || taxon1;
+    findLabelInExternalData(
+      metadata,
+      "for_label",
+      proj,
+      "tax1",
+      Number(taxon1),
+    ) || taxon1;
   const taxon2Label =
-    findCategoricalLabel(metadata, `${dataType}_tax2`, taxon2) || taxon2;
+    findLabelInExternalData(
+      metadata,
+      "for_label",
+      proj,
+      "tax2",
+      Number(taxon2),
+    ) || taxon2;
   const taxon3Label =
-    findCategoricalLabel(metadata, `${dataType}_tax3`, taxon3) || taxon3;
+    findLabelInExternalData(
+      metadata,
+      "for_label",
+      proj,
+      "tax3",
+      Number(taxon3),
+    ) || taxon3;
   return [taxon1Label, taxon2Label, taxon3Label];
 }
 
 export function formatTaxonLevelLabel(
   element: string,
-  metadata: LayerMetadata,
-  dataType: "tsbf" | "barbA",
+  metadata: ExternalData,
+  proj: string,
 ): string {
   const [taxon1Label, taxon2Label, taxon3Label] = getTaxonLabels(
     element,
     metadata,
-    dataType,
+    proj,
   );
   const parts = element.split("-");
   return parts.length === 1

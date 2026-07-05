@@ -2,7 +2,7 @@ catalog:
 	# All 4 Trees - Inventaire forestier
 
 	coordo load kobotoolbox --action add data/all4trees/inventaire_for/20260519_InventaireForestier_QuestionnaireK.xlsx data/all4trees/inventaire_for/20260422_InventaireForestier_DonneesK.xlsx --package catalog/inventaire_for
-	coordo load file --action add data/all4trees/inventaire_for/20260422_InventaireForestier_DonneesExternes.xlsx --package catalog/inventaire_for
+	coordo load file --action add data/all4trees/inventaire_for/20260703_InventaireForestier_DonneesExternes.xlsx --package catalog/inventaire_for
 
 	coordo add-foreignkey adu.decay for_dw.decay --package catalog/inventaire_for
 	coordo add-foreignkey inv_for.proj for_samp.proj --package catalog/inventaire_for

@@ -10,6 +10,7 @@ export const fetchToken = async (username: string, password: string) => {
     throw new Error(`Erreur de connexion: ${res.status} ${res.statusText}`);
   }
   const data = await res.json();
+
   return data.access;
 };
 
@@ -19,6 +20,7 @@ export const verifyToken = async (token: string) => {
     headers: { "Content-Type": "application/json" },
     method: "POST",
   });
+
   if (!res.ok) {
     console.error(`Token invalide: ${res.status} ${res.statusText}`);
     return false;

@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import type { ExternalData } from "@features/popup/forest-inventory/types";
+
 import { i18nInstance } from "@shared/i18n";
 import type { LayerMetadata } from "@shared/lib/coordo";
 
@@ -47,4 +49,30 @@ export function findCategoricalLabel(
     )
     ?.schema.fields.find((f) => f.name === fieldName)
     ?.categories?.find((c) => c.value === fieldValue)?.label;
+}
+
+export function findLabelInExternalData(
+  externalData: ExternalData,
+  resourceName: string,
+  project: string,
+  fieldName: string,
+  fieldValue: any,
+): string | undefined {
+  // Get the data array for the resource (e.g., for_label, for_mf_tax1, etc.)
+  const resourceData = externalData[resourceName];
+
+  if (!resourceData || !Array.isArray(resourceData)) {
+    return undefined;
+  }
+
+  // Find the record matching all criteria: proj, list_name, and name
+  const record = resourceData.find((item) => {
+    return (
+      item?.proj?.trim() === project.trim() &&
+      item?.list_name?.trim() === fieldName.trim() &&
+      item?.name === fieldValue
+    );
+  });
+
+  return record?.label;
 }

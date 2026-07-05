@@ -35,7 +35,6 @@ export const Popup: FC<PopupProps> = ({
   );
 
   const retry = useCallback(() => {
-    console.log("Retrying");
     setReloadKey((k) => k + 1);
   }, []);
   const fallbackRender = useMemo(
