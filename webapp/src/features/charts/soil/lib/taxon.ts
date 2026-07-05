@@ -1,6 +1,5 @@
+import { findLabelInExternalData } from "@features/indicators/utils";
 import type { ExternalData } from "@features/popup/forest-inventory/types";
-
-import { findLabelInExternalData } from "@shared/lib/utils";
 
 export function getTaxonLabels(
   element: string,

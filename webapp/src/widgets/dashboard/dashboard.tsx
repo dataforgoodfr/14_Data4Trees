@@ -4,9 +4,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import LoadedDashboard, {
   type DashboardData,
 } from "@widgets/dashboard/loaded-dashboard";
-import Loading from "@widgets/dashboard/loading";
 
 import { getFallbackRender } from "@features/fallback/error-boundary-fallback";
+import Loading from "@features/fallback/loading";
 
 import { LAYERS } from "@shared/api/layers";
 import { useApi } from "@shared/hooks/useApi";

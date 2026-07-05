@@ -8,8 +8,9 @@ import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "@features/indicators/soil";
+import { findLabelInExternalData } from "@features/indicators/utils";
 
-import { findLabelInExternalData, formatDate } from "@shared/lib/utils";
+import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";

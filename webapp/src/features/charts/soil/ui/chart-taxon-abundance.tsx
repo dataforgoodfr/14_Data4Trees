@@ -7,7 +7,7 @@ import {
   type ChartComponentType,
 } from "@features/charts/components/chart-component";
 
-import { i18nInstance, useTranslation } from "@shared/i18n";
+import { useTranslation } from "@shared/i18n";
 
 import { SUNBURST_LAYOUT } from "../config";
 import { buildNodeColors, buildSunburstNodes } from "../lib/sunburst";

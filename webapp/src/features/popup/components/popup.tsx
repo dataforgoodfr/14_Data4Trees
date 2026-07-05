@@ -2,9 +2,8 @@ import { type FC, Suspense, useCallback, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
 
-import Loading from "@widgets/dashboard/loading";
-
 import { getFallbackRender } from "@features/fallback/error-boundary-fallback";
+import Loading from "@features/fallback/loading";
 
 import type { RenderPopupProps } from "../renderPopup";
 

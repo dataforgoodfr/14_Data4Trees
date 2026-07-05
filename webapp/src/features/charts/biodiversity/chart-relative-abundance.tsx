@@ -1,7 +1,8 @@
+import { findLabelInExternalData } from "@features/indicators/utils";
 import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@shared/i18n";
-import { findLabelInExternalData, precise } from "@shared/lib/utils";
+import { precise } from "@shared/lib/utils";
 import type { ChartConfig } from "@shared/ui/chart";
 
 import type { ChartComponentType } from "../components/chart-component";

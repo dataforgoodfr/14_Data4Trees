@@ -12,7 +12,7 @@ export type ForestInventoryData = {
 
 export type ExternalData = {
   for_label: LabelData[];
-  for_mf_tax1: TaxonLabelData[];
+  for_mf_tax1: any[];
   for_mf_tax2: any[];
   for_mf_tax3: any[];
   for_score: any[];
@@ -26,5 +26,3 @@ export type LabelData = {
   name: number;
   label: string;
 };
-
-export type TaxonLabelData = {};
