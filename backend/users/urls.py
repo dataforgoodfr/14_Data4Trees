@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-from .views import UserViewSet, GroupViewSet, create_admin_session
+from .views import UserViewSet, GroupViewSet, create_admin_session, get_user_info
 
 router = routers.DefaultRouter()
 router.register(r"users", UserViewSet)
@@ -16,6 +16,7 @@ urlpatterns = [
     path("auth/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("auth/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path("admin-session/", create_admin_session, name="admin_session"),
+    path("user/info", get_user_info, name="user-info"),
 ]
 
 urlpatterns += router.urls

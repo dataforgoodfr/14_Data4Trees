@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth import login
 from users.serializers import GroupSerializer, UserSerializer
-
+import json
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -26,6 +26,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all().order_by("name")
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAdminUser]
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_info(request):
+    serializer = UserSerializer(request.user, context={'request': request})
+    return Response(serializer.data)
 
 
 @api_view(["POST"])
