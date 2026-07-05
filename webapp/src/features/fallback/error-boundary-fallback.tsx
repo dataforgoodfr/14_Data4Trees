@@ -2,16 +2,11 @@ import type { TFunction } from "i18next";
 import { TriangleAlert } from "lucide-react";
 import { type FallbackProps, getErrorMessage } from "react-error-boundary";
 
-import {
-  ICON_SIZE_HEADER,
-} from "@features/indicators/components/constants";
+import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 
 import type { APIError } from "@shared/lib/types";
 import { cn } from "@shared/lib/utils";
-import {
-  Alert,
-  AlertTitle,
-} from "@shared/ui/alert";
+import { Alert, AlertTitle } from "@shared/ui/alert";
 
 import { Button } from "@ui/button";
 

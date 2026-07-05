@@ -1,14 +1,10 @@
 import { type FC, Suspense, useCallback, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import Loading from "@widgets/dashboard/loading";
 
 import { getFallbackRender } from "@features/fallback/error-boundary-fallback";
-
-import type { APIError } from "@shared/lib/types";
-import { useAbsoluteUrls } from "@shared/urls";
 
 import type { RenderPopupProps } from "../renderPopup";
 
