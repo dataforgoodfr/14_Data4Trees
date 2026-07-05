@@ -5,7 +5,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 import pandas as pd
-from pandas import DataFrame
 import json
 
 catalog_path = settings.BASE_DIR / "catalog"
