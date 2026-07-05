@@ -42,10 +42,35 @@ class FileUploadTest(TestCase):
             pass 
 
     def get_user_with_permission(self, username, password, codename):
-        user = get_user_model().objects.create_user(username=username, password=password)
+        user, _ = get_user_model().objects.get_or_create(username=username, password=password)
         permission = Permission.objects.get(codename=codename)
         user.user_permissions.add(permission)
         return user
+
+
+    def get_uplodaded_file(self, file_content: str | bytes, filename: str) -> SimpleUploadedFile:
+        if isinstance(file_content, str):
+            file_content = file_content.encode()
+        return SimpleUploadedFile(
+            name=filename,
+            content=file_content,
+            content_type='multipart/form-data'
+        )
+
+
+    def send_post_request(self, url_name: str, file: SimpleUploadedFile):
+        return self.client.post(
+            reverse(url_name),
+            data={ 
+                'file': file, 
+                'package': self.CATALOG_DIR
+            }
+        )
+
+    def assert_all(self, response, file: SimpleUploadedFile, success_message: str):
+        self.assertEqual(response.status_code, 200, f"response is {response}")
+        self.assertEqual(file.name, response.json()['filename'])
+        self.assertIn(success_message, response.json()['message'])
 
 
     ##########################################
@@ -55,28 +80,16 @@ class FileUploadTest(TestCase):
     def add_resource_test_recipe(self, file_content: str | bytes, filename: str):
         user = self.get_user_with_permission("testuser", "pass", "add_data")
         self.client.force_login(user)
-        uploaded_file = SimpleUploadedFile(
-            name=filename,
-            content=file_content,
-            content_type='multipart/form-data'
-        )
-        response = self.client.post(
-            reverse("maps-add-data"),
-            data={ 
-                'file': uploaded_file, 
-                'package': self.CATALOG_DIR
-            }
-        )
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('Resource successfully added to datapackage', response.json()['message'])
+        uploaded_file = self.get_uplodaded_file(file_content, filename)
+        response = self.send_post_request("maps-add-data", uploaded_file)
+        self.assert_all(response, uploaded_file, 'Resource successfully added to datapackage')
         
     def test_add_resource_from_file_with_ascii_content(self):
         file_content = b'col_1,col_2\nvalue1,value2'
         self.add_resource_test_recipe(file_content, "ascii.csv")
 
     def test_add_resource_from_file_with_ut8_content(self):
-        file_content = 'col_1,col_2\néàë,-°$'
+        file_content = 'col_1,col_2\néàë,-°$'.encode()
         self.add_resource_test_recipe(file_content, "utf8.csv")
 
     def test_add_resource_from_file_with_weird_byte(self):
@@ -96,21 +109,9 @@ class FileUploadTest(TestCase):
     def remove_resource_test_recipe(self, file_content: str | bytes, filename: str):
         user = self.get_user_with_permission("testuser", "pass", "add_data")
         self.client.force_login(user)
-        uploaded_file = SimpleUploadedFile(
-            name=filename,
-            content=file_content,
-            content_type='multipart/form-data'
-        )
-        response = self.client.post(
-            reverse("maps-remove-data"),
-            data={ 
-                'file': uploaded_file, 
-                'package': self.CATALOG_DIR
-            }
-        )
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('Resource successfully removed from datapackage', response.json()['message'])
+        uploaded_file = self.get_uplodaded_file(file_content, filename)
+        response = self.send_post_request("maps-remove-data", uploaded_file)
+        self.assert_all(response, uploaded_file, 'Resource successfully removed from datapackage')
 
 
     def test_remove_resource_from_file(self):
@@ -125,21 +126,9 @@ class FileUploadTest(TestCase):
     def append_resource_test_recipe(self, file_content: str | bytes, filename: str):
         user = self.get_user_with_permission("testuser", "pass", "add_data")
         self.client.force_login(user)
-        uploaded_file = SimpleUploadedFile(
-            name=filename,
-            content=file_content,
-            content_type='multipart/form-data'
-        )
-        response = self.client.post(
-            reverse("maps-remove-data"),
-            data={ 
-                'file': uploaded_file, 
-                'package': self.CATALOG_DIR
-            }
-        )
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('File successfully appended to datapackage resource data', response.json()['message'])
+        uploaded_file = self.get_uplodaded_file(file_content, filename)
+        response = self.send_post_request("maps-append-data", uploaded_file)
+        self.assert_all(response, uploaded_file, 'File successfully appended to datapackage resource data')
 
     def test_append_data_to_resource_from_file(self):
         file_content = b'col_1,col_2\nvalue1,value2'
@@ -153,21 +142,9 @@ class FileUploadTest(TestCase):
     def replace_resource_test_recipe(self, file_content: str | bytes, filename: str):
         user = self.get_user_with_permission("testuser", "pass", "add_data")
         self.client.force_login(user)
-        uploaded_file = SimpleUploadedFile(
-            name=filename,
-            content=file_content,
-            content_type='multipart/form-data'
-        )
-        response = self.client.post(
-            reverse("maps-remove-data"),
-            data={ 
-                'file': uploaded_file, 
-                'package': self.CATALOG_DIR
-            }
-        )
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('File successfully replaced datapackage resource data', response.json()['message'])
+        uploaded_file = self.get_uplodaded_file(file_content, filename)
+        response = self.send_post_request("maps-replace-data", uploaded_file)
+        self.assert_all(response, uploaded_file, 'File successfully replaced datapackage resource data')
     
     def test_replace_data_in_resource_from_file(self):
         file_content = b'col_1,col_2\nvalue1,value2'

@@ -1,5 +1,6 @@
 from tempfile import gettempdir
 from pathlib import Path
+import logging
 
 import chardet
 
@@ -7,9 +8,11 @@ from django.http import JsonResponse
 from coordo.loaders import get_file_loader
 
 
+logger = logging.getLogger(__name__)
+
 
 def add_resource(request):
-    return modify_resource(request, "remove", "Resource successfully added to datapackage")
+    return modify_resource(request, "add", "Resource successfully added to datapackage")
 
     
 def remove_resource(request):
@@ -28,7 +31,8 @@ def modify_resource(request, action: str, response_message: str):
         try:
             package = Path(request.POST["package"])
             options: dict = request.POST.get("options", {})
-        except KeyError:
+        except KeyError as e:
+            logger.exception(e)
             return JsonResponse(
                 {"error": "Invalid request format. The request must contain at least the 'package' field."}, 
                 status=400
@@ -41,6 +45,7 @@ def modify_resource(request, action: str, response_message: str):
             elif action == "remove":
                 file_loader.remove()
         except Exception as e:
+            logger.exception(e)
             return JsonResponse({'error': str(e)}, status=500)
             
     finally:
@@ -50,7 +55,7 @@ def modify_resource(request, action: str, response_message: str):
     return JsonResponse({
             'message': response_message,
             'filename': file.name,
-            'package': package
+            'package': str(package)
         })
 
 
@@ -76,7 +81,8 @@ def update_data(request, action: str, response_message: str):
             package = Path(request.POST["package"])
             options: dict = request.POST.get("options", {})
             target_resource_name: str = request.POST.get("resource", None)
-        except KeyError:
+        except KeyError as e:
+            logger.exception(e)
             return JsonResponse(
                 {"error": "Invalid request format. The request must contain at least the 'package' field."},  
                 status=400
@@ -93,16 +99,17 @@ def update_data(request, action: str, response_message: str):
             else:
                 raise ValueError(f"Invalid action name: {action}. It must be one of: 'append' or 'replace'")
         except Exception as e:
+            logger.exception(e)
             return JsonResponse({'error': str(e)}, status=500)
             
     finally:
         # in any case, delete the temporary file
         file.unlink(missing_ok=True)
-    
+
     return JsonResponse({
             'message': response_message,
             'filename': file.name,
-            'package': package
+            'package': str(package)
         })
     
 
@@ -113,7 +120,9 @@ def get_data_file(request) -> Path:
     Writes the file to a temporary file in the system's temporary folder.
     """
     if 'file' not in request.FILES:
-        return JsonResponse({'error': 'No file provided'}, status=400)
+        msg = 'No file provided'
+        logger.error(msg)
+        return JsonResponse({'error': msg}, status=400)
 
     uploaded_file = request.FILES['file']
     temp_file = Path(gettempdir()) / uploaded_file.name

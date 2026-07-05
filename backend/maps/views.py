@@ -38,7 +38,7 @@ def dashboard_view(request, layer_id):
 
 @require_POST
 @permission_required("users.add_data")
-def add_resource_using_file_view(request):
+def add_resource_from_file_view(request):
     """
     View for adding a file (creating the corresponding resource(s)) to a DataPackage.
     Expects a POST request with a body containing the 'file', 'package' fields.
@@ -49,7 +49,7 @@ def add_resource_using_file_view(request):
 
 @require_POST
 @permission_required("users.add_data")
-def remove_resource_using_file_view(request):
+def remove_resource_from_file_view(request):
     """
     View for removing resource(s) cooresponding a file to a DataPackage.
     Expects a POST request with a body containing the 'file', 'package' fields.
