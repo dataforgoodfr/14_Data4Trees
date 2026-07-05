@@ -1,10 +1,11 @@
 import type { FC } from "react";
 import { createRoot } from "react-dom/client";
 
-import type { ApiClient } from "@shared/api/client";
 import type { LayerMetadata, PopupOptions } from "@shared/lib/coordo";
 
 import type { IndicatorPopupHeaderProps } from "./components/indicator-popup-header";
+import { Popup } from "./components/popup";
+import type { ExternalData } from "./forest-inventory/types";
 
 export const getPopupSizeCustomVariables = (isMaximizedPopupSize: boolean) => {
   return {
@@ -31,33 +32,37 @@ export type RenderPopupProps<T> = {
   className: string;
   data: T;
   metadata: LayerMetadata;
-  api: ApiClient;
+  externalDataPromise: Promise<ExternalData>;
 } & Pick<IndicatorPopupHeaderProps, "onClose" | "toggleShiftSize">;
+
+export type GetExternalData = () => Promise<ExternalData>;
 
 export function getRenderPopupLayer<Properties>({
   Element,
   toggleShiftSize,
-  api,
+  getExternalData,
 }: {
   Element: FC<RenderPopupProps<Properties>>;
   toggleShiftSize: IndicatorPopupHeaderProps["toggleShiftSize"];
-  api?: any;
+  getExternalData: GetExternalData;
 }) {
   return (properties: Properties, metadata: LayerMetadata) => {
     const container = document.createElement("div");
     const root = createRoot(container);
-
     // Enforce custom/dynamic max-width at the inner container level
     container.className = "h-full w-full max-w-[var(--popup-max-width)]";
 
     root.render(
-      <Element
-        api={api}
-        className="h-(--popup-height) max-h-full"
-        data={properties}
-        metadata={metadata}
-        onClose={() => root.unmount()}
-        toggleShiftSize={toggleShiftSize}
+      <Popup
+        childrenProps={{
+          className: "h-(--popup-height) max-h-full",
+          data: properties,
+          metadata: metadata,
+          onClose: () => root.unmount(),
+          toggleShiftSize,
+        }}
+        PopupContent={Element}
+        promiseFunc={getExternalData}
       />,
     );
     return container;

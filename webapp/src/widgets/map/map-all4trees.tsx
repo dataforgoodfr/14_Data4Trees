@@ -21,7 +21,7 @@ import { useApi } from "@shared/hooks/useApi";
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
-import { getIconSize } from "./utils";
+import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
 
 export const MapAll4Trees: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
@@ -53,8 +53,8 @@ export const MapAll4Trees: FC = () => {
       layerId: LAYERS.INVENTARY,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<ForestInventoryData>({
-        api,
         Element: ForestInventoryPopupContent,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTARY, api),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -66,8 +66,8 @@ export const MapAll4Trees: FC = () => {
       layerId: LAYERS.ENQUETE,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SocioEcoData>({
-        api,
         Element: SocioEcoIndicator,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.ENQUETE, api),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -79,8 +79,8 @@ export const MapAll4Trees: FC = () => {
       layerId: LAYERS.SEED,
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SeedData>({
-        api,
         Element: SeedIndicator,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.SEED_POINT, api),
         toggleShiftSize,
       }),
       trigger: "click",

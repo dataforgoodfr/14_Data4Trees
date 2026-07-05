@@ -16,7 +16,6 @@ export function getFallbackRender({
 }) {
   function FallbackRender({ error }: FallbackProps) {
     const errorMessage = getErrorMessage(error) ?? t("error.unknownMessage");
-
     return (
       <div className="flex flex-col items-center pt-24 gap-4">
         <h1 className="text-2xl font-bold text-accent">{t("error.title")}</h1>

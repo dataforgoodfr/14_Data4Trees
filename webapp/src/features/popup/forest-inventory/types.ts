@@ -9,3 +9,5 @@ export type ForestInventoryData = {
   taille_placette: number;
 } & SoilData &
   BiodiversityData;
+
+export type ExternalData = Record<string, any>;
