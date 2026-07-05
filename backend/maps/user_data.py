@@ -4,7 +4,7 @@ from pathlib import Path
 import chardet
 
 from django.http import JsonResponse
-from coordo.loaders import Loader, get_file_loader
+from coordo.loaders import get_file_loader
 
 
 
@@ -65,7 +65,7 @@ def replace_data(request):
 def update_data(request, action: str, response_message: str):
     """
     View for updating data from a file to a resource of a DataPackage.
-    Expects a POST request with a body containing the 'file', 'package' and 'action' fields
+    Expects a POST request with a body containing the 'file' and 'package' fields.
     Another optional body field, named 'resource', allows specifying the target resource in case it is different from the file stem.
     The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
     """
