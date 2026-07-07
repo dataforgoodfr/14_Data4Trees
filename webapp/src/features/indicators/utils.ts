@@ -99,7 +99,7 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
     Object.entries(data).map(([key, value]) => [
       key,
       indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value), defaultValue)
+        ? precise(value, defaultValue)
         : value, // Keep the original value if it's not in the list of indicator keys
     ]),
   ) as T;

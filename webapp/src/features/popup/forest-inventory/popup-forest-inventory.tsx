@@ -43,7 +43,7 @@ export const ForestInventoryPopupContent: FC<
   };
 
   const title = t("popup.forestInventory.title", {
-    id: data.id,
+    id: data.cod,
     ns: "all4trees",
   });
 
