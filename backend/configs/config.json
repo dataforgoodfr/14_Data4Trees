@@ -68,7 +68,6 @@
         "bio_idx_dominant_height": "adu.avg(hgt_perp if hgt_perp > percentile(hgt_perp, 80)) * 10 / 40",
         "bio_idx_microhabitats": "adu.list(trem).flatten().list_unique() * 10 / trem_group_max",
         "soil_structure_idx": "(thk1*float(not1) + thk2*float(not2) + thk3*float(not3) + thk4*float(not4) + thk5*float(not5)) / (thk1 + thk2 + thk3 + thk4 + thk5)",
-        "soil_composition": "count(1)",
         "soil_eros_rainfall_and_wind": "for_weath.concat_ws('-', rain, wind)",
         "soil_eros_slope": "int(10 - slop if slop < 10 else 0)",
         "soil_eros_cover": "veg",
