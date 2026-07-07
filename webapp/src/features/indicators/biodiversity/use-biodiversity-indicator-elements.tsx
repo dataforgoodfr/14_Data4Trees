@@ -55,7 +55,7 @@ export const useBiodiversityIndicatorElements = (
           <ChartRelativeAbundance
             data={data.treeDiversity.relative_abundance}
             externalData={metadata}
-            proj={rawData.projet}
+            project={rawData.project}
           />
         </>
       ),

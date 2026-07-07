@@ -5,7 +5,7 @@ export type ForestInventoryData = {
   id: string;
   for: string;
   cod: number;
-  projet: string;
+  project: string;
   taille_placette: number;
 } & SoilData &
   BiodiversityData;

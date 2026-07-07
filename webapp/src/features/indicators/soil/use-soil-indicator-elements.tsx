@@ -79,7 +79,7 @@ export const useSoilIndicatorElements = (
           <ChartTaxonAbundance
             data={data.soil_fauna_abundance}
             metadata={metadata}
-            proj={rawData.projet}
+            project={rawData.project}
           />
         </>
       ),
@@ -104,7 +104,7 @@ export const useSoilIndicatorElements = (
           <ChartTaxonAbundance
             data={data.surface_fauna_abundance}
             metadata={metadata}
-            proj={rawData.projet}
+            project={rawData.project}
           />
         </>
       ),

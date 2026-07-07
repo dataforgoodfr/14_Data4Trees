@@ -22,7 +22,7 @@
     "undefined": "not found"
   },
   "error": {
-    "pleaseLogon": "Please sign in",
+    "pleaseLogin": "Please sign in",
     "retry": "Retry",
     "title": "Error while loading data",
     "unknownMessage": "An unknown error occurred. Please try again later."

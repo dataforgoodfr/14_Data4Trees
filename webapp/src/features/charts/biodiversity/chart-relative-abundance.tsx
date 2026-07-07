@@ -9,13 +9,13 @@ import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
-  proj: string;
+  project: string;
   data: [string, number][];
   externalData: ExternalData;
 };
 
 export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
-  proj,
+  project,
   data,
   externalData,
 }) => {
@@ -44,7 +44,7 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
           findLabelInExternalData(
             externalData,
             "for_label",
-            proj,
+            project,
             "ess",
             Number(element.name),
           ) || element.name,

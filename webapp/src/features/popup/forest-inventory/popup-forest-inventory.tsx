@@ -51,7 +51,7 @@ export const ForestInventoryPopupContent: FC<
     findLabelInExternalData(
       externalData,
       "for_label",
-      data.projet,
+      data.project,
       "loc2",
       Number(data.for),
     ) || t("dataManagement.undefined", { ns: "common" });

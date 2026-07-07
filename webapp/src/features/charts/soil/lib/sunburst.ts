@@ -8,7 +8,7 @@ import { formatTaxonLevelLabel } from "./taxon";
 export function buildSunburstNodes(
   dataEntries: [string, number][],
   metadata: ExternalData,
-  proj: string,
+  project: string,
 ): SunburstNode[] {
   const nodes: SunburstNode[] = [];
   const seen = new Set<string>();
@@ -17,7 +17,7 @@ export function buildSunburstNodes(
     const parts = key.split("-");
     nodes.push({
       id: key,
-      label: formatTaxonLevelLabel(key, metadata, proj),
+      label: formatTaxonLevelLabel(key, metadata, project),
       parent: parts.slice(0, -1).join("-") || "",
       value,
     });
@@ -28,7 +28,7 @@ export function buildSunburstNodes(
       if (!seen.has(parentPath)) {
         nodes.push({
           id: parentPath,
-          label: formatTaxonLevelLabel(parentPath, metadata, proj),
+          label: formatTaxonLevelLabel(parentPath, metadata, project),
           parent: parts.slice(0, i).join("-") || "",
           value: 0,
         });

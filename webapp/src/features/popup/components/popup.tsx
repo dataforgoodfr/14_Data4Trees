@@ -42,17 +42,19 @@ export const Popup: FC<PopupProps> = ({
   );
 
   return (
-    <ErrorBoundary
-      fallbackRender={fallbackRender}
-      resetKeys={[externalDataPromise]}
-    >
-      <Suspense fallback={<Loading />}>
-        <PopupContent
-          {...childrenProps}
-          externalDataPromise={externalDataPromise}
-        />
-      </Suspense>
-    </ErrorBoundary>
+    <div className="h-(--popup-height) max-h-full">
+      <ErrorBoundary
+        fallbackRender={fallbackRender}
+        resetKeys={[externalDataPromise]}
+      >
+        <Suspense fallback={<Loading />}>
+          <PopupContent
+            {...childrenProps}
+            externalDataPromise={externalDataPromise}
+          />
+        </Suspense>
+      </ErrorBoundary>
+    </div>
   );
 };
 

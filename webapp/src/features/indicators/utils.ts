@@ -1,4 +1,7 @@
-import type { ExternalData } from "@features/popup/forest-inventory/types";
+import type {
+  ExternalData,
+  LabelData,
+} from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@shared/i18n";
 import type { LayerMetadata } from "@shared/lib/coordo";
@@ -154,14 +157,13 @@ export function findLabelInExternalData(
     return undefined;
   }
 
-  // Find the record matching all criteria: proj, list_name, and name
-  const record = resourceData.find((item) => {
-    return (
+  // Find the record matching all criteria: project, list_name, and name
+  const record = resourceData.find(
+    (item: LabelData) =>
       item?.proj?.trim() === project.trim() &&
       item?.list_name?.trim() === fieldName.trim() &&
-      item?.name === fieldValue
-    );
-  });
+      item?.name === fieldValue,
+  );
 
   return record?.label;
 }

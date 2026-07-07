@@ -3,7 +3,7 @@ import type { ExternalData } from "@features/popup/forest-inventory/types";
 export type PieChartProps = {
   data: Record<string, number>;
   metadata: ExternalData;
-  proj: string;
+  project: string;
 };
 
 export type SunburstNode = {

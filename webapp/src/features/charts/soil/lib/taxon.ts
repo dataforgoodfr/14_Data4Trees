@@ -4,14 +4,14 @@ import type { ExternalData } from "@features/popup/forest-inventory/types";
 export function getTaxonLabels(
   element: string,
   metadata: ExternalData,
-  proj: string,
+  project: string,
 ): [string, string, string] {
   const [taxon1, taxon2, taxon3] = element.split("-");
   const taxon1Label =
     findLabelInExternalData(
       metadata,
       "for_label",
-      proj,
+      project,
       "tax1",
       Number(taxon1),
     ) || taxon1;
@@ -19,7 +19,7 @@ export function getTaxonLabels(
     findLabelInExternalData(
       metadata,
       "for_label",
-      proj,
+      project,
       "tax2",
       Number(taxon2),
     ) || taxon2;
@@ -27,7 +27,7 @@ export function getTaxonLabels(
     findLabelInExternalData(
       metadata,
       "for_label",
-      proj,
+      project,
       "tax3",
       Number(taxon3),
     ) || taxon3;
@@ -37,12 +37,12 @@ export function getTaxonLabels(
 export function formatTaxonLevelLabel(
   element: string,
   metadata: ExternalData,
-  proj: string,
+  project: string,
 ): string {
   const [taxon1Label, taxon2Label, taxon3Label] = getTaxonLabels(
     element,
     metadata,
-    proj,
+    project,
   );
   const parts = element.split("-");
   return parts.length === 1
