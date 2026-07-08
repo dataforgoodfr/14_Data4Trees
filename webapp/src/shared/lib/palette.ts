@@ -11,6 +11,4 @@ export const getChartPalette = () => [
   getCssVarColor("--chart-2", "#f98038"),
   getCssVarColor("--chart-3", "#2d6db4"),
   getCssVarColor("--chart-4", "#895bf5"),
-  getCssVarColor("--chart-5", "#f04646"),
-  getCssVarColor("--chart-6", "#424242"),
 ];

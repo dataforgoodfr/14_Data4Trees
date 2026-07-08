@@ -11,6 +11,7 @@ export type SunburstNode = {
   label: string;
   parent: string;
   value: number;
+  depth: number;
 };
 
 export type SunburstTrace = {
@@ -23,7 +24,7 @@ export type SunburstTrace = {
   labels: string[];
   parents: string[];
   values: number[];
-  marker: { colors: string[]; line: { width: number } };
+  marker: { colors: string[]; line: { width: number; color: string } };
   leaf: { opacity: number };
   sunburstcolorway: string[];
 };
