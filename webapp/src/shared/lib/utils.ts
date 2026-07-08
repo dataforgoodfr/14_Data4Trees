@@ -2,7 +2,6 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 import { i18nInstance } from "@shared/i18n";
-import type { LayerMetadata } from "@shared/lib/coordo";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,29 +21,4 @@ export function formatDate(date: Date | string) {
   return Intl.DateTimeFormat(i18nInstance.language, {
     dateStyle: "short",
   }).format(typeof date === "string" ? new Date(date) : (date as Date));
-}
-
-export function findCategoricalLabel(
-  metadata: LayerMetadata,
-  fieldName: string,
-  fieldValue: any,
-): string | undefined {
-  // Searching field category in main resource schema
-  const resourceLabel = metadata?.resource?.schema?.fields
-    .find((f) => f.name === fieldName)
-    ?.categories?.find((c) => c.value === fieldValue)?.label;
-
-  if (resourceLabel) {
-    return resourceLabel;
-  }
-
-  // Searching field category in main resource's references' schemas
-  return metadata?.references
-    ?.find((ref) =>
-      ref.schema.fields
-        .find((f) => f.name === fieldName)
-        ?.categories?.some((c) => c.value === fieldValue),
-    )
-    ?.schema.fields.find((f) => f.name === fieldName)
-    ?.categories?.find((c) => c.value === fieldValue)?.label;
 }

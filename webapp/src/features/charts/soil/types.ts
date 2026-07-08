@@ -1,9 +1,9 @@
-import type { LayerMetadata } from "@shared/lib/coordo";
+import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 export type PieChartProps = {
   data: Record<string, number>;
-  metadata: LayerMetadata;
-  dataType: "tsbf" | "barbA";
+  metadata: ExternalData;
+  project: string;
 };
 
 export type SunburstNode = {

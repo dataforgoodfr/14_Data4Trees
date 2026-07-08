@@ -13,5 +13,5 @@ export function ApiProvider({ children }: ApiProviderProps) {
   const { token } = useAuth();
   const api = useMemo(() => createApiClient(token), [token]);
 
-  return <ApiContext value={api}>{children}</ApiContext>;
+  return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>;
 }

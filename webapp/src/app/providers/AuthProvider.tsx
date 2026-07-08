@@ -24,16 +24,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       try {
         const isValid = await verifyToken(token);
         if (isValid) {
-          setToken(storedToken);
+          setToken(token);
           setIsAuthenticated(true);
         } else {
           // Token invalide, nettoyer le localStorage
           localStorage.removeItem("token");
-          localStorage.removeItem("user");
+          localStorage.removeItem("username");
         }
       } catch {
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        localStorage.removeItem("username");
       }
 
       setIsAuthLoading(false);
@@ -50,7 +50,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("username");
     setToken(null);
     setIsAuthenticated(false);
   };

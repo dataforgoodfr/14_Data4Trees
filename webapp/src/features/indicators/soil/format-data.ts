@@ -6,6 +6,7 @@ import {
   UNITS,
   useFormatterWithUnit,
 } from "@features/indicators/utils";
+import type { ForestInventoryData } from "@features/popup/forest-inventory";
 
 import type { NumericKeys } from "@shared/types";
 
@@ -27,7 +28,7 @@ const indicatorsToPreciseWithoutFallBack: NumericKeys<SoilData>[] = [
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
-export const useFormatSoilData = (data: SoilData) => {
+export const useFormatSoilData = (data: ForestInventoryData) => {
   const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 

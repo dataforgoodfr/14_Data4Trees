@@ -7,10 +7,11 @@ import { IndicatorElements } from "@features/indicators/components/indicator-ele
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useEconomicIndicatorElements } from "@features/indicators/economy";
 import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
+import { findCategoricalLabel } from "@features/indicators/utils";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
 import type { LayerMetadata } from "@shared/lib/coordo";
-import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
+import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 

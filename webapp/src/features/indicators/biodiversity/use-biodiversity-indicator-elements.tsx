@@ -2,19 +2,21 @@ import { Gem, TreePine, Trees } from "lucide-react";
 
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
 import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
+import type {
+  ExternalData,
+  ForestInventoryData,
+} from "@features/popup/forest-inventory/types";
 
-import type { LayerMetadata } from "@shared/lib/coordo";
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import { useFormatBiodiversityData } from "./format-data";
-import type { BiodiversityData } from "./types";
 
 export const useBiodiversityIndicatorElements = (
-  rawData: BiodiversityData,
-  metadata: LayerMetadata,
+  rawData: ForestInventoryData,
+  metadata: ExternalData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatBiodiversityData(rawData);
@@ -52,7 +54,8 @@ export const useBiodiversityIndicatorElements = (
           />
           <ChartRelativeAbundance
             data={data.treeDiversity.relative_abundance}
-            metadata={metadata}
+            externalData={metadata}
+            project={rawData.project}
           />
         </>
       ),
