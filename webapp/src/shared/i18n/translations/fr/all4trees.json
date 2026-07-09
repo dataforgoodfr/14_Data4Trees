@@ -118,7 +118,7 @@
         "governance": {
           "beneficialPractices": {
             "legend": "des ménages ont adopté cette pratique",
-            "pract1": "Mise en défense",
+            "pract1": "Plantation",
             "pract2": "Cultures en courbes de niveau",
             "pract3": "Association de cultures",
             "pract4": "Rotation des cultures",
@@ -206,8 +206,8 @@
       "monthPerYear": "{{ value }} mois/an",
       "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
       "speciesCount": "",
-      "speciesCount_one": "{{ count }} espèce inventoriée",
-      "speciesCount_other": "{{ count }} espèces inventoriées",
+      "speciesCount_one": "{{ count }} espèce par piège",
+      "speciesCount_other": "{{ count }} espèces par piège",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },

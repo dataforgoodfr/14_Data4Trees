@@ -28,9 +28,11 @@ function formatTaxonAbundance(abundancePop: string[], abundanceTotal: number) {
 
   const abundancePopRecord: Record<string, number> = {};
   abundancePop.forEach((value) => {
-    const [taxon, count] = value.split(":");
-    const currentCount = abundancePopRecord[taxon] || 0;
-    abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+    if (value) {
+      const [taxon, count] = value.split(":");
+      const currentCount = abundancePopRecord[taxon] || 0;
+      abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+    }
   });
 
   return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
