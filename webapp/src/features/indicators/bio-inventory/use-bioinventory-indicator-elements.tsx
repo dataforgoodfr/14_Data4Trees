@@ -1,4 +1,7 @@
-import { PawPrint, SearchAlert, Gem } from "lucide-react";
+import { Gem, PawPrint, SearchAlert } from "lucide-react";
+
+import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
+import type { BioInventoryData } from "@features/popup/bio-inventory/types";
 
 import type { LayerMetadata } from "@shared/lib/coordo";
 import { useTranslation } from "@i18n";
@@ -7,8 +10,6 @@ import { ICON_SIZE } from "../components/constants";
 import { IndicatorRawValue } from "../components/indicator-raw-value";
 import type { UseIndicatorReturnType } from "../components/types";
 import { useFormatBioInventoryData } from "./format-data";
-import type { BioInventoryData } from "@features/popup/bio-inventory/types";
-import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
 
 export const useBioInventoryIndicatorElements = (
   rawData: BioInventoryData,

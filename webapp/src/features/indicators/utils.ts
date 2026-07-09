@@ -130,7 +130,10 @@ export function convertDictToPercentage(
   Input: ['taxon1:10', 'taxon2:20', 'taxon1:30'], totalPopulation = 60
   Output: { taxon1: 66.67, taxon2: 33.33 }
 */
-export function formatTaxonAbundance(abundancePop: string[], abundanceTotal: number) {
+export function formatTaxonAbundance(
+  abundancePop: string[],
+  abundanceTotal: number,
+) {
   if (!abundanceTotal) {
     return {};
   }
