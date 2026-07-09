@@ -2,7 +2,7 @@ import { findLabelInExternalData } from "@features/indicators/utils";
 import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 export function getDataTypePrefix(dataType: "tsbf" | "barbA" | null): string {
-  return dataType ? `${dataType}_` : '';
+  return dataType ? `${dataType}_` : "";
 }
 
 export function getTaxonLabels(

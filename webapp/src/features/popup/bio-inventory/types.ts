@@ -16,4 +16,4 @@ export type BioInventoryData = {
   taxons_relative_abundance: Record<string, number>;
   pop_by_taxon: string[];
   total_pop: number;
-}
+};

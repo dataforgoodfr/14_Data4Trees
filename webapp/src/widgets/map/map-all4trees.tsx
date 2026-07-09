@@ -2,6 +2,10 @@ import { type FC, useEffect, useState } from "react";
 
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
+  type BioInventoryData,
+  BioInventoryPopupContent,
+} from "@features/popup/bio-inventory";
+import {
   type ForestInventoryData,
   ForestInventoryPopupContent,
 } from "@features/popup/forest-inventory";
@@ -22,7 +26,6 @@ import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
 import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
-import { BioInventoryPopupContent, type BioInventoryData } from "@features/popup/bio-inventory";
 
 export const MapAll4Trees: FC = () => {
   const { isReady, mapApiRef, mapContainerRef } = useMap();
@@ -60,7 +63,10 @@ export const MapAll4Trees: FC = () => {
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<ForestInventoryData>({
         Element: ForestInventoryPopupContent,
-        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTORY_FOR, api),
+        getExternalData: getExternalDataPromiseByLayer(
+          LAYERS.INVENTORY_FOR,
+          api,
+        ),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -86,7 +92,10 @@ export const MapAll4Trees: FC = () => {
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<BioInventoryData>({
         Element: BioInventoryPopupContent,
-        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTORY_BIO, api),
+        getExternalData: getExternalDataPromiseByLayer(
+          LAYERS.INVENTORY_BIO,
+          api,
+        ),
         toggleShiftSize,
       }),
       trigger: "click",

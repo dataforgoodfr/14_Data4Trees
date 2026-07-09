@@ -4,10 +4,10 @@ import { LAYERS } from "./layers";
  * Format of a layer: GROUP_BACKEND-NAME
  */
 export const CATEGORY_IDENTIFIERS = {
+  ACTION_BIO: `action::${LAYERS.INVENTORY_BIO}`,
   ACTION_DIVERSITY: "action-tree-diversity",
   ACTION_INVENTORY: `action::${LAYERS.INVENTORY_FOR}`,
   ACTION_SOCIO: `action::${LAYERS.ENQUETE}`,
-  ACTION_BIO: `action::${LAYERS.INVENTORY_BIO}`,
   DATA_GROUND: "data-ground",
   DATA_MODEL: "data-model",
   DATA_SATELLITE: `data::${LAYERS.SATELLITE}`,

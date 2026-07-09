@@ -4,9 +4,7 @@ import { useCategoriesFilters } from "@features/categories-filters/use-categorie
 import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 
 import { API_URL } from "@shared/api/client";
-import {
-  MapContext,
-} from "@shared/contexts/map-context-all4trees";
+import { MapContext } from "@shared/contexts/map-context-all4trees";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { createMap, EVENTS } from "@shared/lib/coordo";
 

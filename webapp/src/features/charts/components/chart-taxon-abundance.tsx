@@ -10,8 +10,8 @@ import {
 import { useTranslation } from "@shared/i18n";
 
 import { SUNBURST_LAYOUT } from "../soil/config";
-import { buildNodeColors, buildSunburstNodes } from "./lib/sunburst";
 import type { PieChartProps, SunburstTrace } from "../soil/types";
+import { buildNodeColors, buildSunburstNodes } from "./lib/sunburst";
 
 export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   data,

@@ -66,10 +66,10 @@
       "title": "Biodiversité"
     },
     "bioinventory": {
-      "title": "Inventaire de faune",
+      "sampArea": "Effort d'échantillonnage",
       "taxon": "Taxon cible",
-      "type": "Type de dispositif",
-      "sampArea": "Effort d'échantillonnage"
+      "title": "Inventaire de faune",
+      "type": "Type de dispositif"
     },
     "common": {
       "abundance": "Abondance relative",
@@ -222,6 +222,10 @@
     "villages": "Villages"
   },
   "popup": {
+    "bioInventory": {
+      "date": "Date relevé: {{ date }}",
+      "title": "Placette n°{{ id }}"
+    },
     "forestInventory": {
       "date": "Date relevé: {{ date }}",
       "ecos": "Ecosystème",
@@ -233,10 +237,6 @@
       "subtitleCount_one": "{{ count }} ménage enquêté",
       "subtitleCount_other": "{{ count }} ménages enquêtés",
       "title": "{{ village }}"
-    },
-    "bioInventory": {
-      "date": "Date relevé: {{ date }}",
-      "title": "Placette n°{{ id }}"
     }
   }
 }
