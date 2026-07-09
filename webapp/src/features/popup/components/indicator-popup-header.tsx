@@ -20,6 +20,7 @@ export type IndicatorPopupHeaderProps = {
   title: string;
   subtitle?: string;
   date?: string;
+  ecos?: string,
   onClose: () => void;
   toggleShiftSize: () => void;
 };
@@ -54,6 +55,7 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
   title,
   subtitle,
   date,
+  ecos,
   onClose,
   toggleShiftSize,
 }) => {
@@ -78,6 +80,10 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
               <Calendar size={ICON_SIZE} />
               <p className="pt-0.5">{date}</p>
             </div>
+          )}
+
+          {ecos && (
+            <h3>{ecos}</h3>
           )}
         </AlertDescription>
       )}

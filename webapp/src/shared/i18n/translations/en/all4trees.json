@@ -215,7 +215,8 @@
   "popup": {
     "forestInventory": {
       "date": "Site survey date : {{ date }}",
-      "title": "Plot n°{{ id }}"
+      "title": "Plot n°{{ id }}",
+      "ecos": "Ecosystem"
     },
     "socioEco": {
       "date": "Survey date: {{ date }}",
