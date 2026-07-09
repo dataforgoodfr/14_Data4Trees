@@ -219,8 +219,8 @@
   "popup": {
     "forestInventory": {
       "date": "Date relevé: {{ date }}",
-      "title": "Placette n°{{ id }}",
-      "ecos": "Ecosystème"
+      "ecos": "Ecosystème",
+      "title": "Placette n°{{ id }}"
     },
     "socioEco": {
       "date": "Date relevé: {{ date }}",

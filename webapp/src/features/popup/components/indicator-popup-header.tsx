@@ -20,7 +20,7 @@ export type IndicatorPopupHeaderProps = {
   title: string;
   subtitle?: string;
   date?: string;
-  ecos?: string,
+  ecos?: string;
   onClose: () => void;
   toggleShiftSize: () => void;
 };
@@ -82,9 +82,7 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
             </div>
           )}
 
-          {ecos && (
-            <h3>{ecos}</h3>
-          )}
+          {ecos && <h3>{ecos}</h3>}
         </AlertDescription>
       )}
 

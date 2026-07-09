@@ -179,18 +179,18 @@ export function findLabelInExternalData(
   }
 
   // Find the record matching all criteria: project, list_name, and name
-  const record = resourceData.find(
-    (item: LabelData) => {
-      if (typeof (item.name) != typeof (fieldValue)) {
-        console.warn(`Checking field values with different types ! resourceName=${resourceName} fieldName=${fieldName} fieldValue type=${typeof(fieldValue)}; item.name type= ${typeof(item.name)}`)
-      }
-      return (
-        item.proj?.trim() === project.trim() &&
-        item.list_name?.trim() === fieldName.trim() &&
-        item.name === fieldValue
-      )
+  const record = resourceData.find((item: LabelData) => {
+    if (typeof item.name !== typeof fieldValue) {
+      console.warn(
+        `Checking field values with different types ! resourceName=${resourceName} fieldName=${fieldName} fieldValue type=${typeof fieldValue}; item.name type= ${typeof item.name}`,
+      );
     }
-  );
+    return (
+      item.proj?.trim() === project.trim() &&
+      item.list_name?.trim() === fieldName.trim() &&
+      item.name === fieldValue
+    );
+  });
 
   return record?.label;
 }

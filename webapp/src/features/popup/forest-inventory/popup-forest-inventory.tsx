@@ -59,11 +59,12 @@ export const ForestInventoryPopupContent: FC<
   const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${
     findLabelInExternalData(
       externalData,
-     "for_label",
-     data.project,
-    "ecos",
-    data.ecos
-  ) || t("dataManagement.undefined", { ns: "common" })}`;
+      "for_label",
+      data.project,
+      "ecos",
+      data.ecos,
+    ) || t("dataManagement.undefined", { ns: "common" })
+  }`;
 
   const biodiversityElements = useBiodiversityIndicatorElements(
     data,
@@ -77,10 +78,10 @@ export const ForestInventoryPopupContent: FC<
           date: formatDate(new Date()),
           ns: "all4trees",
         })}
+        ecos={ecos}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         subtitle={subtitle}
         title={title}
-        ecos={ecos}
         {...headerProps}
       />
 
