@@ -16,7 +16,7 @@ def datapackage_view(request):
     layer_id = request.query_params.get('layer_id')
 
     if not layer_id:
-        raise ValidationError(f"Missing query parameter 'layer_id'")
+        raise ValidationError("Missing query parameter 'layer_id'")
 
     datapackage_path = get_package_path(catalog_path, layer_id) / "datapackage.json"
     try:
