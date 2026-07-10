@@ -1,4 +1,3 @@
-import { LAYERS } from "@entities/layers";
 import { type FC, useEffect, useState } from "react";
 
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
@@ -19,6 +18,7 @@ import {
   SocioEcoIndicator,
 } from "@features/popup/socio-eco";
 
+import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useApi } from "@shared/hooks/useApi";
 

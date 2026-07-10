@@ -1,4 +1,4 @@
-import { LAYERS } from "@entities/layers";
+import { LAYERS } from "@shared/api/layers";
 
 const SEPARATOR = ":::";
 
