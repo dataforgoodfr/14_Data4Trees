@@ -66,6 +66,12 @@
       },
       "title": "Biodiversity"
     },
+    "bioinventory": {
+      "sampArea": "Sampling area",
+      "taxon": "Target taxon",
+      "title": "Fauna inventory",
+      "type": "Measures type"
+    },
     "common": {
       "abundance": "Relative abundance",
       "beneficiary": "Beneficiary",
@@ -195,7 +201,10 @@
       "title": "Soil"
     },
     "units": {
-      "essenceCount": "{{ count }} species inventoried",
+      "essenceCount": "",
+      "essenceCount_one": "{{ count }} essence inventoried",
+      "essenceCount_other": "{{ count }} essences inventoried",
+      "speciesInventoried": "{{ count }} species inventoried",
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
@@ -203,7 +212,7 @@
       "minPerHhPerDay": "{{ value }} min/household/day",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
-      "speciesCount": "{{ count }} species per trap",
+      "speciesPerTrap": "{{ count }} species per trap",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },

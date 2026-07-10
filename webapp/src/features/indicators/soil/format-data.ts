@@ -88,7 +88,7 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     ),
     soil_fauna_diversity: formatWithUnit(
       soil_fauna_diversity,
-      UNITS.speciesCount,
+      UNITS.speciesPerTrap,
     ),
     soil_structure_idx:
       String(soil_structure_idx) === t("dataManagement.noData")
@@ -101,7 +101,7 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     ),
     surface_fauna_diversity: formatWithUnit(
       soil_surface_fauna_diversity,
-      UNITS.speciesCount,
+      UNITS.speciesPerTrap,
     ),
   };
 };

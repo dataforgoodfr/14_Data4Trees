@@ -10,7 +10,7 @@ import {
 import { Activity, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 
-import { LAYERS } from "@shared/api/layers";
+import { LAYERS } from "@entities/layers";
 import { useTranslation } from "@shared/i18n";
 import {
   LAYER_CONTROL_ELEMENTS,

@@ -1,13 +1,16 @@
 import { useTranslation } from "react-i18next";
 
 import {
+  findLabelInExternalData2,
   formatTaxonAbundance,
   preciseNumericIndicators,
+  UNITS,
+  useFormatterWithUnit,
 } from "@features/indicators/utils";
 import type { BioInventoryData } from "@features/popup/bio-inventory";
+import type { LabelData } from "@features/popup/forest-inventory/types";
 
-import type { LayerMetadata } from "@shared/lib/coordo";
-import { findCategoricalLabel } from "@shared/lib/utils";
+import { i18nInstance } from "@shared/i18n";
 import type { NumericKeys } from "@shared/types";
 
 const indicatorKeys: NumericKeys<BioInventoryData>[] = [
@@ -22,9 +25,11 @@ const indicatorKeys: NumericKeys<BioInventoryData>[] = [
  */
 export const useFormatBioInventoryData = (
   data: BioInventoryData,
-  metadata: LayerMetadata,
+  metadata: LabelData[],
 ) => {
   const { t } = useTranslation("common");
+  const lang = i18nInstance.language;
+  const { formatWithUnit } = useFormatterWithUnit();
 
   const safeData = preciseNumericIndicators<BioInventoryData>(
     data,
@@ -38,15 +43,37 @@ export const useFormatBioInventoryData = (
   );
 
   return {
-    area: `${safeData.samp_area} ${findCategoricalLabel(metadata, "inv_unit", safeData.samp_unit) || t("dataManagement.noUnit")}`,
+    area: `${safeData.samp_area} ${
+      findLabelInExternalData2(
+        metadata,
+        data.proj,
+        lang,
+        "unit",
+        Number(safeData.samp_unit),
+      ) || t("dataManagement.noUnit")
+    }`,
     density: `${safeData.density} ${safeData.dens_unit || t("dataManagement.noUnit")}`,
     relative_abundance: safeData.taxons_relative_abundance,
-    richness: safeData.richness,
-    taxon: "Lémuriens", // findCategoricalLabel(metadata, "tax", safeData.taxon) || safeData.taxon
+    richness: formatWithUnit(safeData.richness, UNITS.speciesInventoried),
+    taxon:
+      findLabelInExternalData2(
+        metadata,
+        data.proj,
+        lang,
+        "tax",
+        Number(safeData.taxon),
+      ) ||
+      t("dataManagement.noUnit") ||
+      safeData.taxon,
     total_population: safeData.total_pop,
     type:
-      findCategoricalLabel(metadata, "meth", safeData.type.toString()) ||
-      safeData.type,
+      findLabelInExternalData2(
+        metadata,
+        data.proj,
+        lang,
+        "meth",
+        Number(safeData.type),
+      ) || safeData.type,
   };
 };
 
