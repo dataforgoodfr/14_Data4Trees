@@ -4,8 +4,8 @@ import LoadedDashboard from "@widgets/dashboard/loaded-dashboard";
 
 import { SuspenseBoundary } from "@features/fallback/suspense-boundary";
 
-import { LAYERS } from "@shared/api/layers";
 import { useSuspenseData } from "@shared/api/suspense-fetch";
+import { LAYERS } from "@entities/layers";
 import { useApi } from "@shared/hooks/useApi";
 
 export default function Dashboard() {

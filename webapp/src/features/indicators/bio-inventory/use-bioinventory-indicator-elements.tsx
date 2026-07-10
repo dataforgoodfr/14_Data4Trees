@@ -1,9 +1,9 @@
-import { Gem, PawPrint, SearchAlert } from "lucide-react";
+import { Gem, PawPrint, Ruler, SearchAlert, VectorSquare } from "lucide-react";
 
 import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
 import type { BioInventoryData } from "@features/popup/bio-inventory/types";
+import type { ExternalData, LabelData } from "@features/popup/forest-inventory/types";
 
-import type { LayerMetadata } from "@shared/lib/coordo";
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
@@ -13,7 +13,7 @@ import { useFormatBioInventoryData } from "./format-data";
 
 export const useBioInventoryIndicatorElements = (
   rawData: BioInventoryData,
-  metadata: LayerMetadata,
+  metadata: LabelData[],
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatBioInventoryData(rawData, metadata);
@@ -29,12 +29,12 @@ export const useBioInventoryIndicatorElements = (
           />
           <IndicatorRawValue
             dataName={t("indicators.bioinventory.type")}
-            iconStart={<SearchAlert size={ICON_SIZE} />}
+            iconStart={<Ruler size={ICON_SIZE} />}
             value={data.type}
           />
           <IndicatorRawValue
             dataName={t("indicators.bioinventory.sampArea")}
-            iconStart={<SearchAlert size={ICON_SIZE} />}
+            iconStart={<VectorSquare size={ICON_SIZE} />}
             value={data.area}
           />
           <IndicatorRawValue
@@ -50,6 +50,7 @@ export const useBioInventoryIndicatorElements = (
           <ChartTaxonAbundance
             data={data.relative_abundance}
             metadata={metadata}
+            project={rawData.proj}
           />
         </>
       ),

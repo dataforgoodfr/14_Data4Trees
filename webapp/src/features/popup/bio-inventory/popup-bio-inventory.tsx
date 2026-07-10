@@ -1,36 +1,45 @@
 import { cx } from "class-variance-authority";
 import { Leaf } from "lucide-react";
-import type { FC } from "react";
+import { type FC, use } from "react";
 
 import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inventory/use-bioinventory-indicator-elements";
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+import { findLabelInExternalData2 } from "@features/indicators/utils";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
-import { findCategoricalLabel, formatDate } from "@shared/lib/utils";
-import { useTranslation } from "@i18n";
+import { formatDate } from "@shared/lib/utils";
+import { i18nInstance, useTranslation } from "@i18n";
 
 import type { RenderPopupProps } from "../renderPopup";
 import type { BioInventoryData } from "./types";
+import { LABEL_DATA } from "@entities/resources";
+import { LAYERS } from "@entities/layers";
+import type { LabelData } from "../forest-inventory/types";
 
 type BioInventoryPopupContentProps = RenderPopupProps<BioInventoryData>;
 
 export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
   data,
-  metadata,
+  externalDataPromise,
   className,
   ...headerProps
 }) => {
   const { t } = useTranslation(["common", "all4trees"]);
-
-  const biodiversityElements = useBioInventoryIndicatorElements(data, metadata);
+  const lang = i18nInstance.language;
+  const externalData = use(externalDataPromise);
+  const labelData = externalData[LABEL_DATA.get(LAYERS.INVENTORY_BIO) || ""] || [] as LabelData[];
+  const biodiversityElements = useBioInventoryIndicatorElements(
+    data,
+    labelData,
+  );
 
   console.log(
     "BioInventoryPopupContent data",
     data,
     "metadata",
-    metadata,
+    externalData,
     "biodiversityElements",
     biodiversityElements,
   );
@@ -48,8 +57,13 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
         })}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
-          findCategoricalLabel(metadata, "loc2", data.forest) ||
-          t("dataManagement.undefined", { ns: "common" })
+          findLabelInExternalData2(
+            labelData,
+            data.proj,
+            lang,
+            "loc2",
+            Number(data.forest),
+          ) || t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}

@@ -10,6 +10,7 @@ import { IndicatorScrollContainer } from "@features/indicators/components/indica
 import { useSoilIndicatorElements } from "@features/indicators/soil";
 import { findLabelInExternalData } from "@features/indicators/utils";
 
+import { i18nInstance } from "@shared/i18n";
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 
@@ -30,6 +31,7 @@ export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
 > = ({ data, metadata, externalDataPromise, className, ...headerProps }) => {
   const { t } = useTranslation(["common", "all4trees"]);
+  const lang = i18nInstance.language;
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
   const externalData = use(externalDataPromise);
 
@@ -52,6 +54,7 @@ export const ForestInventoryPopupContent: FC<
       externalData,
       "for_label",
       data.project,
+      lang,
       "loc2",
       data.for,
     ) || t("common:dataManagement.undefined");
@@ -61,6 +64,7 @@ export const ForestInventoryPopupContent: FC<
       externalData,
       "for_label",
       data.project,
+      lang,
       "ecos",
       data.ecos,
     ) || t("dataManagement.undefined", { ns: "common" })

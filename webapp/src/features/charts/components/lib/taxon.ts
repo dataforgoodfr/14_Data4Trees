@@ -1,5 +1,5 @@
-import { findLabelInExternalData } from "@features/indicators/utils";
-import type { ExternalData } from "@features/popup/forest-inventory/types";
+import { findLabelInExternalData2 } from "@features/indicators/utils";
+import type { LabelData } from "@features/popup/forest-inventory/types";
 
 export function getDataTypePrefix(dataType: "tsbf" | "barbA" | null): string {
   return dataType ? `${dataType}_` : "";
@@ -7,31 +7,32 @@ export function getDataTypePrefix(dataType: "tsbf" | "barbA" | null): string {
 
 export function getTaxonLabels(
   element: string,
-  metadata: ExternalData,
+  metadata: LabelData[],
   project: string,
+  lang: string,
 ): [string, string, string] {
   const [taxon1, taxon2, taxon3] = element.split("-");
   const taxon1Label =
-    findLabelInExternalData(
+    findLabelInExternalData2(
       metadata,
-      "for_label",
       project,
+      lang,
       "tax1",
       Number(taxon1),
     ) || taxon1;
   const taxon2Label =
-    findLabelInExternalData(
+    findLabelInExternalData2(
       metadata,
-      "for_label",
       project,
+      lang,
       "tax2",
       Number(taxon2),
     ) || taxon2;
   const taxon3Label =
-    findLabelInExternalData(
+    findLabelInExternalData2(
       metadata,
-      "for_label",
       project,
+      lang,
       "tax3",
       Number(taxon3),
     ) || taxon3;
@@ -40,13 +41,15 @@ export function getTaxonLabels(
 
 export function formatTaxonLevelLabel(
   element: string,
-  metadata: ExternalData,
+  metadata: LabelData[],
   project: string,
+  lang: string,
 ): string {
   const [taxon1Label, taxon2Label, taxon3Label] = getTaxonLabels(
     element,
     metadata,
     project,
+    lang,
   );
   const parts = element.split("-");
   return parts.length === 1

@@ -203,6 +203,9 @@
       "essenceCount": "",
       "essenceCount_one": "{{ count }} essence inventoriée",
       "essenceCount_other": "{{ count }} essences inventoriées",
+      "speciesInventoried": "",
+      "speciesInventoried_one": "{{ count }} espèce inventoriée",
+      "speciesInventoried_other": "{{ count }} espèces inventoriées",
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/piège",
@@ -210,9 +213,9 @@
       "minPerHhPerDay": "{{ value }} min/ménage/jour",
       "monthPerYear": "{{ value }} mois/an",
       "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
-      "speciesCount": "",
-      "speciesCount_one": "{{ count }} espèce par piège",
-      "speciesCount_other": "{{ count }} espèces par piège",
+      "speciesPerTrap": "",
+      "speciesPerTrap_one": "{{ count }} espèce par piège",
+      "speciesPerTrap_other": "{{ count }} espèces par piège",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },

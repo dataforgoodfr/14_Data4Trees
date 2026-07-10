@@ -10,6 +10,7 @@ import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
   essenceCount: "essenceCount",
+  speciesInventoried: "speciesInventoried",
   individualPerCubicMeter: "individualPerCubicMeter",
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
@@ -17,7 +18,7 @@ export const UNITS = {
   minPerHouseholdPerDay: "minPerHouseholdPerDay",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
-  speciesCount: "speciesCount",
+  speciesPerTrap: "speciesPerTrap",
   tonPerHectare: "tonPerHectare",
 } as const;
 
@@ -56,13 +57,18 @@ export const useFormatterWithUnit = () => {
           ns: "all4trees",
           value,
         });
-      case UNITS.speciesCount:
-        return t("indicators.units.speciesCount", {
+      case UNITS.speciesPerTrap:
+        return t("indicators.units.speciesPerTrap", {
           count: parseInt(formattedValue, 10),
           ns: "all4trees",
         });
       case UNITS.essenceCount:
         return t("indicators.units.essenceCount", {
+          count: parseInt(formattedValue, 10),
+          ns: "all4trees",
+        });
+      case UNITS.speciesInventoried:
+        return t("indicators.units.speciesInventoried", {
           count: parseInt(formattedValue, 10),
           ns: "all4trees",
         });
@@ -99,7 +105,7 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
     Object.entries(data).map(([key, value]) => [
       key,
       indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(value, defaultValue)
+        ? precise(Number(value), defaultValue)
         : value, // Keep the original value if it's not in the list of indicator keys
     ]),
   ) as T;
@@ -140,9 +146,11 @@ export function formatTaxonAbundance(
 
   const abundancePopRecord: Record<string, number> = {};
   abundancePop.forEach((value) => {
-    const [taxon, count] = value.split(":");
-    const currentCount = abundancePopRecord[taxon] || 0;
-    abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+    if (value) {
+      const [taxon, count] = value.split(":");
+      const currentCount = abundancePopRecord[taxon] || 0;
+      abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+    }
   });
 
   return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
@@ -195,9 +203,20 @@ export function findLabelInExternalData(
   externalData: ExternalData,
   resourceName: string,
   project: string,
+  lang: string,
   fieldName: string,
   fieldValue: any,
 ): string | undefined {
+  return findMatchingRecord(externalData, resourceName, project, fieldName, fieldValue)?.[`label::${lang}`];
+}
+
+export function findMatchingRecord(
+  externalData: ExternalData,
+  resourceName: string,
+  project: string,
+  fieldName: string,
+  fieldValue: any,
+): any {
   // Get the data array for the resource (e.g., for_label, for_mf_tax1, etc.)
   const resourceData = externalData[resourceName];
 
@@ -219,5 +238,42 @@ export function findLabelInExternalData(
     );
   });
 
-  return record?.label;
+  return record;
+}
+
+export function findLabelInExternalData2(
+  resourceData: LabelData[],
+  project: string,
+  lang: string,
+  fieldName: string,
+  fieldValue: any,
+): string | undefined {
+  return findMatchingRecord2(resourceData, project, fieldName, fieldValue)?.[`label::${lang}`];
+}
+
+export function findMatchingRecord2(
+  resourceData: LabelData[],
+  project: string,
+  fieldName: string,
+  fieldValue: any,
+): any {
+  if (!resourceData || !Array.isArray(resourceData)) {
+    return undefined;
+  }
+
+  // Find the record matching all criteria: project, list_name, and name
+  const record = resourceData.find((item: LabelData) => {
+    if (typeof item.name !== typeof fieldValue) {
+      console.warn(
+        `Checking field values with different types ! fieldName=${fieldName} fieldValue type=${typeof fieldValue}; item.name type= ${typeof item.name}`,
+      );
+    }
+    return (
+      item.proj?.trim() === project.trim() &&
+      item.list_name?.trim() === fieldName.trim() &&
+      item.name === fieldValue
+    );
+  });
+
+  return record;
 }

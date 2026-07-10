@@ -1,7 +1,7 @@
 import { findLabelInExternalData } from "@features/indicators/utils";
 import type { ExternalData } from "@features/popup/forest-inventory/types";
 
-import { useTranslation } from "@shared/i18n";
+import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
 import type { ChartComponentType } from "../components/chart-component";
@@ -19,6 +19,7 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
   externalData,
 }) => {
   const { t } = useTranslation("all4trees");
+  const lang = i18nInstance.language;
   const smallCategoriesSum = Object.values(data)
     .filter((value) => value < 5)
     .reduce((acc, value) => acc + value, 0);
@@ -43,6 +44,7 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
             externalData,
             "for_label",
             project,
+            lang,
             "ess",
             Number(element.name),
           ) || element.name,

@@ -6,7 +6,7 @@ import {
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
 
-import { LAYERS } from "@shared/api/layers";
+import { LAYERS } from "@entities/layers";
 import { useMap } from "@shared/hooks/use-map-seed";
 import { useApi } from "@shared/hooks/useApi";
 

@@ -18,7 +18,7 @@ import {
   SocioEcoIndicator,
 } from "@features/popup/socio-eco";
 
-import { LAYERS } from "@shared/api/layers";
+import { LAYERS } from "@entities/layers";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useApi } from "@shared/hooks/useApi";
 

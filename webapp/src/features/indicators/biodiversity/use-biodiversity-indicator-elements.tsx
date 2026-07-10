@@ -46,9 +46,7 @@ export const useBiodiversityIndicatorElements = (
       children: (
         <>
           <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.treeDiversity.speciesRichness",
-            )}
+            dataName={t("indicators.common.speciesRichness")}
             iconStart={<Gem size={ICON_SIZE} />}
             value={data.treeDiversity.speciesRichness}
           />
