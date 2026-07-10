@@ -1,4 +1,4 @@
-import { findLabelInExternalData2 } from "@features/indicators/utils";
+import { findLabel } from "@features/indicators/utils";
 import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
@@ -40,13 +40,8 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
       ...chartConfig,
       [element.name]: {
         label:
-          findLabelInExternalData2(
-            metadata,
-            project,
-            lang,
-            "ess",
-            Number(element.name),
-          ) || element.name,
+          findLabel(metadata, project, lang, "ess", Number(element.name)) ||
+          element.name,
       },
       other: {
         label: t(

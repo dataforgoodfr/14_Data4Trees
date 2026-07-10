@@ -68,6 +68,7 @@
     },
     "bioinventory": {
       "sampArea": "Sampling area",
+      "status_abundance": "Relative abundance by extinction threat",
       "taxon": "Target taxon",
       "title": "Fauna inventory",
       "type": "Measures type"

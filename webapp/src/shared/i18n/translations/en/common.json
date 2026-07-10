@@ -20,6 +20,7 @@
   "dataManagement": {
     "noData": "No data available",
     "noUnit": "Unit undefined",
+    "other": "Autre",
     "undefined": "not found"
   },
   "error": {

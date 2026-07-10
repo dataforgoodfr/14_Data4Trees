@@ -10,7 +10,7 @@ import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "@features/indicators/soil";
-import { findLabelInExternalData } from "@features/indicators/utils";
+import { findLabel } from "@features/indicators/utils";
 
 import { i18nInstance } from "@shared/i18n";
 import { formatDate } from "@shared/lib/utils";
@@ -37,7 +37,7 @@ export const ForestInventoryPopupContent: FC<
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
   const externalData = use(externalDataPromise);
   const labelData =
-    externalData[LABEL_DATA.get(LAYERS.INVENTORY_BIO) || ""] ||
+    externalData[LABEL_DATA.get(LAYERS.INVENTORY_FOR) || ""] ||
     ([] as LabelData[]);
 
   const biodiversityElements = useBiodiversityIndicatorElements(
@@ -61,24 +61,12 @@ export const ForestInventoryPopupContent: FC<
   });
 
   const subtitle =
-    findLabelInExternalData(
-      externalData,
-      "for_label",
-      data.project,
-      lang,
-      "loc2",
-      data.for,
-    ) || t("common:dataManagement.undefined");
+    findLabel(labelData, data.project, lang, "loc2", data.for) ||
+    t("common:dataManagement.undefined");
 
   const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${
-    findLabelInExternalData(
-      externalData,
-      "for_label",
-      data.project,
-      lang,
-      "ecos",
-      data.ecos,
-    ) || t("dataManagement.undefined", { ns: "common" })
+    findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
+    t("dataManagement.undefined", { ns: "common" })
   }`;
 
   return (

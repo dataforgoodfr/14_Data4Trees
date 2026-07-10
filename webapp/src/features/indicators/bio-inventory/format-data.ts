@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import {
-  findLabelInExternalData2,
+  findLabel,
   formatTaxonAbundance,
   preciseNumericIndicators,
   UNITS,
@@ -17,7 +17,7 @@ const indicatorKeys: NumericKeys<BioInventoryData>[] = [
   "samp_area",
   "density",
   "richness",
-  "total_pop",
+  "taxons_total_pop",
 ];
 
 /**
@@ -37,14 +37,14 @@ export const useFormatBioInventoryData = (
     t("dataManagement.noData"),
   );
 
-  safeData.taxons_relative_abundance = formatTaxonAbundance(
-    safeData.pop_by_taxon,
-    safeData.total_pop,
+  const taxons_relative_abundance = formatTaxonAbundance(
+    safeData.taxons_abundance_pop,
+    safeData.taxons_total_pop,
   );
 
   return {
     area: `${safeData.samp_area} ${
-      findLabelInExternalData2(
+      findLabel(
         metadata,
         data.proj,
         lang,
@@ -53,27 +53,16 @@ export const useFormatBioInventoryData = (
       ) || t("dataManagement.noUnit")
     }`,
     density: `${safeData.density} ${safeData.dens_unit || t("dataManagement.noUnit")}`,
-    relative_abundance: safeData.taxons_relative_abundance,
+    relative_abundance: taxons_relative_abundance,
     richness: formatWithUnit(safeData.richness, UNITS.speciesInventoried),
     taxon:
-      findLabelInExternalData2(
-        metadata,
-        data.proj,
-        lang,
-        "tax",
-        Number(safeData.taxon),
-      ) ||
+      findLabel(metadata, data.proj, lang, "tax", Number(safeData.taxon)) ||
       t("dataManagement.noUnit") ||
       safeData.taxon,
-    total_population: safeData.total_pop,
+    total_population: safeData.taxons_total_pop,
     type:
-      findLabelInExternalData2(
-        metadata,
-        data.proj,
-        lang,
-        "meth",
-        Number(safeData.type),
-      ) || safeData.type,
+      findLabel(metadata, data.proj, lang, "meth", Number(safeData.type)) ||
+      safeData.type,
   };
 };
 

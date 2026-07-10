@@ -13,7 +13,6 @@ export type BioInventoryData = {
   density: number;
   dens_unit: string;
   richness: number;
-  taxons_relative_abundance: Record<string, number>;
-  pop_by_taxon: string[];
-  total_pop: number;
+  taxons_abundance_pop: string[];
+  taxons_total_pop: number;
 };

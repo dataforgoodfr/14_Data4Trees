@@ -67,6 +67,7 @@
     },
     "bioinventory": {
       "sampArea": "Effort d'échantillonnage",
+      "status_abundance": "Abondance relative par menace d'extinction",
       "taxon": "Taxon cible",
       "title": "Inventaire de faune",
       "type": "Type de dispositif"

@@ -8,7 +8,7 @@ import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inven
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
-import { findLabelInExternalData2 } from "@features/indicators/utils";
+import { findLabel } from "@features/indicators/utils";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
 import { formatDate } from "@shared/lib/utils";
@@ -59,13 +59,8 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
         })}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
-          findLabelInExternalData2(
-            labelData,
-            data.proj,
-            lang,
-            "loc2",
-            Number(data.forest),
-          ) || t("dataManagement.undefined", { ns: "common" })
+          findLabel(labelData, data.proj, lang, "loc2", Number(data.forest)) ||
+          t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}
