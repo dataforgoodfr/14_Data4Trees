@@ -1,4 +1,3 @@
-import { LAYERS } from "@entities/layers";
 import { LABEL_DATA } from "@entities/resources";
 import { cx } from "class-variance-authority";
 import { TreesIcon } from "lucide-react";
@@ -12,6 +11,7 @@ import { IndicatorScrollContainer } from "@features/indicators/components/indica
 import { useSoilIndicatorElements } from "@features/indicators/soil";
 import { findLabel } from "@features/indicators/utils";
 
+import { LAYERS } from "@shared/api/layers";
 import { i18nInstance } from "@shared/i18n";
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";

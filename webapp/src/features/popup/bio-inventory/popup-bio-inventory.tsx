@@ -1,4 +1,3 @@
-import { LAYERS } from "@entities/layers";
 import { LABEL_DATA } from "@entities/resources";
 import { cx } from "class-variance-authority";
 import { Leaf } from "lucide-react";
@@ -11,6 +10,7 @@ import { IndicatorScrollContainer } from "@features/indicators/components/indica
 import { findLabel } from "@features/indicators/utils";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
+import { LAYERS } from "@shared/api/layers";
 import { formatDate } from "@shared/lib/utils";
 import { i18nInstance, useTranslation } from "@i18n";
 

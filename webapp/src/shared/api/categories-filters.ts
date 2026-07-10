@@ -1,4 +1,4 @@
-import { LAYERS } from "@entities/layers";
+import { LAYERS } from "@shared/api/layers";
 
 /**
  * Format of a layer: GROUP_BACKEND-NAME

@@ -1,4 +1,4 @@
-import { LAYERS } from "./layers";
+import { LAYERS } from "../shared/api/layers";
 
 export const EXTERNAL_RESOURCES_BY_LAYER = new Map<string, string[]>([
   [
