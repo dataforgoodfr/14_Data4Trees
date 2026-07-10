@@ -1,3 +1,5 @@
+import { LAYERS } from "@entities/layers";
+import { LABEL_DATA } from "@entities/resources";
 import { cx } from "class-variance-authority";
 import { TreesIcon } from "lucide-react";
 import { Activity, type FC, use, useState } from "react";
@@ -17,8 +19,6 @@ import { GridSelector } from "@shared/ui/grid-selector";
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import type { RenderPopupProps } from "../renderPopup";
 import type { ForestInventoryData, LabelData } from "./types";
-import { LABEL_DATA } from "@entities/resources";
-import { LAYERS } from "@entities/layers";
 
 type ForestInventoryPopupContentProps = RenderPopupProps<ForestInventoryData>;
 
@@ -36,9 +36,9 @@ export const ForestInventoryPopupContent: FC<
   const lang = i18nInstance.language;
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
   const externalData = use(externalDataPromise);
-    const labelData =
-      externalData[LABEL_DATA.get(LAYERS.INVENTORY_BIO) || ""] ||
-      ([] as LabelData[]);
+  const labelData =
+    externalData[LABEL_DATA.get(LAYERS.INVENTORY_BIO) || ""] ||
+    ([] as LabelData[]);
 
   const biodiversityElements = useBiodiversityIndicatorElements(
     data,
