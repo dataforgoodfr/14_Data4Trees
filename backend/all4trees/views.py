@@ -11,6 +11,22 @@ from rest_framework.response import Response
 catalog_path = settings.BASE_DIR / "catalog"
 
 
+@api_view(['GET'])
+def datapackage_view(request):
+    layer_id = request.query_params.get('layer_id')
+
+    if not layer_id:
+        raise ValidationError(f"Missing query parameter 'layer_id'")
+
+    datapackage_path = get_package_path(catalog_path, layer_id) / "datapackage.json"
+    try:
+        with open(datapackage_path, 'r') as f:
+            data = json.load(f)
+        return Response(data)
+    except FileNotFoundError:
+        raise NotFound(f"datapackage.json was not found in package {layer_id}")
+
+
 @api_view(["GET"])
 def resource_view(request, layer_id, resource_name):
     resource_path = get_resource_path(catalog_path, layer_id, resource_name)
