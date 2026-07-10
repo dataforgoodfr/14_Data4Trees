@@ -10,7 +10,6 @@ import type { NumericKeys } from "@shared/types";
 
 export const UNITS = {
   essenceCount: "essenceCount",
-  speciesInventoried: "speciesInventoried",
   individualPerCubicMeter: "individualPerCubicMeter",
   individualPerHectare: "individualPerHectare",
   individualPerTrap: "individualPerTrap",
@@ -18,6 +17,7 @@ export const UNITS = {
   minPerHouseholdPerDay: "minPerHouseholdPerDay",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
+  speciesInventoried: "speciesInventoried",
   speciesPerTrap: "speciesPerTrap",
   tonPerHectare: "tonPerHectare",
 } as const;
@@ -207,7 +207,13 @@ export function findLabelInExternalData(
   fieldName: string,
   fieldValue: any,
 ): string | undefined {
-  return findMatchingRecord(externalData, resourceName, project, fieldName, fieldValue)?.[`label::${lang}`];
+  return findMatchingRecord(
+    externalData,
+    resourceName,
+    project,
+    fieldName,
+    fieldValue,
+  )?.[`label::${lang}`];
 }
 
 export function findMatchingRecord(
@@ -248,7 +254,9 @@ export function findLabelInExternalData2(
   fieldName: string,
   fieldValue: any,
 ): string | undefined {
-  return findMatchingRecord2(resourceData, project, fieldName, fieldValue)?.[`label::${lang}`];
+  return findMatchingRecord2(resourceData, project, fieldName, fieldValue)?.[
+    `label::${lang}`
+  ];
 }
 
 export function findMatchingRecord2(

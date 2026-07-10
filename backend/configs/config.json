@@ -41,8 +41,8 @@
       "resource": "inv_for",
       "layerType": "symbol",
       "cluster": {
-        "radius": 50,
-        "maxZoom": 12.5,
+        "radius": 40,
+        "maxZoom": 12,
         "steps": [10, 20],
         "colors": ["#99D6C2", "#009966", "#006B47"]
       },
@@ -97,6 +97,12 @@
       "path": "../catalog/inventaire_bio",
       "resource": "inv_bio",
       "layerType": "symbol",
+      "cluster": {
+        "radius": 2,
+        "maxZoom": 12,
+        "steps": [10, 20],
+        "colors": ["#99D6C2", "#009966", "#006B47"]
+      },
       "columns": {
         "geom": "start_point.merge().centroid()",
         "id": "_id",
@@ -130,7 +136,7 @@
       "groupby": ["loc2"],
       "cluster": {
         "radius": 50,
-        "maxZoom": 12.5,
+        "maxZoom": 12,
         "steps": [10, 20],
         "colors": ["#A1B5F5", "#1447E6", "#0E32A1"]
       },

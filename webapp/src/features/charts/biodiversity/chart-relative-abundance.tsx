@@ -1,5 +1,5 @@
-import { findLabelInExternalData } from "@features/indicators/utils";
-import type { ExternalData } from "@features/popup/forest-inventory/types";
+import { findLabelInExternalData2 } from "@features/indicators/utils";
+import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
@@ -10,13 +10,13 @@ import { PieChartCategorical } from "../components/pie-chart-categorical";
 type PieChartProps = {
   project: string;
   data: Record<string, number>;
-  externalData: ExternalData;
+  metadata: LabelData[];
 };
 
 export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
   project,
   data,
-  externalData,
+  metadata,
 }) => {
   const { t } = useTranslation("all4trees");
   const lang = i18nInstance.language;
@@ -40,9 +40,8 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
       ...chartConfig,
       [element.name]: {
         label:
-          findLabelInExternalData(
-            externalData,
-            "for_label",
+          findLabelInExternalData2(
+            metadata,
             project,
             lang,
             "ess",

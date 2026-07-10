@@ -16,7 +16,9 @@ import { GridSelector } from "@shared/ui/grid-selector";
 
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
 import type { RenderPopupProps } from "../renderPopup";
-import type { ForestInventoryData } from "./types";
+import type { ForestInventoryData, LabelData } from "./types";
+import { LABEL_DATA } from "@entities/resources";
+import { LAYERS } from "@entities/layers";
 
 type ForestInventoryPopupContentProps = RenderPopupProps<ForestInventoryData>;
 
@@ -34,6 +36,15 @@ export const ForestInventoryPopupContent: FC<
   const lang = i18nInstance.language;
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
   const externalData = use(externalDataPromise);
+    const labelData =
+      externalData[LABEL_DATA.get(LAYERS.INVENTORY_BIO) || ""] ||
+      ([] as LabelData[]);
+
+  const biodiversityElements = useBiodiversityIndicatorElements(
+    data,
+    labelData,
+  );
+  const soilElements = useSoilIndicatorElements(data, labelData);
 
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {
@@ -70,11 +81,6 @@ export const ForestInventoryPopupContent: FC<
     ) || t("dataManagement.undefined", { ns: "common" })
   }`;
 
-  const biodiversityElements = useBiodiversityIndicatorElements(
-    data,
-    externalData,
-  );
-  const soilElements = useSoilIndicatorElements(data, externalData);
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader

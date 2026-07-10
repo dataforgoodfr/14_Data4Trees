@@ -5,6 +5,7 @@ import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-rela
 import type {
   ExternalData,
   ForestInventoryData,
+  LabelData,
 } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@i18n";
@@ -16,7 +17,7 @@ import { useFormatBiodiversityData } from "./format-data";
 
 export const useBiodiversityIndicatorElements = (
   rawData: ForestInventoryData,
-  metadata: ExternalData,
+  metadata: LabelData[],
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatBiodiversityData(rawData);
@@ -52,7 +53,7 @@ export const useBiodiversityIndicatorElements = (
           />
           <ChartRelativeAbundance
             data={data.treeDiversity.relative_abundance}
-            externalData={metadata}
+            metadata={metadata}
             project={rawData.project}
           />
         </>

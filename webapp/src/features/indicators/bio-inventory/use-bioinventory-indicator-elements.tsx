@@ -2,7 +2,7 @@ import { Gem, PawPrint, Ruler, SearchAlert, VectorSquare } from "lucide-react";
 
 import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
 import type { BioInventoryData } from "@features/popup/bio-inventory/types";
-import type { ExternalData, LabelData } from "@features/popup/forest-inventory/types";
+import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@i18n";
 

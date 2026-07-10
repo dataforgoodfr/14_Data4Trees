@@ -12,5 +12,5 @@ export const EXTERNAL_RESOURCES_BY_LAYER = new Map<string, string[]>([
 
 export const LABEL_DATA = new Map<string, string>([
   [LAYERS.INVENTORY_FOR, "for_label"],
-  [LAYERS.INVENTORY_BIO, "bio_label"]
+  [LAYERS.INVENTORY_BIO, "bio_label"],
 ]);

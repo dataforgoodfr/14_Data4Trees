@@ -1,3 +1,4 @@
+import { LAYERS } from "@entities/layers";
 import { type FC, useEffect, useState } from "react";
 
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
@@ -6,7 +7,6 @@ import {
   getRenderPopupLayer,
 } from "@features/popup/renderPopup";
 
-import { LAYERS } from "@entities/layers";
 import { useMap } from "@shared/hooks/use-map-seed";
 import { useApi } from "@shared/hooks/useApi";
 
