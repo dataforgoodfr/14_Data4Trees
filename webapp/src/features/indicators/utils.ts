@@ -1,7 +1,4 @@
-import type {
-  ExternalData,
-  LabelData,
-} from "@features/popup/forest-inventory/types";
+import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@shared/i18n";
 import type { LayerMetadata } from "@shared/lib/coordo";
@@ -199,67 +196,32 @@ export function findCategoricalLabel(
     ?.categories?.find((c) => c.value === fieldValue)?.label;
 }
 
-export function findLabelInExternalData(
-  externalData: ExternalData,
-  resourceName: string,
-  project: string,
-  lang: string,
-  fieldName: string,
-  fieldValue: any,
-): string | undefined {
-  return findMatchingRecord(
-    externalData,
-    resourceName,
-    project,
-    fieldName,
-    fieldValue,
-  )?.[`label::${lang}`];
-}
-
-export function findMatchingRecord(
-  externalData: ExternalData,
-  resourceName: string,
-  project: string,
-  fieldName: string,
-  fieldValue: any,
-): any {
-  // Get the data array for the resource (e.g., for_label, for_mf_tax1, etc.)
-  const resourceData = externalData[resourceName];
-
-  if (!resourceData || !Array.isArray(resourceData)) {
-    return undefined;
-  }
-
-  // Find the record matching all criteria: project, list_name, and name
-  const record = resourceData.find((item: LabelData) => {
-    if (typeof item.name !== typeof fieldValue) {
-      console.warn(
-        `Checking field values with different types ! resourceName=${resourceName} fieldName=${fieldName} fieldValue type=${typeof fieldValue}; item.name type= ${typeof item.name}`,
-      );
-    }
-    return (
-      item.proj?.trim() === project.trim() &&
-      item.list_name?.trim() === fieldName.trim() &&
-      item.name === fieldValue
-    );
-  });
-
-  return record;
-}
-
-export function findLabelInExternalData2(
+// Find status of corresponding taxon value.
+export function findStatus(
   resourceData: LabelData[],
   project: string,
   lang: string,
   fieldName: string,
   fieldValue: any,
 ): string | undefined {
-  return findMatchingRecord2(resourceData, project, fieldName, fieldValue)?.[
+  return findMatchingRecord(resourceData, project, fieldName, fieldValue)?.[
+    `stat::${lang}`
+  ];
+}
+
+export function findLabel(
+  resourceData: LabelData[],
+  project: string,
+  lang: string,
+  fieldName: string,
+  fieldValue: any,
+): string | undefined {
+  return findMatchingRecord(resourceData, project, fieldName, fieldValue)?.[
     `label::${lang}`
   ];
 }
 
-export function findMatchingRecord2(
+export function findMatchingRecord(
   resourceData: LabelData[],
   project: string,
   fieldName: string,

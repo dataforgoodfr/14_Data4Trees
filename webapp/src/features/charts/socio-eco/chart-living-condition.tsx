@@ -25,17 +25,17 @@ export const ChartLivingCondition: ChartComponentType<PieChartProps> = ({
       value: data.improvement,
     },
     {
-      fill: "var(--chart-3)",
+      fill: "var(--chart-5)",
       name: "stable",
       value: data.stable,
     },
     {
-      fill: "var(--chart-5)",
+      fill: "var(--chart-6)",
       name: "regression",
       value: data.regression,
     },
     {
-      fill: "var(--chart-6)",
+      fill: "var(--chart-3)",
       name: "refuse",
       value: data.refuse,
     },

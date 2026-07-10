@@ -118,10 +118,9 @@
         "samp_unit": "inv_unit",
         "density": "int(sum(inv_001.no)) / inv_samp",
         "dens_unit": "dens_unit",
-        "richness": "list_unique(list(nullif(inv_001.concat_ws('-', tax1, tax2, tax3), '')))",
-        "taxons_relative_abundance": "list_aggregate(list(nullif(inv_001.concat_ws('-', tax1, tax2, tax3), '')), 'histogram')",
-        "pop_by_taxon": "list_concat(list(inv_001.concat_ws(':', concat_ws('-',tax1, tax2, tax3), no) if inv_001.no > 0))",
-        "total_pop": "int(sum(inv_001.no))"
+        "richness": "inv_001.count(no)",
+        "taxons_abundance_pop": "list_concat(list(inv_001.concat_ws(':', concat_ws('-',tax1, tax2, tax3), no) if inv_001.no > 0))",
+        "taxons_total_pop": "int(sum(inv_001.no))"
       },
       "popup": {
         "trigger": "click"
