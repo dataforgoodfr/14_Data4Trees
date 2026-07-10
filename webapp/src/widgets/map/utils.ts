@@ -1,4 +1,5 @@
 import { EXTERNAL_RESOURCES_BY_LAYER } from "@entities/resources";
+
 import type { ApiClient } from "@shared/api/client";
 
 export const SVG_SIZE_DEFAULT = 72;

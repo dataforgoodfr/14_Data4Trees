@@ -13,29 +13,14 @@ export function getTaxonLabels(
 ): [string, string, string] {
   const [taxon1, taxon2, taxon3] = element.split("-");
   const taxon1Label =
-    findLabelInExternalData2(
-      metadata,
-      project,
-      lang,
-      "tax1",
-      Number(taxon1),
-    ) || taxon1;
+    findLabelInExternalData2(metadata, project, lang, "tax1", Number(taxon1)) ||
+    taxon1;
   const taxon2Label =
-    findLabelInExternalData2(
-      metadata,
-      project,
-      lang,
-      "tax2",
-      Number(taxon2),
-    ) || taxon2;
+    findLabelInExternalData2(metadata, project, lang, "tax2", Number(taxon2)) ||
+    taxon2;
   const taxon3Label =
-    findLabelInExternalData2(
-      metadata,
-      project,
-      lang,
-      "tax3",
-      Number(taxon3),
-    ) || taxon3;
+    findLabelInExternalData2(metadata, project, lang, "tax3", Number(taxon3)) ||
+    taxon3;
   return [taxon1Label, taxon2Label, taxon3Label];
 }
 

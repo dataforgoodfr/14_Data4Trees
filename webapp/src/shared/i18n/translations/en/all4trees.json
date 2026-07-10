@@ -204,7 +204,6 @@
       "essenceCount": "",
       "essenceCount_one": "{{ count }} essence inventoried",
       "essenceCount_other": "{{ count }} essences inventoried",
-      "speciesInventoried": "{{ count }} species inventoried",
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
@@ -212,6 +211,7 @@
       "minPerHhPerDay": "{{ value }} min/household/day",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
+      "speciesInventoried": "{{ count }} species inventoried",
       "speciesPerTrap": "{{ count }} species per trap",
       "tonPerHectare": "{{ value }} t/ha"
     }
