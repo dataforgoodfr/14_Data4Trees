@@ -1,5 +1,6 @@
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
+import { useAuth } from "@features/auth";
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
 import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 
@@ -10,7 +11,6 @@ import {
 } from "@shared/contexts/map-context-all4trees";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { createMap, EVENTS } from "@shared/lib/coordo";
-import { useAuth } from "@features/auth";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -81,8 +81,8 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
           renderAnchor,
           renderLayerRow,
         },
+        headers: isAuthenticated ? { Authorization: `Bearer ${token}` } : {},
         zoom: mapSettings.zoom,
-        headers: isAuthenticated ? { "Authorization": `Bearer ${token}` } : {}
       });
       if (import.meta.env.DEV) {
         // biome-ignore lint/suspicious/noExplicitAny : debug only

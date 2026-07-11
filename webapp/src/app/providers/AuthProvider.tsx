@@ -54,7 +54,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setToken(null);
     setIsAuthenticated(false);
     // Reload page to reinstantiate map at logout
-    window.location.reload(); 
+    window.location.reload();
   };
 
   return (
