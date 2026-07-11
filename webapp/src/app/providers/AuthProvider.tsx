@@ -53,6 +53,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem("username");
     setToken(null);
     setIsAuthenticated(false);
+    // Reload page to reinstantiate map at logout
+    window.location.reload(); 
   };
 
   return (

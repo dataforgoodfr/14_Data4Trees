@@ -10,6 +10,7 @@ import {
 } from "@shared/contexts/map-context-all4trees";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { createMap, EVENTS } from "@shared/lib/coordo";
+import { useAuth } from "@features/auth";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 
@@ -29,6 +30,8 @@ type MapProviderAll4TreesProps = {
 
 export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
   const [isReady, setIsReady] = useState(false);
+  const { isAuthenticated, token } = useAuth();
+
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
   const [forests, setForests] = useState<Category[]>([]);
   const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
@@ -79,6 +82,7 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
           renderLayerRow,
         },
         zoom: mapSettings.zoom,
+        headers: isAuthenticated ? { "Authorization": `Bearer ${token}` } : {}
       });
       if (import.meta.env.DEV) {
         // biome-ignore lint/suspicious/noExplicitAny : debug only
