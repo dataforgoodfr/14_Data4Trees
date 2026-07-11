@@ -6,10 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
-import chardet
-
-
-from . import stats, user_data
+from . import stats, datapackage_management
 
 config_path = settings.BASE_DIR / "configs" / "config.json"
 map = Map.from_file(config_path)
@@ -40,64 +37,47 @@ def dashboard_view(request, layer_id):
     }, status=status.HTTP_501_NOT_IMPLEMENTED)
 
 
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def add_data_view(request):
+def add_resource_from_file_view(request):
     """
     View for adding a file (creating the corresponding resource(s)) to a DataPackage.
     Expects a POST request with a body containing the 'file', 'package' fields.
     The body can also contain a 'options' field.
     """
+    return datapackage_management.add_resource(request)
 
-    # authorization: ensure user has the custom add_data permission
-    if not request.user.has_perm("users.add_data"):
-        return Response(status=status.HTTP_403_FORBIDDEN)
 
-    if 'file' not in request.FILES:
-        return Response({'error': 'No file provided'}, status=status.HTTP_400_BAD_REQUEST)
-       
-    uploaded_file = request.FILES['file']
-    temp_file = Path(gettempdir()) / uploaded_file.name
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def remove_resource_from_file_view(request):
+    """
+    View for removing resource(s) cooresponding a file to a DataPackage.
+    Expects a POST request with a body containing the 'file', 'package' fields.
+    """
+    return datapackage_management.remove_resource(request)
 
-    # get file content
-    file_content = uploaded_file.read()
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def append_file_data_to_datapackage_view(request):
+    """
+    View for appending the data contained in a file to the corresponding resources of a DataPackage.
+    Expects a POST request with a body containing at least the 'file', 'package' fields.
+    Optionally, a target resource name can be provided as a 'resource' field.
+    """
+    return datapackage_management.append_data(request)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def replace_datapackage_data_from_file_view(request):
+    """
+    View for removing the data contained in a file from the corresponding resources of a DataPackage.
+    Expects a POST request with a body containing at least the 'file', 'package' fields.
+    Optionally, a target resource name can be provided as a 'resource' field.
+    """
+    return datapackage_management.replace_data(request)
+
     
-    # detect the encoding using chardet, decode the content and re-encode as UTF-8
-    encoding_info = chardet.detect(file_content)
-    detected_encoding = encoding_info['encoding']
-    decoded_content = file_content.decode(detected_encoding)
-    utf8_content = decoded_content.encode('utf-8')
-
-    try:
-        # save the file temporarily
-        with open(temp_file, 'wb') as f:
-            f.write(utf8_content)
-    
-        try:
-            package = Path(request.POST["package"])
-            action = request.POST["action"]
-        except KeyError:
-            return Response(
-                {"error": "Invalid request format. The request must contain the 'package' and 'action' fields."}, 
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-    
-        if action not in ResourceAction:
-            return Response(
-                {"error": "Invalid action. The action must be one of: " + ", ".join(ResourceAction)}, 
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        try:
-            FileLoader(package, temp_file, action).etl()
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
-    finally:
-        # in any case, delete the temporary file
-        temp_file.unlink(missing_ok=True)
-    
-    return Response({
-        'message': 'File uploaded successfully',
-        'filename': uploaded_file.name,
-    }, status=status.HTTP_200_OK)

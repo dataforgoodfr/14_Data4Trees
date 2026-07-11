@@ -4,7 +4,8 @@ import logging
 
 import chardet
 
-from django.http import JsonResponse
+from rest_framework.response import Response
+from rest_framework import status
 from coordo.loaders import get_file_loader
 
 
@@ -26,17 +27,16 @@ def modify_resource(request, action: str, response_message: str):
     An optional field 'options' can also be provided.
     The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
     """
+    check_user_authorizations(request)
     file = get_data_file(request)
     try:
         try:
             package = Path(request.POST["package"])
             options: dict = request.POST.get("options", {})
-        except KeyError as e:
-            logger.exception(e)
-            return JsonResponse(
-                {"error": "Invalid request format. The request must contain at least the 'package' field."}, 
-                status=400
-            )
+        except KeyError:
+            msg = "Invalid request format. The request must contain at least the 'package' field."
+            logger.error(msg)
+            return Response({"error": msg},  status=status.HTTP_400_BAD_REQUEST)
 
         try:
             file_loader = get_file_loader(package, file, **options)
@@ -46,17 +46,16 @@ def modify_resource(request, action: str, response_message: str):
                 file_loader.remove()
         except Exception as e:
             logger.exception(e)
-            return JsonResponse({'error': str(e)}, status=500)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
     finally:
         # in any case, delete the temporary file
         file.unlink(missing_ok=True)
     
-    return JsonResponse({
-            'message': response_message,
-            'filename': file.name,
-            'package': str(package)
-        })
+    return Response(
+        {'message': response_message, 'filename': file.name, 'package': str(package)},
+        status=status.HTTP_200_OK
+    )
 
 
 def append_data(request):
@@ -74,6 +73,7 @@ def update_data(request, action: str, response_message: str):
     Another optional body field, named 'resource', allows specifying the target resource in case it is different from the file stem.
     The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
     """
+    check_user_authorizations(request)
     file = get_data_file(request)
     try:
     
@@ -81,12 +81,10 @@ def update_data(request, action: str, response_message: str):
             package = Path(request.POST["package"])
             options: dict = request.POST.get("options", {})
             target_resource_name: str = request.POST.get("resource", None)
-        except KeyError as e:
-            logger.exception(e)
-            return JsonResponse(
-                {"error": "Invalid request format. The request must contain at least the 'package' field."},  
-                status=400
-            )
+        except KeyError:
+            msg = "Invalid request format. The request must contain at least the 'package' field."
+            logger.error(msg)
+            return Response({"error": msg}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             file_folder = get_file_loader(package, file, **options)
@@ -100,17 +98,22 @@ def update_data(request, action: str, response_message: str):
                 raise ValueError(f"Invalid action name: {action}. It must be one of: 'append' or 'replace'")
         except Exception as e:
             logger.exception(e)
-            return JsonResponse({'error': str(e)}, status=500)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
     finally:
         # in any case, delete the temporary file
         file.unlink(missing_ok=True)
 
-    return JsonResponse({
-            'message': response_message,
-            'filename': file.name,
-            'package': str(package)
-        })
+    return Response(
+        {'message': response_message, 'filename': file.name, 'package': str(package)},
+        status=status.HTTP_200_OK
+    )
+
+
+def check_user_authorizations(request):
+    # authorization: ensure user has the custom add_data permission
+    if not request.user.has_perm("users.add_data"):
+        return Response(status=status.HTTP_403_FORBIDDEN)
     
 
 def get_data_file(request) -> Path:
@@ -122,7 +125,7 @@ def get_data_file(request) -> Path:
     if 'file' not in request.FILES:
         msg = 'No file provided'
         logger.error(msg)
-        return JsonResponse({'error': msg}, status=400)
+        return Response({'error': msg}, status=status.HTTP_400_BAD_REQUEST)
 
     uploaded_file = request.FILES['file']
     temp_file = Path(gettempdir()) / uploaded_file.name
