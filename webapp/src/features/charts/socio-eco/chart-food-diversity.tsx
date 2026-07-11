@@ -4,14 +4,15 @@ import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-contro
 import type { ChartComponentType } from "../components/chart-component";
 
 type Data = {
-  cereals: number;
-  eggs: number;
+  cer: number;
+  egg: number;
   fish: number;
-  fruits: number;
-  roots: number;
+  fru: number;
+  tub: number;
   meat: number;
-  seeds: number;
-  vegetables: number;
+  puls: number;
+  veg: number;
+  dairy: number;
 };
 
 type ChartFoodDiversityProps = {
@@ -26,14 +27,14 @@ export const ChartFoodDiversity: ChartComponentType<
 
   const chartData = [
     {
-      benef: benef.cereals,
+      benef: benef.cer,
       indicator: t("indicators.socioEco.sections.food.diversity.cereals"),
-      temoin: temoin?.cereals,
+      temoin: temoin?.cer,
     },
     {
-      benef: benef.eggs,
+      benef: benef.egg,
       indicator: t("indicators.socioEco.sections.food.diversity.eggs"),
-      temoin: temoin?.eggs,
+      temoin: temoin?.egg,
     },
     {
       benef: benef.fish,
@@ -46,24 +47,29 @@ export const ChartFoodDiversity: ChartComponentType<
       temoin: temoin?.meat,
     },
     {
-      benef: benef.fruits,
+      benef: benef.fru,
       indicator: t("indicators.socioEco.sections.food.diversity.fruits"),
-      temoin: temoin?.fruits,
+      temoin: temoin?.fru,
     },
     {
-      benef: benef.vegetables,
+      benef: benef.veg,
       indicator: t("indicators.socioEco.sections.food.diversity.vegetables"),
-      temoin: temoin?.vegetables,
+      temoin: temoin?.veg,
     },
     {
-      benef: benef.roots,
+      benef: benef.tub,
       indicator: t("indicators.socioEco.sections.food.diversity.roots"),
-      temoin: temoin?.roots,
+      temoin: temoin?.tub,
     },
     {
-      benef: benef.seeds,
+      benef: benef.puls,
       indicator: t("indicators.socioEco.sections.food.diversity.seeds"),
-      temoin: temoin?.seeds,
+      temoin: temoin?.puls,
+    },
+    {
+      benef: benef.dairy,
+      indicator: t("indicators.socioEco.sections.food.diversity.dairy"),
+      temoin: temoin?.dairy,
     },
   ];
 
@@ -72,6 +78,7 @@ export const ChartFoodDiversity: ChartComponentType<
       chartData={chartData}
       legendLabel={t("indicators.socioEco.sections.food.diversity.legend")}
       title={t("indicators.socioEco.sections.food.diversity.title")}
+      unit="%"
       withTemoin={!!temoin}
     />
   );

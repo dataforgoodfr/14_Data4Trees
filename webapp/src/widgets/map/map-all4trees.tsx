@@ -16,19 +16,22 @@ import {
 
 import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/use-map-all4trees";
+import { useApi } from "@shared/hooks/useApi";
 
 import pictoInventaire from "./assets/inventaire-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
-import { getIconSize } from "./utils";
+import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
 
 export const MapAll4Trees: FC = () => {
   const { isReady, mapApiRef, forests, mapContainerRef } = useMap();
+  // We need to pass the api as prop to the popup content, so we can fetch data from the catalog.
+  // We can't call useApi() from inside the popup as it is created dynamically and not part of the React tree.
+  const api = useApi();
   const [isMaximizedPopupSize, setIsMaximizedPopupSize] = useState(false);
 
   useEffect(() => {
     if (!isReady || !mapApiRef.current) return;
-
     const toggleShiftSize = () => setIsMaximizedPopupSize((prev) => !prev);
 
     mapApiRef.current.setLayerSymbol({
@@ -50,6 +53,7 @@ export const MapAll4Trees: FC = () => {
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<ForestInventoryData>({
         Element: ForestInventoryPopupContent,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.INVENTARY, api),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -62,6 +66,7 @@ export const MapAll4Trees: FC = () => {
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SocioEcoData>({
         Element: SocioEcoIndicator,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.ENQUETE, api),
         toggleShiftSize,
       }),
       trigger: "click",
@@ -74,11 +79,12 @@ export const MapAll4Trees: FC = () => {
       popupConfig: DEFAULT_POPUP_CONFIG,
       renderCallback: getRenderPopupLayer<SeedData>({
         Element: SeedIndicator,
+        getExternalData: getExternalDataPromiseByLayer(LAYERS.SEED_POINT, api),
         toggleShiftSize,
       }),
       trigger: "click",
     });
-  }, [isReady, mapApiRef]);
+  }, [isReady, mapApiRef, api]);
 
   const filterByForest = (forestId: string) => {
     mapApiRef.current?.setLayerFilters({

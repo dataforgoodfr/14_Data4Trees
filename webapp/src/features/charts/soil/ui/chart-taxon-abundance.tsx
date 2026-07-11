@@ -1,4 +1,5 @@
 import type { Data as PlotlyData } from "plotly.js";
+import { useEffect, useRef } from "react";
 import Plot from "react-plotly.js";
 
 import {
@@ -15,19 +16,21 @@ import type { PieChartProps, SunburstTrace } from "../types";
 export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   data,
   metadata,
-  dataType,
+  project,
 }) => {
   const { t } = useTranslation(["common", "all4trees"]);
+
   const dataEntries = Object.entries(data);
   const hasTaxonData = dataEntries.some(([key]) => key.trim() !== "");
   let sunburstData: PlotlyData[] = [];
   const cardHeight = hasTaxonData ? "min-h-105" : "min-h-40";
+
   if (hasTaxonData) {
     // Remove taxon entries with "Aucun" value
     const filteredDataEntries = dataEntries.filter(
       ([key]) => key.trim() !== "0",
     );
-    const nodes = buildSunburstNodes(filteredDataEntries, metadata, dataType);
+    const nodes = buildSunburstNodes(filteredDataEntries, metadata, project);
     const nodeColors = buildNodeColors(nodes);
 
     sunburstData = [
@@ -45,6 +48,25 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
       } as SunburstTrace,
     ] as unknown as PlotlyData[];
   }
+
+  // Plotly (via react-plotly's `useResizeHandler`) only refits on window
+  // resize, so it misses container-only changes such as toggling the popup
+  // size. Observe the wrapper and forward those changes as a resize event so
+  // the sunburst adapts like the recharts base charts.
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!hasTaxonData) return;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    // Use react-plotly's own resize handler (which refits to the container)
+    const observer = new ResizeObserver(() => {
+      window.dispatchEvent(new Event("resize"));
+    });
+    observer.observe(wrapper);
+    return () => observer.disconnect();
+  }, [hasTaxonData]);
+
   return (
     <ChartComponent
       className={cardHeight}
@@ -52,13 +74,21 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
     >
       <div className="flex items-center justify-center">
         {hasTaxonData && (
-          <Plot
-            className="pl-15  "
-            config={{ displayModeBar: false, responsive: true }}
-            data={sunburstData}
-            layout={SUNBURST_LAYOUT}
-            style={{ height: "100%", width: "100%" }}
-          />
+          // Style - Extend the width to the container, keep a square aspect and
+          // stay centered. Limit width to 600px to avoid an oversized chart.
+          <div
+            className="mx-auto aspect-square h-auto max-h-full w-full max-w-150"
+            ref={wrapperRef}
+          >
+            <Plot
+              className="h-full w-full"
+              config={{ displayModeBar: false, responsive: true }}
+              data={sunburstData}
+              layout={SUNBURST_LAYOUT}
+              style={{ height: "100%", width: "100%" }}
+              useResizeHandler
+            />
+          </div>
         )}
         {!hasTaxonData && (
           <div

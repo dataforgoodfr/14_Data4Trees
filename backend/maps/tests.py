@@ -5,9 +5,11 @@ from typing import ClassVar
 import pandas as pd
 from django.contrib.auth.models import Permission
 from django.contrib.auth import get_user_model
-from django.test import TestCase, Client, SimpleTestCase
+from django.test import TestCase, SimpleTestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
+from rest_framework.test import APIClient
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from maps.stats import mrp_mean
 
@@ -33,7 +35,11 @@ class FileUploadTest(TestCase):
     CATALOG_DIR: ClassVar[str] = 'catalog/test'
     
     def setUp(self):
-        self.client = Client()
+        self.client = APIClient()
+        self.url = reverse('maps-add-data')
+        user = self.get_user_with_permission("testuser", "pass", "add_data")
+        token = self.get_jwt_for_user(user)
+        self.authenticate_user(token)
 
     def tearDown(self):
         try:
@@ -47,6 +53,12 @@ class FileUploadTest(TestCase):
         user.user_permissions.add(permission)
         return user
 
+    def get_jwt_for_user(self, user):
+        refresh = RefreshToken.for_user(user)
+        return str(refresh.access_token)
+
+    def authenticate_user(self, token):
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
 
     def get_uplodaded_file(self, file_content: str | bytes, filename: str) -> SimpleUploadedFile:
         if isinstance(file_content, str):

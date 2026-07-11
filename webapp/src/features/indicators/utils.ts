@@ -1,4 +1,10 @@
+import type {
+  ExternalData,
+  LabelData,
+} from "@features/popup/forest-inventory/types";
+
 import { useTranslation } from "@shared/i18n";
+import type { LayerMetadata } from "@shared/lib/coordo";
 import { precise } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
@@ -75,10 +81,23 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
     Object.entries(data).map(([key, value]) => [
       key,
       indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(Number(value))
+        ? precise(Number(value), defaultValue)
         : (value ?? defaultValue),
     ]),
   ) as T;
+}
+
+export function convertDictToPercentage(
+  data: Record<string, number>,
+  total: number,
+  defaultValue: string,
+): Record<string, number> {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      Number(precise(Number((value * 100) / total), defaultValue)),
+    ]),
+  );
 }
 
 /*
@@ -97,4 +116,54 @@ export function computeScore(value: number): number {
   if (value === 0) return 10;
 
   return 4 - Math.floor(Math.log10(value));
+}
+
+export function findCategoricalLabel(
+  metadata: LayerMetadata,
+  fieldName: string,
+  fieldValue: any,
+): string | undefined {
+  // Searching field category in main resource schema
+  const resourceLabel = metadata?.resource?.schema?.fields
+    .find((f) => f.name === fieldName)
+    ?.categories?.find((c) => c.value === fieldValue)?.label;
+
+  if (resourceLabel) {
+    return resourceLabel;
+  }
+
+  // Searching field category in main resource's references' schemas
+  return metadata?.references
+    ?.find((ref) =>
+      ref.schema.fields
+        .find((f) => f.name === fieldName)
+        ?.categories?.some((c) => c.value === fieldValue),
+    )
+    ?.schema.fields.find((f) => f.name === fieldName)
+    ?.categories?.find((c) => c.value === fieldValue)?.label;
+}
+
+export function findLabelInExternalData(
+  externalData: ExternalData,
+  resourceName: string,
+  project: string,
+  fieldName: string,
+  fieldValue: any,
+): string | undefined {
+  // Get the data array for the resource (e.g., for_label, for_mf_tax1, etc.)
+  const resourceData = externalData[resourceName];
+
+  if (!resourceData || !Array.isArray(resourceData)) {
+    return undefined;
+  }
+
+  // Find the record matching all criteria: project, list_name, and name
+  const record = resourceData.find(
+    (item: LabelData) =>
+      item?.proj?.trim() === project.trim() &&
+      item?.list_name?.trim() === fieldName.trim() &&
+      item?.name === fieldValue,
+  );
+
+  return record?.label;
 }

@@ -1,4 +1,3 @@
-import type { LayerMetadata } from "coordo";
 import { Bug, Gem, Sprout } from "lucide-react";
 
 import { ChartAquaticErosion } from "@features/charts/soil/ui/chart-aquatic-erosion";
@@ -6,16 +5,17 @@ import { ChartTaxonAbundance } from "@features/charts/soil/ui/chart-taxon-abunda
 import { ChartWindErosion } from "@features/charts/soil/ui/chart-wind-erosion";
 import type { UseIndicatorReturnType } from "@features/indicators//components/types";
 import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
+import type { ForestInventoryData } from "@features/popup/forest-inventory";
+import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
 import { useFormatSoilData } from "./format-data";
-import type { SoilData } from "./types";
 
 export const useSoilIndicatorElements = (
-  rawData: SoilData,
-  metadata: LayerMetadata,
+  rawData: ForestInventoryData,
+  metadata: ExternalData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
 
@@ -78,8 +78,8 @@ export const useSoilIndicatorElements = (
           />
           <ChartTaxonAbundance
             data={data.soil_fauna_abundance}
-            dataType="tsbf"
             metadata={metadata}
+            project={rawData.project}
           />
         </>
       ),
@@ -103,8 +103,8 @@ export const useSoilIndicatorElements = (
           />
           <ChartTaxonAbundance
             data={data.surface_fauna_abundance}
-            dataType="barbA"
             metadata={metadata}
+            project={rawData.project}
           />
         </>
       ),

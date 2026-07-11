@@ -21,6 +21,12 @@
     "noData": "Données non disponibles",
     "undefined": "non trouvée"
   },
+  "error": {
+    "pleaseLogin": "Veuillez vous connecter",
+    "retry": "Réessayer",
+    "title": "Erreur lors du chargement des données",
+    "unknownMessage": "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."
+  },
   "header": {
     "colorModeSelector": {
       "dark": "Sombre",

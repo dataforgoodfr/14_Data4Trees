@@ -1,4 +1,3 @@
-import { createMap, EVENTS } from "coordo";
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
@@ -10,6 +9,7 @@ import {
   MapContext,
 } from "@shared/contexts/map-context-all4trees";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
+import { createMap, EVENTS } from "@shared/lib/coordo";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 

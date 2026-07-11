@@ -100,10 +100,11 @@
           "autoConso": "Satisfaction des besoins en auto-consommation",
           "diversity": {
             "cereals": "Céréales",
+            "dairy": "Produits Laitiers",
             "eggs": "Œufs",
             "fish": "Poisson",
             "fruits": "Fruits",
-            "legend": "ménages consommant ce groupe alimentaire (en %):",
+            "legend": "des ménages consomment ce groupe alimentaire",
             "meat": "Viande",
             "roots": "Racines",
             "seeds": "Graines",
@@ -116,12 +117,13 @@
         },
         "governance": {
           "beneficialPractices": {
-            "defense": "Mise en défense",
-            "improvedHousehold": "Utilisation d'un foyer amélioré",
-            "legend": "ménages ayant adopté cette pratique (en %): ",
-            "rna": "Pratique de la RNA",
-            "title": "Pratiques bénéfiques adoptées",
-            "treePlanting": "Plantation d'arbres"
+            "legend": "des ménages ont adopté cette pratique",
+            "pract1": "Mise en défense",
+            "pract2": "Cultures en courbes de niveau",
+            "pract3": "Association de cultures",
+            "pract4": "Rotation des cultures",
+            "pract5": "Fabrication de compost",
+            "title": "Pratiques bénéfiques adoptées"
           },
           "conflictIndex": "Indice de conflictualité",
           "title": "Gouvernance"
@@ -138,9 +140,10 @@
             "coal": "Charbon",
             "collectedWood": "Bois collecté",
             "gas": "Gaz",
-            "legend": "ménages utilisant la ressource (en %):",
+            "legend": "des ménages utilisent la ressource",
             "organicWaste": "Déchets végétaux",
             "other": "Autres",
+            "recWood": "Bois offert",
             "title": "Sources d’énergie utilisées"
           },
           "needs": {

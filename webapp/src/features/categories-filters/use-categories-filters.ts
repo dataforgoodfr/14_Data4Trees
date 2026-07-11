@@ -1,4 +1,3 @@
-import { EVENTS } from "coordo";
 import { useCallback, useEffectEvent } from "react";
 
 import {
@@ -7,6 +6,7 @@ import {
   parseLayerId,
 } from "@shared/api/categories-filters";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
+import { EVENTS } from "@shared/lib/coordo";
 
 export const useCategoriesFilters = () => {
   const [categoriesFilters, setCategoriesFilters] =
