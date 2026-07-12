@@ -43,6 +43,12 @@ export const fetchJSONWithAuth = async (
 ) => (await fetchWithAuth(endpoint, options, authToken)).json();
 
 export const createApiClient = (authToken: string | null) => ({
+  addData: (formData: FormData) =>
+    fetchWithAuth(
+      `/maps/add-data/`,
+      { body: formData, method: "POST" },
+      authToken,
+    ),
   getCatalogResource: (layerId: string, resourceName: string) =>
     fetchJSONWithAuth(`/catalog/${layerId}/${resourceName}`, {}, authToken),
   getCatalogResourceList: (layerId: string, resourceList: string[]) =>

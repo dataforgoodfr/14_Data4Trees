@@ -1,4 +1,40 @@
 {
+  "addData": {
+    "button": {
+      "pending": "Uploading...",
+      "submit": "Add data"
+    },
+    "description": "Upload a file to add data to a map layer.",
+    "error": {
+      "generic": "Upload failed. Please try again.",
+      "missingFile": "Please choose a file to upload.",
+      "missingForm": "Please select a layer to update."
+    },
+    "field": {
+      "file": "File to upload",
+      "form": "Layer / Form to update",
+      "formPlaceholder": "Select a layer",
+      "kind": "Kind of resource",
+      "resource": "Resource name (optional)",
+      "resourcePlaceholder": "Leave empty to infer from file name"
+    },
+    "forms": {
+      "enquete": "Household survey",
+      "inventaire_bio": "Biological inventory",
+      "inventaire_for": "Forest inventory",
+      "seed": "Reforestation"
+    },
+    "kind": {
+      "externalData": "External data",
+      "formData": "Form data"
+    },
+    "resourceHint": {
+      "csv": "Optional. If left empty, the resource name is inferred from the CSV file name.",
+      "excel": "Resource names will be inferred from the sheet names. Make sure your sheet names are correct before uploading."
+    },
+    "success": "Data added successfully.",
+    "title": "Add data"
+  },
   "auth": {
     "loginForm": {
       "button": {
@@ -34,6 +70,7 @@
       "system": "System"
     },
     "menu": {
+      "addData": "Add data",
       "goToAdmin": "Admin",
       "language": "Language",
       "login": "Login",

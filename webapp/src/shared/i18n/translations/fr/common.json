@@ -1,4 +1,40 @@
 {
+  "addData": {
+    "button": {
+      "pending": "Envoi en cours...",
+      "submit": "Ajouter les données"
+    },
+    "description": "Importez un fichier pour ajouter des données à une couche de la carte.",
+    "error": {
+      "generic": "Échec de l'import. Veuillez réessayer.",
+      "missingFile": "Veuillez choisir un fichier à importer.",
+      "missingForm": "Veuillez sélectionner une couche à mettre à jour."
+    },
+    "field": {
+      "file": "Fichier à importer",
+      "form": "Couche / Formulaire à mettre à jour",
+      "formPlaceholder": "Sélectionnez une couche",
+      "kind": "Type de ressource",
+      "resource": "Nom de la ressource (facultatif)",
+      "resourcePlaceholder": "Laissez vide pour déduire du nom du fichier"
+    },
+    "forms": {
+      "enquete": "Enquête ménage",
+      "inventaire_bio": "Inventaire biologique",
+      "inventaire_for": "Inventaire forestier",
+      "seed": "Reboisement"
+    },
+    "kind": {
+      "externalData": "Données externes",
+      "formData": "Données de formulaire"
+    },
+    "resourceHint": {
+      "csv": "Facultatif. Si laissé vide, le nom de la ressource sera déduit du nom du fichier CSV.",
+      "excel": "Les noms des ressources seront déduits des noms des feuilles. Vérifiez les noms des feuilles avant l'import."
+    },
+    "success": "Données ajoutées avec succès.",
+    "title": "Ajouter des données"
+  },
   "auth": {
     "loginForm": {
       "button": {
@@ -34,6 +70,7 @@
       "system": "Système"
     },
     "menu": {
+      "addData": "Ajouter des données",
       "goToAdmin": "Espace Admin",
       "language": "Langue",
       "login": "Connexion",
