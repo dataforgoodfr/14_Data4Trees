@@ -39,7 +39,7 @@ export const useSoilIndicatorElements = (
     { type: "divider" },
     {
       children: (
-        <div className="flex flex-col gap-sm">
+        <div className="flex flex-col gap-2">
           <ChartAquaticErosion
             benef={{
               rainfall: data.soil_eros_rainfall,

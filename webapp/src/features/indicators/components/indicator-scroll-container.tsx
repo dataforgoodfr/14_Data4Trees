@@ -13,7 +13,7 @@ export const IndicatorScrollContainer: FC<IndicatorScrollContainerProps> = ({
   return (
     <div
       className={cx(
-        "p-md flex flex-col gap-md text-xs",
+        "p-3 flex flex-col gap-3 text-xs",
         "overflow-y-scroll custom-scrollbar",
         className ?? "",
       )}
