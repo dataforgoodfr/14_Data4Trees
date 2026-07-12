@@ -16,8 +16,8 @@ export const IndicatorRawValue: FC<IndicatorRawValueProps> = ({
   }
 
   return (
-    <div className="flex flex-row items-center justify-between gap-sm flex-1 mt-sm text-sm">
-      <div className="flex flex-row items-center gap-xs text-muted-foreground">
+    <div className="flex flex-row items-center justify-between gap-2 flex-1 mt-2 text-sm">
+      <div className="flex flex-row items-center gap-1 text-muted-foreground">
         {iconStart}
         <p>{dataName}</p>
       </div>

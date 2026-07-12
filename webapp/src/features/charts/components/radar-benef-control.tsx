@@ -87,7 +87,7 @@ export const ChartRadarWithBenefAndControl: ChartComponentType<
               />
 
               <ChartLegend
-                className="mt-md"
+                className="mt-3"
                 content={<ChartLegendContent />}
               />
             </>

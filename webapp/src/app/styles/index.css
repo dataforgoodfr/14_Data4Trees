@@ -18,7 +18,6 @@
 
 :root {
   --radius: 0.625rem;
-  --spacing-base: 0.25rem;
 }
 
 /* ========================================================================
@@ -30,16 +29,6 @@
  */
 
 @theme inline {
-  --spacing-2xs: calc(var(--spacing-base) / 2);
-  --spacing-xs: calc(var(--spacing-base));
-  --spacing-sm: calc(var(--spacing-base) * 2);
-  --spacing-md: calc(var(--spacing-base) * 3);
-  --spacing-lg: calc(var(--spacing-base) * 4);
-  --spacing-xl: calc(var(--spacing-base) * 5);
-  --spacing-2xl: calc(var(--spacing-base) * 6);
-  --spacing-3xl: calc(var(--spacing-base) * 8);
-  --spacing-4xl: calc(var(--spacing-base) * 10);
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
