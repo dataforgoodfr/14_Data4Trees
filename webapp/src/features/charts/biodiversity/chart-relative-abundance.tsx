@@ -2,7 +2,6 @@ import { findLabelInExternalData } from "@features/indicators/utils";
 import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@shared/i18n";
-import { precise } from "@shared/lib/utils";
 import type { ChartConfig } from "@shared/ui/chart";
 
 import type { ChartComponentType } from "../components/chart-component";
@@ -10,7 +9,7 @@ import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
   project: string;
-  data: [string, number][];
+  data: Record<string, number>;
   externalData: ExternalData;
 };
 
@@ -20,19 +19,18 @@ export const ChartRelativeAbundance: ChartComponentType<PieChartProps> = ({
   externalData,
 }) => {
   const { t } = useTranslation("all4trees");
-  const smallCategoriesSum = Number(
-    precise(
-      data
-        .filter(([_, value]) => value < 5)
-        .reduce((acc, [_, value]) => acc + value, 0),
-    ),
-  );
-  const chartData = data
-    .filter(([name, value]) => name !== "0" && (data.length < 6 || value >= 5))
-    .map((element, index) => ({
+  const smallCategoriesSum = Object.values(data)
+    .filter((value) => value < 5)
+    .reduce((acc, value) => acc + value, 0);
+  const chartData = Object.entries(data)
+    .filter(
+      ([name, value]) =>
+        name !== "0" && (Object.keys(data).length < 6 || value >= 5),
+    )
+    .map(([name, value], index) => ({
       fill: `var(--chart-${(index % 5) + 1})`,
-      name: element[0],
-      value: element[1],
+      name,
+      value,
     }));
 
   let chartConfig: ChartConfig = {};

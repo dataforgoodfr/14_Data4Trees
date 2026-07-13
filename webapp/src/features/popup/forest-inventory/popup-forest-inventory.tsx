@@ -43,7 +43,7 @@ export const ForestInventoryPopupContent: FC<
   };
 
   const title = t("popup.forestInventory.title", {
-    id: data.id,
+    id: data.cod,
     ns: "all4trees",
   });
 
@@ -53,8 +53,18 @@ export const ForestInventoryPopupContent: FC<
       "for_label",
       data.project,
       "loc2",
-      Number(data.for),
-    ) || t("dataManagement.undefined", { ns: "common" });
+      data.for,
+    ) || t("common:dataManagement.undefined");
+
+  const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${
+    findLabelInExternalData(
+      externalData,
+      "for_label",
+      data.project,
+      "ecos",
+      data.ecos,
+    ) || t("dataManagement.undefined", { ns: "common" })
+  }`;
 
   const biodiversityElements = useBiodiversityIndicatorElements(
     data,
@@ -68,6 +78,7 @@ export const ForestInventoryPopupContent: FC<
           date: formatDate(new Date()),
           ns: "all4trees",
         })}
+        ecos={ecos}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         subtitle={subtitle}
         title={title}

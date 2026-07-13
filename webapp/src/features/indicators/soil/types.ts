@@ -12,7 +12,11 @@ export type SoilData = {
   soil_fauna_density: number;
   soil_fauna_diversity: number;
   soil_fauna_abundance: any;
+  soil_fauna_abundance_pop: string[];
+  soil_fauna_total_pop: number;
   soil_surface_fauna_density: number;
   soil_surface_fauna_diversity: number;
   soil_surface_fauna_abundance: any;
+  soil_surface_fauna_abundance_pop: string[];
+  soil_surface_fauna_total_pop: number;
 };

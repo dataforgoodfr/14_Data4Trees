@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next";
 
 import {
+  convertDictToPercentage,
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
 } from "@features/indicators/utils";
+import type { ForestInventoryData } from "@features/popup/forest-inventory/types";
 
-import { precise } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
 
 import type { BiodiversityData } from "./types";
@@ -25,22 +26,10 @@ const indicatorKeys: NumericKeys<BiodiversityData>[] = [
   "bio_idx_microhabitats",
 ];
 
-const formatRelativeAbundance = (
-  relativeAbundance: BiodiversityData["relative_abundance"],
-  treePop: number,
-) =>
-  Object.entries(relativeAbundance).map(
-    ([key, value]) =>
-      [key, Number(precise((Number(value) * 100) / treePop))] as [
-        string,
-        number,
-      ],
-  );
-
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
-export const useFormatBiodiversityData = (data: BiodiversityData) => {
+export const useFormatBiodiversityData = (data: ForestInventoryData) => {
   const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 
@@ -59,9 +48,10 @@ export const useFormatBiodiversityData = (data: BiodiversityData) => {
       volume: formatWithUnit(safeData.biomass_volume, UNITS.tonPerHectare),
     },
     treeDiversity: {
-      relative_abundance: formatRelativeAbundance(
+      relative_abundance: convertDictToPercentage(
         data.relative_abundance,
         data.tree_pop,
+        "0",
       ),
       speciesRichness: formatWithUnit(safeData.richness, UNITS.essenceCount),
       tree_pop: data.tree_pop,

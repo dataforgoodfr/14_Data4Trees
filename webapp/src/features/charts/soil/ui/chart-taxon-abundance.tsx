@@ -32,15 +32,20 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
     );
     const nodes = buildSunburstNodes(filteredDataEntries, metadata, project);
     const nodeColors = buildNodeColors(nodes);
+    const hoverText = nodes.map(
+      (node) => `${node.label}<br>${node.value.toFixed(2)} %`,
+    );
 
     sunburstData = [
       {
         branchvalues: "total",
         extendsunburstcolorway: true,
+        hoverinfo: "text",
+        hovertext: hoverText,
         ids: nodes.map((n) => n.id),
         labels: nodes.map((n) => n.label),
-        leaf: { opacity: 0.4 },
-        marker: { colors: nodeColors, line: { width: 2 } },
+        leaf: { opacity: 1 },
+        marker: { colors: nodeColors, line: { color: "#fff", width: 2 } },
         parents: nodes.map((n) => n.parent),
         sunburstcolorway: nodeColors,
         type: "sunburst",

@@ -203,7 +203,7 @@
       "minPerHhPerDay": "{{ value }} min/household/day",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
-      "speciesCount": "{{ count }} species inventoried",
+      "speciesCount": "{{ count }} species per trap",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },
@@ -215,6 +215,7 @@
   "popup": {
     "forestInventory": {
       "date": "Site survey date : {{ date }}",
+      "ecos": "Ecosystem",
       "title": "Plot n°{{ id }}"
     },
     "socioEco": {
