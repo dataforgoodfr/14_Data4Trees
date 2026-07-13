@@ -7,11 +7,16 @@ import logging
 import chardet
 
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound, ParseError, APIException
 from rest_framework import status
 from coordo.loaders import get_file_loader, KoboToolboxLoader
 
 
 logger = logging.getLogger(__name__)
+
+
+class DatapackageException(APIException):
+    status_code = 500
 
 
 class LoaderMethod(str, Enum):
@@ -85,8 +90,7 @@ class DatapackageManager:
         try:
             params = self.parse_params(loader_method)
         except ValueError as e:
-            logger.exception(e)
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return ParseError(str(e))
 
         # getting keys to get in self.request.FILES
         file_keys = ["data"]
@@ -110,8 +114,7 @@ class DatapackageManager:
                 getattr(file_loader, loader_method)()
                 
             except Exception as e:
-                logger.exception(e)
-                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return DatapackageException(str(e))
                 
         finally:
             # in any case, delete the temporary files
@@ -139,9 +142,7 @@ class DatapackageManager:
         try:
             uploaded_file = self.request.FILES[key]
         except KeyError:
-            msg = f"No file provided with key '{key}'"
-            logger.error(msg)
-            return Response({'error': msg}, status=status.HTTP_400_BAD_REQUEST)
+            raise NotFound(f"No file provided with key '{key}'")
     
         temp_file = Path(gettempdir()) / uploaded_file.name
     
@@ -188,6 +189,6 @@ class DatapackageManager:
         except (KeyError, TypeError) as e:
             msg = (
                 f"Invalid request format. Mandatory fields: {', '.join([f'{field} (type {str(type_)})' for field, type_ in fields.items()])}. "
-                f"Entountered error with: {str(e)}"
+                f"Error encountered: {str(e)}"
             )
             raise ValueError(msg)
