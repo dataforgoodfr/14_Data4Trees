@@ -85,12 +85,10 @@ class DatapackageManager:
         An optional field 'options' can also be provided.
         The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
         """
-        self.check_user_authorizations()
-        
         try:
             params = self.parse_params(loader_method)
         except ValueError as e:
-            return ParseError(str(e))
+            return ParseError(e)
 
         # getting keys to get in self.request.FILES
         file_keys = ["data"]
@@ -114,7 +112,8 @@ class DatapackageManager:
                 getattr(file_loader, loader_method)()
                 
             except Exception as e:
-                return DatapackageException(str(e))
+                logger.exception(e)
+                raise DatapackageException(e)
                 
         finally:
             # in any case, delete the temporary files
@@ -127,12 +126,6 @@ class DatapackageManager:
         )
     
     
-    def check_user_authorizations(self):
-        # authorization: ensure user has the custom add_data permission
-        if not self.request.user.has_perm("users.add_data"):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-    
-    
     def get_file(self, key: str) -> Path:
         """
         Gets the uploaded file from the request object.
@@ -143,21 +136,26 @@ class DatapackageManager:
             uploaded_file = self.request.FILES[key]
         except KeyError:
             raise NotFound(f"No file provided with key '{key}'")
-    
+
         temp_file = Path(gettempdir()) / uploaded_file.name
-    
+
         # get file content
         file_content = uploaded_file.read()
         
         # detect the encoding using chardet, decode the content and re-encode as UTF-8
         encoding_info = chardet.detect(file_content)
-        detected_encoding = encoding_info['encoding']
-        decoded_content = file_content.decode(detected_encoding)
-        utf8_content = decoded_content.encode('utf-8')
+
+        if detected_encoding := encoding_info['encoding'] is not None:
+            decoded_content = file_content.decode(detected_encoding)
+            logger.info(f"Encoding detected for {uploaded_file.name}: {detected_encoding}. Re-encoding as utf-8")
+            reencoded_content = decoded_content.encode('utf-8')
+        else:
+            logger.info(f"Encoding not detected for {uploaded_file.name}, writing file content as it is.")
+            reencoded_content = file_content
     
         # save the file temporarily
         with open(temp_file, 'wb') as f:
-            f.write(utf8_content)
+            f.write(reencoded_content)
     
         return temp_file
 
