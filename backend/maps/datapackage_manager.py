@@ -155,8 +155,7 @@ class DatapackageManager:
         
         # detect the encoding using chardet, decode the content and re-encode as UTF-8
         encoding_info = chardet.detect(file_content)
-
-        if detected_encoding := encoding_info['encoding'] is not None:
+        if (detected_encoding := encoding_info['encoding']) is not None:
             decoded_content = file_content.decode(detected_encoding)
             logger.info(f"Encoding detected for {uploaded_file.name}: {detected_encoding}. Re-encoding as utf-8")
             reencoded_content = decoded_content.encode('utf-8')
