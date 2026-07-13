@@ -26,5 +26,6 @@ urlpatterns = [
     path("api/maps/", include("maps.urls")),
     path("api/catalog/<layer_id>/<resource_name>", views.resource_view, name="get-catalog-resource"),
     path("api/catalog/<layer_id>", views.resource_list_view, name="get-catalog-resources-list"),
+    path("api/datapackage.json", views.datapackage_view, name="get-datapackage.json"),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
