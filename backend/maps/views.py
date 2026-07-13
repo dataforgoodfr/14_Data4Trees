@@ -1,18 +1,14 @@
-from pathlib import Path
-from tempfile import gettempdir
-
-from coordo.loaders import FileLoader, ResourceAction
 from coordo.map import Map
 from django.conf import settings
 from django.http import JsonResponse
+from django.contrib.auth.decorators import permission_required
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
-import chardet
-
 from . import stats
+from .datapackage_manager import DatapackageManager
 
 config_path = settings.BASE_DIR / "configs" / "config.json"
 map = Map.from_file(config_path)
@@ -43,64 +39,62 @@ def dashboard_view(request, layer_id):
     }, status=status.HTTP_501_NOT_IMPLEMENTED)
 
 
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def add_data_view(request):
+@permission_required("users.add_data")
+def add_resources_view(request):
     """
-    View for adding a file to a DataPackage.
-    Expects a POST request with a body containing the 'file', 'package' and 'action' fields.
-    The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
+    View for adding a file / Kobotoolbox files (creating the corresponding resource(s)) to a DataPackage.
     """
+    return DatapackageManager(request).add_resources()
 
-    # authorization: ensure user has the custom add_data permission
-    if not request.user.has_perm("users.add_data"):
-        return Response(status=status.HTTP_403_FORBIDDEN)
 
-    if 'file' not in request.FILES:
-        return Response({'error': 'No file provided'}, status=status.HTTP_400_BAD_REQUEST)
-       
-    uploaded_file = request.FILES['file']
-    temp_file = Path(gettempdir()) / uploaded_file.name
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.delete_data")
+def remove_resources_view(request):
+    """
+    View for removing resource(s) corresponding to a file / Kobotoolbox files in a DataPackage.
+    """
+    return DatapackageManager(request).remove_resources()
 
-    # get file content
-    file_content = uploaded_file.read()
-    
-    # detect the encoding using chardet, decode the content and re-encode as UTF-8
-    encoding_info = chardet.detect(file_content)
-    detected_encoding = encoding_info['encoding']
-    decoded_content = file_content.decode(detected_encoding)
-    utf8_content = decoded_content.encode('utf-8')
 
-    try:
-        # save the file temporarily
-        with open(temp_file, 'wb') as f:
-            f.write(utf8_content)
-    
-        try:
-            package = Path(request.POST["package"])
-            action = request.POST["action"]
-        except KeyError:
-            return Response(
-                {"error": "Invalid request format. The request must contain the 'package' and 'action' fields."}, 
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-    
-        if action not in ResourceAction:
-            return Response(
-                {"error": "Invalid action. The action must be one of: " + ", ".join(ResourceAction)}, 
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.change_data")
+def append_data_view(request):
+    """
+    View for appending the data contained in a file / Kobotoolbox file to the corresponding resources of a DataPackage.
+    """
+    return DatapackageManager(request).append_data()
 
-        try:
-            FileLoader(package, temp_file, action).etl()
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
-    finally:
-        # in any case, delete the temporary file
-        temp_file.unlink(missing_ok=True)
-    
-    return Response({
-        'message': 'File uploaded successfully',
-        'filename': uploaded_file.name,
-    }, status=status.HTTP_200_OK)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.change_data")
+def replace_data_view(request):
+    """
+    View for removing the data contained in a file from the corresponding resources of a DataPackage.
+    """
+    return DatapackageManager(request).replace_data()
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.add_data")
+def add_foreign_key_view(request):
+    """
+    View for adding a foreign key to a DataPackage.
+    """
+    return DatapackageManager(request).add_foreign_key()
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.add_data")
+def remove_foreign_key_view(request):
+    """
+    View for adding a foreign key to a DataPackage.
+    """
+    return DatapackageManager(request).remove_foreign_key()

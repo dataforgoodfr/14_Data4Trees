@@ -1,5 +1,8 @@
 import json
 import shutil
+import logging
+from typing import ClassVar
+from pathlib import Path
 
 import pandas as pd
 from django.contrib.auth.models import Permission
@@ -12,7 +15,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from maps.stats import mrp_mean
 
-TEST_DIR = 'catalog/test'
+
+logger = logging.getLogger(__name__)
+
 class SerializationTest(SimpleTestCase):
     def test_mrp_mean_returns_json_serializable_values(self):
         df = pd.DataFrame(
@@ -29,24 +34,35 @@ class SerializationTest(SimpleTestCase):
         self.assertIn('"error"', payload)
 
 
-class FileUploadTest(TestCase):
+class DatapackageTest(TestCase):
+
+    CATALOG_DIR: ClassVar[str] = 'catalog/test'
+    TEST_DATA_DIR: ClassVar[Path] = Path(__file__).parent / 'fixtures'
+    KOBOTOOLBOX_FORM: ClassVar[str] = 'kobotoolbox_inquiry.xlsx'
+    KOBOTOOLBOX_DATA: ClassVar[str] = 'kobotoolbox_data.xlsx'
+    
+    
     def setUp(self):
         self.client = APIClient()
-        self.url = reverse('maps-add-data')
-        user = self.get_user_with_permission("testuser", "pass", "add_data")
+        user = self.get_user_with_permissions(
+            username="testuser", 
+            password="pass", 
+            permissions=["add_data", "delete_data", "change_data"]
+        )
         token = self.get_jwt_for_user(user)
         self.authenticate_user(token)
 
     def tearDown(self):
         try:
-            shutil.rmtree(TEST_DIR)
+            shutil.rmtree(self.CATALOG_DIR)
         except OSError:
             pass 
 
-    def get_user_with_permission(self, username, password, codename):
-        user = get_user_model().objects.create_user(username=username, password=password)
-        permission = Permission.objects.get(codename=codename)
-        user.user_permissions.add(permission)
+    def get_user_with_permissions(self, username: str, password: str, permissions: list[str]):
+        user, _ = get_user_model().objects.get_or_create(username=username, password=password)
+        for permission in permissions:
+            permission = Permission.objects.get(codename=permission)
+            user.user_permissions.add(permission)
         return user
 
     def get_jwt_for_user(self, user):
@@ -56,94 +72,110 @@ class FileUploadTest(TestCase):
     def authenticate_user(self, token):
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
 
-    def test_file_upload_add_ascii_content(self):
-        file_content = b'col_1,col_2\nvalue1,value2'
+    def manage_file_resource(self, method: str, file_content: str | bytes):
+        file_data: dict = self.format_file_data_for_post_request(file_content, "file.csv")
+        self.manage_resources(method, 'file', file_data)
 
-        uploaded_file = SimpleUploadedFile(
-            name="ascii.csv",
+    def manage_kobotoolbox_resources(self, method: str):
+        data_content = self.get_kobotoolbox_file_content(self.KOBOTOOLBOX_DATA)
+        file_data = {"data": data_content}
+        if method in ["add", "remove"]:
+            form_content = self.get_kobotoolbox_file_content(self.KOBOTOOLBOX_FORM)
+            file_data["form"] = form_content
+        self.manage_resources(method, 'kobotoolbox', file_data)
+        
+    def manage_resources(self, method: str, resource_type: str, file_data: dict):
+        response = self.send_post_request_for_resources(f"maps-{method}-data", resource_type, file_data)
+        logger.info(f"Response: {response}")
+        self.assertEqual(response.status_code, 200)
+
+    def manage_foreign_keys(self, method: str, from_: str, to: str):
+        fk_data = {"from": from_, "to": to}
+        response = self.send_post_request_for_foreign_keys(f"maps-{method}-fk", fk_data)
+        logger.info(f"Response: {response}")
+        self.assertEqual(response.status_code, 200)
+
+    @staticmethod
+    def format_file_data_for_post_request(file_content: str | bytes, filename: str) -> dict[str, SimpleUploadedFile]:
+        if isinstance(file_content, str):
+            file_content = file_content.encode()
+        uploaded_file =  SimpleUploadedFile(
+            name=filename,
             content=file_content,
             content_type='multipart/form-data'
         )
+        return {"data": uploaded_file}
 
-        response = self.client.post(
-            self.url,
-            data={ 
-                'file': uploaded_file, 
-                'package': TEST_DIR,
-                'action': 'add'
-            }
-        )
-        
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('File uploaded successfully', response.json()['message'])
-
-
-    def test_file_upload_add_ut8_content(self):
-        file_content = 'col_1,col_2\néàë,-°$'
-
-        uploaded_file = SimpleUploadedFile(
-            name="utf8.csv",
-            content=file_content.encode('utf-8'),
-            content_type='multipart/form-data'
-        )
-
-        response = self.client.post(
-            self.url,
-            data={ 
-                'file': uploaded_file, 
-                'package': TEST_DIR,
-                'action': 'add'
-            }
-        )
-        
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('File uploaded successfully', response.json()['message'])
-        
-    def test_file_upload_weird_byte(self):
-        data = b"id,name\n1,John\n2,Ana\n3,Bob\x96\n"  # 0x96 is typical Windows-1252 dash
-
-        uploaded_file = SimpleUploadedFile(
-            name="ascii_with_weird_byte.csv",
-            content=data,
-            content_type='multipart/form-data'
-        )
+    def get_kobotoolbox_file_content(self, filename: str) -> bytes:
+        file = self.TEST_DATA_DIR / filename
+        with open(file, "rb") as f:
+            return SimpleUploadedFile(
+                filename, 
+                f.read(), 
+                content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
             
-        response = self.client.post(
-            self.url,
-            data={ 
-                'file': uploaded_file, 
-                'package': TEST_DIR,
-                'action': 'add'
-            }
-        )
+    def send_post_request_for_resources(self, url_name: str, resource_type: str, file_data: dict):
+        data = {'resource_type': resource_type, 'package': self.CATALOG_DIR} | file_data
+        return self.client.post(reverse(url_name), data, format='multipart')
 
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('File uploaded successfully', response.json()['message'])
+    def send_post_request_for_foreign_keys(self, url_name: str, fk_data: dict):
+        data = {'package': self.CATALOG_DIR} | fk_data
+        return self.client.post(reverse(url_name), data)
+
+    ##########################################
+    # TEST CASES FOR MANAGEMENT OF FILE RESOURCES
+    ##########################################
+
+    def test_add_resource_from_file_with_ascii_content(self):
+        file_content = b'col_1,col_2\nvalue1,value2'
+        self.manage_file_resource('add', file_content)
+
+    def test_add_resource_from_file_with_ut8_content(self):
+        file_content = 'col_1,col_2\néàë,-°$'.encode()
+        self.manage_file_resource('add', file_content)
+
+    def test_add_resource_from_file_with_weird_byte(self):
+        file_content = b"id,name\n1,John\n2,Ana\n3,Bob\x96\n"  # 0x96 is typical Windows-1252 dash
+        self.manage_file_resource('add', file_content)
         
     def test_file_mixed_encodings(self):
         part_utf8 = "id,name,city\n1,Élodie,Paris\n".encode("utf-8")
         part_latin1 = "2,José,Lisboa\n3,François,Lyon\n".encode("latin-1")
         file_content = part_utf8 + part_latin1
+        self.manage_file_resource('add', file_content)
 
-        uploaded_file = SimpleUploadedFile(
-            name="mixed_encoding_file.csv",
-            content=file_content,
-            content_type='multipart/form-data'
-        )
-            
-        response = self.client.post(
-            self.url,
-            data={ 
-                'file': uploaded_file, 
-                'package': TEST_DIR,
-                'action': 'add'
-            }
-        )
+    def test_remove_resource_from_file(self):
+        file_content = b'col_1,col_2\nvalue1,value2'
+        self.manage_file_resource('add', file_content)
+        self.manage_file_resource('remove', file_content)
 
-        self.assertEqual(response.status_code, 200, f"response is {response}")
-        self.assertEqual(uploaded_file.name, response.json()['filename'])
-        self.assertIn('File uploaded successfully', response.json()['message'])
-        
+    def test_append_data_to_resource_from_file(self):
+        file_content = b'col_1,col_2\nvalue1,value2'
+        self.manage_file_resource('add', file_content)
+        self.manage_file_resource('append', file_content)
+
+    def test_replace_data_in_resource_from_file(self):
+        file_content = b'col_1,col_2\nvalue1,value2'
+        self.manage_file_resource('add', file_content)
+        self.manage_file_resource('replace', file_content)
+
+    ##########################################
+    # TEST CASES FOR MANAGEMENT OF KOBOTOOLBOX RESOURCES
+    ##########################################
+
+    def test_add_remove_replace_append_kobotoolbox_resource(self):
+        self.manage_kobotoolbox_resources('add')
+        self.manage_foreign_keys('remove', 'reg.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('add', 'reg.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'reg.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'ind.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'tsbf_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barba_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barbb_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barbc_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barbd_001.parent_id', 'inventaire_id._id')
+        self.manage_kobotoolbox_resources('remove')
+        self.manage_kobotoolbox_resources('add')
+        self.manage_kobotoolbox_resources('replace')
+        self.manage_kobotoolbox_resources('append')
