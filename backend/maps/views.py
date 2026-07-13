@@ -1,6 +1,7 @@
 from coordo.map import Map
 from django.conf import settings
 from django.http import JsonResponse
+from django.contrib.auth.decorators import permission_required
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -41,6 +42,7 @@ def dashboard_view(request, layer_id):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
+@permission_required("users.add_data")
 def add_resource_from_file_view(request):
     """
     View for adding a file (creating the corresponding resource(s)) to a DataPackage.
@@ -52,6 +54,7 @@ def add_resource_from_file_view(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
+@permission_required("users.delete_data")
 def remove_resource_from_file_view(request):
     """
     View for removing resource(s) cooresponding a file to a DataPackage.
@@ -62,6 +65,7 @@ def remove_resource_from_file_view(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
+@permission_required("users.change_data")
 def append_file_data_to_datapackage_view(request):
     """
     View for appending the data contained in a file to the corresponding resources of a DataPackage.
@@ -73,6 +77,7 @@ def append_file_data_to_datapackage_view(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
+@permission_required("users.change_data")
 def replace_datapackage_data_from_file_view(request):
     """
     View for removing the data contained in a file from the corresponding resources of a DataPackage.

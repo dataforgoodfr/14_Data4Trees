@@ -36,7 +36,11 @@ class FileUploadTest(TestCase):
     
     def setUp(self):
         self.client = APIClient()
-        user = self.get_user_with_permission("testuser", "pass", "add_data")
+        user = self.get_user_with_permissions(
+            username="testuser", 
+            password="pass", 
+            permissions=["add_data", "delete_data", "change_data"]
+        )
         token = self.get_jwt_for_user(user)
         self.authenticate_user(token)
 
@@ -46,10 +50,11 @@ class FileUploadTest(TestCase):
         except OSError:
             pass 
 
-    def get_user_with_permission(self, username, password, codename):
+    def get_user_with_permissions(self, username: str, password: str, permissions: list[str]):
         user, _ = get_user_model().objects.get_or_create(username=username, password=password)
-        permission = Permission.objects.get(codename=codename)
-        user.user_permissions.add(permission)
+        for permission in permissions:
+            permission = Permission.objects.get(codename=permission)
+            user.user_permissions.add(permission)
         return user
 
     def get_jwt_for_user(self, user):
