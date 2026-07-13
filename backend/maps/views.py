@@ -43,11 +43,9 @@ def dashboard_view(request, layer_id):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @permission_required("users.add_data")
-def add_resource_from_file_view(request):
+def add_resources_view(request):
     """
-    View for adding a file (creating the corresponding resource(s)) to a DataPackage.
-    Expects a POST request with a body containing the 'file', 'package' fields.
-    The body can also contain a 'options' field.
+    View for adding a file / Kobotoolbox files (creating the corresponding resource(s)) to a DataPackage.
     """
     return DatapackageManager(request).add_resources()
 
@@ -55,10 +53,9 @@ def add_resource_from_file_view(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @permission_required("users.delete_data")
-def remove_resource_from_file_view(request):
+def remove_resources_view(request):
     """
-    View for removing resource(s) cooresponding a file to a DataPackage.
-    Expects a POST request with a body containing the 'file', 'package' fields.
+    View for removing resource(s) corresponding to a file / Kobotoolbox files in a DataPackage.
     """
     return DatapackageManager(request).remove_resources()
 
@@ -66,11 +63,9 @@ def remove_resource_from_file_view(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @permission_required("users.change_data")
-def append_file_data_to_datapackage_view(request):
+def append_data_view(request):
     """
-    View for appending the data contained in a file to the corresponding resources of a DataPackage.
-    Expects a POST request with a body containing at least the 'file', 'package' fields.
-    Optionally, a target resource name can be provided as a 'resource' field.
+    View for appending the data contained in a file / Kobotoolbox file to the corresponding resources of a DataPackage.
     """
     return DatapackageManager(request).append_data()
 
@@ -78,12 +73,28 @@ def append_file_data_to_datapackage_view(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @permission_required("users.change_data")
-def replace_datapackage_data_from_file_view(request):
+def replace_data_view(request):
     """
     View for removing the data contained in a file from the corresponding resources of a DataPackage.
-    Expects a POST request with a body containing at least the 'file', 'package' fields.
-    Optionally, a target resource name can be provided as a 'resource' field.
     """
     return DatapackageManager(request).replace_data()
 
-    
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.add_data")
+def add_foreign_key_view(request):
+    """
+    View for adding a foreign key to a DataPackage.
+    """
+    return DatapackageManager(request).add_foreign_key()
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@permission_required("users.add_data")
+def remove_foreign_key_view(request):
+    """
+    View for adding a foreign key to a DataPackage.
+    """
+    return DatapackageManager(request).remove_foreign_key()

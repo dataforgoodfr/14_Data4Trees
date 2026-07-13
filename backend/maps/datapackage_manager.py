@@ -9,7 +9,7 @@ import chardet
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, ParseError, APIException
 from rest_framework import status
-from coordo.loaders import get_file_loader, KoboToolboxLoader
+from coordo.loaders import get_file_loader, KoboToolboxLoader, Loader
 
 
 logger = logging.getLogger(__name__)
@@ -63,26 +63,34 @@ class DatapackageManager:
     
 
     def add_resources(self):
-        return self._interact_with_datapackage(LoaderMethod.ADD)
+        return self._handle_resources(LoaderMethod.ADD)
     
         
     def remove_resources(self):
-        return self._interact_with_datapackage(LoaderMethod.REMOVE)
+        return self._handle_resources(LoaderMethod.REMOVE)
 
 
     def append_data(self):
-        return self._interact_with_datapackage(LoaderMethod.APPEND)
+        return self._handle_resources(LoaderMethod.APPEND)
     
     
     def replace_data(self):
-        return self._interact_with_datapackage(LoaderMethod.REPLACE)
+        return self._handle_resources(LoaderMethod.REPLACE)
+
+
+    def add_foreign_key(self):
+        return self._handle_foreign_key(LoaderMethod.ADD)
+
+    def remove_foreign_key(self):
+        return self._handle_foreign_key(LoaderMethod.REMOVE)
     
         
-    def _interact_with_datapackage(self, loader_method: LoaderMethod):
+    def _handle_resources(self, loader_method: LoaderMethod):
         """
-        Method for modifying (adding / removing) a DataPackage resource using uploaded files.
+        Method for modifying (adding / removing / append / replacing) a DataPackage resource using uploaded files.
         Expects a POST request with a body containing at least the 'resource_type', 'file' and 'package' fields.
         An optional field 'options' can also be provided.
+        In case of append or replace, an optional field 'resource' can also be specified.
         The uploaded file is saved temporarily in the system's temporary folder, processed and removed at the end.
         """
         try:
@@ -92,7 +100,7 @@ class DatapackageManager:
 
         # getting keys to get in self.request.FILES
         file_keys = ["data"]
-        if params["resource_type"] == LoaderType.KOBOTOOLBOX:
+        if params["resource_type"] == LoaderType.KOBOTOOLBOX and loader_method in [LoaderMethod.ADD, LoaderMethod.REMOVE]:
             file_keys.append("form")
 
         files = {}
@@ -104,7 +112,10 @@ class DatapackageManager:
             try:
                 # creating instance of loader
                 if params["resource_type"] == LoaderType.KOBOTOOLBOX:
-                    file_loader = KoboToolboxLoader(params["package"], files["data"], files["form"], **params.get("options", {}))
+                    if loader_method in [LoaderMethod.ADD, LoaderMethod.REMOVE]:
+                        file_loader = KoboToolboxLoader(params["package"], files["data"], files["form"], **params.get("options", {}))
+                    else:
+                        file_loader = KoboToolboxLoader(params["package"], files["data"], **params.get("options", {}))
                 else:
                     file_loader = get_file_loader(params["package"], files["data"], **params.get("options", {}))
                     
@@ -190,3 +201,25 @@ class DatapackageManager:
                 f"Error encountered: {str(e)}"
             )
             raise ValueError(msg)
+
+
+    def _handle_foreign_key(self, loader_method: LoaderMethod):
+        """
+        Method for modifying (adding / removing) a DataPackage foreign key.
+        Expects a POST request with a body containing at least the 'package', 'from' and 'to' fields.
+        """
+        package = self.request.POST["package"]
+        from_ = self.request.POST["from"]
+        to = self.request.POST["to"]
+        
+        if loader_method == LoaderMethod.ADD:
+            Loader.add_foreign_key(package, from_, to)
+        elif loader_method == LoaderMethod.REMOVE:
+            Loader.remove_foreign_key(package, from_, to)
+        else:
+            raise DatapackageException(f"Unhandled method {loader_method} for foreign keys.")
+
+        return Response(
+            {'message': self.LOADER_METHOD_TO_RESPONSE[loader_method], 'package': package},
+            status=status.HTTP_200_OK
+        )

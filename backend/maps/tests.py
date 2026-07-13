@@ -78,12 +78,20 @@ class DatapackageTest(TestCase):
 
     def manage_kobotoolbox_resources(self, method: str):
         data_content = self.get_kobotoolbox_file_content(self.KOBOTOOLBOX_DATA)
-        form_content = self.get_kobotoolbox_file_content(self.KOBOTOOLBOX_FORM)
-        file_data = {"data": data_content, "form": form_content}
+        file_data = {"data": data_content}
+        if method in ["add", "remove"]:
+            form_content = self.get_kobotoolbox_file_content(self.KOBOTOOLBOX_FORM)
+            file_data["form"] = form_content
         self.manage_resources(method, 'kobotoolbox', file_data)
         
     def manage_resources(self, method: str, resource_type: str, file_data: dict):
-        response = self.send_post_request(f"maps-{method}-data", resource_type, file_data)
+        response = self.send_post_request_for_resources(f"maps-{method}-data", resource_type, file_data)
+        logger.info(f"Response: {response}")
+        self.assertEqual(response.status_code, 200)
+
+    def manage_foreign_keys(self, method: str, from_: str, to: str):
+        fk_data = {"from": from_, "to": to}
+        response = self.send_post_request_for_foreign_keys(f"maps-{method}-fk", fk_data)
         logger.info(f"Response: {response}")
         self.assertEqual(response.status_code, 200)
 
@@ -107,10 +115,13 @@ class DatapackageTest(TestCase):
                 content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
             
-
-    def send_post_request(self, url_name: str, resource_type: str, file_data: dict):
+    def send_post_request_for_resources(self, url_name: str, resource_type: str, file_data: dict):
         data = {'resource_type': resource_type, 'package': self.CATALOG_DIR} | file_data
         return self.client.post(reverse(url_name), data, format='multipart')
+
+    def send_post_request_for_foreign_keys(self, url_name: str, fk_data: dict):
+        data = {'package': self.CATALOG_DIR} | fk_data
+        return self.client.post(reverse(url_name), data)
 
     ##########################################
     # TEST CASES FOR MANAGEMENT OF FILE RESOURCES
@@ -155,6 +166,16 @@ class DatapackageTest(TestCase):
 
     def test_add_remove_replace_append_kobotoolbox_resource(self):
         self.manage_kobotoolbox_resources('add')
-        #self.manage_kobotoolbox_resources('remove')
+        self.manage_foreign_keys('remove', 'reg.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('add', 'reg.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'reg.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'ind.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'tsbf_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barba_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barbb_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barbc_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'barbd_001.parent_id', 'inventaire_id._id')
+        self.manage_kobotoolbox_resources('remove')
+        self.manage_kobotoolbox_resources('add')
         self.manage_kobotoolbox_resources('replace')
         self.manage_kobotoolbox_resources('append')
