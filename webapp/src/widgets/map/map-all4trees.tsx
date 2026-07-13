@@ -18,7 +18,7 @@ import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useApi } from "@shared/hooks/useApi";
 
-import pictoInventaire from "./assets/inventaire-icon.svg";
+import pictoInventaire from "./assets/inventaire-icon-sdf.png";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
 import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
@@ -34,6 +34,7 @@ export const MapAll4Trees: FC = () => {
     if (!isReady || !mapApiRef.current) return;
     const toggleShiftSize = () => setIsMaximizedPopupSize((prev) => !prev);
 
+    console.log("Setting layer symbol with svg", pictoInventaire)
     mapApiRef.current.setLayerSymbol({
       iconSize: getIconSize({}),
       layerId: LAYERS.INVENTARY,
