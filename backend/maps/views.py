@@ -6,7 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
-from . import stats, datapackage_management
+from . import stats
+from .datapackage_manager import DatapackageManager
 
 config_path = settings.BASE_DIR / "configs" / "config.json"
 map = Map.from_file(config_path)
@@ -46,7 +47,7 @@ def add_resource_from_file_view(request):
     Expects a POST request with a body containing the 'file', 'package' fields.
     The body can also contain a 'options' field.
     """
-    return datapackage_management.add_resource(request)
+    return DatapackageManager(request).add_resources()
 
 
 @api_view(["POST"])
@@ -56,7 +57,7 @@ def remove_resource_from_file_view(request):
     View for removing resource(s) cooresponding a file to a DataPackage.
     Expects a POST request with a body containing the 'file', 'package' fields.
     """
-    return datapackage_management.remove_resource(request)
+    return DatapackageManager(request).remove_resources()
 
 
 @api_view(["POST"])
@@ -67,7 +68,7 @@ def append_file_data_to_datapackage_view(request):
     Expects a POST request with a body containing at least the 'file', 'package' fields.
     Optionally, a target resource name can be provided as a 'resource' field.
     """
-    return datapackage_management.append_data(request)
+    return DatapackageManager(request).append_data()
 
 
 @api_view(["POST"])
@@ -78,6 +79,6 @@ def replace_datapackage_data_from_file_view(request):
     Expects a POST request with a body containing at least the 'file', 'package' fields.
     Optionally, a target resource name can be provided as a 'resource' field.
     """
-    return datapackage_management.replace_data(request)
+    return DatapackageManager(request).replace_data()
 
     
