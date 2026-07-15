@@ -28,7 +28,7 @@ catalog:
 
 	# All 4 Trees - Inventaire Biologique
 	coordo add kobotoolbox data/all4trees/inventaire_bio/20260710_InventaireBiologique_DonneesK.xlsx --form data/all4trees/inventaire_bio/20260709_InventaireBiologique_QuestionnaireK.xlsx --package catalog/inventaire_bio
-	coordo add file data/all4trees/inventaire_bio/20260709_InventaireBiologique_DonneesExternes.xlsx --package catalog/inventaire_bio
+	coordo add file data/all4trees/inventaire_bio/20260713_InventaireBiologique_DonneesExternes.xlsx --package catalog/inventaire_bio
 
 	coordo add foreignkey inv_bio.proj bio_samp.proj --package catalog/inventaire_bio
 	coordo add foreignkey inv_bio.year bio_pop.year --package catalog/inventaire_bio
