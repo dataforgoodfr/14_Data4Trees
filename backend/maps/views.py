@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from users.models import ADMIN_PROJECT
 from copy import copy
 from . import stats
 from .datapackage_manager import DatapackageManager
@@ -108,7 +109,9 @@ def remove_foreign_key_view(request):
 def get_map(user):
     user_map = copy(map)
     if user.is_authenticated:
-        filter = f"proj = {user.project}"
+        project = user.project
+        if (project.lower() != ADMIN_PROJECT):
+            filter = f"proj = '{project}' or conf = 1"
     else:
         filter = 'conf = 1'
 
