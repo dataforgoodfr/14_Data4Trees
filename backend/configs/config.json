@@ -140,11 +140,11 @@
         "colors": ["#A1B5F5", "#1447E6", "#0E32A1"]
       },
       "columns": {
-        "geom": "centroid(merge(point(enq_gps.long, enq_gps.latit)))",
+        "geom": "centroid(merge(point(hh_gps.long, hh_gps.latit)))",
         "household_nb": "count(_id)",
         "population": "sum(res)",
         "fuel_sources": "list_aggregate(flatten(list(ener)), 'histogram')",
-        "wood_fuel_cons": "sum( 12 * ( ifnull(fw_qty * enq_fw.fw_vol * fw_freq, 0) + ifnull(coal_qty * enq_coal.coal_kg * coal_freq * enq_coal.coal_fw, 0) / enq_coal.coal_dens )) / sum(res)",
+        "wood_fuel_cons": "sum( 12 * ( ifnull(fw_qty * hh_fw.fw_vol * fw_freq, 0) + ifnull(coal_qty * hh_coal.coal_kg * coal_freq * hh_coal.coal_fw, 0) / hh_coal.coal_dens )) / sum(res)",
         "firewood_collec_time": "avg(ifnull(coll_freq, 0) * ifnull(coll_dur, 0) / 30)",
         "firewood_satis": "histogram(wf_satis if int(wf_satis) > 0)",
         "firewood_satis_tot": "count(1 if int(wf_satis) > 0)",
@@ -169,7 +169,6 @@
         "assets_idx_raw": "avg( ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + ifnull(list_unique(ass),0) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + ( int( land_own ) + int( land_titl ) + int( land_size ) if int(land_own) > 0 else 0) ) if ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + list_unique(ass) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + int( land_own ) + int( land_titl ) + int( land_size ) ) <= int(ass_tot_max) )",
         "assets_idx": "10 / int(ass_tot_max) * avg( ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + ifnull(list_unique(ass),0) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + ( int( land_own ) + int( land_titl ) + int( land_size ) if int(land_own) > 0 else 0) ) if ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + list_unique(ass) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + int( land_own ) + int( land_titl ) + int( land_size ) ) <= int(ass_tot_max) )",
         "nb_income_sources" : "avg(int(inc_no))",
-        "nb_additional_incomes": "'N/A'",
         "benef_pract1": "count(1 if int(pract1) = 2) / count(1) * 100",
         "benef_pract2": "count(1 if int(pract2) = 2) / count(1) * 100",
         "benef_pract3": "count(1 if int(pract3) = 2) / count(1) * 100",
