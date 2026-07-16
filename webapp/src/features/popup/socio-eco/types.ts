@@ -2,8 +2,19 @@ import type { EconomicData } from "@features/indicators/economy/types";
 import type { SocialData } from "@features/indicators/social/types";
 
 export type SocioEcoData = {
-  household_nb: number;
-  population: number;
+  project: string;
+  year: number;
+  cohort: number;
+  type: number;
+  loc1: string;
   loc2: string;
+  population: number;
+  household_nb: number;
 } & SocialData &
   EconomicData;
+
+export type GPSData = {
+  proj: string;
+  loc2: number;
+  [key: string]: any;
+  }

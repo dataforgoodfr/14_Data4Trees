@@ -143,6 +143,8 @@
         "geom": "centroid(merge(point(hh_gps.long, hh_gps.latit)))",
         "household_nb": "count(_id)",
         "population": "sum(res)",
+        "project": "first(proj)",
+        "loc1": "first(loc1)",
         "fuel_sources": "list_aggregate(flatten(list(ener)), 'histogram')",
         "wood_fuel_cons": "sum( 12 * ( ifnull(fw_qty * hh_fw.fw_vol * fw_freq, 0) + ifnull(coal_qty * hh_coal.coal_kg * coal_freq * hh_coal.coal_fw, 0) / hh_coal.coal_dens )) / sum(res)",
         "firewood_collec_time": "avg(ifnull(coll_freq, 0) * ifnull(coll_dur, 0) / 30)",
