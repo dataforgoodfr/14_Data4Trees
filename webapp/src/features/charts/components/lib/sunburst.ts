@@ -1,6 +1,5 @@
+import type { LabelData } from "@entities/data";
 import { darken, lighten } from "color2k";
-
-import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { getChartPalette } from "@shared/lib/palette";
 

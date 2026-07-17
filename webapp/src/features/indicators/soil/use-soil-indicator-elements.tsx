@@ -1,3 +1,4 @@
+import type { LabelData } from "@entities/data";
 import { Bug, Gem, Sprout } from "lucide-react";
 
 import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
@@ -6,7 +7,6 @@ import { ChartWindErosion } from "@features/charts/soil/ui/chart-wind-erosion";
 import type { UseIndicatorReturnType } from "@features/indicators//components/types";
 import { IndicatorRawValue } from "@features/indicators/components/indicator-raw-value";
 import type { ForestInventoryData } from "@features/popup/forest-inventory";
-import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@i18n";
 

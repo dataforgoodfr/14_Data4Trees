@@ -1,5 +1,6 @@
+import type { LabelData } from "@entities/data";
+
 import { findLabel } from "@features/indicators/utils";
-import type { LabelData } from "@features/popup/forest-inventory/types";
 
 export function getDataTypePrefix(dataType: "tsbf" | "barbA" | null): string {
   return dataType ? `${dataType}_` : "";

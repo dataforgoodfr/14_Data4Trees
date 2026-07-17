@@ -1,4 +1,4 @@
-import type { LabelData } from "@features/popup/forest-inventory/types";
+import type { BioSpeciesData, LabelData } from "@entities/data";
 
 import { useTranslation } from "@shared/i18n";
 import type { LayerMetadata } from "@shared/lib/coordo";
@@ -198,15 +198,21 @@ export function findCategoricalLabel(
 
 // Find status of corresponding taxon value.
 export function findStatus(
-  resourceData: LabelData[],
+  resourceData: BioSpeciesData[],
   project: string,
   lang: string,
-  fieldName: string,
-  fieldValue: any,
+  taxon: number,
 ): string | undefined {
-  return findMatchingRecord(resourceData, project, fieldName, fieldValue)?.[
-    `stat::${lang}`
-  ];
+  if (!resourceData || !Array.isArray(resourceData)) {
+    return undefined;
+  }
+
+  // Find the record matching all criteria: project, list_name, and name
+  const record = resourceData.find((item: BioSpeciesData) => {
+    return item.proj?.trim() === project.trim() && item.tax3 === taxon;
+  });
+
+  return record?.[`stat::${lang}` as keyof BioSpeciesData] as string;
 }
 
 export function findLabel(

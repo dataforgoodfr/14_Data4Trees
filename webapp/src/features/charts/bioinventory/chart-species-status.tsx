@@ -1,5 +1,6 @@
+import type { BioSpeciesData } from "@entities/data";
+
 import { findStatus } from "@features/indicators/utils";
-import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
@@ -9,7 +10,7 @@ import { PieChartCategorical } from "../components/pie-chart-categorical";
 
 type PieChartProps = {
   data: Record<string, number>;
-  metadata: LabelData[];
+  metadata: BioSpeciesData[];
   project: string;
 };
 
@@ -27,7 +28,7 @@ export const ChartSpeciesStatus: ChartComponentType<PieChartProps> = ({
       const tax3 = name.split("-")[2];
       const tax3status = (
         tax3
-          ? findStatus(metadata, project, lang, "tax3", Number(tax3))
+          ? findStatus(metadata, project, lang, Number(tax3))
           : t("common:dataManagement.other")
       ) as string;
       return [tax3status, value];

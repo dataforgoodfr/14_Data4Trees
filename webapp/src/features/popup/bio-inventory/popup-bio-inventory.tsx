@@ -1,4 +1,3 @@
-import { LABEL_DATA } from "@entities/resources";
 import { cx } from "class-variance-authority";
 import { Leaf } from "lucide-react";
 import { type FC, use } from "react";
@@ -10,11 +9,9 @@ import { IndicatorScrollContainer } from "@features/indicators/components/indica
 import { findLabel } from "@features/indicators/utils";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
-import { LAYERS } from "@shared/api/layers";
 import { formatDate } from "@shared/lib/utils";
 import { i18nInstance, useTranslation } from "@i18n";
 
-import type { LabelData } from "../forest-inventory/types";
 import type { RenderPopupProps } from "../renderPopup";
 import type { BioInventoryData } from "./types";
 
@@ -29,12 +26,10 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
   const externalData = use(externalDataPromise);
-  const labelData =
-    externalData[LABEL_DATA.get(LAYERS.INVENTORY_BIO) || ""] ||
-    ([] as LabelData[]);
+
   const biodiversityElements = useBioInventoryIndicatorElements(
     data,
-    labelData,
+    externalData,
   );
 
   console.log(
@@ -59,8 +54,13 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
         })}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
-          findLabel(labelData, data.proj, lang, "loc2", Number(data.forest)) ||
-          t("dataManagement.undefined", { ns: "common" })
+          findLabel(
+            externalData.bio_label,
+            data.proj,
+            lang,
+            "loc2",
+            Number(data.forest),
+          ) || t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}

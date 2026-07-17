@@ -1,5 +1,6 @@
+import type { LabelData } from "@entities/data";
+
 import { findLabel } from "@features/indicators/utils";
-import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";

@@ -1,4 +1,4 @@
-import type { LabelData } from "@features/popup/forest-inventory/types";
+import type { LabelData } from "@entities/data";
 
 export type PieChartProps = {
   data: Record<string, number>;

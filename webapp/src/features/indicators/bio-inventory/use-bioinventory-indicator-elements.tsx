@@ -1,9 +1,9 @@
+import type { ExternalData } from "@entities/data";
 import { Gem, PawPrint, Ruler, SearchAlert, VectorSquare } from "lucide-react";
 
 import { ChartSpeciesStatus } from "@features/charts/bioinventory/chart-species-status";
 import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
 import type { BioInventoryData } from "@features/popup/bio-inventory/types";
-import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { useTranslation } from "@i18n";
 
@@ -14,10 +14,10 @@ import { useFormatBioInventoryData } from "./format-data";
 
 export const useBioInventoryIndicatorElements = (
   rawData: BioInventoryData,
-  metadata: LabelData[],
+  externalData: ExternalData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
-  const data = useFormatBioInventoryData(rawData, metadata);
+  const data = useFormatBioInventoryData(rawData, externalData.bio_label);
 
   return [
     {
@@ -50,12 +50,12 @@ export const useBioInventoryIndicatorElements = (
           />
           <ChartTaxonAbundance
             data={data.relative_abundance}
-            metadata={metadata}
+            metadata={externalData.bio_label}
             project={rawData.proj}
           />
           <ChartSpeciesStatus
             data={data.relative_abundance}
-            metadata={metadata}
+            metadata={externalData.bio_sp}
             project={rawData.proj}
           />
         </>
