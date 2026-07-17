@@ -12,9 +12,3 @@ export type SocioEcoData = {
   household_nb: number;
 } & SocialData &
   EconomicData;
-
-export type GPSData = {
-  proj: string;
-  loc2: number;
-  [key: string]: any;
-  }
