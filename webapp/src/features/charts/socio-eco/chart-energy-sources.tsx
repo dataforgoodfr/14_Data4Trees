@@ -2,6 +2,7 @@ import { useTranslation } from "@shared/i18n";
 
 import { BarCharWithBenefAndControl } from "../components/bar-chart-benef-control";
 import type { ChartComponentType } from "../components/chart-component";
+import type { ExternalData } from "@features/popup/forest-inventory/types";
 
 type Data = {
   fw_coll: number;
@@ -15,6 +16,8 @@ type Data = {
 };
 
 type ChartEnergySourcesProps = {
+  project: string;
+  externalData: ExternalData
   benef: Data;
   temoin?: Data;
 };
