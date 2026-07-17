@@ -1,6 +1,6 @@
-import type { LabelData } from "@features/popup/forest-inventory/types";
 import type { LayerMetadata } from "coordo";
 
+import type { LabelData } from "@features/popup/forest-inventory/types";
 
 export function findCategoricalLabel(
   metadata: LayerMetadata,
@@ -76,6 +76,6 @@ export function findMatchingRecord(
     );
   });
 
-  console.log("Found matching record", record)
+  console.log("Found matching record", record);
   return record;
 }

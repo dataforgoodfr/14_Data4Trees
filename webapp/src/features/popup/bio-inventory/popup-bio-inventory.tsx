@@ -7,7 +7,7 @@ import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inven
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
-import { findLabel } from "@features/indicators/utils";
+import { findLabel } from "@features/indicators/labels";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
 import { LAYERS } from "@shared/api/layers";

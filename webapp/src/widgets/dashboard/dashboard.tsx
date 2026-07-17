@@ -1,12 +1,12 @@
-import { useSuspenseData } from "@shared/api/suspense-fetch";
 import { useCallback } from "react";
 
-import LoadedDashboard, {
-} from "@widgets/dashboard/loaded-dashboard";
+import LoadedDashboard, {} from "@widgets/dashboard/loaded-dashboard";
+
+import { SuspenseBoundary } from "@features/fallback/suspense-boundary";
 
 import { LAYERS } from "@shared/api/layers";
+import { useSuspenseData } from "@shared/api/suspense-fetch";
 import { useApi } from "@shared/hooks/useApi";
-import { SuspenseBoundary } from "@features/fallback/suspense-boundary";
 
 export default function Dashboard() {
   const { getDashboardData } = useApi();

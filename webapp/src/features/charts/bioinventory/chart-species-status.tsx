@@ -1,4 +1,4 @@
-import { findStatus } from "@features/indicators/utils";
+import { findStatus } from "@features/indicators/labels";
 import type { LabelData } from "@features/popup/forest-inventory/types";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";

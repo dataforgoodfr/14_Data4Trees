@@ -1,3 +1,4 @@
+import { LABEL_DATA } from "@entities/resources";
 import { cx } from "class-variance-authority";
 import { UsersIcon } from "lucide-react";
 import { Activity, type FC, use, useState } from "react";
@@ -6,16 +7,18 @@ import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useEconomicIndicatorElements } from "@features/indicators/economy";
+import { findLabel } from "@features/indicators/labels";
 import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
+import { LAYERS } from "@shared/api/layers";
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { i18nInstance, useTranslation } from "@i18n";
 
+import type { LabelData } from "../forest-inventory/types";
 import type { RenderPopupProps } from "../renderPopup";
-import type { GPSData, SocioEcoData } from "./types";
-
+import type { SocioEcoData } from "./types";
 
 type SocioEcoIndicatorProps = RenderPopupProps<SocioEcoData>;
 
@@ -25,23 +28,6 @@ const TABS: Record<string, TabKind> = {
   ECONOMY: "economy",
   RESOURCES: "resources",
 } as const;
-
-const exctractVillageName = (
-  metadata: GPSData[],
-  data: SocioEcoData,
-  lang: string,
-): string => {
-
-    // Find the record matching all criteria: project, list_name, and name
-  const record = metadata.find((item: GPSData) => {
-    return (
-      item.proj?.trim() === data.project.trim() &&
-      item.loc2 === Number(data.loc2)
-    );
-  });
-
-  return record?.[`loc2::${lang}`] || data.loc2;
-};
 
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   data,
@@ -53,12 +39,15 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
   const lang = i18nInstance.language;
 
-  const externalData = use(externalDataPromise)
+  const externalData = use(externalDataPromise);
+  const labelData =
+    externalData[LABEL_DATA.get(LAYERS.ENQUETE) || ""] || ([] as LabelData[]);
+
   const socialElements = useSocialIndicatorElements(data);
   const economicElements = useEconomicIndicatorElements(data);
 
   const title = t("popup.socioEco.title", {
-    village: exctractVillageName(externalData['hh_gps'], data, lang),
+    village: findLabel(labelData, data.project, lang, "loc2", data.loc2),
   });
   const tabs = {
     [TABS.RESOURCES]: t("indicators.resources.title"),
