@@ -31,15 +31,6 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
     data,
     externalData,
   );
-
-  console.log(
-    "BioInventoryPopupContent data",
-    data,
-    "metadata",
-    externalData,
-    "biodiversityElements",
-    biodiversityElements,
-  );
   const title = t("popup.bioInventory.title", {
     id: data.id,
     ns: "all4trees",
