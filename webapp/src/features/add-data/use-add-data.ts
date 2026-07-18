@@ -2,18 +2,14 @@ import { useState } from "react";
 
 import { useApi } from "@shared/hooks/useApi";
 
-import {
-  type AddDataForm,
-  RESOURCE_KINDS,
-  type ResourceKind,
-} from "./constants";
+import { RESOURCE_KINDS, type ResourceKind } from "./constants";
 
 type AddDataError = "generic" | "missingFile" | "missingForm";
 
 export const useAddData = () => {
   const api = useApi();
 
-  const [form, setForm] = useState<AddDataForm | "">("");
+  const [form, setForm] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [kind, setKind] = useState<ResourceKind>(RESOURCE_KINDS.FormData);
   const [resource, setResource] = useState("");

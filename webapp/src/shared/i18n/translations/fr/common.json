@@ -18,12 +18,6 @@
       "resource": "Nom de la ressource (facultatif)",
       "resourcePlaceholder": "Laissez vide pour déduire du nom du fichier"
     },
-    "forms": {
-      "enquete": "Enquête ménage",
-      "inventaire_bio": "Inventaire biologique",
-      "inventaire_for": "Inventaire forestier",
-      "seed": "Reboisement"
-    },
     "kind": {
       "externalData": "Données externes",
       "formData": "Données de formulaire"

@@ -26,20 +26,23 @@ import {
 
 import {
   ACCEPTED_EXTENSIONS,
-  ADD_DATA_FORMS,
-  type AddDataForm,
   isCsvFileName,
   RESOURCE_KINDS,
   type ResourceKind,
 } from "./constants";
 import { useAddData } from "./use-add-data";
 
-interface AddDataDialogProps {
+// The value is the catalog folder name
+export type LayerOptions = Array<{ value: string; translation: string }>;
+
+type AddDataDialogProps = {
+  layerOptions: LayerOptions;
   onOpenChange: (open: boolean) => void;
   open: boolean;
-}
+};
 
 export const AddDataDialog: FC<AddDataDialogProps> = ({
+  layerOptions,
   onOpenChange,
   open,
 }) => {
@@ -95,19 +98,19 @@ export const AddDataDialog: FC<AddDataDialogProps> = ({
           <div className="grid gap-3">
             <Label htmlFor="add-data-form">{t("addData.field.form")}</Label>
             <Select
-              onValueChange={(value) => setForm(value as AddDataForm)}
+              onValueChange={(value) => setForm(value)}
               value={form}
             >
               <SelectTrigger id="add-data-form">
                 <SelectValue placeholder={t("addData.field.formPlaceholder")} />
               </SelectTrigger>
               <SelectContent>
-                {ADD_DATA_FORMS.map((formName) => (
+                {layerOptions.map(({ value, translation }) => (
                   <SelectItem
-                    key={formName}
-                    value={formName}
+                    key={value}
+                    value={value}
                   >
-                    {t(`addData.forms.${formName}`)}
+                    {translation}
                   </SelectItem>
                 ))}
               </SelectContent>

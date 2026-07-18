@@ -5,14 +5,18 @@ import { useTranslation } from "@shared/i18n";
 import { Button } from "@shared/ui/button";
 import { URLS, useAbsoluteUrls } from "@shared/urls";
 
-import { UserMenu } from "./user-menu";
+import { UserMenu, type UserMenuProps } from "./user-menu";
 
 export type HeaderProps = {
   logoSrc: string;
   hasDashboard?: boolean;
-};
+} & UserMenuProps;
 
-export const Header: FC<HeaderProps> = ({ logoSrc, hasDashboard }) => {
+export const Header: FC<HeaderProps> = ({
+  logoSrc,
+  hasDashboard,
+  layerOptions,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isDashboardPage =
@@ -47,7 +51,7 @@ export const Header: FC<HeaderProps> = ({ logoSrc, hasDashboard }) => {
                   : t("header.navigationButton.toDashboard")}
               </Button>
             )}
-            <UserMenu />
+            <UserMenu layerOptions={layerOptions} />
           </div>
         </div>
       </div>

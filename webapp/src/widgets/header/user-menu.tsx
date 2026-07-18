@@ -9,7 +9,7 @@ import type { FC } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AddDataDialog } from "@features/add-data";
+import { AddDataDialog, type LayerOptions } from "@features/add-data";
 import { useCreateAdminSession } from "@features/admin/use-create-admin-session";
 import { useAuth } from "@features/auth";
 
@@ -28,7 +28,11 @@ import {
 import { LanguageSelector } from "./language-selector";
 import { ModeToggle } from "./mode-toggle";
 
-export const UserMenu: FC = () => {
+export type UserMenuProps = {
+  layerOptions?: LayerOptions;
+};
+
+export const UserMenu: FC<UserMenuProps> = ({ layerOptions }) => {
   const { t } = useTranslation("common");
 
   const navigate = useNavigate();
@@ -115,8 +119,9 @@ export const UserMenu: FC = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {isAuthenticated && (
+      {isAuthenticated && layerOptions?.length && (
         <AddDataDialog
+          layerOptions={layerOptions}
           onOpenChange={setIsAddDataOpen}
           open={isAddDataOpen}
         />

@@ -1,1 +1,1 @@
-export { AddDataDialog } from "./add-data-dialog";
+export { AddDataDialog, type LayerOptions } from "./add-data-dialog";
