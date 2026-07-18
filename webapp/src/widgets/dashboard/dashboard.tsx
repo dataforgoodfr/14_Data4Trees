@@ -1,97 +1,34 @@
-import { Suspense, useCallback, useMemo, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { useCallback } from "react";
 
-import LoadedDashboard, {
-  type DashboardData,
-} from "@widgets/dashboard/loaded-dashboard";
+import LoadedDashboard from "@widgets/dashboard/loaded-dashboard";
 
-import { getFallbackRender } from "@features/fallback/error-boundary-fallback";
-import Loading from "@features/fallback/loading";
+import { SuspenseBoundary } from "@features/fallback/suspense-boundary";
 
 import { LAYERS } from "@shared/api/layers";
+import { useSuspenseData } from "@shared/api/suspense-fetch";
 import { useApi } from "@shared/hooks/useApi";
-import { useTranslation } from "@shared/i18n";
-
-type GetDashboardData = (layer: string) => Promise<DashboardData>;
-type Layer = (typeof LAYERS)[keyof typeof LAYERS];
-
-// ✅ Cache Promises so the same one is reused across renders
-// required by 'use()', see https://react.dev/reference/react/use#caching-promises-for-client-components
-// Cache is scoped by API client (auth token) + layer to avoid leaking data across sessions.
-const cache = new WeakMap<
-  GetDashboardData,
-  Map<Layer, Promise<DashboardData>>
->();
-
-function getPerApiCache(getDashboardData: GetDashboardData) {
-  const perApiCache = cache.get(getDashboardData);
-  if (perApiCache) {
-    return perApiCache;
-  }
-  const newPerApiCache = new Map<Layer, Promise<DashboardData>>();
-  cache.set(getDashboardData, newPerApiCache);
-  return newPerApiCache;
-}
-
-function fetchData({
-  getDashboardData,
-  layer,
-  force,
-}: {
-  getDashboardData: GetDashboardData;
-  layer: Layer;
-  force?: boolean;
-}): Promise<DashboardData> {
-  const perLayerCache = getPerApiCache(getDashboardData);
-  const cachedPromise = perLayerCache.get(layer);
-
-  if (cachedPromise && !force) {
-    return cachedPromise;
-  }
-  const promise = getDashboardData(layer).catch((err) => {
-    // Don't cache failures forever; allow retries (e.g. after navigation / remount).
-    perLayerCache.delete(layer);
-    throw err;
-  });
-  perLayerCache.set(layer, promise);
-
-  return promise;
-}
 
 export default function Dashboard() {
-  const { t } = useTranslation("common");
   const { getDashboardData } = useApi();
-  const [reloadKey, setReloadKey] = useState(0);
-  const dataPromise = useMemo(
-    () =>
-      fetchData({
-        force: reloadKey > 0,
-        getDashboardData,
-        layer: LAYERS.INVENTARY,
-      }),
-    [getDashboardData, reloadKey],
-  );
 
-  const retry = useCallback(() => {
-    setReloadKey((k) => k + 1);
-  }, []);
-  const fallbackRender = useMemo(
-    () => getFallbackRender({ retry, t }),
-    [retry, t],
+  // Stable per API client (auth token) so the promise cache stays scoped to
+  // the current session — see suspense-fetch.ts.
+  const fetcher = useCallback(
+    () => getDashboardData(LAYERS.INVENTARY),
+    [getDashboardData],
   );
+  const { dataPromise, retry } = useSuspenseData({ fetcher });
 
   return (
-    <ErrorBoundary
-      fallbackRender={fallbackRender}
+    <SuspenseBoundary
       onError={(error, info) => {
         // Log the error to your error reporting service
         console.error("Error in Dashboard:", error, info);
       }}
-      resetKeys={[dataPromise]}
+      resource={dataPromise}
+      retry={retry}
     >
-      <Suspense fallback={<Loading />}>
-        <LoadedDashboard dataPromise={dataPromise} />
-      </Suspense>
-    </ErrorBoundary>
+      <LoadedDashboard dataPromise={dataPromise} />
+    </SuspenseBoundary>
   );
 }
