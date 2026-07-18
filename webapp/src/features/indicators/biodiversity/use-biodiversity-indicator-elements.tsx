@@ -1,9 +1,10 @@
-import type { LabelData } from "@entities/data";
 import { Gem, TreePine, Trees } from "lucide-react";
 
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
 import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
 import type { ForestInventoryData } from "@features/popup/forest-inventory/types";
+
+import type { LabelData } from "@entities/data";
 
 import { useTranslation } from "@i18n";
 

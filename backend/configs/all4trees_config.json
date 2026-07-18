@@ -101,7 +101,7 @@
         "radius": 2,
         "maxZoom": 12,
         "steps": [10, 20],
-        "colors": ["#99D6C2", "#009966", "#006B47"]
+        "colors": ["#f4a236", "#e58800", "#b76c00"]
       },
       "columns": {
         "geom": "start_point.merge().centroid()",

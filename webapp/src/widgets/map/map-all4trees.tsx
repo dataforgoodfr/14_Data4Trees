@@ -22,7 +22,8 @@ import { LAYERS } from "@shared/api/layers";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useApi } from "@shared/hooks/useApi";
 
-import pictoInventaire from "./assets/inventaire-icon.svg";
+import pictoBioInventory from "./assets/bio-inventory-icon.svg";
+import pictoForestInventory from "./assets/forest-inventory-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
 import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
@@ -41,7 +42,7 @@ export const MapAll4Trees: FC = () => {
     mapApiRef.current.setLayerSymbol({
       iconSize: getIconSize({}),
       layerId: LAYERS.INVENTORY_FOR,
-      svg: pictoInventaire,
+      svg: pictoForestInventory,
     });
 
     mapApiRef.current.setLayerSymbol({
@@ -53,7 +54,7 @@ export const MapAll4Trees: FC = () => {
     mapApiRef.current.setLayerSymbol({
       iconSize: getIconSize({}),
       layerId: LAYERS.INVENTORY_BIO,
-      svg: pictoInventaire,
+      svg: pictoBioInventory,
     });
 
     // Set the popup for the "inventaire_for" layer

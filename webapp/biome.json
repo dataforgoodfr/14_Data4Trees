@@ -3,7 +3,7 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": {
+"organizeImports": {
           "level": "on",
           "options": {
             "groups": [
@@ -16,6 +16,7 @@
                 "!@pages/**",
                 "!@widgets/**",
                 "!@features/**",
+                "!@entities/**",
                 "!@shared/**",
                 "!@lib/**",
                 "!@i18n",
@@ -30,6 +31,8 @@
               "@widgets/**",
               ":BLANK_LINE:",
               "@features/**",
+              ":BLANK_LINE:",
+              "@entities/**",
               ":BLANK_LINE:",
               "@shared/**",
               "@lib/**",

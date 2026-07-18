@@ -2,7 +2,7 @@ import { cx } from "class-variance-authority";
 import { Leaf } from "lucide-react";
 import { type FC, use } from "react";
 
-import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inventory/use-bioinventory-indicator-elements";
+import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inventory";
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";

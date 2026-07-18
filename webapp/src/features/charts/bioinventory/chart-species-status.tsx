@@ -1,6 +1,6 @@
-import type { BioSpeciesData } from "@entities/data";
-
 import { findStatus } from "@features/indicators/utils";
+
+import type { BioSpeciesData } from "@entities/data";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
@@ -54,15 +54,12 @@ export const ChartSpeciesStatus: ChartComponentType<PieChartProps> = ({
   }));
 
   // Generate chart config from chart Data
-  let chartConfig: ChartConfig = {};
-  chartData.forEach((element) => {
-    chartConfig = {
-      ...chartConfig,
-      [element.name]: {
-        label: element.name,
-      },
+  const chartConfig = chartData.reduce((acc, element) => {
+    return {
+      ...acc,
+      [element.name]: { label: element.name },
     };
-  });
+  }, {} as ChartConfig);
 
   return (
     <PieChartCategorical

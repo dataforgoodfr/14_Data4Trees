@@ -1,6 +1,7 @@
-import type { ExternalData } from "@entities/data";
 import type { FC } from "react";
 import { createRoot } from "react-dom/client";
+
+import type { ExternalData } from "@entities/data";
 
 import type { LayerMetadata, PopupOptions } from "@shared/lib/coordo";
 

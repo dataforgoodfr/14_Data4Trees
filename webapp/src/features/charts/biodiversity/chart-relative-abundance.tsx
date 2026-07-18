@@ -1,6 +1,6 @@
-import type { LabelData } from "@entities/data";
-
 import { findLabel } from "@features/indicators/utils";
+
+import type { LabelData } from "@entities/data";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";

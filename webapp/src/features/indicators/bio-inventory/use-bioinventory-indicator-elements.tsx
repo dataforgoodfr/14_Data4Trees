@@ -1,9 +1,10 @@
-import type { ExternalData } from "@entities/data";
 import { Gem, PawPrint, Ruler, SearchAlert, VectorSquare } from "lucide-react";
 
 import { ChartSpeciesStatus } from "@features/charts/bioinventory/chart-species-status";
 import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
 import type { BioInventoryData } from "@features/popup/bio-inventory/types";
+
+import type { ExternalData } from "@entities/data";
 
 import { useTranslation } from "@i18n";
 

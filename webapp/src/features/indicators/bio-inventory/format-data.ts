@@ -1,4 +1,3 @@
-import type { LabelData } from "@entities/data";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -9,6 +8,8 @@ import {
   useFormatterWithUnit,
 } from "@features/indicators/utils";
 import type { BioInventoryData } from "@features/popup/bio-inventory";
+
+import type { LabelData } from "@entities/data";
 
 import { i18nInstance } from "@shared/i18n";
 import type { NumericKeys } from "@shared/types";

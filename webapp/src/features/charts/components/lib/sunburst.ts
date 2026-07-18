@@ -1,5 +1,6 @@
-import type { LabelData } from "@entities/data";
 import { darken, lighten } from "color2k";
+
+import type { LabelData } from "@entities/data";
 
 import { getChartPalette } from "@shared/lib/palette";
 
