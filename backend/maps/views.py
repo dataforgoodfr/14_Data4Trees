@@ -15,7 +15,7 @@ from .datapackage_manager import DatapackageManager
 
 ALL4TREES_LAYERS = ['inventaire_for', 'enquete']
 
-config_path = settings.BASE_DIR / "configs" / "config.json"
+config_path = settings.BASE_DIR / "configs" / "all4trees_config.json"
 map = Map.from_file(config_path)
 
 @api_view(['GET', 'POST'])
