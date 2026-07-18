@@ -142,6 +142,8 @@ className = "text-foreground hover:text-primary bg-background";
 
 [Biome](https://biomejs.dev/guides/getting-started/) est un outil qui permet de linter, formatter et réorganiser le code. Toute la configuration tient dans le fichier [biome.json](./biome.json).
 
+Pour utiliser Biome dans VSCode, il faut installer l'extension [Biome Monorepo](https://marketplace.visualstudio.com/items?itemName=fronterior.biome-monorepo), car l'extension [Biome](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) ne supporte pas encore la configuration monorepo.
+
 ### Linter
 
 Config path: `linter`.
