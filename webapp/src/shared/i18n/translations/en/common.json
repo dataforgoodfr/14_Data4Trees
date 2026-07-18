@@ -18,12 +18,6 @@
       "resource": "Resource name (optional)",
       "resourcePlaceholder": "Leave empty to infer from file name"
     },
-    "forms": {
-      "enquete": "Household survey",
-      "inventaire_bio": "Biological inventory",
-      "inventaire_for": "Forest inventory",
-      "seed": "Reforestation"
-    },
     "kind": {
       "externalData": "External data",
       "formData": "Form data"
