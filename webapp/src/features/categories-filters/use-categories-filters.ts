@@ -25,20 +25,12 @@ export const changeLayerVisibility = ({
 }) => {
   const isClustered = LAYERS_WITH_CLUSTERS.includes(layerId);
 
-  if (isActive) {
-    showLayer?.(layerId);
-    if (isClustered) {
-      const { circle, count } = getClusterLayerIds(layerId);
-      showLayer?.(circle);
-      showLayer?.(count);
-    }
-  } else {
-    hideLayer?.(layerId);
-    if (isClustered) {
-      const { circle, count } = getClusterLayerIds(layerId);
-      hideLayer?.(circle);
-      hideLayer?.(count);
-    }
+  const action = isActive ? showLayer : hideLayer;
+  action?.(layerId);
+  if (isClustered) {
+    const { circle, count } = getClusterLayerIds(layerId);
+    action?.(circle);
+    action?.(count);
   }
 };
 
