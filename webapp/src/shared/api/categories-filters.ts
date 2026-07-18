@@ -1,15 +1,17 @@
 import { LAYERS } from "./layers";
 
+const SEPARATOR = ":::";
+
 /**
  * Format of a layer: GROUP_BACKEND-NAME
  */
 export const CATEGORY_IDENTIFIERS = {
   ACTION_DIVERSITY: "action-tree-diversity",
-  ACTION_INVENTARY: `action-forest_${LAYERS.INVENTARY}`,
-  ACTION_SOCIO: `action-socio-eco_${LAYERS.ENQUETE}`,
+  ACTION_INVENTARY: `action-forest${SEPARATOR}${LAYERS.INVENTARY}`,
+  ACTION_SOCIO: `action-socio-eco${SEPARATOR}${LAYERS.ENQUETE}`,
   DATA_GROUND: "data-ground",
   DATA_MODEL: "data-model",
-  DATA_SATELLITE: `data_${LAYERS.SATELLITE}`,
+  DATA_SATELLITE: `data${SEPARATOR}${LAYERS.SATELLITE}`,
   SYSTEM_FOREST_PRIMARY: "system-forest-primary",
   SYSTEM_FOREST_SECONDARY: "system-forest-secondary",
   SYSTEM_MANGROVE_HIGH: "system-mangrove-high",
@@ -21,7 +23,7 @@ export const CATEGORY_IDENTIFIERS = {
  * Return null if it can't retrieve the layer id.
  */
 export const parseLayerId = (name: string) => {
-  const parts = name.split("_");
+  const parts = name.split(SEPARATOR);
 
   return parts.length > 1 ? parts[1] : null;
 };

@@ -8,3 +8,8 @@ export const LAYERS = {
   TOWNS: "towns",
   VILLAGES: "villages",
 } as const;
+
+export const LAYERS_WITH_CLUSTERS: string[] = [
+  LAYERS.ENQUETE,
+  LAYERS.INVENTARY,
+];

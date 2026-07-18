@@ -5,8 +5,34 @@ import {
   type CategoriesFiltersState,
   parseLayerId,
 } from "@shared/api/categories-filters";
+import { LAYERS_WITH_CLUSTERS } from "@shared/api/layers";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
-import { EVENTS } from "@shared/lib/coordo";
+import { EVENTS, getClusterLayerIds } from "@shared/lib/coordo";
+
+/**
+ * Trigger visibility update on the layer and its cluster related layers
+ */
+export const changeLayerVisibility = ({
+  layerId,
+  isActive,
+  showLayer,
+  hideLayer,
+}: {
+  layerId: string;
+  isActive: boolean;
+  showLayer?: (layerId: string) => void;
+  hideLayer?: (layerId: string) => void;
+}) => {
+  const isClustered = LAYERS_WITH_CLUSTERS.includes(layerId);
+
+  const action = isActive ? showLayer : hideLayer;
+  action?.(layerId);
+  if (isClustered) {
+    const { circle, count } = getClusterLayerIds(layerId);
+    action?.(circle);
+    action?.(count);
+  }
+};
 
 export const useCategoriesFilters = () => {
   const [categoriesFilters, setCategoriesFilters] =
@@ -69,11 +95,7 @@ export const useCategoriesFilters = () => {
         const layerId = parseLayerId(identifier);
         if (!layerId) return;
 
-        if (isActive) {
-          showLayer?.(layerId);
-        } else {
-          hideLayer?.(layerId);
-        }
+        changeLayerVisibility({ hideLayer, isActive, layerId, showLayer });
       });
     },
     [categoriesFilters],

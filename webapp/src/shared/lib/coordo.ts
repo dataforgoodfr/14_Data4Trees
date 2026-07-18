@@ -3,6 +3,7 @@
 export {
   createMap,
   EVENTS,
+  getClusterLayerIds,
   LAYER_CONTROL_ELEMENTS,
   type LayerControlRenderAnchor,
   type LayerControlRenderLayerRow,

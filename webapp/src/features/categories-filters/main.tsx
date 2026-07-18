@@ -12,6 +12,7 @@ import type { CheckedState } from "@ui/checkbox";
 import { AllOrNoneSelector } from "./all-or-none-selector";
 import { CategoriesCheckboxGroup } from "./categories-checkbox-group";
 import { useCategoriesConfig } from "./use-categories-config";
+import { changeLayerVisibility } from "./use-categories-filters";
 
 type CategoriesFiltersProps = {
   disabled?: boolean;
@@ -37,11 +38,12 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
       }
 
       try {
-        if (checkedState) {
-          mapApiRef.current.showLayer(layerId);
-        } else {
-          mapApiRef.current.hideLayer(layerId);
-        }
+        changeLayerVisibility({
+          hideLayer: mapApiRef.current.hideLayer,
+          isActive: Boolean(checkedState),
+          layerId,
+          showLayer: mapApiRef.current.showLayer,
+        });
       } catch (error) {
         console.error(error);
       }
