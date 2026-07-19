@@ -14,17 +14,15 @@
       "file": "File to upload",
       "form": "Layer / Form to update",
       "formPlaceholder": "Select a layer",
-      "kind": "Kind of resource",
-      "resource": "Resource name (optional)",
-      "resourcePlaceholder": "Leave empty to infer from file name"
+      "kind": "Kind of resource"
+    },
+    "hint": {
+      "externalData": "The file name must match the target resource (e.g. \"for_dw.csv\"); Excel sheets are matched by sheet name.",
+      "formData": "Upload the KoboToolbox answers workbook (e.g. \"…DonneesK.xlsx\"). Rows are appended to the layer's resources."
     },
     "kind": {
       "externalData": "External data",
       "formData": "Form data"
-    },
-    "resourceHint": {
-      "csv": "Optional. If left empty, the resource name is inferred from the CSV file name.",
-      "excel": "Resource names will be inferred from the sheet names. Make sure your sheet names are correct before uploading."
     },
     "success": "Data added successfully.",
     "title": "Add data"

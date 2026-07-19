@@ -6,8 +6,15 @@ export const RESOURCE_KINDS = {
 
 export type ResourceKind = (typeof RESOURCE_KINDS)[keyof typeof RESOURCE_KINDS];
 
-// Extensions accepted by coordo's file loaders.
-export const ACCEPTED_EXTENSIONS = ".csv,.xls,.xlsx,.zip";
+// coordo loader the backend selects, per resource kind. cf LoaderType
+export const RESOURCE_TYPE_BY_KIND = {
+  [RESOURCE_KINDS.ExternalData]: "file",
+  [RESOURCE_KINDS.FormData]: "kobotoolbox",
+} as const;
 
-export const isCsvFileName = (fileName: string): boolean =>
-  fileName.toLowerCase().endsWith(".csv");
+// Accepted upload extensions per kind (coordo's file / kobotoolbox loaders).
+// Form data is the multi-sheet KoboToolbox answers workbook (.xlsx).
+export const ACCEPTED_EXTENSIONS_BY_KIND = {
+  [RESOURCE_KINDS.ExternalData]: ".csv,.xls,.xlsx",
+  [RESOURCE_KINDS.FormData]: ".xlsx",
+} as const;

@@ -133,7 +133,7 @@
         "revenue_change": "avg(0 - inc_dif if inc_evol = '2' else ifnull(inc_dif, 0))",
         "assets_idx_raw": "avg( ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + ifnull(list_unique(ass),0) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + ( int( land_own ) + int( land_titl ) + int( land_size ) if int(land_own) > 0 else 0) ) if ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + list_unique(ass) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + int( land_own ) + int( land_titl ) + int( land_size ) ) <= int(ass_tot_max) )",
         "assets_idx": "10 / int(ass_tot_max) * avg( ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + ifnull(list_unique(ass),0) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + ( int( land_own ) + int( land_titl ) + int( land_size ) if int(land_own) > 0 else 0) ) if ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + list_unique(ass) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + int( land_own ) + int( land_titl ) + int( land_size ) ) <= int(ass_tot_max) )",
-        "nb_income_sources" : "avg(int(inc_no))",
+        "nb_income_sources": "avg(int(inc_no))",
         "nb_additional_incomes": "'N/A'",
         "benef_pract1": "count(1 if int(pract1) = 2) / count(1) * 100",
         "benef_pract2": "count(1 if int(pract2) = 2) / count(1) * 100",

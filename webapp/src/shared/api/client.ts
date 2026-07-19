@@ -43,9 +43,9 @@ export const fetchJSONWithAuth = async (
 ) => (await fetchWithAuth(endpoint, options, authToken)).json();
 
 export const createApiClient = (authToken: string | null) => ({
-  addData: (formData: FormData) =>
+  appendData: (formData: FormData) =>
     fetchWithAuth(
-      `/maps/add-data/`,
+      `/maps/append-data/`,
       { body: formData, method: "POST" },
       authToken,
     ),

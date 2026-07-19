@@ -96,7 +96,7 @@ class DatapackageManager:
         try:
             params = self.parse_params(loader_method)
         except ValueError as e:
-            return ParseError(e)
+            raise ParseError(e)
 
         # getting keys to get in self.request.FILES
         file_keys = ["data"]
