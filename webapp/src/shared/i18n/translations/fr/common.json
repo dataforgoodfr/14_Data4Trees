@@ -14,17 +14,15 @@
       "file": "Fichier à importer",
       "form": "Couche / Formulaire à mettre à jour",
       "formPlaceholder": "Sélectionnez une couche",
-      "kind": "Type de ressource",
-      "resource": "Nom de la ressource (facultatif)",
-      "resourcePlaceholder": "Laissez vide pour déduire du nom du fichier"
+      "kind": "Type de ressource"
+    },
+    "hint": {
+      "externalData": "Le nom du fichier doit correspondre à la ressource cible (ex. « for_dw.csv ») ; les feuilles Excel sont associées par nom de feuille.",
+      "formData": "Importez le classeur de réponses KoboToolbox (ex. « …DonneesK.xlsx »). Les lignes sont ajoutées aux ressources de la couche."
     },
     "kind": {
       "externalData": "Données externes",
       "formData": "Données de formulaire"
-    },
-    "resourceHint": {
-      "csv": "Facultatif. Si laissé vide, le nom de la ressource sera déduit du nom du fichier CSV.",
-      "excel": "Les noms des ressources seront déduits des noms des feuilles. Vérifiez les noms des feuilles avant l'import."
     },
     "success": "Données ajoutées avec succès.",
     "title": "Ajouter des données"

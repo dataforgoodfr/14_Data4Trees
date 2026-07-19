@@ -25,8 +25,7 @@ import {
 } from "@ui/select";
 
 import {
-  ACCEPTED_EXTENSIONS,
-  isCsvFileName,
+  ACCEPTED_EXTENSIONS_BY_KIND,
   RESOURCE_KINDS,
   type ResourceKind,
 } from "./constants";
@@ -49,24 +48,18 @@ export const AddDataDialog: FC<AddDataDialogProps> = ({
   const { t } = useTranslation("common");
   const {
     error,
-    file,
     form,
     isLoading,
     isSuccess,
     kind,
     reset,
-    resource,
     setFile,
     setForm,
     setKind,
-    setResource,
     submit,
   } = useAddData();
 
-  // A single resource name only makes sense for CSV uploads. Excel/zip files
-  // can populate several resources, whose names coordo infers from the sheet
-  // (or inner file) names, so we hide the field and warn the user instead.
-  const isCsv = file ? isCsvFileName(file.name) : true;
+  const isFormData = kind === RESOURCE_KINDS.FormData;
 
   const handleOpenChange = (next: boolean) => {
     if (!next) {
@@ -118,16 +111,6 @@ export const AddDataDialog: FC<AddDataDialogProps> = ({
           </div>
 
           <div className="grid gap-3">
-            <Label htmlFor="add-data-file">{t("addData.field.file")}</Label>
-            <Input
-              accept={ACCEPTED_EXTENSIONS}
-              id="add-data-file"
-              onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-              type="file"
-            />
-          </div>
-
-          <div className="grid gap-3">
             <Label>{t("addData.field.kind")}</Label>
             <RadioGroup
               className="flex gap-6"
@@ -161,41 +144,37 @@ export const AddDataDialog: FC<AddDataDialogProps> = ({
             </RadioGroup>
           </div>
 
-          {isCsv ? (
-            <div className="grid gap-3">
-              <Label htmlFor="add-data-resource">
-                {t("addData.field.resource")}
-              </Label>
-              <Input
-                id="add-data-resource"
-                onChange={(event) => setResource(event.target.value)}
-                placeholder={t("addData.field.resourcePlaceholder")}
-                value={resource}
-              />
-              <p className="text-sm text-muted-foreground">
-                {t("addData.resourceHint.csv")}
-              </p>
-            </div>
-          ) : (
-            <Alert>
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>
-                {t("addData.resourceHint.excel")}
-              </AlertDescription>
-            </Alert>
-          )}
+          <div className="grid gap-3">
+            <Label htmlFor="add-data-file">{t("addData.field.file")}</Label>
+            <Input
+              accept={ACCEPTED_EXTENSIONS_BY_KIND[kind]}
+              className="hover:cursor-pointer"
+              id="add-data-file"
+              onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+              type="file"
+            />
+            <p className="text-sm text-muted-foreground">
+              {isFormData
+                ? t("addData.hint.formData")
+                : t("addData.hint.externalData")}
+            </p>
+          </div>
 
           {error && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{t(`addData.error.${error}`)}</AlertDescription>
+              <AlertDescription style={{ "--tw-translate-y": 0 }}>
+                {t(`addData.error.${error}`)}
+              </AlertDescription>
             </Alert>
           )}
 
           {isSuccess && (
             <Alert>
               <CheckCircle2 className="h-4 w-4" />
-              <AlertDescription>{t("addData.success")}</AlertDescription>
+              <AlertDescription style={{ "--tw-translate-y": 0 }}>
+                {t("addData.success")}
+              </AlertDescription>
             </Alert>
           )}
 
