@@ -1,4 +1,32 @@
 {
+  "addData": {
+    "button": {
+      "pending": "Envoi en cours...",
+      "submit": "Ajouter les données"
+    },
+    "description": "Importez un fichier pour ajouter des données à une couche de la carte.",
+    "error": {
+      "generic": "Échec de l'import. Veuillez réessayer.",
+      "missingFile": "Veuillez choisir un fichier à importer.",
+      "missingForm": "Veuillez sélectionner une couche à mettre à jour."
+    },
+    "field": {
+      "file": "Fichier à importer",
+      "form": "Couche / Formulaire à mettre à jour",
+      "formPlaceholder": "Sélectionnez une couche",
+      "kind": "Type de ressource"
+    },
+    "hint": {
+      "externalData": "Le nom du fichier doit correspondre à la ressource cible (ex. « for_dw.csv ») ; les feuilles Excel sont associées par nom de feuille.",
+      "formData": "Importez le classeur de réponses KoboToolbox (ex. « …DonneesK.xlsx »). Les lignes sont ajoutées aux ressources de la couche."
+    },
+    "kind": {
+      "externalData": "Données externes",
+      "formData": "Données de formulaire"
+    },
+    "success": "Données ajoutées avec succès.",
+    "title": "Ajouter des données"
+  },
   "auth": {
     "loginForm": {
       "button": {
@@ -34,6 +62,7 @@
       "system": "Système"
     },
     "menu": {
+      "addData": "Ajouter des données",
       "goToAdmin": "Espace Admin",
       "language": "Langue",
       "login": "Connexion",
