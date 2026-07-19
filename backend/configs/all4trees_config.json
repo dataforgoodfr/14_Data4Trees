@@ -44,7 +44,7 @@
         "radius": 40,
         "maxZoom": 12,
         "steps": [10, 20],
-        "colors": ["#99D6C2", "#009966", "#006B47"]
+        "colors": ["rgba(153,214,194,0.7)", "rgba(0,153,102,0.7)", "rgba(0,107,71,0.7)"]
       },
       "columns": {
         "id": "_id",
@@ -101,7 +101,7 @@
         "radius": 40,
         "maxZoom": 12,
         "steps": [10, 20],
-        "colors": ["#f98038", "#c7662c", "#954c21"]
+        "colors": ["rgba(249,128,56,0.7)", "rgba(199,102,44,0.7)", "rgba(149,76,33,0.7)"]
       },
       "columns": {
         "geom": "start_point.merge().centroid()",
@@ -137,7 +137,7 @@
         "radius": 50,
         "maxZoom": 12,
         "steps": [10, 20],
-        "colors": ["#A1B5F5", "#1447E6", "#0E32A1"]
+        "colors": ["rgba(161,181,245,0.7)", "rgba(20,71,230,0.7)", "rgba(14,50,161,0.7)"]
       },
       "columns": {
         "geom": "centroid(merge(point(enq_gps.long, enq_gps.latit)))",
