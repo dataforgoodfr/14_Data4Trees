@@ -1,8 +1,6 @@
 import type { LayerMetadata } from "coordo";
 
-import type { LabelData } from "@features/popup/forest-inventory/types";
-
-import type { BioSpeciesData } from "@entities/data";
+import type { BioSpeciesData, LabelData } from "@entities/data";
 
 export function findCategoricalLabel(
   metadata: LayerMetadata,
