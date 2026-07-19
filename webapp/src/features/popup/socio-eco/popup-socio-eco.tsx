@@ -10,6 +10,7 @@ import { findLabel } from "@features/indicators/labels";
 import { useSocialIndicatorElements } from "@features/indicators/social/use-social-indicator-elements";
 import { IndicatorPopupHeader } from "@features/popup/components/indicator-popup-header";
 
+import type { LabelData } from "@entities/data";
 import { LABEL_DATA } from "@entities/resources";
 
 import { LAYERS } from "@shared/api/layers";
@@ -17,7 +18,6 @@ import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { i18nInstance, useTranslation } from "@i18n";
 
-import type { LabelData } from "../forest-inventory/types";
 import type { RenderPopupProps } from "../renderPopup";
 import type { SocioEcoData } from "./types";
 
@@ -44,7 +44,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const labelData =
     externalData[LABEL_DATA.get(LAYERS.ENQUETE) || ""] || ([] as LabelData[]);
 
-  const socialElements = useSocialIndicatorElements(data);
+  const socialElements = useSocialIndicatorElements(data, externalData);
   const economicElements = useEconomicIndicatorElements(data);
 
   const title = t("popup.socioEco.title", {

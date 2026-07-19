@@ -82,6 +82,5 @@ export function findMatchingRecord(
     );
   });
 
-  console.log("Found matching record", record);
   return record;
 }

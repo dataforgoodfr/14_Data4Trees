@@ -74,11 +74,11 @@ export const useFormatSocialData = (data: SocioEcoData) => {
         UNITS.m3PerHabPerYear,
       ),
       firewoodNeeds: {
-        difficultToMeet: Number(safeData.firewood_satis3),
-        dontKnow: Number(safeData.firewood_satis98),
-        easyToMeet: Number(safeData.firewood_satis1),
-        moderateToMeet: Number(safeData.firewood_satis2),
-        refuse: Number(safeData.firewood_satis99),
+        "1": Number(safeData.firewood_satis1),
+        "2": Number(safeData.firewood_satis2),
+        "3": Number(safeData.firewood_satis3),
+        "98": Number(safeData.firewood_satis98),
+        "99": Number(safeData.firewood_satis99),
       },
       fuelSources: safeData.fuel_sources,
       timberNeeds: {
