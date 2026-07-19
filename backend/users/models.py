@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import AutoField, CharField
 
+ADMIN_PROJECT = "all4trees"
 class CustomUser(AbstractUser):
     id = AutoField(primary_key=True)
     project = CharField("projet", max_length=30, blank=True, null=True)

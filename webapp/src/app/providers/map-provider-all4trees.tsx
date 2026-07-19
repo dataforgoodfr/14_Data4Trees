@@ -1,5 +1,6 @@
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
+import { useAuth } from "@features/auth";
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
 import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 
@@ -29,6 +30,8 @@ type MapProviderAll4TreesProps = {
 
 export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
   const [isReady, setIsReady] = useState(false);
+  const { isAuthenticated, token } = useAuth();
+
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
   const [forests, setForests] = useState<Category[]>([]);
   const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
@@ -78,6 +81,7 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
           renderAnchor,
           renderLayerRow,
         },
+        headers: isAuthenticated ? { Authorization: `Bearer ${token}` } : {},
         zoom: mapSettings.zoom,
       });
       if (import.meta.env.DEV) {
