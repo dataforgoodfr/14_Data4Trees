@@ -18,7 +18,7 @@ import { useCallback, useMemo, useState } from "react";
  * ```tsx
  * const { getDashboardData } = useApi();
  * const fetcher = useCallback(
- *   () => getDashboardData(LAYERS.INVENTARY),
+ *   () => getDashboardData(LAYERS.INVENTORY_FOR),
  *   [getDashboardData],
  * );
  * const { dataPromise, retry } = useSuspenseData({ fetcher });
