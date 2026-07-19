@@ -10,6 +10,8 @@ import { IndicatorRawValue } from "@features/indicators/components/indicator-raw
 import type { UseIndicatorReturnType } from "@features/indicators/components/types";
 import type { SocioEcoData } from "@features/popup/socio-eco";
 
+import type { ExternalData } from "@entities/data";
+
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
@@ -17,6 +19,7 @@ import { useFormatSocialData } from "./format-data";
 
 export const useSocialIndicatorElements = (
   rawData: SocioEcoData,
+  externalData: ExternalData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatSocialData(rawData);
@@ -25,13 +28,21 @@ export const useSocialIndicatorElements = (
     {
       children: (
         <>
-          <ChartFuelSources benef={data.wood.fuelSources} />
+          <ChartFuelSources
+            benef={data.wood.fuelSources}
+            metadata={externalData.hh_label}
+            project={rawData.project}
+          />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.wood.energyConsumption")}
             iconStart={<Zap size={ICON_SIZE} />}
             value={data.wood.energyConsumption}
           />
-          <ChartFireWoodNeeds data={data.wood.firewoodNeeds} />
+          <ChartFireWoodNeeds
+            data={data.wood.firewoodNeeds}
+            metadata={externalData.hh_label}
+            project={rawData.project}
+          />
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.wood.collectionTime")}
             iconStart={<Hourglass size={ICON_SIZE} />}
