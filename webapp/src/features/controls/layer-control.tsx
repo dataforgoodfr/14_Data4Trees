@@ -54,9 +54,9 @@ function useLayerConfig(layerId: string) {
           />
         ),
       };
-    case LAYERS.INVENTARY:
+    case LAYERS.INVENTORY_FOR:
       return {
-        label: t("filters.categories.actions.forestInventary") as string,
+        label: t("filters.categories.actions.forestInventory") as string,
         renderIcon: (checked?: boolean) => (
           <TreePineIcon
             className={checked ? "text-inventaire" : "text-muted"}

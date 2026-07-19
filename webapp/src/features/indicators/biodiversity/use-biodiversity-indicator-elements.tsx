@@ -2,10 +2,9 @@ import { Gem, TreePine, Trees } from "lucide-react";
 
 import { ChartForestPotential } from "@features/charts/biodiversity/chart-forest-potential";
 import { ChartRelativeAbundance } from "@features/charts/biodiversity/chart-relative-abundance";
-import type {
-  ExternalData,
-  ForestInventoryData,
-} from "@features/popup/forest-inventory/types";
+import type { ForestInventoryData } from "@features/popup/forest-inventory/types";
+
+import type { LabelData } from "@entities/data";
 
 import { useTranslation } from "@i18n";
 
@@ -16,7 +15,7 @@ import { useFormatBiodiversityData } from "./format-data";
 
 export const useBiodiversityIndicatorElements = (
   rawData: ForestInventoryData,
-  metadata: ExternalData,
+  metadata: LabelData[],
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatBiodiversityData(rawData);
@@ -46,15 +45,13 @@ export const useBiodiversityIndicatorElements = (
       children: (
         <>
           <IndicatorRawValue
-            dataName={t(
-              "indicators.biodiversity.sections.treeDiversity.speciesRichness",
-            )}
+            dataName={t("indicators.common.speciesRichness")}
             iconStart={<Gem size={ICON_SIZE} />}
             value={data.treeDiversity.speciesRichness}
           />
           <ChartRelativeAbundance
             data={data.treeDiversity.relative_abundance}
-            externalData={metadata}
+            metadata={metadata}
             project={rawData.project}
           />
         </>

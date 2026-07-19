@@ -7,11 +7,11 @@ import {
   type ChartComponentType,
 } from "@features/charts/components/chart-component";
 
-import { useTranslation } from "@shared/i18n";
+import { i18nInstance, useTranslation } from "@shared/i18n";
 
-import { SUNBURST_LAYOUT } from "../config";
-import { buildNodeColors, buildSunburstNodes } from "../lib/sunburst";
-import type { PieChartProps, SunburstTrace } from "../types";
+import { SUNBURST_LAYOUT } from "../soil/config";
+import type { PieChartProps, SunburstTrace } from "../soil/types";
+import { buildNodeColors, buildSunburstNodes } from "./lib/sunburst";
 
 export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   data,
@@ -19,7 +19,7 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
   project,
 }) => {
   const { t } = useTranslation(["common", "all4trees"]);
-
+  const lang = i18nInstance.language;
   const dataEntries = Object.entries(data);
   const hasTaxonData = dataEntries.some(([key]) => key.trim() !== "");
   let sunburstData: PlotlyData[] = [];
@@ -30,7 +30,12 @@ export const ChartTaxonAbundance: ChartComponentType<PieChartProps> = ({
     const filteredDataEntries = dataEntries.filter(
       ([key]) => key.trim() !== "0",
     );
-    const nodes = buildSunburstNodes(filteredDataEntries, metadata, project);
+    const nodes = buildSunburstNodes(
+      filteredDataEntries,
+      metadata,
+      project,
+      lang,
+    );
     const nodeColors = buildNodeColors(nodes);
     const hoverText = nodes.map(
       (node) => `${node.label}<br>${node.value.toFixed(2)} %`,

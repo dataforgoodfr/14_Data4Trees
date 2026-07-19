@@ -7,7 +7,7 @@
   "filters": {
     "categories": {
       "actions": {
-        "forestInventary": "Forest inventory",
+        "forestInventory": "Forest inventory",
         "socioEco": "Socio-economic",
         "title": "Actions taken",
         "treeDiversity": "Tree diversity"
@@ -65,6 +65,13 @@
         }
       },
       "title": "Biodiversity"
+    },
+    "bioinventory": {
+      "sampArea": "Sampling area",
+      "status_abundance": "Relative abundance by extinction threat",
+      "taxon": "Target taxon",
+      "title": "Fauna inventory",
+      "type": "Measures type"
     },
     "common": {
       "abundance": "Relative abundance",
@@ -195,7 +202,9 @@
       "title": "Soil"
     },
     "units": {
-      "essenceCount": "{{ count }} species inventoried",
+      "essenceCount": "",
+      "essenceCount_one": "{{ count }} essence inventoried",
+      "essenceCount_other": "{{ count }} essences inventoried",
       "individualPerCubicMeter": "{{ value }} ind/m³",
       "individualPerHectare": "{{ value }} ind/ha",
       "individualPerTrap": "{{ value }} ind/trap",
@@ -203,7 +212,8 @@
       "minPerHhPerDay": "{{ value }} min/household/day",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
-      "speciesCount": "{{ count }} species per trap",
+      "speciesInventoried": "{{ count }} species inventoried",
+      "speciesPerTrap": "{{ count }} species per trap",
       "tonPerHectare": "{{ value }} t/ha"
     }
   },
@@ -213,6 +223,10 @@
     "villages": "Villages"
   },
   "popup": {
+    "bioInventory": {
+      "date": "Survey date: {{ date }}",
+      "title": "Plot n°{{ id }}"
+    },
     "forestInventory": {
       "date": "Site survey date : {{ date }}",
       "ecos": "Ecosystem",

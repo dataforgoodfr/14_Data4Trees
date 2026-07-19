@@ -8,8 +8,9 @@ import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useSoilIndicatorElements } from "@features/indicators/soil";
-import { findLabelInExternalData } from "@features/indicators/utils";
+import { findLabel } from "@features/indicators/utils";
 
+import { i18nInstance } from "@shared/i18n";
 import { formatDate } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 
@@ -30,8 +31,16 @@ export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
 > = ({ data, metadata, externalDataPromise, className, ...headerProps }) => {
   const { t } = useTranslation(["common", "all4trees"]);
+  const lang = i18nInstance.language;
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
   const externalData = use(externalDataPromise);
+  const labelData = externalData.for_label;
+
+  const biodiversityElements = useBiodiversityIndicatorElements(
+    data,
+    labelData,
+  );
+  const soilElements = useSoilIndicatorElements(data, labelData);
 
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {
@@ -48,29 +57,14 @@ export const ForestInventoryPopupContent: FC<
   });
 
   const subtitle =
-    findLabelInExternalData(
-      externalData,
-      "for_label",
-      data.project,
-      "loc2",
-      data.for,
-    ) || t("common:dataManagement.undefined");
+    findLabel(labelData, data.project, lang, "loc2", data.for) ||
+    t("common:dataManagement.undefined");
 
   const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${
-    findLabelInExternalData(
-      externalData,
-      "for_label",
-      data.project,
-      "ecos",
-      data.ecos,
-    ) || t("dataManagement.undefined", { ns: "common" })
+    findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
+    t("dataManagement.undefined", { ns: "common" })
   }`;
 
-  const biodiversityElements = useBiodiversityIndicatorElements(
-    data,
-    externalData,
-  );
-  const soilElements = useSoilIndicatorElements(data, externalData);
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader

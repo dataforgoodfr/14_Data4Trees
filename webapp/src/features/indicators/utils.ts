@@ -1,7 +1,4 @@
-import type {
-  ExternalData,
-  LabelData,
-} from "@features/popup/forest-inventory/types";
+import type { BioSpeciesData, LabelData } from "@entities/data";
 
 import { useTranslation } from "@shared/i18n";
 import type { LayerMetadata } from "@shared/lib/coordo";
@@ -17,7 +14,8 @@ export const UNITS = {
   minPerHouseholdPerDay: "minPerHouseholdPerDay",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
-  speciesCount: "speciesCount",
+  speciesInventoried: "speciesInventoried",
+  speciesPerTrap: "speciesPerTrap",
   tonPerHectare: "tonPerHectare",
 } as const;
 
@@ -56,13 +54,18 @@ export const useFormatterWithUnit = () => {
           ns: "all4trees",
           value,
         });
-      case UNITS.speciesCount:
-        return t("indicators.units.speciesCount", {
+      case UNITS.speciesPerTrap:
+        return t("indicators.units.speciesPerTrap", {
           count: parseInt(formattedValue, 10),
           ns: "all4trees",
         });
       case UNITS.essenceCount:
         return t("indicators.units.essenceCount", {
+          count: parseInt(formattedValue, 10),
+          ns: "all4trees",
+        });
+      case UNITS.speciesInventoried:
+        return t("indicators.units.speciesInventoried", {
           count: parseInt(formattedValue, 10),
           ns: "all4trees",
         });
@@ -99,7 +102,7 @@ export function preciseNumericIndicators<T extends Record<string, any>>(
     Object.entries(data).map(([key, value]) => [
       key,
       indicatorKeys.includes(key as (typeof indicatorKeys)[number])
-        ? precise(value, defaultValue)
+        ? precise(Number(value), defaultValue)
         : value, // Keep the original value if it's not in the list of indicator keys
     ]),
   ) as T;
@@ -119,6 +122,35 @@ export function convertDictToPercentage(
       Number(precise(Number((value * 100) / total), defaultValue)),
     ]),
   );
+}
+
+/*
+  Format taxon relative abundance by converting the sring array containing data like 'taxon:pop' by:
+  1. Sum all pop corresponding to same taxon
+  2. Convert the pop to percentage of total population
+  3. Return a record with taxon as key and percentage as value
+  Example:
+  Input: ['taxon1:10', 'taxon2:20', 'taxon1:30'], totalPopulation = 60
+  Output: { taxon1: 66.67, taxon2: 33.33 }
+*/
+export function formatTaxonAbundance(
+  abundancePop: string[],
+  abundanceTotal: number,
+) {
+  if (!abundanceTotal) {
+    return {};
+  }
+
+  const abundancePopRecord: Record<string, number> = {};
+  abundancePop.forEach((value) => {
+    if (value) {
+      const [taxon, count] = value.split(":");
+      const currentCount = abundancePopRecord[taxon] || 0;
+      abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
+    }
+  });
+
+  return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
 }
 
 /*
@@ -164,16 +196,43 @@ export function findCategoricalLabel(
     ?.categories?.find((c) => c.value === fieldValue)?.label;
 }
 
-export function findLabelInExternalData(
-  externalData: ExternalData,
-  resourceName: string,
+// Find status of corresponding taxon value.
+export function findStatus(
+  resourceData: BioSpeciesData[],
   project: string,
+  lang: string,
+  taxon: number,
+): string | undefined {
+  if (!resourceData || !Array.isArray(resourceData)) {
+    return undefined;
+  }
+
+  // Find the record matching all criteria: project, list_name, and name
+  const record = resourceData.find((item: BioSpeciesData) => {
+    return item.proj?.trim() === project.trim() && item.tax3 === taxon;
+  });
+
+  return record?.[`stat::${lang}` as keyof BioSpeciesData] as string;
+}
+
+export function findLabel(
+  resourceData: LabelData[],
+  project: string,
+  lang: string,
   fieldName: string,
   fieldValue: any,
 ): string | undefined {
-  // Get the data array for the resource (e.g., for_label, for_mf_tax1, etc.)
-  const resourceData = externalData[resourceName];
+  return findMatchingRecord(resourceData, project, fieldName, fieldValue)?.[
+    `label::${lang}`
+  ];
+}
 
+export function findMatchingRecord(
+  resourceData: LabelData[],
+  project: string,
+  fieldName: string,
+  fieldValue: any,
+): any {
   if (!resourceData || !Array.isArray(resourceData)) {
     return undefined;
   }
@@ -182,7 +241,7 @@ export function findLabelInExternalData(
   const record = resourceData.find((item: LabelData) => {
     if (typeof item.name !== typeof fieldValue) {
       console.warn(
-        `Checking field values with different types ! resourceName=${resourceName} fieldName=${fieldName} fieldValue type=${typeof fieldValue}; item.name type= ${typeof item.name}`,
+        `Checking field values with different types ! fieldName=${fieldName} fieldValue type=${typeof fieldValue}; item.name type= ${typeof item.name}`,
       );
     }
     return (
@@ -192,5 +251,5 @@ export function findLabelInExternalData(
     );
   });
 
-  return record?.label;
+  return record;
 }

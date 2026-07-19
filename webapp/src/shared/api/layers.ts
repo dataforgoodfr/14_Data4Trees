@@ -1,7 +1,8 @@
 export const LAYERS = {
   BOUNDARIES: "boundaries",
   ENQUETE: "enquete",
-  INVENTARY: "inventaire_for",
+  INVENTORY_BIO: "inventaire_bio",
+  INVENTORY_FOR: "inventaire_for",
   SATELLITE: "satellite",
   SEED: "seed",
   SEED_POINT: "seed_point",
@@ -11,5 +12,6 @@ export const LAYERS = {
 
 export const LAYERS_WITH_CLUSTERS: string[] = [
   LAYERS.ENQUETE,
-  LAYERS.INVENTARY,
+  LAYERS.INVENTORY_FOR,
+  LAYERS.INVENTORY_BIO,
 ];

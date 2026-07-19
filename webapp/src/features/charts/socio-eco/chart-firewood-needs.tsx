@@ -27,17 +27,17 @@ export const ChartFireWoodNeeds: ChartComponentType<PieChartProps> = ({
       value: data.easyToMeet,
     },
     {
-      fill: "var(--chart-2)",
+      fill: "var(--chart-3)",
       name: "moderateToMeet",
       value: data.moderateToMeet,
     },
     {
-      fill: "var(--chart-5)",
+      fill: "var(--chart-6)",
       name: "difficultToMeet",
       value: data.difficultToMeet,
     },
     {
-      fill: "var(--chart-6)",
+      fill: "var(--chart-2)",
       name: "dontKnow",
       value: data.dontKnow,
     },

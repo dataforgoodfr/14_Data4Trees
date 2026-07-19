@@ -19,6 +19,8 @@
   },
   "dataManagement": {
     "noData": "Données non disponibles",
+    "noUnit": "Unité non définie",
+    "other": "Autre",
     "undefined": "non trouvée"
   },
   "error": {

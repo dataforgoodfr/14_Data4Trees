@@ -2,7 +2,7 @@ catalog:
 	# All 4 Trees - Inventaire forestier
 
 	coordo add kobotoolbox data/all4trees/inventaire_for/20260422_InventaireForestier_DonneesK.xlsx --form data/all4trees/inventaire_for/20260519_InventaireForestier_QuestionnaireK.xlsx --package catalog/inventaire_for
-	coordo add file data/all4trees/inventaire_for/20260703_InventaireForestier_DonneesExternes.xlsx --package catalog/inventaire_for
+	coordo add file data/all4trees/inventaire_for/20260713_InventaireForestier_DonneesExternes.xlsx --package catalog/inventaire_for
 
 	coordo add foreignkey adu.decay for_dw.decay --package catalog/inventaire_for
 	coordo add foreignkey inv_for.proj for_samp.proj --package catalog/inventaire_for
@@ -27,12 +27,11 @@ catalog:
 	coordo add foreignkey barbd_001.barbD_tax3 for_mf_tax3.tax3 --package catalog/inventaire_for
 
 	# All 4 Trees - Inventaire Biologique
-	coordo add kobotoolbox data/all4trees/inventaire_bio/20260422_InventaireBiologique_DonneesK.xlsx --form data/all4trees/inventaire_bio/20260519_InventaireBiologique_QuestionnaireK.xlsx --package catalog/inventaire_bio
-	coordo add file data/all4trees/inventaire_bio/20260422_InventaireBiologique_DonneesExternes.xlsx --package catalog/inventaire_bio
+	coordo add kobotoolbox data/all4trees/inventaire_bio/20260710_InventaireBiologique_DonneesK.xlsx --form data/all4trees/inventaire_bio/20260709_InventaireBiologique_QuestionnaireK.xlsx --package catalog/inventaire_bio
+	coordo add file data/all4trees/inventaire_bio/20260713_InventaireBiologique_DonneesExternes.xlsx --package catalog/inventaire_bio
 
 	coordo add foreignkey inv_bio.proj bio_samp.proj --package catalog/inventaire_bio
 	coordo add foreignkey inv_bio.year bio_pop.year --package catalog/inventaire_bio
-	coordo add foreignkey inv_001.tax3 bio_sp.tax3 --package catalog/inventaire_bio
 
 	# All 4 Trees - Enquête ménage
 	coordo add kobotoolbox data/all4trees/enquete/20260422_EnqueteMenage_DonneesK.csv --form data/all4trees/enquete/20260519_EnqueteMenage_QuestionnaireK.xlsx --package catalog/enquete

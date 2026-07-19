@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   computeScore,
   convertDictToPercentage,
+  formatTaxonAbundance,
   preciseNumericIndicators,
   UNITS,
   useFormatterWithUnit,
@@ -20,23 +21,6 @@ const indicatorsToPreciseWithFallBack: NumericKeys<SoilData>[] = [
   "soil_eros_water_infiltration",
   "soil_eros_stability",
 ] as const;
-
-function formatTaxonAbundance(abundancePop: string[], abundanceTotal: number) {
-  if (!abundanceTotal) {
-    return {};
-  }
-
-  const abundancePopRecord: Record<string, number> = {};
-  abundancePop.forEach((value) => {
-    if (value) {
-      const [taxon, count] = value.split(":");
-      const currentCount = abundancePopRecord[taxon] || 0;
-      abundancePopRecord[taxon] = currentCount + parseInt(count, 10);
-    }
-  });
-
-  return convertDictToPercentage(abundancePopRecord, abundanceTotal, "0");
-}
 
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
@@ -59,6 +43,23 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     data,
     indicatorsToPreciseWithFallBack,
     t("dataManagement.noData"),
+  );
+
+  safeData.soil_surface_fauna_abundance = convertDictToPercentage(
+    safeData.soil_surface_fauna_abundance,
+    Object.values<number>(safeData.soil_surface_fauna_abundance || {}).reduce(
+      (a, b) => a + b,
+      0,
+    ),
+    "0",
+  ); /*formatTaxonAbundance(
+    safeData.soil_surface_fauna_abundance_pop,
+    safeData.soil_surface_fauna_total_pop
+  )*/
+
+  safeData.soil_fauna_abundance = formatTaxonAbundance(
+    safeData.soil_fauna_abundance_pop,
+    safeData.soil_fauna_total_pop,
   );
 
   safeData.soil_surface_fauna_abundance = formatTaxonAbundance(
@@ -87,7 +88,7 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     ),
     soil_fauna_diversity: formatWithUnit(
       soil_fauna_diversity,
-      UNITS.speciesCount,
+      UNITS.speciesPerTrap,
     ),
     soil_structure_idx:
       String(soil_structure_idx) === t("dataManagement.noData")
@@ -100,7 +101,7 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     ),
     surface_fauna_diversity: formatWithUnit(
       soil_surface_fauna_diversity,
-      UNITS.speciesCount,
+      UNITS.speciesPerTrap,
     ),
   };
 };

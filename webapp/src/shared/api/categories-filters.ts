@@ -1,4 +1,4 @@
-import { LAYERS } from "./layers";
+import { LAYERS } from "@shared/api/layers";
 
 const SEPARATOR = ":::";
 
@@ -6,9 +6,10 @@ const SEPARATOR = ":::";
  * Format of a layer: GROUP_BACKEND-NAME
  */
 export const CATEGORY_IDENTIFIERS = {
+  ACTION_BIO: `action${SEPARATOR}${LAYERS.INVENTORY_BIO}`,
   ACTION_DIVERSITY: "action-tree-diversity",
-  ACTION_INVENTARY: `action-forest${SEPARATOR}${LAYERS.INVENTARY}`,
-  ACTION_SOCIO: `action-socio-eco${SEPARATOR}${LAYERS.ENQUETE}`,
+  ACTION_INVENTORY: `action${SEPARATOR}${LAYERS.INVENTORY_FOR}`,
+  ACTION_SOCIO: `action${SEPARATOR}${LAYERS.ENQUETE}`,
   DATA_GROUND: "data-ground",
   DATA_MODEL: "data-model",
   DATA_SATELLITE: `data${SEPARATOR}${LAYERS.SATELLITE}`,

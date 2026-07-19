@@ -14,7 +14,7 @@ export default function Dashboard() {
   // Stable per API client (auth token) so the promise cache stays scoped to
   // the current session — see suspense-fetch.ts.
   const fetcher = useCallback(
-    () => getDashboardData(LAYERS.INVENTARY),
+    () => getDashboardData(LAYERS.INVENTORY_FOR),
     [getDashboardData],
   );
   const { dataPromise, retry } = useSuspenseData({ fetcher });

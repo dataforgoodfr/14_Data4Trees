@@ -13,7 +13,7 @@ from copy import copy
 from . import stats
 from .datapackage_manager import DatapackageManager
 
-ALL4TREES_LAYERS = ['inventaire_for', 'enquete']
+ALL4TREES_LAYERS = ['inventaire_for', 'enquete', 'inventaire_bio']
 
 config_path = settings.BASE_DIR / "configs" / "all4trees_config.json"
 map = Map.from_file(config_path)
@@ -108,6 +108,7 @@ def remove_foreign_key_view(request):
 
 def get_map(user):
     user_map = copy(map)
+    filter = ''
     if user.is_authenticated:
         project = user.project
         if (project.lower() != ADMIN_PROJECT):

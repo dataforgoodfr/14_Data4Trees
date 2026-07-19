@@ -1,16 +1,17 @@
 import { darken, lighten } from "color2k";
 
-import type { ExternalData } from "@features/popup/forest-inventory/types";
+import type { LabelData } from "@entities/data";
 
 import { getChartPalette } from "@shared/lib/palette";
 
-import type { SunburstNode } from "../types";
+import type { SunburstNode } from "../../soil/types";
 import { formatTaxonLevelLabel } from "./taxon";
 
 export function buildSunburstNodes(
   dataEntries: [string, number][],
-  metadata: ExternalData,
+  metadata: LabelData[],
   project: string,
+  lang: string,
 ): SunburstNode[] {
   const nodes = new Map<string, SunburstNode>();
   for (const [key, value] of dataEntries) {
@@ -18,7 +19,7 @@ export function buildSunburstNodes(
     nodes.set(key, {
       depth: parts.length - 1,
       id: key,
-      label: formatTaxonLevelLabel(key, metadata, project),
+      label: formatTaxonLevelLabel(key, metadata, project, lang),
       parent: parts.slice(0, -1).join("-") || "",
       value,
     });
@@ -33,7 +34,7 @@ export function buildSunburstNodes(
         nodes.set(parentPath, {
           depth: parentPath.split("-").length - 1,
           id: parentPath,
-          label: formatTaxonLevelLabel(parentPath, metadata, project),
+          label: formatTaxonLevelLabel(parentPath, metadata, project, lang),
           parent: parts.slice(0, i - 1).join("-") || "",
           value: value,
         });

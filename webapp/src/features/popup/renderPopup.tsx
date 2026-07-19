@@ -1,11 +1,12 @@
 import type { FC } from "react";
 import { createRoot } from "react-dom/client";
 
+import type { ExternalData } from "@entities/data";
+
 import type { LayerMetadata, PopupOptions } from "@shared/lib/coordo";
 
 import type { IndicatorPopupHeaderProps } from "./components/indicator-popup-header";
 import { Popup } from "./components/popup";
-import type { ExternalData } from "./forest-inventory/types";
 
 export const getPopupSizeCustomVariables = (isMaximizedPopupSize: boolean) => {
   return {
