@@ -61,7 +61,7 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
 }) => {
   return (
     <Alert
-      className="w-full rounded-t-md rounded-b-none border-none text-xl py-lg"
+      className="w-full rounded-t-md rounded-b-none border-none text-xl py-4"
       variant="info"
     >
       {icon}
@@ -70,13 +70,13 @@ export const IndicatorPopupHeader: FC<IndicatorPopupHeaderProps> = ({
       {(subtitle || date) && (
         <AlertDescription
           className={cn("text-muted-foreground text-sm", {
-            "flex flex-col gap-sm": subtitle && date,
+            "flex flex-col gap-2": subtitle && date,
           })}
         >
           {subtitle && <span>{subtitle}</span>}
 
           {date && (
-            <div className="flex flex-row items-center gap-xs text-muted-foreground">
+            <div className="flex flex-row items-center gap-1 text-muted-foreground">
               <Calendar size={ICON_SIZE} />
               <p className="pt-0.5">{date}</p>
             </div>

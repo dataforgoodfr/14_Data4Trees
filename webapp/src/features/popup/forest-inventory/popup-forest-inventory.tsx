@@ -86,7 +86,7 @@ export const ForestInventoryPopupContent: FC<
       />
 
       <GridSelector
-        className="m-sm"
+        className="m-2"
         onChange={(value) => setSelectedTab(value as TabKind)}
         options={[
           {

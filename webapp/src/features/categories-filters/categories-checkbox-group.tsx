@@ -27,11 +27,11 @@ export const CategoriesCheckboxGroup: FC<CategoriesCheckboxGroupProps> = ({
 }) => {
   return (
     <section>
-      <p className="font-medium text-sm mb-md">{title}</p>
-      <FieldGroup className="mx-auto gap-sm">
+      <p className="font-medium text-sm mb-3">{title}</p>
+      <FieldGroup className="mx-auto gap-2">
         {items.map((item) => (
           <Field
-            className="border border-border rounded-md p-sm align-start gap-sm"
+            className="border border-border rounded-md p-2 align-start gap-2"
             key={item.identifier}
             orientation="horizontal"
           >
@@ -44,7 +44,7 @@ export const CategoriesCheckboxGroup: FC<CategoriesCheckboxGroupProps> = ({
             />
 
             <FieldLabel
-              className="font-normal cursor-pointer gap-sm items-center"
+              className="font-normal cursor-pointer gap-2 items-center"
               // Ensures that the label is correctly associated with the checkbox input field
               htmlFor={FIELD_HTML_ID(item.identifier)}
             >

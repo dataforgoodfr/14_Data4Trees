@@ -48,20 +48,20 @@ export const IndicatorSection: FC<IndicatorSectionProps> = ({
   );
 
   return (
-    <section className="flex flex-col w-full gap-sm">
-      <div className="flex flex-row items-center gap-xs">
+    <section className="flex flex-col w-full gap-2">
+      <div className="flex flex-row items-center gap-1">
         {iconStart}
         <h5 className="px-5 pb-2 font-bold text-base">{title}</h5>
       </div>
 
       {valueIndicators.length > 0 && (
         <Card>
-          <CardContent className="py-sm">{valueIndicators}</CardContent>
+          <CardContent className="py-2">{valueIndicators}</CardContent>
         </Card>
       )}
 
       {chartIndicators.length > 0 && (
-        <div className="flex flex-col w-full gap-sm">
+        <div className="flex flex-col w-full gap-2">
           {chartIndicators.map((child, index) => (
             // `w-0 min-w-full` makes each chart fill the available width without
             // contributing to the popup's intrinsic (max-content) width. Charts

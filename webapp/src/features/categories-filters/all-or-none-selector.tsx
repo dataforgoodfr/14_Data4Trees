@@ -70,7 +70,7 @@ export const AllOrNoneSelector: FC = () => {
     }) as const;
 
   return (
-    <div className="flex flex-row justify-center items-center gap-sm">
+    <div className="flex flex-row justify-center items-center gap-2">
       <Button
         onClick={onAllClick}
         {...getButtonProps(isAll)}

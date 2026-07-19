@@ -51,7 +51,7 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
   };
 
   return (
-    <div className="flex flex-col gap-md">
+    <div className="flex flex-col gap-3">
       <AllOrNoneSelector />
 
       <CategoriesCheckboxGroup
