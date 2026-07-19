@@ -98,10 +98,10 @@
       "resource": "inv_bio",
       "layerType": "symbol",
       "cluster": {
-        "radius": 2,
+        "radius": 40,
         "maxZoom": 12,
         "steps": [10, 20],
-        "colors": ["#f4a236", "#e58800", "#b76c00"]
+        "colors": ["#f98038", "#c7662c", "#954c21"]
       },
       "columns": {
         "geom": "start_point.merge().centroid()",
