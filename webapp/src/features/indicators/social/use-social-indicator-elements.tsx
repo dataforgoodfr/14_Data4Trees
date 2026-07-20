@@ -48,7 +48,11 @@ export const useSocialIndicatorElements = (
             iconStart={<Hourglass size={ICON_SIZE} />}
             value={data.wood.collectionTime}
           />
-          <ChartTimberNeeds data={data.wood.timberNeeds} />
+          <ChartTimberNeeds
+            data={data.wood.timberNeeds}
+            metadata={externalData.hh_label}
+            project={rawData.project}
+          />
         </>
       ),
       identifier: "indicator-wood",

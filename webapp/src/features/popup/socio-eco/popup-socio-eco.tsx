@@ -45,7 +45,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
     externalData[LABEL_DATA.get(LAYERS.ENQUETE) || ""] || ([] as LabelData[]);
 
   const socialElements = useSocialIndicatorElements(data, externalData);
-  const economicElements = useEconomicIndicatorElements(data);
+  const economicElements = useEconomicIndicatorElements(data, externalData);
 
   const title = t("popup.socioEco.title", {
     village: findLabel(labelData, data.project, lang, "loc2", data.loc2),

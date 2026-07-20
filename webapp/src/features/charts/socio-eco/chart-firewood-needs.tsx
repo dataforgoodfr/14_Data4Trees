@@ -10,7 +10,7 @@ import {
   PieChartCategorical,
   renderLabel,
 } from "../components/pie-chart-categorical";
-import { satisfactionColorMap } from "./utils";
+import { SATISFACTION_COLOR_MAP } from "./constants";
 
 type PieChartProps = {
   project: string;
@@ -25,18 +25,20 @@ export const ChartFireWoodNeeds: ChartComponentType<PieChartProps> = ({
   metadata,
   project,
 }) => {
-  const { t } = useTranslation("all4trees");
+  const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
 
   const chartData = Object.entries(data).map(([key, value]) => ({
-    fill: satisfactionColorMap.get(key) || "var(--chart-5)",
+    fill: SATISFACTION_COLOR_MAP.get(key) || "var(--chart-4)",
     name: key,
     value,
   }));
 
   const chartConfig = chartData.reduce((acc, item) => {
     acc[item.name as keyof typeof acc] = {
-      label: findLabel(metadata, project, lang, "satis", item.name),
+      label:
+        findLabel(metadata, project, lang, "satis", item.name) ||
+        t("common:dataManagement.undefined"),
     };
     return acc;
   }, {} as ChartConfig) satisfies ChartConfig;
@@ -45,7 +47,7 @@ export const ChartFireWoodNeeds: ChartComponentType<PieChartProps> = ({
     <PieChartCategorical
       chartConfig={chartConfig}
       chartData={chartData}
-      title={t("indicators.socioEco.sections.wood.energyNeeds.title")}
+      title={t("all4trees:indicators.socioEco.sections.wood.energyNeeds.title")}
       unit="%"
       withLabel={(props) =>
         renderLabel({ ...props, chartConfig, linebreak: 18 })

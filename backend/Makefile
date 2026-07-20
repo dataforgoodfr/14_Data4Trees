@@ -38,7 +38,6 @@ catalog:
 	coordo add file data/all4trees/enquete/20260713_EnqueteMenage_DonneesExternes.xlsx --package catalog/enquete
 
 	coordo add foreignkey enquete_menage.proj hh_samp.proj --package catalog/enquete
-	coordo add foreignkey enquete_menage.typ hh_pop.typ --package catalog/enquete
 	coordo add foreignkey enquete_menage.loc2 hh_gps.loc2 --package catalog/enquete
 	coordo add foreignkey enquete_menage.fw_cod hh_fw.fw_cod --package catalog/enquete
 	coordo add foreignkey enquete_menage.coal_unit hh_coal.coal_unit --package catalog/enquete

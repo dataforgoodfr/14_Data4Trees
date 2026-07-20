@@ -82,11 +82,11 @@ export const useFormatSocialData = (data: SocioEcoData) => {
       },
       fuelSources: safeData.fuel_sources,
       timberNeeds: {
-        difficultToMeet: Number(safeData.timber_satis3),
-        dontKnow: Number(safeData.timber_satis98),
-        easyToMeet: Number(safeData.timber_satis1),
-        moderateToMeet: Number(safeData.timber_satis2),
-        refuse: Number(safeData.timber_satis99),
+        "1": Number(safeData.timber_satis1),
+        "2": Number(safeData.timber_satis2),
+        "3": Number(safeData.timber_satis3),
+        "98": Number(safeData.timber_satis98),
+        "99": Number(safeData.timber_satis99),
       },
     },
   };
