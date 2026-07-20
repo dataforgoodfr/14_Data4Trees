@@ -1,80 +1,52 @@
-import { useTranslation } from "@shared/i18n";
+import { findLabel } from "@features/indicators/labels";
+
+import type { LabelData } from "@entities/data";
+
+import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
 import type { ChartComponentType } from "../components/chart-component";
 import { PieChartCategorical } from "../components/pie-chart-categorical";
+import { EVOLUTION_COLOR_MAP } from "./constants";
 
 type PieChartProps = {
+  project: string;
+  metadata: LabelData[];
   data: {
-    improvement: number;
-    stable: number;
-    regression: number;
-    dontKnow: number;
-    refuse: number;
+    [key: string]: number;
   };
 };
 
 export const ChartLivingCondition: ChartComponentType<PieChartProps> = ({
   data,
+  metadata,
+  project,
 }) => {
-  const { t } = useTranslation("all4trees");
-  const chartData = [
-    {
-      fill: "var(--chart-1)",
-      name: "improvement",
-      value: data.improvement,
-    },
-    {
-      fill: "var(--chart-5)",
-      name: "stable",
-      value: data.stable,
-    },
-    {
-      fill: "var(--chart-6)",
-      name: "regression",
-      value: data.regression,
-    },
-    {
-      fill: "var(--chart-3)",
-      name: "refuse",
-      value: data.refuse,
-    },
-    {
-      fill: "var(--chart-2)",
-      name: "dontKnow",
-      value: data.dontKnow,
-    },
-  ];
+  const { t } = useTranslation(["common", "all4trees"]);
+  const lang = i18nInstance.language;
 
-  const chartConfig = {
-    dontKnow: {
-      label: t(
-        "indicators.socioEco.sections.economy.livingPerception.dontKnow",
-      ),
-    },
-    improvement: {
-      label: t(
-        "indicators.socioEco.sections.economy.livingPerception.improvement",
-      ),
-    },
-    refuse: {
-      label: t("indicators.socioEco.sections.economy.livingPerception.refuse"),
-    },
-    regression: {
-      label: t(
-        "indicators.socioEco.sections.economy.livingPerception.regression",
-      ),
-    },
-    stable: {
-      label: t("indicators.socioEco.sections.economy.livingPerception.stable"),
-    },
-  } satisfies ChartConfig;
+  const chartData = Object.entries(data).map(([key, value]) => ({
+    fill: EVOLUTION_COLOR_MAP.get(key) || "var(--chart-4)",
+    name: key,
+    value,
+  }));
+
+  const chartConfig = chartData.reduce((acc, item) => {
+    acc[item.name as keyof typeof acc] = {
+      label:
+        findLabel(metadata, project, lang, "evol", item.name) ||
+        t("common:dataManagement.undefined"),
+    };
+    return acc;
+  }, {} as ChartConfig) satisfies ChartConfig;
 
   return (
     <PieChartCategorical
       chartConfig={chartConfig}
       chartData={chartData}
-      title={t("indicators.socioEco.sections.economy.livingPerception.title")}
+      title={t(
+        "all4trees:indicators.socioEco.sections.economy.livingPerception.title",
+      )}
       unit="%"
       withLabel
     />

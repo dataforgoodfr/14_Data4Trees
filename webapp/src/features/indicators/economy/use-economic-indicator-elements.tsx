@@ -6,6 +6,8 @@ import {
 } from "@features/charts/socio-eco";
 import type { SocioEcoData } from "@features/popup/socio-eco";
 
+import type { ExternalData } from "@entities/data";
+
 import { useTranslation } from "@i18n";
 
 import { ICON_SIZE } from "../components/constants";
@@ -15,6 +17,7 @@ import { useFormatEconomicData } from "./format-data";
 
 export const useEconomicIndicatorElements = (
   rawData: SocioEcoData,
+  externalData: ExternalData,
 ): UseIndicatorReturnType => {
   const { t } = useTranslation("all4trees");
   const data = useFormatEconomicData(rawData);
@@ -40,6 +43,8 @@ export const useEconomicIndicatorElements = (
           />
           <ChartLivingCondition
             data={data.economy.livingConditionsPerception}
+            metadata={externalData.hh_label}
+            project={rawData.project}
           />
         </>
       ),
