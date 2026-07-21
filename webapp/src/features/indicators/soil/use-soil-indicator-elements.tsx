@@ -1,6 +1,6 @@
 import { Bug, Gem, Sprout } from "lucide-react";
 
-import { ChartTaxonAbundance } from "@features/charts/components/chart-taxon-abundance";
+import { ChartTaxonAbundance } from "@features/charts";
 import { ChartAquaticErosion } from "@features/charts/soil/ui/chart-aquatic-erosion";
 import { ChartWindErosion } from "@features/charts/soil/ui/chart-wind-erosion";
 import type { UseIndicatorReturnType } from "@features/indicators//components/types";

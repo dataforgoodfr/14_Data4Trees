@@ -1,12 +1,11 @@
 import { ChartLine, HandCoins, Scroll } from "lucide-react";
 
-import {
-  ChartBeneficialPractices,
-  ChartLivingCondition,
-} from "@features/charts/socio-eco";
+import { LabeledBarChart, LabeledPieChart } from "@features/charts";
+import { EVOLUTION_COLOR_MAP } from "@features/charts/socio-eco/constants";
 import type { SocioEcoData } from "@features/popup/socio-eco";
 
 import type { ExternalData } from "@entities/data";
+import { SOCIO_LABEL_FIELDS } from "@entities/socio-eco";
 
 import { useTranslation } from "@i18n";
 
@@ -41,10 +40,15 @@ export const useEconomicIndicatorElements = (
             iconStart={<Scroll size={ICON_SIZE} />}
             value={data.economy.assetsIndex}
           />
-          <ChartLivingCondition
+          <LabeledPieChart
+            colorMap={EVOLUTION_COLOR_MAP}
             data={data.economy.livingConditionsPerception}
+            labelField={SOCIO_LABEL_FIELDS.EVOLUTION}
             metadata={externalData.hh_label}
             project={rawData.project}
+            title={t(
+              "indicators.socioEco.sections.economy.livingPerception.title",
+            )}
           />
         </>
       ),
@@ -54,18 +58,18 @@ export const useEconomicIndicatorElements = (
     },
     {
       children: (
-        <>
-          {/* Not implemented yet, waiting for All4Trees to better define this indicator.
-          <IndicatorRawValue
-            dataName={t(
-              "indicators.socioEco.sections.governance.conflictIndex",
-            )}
-            value={data.governance.conflictIndex}
-          /> */}
-          <ChartBeneficialPractices
-            benef={data.governance.beneficialPractices}
-          />
-        </>
+        <LabeledBarChart
+          benef={data.governance.beneficialPractices}
+          labelField={SOCIO_LABEL_FIELDS.BENEFICIAL_PRACTICES}
+          legendLabel={t(
+            "indicators.socioEco.sections.governance.beneficialPractices.legend",
+          )}
+          metadata={externalData.hh_label}
+          project={rawData.project}
+          title={t(
+            "indicators.socioEco.sections.governance.beneficialPractices.title",
+          )}
+        />
       ),
       identifier: "indicator-governance",
       title: t("indicators.socioEco.sections.governance.title"),
