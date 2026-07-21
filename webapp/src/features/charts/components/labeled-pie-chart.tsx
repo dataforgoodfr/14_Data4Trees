@@ -5,31 +5,33 @@ import type { LabelData } from "@entities/data";
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
-import type { ChartComponentType } from "../components/chart-component";
-import {
-  PieChartCategorical,
-  renderLabel,
-} from "../components/pie-chart-categorical";
-import { SATISFACTION_COLOR_MAP } from "./constants";
+import type { ChartComponentType } from "./chart-component";
+import { PieChartCategorical, renderLabel } from "./pie-chart-categorical";
 
-type PieChartProps = {
+type LabeledPieChartProps = {
   project: string;
   metadata: LabelData[];
   data: {
     [key: string]: number;
   };
+  title: string;
+  labelField: string;
+  colorMap: Map<string, string>;
 };
 
-export const ChartTimberNeeds: ChartComponentType<PieChartProps> = ({
+export const LabeledPieChart: ChartComponentType<LabeledPieChartProps> = ({
   data,
   metadata,
   project,
+  title,
+  colorMap,
+  labelField,
 }) => {
-  const { t } = useTranslation(["common", "all4trees"]);
+  const { t } = useTranslation("common");
   const lang = i18nInstance.language;
 
   const chartData = Object.entries(data).map(([key, value]) => ({
-    fill: SATISFACTION_COLOR_MAP.get(key) || "var(--chart-4)",
+    fill: colorMap.get(key) || "var(--chart-4)",
     name: key,
     value,
   }));
@@ -37,8 +39,8 @@ export const ChartTimberNeeds: ChartComponentType<PieChartProps> = ({
   const chartConfig = chartData.reduce((acc, item) => {
     acc[item.name as keyof typeof acc] = {
       label:
-        findLabel(metadata, project, lang, "satis", item.name) ||
-        t("common:dataManagement.undefined"),
+        findLabel(metadata, project, lang, labelField, item.name) ||
+        t("dataManagement.undefined"),
     };
     return acc;
   }, {} as ChartConfig) satisfies ChartConfig;
@@ -47,7 +49,7 @@ export const ChartTimberNeeds: ChartComponentType<PieChartProps> = ({
     <PieChartCategorical
       chartConfig={chartConfig}
       chartData={chartData}
-      title={t("all4trees:indicators.socioEco.sections.wood.timberNeeds.title")}
+      title={title}
       unit="%"
       withLabel={(props) =>
         renderLabel({ ...props, chartConfig, linebreak: 18 })
@@ -56,4 +58,4 @@ export const ChartTimberNeeds: ChartComponentType<PieChartProps> = ({
   );
 };
 
-ChartTimberNeeds.isChartComponent = true;
+LabeledPieChart.isChartComponent = true;
