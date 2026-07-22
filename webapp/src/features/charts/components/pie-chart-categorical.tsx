@@ -7,8 +7,6 @@ import { lineBreakLabel } from "../utils";
 import type { ChartComponentType } from "./chart-component";
 import { ChartComponent } from "./chart-component";
 
-export const description = "A pie chart with a label";
-
 export type PieChartCategoricalProps = {
   title: string;
   chartData: Array<{ name: string; value: number; fill: string }>;
