@@ -48,6 +48,7 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
           date: formatDate(new Date()),
           ns: "all4trees",
         })}
+        ecos={ecos}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
           findLabel(
@@ -58,7 +59,6 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
             Number(data.loc2),
           ) || t("dataManagement.undefined", { ns: "common" })
         }
-        ecos={ecos}
         title={title}
         {...headerProps}
       />
