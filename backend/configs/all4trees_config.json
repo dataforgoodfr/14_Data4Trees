@@ -166,7 +166,7 @@
         "lean_months": "list_aggregate(flatten(list(lean)), 'histogram')",
         "food_diversity": "list_aggregate(flatten(list(food_cons)), 'histogram')",
         "food_diversity_score": "avg(list_unique(food_cons) / int(food_cons_max) * 10)",
-        "food_self_suff_score": "avg(ifnull(list_unique(food_self), 0) / list_unique(food_cons) * 100)",
+        "food_self_suff_score": "avg( ((0 if list_contains(food_self, '<NA>') else list_unique(food_self)) / list_unique(food_cons) * 100) if list_contains(food_cons, '<NA>') != 'true')",
         "living_cond_perception": "histogram(cond_evol)",
         "revenue_change": "avg(0 - inc_dif if inc_evol = '2' else ifnull(inc_dif, 0))",
         "assets_idx_raw": "avg( ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + ifnull(list_unique(ass),0) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + ( int( land_own ) + int( land_titl ) + int( land_size ) if int(land_own) > 0 else 0) ) if ( ( int(hous_typ) + int(hous_size)) * int(hous_own) + list_unique(ass) + int(lvst_yn) * ( int(lvst_s) + int(lvst_l) ) + int( land_own ) + int( land_titl ) + int( land_size ) ) <= int(ass_tot_max) )",
