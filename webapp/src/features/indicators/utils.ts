@@ -27,7 +27,7 @@ export const useFormatterWithUnit = () => {
   function formatWithUnit(
     value: number | string | null | undefined,
     unit: Unit,
-  ): string | null {
+  ): string {
     const noDataStr = t("dataManagement.noData", { ns: "common" });
     if (value == null || value === noDataStr) {
       return noDataStr;

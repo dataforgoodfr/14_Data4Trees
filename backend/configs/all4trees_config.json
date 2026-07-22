@@ -163,6 +163,7 @@
         "timber_satis": "histogram(timb_satis if timb_yn = '1')",
         "timber_satis_tot": "count(1 if timb_yn = '1')",
         "lean_period": "avg(len(lean) if lean_yn = 1)",
+        "lean_months": "list_aggregate(flatten(list(lean)), 'histogram')",
         "food_diversity": "list_aggregate(flatten(list(food_cons)), 'histogram')",
         "food_diversity_score": "avg(list_unique(food_cons) / int(food_cons_max) * 10)",
         "food_self_suff_score": "avg(ifnull(list_unique(food_self), 0) / list_unique(food_cons) * 100)",

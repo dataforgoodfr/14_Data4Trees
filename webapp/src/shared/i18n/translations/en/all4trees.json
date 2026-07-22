@@ -105,7 +105,11 @@
             "title": "Food groups consumed"
           },
           "diversityScore": "Dietary diversity score",
-          "leanPeriod": "Duration of the lean season",
+          "lean": {
+            "duration": "Mean duration of the lean season",
+            "legend": "of households",
+            "title": "Lean period"
+          },
           "title": "Food resources"
         },
         "governance": {

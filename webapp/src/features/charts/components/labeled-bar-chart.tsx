@@ -1,3 +1,5 @@
+import type { PropsWithChildren } from "react";
+
 import { findLabel } from "@features/indicators/labels";
 
 import type { LabelData } from "@entities/data";
@@ -11,7 +13,7 @@ type Data = {
   [key: string]: number;
 };
 
-type LabeledBarChartProps = {
+type LabeledBarChartProps = PropsWithChildren<{
   benef: Data;
   temoin?: Data;
   metadata: LabelData[];
@@ -19,7 +21,8 @@ type LabeledBarChartProps = {
   labelField: string;
   title: string;
   legendLabel: string;
-};
+  description?: string;
+}>;
 
 export const LabeledBarChart: ChartComponentType<LabeledBarChartProps> = ({
   benef,
@@ -29,6 +32,8 @@ export const LabeledBarChart: ChartComponentType<LabeledBarChartProps> = ({
   labelField,
   legendLabel,
   title,
+  description,
+  children,
 }) => {
   const { t } = useTranslation("common");
   const lang = i18nInstance.language;
@@ -44,11 +49,14 @@ export const LabeledBarChart: ChartComponentType<LabeledBarChartProps> = ({
   return (
     <BarCharWithBenefAndControl
       chartData={chartData}
+      description={description}
       legendLabel={legendLabel}
       title={title}
       unit="%"
       withTemoin={!!temoin}
-    />
+    >
+      {children}
+    </BarCharWithBenefAndControl>
   );
 };
 

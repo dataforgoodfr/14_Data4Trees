@@ -70,31 +70,42 @@ export const useSocialIndicatorElements = (
     {
       children: (
         <>
-          <IndicatorRawValue
-            dataName={t("indicators.socioEco.sections.food.diversityScore")}
-            iconStart={<Soup size={ICON_SIZE} />}
-            value={data.food.foodDiversityScore}
-          />
           <LabeledBarChart
             benef={data.food.foodDiversity}
-            labelField={SOCIO_LABEL_FIELDS.FOOD_CONS}
+            labelField={SOCIO_LABEL_FIELDS.FOOD_CONSOMMATION}
             legendLabel={t(
               "indicators.socioEco.sections.food.diversity.legend",
             )}
             metadata={externalData.hh_label}
             project={rawData.project}
             title={t("indicators.socioEco.sections.food.diversity.title")}
-          />
+          >
+            <IndicatorRawValue
+              dataName={t("indicators.socioEco.sections.food.diversityScore")}
+              iconStart={<Soup size={ICON_SIZE} />}
+              value={data.food.foodDiversityScore}
+            />
+          </LabeledBarChart>
           <IndicatorRawValue
             dataName={t("indicators.socioEco.sections.food.autoConso")}
             iconStart={<Wheat size={ICON_SIZE} />}
             value={data.food.foodSelfSufficiency}
           />
-          <IndicatorRawValue
-            dataName={t("indicators.socioEco.sections.food.leanPeriod")}
-            iconStart={<Calendar size={ICON_SIZE} />}
-            value={data.food.leanPeriod}
-          />
+          <LabeledBarChart
+            benef={data.food.leanMonths}
+            description={data.food.leanPeriod}
+            labelField={SOCIO_LABEL_FIELDS.LEAN_MONTHS}
+            legendLabel={t("indicators.socioEco.sections.food.lean.legend")}
+            metadata={externalData.hh_label}
+            project={rawData.project}
+            title={t("indicators.socioEco.sections.food.lean.title")}
+          >
+            <IndicatorRawValue
+              dataName={t("indicators.socioEco.sections.food.lean.duration")}
+              iconStart={<Calendar size={ICON_SIZE} />}
+              value={data.food.leanPeriod}
+            />
+          </LabeledBarChart>
         </>
       ),
       identifier: "indicator-food",
