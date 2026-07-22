@@ -47,7 +47,7 @@ export const useFormatBioInventoryData = (
     area: `${safeData.samp_area} ${
       findLabel(
         metadata,
-        data.proj,
+        data.project,
         lang,
         "unit",
         Number(safeData.samp_unit),
@@ -57,12 +57,12 @@ export const useFormatBioInventoryData = (
     relative_abundance: taxons_relative_abundance,
     richness: formatWithUnit(safeData.richness, UNITS.speciesInventoried),
     taxon:
-      findLabel(metadata, data.proj, lang, "tax", Number(safeData.taxon)) ||
+      findLabel(metadata, data.project, lang, "tax", Number(safeData.taxon)) ||
       t("dataManagement.noUnit") ||
       safeData.taxon,
     total_population: safeData.taxons_total_pop,
     type:
-      findLabel(metadata, data.proj, lang, "meth", Number(safeData.type)) ||
+      findLabel(metadata, data.project, lang, "meth", Number(safeData.type)) ||
       safeData.type,
   };
 };

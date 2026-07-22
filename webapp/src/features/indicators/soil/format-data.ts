@@ -35,7 +35,8 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     soil_fauna_density,
     soil_surface_fauna_diversity,
     soil_surface_fauna_density,
-    soil_eros_rainfall_and_wind,
+    soil_eros_rainfall,
+    soil_eros_wind,
     soil_eros_stability,
     soil_eros_water_infiltration,
     ...safeData
@@ -74,13 +75,13 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
 
   return {
     ...safeData,
-    soil_eros_rainfall: Number(soil_eros_rainfall_and_wind.split("-")[0]),
+    soil_eros_rainfall: soil_eros_rainfall,
     soil_eros_stability: soil_eros_stability,
     soil_eros_water_infiltration:
       String(soil_eros_water_infiltration) === t("dataManagement.noData")
         ? soil_eros_water_infiltration
         : computeScore(soil_eros_water_infiltration),
-    soil_eros_wind: Number(soil_eros_rainfall_and_wind.split("-")[1]),
+    soil_eros_wind: soil_eros_wind,
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(
       soil_fauna_density,

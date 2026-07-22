@@ -52,12 +52,12 @@ export const useBioInventoryIndicatorElements = (
           <ChartTaxonAbundance
             data={data.relative_abundance}
             metadata={externalData.bio_label}
-            project={rawData.proj}
+            project={rawData.project}
           />
           <ChartSpeciesStatus
             data={data.relative_abundance}
             metadata={externalData.bio_sp}
-            project={rawData.proj}
+            project={rawData.project}
           />
         </>
       ),

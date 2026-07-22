@@ -52,12 +52,12 @@ export const ForestInventoryPopupContent: FC<
   };
 
   const title = t("popup.forestInventory.title", {
-    id: data.cod,
+    id: data.code,
     ns: "all4trees",
   });
 
   const subtitle =
-    findLabel(labelData, data.project, lang, "loc2", data.for) ||
+    findLabel(labelData, data.project, lang, "loc2", data.loc2) ||
     t("common:dataManagement.undefined");
 
   const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${

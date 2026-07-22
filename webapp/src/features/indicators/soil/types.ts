@@ -4,7 +4,8 @@
 
 export type SoilData = {
   soil_structure_idx: number;
-  soil_eros_rainfall_and_wind: string;
+  soil_eros_rainfall: number;
+  soil_eros_wind: number;
   soil_eros_cover: number;
   soil_eros_slope: number;
   soil_eros_stability: number;
