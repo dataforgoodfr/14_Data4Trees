@@ -66,7 +66,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.socioEco.date", { date: formatDate(new Date()) })}
+        date={t("popup.common.date", { date: formatDate(new Date()) })}
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         subtitle={t("popup.socioEco.subtitleCount", {
           count: data.household_nb,

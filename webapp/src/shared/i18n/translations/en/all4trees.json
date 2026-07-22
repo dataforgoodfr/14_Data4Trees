@@ -68,9 +68,9 @@
     },
     "bioinventory": {
       "sampArea": "Sampling area",
-      "status_abundance": "Relative abundance by extinction threat",
+      "status_abundance": "Relative abundance by UICN status",
       "taxon": "Target taxon",
-      "title": "Fauna inventory",
+      "title": "Biodiversity inventory",
       "type": "Measures type"
     },
     "common": {
@@ -223,17 +223,17 @@
     "villages": "Villages"
   },
   "popup": {
+    "common": {
+      "date": "Site survey date : {{ date }}",
+      "ecos": "Ecosystem"
+    },
     "bioInventory": {
-      "date": "Survey date: {{ date }}",
-      "title": "Plot n°{{ id }}"
+      "title": "Site n°{{ id }}"
     },
     "forestInventory": {
-      "date": "Site survey date : {{ date }}",
-      "ecos": "Ecosystem",
       "title": "Plot n°{{ id }}"
     },
     "socioEco": {
-      "date": "Survey date: {{ date }}",
       "subtitleCount": "",
       "subtitleCount_one": "{{ count }} household surveyed",
       "subtitleCount_other": "{{ count }} households surveyed",
