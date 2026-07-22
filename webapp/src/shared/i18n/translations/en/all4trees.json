@@ -223,12 +223,12 @@
     "villages": "Villages"
   },
   "popup": {
+    "bioInventory": {
+      "title": "Site n°{{ id }}"
+    },
     "common": {
       "date": "Site survey date : {{ date }}",
       "ecos": "Ecosystem"
-    },
-    "bioInventory": {
-      "title": "Site n°{{ id }}"
     },
     "forestInventory": {
       "title": "Plot n°{{ id }}"
