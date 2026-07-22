@@ -60,7 +60,7 @@ export const ForestInventoryPopupContent: FC<
     findLabel(labelData, data.project, lang, "loc2", data.loc2) ||
     t("common:dataManagement.undefined");
 
-  const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${
+  const ecos = `${t("all4trees:popup.common.ecos")}: ${
     findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
     t("dataManagement.undefined", { ns: "common" })
   }`;
@@ -68,7 +68,7 @@ export const ForestInventoryPopupContent: FC<
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.forestInventory.date", {
+        date={t("popup.common.date", {
           date: formatDate(new Date()),
           ns: "all4trees",
         })}
