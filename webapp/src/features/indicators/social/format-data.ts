@@ -30,6 +30,33 @@ const indicatorKeys: NumericKeys<SocialData>[] = [
   "food_self_suff_score",
 ];
 
+// Lean months order mapping
+const monthOrder: Record<string, number> = {
+  apr: 3,
+  aug: 7,
+  dec: 11,
+  feb: 1,
+  jan: 0,
+  jull: 6,
+  jun: 5,
+  mar: 2,
+  may: 4,
+  nov: 10,
+  oct: 9,
+  sep: 8,
+};
+
+export const sortByMonth = (monthDict: Record<string, number>) => {
+  return Object.keys(monthDict)
+    .sort((a, b) => monthOrder[a] - monthOrder[b])
+    .reduce(
+      (acc, key) => {
+        acc[key] = monthDict[key];
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+};
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
@@ -53,6 +80,9 @@ export const useFormatSocialData = (data: SocioEcoData) => {
     data.household_nb,
     "0",
   );
+  safeData.lean_months = sortByMonth(
+    convertDictToPercentage(safeData.lean_months, data.household_nb, "0"),
+  );
 
   return {
     food: {
@@ -62,6 +92,7 @@ export const useFormatSocialData = (data: SocioEcoData) => {
         safeData.food_self_suff_score,
         UNITS.percentFoodRequirements,
       ),
+      leanMonths: safeData.lean_months,
       leanPeriod: formatWithUnit(safeData.lean_period, UNITS.monthPerYear),
     },
     wood: {
@@ -74,19 +105,19 @@ export const useFormatSocialData = (data: SocioEcoData) => {
         UNITS.m3PerHabPerYear,
       ),
       firewoodNeeds: {
-        difficultToMeet: Number(safeData.firewood_satis3),
-        dontKnow: Number(safeData.firewood_satis98),
-        easyToMeet: Number(safeData.firewood_satis1),
-        moderateToMeet: Number(safeData.firewood_satis2),
-        refuse: Number(safeData.firewood_satis99),
+        "1": Number(safeData.firewood_satis1),
+        "2": Number(safeData.firewood_satis2),
+        "3": Number(safeData.firewood_satis3),
+        "98": Number(safeData.firewood_satis98),
+        "99": Number(safeData.firewood_satis99),
       },
       fuelSources: safeData.fuel_sources,
       timberNeeds: {
-        difficultToMeet: Number(safeData.timber_satis3),
-        dontKnow: Number(safeData.timber_satis98),
-        easyToMeet: Number(safeData.timber_satis1),
-        moderateToMeet: Number(safeData.timber_satis2),
-        refuse: Number(safeData.timber_satis99),
+        "1": Number(safeData.timber_satis1),
+        "2": Number(safeData.timber_satis2),
+        "3": Number(safeData.timber_satis3),
+        "98": Number(safeData.timber_satis98),
+        "99": Number(safeData.timber_satis99),
       },
     },
   };

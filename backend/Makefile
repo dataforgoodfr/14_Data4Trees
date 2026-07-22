@@ -34,14 +34,13 @@ catalog:
 	coordo add foreignkey inv_bio.year bio_pop.year --package catalog/inventaire_bio
 
 	# All 4 Trees - Enquête ménage
-	coordo add kobotoolbox data/all4trees/enquete/20260422_EnqueteMenage_DonneesK.csv --form data/all4trees/enquete/20260519_EnqueteMenage_QuestionnaireK.xlsx --package catalog/enquete
-	coordo add file data/all4trees/enquete/20260422_EnqueteMenage_DonneesExternes.xlsx --package catalog/enquete
+	coordo add kobotoolbox data/all4trees/enquete/20260709_EnqueteMenage_DonneesK.xlsx --form data/all4trees/enquete/20260519_EnqueteMenage_QuestionnaireK.xlsx --package catalog/enquete
+	coordo add file data/all4trees/enquete/20260713_EnqueteMenage_DonneesExternes.xlsx --package catalog/enquete
 
-	coordo add foreignkey enquete_menage.proj enq_samp.proj --package catalog/enquete
-	coordo add foreignkey enquete_menage.typ enq_pop.typ --package catalog/enquete
-	coordo add foreignkey enquete_menage.loc2 enq_gps.loc2 --package catalog/enquete
-	coordo add foreignkey enquete_menage.fw_cod enq_fw.fw_cod --package catalog/enquete
-	coordo add foreignkey enquete_menage.coal_unit enq_coal.coal_unit --package catalog/enquete
+	coordo add foreignkey enquete_menage.proj hh_samp.proj --package catalog/enquete
+	coordo add foreignkey enquete_menage.loc2 hh_gps.loc2 --package catalog/enquete
+	coordo add foreignkey enquete_menage.fw_cod hh_fw.fw_cod --package catalog/enquete
+	coordo add foreignkey enquete_menage.coal_unit hh_coal.coal_unit --package catalog/enquete
 
 	# Seed - Survey
 	coordo add file data/seed/survey.zip --package catalog/seed

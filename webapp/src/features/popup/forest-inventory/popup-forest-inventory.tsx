@@ -7,8 +7,8 @@ import { useBiodiversityIndicatorElements } from "@features/indicators/biodivers
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
+import { findLabel } from "@features/indicators/labels";
 import { useSoilIndicatorElements } from "@features/indicators/soil";
-import { findLabel } from "@features/indicators/utils";
 
 import { i18nInstance } from "@shared/i18n";
 import { formatDate } from "@shared/lib/utils";

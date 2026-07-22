@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
+import { findLabel } from "@features/indicators/labels";
 import {
-  findLabel,
   formatTaxonAbundance,
   preciseNumericIndicators,
   UNITS,

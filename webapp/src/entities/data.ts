@@ -1,6 +1,7 @@
 export type ExternalData = {
   for_label: LabelData[];
   bio_label: LabelData[];
+  hh_label: LabelData[];
   bio_sp: BioSpeciesData[];
   for_mf_tax1: any[];
   for_mf_tax2: any[];

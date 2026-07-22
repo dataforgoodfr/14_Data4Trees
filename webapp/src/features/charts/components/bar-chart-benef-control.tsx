@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { useTranslation } from "@shared/i18n";
@@ -10,14 +11,15 @@ import {
 import type { ChartComponentType } from "./chart-component";
 import { ChartComponent } from "./chart-component";
 
-type BarChartProps = {
+type BarChartProps = PropsWithChildren<{
   title: string;
   chartData: Array<{ indicator: string; benef: unknown; temoin?: unknown }>;
   legendLabel: string;
   unit?: string;
   withTemoin?: boolean;
   layout?: { chartHeight: number; chartXAxisHeight: number };
-};
+  description?: string;
+}>;
 
 export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   title,
@@ -25,6 +27,8 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   legendLabel,
   unit = "",
   withTemoin = false,
+  description,
+  children,
 }) => {
   const { t } = useTranslation("all4trees");
   const chartConfig = {
@@ -56,10 +60,14 @@ export const BarCharWithBenefAndControl: ChartComponentType<BarChartProps> = ({
   };
 
   return (
-    <ChartComponent title={title}>
+    <ChartComponent
+      description={description}
+      title={title}
+    >
+      {children}
       <ChartContainer
         // Style: Extend the width to the container, but enforce the height for XAxis alignment
-        className="mx-auto h-110 max-h-110 w-full max-w-full"
+        className="mx-auto h-110 max-h-110 w-full max-w-full my-5"
         config={chartConfig}
       >
         <BarChart

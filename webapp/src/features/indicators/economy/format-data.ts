@@ -46,14 +46,12 @@ export const useFormatEconomicData = (data: SocioEcoData) => {
     economy: {
       assetsIndex: `${safeData.assets_idx}/10`,
       incomeSourceNb: safeData.nb_income_sources,
-      livingConditionsPerception: {
-        dontKnow: safeData.living_cond_perception[HISTOGRAM_KEYS.DONT_KNOW],
-        improvement:
-          safeData.living_cond_perception[HISTOGRAM_KEYS.IMPROVEMENT],
-        refuse: safeData.living_cond_perception[HISTOGRAM_KEYS.REFUSE],
-        regression: safeData.living_cond_perception[HISTOGRAM_KEYS.REGRESSION],
-        stable: safeData.living_cond_perception[HISTOGRAM_KEYS.STABLE],
-      },
+      livingConditionsPerception: Object.fromEntries(
+        Object.entries(HISTOGRAM_KEYS).map(([_, value]) => [
+          value,
+          safeData.living_cond_perception[value],
+        ]),
+      ),
       revenueChange: `${safeData.revenue_change} %`,
     },
     governance: {

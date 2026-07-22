@@ -93,11 +93,6 @@
           "assetsIndex": "Material assets index",
           "incomeSourceNb": "Number of sources of income per household",
           "livingPerception": {
-            "dontKnow": "Don't know",
-            "improvement": "Improvement",
-            "refuse": "Refuse to respond",
-            "regression": "Regression",
-            "stable": "No change",
             "title": "Perception of changes in living conditions"
           },
           "revenueChange": "Revenue changes",
@@ -106,30 +101,20 @@
         "food": {
           "autoConso": "Food self-sufficiency",
           "diversity": {
-            "cereals": "Cereals",
-            "dairy": "Dairy",
-            "eggs": "Eggs",
-            "fish": "Fish",
-            "fruits": "Fruits",
             "legend": "of households consume this food group",
-            "meat": "Meat",
-            "roots": "Roots",
-            "seeds": "Seeds",
-            "title": "Food groups consumed",
-            "vegetables": "Vegetables"
+            "title": "Food groups consumed"
           },
           "diversityScore": "Dietary diversity score",
-          "leanPeriod": "Duration of the lean season",
+          "lean": {
+            "duration": "Mean duration of the lean season",
+            "legend": "of households",
+            "title": "Lean period"
+          },
           "title": "Food resources"
         },
         "governance": {
           "beneficialPractices": {
             "legend": "of households adopted this practice",
-            "pract1": "Tree planting",
-            "pract2": "Contour farming",
-            "pract3": "Intercropping",
-            "pract4": "Crop rotation",
-            "pract5": "Composting",
             "title": "Adoption of good practices"
           },
           "conflictIndex": "Conflict Index",
@@ -142,22 +127,8 @@
             "title": "Satisfaction of wood energy needs"
           },
           "energySources": {
-            "animalWaste": "Animal waste",
-            "boughtWood": "Bought wood",
-            "coal": "Coal",
-            "collectedWood": "Collected wood",
-            "gas": "Gas",
             "legend": "of households use the resource",
-            "organicWaste": "Organic waste",
-            "other": "Other",
-            "recWood": "Received wood",
             "title": "Energy sources usage"
-          },
-          "needs": {
-            "difficultToMeet": "Difficult to meet",
-            "dontKnow": "Don't know",
-            "easyToMeet": "Easy to meet",
-            "moderateToMeet": "Moderate to meet"
           },
           "timberNeeds": {
             "title": "Satisfaction of timber needs"
