@@ -21,7 +21,7 @@ export function MapSidebar() {
 
   return (
     <div className="flex flex-col h-full">
-      <h3 className="px-4 py-2 font-semibold flex flex-row items-center flex-start gap-sm">
+      <h3 className="px-4 py-2 font-semibold flex flex-row items-center flex-start gap-2">
         <ListFilterIcon size={18} />
         {t("filters.sidebarLayout.title")}
       </h3>
@@ -29,7 +29,7 @@ export function MapSidebar() {
       <Separator />
 
       <GridSelector
-        className="mx-sm my-md"
+        className="mx-2 my-3"
         onChange={(value) => setSelectedFilterKind(value)}
         options={[
           {
@@ -45,7 +45,7 @@ export function MapSidebar() {
       />
 
       <div
-        className="px-4 mb-md overflow-y-scroll custom-scrollbar flex-1"
+        className="px-4 mb-3 overflow-y-scroll custom-scrollbar flex-1"
         style={{
           "--scrollbar-thumb": "var(--info-foreground)",
           "--scrollbar-track": "var(--background)",

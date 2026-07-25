@@ -75,7 +75,7 @@ export const ModeToggle: FC = () => {
         <DropdownMenuSubContent className="bg-background">
           {colorModes.map((config) => (
             <DropdownMenuItem
-              className="gap-sm"
+              className="gap-2"
               key={config.identifier}
               onClick={() => setTheme(config.identifier)}
             >

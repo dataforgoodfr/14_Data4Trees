@@ -13,8 +13,8 @@ export const IndicatorDate: FC<IndicatorDateProps> = ({ date }) => {
   const { t } = useTranslation("all4trees");
 
   return (
-    <div className="flex flex-row items-center justify-between gap-sm flex-1">
-      <div className="flex flex-row items-center gap-xs">
+    <div className="flex flex-row items-center justify-between gap-2 flex-1">
+      <div className="flex flex-row items-center gap-1">
         <CalendarIcon size={ICON_SIZE} />
         <p> {t("indicators.common.date")}</p>
       </div>

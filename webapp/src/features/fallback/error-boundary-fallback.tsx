@@ -30,7 +30,7 @@ export function ErrorBoundaryFallback({
   return (
     <>
       <Alert
-        className="w-full rounded-t-md rounded-b-none border-none text-xl py-lg bg-rose-950"
+        className="w-full rounded-t-md rounded-b-none border-none text-xl py-4 bg-rose-950"
         variant="destructive"
       >
         <TriangleAlert size={ICON_SIZE_HEADER} />

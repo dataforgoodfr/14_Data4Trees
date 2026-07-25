@@ -29,7 +29,7 @@ export const Header: FC<HeaderProps> = ({ logoSrc, hasDashboard }) => {
   return (
     <header className="bg-background border-b border-border md:p-3 p-2 relative z-40 flex-0">
       <div className="mx-auto max-w-screen-2xl">
-        <div className="flex items-center justify-between gap-md">
+        <div className="flex items-center justify-between gap-3">
           <img
             alt="Logo"
             className="md:h-12 h-8"

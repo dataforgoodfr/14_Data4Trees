@@ -24,7 +24,7 @@ const ICON_SIZE = 18;
 
 export const renderAnchor: LayerControlRenderAnchor = () => {
   const container = document.createElement("div");
-  container.className = "cursor-pointer p-sm";
+  container.className = "cursor-pointer p-2";
   const root = createRoot(container);
   root.render(<LayersIcon size={ICON_SIZE} />);
   return container;
@@ -134,7 +134,7 @@ function LayerRow({
       key={key}
       orientation="horizontal"
     >
-      <div className="flex items-center justify-center w-2xl h-2xl">
+      <div className="flex items-center justify-center w-6 h-6">
         {renderIcon?.(isChecked)}
         <Activity mode={renderIcon ? "hidden" : "visible"}>
           <Checkbox
@@ -161,7 +161,7 @@ export const renderLayerRow: LayerControlRenderLayerRow = ({
 }) => {
   const container = document.createElement("div");
   container.className =
-    "cursor-pointer px-sm py-xs flex flex-row gap-sm mb-xs w-full rounded-sm hover:bg-accent";
+    "cursor-pointer px-2 py-1 flex flex-row gap-2 mb-1 w-full rounded-sm hover:bg-accent";
   const root = createRoot(container);
   root.render(
     <LayerRow

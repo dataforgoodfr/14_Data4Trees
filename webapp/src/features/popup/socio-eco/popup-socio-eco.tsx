@@ -76,7 +76,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
       />
 
       <GridSelector
-        className="m-sm text-base"
+        className="m-2 text-base"
         onChange={(value) => setSelectedTab(value as TabKind)}
         options={[
           {
