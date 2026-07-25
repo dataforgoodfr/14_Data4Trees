@@ -91,6 +91,8 @@
   --destructive: #dc2626;
   --info: var(--custom-color-blue-light);
   --info-foreground: var(--custom-color-blue-dark);
+  --success: rgb(237, 247, 237);
+  --success-foreground: #2e7d32;
 
   --border: rgba(0, 0, 0, 0.15);
   --input: #ffffff;
@@ -135,6 +137,8 @@
   --destructive: #ef4444;
   --info: var(--custom-color-blue-dark);
   --info-foreground: var(--custom-color-blue-light);
+  --success: rgb(12, 19, 13);
+  --success-foreground: #66bb6a;
 
   --border: rgba(255, 255, 255, 0.15);
   --input: rgba(255, 255, 255, 0.05);

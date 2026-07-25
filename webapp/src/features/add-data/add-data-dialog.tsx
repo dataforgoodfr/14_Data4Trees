@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { useTranslation } from "@i18n";
 
-import { Alert, AlertDescription } from "@ui/alert";
+import { Alert, AlertAction, AlertDescription } from "@ui/alert";
 import { Button } from "@ui/button";
 import {
   Dialog,
@@ -147,7 +147,7 @@ export const AddDataDialog: FC<AddDataDialogProps> = ({
           <div className="grid gap-3">
             <Label htmlFor="add-data-file">{t("addData.field.file")}</Label>
             <Input
-              accept={ACCEPTED_EXTENSIONS_BY_KIND[kind]}
+              accept={ACCEPTED_EXTENSIONS_BY_KIND[kind].join(",")}
               className="hover:cursor-pointer"
               id="add-data-file"
               onChange={(event) => setFile(event.target.files?.[0] ?? null)}
@@ -170,11 +170,20 @@ export const AddDataDialog: FC<AddDataDialogProps> = ({
           )}
 
           {isSuccess && (
-            <Alert>
+            <Alert variant="success">
               <CheckCircle2 className="h-4 w-4" />
               <AlertDescription style={{ "--tw-translate-y": 0 }}>
                 {t("addData.success")}
               </AlertDescription>
+              <AlertAction>
+                <Button
+                  onClick={() => window.location.reload()}
+                  size="sm"
+                  variant="default"
+                >
+                  {t("addData.refreshData")}
+                </Button>
+              </AlertAction>
             </Alert>
           )}
 

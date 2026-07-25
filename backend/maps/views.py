@@ -109,7 +109,7 @@ def remove_foreign_key_view(request):
 def get_map(user):
     user_map = copy(map)
     filter = ''
-    if user.is_authenticated:
+    if user.is_authenticated and bool(user.project):
         project = user.project
         if (project.lower() != ADMIN_PROJECT):
             filter = f"proj = '{project}' or conf = 1"

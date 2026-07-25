@@ -51,6 +51,7 @@ export const useAddData = () => {
     try {
       await api.appendData(formData);
       setFile(null);
+      setForm("");
       setIsSuccess(true);
     } catch {
       setError("generic");

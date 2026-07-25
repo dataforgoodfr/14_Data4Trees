@@ -15,6 +15,17 @@ export const RESOURCE_TYPE_BY_KIND = {
 // Accepted upload extensions per kind (coordo's file / kobotoolbox loaders).
 // Form data is the multi-sheet KoboToolbox answers workbook (.xlsx).
 export const ACCEPTED_EXTENSIONS_BY_KIND = {
-  [RESOURCE_KINDS.ExternalData]: ".csv,.xls,.xlsx",
-  [RESOURCE_KINDS.FormData]: ".xlsx",
+  [RESOURCE_KINDS.ExternalData]: [
+    ".csv",
+    ".tsv",
+    ".tab",
+    ".xlsx",
+    ".xls",
+    ".xlsm",
+    ".xlsb",
+    ".odf",
+    ".ods",
+    ".odt",
+  ],
+  [RESOURCE_KINDS.FormData]: [".csv", ".xlsx"],
 } as const;

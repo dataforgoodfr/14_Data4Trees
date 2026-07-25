@@ -22,8 +22,12 @@ export const AppRouterAll4Trees = () => {
         hasDashboard: true,
         layerOptions: [
           {
-            translation: t("filters.categories.actions.forestInventary"),
-            value: LAYERS.INVENTARY,
+            translation: t("filters.categories.actions.forestInventory"),
+            value: LAYERS.INVENTORY_FOR,
+          },
+          {
+            translation: t("filters.categories.actions.treeDiversity"),
+            value: LAYERS.INVENTORY_BIO,
           },
           {
             translation: t("filters.categories.actions.socioEco"),

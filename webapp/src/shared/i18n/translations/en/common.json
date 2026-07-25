@@ -4,26 +4,27 @@
       "pending": "Uploading...",
       "submit": "Add data"
     },
-    "description": "Upload a file to add data to a map layer.",
+    "description": "Upload a file to add data to the map.",
     "error": {
       "generic": "Upload failed. Please try again.",
       "missingFile": "Please choose a file to upload.",
-      "missingForm": "Please select a layer to update."
+      "missingForm": "Please select a data source to update."
     },
     "field": {
       "file": "File to upload",
-      "form": "Layer / Form to update",
-      "formPlaceholder": "Select a layer",
+      "form": "Data source to update",
+      "formPlaceholder": "Select a data source",
       "kind": "Kind of resource"
     },
     "hint": {
       "externalData": "The file name must match the target resource (e.g. \"for_dw.csv\"); Excel sheets are matched by sheet name.",
-      "formData": "Upload the KoboToolbox answers workbook (e.g. \"…DonneesK.xlsx\"). Rows are appended to the layer's resources."
+      "formData": "Upload the KoboToolbox answers workbook (e.g. \"…DonneesK.xlsx\"). Rows are appended to the data source."
     },
     "kind": {
       "externalData": "External data",
       "formData": "Form data"
     },
+    "refreshData": "Reload",
     "success": "Data added successfully.",
     "title": "Add data"
   },
