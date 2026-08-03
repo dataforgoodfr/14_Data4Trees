@@ -58,6 +58,8 @@
   --color-destructive: var(--destructive);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
 
   --color-border: var(--border);
   --color-input: var(--input);
