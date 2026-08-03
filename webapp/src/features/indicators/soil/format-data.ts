@@ -9,6 +9,8 @@ import {
 } from "@features/indicators/utils";
 import type { ForestInventoryData } from "@features/popup/forest-inventory";
 
+import type { ExternalData } from "@entities/data";
+
 import type { NumericKeys } from "@shared/types";
 
 import type { SoilData } from "./types";
@@ -24,7 +26,10 @@ const indicatorsToPreciseWithFallBack: NumericKeys<SoilData>[] = [
 /**
  * Return data in a convenient way for UI rendering, handling units and fixing
  */
-export const useFormatSoilData = (data: ForestInventoryData) => {
+export const useFormatSoilData = (
+  data: ForestInventoryData,
+  externalData: ExternalData,
+) => {
   const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
 
@@ -38,6 +43,8 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     soil_eros_wind,
     soil_eros_stability,
     soil_eros_water_infiltration,
+    soil_eros_slope,
+    soil_eros_cover,
     ...safeData
   } = preciseNumericIndicators<SoilData>(
     data,
@@ -57,12 +64,35 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
 
   return {
     ...safeData,
+    soil_eros_cover:
+      String(soil_eros_cover) === t("dataManagement.noData")
+        ? soil_eros_cover
+        : computeScore(
+            data.project,
+            "veg",
+            soil_eros_cover,
+            externalData.for_score,
+          ),
     soil_eros_rainfall: soil_eros_rainfall,
+    soil_eros_slope:
+      String(soil_eros_slope) === t("dataManagement.noData")
+        ? soil_eros_slope
+        : computeScore(
+            data.project,
+            "slop",
+            soil_eros_slope,
+            externalData.for_score,
+          ),
     soil_eros_stability: soil_eros_stability,
     soil_eros_water_infiltration:
       String(soil_eros_water_infiltration) === t("dataManagement.noData")
         ? soil_eros_water_infiltration
-        : computeScore(soil_eros_water_infiltration),
+        : computeScore(
+            data.project,
+            "infil",
+            soil_eros_water_infiltration,
+            externalData.for_score,
+          ),
     soil_eros_wind: soil_eros_wind,
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(

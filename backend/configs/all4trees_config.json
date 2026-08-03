@@ -72,7 +72,7 @@
         "soil_structure_idx": "(thk1*float(not1) + thk2*float(not2) + thk3*float(not3) + thk4*float(not4) + thk5*float(not5)) / (thk1 + thk2 + thk3 + thk4 + thk5)",
         "soil_eros_rainfall": "for_weath.rain",
         "soil_eros_wind": "for_weath.wind",
-        "soil_eros_slope": "int(10 - slop if slop < 10 else 0)",
+        "soil_eros_slope": "slop",
         "soil_eros_cover": "veg",
         "soil_eros_stability": "((int(slak1) + int(slak2) + int(slak3) ) / 3 if slak1 != '' )",
         "soil_eros_water_infiltration": "600 * for_samp.beer_vol / ( (epoch(interval(beer1)) + ( epoch(interval(beer2)) if beer2!='' ) + ( epoch(interval(beer3)) if beer3!='' ) + ( epoch(interval(beer4)) if beer4!='' ) + ( epoch(interval(beer5)) if beer5!='' ) + ( epoch(interval(beer6)) if beer6!='' ) + ( epoch(interval(beer7)) if beer7!='' ) + ( epoch(interval(beer8)) if beer8!='' ) + ( epoch(interval(beer9)) if beer9!='' ) + ( epoch(interval(beer10)) if beer10!='' ) ) / non_null_count(beer1, beer2, beer3, beer4, beer5, beer6, beer7, beer8, beer9, beer10) * pi() * for_samp.beer_r^2) if beer1 != ''",

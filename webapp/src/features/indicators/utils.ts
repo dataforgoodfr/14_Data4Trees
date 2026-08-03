@@ -1,3 +1,5 @@
+import type { ScoringData, scoreLabel } from "@entities/data";
+
 import { useTranslation } from "@shared/i18n";
 import { precise } from "@shared/lib/utils";
 import type { NumericKeys } from "@shared/types";
@@ -151,19 +153,25 @@ export function formatTaxonAbundance(
 }
 
 /*
-  Compute score based on the scale define in for_score external data (see backed/catalog/inventaire_for)
+  Compute score based on the scale define in for_score external data
   Ideally should be conmputed in the config.json but for now we can't do it.
+  Return the found score or default if no matching range is found
 */
-export function computeScore(value: number): number {
-  if (value >= 10) return 0;
+export function computeScore(
+  project: string,
+  dataKey: scoreLabel,
+  value: number,
+  scoringData: ScoringData[],
+): number {
+  const infKey = `${dataKey}_inf` as keyof ScoringData;
+  const supKey = `${dataKey}_sup` as keyof ScoringData;
 
-  if (value >= 8 && value < 10) return 1;
-
-  if (value >= 6 && value < 8) return 2;
-
-  if (value >= 4 && value < 6) return 3;
-
-  if (value === 0) return 10;
-
-  return 4 - Math.floor(Math.log10(value));
+  return (
+    scoringData
+      .filter((item) => item.proj.trim() === project.trim())
+      .find(
+        (item) =>
+          value >= Number(item[infKey]) && value <= Number(item[supKey]),
+      )?.score || 0
+  );
 }

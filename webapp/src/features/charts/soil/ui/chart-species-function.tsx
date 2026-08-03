@@ -19,13 +19,10 @@ function getTaxonLabels(
 ): FuncSpeciesData[] {
   switch (length) {
     case 1:
-      console.log("metadata for_mf_tax1", metadata.for_mf_tax1);
       return metadata.for_mf_tax1;
     case 2:
-      console.log("metadata for_mf_tax2", metadata.for_mf_tax2);
       return metadata.for_mf_tax2;
     case 3:
-      console.log("metadata for_mf_tax3", metadata.for_mf_tax3);
       return metadata.for_mf_tax3;
     default:
       console.warn("Taxon length not supported for function labels:", length);
@@ -41,7 +38,6 @@ export const ChartSpeciesFunction: ChartComponentType<PieChartProps> = ({
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
 
-  console.log("ChartSpeciesFunction data", data);
   // Replace taxon string like 1-2-3 by corresponding status label in external data
   const labeledData = Object.entries(data).map<[string, number]>(
     ([name, value]) => {

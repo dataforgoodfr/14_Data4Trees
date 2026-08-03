@@ -142,12 +142,12 @@
       "sections": {
         "erosion": {
           "aquatic": {
-            "rainfall": "rainfall",
-            "slope": "slope",
-            "soilCover": "ground cover",
-            "stability": "soil stability",
+            "rainfall": "Rainfall",
+            "slope": "Slope",
+            "soilCover": "Soil cover",
+            "stability": "Soil stability",
             "title": "Water erosion resistance index",
-            "waterSeepage": "water infiltration rate"
+            "waterSeepage": "Water infiltration rate"
           },
           "title": "Soil erosion",
           "wind": {
