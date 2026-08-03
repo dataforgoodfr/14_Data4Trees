@@ -24,3 +24,9 @@ export type BioSpeciesData = {
   "stat::fr": string;
   "stat::en": string;
 };
+
+export type FuncSpeciesData = {
+  proj: string;
+  [key: `tax${number}`]: number | undefined;
+  [key: `func::${string}`]: string;
+};

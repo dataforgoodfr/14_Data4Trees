@@ -1,17 +1,37 @@
 import type { ChartComponentType } from "@features/charts/components/chart-component";
 import { PieChartCategorical } from "@features/charts/components/pie-chart-categorical";
-import { findStatus } from "@features/indicators/labels";
+import { findFunction } from "@features/indicators/labels";
 
-import type { BioSpeciesData } from "@entities/data";
+import type { ExternalData, FuncSpeciesData } from "@entities/data";
 
 import { i18nInstance, useTranslation } from "@shared/i18n";
 import type { ChartConfig } from "@shared/ui/chart";
 
 type PieChartProps = {
   data: Record<string, number>;
-  metadata: BioSpeciesData[];
+  metadata: ExternalData;
   project: string;
 };
+
+function getTaxonLabels(
+  length: number,
+  metadata: ExternalData,
+): FuncSpeciesData[] {
+  switch (length) {
+    case 1:
+      console.log("metadata for_mf_tax1", metadata.for_mf_tax1);
+      return metadata.for_mf_tax1;
+    case 2:
+      console.log("metadata for_mf_tax2", metadata.for_mf_tax2);
+      return metadata.for_mf_tax2;
+    case 3:
+      console.log("metadata for_mf_tax3", metadata.for_mf_tax3);
+      return metadata.for_mf_tax3;
+    default:
+      console.warn("Taxon length not supported for function labels:", length);
+      return metadata.for_mf_tax3;
+  }
+}
 
 export const ChartSpeciesFunction: ChartComponentType<PieChartProps> = ({
   data,
@@ -21,16 +41,24 @@ export const ChartSpeciesFunction: ChartComponentType<PieChartProps> = ({
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
 
+  console.log("ChartSpeciesFunction data", data);
   // Replace taxon string like 1-2-3 by corresponding status label in external data
   const labeledData = Object.entries(data).map<[string, number]>(
     ([name, value]) => {
-      const tax3 = name.split("-")[2];
-      const tax3status = (
-        tax3
-          ? findStatus(metadata, project, lang, Number(tax3))
+      const taxons = name.split("-");
+      const lastTaxon = taxons[taxons.length - 1];
+      const taxFunc = (
+        lastTaxon
+          ? findFunction(
+              getTaxonLabels(taxons.length, metadata),
+              project,
+              lang,
+              taxons.length,
+              Number(lastTaxon),
+            )
           : t("common:dataManagement.other")
       ) as string;
-      return [tax3status, value];
+      return [taxFunc, value];
     },
   );
 
@@ -64,7 +92,9 @@ export const ChartSpeciesFunction: ChartComponentType<PieChartProps> = ({
     <PieChartCategorical
       chartConfig={chartConfig}
       chartData={chartData}
-      title={t("all4trees:indicators.bioinventory.status_abundance")}
+      title={t(
+        "all4trees:indicators.soil.sections.soilFauna.functionAbundance",
+      )}
       unit="%"
       withLabel
     />

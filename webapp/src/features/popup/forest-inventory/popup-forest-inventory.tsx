@@ -40,7 +40,7 @@ export const ForestInventoryPopupContent: FC<
     data,
     labelData,
   );
-  const soilElements = useSoilIndicatorElements(data, labelData);
+  const soilElements = useSoilIndicatorElements(data, externalData);
 
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {

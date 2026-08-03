@@ -157,6 +157,7 @@
           }
         },
         "soilFauna": {
+          "functionAbundance": "Abondance relative par fonction écologique",
           "title": "Macrofaune du sol"
         },
         "structuration": {

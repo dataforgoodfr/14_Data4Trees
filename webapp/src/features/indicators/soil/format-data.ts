@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 
 import {
   computeScore,
-  convertDictToPercentage,
   formatTaxonAbundance,
   preciseNumericIndicators,
   UNITS,
@@ -46,18 +45,6 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
     t("dataManagement.noData"),
   );
 
-  safeData.soil_surface_fauna_abundance = convertDictToPercentage(
-    safeData.soil_surface_fauna_abundance,
-    Object.values<number>(safeData.soil_surface_fauna_abundance || {}).reduce(
-      (a, b) => a + b,
-      0,
-    ),
-    "0",
-  ); /*formatTaxonAbundance(
-    safeData.soil_surface_fauna_abundance_pop,
-    safeData.soil_surface_fauna_total_pop
-  )*/
-
   safeData.soil_fauna_abundance = formatTaxonAbundance(
     safeData.soil_fauna_abundance_pop,
     safeData.soil_fauna_total_pop,
@@ -66,11 +53,6 @@ export const useFormatSoilData = (data: ForestInventoryData) => {
   safeData.soil_surface_fauna_abundance = formatTaxonAbundance(
     safeData.soil_surface_fauna_abundance_pop,
     safeData.soil_surface_fauna_total_pop,
-  );
-
-  safeData.soil_fauna_abundance = formatTaxonAbundance(
-    safeData.soil_fauna_abundance_pop,
-    safeData.soil_fauna_total_pop,
   );
 
   return {

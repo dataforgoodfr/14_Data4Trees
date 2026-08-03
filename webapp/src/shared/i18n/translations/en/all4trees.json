@@ -158,6 +158,7 @@
           }
         },
         "soilFauna": {
+          "functionAbundance": "Relative abundance by ecological function",
           "title": "Soil macrofauna"
         },
         "structuration": {
