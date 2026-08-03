@@ -92,11 +92,6 @@
           "assetsIndex": "Indice de patrimoine",
           "incomeSourceNb": "Nombre de sources de revenus par ménage",
           "livingPerception": {
-            "dontKnow": "Ne sait pas",
-            "improvement": "Amélioration",
-            "refuse": "Refuse de répondre",
-            "regression": "Dégradation",
-            "stable": "Pas de changement",
             "title": "Perception de l’évolution des conditions de vie"
           },
           "revenueChange": "Evolution du montant des revenus",
@@ -105,30 +100,20 @@
         "food": {
           "autoConso": "Satisfaction des besoins en auto-consommation",
           "diversity": {
-            "cereals": "Céréales",
-            "dairy": "Produits Laitiers",
-            "eggs": "Œufs",
-            "fish": "Poisson",
-            "fruits": "Fruits",
             "legend": "des ménages consomment ce groupe alimentaire",
-            "meat": "Viande",
-            "roots": "Racines",
-            "seeds": "Graines",
-            "title": "Groupes alimentaires consommés",
-            "vegetables": "Légumes"
+            "title": "Groupes alimentaires consommés"
           },
           "diversityScore": "Score de diversité alimentaire",
-          "leanPeriod": "Durée de la pérode de soudure",
+          "lean": {
+            "duration": "Durée moyenne de la période de soudure",
+            "legend": "des ménages",
+            "title": "Pérode de soudure"
+          },
           "title": "Ressources alimentaires"
         },
         "governance": {
           "beneficialPractices": {
             "legend": "des ménages ont adopté cette pratique",
-            "pract1": "Plantation",
-            "pract2": "Cultures en courbes de niveau",
-            "pract3": "Association de cultures",
-            "pract4": "Rotation des cultures",
-            "pract5": "Fabrication de compost",
             "title": "Pratiques bénéfiques adoptées"
           },
           "conflictIndex": "Indice de conflictualité",
@@ -141,22 +126,8 @@
             "title": "Satisfaction des besoins en bois-énergie"
           },
           "energySources": {
-            "animalWaste": "Déchets animaux",
-            "boughtWood": "Bois acheté",
-            "coal": "Charbon",
-            "collectedWood": "Bois collecté",
-            "gas": "Gaz",
             "legend": "des ménages utilisent la ressource",
-            "organicWaste": "Déchets végétaux",
-            "other": "Autres",
-            "recWood": "Bois offert",
             "title": "Sources d’énergie utilisées"
-          },
-          "needs": {
-            "difficultToMeet": "Difficile à satisfaire",
-            "dontKnow": "Ne sait pas",
-            "easyToMeet": "Facile à satisfaire",
-            "moderateToMeet": "Moyennement facile à satisfaire"
           },
           "timberNeeds": {
             "title": "Satisfaction des besoins en bois d’œuvre"

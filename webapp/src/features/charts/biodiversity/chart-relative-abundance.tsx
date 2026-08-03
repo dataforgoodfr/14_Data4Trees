@@ -1,4 +1,4 @@
-import { findLabel } from "@features/indicators/utils";
+import { findLabel } from "@features/indicators/labels";
 
 import type { LabelData } from "@entities/data";
 

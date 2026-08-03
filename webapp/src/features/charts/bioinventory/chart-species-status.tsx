@@ -1,4 +1,4 @@
-import { findStatus } from "@features/indicators/utils";
+import { findStatus } from "@features/indicators/labels";
 
 import type { BioSpeciesData } from "@entities/data";
 

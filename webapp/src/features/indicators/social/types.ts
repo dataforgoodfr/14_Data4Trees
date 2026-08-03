@@ -13,6 +13,7 @@ export type SocialData = {
   timber_satis98: number;
   timber_satis99: number;
   lean_period: number;
+  lean_months: any;
   food_diversity: any;
   food_diversity_score: number;
   food_self_suff_score: number;
