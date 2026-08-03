@@ -37,9 +37,8 @@ export const changeLayerVisibility = ({
 export const useCategoriesFilters = () => {
   const [categoriesFilters, setCategoriesFilters] =
     useLocalStorage<CategoriesFiltersState>("categories-filters", {
-      [CATEGORY_IDENTIFIERS.ACTION_DIVERSITY]: true,
-      [CATEGORY_IDENTIFIERS.ACTION_INVENTORY]: true,
-      [CATEGORY_IDENTIFIERS.ACTION_BIO]: true,
+      [CATEGORY_IDENTIFIERS.ACTION_INVENTORY_BIO]: true,
+      [CATEGORY_IDENTIFIERS.ACTION_INVENTORY_FOR]: true,
       [CATEGORY_IDENTIFIERS.ACTION_SOCIO]: true,
       [CATEGORY_IDENTIFIERS.DATA_GROUND]: true,
       [CATEGORY_IDENTIFIERS.DATA_MODEL]: true,

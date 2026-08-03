@@ -1,6 +1,6 @@
 import {
+  Binoculars,
   DatabaseIcon,
-  LeafIcon,
   SatelliteIcon,
   TreePineIcon,
   UsersIcon,
@@ -23,23 +23,23 @@ export const useCategoriesConfig = (): {
   const actionInventory: CategoryGroupItem = {
     icon: (
       <TreePineIcon
-        className="text-inventaire"
+        className="text-forest-inventory"
         size={ICON_SIZE}
       />
     ),
-    identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTORY,
+    identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTORY_FOR,
     label: t("filters.categories.actions.forestInventory"),
   };
 
   const actionDiversity: CategoryGroupItem = {
     icon: (
-      <LeafIcon
-        className="text-inventaire"
+      <Binoculars
+        className="text-bio-inventory"
         size={ICON_SIZE}
       />
     ),
-    identifier: CATEGORY_IDENTIFIERS.ACTION_DIVERSITY,
-    label: t("filters.categories.actions.treeDiversity"),
+    identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTORY_BIO,
+    label: t("filters.categories.actions.bioInventory"),
   };
 
   const actionSocioEco: CategoryGroupItem = {

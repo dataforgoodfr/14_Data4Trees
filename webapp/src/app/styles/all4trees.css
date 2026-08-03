@@ -47,7 +47,8 @@
   --custom-color-blue-light: #52a4ff;
 
   --custom-color-socio-eco: #1447e6; /* Same as in socio-eco-icon */
-  --custom-color-inventaire: #009966; /* Same as in inventaire-icon */
+  --custom-color-forest-inventory: #009966; /* Same as in forest-inventory-icon */
+  --custom-color-bio-inventory: #f98038; /* Same as in bio-inventory-icon */
 
   /* ========================================================================
      TYPOGRAPHIE - CHARTE ALL4TREES
@@ -156,7 +157,8 @@
 
 @theme inline {
   --color-socio-eco: var(--custom-color-socio-eco);
-  --color-inventaire: var(--custom-color-inventaire);
+  --color-forest-inventory: var(--custom-color-forest-inventory);
+  --color-bio-inventory: var(--custom-color-bio-inventory);
 }
 
 @layer components {

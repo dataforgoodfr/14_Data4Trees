@@ -26,7 +26,7 @@ export const AppRouterAll4Trees = () => {
             value: LAYERS.INVENTORY_FOR,
           },
           {
-            translation: t("filters.categories.actions.treeDiversity"),
+            translation: t("filters.categories.actions.bioInventory"),
             value: LAYERS.INVENTORY_BIO,
           },
           {

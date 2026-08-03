@@ -1,6 +1,6 @@
 import type { ChartComponentType } from "@features/charts/components/chart-component";
 import { PieChartCategorical } from "@features/charts/components/pie-chart-categorical";
-import { findStatus } from "@features/indicators/utils";
+import { findStatus } from "@features/indicators/labels";
 
 import type { BioSpeciesData } from "@entities/data";
 

@@ -7,10 +7,10 @@
   "filters": {
     "categories": {
       "actions": {
+        "bioInventory": "Biodiversity inventory",
         "forestInventory": "Forest inventory",
-        "socioEco": "Socio-economic",
-        "title": "Actions taken",
-        "treeDiversity": "Tree diversity"
+        "socioEco": "Socio-economic survey",
+        "title": "Actions taken"
       },
       "all": "All",
       "data": {
