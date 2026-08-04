@@ -1,6 +1,6 @@
 import type { ChartComponentType } from "@features/charts/components/chart-component";
 import { PieChartCategorical } from "@features/charts/components/pie-chart-categorical";
-import { findFunction } from "@features/indicators/labels";
+import { findTaxonFunction } from "@features/indicators/labels";
 
 import type { ExternalData, FuncSpeciesData } from "@entities/data";
 
@@ -14,10 +14,10 @@ type PieChartProps = {
 };
 
 function getTaxonLabels(
-  length: number,
+  depth: number,
   metadata: ExternalData,
 ): FuncSpeciesData[] {
-  switch (length) {
+  switch (depth) {
     case 1:
       return metadata.for_mf_tax1;
     case 2:
@@ -25,7 +25,7 @@ function getTaxonLabels(
     case 3:
       return metadata.for_mf_tax3;
     default:
-      console.warn("Taxon length not supported for function labels:", length);
+      console.warn("Taxon length not supported for function labels:", depth);
       return metadata.for_mf_tax3;
   }
 }
@@ -42,14 +42,15 @@ export const ChartSpeciesFunction: ChartComponentType<PieChartProps> = ({
   const labeledData = Object.entries(data).map<[string, number]>(
     ([name, value]) => {
       const taxons = name.split("-");
-      const lastTaxon = taxons[taxons.length - 1];
+      const depth = taxons.length;
+      const lastTaxon = taxons[depth - 1];
       const taxFunc = (
         lastTaxon
-          ? findFunction(
-              getTaxonLabels(taxons.length, metadata),
+          ? findTaxonFunction(
+              getTaxonLabels(depth, metadata),
               project,
               lang,
-              taxons.length,
+              depth,
               Number(lastTaxon),
             )
           : t("common:dataManagement.other")
@@ -61,18 +62,18 @@ export const ChartSpeciesFunction: ChartComponentType<PieChartProps> = ({
   // Sum pop values grouped by labels then map into chartData
   const chartData = Object.entries(
     labeledData.reduce(
-      (acc, [label, value]) => {
-        if (!acc[label]) {
-          acc[label] = 0;
+      (acc, [taxFunc, value]) => {
+        if (!acc[taxFunc]) {
+          acc[taxFunc] = 0;
         }
-        acc[label] += value;
+        acc[taxFunc] += value;
         return acc;
       },
       {} as { [key: string]: number },
     ),
-  ).map(([label, value], index) => ({
+  ).map(([taxFunc, value], index) => ({
     fill: `var(--chart-${(index % 5) + 1})`,
-    name: label,
+    name: taxFunc,
     value,
   }));
 

@@ -51,11 +51,11 @@ export function findStatus(
 }
 
 // Find function of corresponding taxon value.
-export function findFunction(
+export function findTaxonFunction(
   resourceData: FuncSpeciesData[],
   project: string,
   lang: string,
-  taxNumber: number,
+  depth: number,
   taxon: number,
 ): string | undefined {
   if (!resourceData || !Array.isArray(resourceData)) {
@@ -65,7 +65,7 @@ export function findFunction(
   // Find the record matching all criteria: project, list_name, and name
   const record = resourceData.find((item: FuncSpeciesData) => {
     return (
-      item.proj?.trim() === project.trim() && item[`tax${taxNumber}`] === taxon
+      item.proj?.trim() === project.trim() && item[`tax${depth}`] === taxon
     );
   });
 

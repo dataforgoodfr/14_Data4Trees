@@ -38,18 +38,18 @@ export const ChartSpeciesStatus: ChartComponentType<PieChartProps> = ({
   // Sum pop values grouped by labels then map into chartData
   const chartData = Object.entries(
     labeledData.reduce(
-      (acc, [label, value]) => {
-        if (!acc[label]) {
-          acc[label] = 0;
+      (acc, [tax3status, value]) => {
+        if (!acc[tax3status]) {
+          acc[tax3status] = 0;
         }
-        acc[label] += value;
+        acc[tax3status] += value;
         return acc;
       },
       {} as { [key: string]: number },
     ),
-  ).map(([label, value], index) => ({
+  ).map(([tax3status, value], index) => ({
     fill: `var(--chart-${(index % 5) + 1})`,
-    name: label,
+    name: tax3status,
     value,
   }));
 
