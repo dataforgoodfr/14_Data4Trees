@@ -32,6 +32,7 @@ export const useFormatSoilData = (
 ) => {
   const { t } = useTranslation("common");
   const { formatWithUnit } = useFormatterWithUnit();
+  const noDataPlaceholder = t("dataManagement.noData");
 
   const {
     soil_structure_idx,
@@ -49,7 +50,7 @@ export const useFormatSoilData = (
   } = preciseNumericIndicators<SoilData>(
     data,
     indicatorsToPreciseWithFallBack,
-    t("dataManagement.noData"),
+    noDataPlaceholder,
   );
 
   safeData.soil_fauna_abundance = formatTaxonAbundance(
@@ -65,34 +66,34 @@ export const useFormatSoilData = (
   return {
     ...safeData,
     soil_eros_cover:
-      String(soil_eros_cover) === t("dataManagement.noData")
+      String(soil_eros_cover) === noDataPlaceholder
         ? soil_eros_cover
-        : computeScore(
-            data.project,
-            "veg",
-            soil_eros_cover,
-            externalData.for_score,
-          ),
+        : computeScore({
+            dataKey: "veg",
+            project: data.project,
+            scoringData: externalData.for_score,
+            value: soil_eros_cover,
+          }),
     soil_eros_rainfall: soil_eros_rainfall,
     soil_eros_slope:
-      String(soil_eros_slope) === t("dataManagement.noData")
+      String(soil_eros_slope) === noDataPlaceholder
         ? soil_eros_slope
-        : computeScore(
-            data.project,
-            "slop",
-            soil_eros_slope,
-            externalData.for_score,
-          ),
+        : computeScore({
+            dataKey: "slop",
+            project: data.project,
+            scoringData: externalData.for_score,
+            value: soil_eros_slope,
+          }),
     soil_eros_stability: soil_eros_stability,
     soil_eros_water_infiltration:
-      String(soil_eros_water_infiltration) === t("dataManagement.noData")
+      String(soil_eros_water_infiltration) === noDataPlaceholder
         ? soil_eros_water_infiltration
-        : computeScore(
-            data.project,
-            "infil",
-            soil_eros_water_infiltration,
-            externalData.for_score,
-          ),
+        : computeScore({
+            dataKey: "infil",
+            project: data.project,
+            scoringData: externalData.for_score,
+            value: soil_eros_water_infiltration,
+          }),
     soil_eros_wind: soil_eros_wind,
     soil_fauna_abundance: safeData.soil_fauna_abundance,
     soil_fauna_density: formatWithUnit(
@@ -104,7 +105,7 @@ export const useFormatSoilData = (
       UNITS.speciesPerTrap,
     ),
     soil_structure_idx:
-      String(soil_structure_idx) === t("dataManagement.noData")
+      String(soil_structure_idx) === noDataPlaceholder
         ? soil_structure_idx
         : `${soil_structure_idx}/10`,
     surface_fauna_abundance: safeData.soil_surface_fauna_abundance,

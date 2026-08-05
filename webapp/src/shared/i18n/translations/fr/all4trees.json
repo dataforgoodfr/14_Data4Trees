@@ -7,7 +7,7 @@
   "filters": {
     "categories": {
       "actions": {
-        "bioInventory": "Invetaire biologique",
+        "bioInventory": "Inventaire biologique",
         "forestInventory": "Inventaire forestier",
         "socioEco": "Enquête socio-économique",
         "title": "Actions menées"
@@ -203,7 +203,7 @@
     },
     "common": {
       "date": "Date relevé: {{ date }}",
-      "ecos": "Ecosystème"
+      "ecosystem": "Ecosystème"
     },
     "forestInventory": {
       "title": "Placette n°{{ id }}"

@@ -36,7 +36,7 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
     ns: "all4trees",
   });
 
-  const ecos = `${t("all4trees:popup.common.ecos")}: ${
+  const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
     findLabel(externalData.bio_label, data.project, lang, "ecos", data.ecos) ||
     t("dataManagement.undefined", { ns: "common" })
   }`;

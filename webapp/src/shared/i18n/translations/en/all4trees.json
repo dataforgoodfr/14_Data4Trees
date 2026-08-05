@@ -200,7 +200,7 @@
     },
     "common": {
       "date": "Site survey date : {{ date }}",
-      "ecos": "Ecosystem"
+      "ecosystem": "Ecosystem"
     },
     "forestInventory": {
       "title": "Plot n°{{ id }}"

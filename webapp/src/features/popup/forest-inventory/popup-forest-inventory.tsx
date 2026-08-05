@@ -60,7 +60,7 @@ export const ForestInventoryPopupContent: FC<
     findLabel(labelData, data.project, lang, "loc2", data.loc2) ||
     t("common:dataManagement.undefined");
 
-  const ecos = `${t("all4trees:popup.common.ecos")}: ${
+  const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
     findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
     t("dataManagement.undefined", { ns: "common" })
   }`;

@@ -157,12 +157,17 @@ export function formatTaxonAbundance(
   Ideally should be conmputed in the config.json but for now we can't do it.
   Return the found score or default if no matching range is found
 */
-export function computeScore(
-  project: string,
-  dataKey: scoreLabel,
-  value: number,
-  scoringData: ScoringData[],
-): number {
+export function computeScore({
+  project,
+  dataKey,
+  value,
+  scoringData,
+}: {
+  project: string;
+  dataKey: scoreLabel;
+  value: number;
+  scoringData: ScoringData[];
+}): number {
   const infKey = `${dataKey}_inf` as keyof ScoringData;
   const supKey = `${dataKey}_sup` as keyof ScoringData;
 
