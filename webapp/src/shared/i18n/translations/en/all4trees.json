@@ -7,10 +7,10 @@
   "filters": {
     "categories": {
       "actions": {
+        "bioInventory": "Biodiversity inventory",
         "forestInventory": "Forest inventory",
-        "socioEco": "Socio-economic",
-        "title": "Actions taken",
-        "treeDiversity": "Tree diversity"
+        "socioEco": "Socio-economic survey",
+        "title": "Actions taken"
       },
       "all": "All",
       "data": {
@@ -68,9 +68,9 @@
     },
     "bioinventory": {
       "sampArea": "Sampling area",
-      "status_abundance": "Relative abundance by extinction threat",
+      "status_abundance": "Relative abundance by UICN status",
       "taxon": "Target taxon",
-      "title": "Fauna inventory",
+      "title": "Biodiversity inventory",
       "type": "Measures type"
     },
     "common": {
@@ -142,12 +142,12 @@
       "sections": {
         "erosion": {
           "aquatic": {
-            "rainfall": "rainfall",
-            "slope": "slope",
-            "soilCover": "ground cover",
-            "stability": "soil stability",
+            "rainfall": "Rainfall",
+            "slope": "Slope",
+            "soilCover": "Soil cover",
+            "stability": "Soil stability",
             "title": "Water erosion resistance index",
-            "waterSeepage": "water infiltration rate"
+            "waterSeepage": "Water infiltration rate"
           },
           "title": "Soil erosion",
           "wind": {
@@ -158,6 +158,7 @@
           }
         },
         "soilFauna": {
+          "functionAbundance": "Relative abundance by ecological function",
           "title": "Soil macrofauna"
         },
         "structuration": {
@@ -195,16 +196,16 @@
   },
   "popup": {
     "bioInventory": {
-      "date": "Survey date: {{ date }}",
-      "title": "Plot n°{{ id }}"
+      "title": "Site n°{{ id }}"
+    },
+    "common": {
+      "date": "Site survey date : {{ date }}",
+      "ecosystem": "Ecosystem"
     },
     "forestInventory": {
-      "date": "Site survey date : {{ date }}",
-      "ecos": "Ecosystem",
       "title": "Plot n°{{ id }}"
     },
     "socioEco": {
-      "date": "Survey date: {{ date }}",
       "subtitleCount": "",
       "subtitleCount_one": "{{ count }} household surveyed",
       "subtitleCount_other": "{{ count }} households surveyed",

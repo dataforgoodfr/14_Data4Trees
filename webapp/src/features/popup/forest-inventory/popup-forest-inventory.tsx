@@ -40,7 +40,7 @@ export const ForestInventoryPopupContent: FC<
     data,
     labelData,
   );
-  const soilElements = useSoilIndicatorElements(data, labelData);
+  const soilElements = useSoilIndicatorElements(data, externalData);
 
   const tabs = {
     [TABS.BIODIVERSITY]: t("indicators.biodiversity.title", {
@@ -52,15 +52,15 @@ export const ForestInventoryPopupContent: FC<
   };
 
   const title = t("popup.forestInventory.title", {
-    id: data.cod,
+    id: data.code,
     ns: "all4trees",
   });
 
   const subtitle =
-    findLabel(labelData, data.project, lang, "loc2", data.for) ||
+    findLabel(labelData, data.project, lang, "loc2", data.loc2) ||
     t("common:dataManagement.undefined");
 
-  const ecos = `${t("all4trees:popup.forestInventory.ecos")}: ${
+  const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
     findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
     t("dataManagement.undefined", { ns: "common" })
   }`;
@@ -68,7 +68,7 @@ export const ForestInventoryPopupContent: FC<
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.forestInventory.date", {
+        date={t("popup.common.date", {
           date: formatDate(new Date()),
           ns: "all4trees",
         })}

@@ -1,6 +1,10 @@
 import type { LayerMetadata } from "coordo";
 
-import type { BioSpeciesData, LabelData } from "@entities/data";
+import type {
+  BioSpeciesData,
+  FuncSpeciesData,
+  LabelData,
+} from "@entities/data";
 
 export function findCategoricalLabel(
   metadata: LayerMetadata,
@@ -44,6 +48,28 @@ export function findStatus(
   });
 
   return record?.[`stat::${lang}` as keyof BioSpeciesData] as string;
+}
+
+// Find function of corresponding taxon value.
+export function findTaxonFunction(
+  resourceData: FuncSpeciesData[],
+  project: string,
+  lang: string,
+  depth: number,
+  taxon: number,
+): string | undefined {
+  if (!resourceData || !Array.isArray(resourceData)) {
+    return undefined;
+  }
+
+  // Find the record matching all criteria: project, list_name, and name
+  const record = resourceData.find((item: FuncSpeciesData) => {
+    return (
+      item.proj?.trim() === project.trim() && item[`tax${depth}`] === taxon
+    );
+  });
+
+  return record?.[`func::${lang}`] as string;
 }
 
 export function findLabel(

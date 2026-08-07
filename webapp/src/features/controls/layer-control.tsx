@@ -1,4 +1,5 @@
 import {
+  Binoculars,
   HouseIcon,
   LayersIcon,
   SatelliteIcon,
@@ -59,7 +60,17 @@ function useLayerConfig(layerId: string) {
         label: t("filters.categories.actions.forestInventory") as string,
         renderIcon: (checked?: boolean) => (
           <TreePineIcon
-            className={checked ? "text-inventaire" : "text-muted"}
+            className={checked ? "text-forest-inventory" : "text-muted"}
+            size={ICON_SIZE}
+          />
+        ),
+      };
+    case LAYERS.INVENTORY_BIO:
+      return {
+        label: t("filters.categories.actions.bioInventory") as string,
+        renderIcon: (checked?: boolean) => (
+          <Binoculars
+            className={checked ? "text-bio-inventory" : "text-muted"}
             size={ICON_SIZE}
           />
         ),

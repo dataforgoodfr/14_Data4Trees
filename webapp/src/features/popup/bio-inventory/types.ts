@@ -1,13 +1,13 @@
 export type BioInventoryData = {
   id: number;
-  conf: boolean;
-  proj: string;
+  loc1: number;
+  loc2: number;
+  type: number;
+  cohort: number;
+  project: string;
   ecos: number;
-  region: number;
-  forest: number;
   start_date: Date;
   taxon: string;
-  type: number;
   samp_area: number;
   samp_unit: number;
   density: number;

@@ -36,21 +36,27 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
     ns: "all4trees",
   });
 
+  const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
+    findLabel(externalData.bio_label, data.project, lang, "ecos", data.ecos) ||
+    t("dataManagement.undefined", { ns: "common" })
+  }`;
+
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.bioInventory.date", {
+        date={t("popup.common.date", {
           date: formatDate(new Date()),
           ns: "all4trees",
         })}
+        ecos={ecos}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
           findLabel(
             externalData.bio_label,
-            data.proj,
+            data.project,
             lang,
             "loc2",
-            Number(data.forest),
+            Number(data.loc2),
           ) || t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
