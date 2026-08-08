@@ -22,15 +22,15 @@ export const AppRouterAll4Trees = () => {
         hasDashboard: true,
         layerOptions: [
           {
-            translation: t("filters.categories.actions.forestInventory"),
+            translation: t("layers.forestInventory"),
             value: LAYERS.INVENTORY_FOR,
           },
           {
-            translation: t("filters.categories.actions.bioInventory"),
+            translation: t("layers.bioInventory"),
             value: LAYERS.INVENTORY_BIO,
           },
           {
-            translation: t("filters.categories.actions.socioEco"),
+            translation: t("layers.socioEco"),
             value: LAYERS.ENQUETE,
           },
         ],
