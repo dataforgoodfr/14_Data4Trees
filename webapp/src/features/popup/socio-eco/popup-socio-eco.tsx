@@ -1,7 +1,8 @@
 import { cx } from "class-variance-authority";
 import { UsersIcon } from "lucide-react";
-import { Activity, type FC, use, useState } from "react";
+import { Activity, type FC, useState } from "react";
 
+import { useExternalData } from "@features/external-data/context";
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
@@ -32,7 +33,6 @@ const TABS: Record<string, TabKind> = {
 
 export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   data,
-  externalDataPromise,
   className,
   ...headerProps
 }) => {
@@ -40,7 +40,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.RESOURCES);
   const lang = i18nInstance.language;
 
-  const externalData = use(externalDataPromise);
+  const externalData = useExternalData();
   const labelData =
     externalData[LABEL_DATA.get(LAYERS.ENQUETE) || ""] || ([] as LabelData[]);
 

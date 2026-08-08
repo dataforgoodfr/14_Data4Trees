@@ -1,5 +1,6 @@
 import { type FC, useEffect, useState } from "react";
 
+import { getExternalDataPromiseByLayer } from "@features/external-data/getter";
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   type BioInventoryData,
@@ -26,7 +27,7 @@ import pictoBioInventory from "./assets/bio-inventory-icon.svg";
 import pictoForestInventory from "./assets/forest-inventory-icon.svg";
 import pictoSocioEco from "./assets/socio-eco-icon.svg";
 import { MapBase } from "./map-base";
-import { getExternalDataPromiseByLayer, getIconSize } from "./utils";
+import { getIconSize } from "./utils";
 
 export const MapAll4Trees: FC = () => {
   const { isReady, mapApiRef, mapContainerRef } = useMap();

@@ -1,8 +1,9 @@
 import { cx } from "class-variance-authority";
 import { TreesIcon } from "lucide-react";
-import { Activity, type FC, use, useState } from "react";
+import { Activity, type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useExternalData } from "@features/external-data/context";
 import { useBiodiversityIndicatorElements } from "@features/indicators/biodiversity";
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
@@ -29,11 +30,11 @@ const TABS: Record<string, TabKind> = {
 
 export const ForestInventoryPopupContent: FC<
   ForestInventoryPopupContentProps
-> = ({ data, metadata, externalDataPromise, className, ...headerProps }) => {
+> = ({ data, metadata, className, ...headerProps }) => {
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
   const [selectedTab, setSelectedTab] = useState<TabKind>(TABS.BIODIVERSITY);
-  const externalData = use(externalDataPromise);
+  const externalData = useExternalData();
   const labelData = externalData.for_label;
 
   const biodiversityElements = useBiodiversityIndicatorElements(
