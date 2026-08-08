@@ -102,7 +102,7 @@ export function findMatchingRecord(
       );
     }
     return (
-      item.proj?.trim() === project.trim() &&
+      item.proj?.trim() === project?.trim() &&
       item.list_name?.trim() === fieldName.trim() &&
       item.name === fieldValue
     );
