@@ -1,5 +1,5 @@
-import type { ExternalData } from "@entities/data";
-import { EXTERNAL_RESOURCES_BY_LAYER } from "@entities/resources";
+import type { ExternalData, LabelData } from "@entities/data";
+import { EXTERNAL_RESOURCES_BY_LAYER, LABEL_DATA } from "@entities/resources";
 
 import type { ApiClient } from "@shared/api/client";
 
@@ -20,4 +20,14 @@ export const getExternalDataPromiseByLayer = (
   return resourceList.length > 0
     ? () => client.getCatalogResourceList(layerId, resourceList)
     : () => Promise.resolve(EMPTY_EXTERNAL_DATA);
+};
+
+export const getLabelData = ({
+  externalData,
+  layerId,
+}: {
+  externalData: ExternalData;
+  layerId: string;
+}) => {
+  return externalData[LABEL_DATA.get(layerId) || ""] || ([] as LabelData[]);
 };
