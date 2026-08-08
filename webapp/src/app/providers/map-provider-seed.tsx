@@ -1,9 +1,9 @@
-import { createMap, EVENTS } from "coordo";
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
 import { API_URL } from "@shared/api/client";
 import { MapContext } from "@shared/contexts/map-context-seed";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
+import { createMap, EVENTS } from "@shared/lib/coordo";
 
 const STYLE_URL = `${API_URL}/maps/style.json`;
 

@@ -1,5 +1,6 @@
-import type { createMap } from "coordo";
 import { createContext, type RefCallback, type RefObject } from "react";
+
+import type { createMap } from "@shared/lib/coordo";
 
 export type Category = { value: string; label: string };
 

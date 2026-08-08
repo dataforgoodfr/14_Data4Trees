@@ -1,10 +1,10 @@
-import type { LayerMetadata } from "coordo";
-
 import type {
   BioSpeciesData,
   FuncSpeciesData,
   LabelData,
 } from "@entities/data";
+
+import type { LayerMetadata } from "@shared/lib/coordo";
 
 export function findCategoricalLabel(
   metadata: LayerMetadata,
