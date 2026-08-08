@@ -1,8 +1,11 @@
 import { ListFilterIcon } from "lucide-react";
-import { useState } from "react";
+import { Activity, useEffect, useRef, useState } from "react";
 
 import { CategoriesFilters } from "@features/categories-filters";
+import { MapFilters } from "@features/map-filters";
 
+import type { Filters } from "@shared/api/types";
+import { useApi } from "@shared/hooks/useApi";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
@@ -18,6 +21,22 @@ export function MapSidebar() {
   const [selectedFilterKind, setSelectedFilterKind] = useState<string>(
     FILTER_KIND.category,
   );
+  const [mapFilters, setMapFilters] = useState<Filters | null>(null);
+  const isLoadingFilter = useRef<boolean|null>(null);
+
+  const client = useApi();
+
+  useEffect(() => {
+    const fetchFilters = async () => {
+      isLoadingFilter.current = true;
+      const filters = await client.getFilters();
+      setMapFilters(filters);
+      isLoadingFilter.current = false;
+    };
+    if (mapFilters == null && !isLoadingFilter.current) {
+      fetchFilters();
+    }
+  }, [mapFilters, client.getFilters]);
 
   return (
     <div className="flex flex-col h-full">
@@ -37,6 +56,7 @@ export function MapSidebar() {
             label: t("filters.sidebarLayout.groupCategory"),
           },
           {
+            disabled: mapFilters == null,
             id: FILTER_KIND.filtersPerCategory,
             label: t("filters.sidebarLayout.groupFilters"),
           },
@@ -52,6 +72,17 @@ export function MapSidebar() {
         }}
       >
         {selectedFilterKind === FILTER_KIND.category && <CategoriesFilters />}
+
+        <Activity
+          mode={
+            selectedFilterKind === FILTER_KIND.filtersPerCategory &&
+            mapFilters != null
+              ? "visible"
+              : "hidden"
+          }
+        >
+          <MapFilters filters={mapFilters} />
+        </Activity>
       </div>
     </div>
   );
