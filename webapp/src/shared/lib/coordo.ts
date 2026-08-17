@@ -1,5 +1,6 @@
 // Façade file to export coordo content
 // This helps for local development where only one path has to be updated
+
 export {
   createMap,
   EVENTS,
@@ -10,3 +11,4 @@ export {
   type LayerMetadata,
   type PopupOptions,
 } from "coordo";
+export type { FilterSpecification, Map as MapInstance } from "maplibre-gl";

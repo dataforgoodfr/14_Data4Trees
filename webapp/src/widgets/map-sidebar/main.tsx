@@ -22,7 +22,7 @@ export function MapSidebar() {
     FILTER_KIND.category,
   );
   const [mapFilters, setMapFilters] = useState<Filters | null>(null);
-  const isLoadingFilter = useRef<boolean|null>(null);
+  const isLoadingFilter = useRef<boolean | null>(null);
 
   const client = useApi();
 
