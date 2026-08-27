@@ -54,7 +54,7 @@ export type LayerFilter = ValuesFilter | RangeFilter;
  *
  * `propertyName` is stored alongside the selection on purpose: it lets the map
  * apply persisted filters on load without waiting for — or knowing about — the
- * `getFilters()` payload. See `syncInitialLayerFilters`.
+ * `getFilters()` payload. See `refreshAllLayerFilters`.
  */
 export type LayerFiltersState = Record<string, LayerFilter>;
 
@@ -64,5 +64,35 @@ export type FilterGroup = {
   key: string;
   propertyName: string;
   /** Every value the API offers, in API order. */
+  values: FilterValue[];
+};
+
+/* -------------------------------------------------------------------------- */
+/*                               Global filters                               */
+/* -------------------------------------------------------------------------- */
+
+/** Distributes over the union so each kind keeps its own fields. */
+type OmitPropertyName<T> = T extends unknown ? Omit<T, "propertyName"> : never;
+
+/**
+ * A filter applied to every layer at once (year, …), persisted in its own
+ * localStorage entry.
+ *
+ * Same kinds as a per-layer filter, except the property is resolved per layer:
+ * the same concept is not exposed under the same name everywhere (`cohort` vs
+ * `start_date`, `project` vs `proj`). A layer missing from `propertyNameByLayer`
+ * does not expose the concept and is left unfiltered by this entry.
+ */
+export type GlobalFilter = OmitPropertyName<LayerFilter> & {
+  propertyNameByLayer: Record<string, string>;
+};
+
+export type GlobalFiltersState = Record<string, GlobalFilter>;
+
+/** A global checkbox group as offered by the API, before the user touches it. */
+export type GlobalFilterGroup = {
+  key: string;
+  propertyNameByLayer: Record<string, string>;
+  /** Union of every layer's values, deduplicated. */
   values: FilterValue[];
 };
