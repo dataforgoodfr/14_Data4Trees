@@ -20,10 +20,13 @@ FILTER_PROPERTIES_BY_LAYER = {
     "project": {
         LAYER_INVENTAIRE_FOR: "project",
         LAYER_INVENTAIRE_BIO: "project",
+        # Not renamed on this layer: "groupby" keeps the source column name.
+        LAYER_ENQUETE: "proj",
     },
     "loc1": {
         LAYER_INVENTAIRE_FOR: "loc1",
         LAYER_INVENTAIRE_BIO: "loc1",
+        LAYER_ENQUETE: "loc1",
     },
     "loc2": {
         LAYER_INVENTAIRE_FOR: "loc2",
@@ -104,13 +107,23 @@ def get_filter_values(layer_data, property_name):
         if properties.get(property_name) not in EMPTY_VALUES
     }
 
-    try:
-        sorted_values = sorted(values)
-    except TypeError:
-        # Defensive: a column mixing types (int and str) is not comparable.
-        sorted_values = sorted(values, key=str)
-
     return {
         "property_name": property_name,
-        "values": sorted_values,
+        "values": sort_filter_values(values),
     }
+
+def sort_filter_values(values):
+    """
+    Natural order.
+
+    Codes are uncast strings on the enquete layer, which "groupby" serves raw:
+    plain lexicographic order would list its communes as 1, 12, 3, 40, 9.
+    """
+    if all(isinstance(value, str) and value.lstrip("-").isdigit() for value in values):
+        return sorted(values, key=int)
+
+    try:
+        return sorted(values)
+    except TypeError:
+        # Defensive: a column mixing types (int and str) is not comparable.
+        return sorted(values, key=str)
