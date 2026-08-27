@@ -8,11 +8,8 @@ import { Card, CardTitle } from "@shared/ui/card";
 import { Separator } from "@shared/ui/separator";
 
 import { CheckboxGroup } from "./components/checkbox-group";
+import { GROUP_KEYS } from "./constants";
 import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
-
-const GROUP_KEYS = {
-  YEAR: "year",
-} as const;
 
 /**
  * Filters applied to every layer at once, above the per-layer panels.
