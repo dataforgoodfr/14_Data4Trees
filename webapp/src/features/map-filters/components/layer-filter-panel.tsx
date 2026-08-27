@@ -129,6 +129,8 @@ export const LayerFilterPanel: FC<LayerFilterPanelProps> = ({
             label: getItemLabel(group, value),
           }))}
           key={group.key}
+          // Codes repeat across groups and layers, so the DOM ids need both.
+          namespace={`${layerId}-${group.key}`}
           title={group.title}
           {...getCheckboxGroupProps(group)}
         />

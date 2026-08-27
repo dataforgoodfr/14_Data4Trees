@@ -124,6 +124,13 @@ toPanelGroup({
 Nothing else to wire: the group key becomes its localStorage key, and the effect
 in `useLayerFilters` pushes the change to the map.
 
+If you ever render a `<CheckboxGroup>` yourself instead of going through
+`LayerFilterPanel`, pass a `namespace` (`<layerId>-<groupKey>`). Item identifiers
+are only unique within a group — `loc1`, `loc2` and `ecos` all start at 1, and
+every layer repeats the same codes — so without it the DOM ids collide and each
+label activates the first matching checkbox in the document, silently toggling
+another group's (or another layer's) box.
+
 ### Labels
 
 `LayerFilterPanel` resolves a group's labels through `findLabel`, keyed by

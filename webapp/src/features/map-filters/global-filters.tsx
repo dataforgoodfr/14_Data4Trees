@@ -47,6 +47,7 @@ export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
           identifier: String(value),
           label: String(value),
         }))}
+        namespace={`global-${yearGroup.key}`}
         title={t("filters.groups.year")}
         {...getCheckboxGroupProps(yearGroup)}
       />
