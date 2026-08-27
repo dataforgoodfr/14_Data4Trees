@@ -50,15 +50,17 @@ const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
 
   const labelData = getLabelData({ externalData, layerId: LAYER_ID });
 
-  const leaves: Record<string, { property_name: string; values: FilterValue[] }> =
-    {
-      [GROUP_KEYS.COHORT]: filters.cohort[LAYER_ID],
-      [GROUP_KEYS.ECOS]: filters.ecos[LAYER_ID],
-      [GROUP_KEYS.LOC1]: filters.loc1[LAYER_ID],
-      [GROUP_KEYS.LOC2]: filters.loc2[LAYER_ID],
-      [GROUP_KEYS.PROJECT]: filters.project[LAYER_ID],
-      [GROUP_KEYS.TYPE]: filters.type[LAYER_ID],
-    };
+  const leaves: Record<
+    string,
+    { property_name: string; values: FilterValue[] }
+  > = {
+    [GROUP_KEYS.COHORT]: filters.cohort[LAYER_ID],
+    [GROUP_KEYS.ECOS]: filters.ecos[LAYER_ID],
+    [GROUP_KEYS.LOC1]: filters.loc1[LAYER_ID],
+    [GROUP_KEYS.LOC2]: filters.loc2[LAYER_ID],
+    [GROUP_KEYS.PROJECT]: filters.project[LAYER_ID],
+    [GROUP_KEYS.TYPE]: filters.type[LAYER_ID],
+  };
 
   // Label tables are keyed by project. Each layer carries a single project
   // today, so the first value is the right lookup key; this becomes ambiguous
