@@ -21,7 +21,7 @@ export const getLayerFiltersStorageKey = (layerId: string) =>
 /** Global filters live in their own entry, outside any layer namespace. */
 export const GLOBAL_FILTERS_STORAGE_KEY = `${STORAGE_PREFIX}:__global__`;
 
-const read = <T,>(key: string, fallback: T): T => {
+const read = <T>(key: string, fallback: T): T => {
   try {
     const item = window.localStorage.getItem(key);
     return item ? (JSON.parse(item) as T) : fallback;

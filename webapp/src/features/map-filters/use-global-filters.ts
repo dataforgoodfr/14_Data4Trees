@@ -32,7 +32,10 @@ export const buildGlobalFilterGroup = ({
   leavesByLayer,
 }: {
   key: string;
-  leavesByLayer: Record<string, { property_name: string; values: FilterValue[] }>;
+  leavesByLayer: Record<
+    string,
+    { property_name: string; values: FilterValue[] }
+  >;
 }): GlobalFilterGroup => {
   const entries = Object.entries(leavesByLayer);
 
@@ -61,9 +64,12 @@ export const buildGlobalFilterGroup = ({
  */
 export const useGlobalFilters = () => {
   const { isReady, mapApiRef } = useMap();
-  const [globalFilters, setGlobalFilters] =
-    useLocalStorage<GlobalFiltersState>(GLOBAL_FILTERS_STORAGE_KEY, {});
+  const [globalFilters, setGlobalFilters] = useLocalStorage<GlobalFiltersState>(
+    GLOBAL_FILTERS_STORAGE_KEY,
+    {},
+  );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <refreshAllLayerFilters must be triggered when globalFilters are updated>
   useEffect(() => {
     const map = mapApiRef.current?.mapInstance;
     if (!isReady || !map) return;
