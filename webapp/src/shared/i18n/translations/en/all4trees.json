@@ -25,6 +25,18 @@
         "title": "Ecosystem"
       }
     },
+    "global": {
+      "title": "All layers"
+    },
+    "groups": {
+      "cohort": "Cohort",
+      "ecos": "Ecosystem",
+      "loc1": "Department",
+      "loc2": "Municipality",
+      "project": "Project",
+      "type": "Plot type",
+      "year": "Year"
+    },
     "sidebarLayout": {
       "groupCategory": "Categories",
       "groupFilters": "Filters",
