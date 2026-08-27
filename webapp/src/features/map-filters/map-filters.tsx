@@ -2,6 +2,7 @@ import type { FC } from "react";
 
 import type { Filters } from "@shared/api/types";
 
+import { MapGlobalFilters } from "./global-filters";
 import { MapFiltersForestInventory } from "./layers/forest-inventory";
 
 type MapFiltersProps = {
@@ -10,8 +11,9 @@ type MapFiltersProps = {
 
 export const MapFilters: FC<MapFiltersProps> = ({ filters }) => {
   return (
-    <>
+    <div className="flex flex-col gap-3">
+      <MapGlobalFilters filters={filters} />
       <MapFiltersForestInventory filters={filters} />
-    </>
+    </div>
   );
 };
