@@ -8,10 +8,7 @@ import { Card, CardTitle } from "@shared/ui/card";
 import { Separator } from "@shared/ui/separator";
 
 import { CheckboxGroup } from "./components/checkbox-group";
-import {
-  buildGlobalFilterGroup,
-  useGlobalFilters,
-} from "./use-global-filters";
+import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
 
 const GROUP_KEYS = {
   YEAR: "year",

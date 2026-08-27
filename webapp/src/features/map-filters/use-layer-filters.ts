@@ -40,6 +40,7 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
 
   // `layerFilters` is the trigger, not the input: the refresh re-reads both this
   // layer's entry and the global one from localStorage so the two compose.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <refreshAllLayerFilters must be triggered when globalFilters are updated>
   useEffect(() => {
     const map = mapApiRef.current?.mapInstance;
     if (!isReady || !map) return;
