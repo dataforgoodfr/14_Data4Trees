@@ -5,6 +5,7 @@ from enum import Enum
 import logging
 
 import chardet
+import json
 
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, ParseError, APIException
@@ -207,14 +208,16 @@ class DatapackageManager:
         Method for modifying (adding / removing) a DataPackage foreign key.
         Expects a POST request with a body containing at least the 'package', 'from' and 'to' fields.
         """
-        package = self.request.POST["package"]
-        from_ = self.request.POST["from"]
-        to = self.request.POST["to"]
-        
+        body = json.loads(self.request.body)
+        package = body["package"]
+        resource_name = body["from"]
+        foreign_resource_name = body["to"]
+        pairs = body["pairs"]
+
         if loader_method == LoaderMethod.ADD:
-            Loader.add_foreign_key(package, from_, to)
+            Loader.add_foreign_key(package, resource_name, foreign_resource_name, pairs)
         elif loader_method == LoaderMethod.REMOVE:
-            Loader.remove_foreign_key(package, from_, to)
+            Loader.remove_foreign_key(package, resource_name, foreign_resource_name)
         else:
             raise DatapackageException(f"Unhandled method {loader_method} for foreign keys.")
 
