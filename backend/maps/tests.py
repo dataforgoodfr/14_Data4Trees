@@ -89,8 +89,8 @@ class DatapackageTest(TestCase):
         logger.info(f"Response: {response}")
         self.assertEqual(response.status_code, 200)
 
-    def manage_foreign_keys(self, method: str, from_: str, to: str):
-        fk_data = {"from": from_, "to": to}
+    def manage_foreign_keys(self, method: str, from_: str, to: str, pairs: list[str] = list()):
+        fk_data = {"from": from_, "to": to, "pairs": pairs}
         response = self.send_post_request_for_foreign_keys(f"maps-{method}-fk", fk_data)
         logger.info(f"Response: {response}")
         self.assertEqual(response.status_code, 200)
@@ -121,7 +121,7 @@ class DatapackageTest(TestCase):
 
     def send_post_request_for_foreign_keys(self, url_name: str, fk_data: dict):
         data = {'package': self.CATALOG_DIR} | fk_data
-        return self.client.post(reverse(url_name), data)
+        return self.client.post(reverse(url_name), json.dumps(data), content_type='application/json')
 
     ##########################################
     # TEST CASES FOR MANAGEMENT OF FILE RESOURCES
@@ -166,15 +166,15 @@ class DatapackageTest(TestCase):
 
     def test_add_remove_replace_append_kobotoolbox_resource(self):
         self.manage_kobotoolbox_resources('add')
-        self.manage_foreign_keys('remove', 'reg.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('add', 'reg.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'reg.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'ind.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'tsbf_001.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'barba_001.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'barbb_001.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'barbc_001.parent_id', 'inventaire_id._id')
-        self.manage_foreign_keys('remove', 'barbd_001.parent_id', 'inventaire_id._id')
+        self.manage_foreign_keys('remove', 'reg', 'inventaire_id')
+        self.manage_foreign_keys('add', 'reg', 'inventaire_id', list(['parent_id', '_id']))
+        self.manage_foreign_keys('remove', 'reg', 'inventaire_id')
+        self.manage_foreign_keys('remove', 'ind', 'inventaire_id')
+        self.manage_foreign_keys('remove', 'tsbf_001', 'inventaire_id')
+        self.manage_foreign_keys('remove', 'barba_001', 'inventaire_id')
+        self.manage_foreign_keys('remove', 'barbb_001', 'inventaire_id')
+        self.manage_foreign_keys('remove', 'barbc_001', 'inventaire_id')
+        self.manage_foreign_keys('remove', 'barbd_001', 'inventaire_id')
         self.manage_kobotoolbox_resources('remove')
         self.manage_kobotoolbox_resources('add')
         self.manage_kobotoolbox_resources('replace')
