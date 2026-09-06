@@ -47,7 +47,7 @@ function useLayerConfig(layerId: string) {
       };
     case LAYERS.ENQUETE:
       return {
-        label: t("filters.categories.actions.socioEco") as string,
+        label: t("layers.socioEco") as string,
         renderIcon: (checked?: boolean) => (
           <UsersIcon
             className={checked ? "text-socio-eco" : "text-muted"}
@@ -57,7 +57,7 @@ function useLayerConfig(layerId: string) {
       };
     case LAYERS.INVENTORY_FOR:
       return {
-        label: t("filters.categories.actions.forestInventory") as string,
+        label: t("layers.forestInventory") as string,
         renderIcon: (checked?: boolean) => (
           <TreePineIcon
             className={checked ? "text-forest-inventory" : "text-muted"}
@@ -67,7 +67,7 @@ function useLayerConfig(layerId: string) {
       };
     case LAYERS.INVENTORY_BIO:
       return {
-        label: t("filters.categories.actions.bioInventory") as string,
+        label: t("layers.bioInventory") as string,
         renderIcon: (checked?: boolean) => (
           <Binoculars
             className={checked ? "text-bio-inventory" : "text-muted"}

@@ -1,5 +1,6 @@
 import { type FC, useEffect, useState } from "react";
 
+import { getExternalDataPromiseByLayer } from "@features/external-data/getter";
 import { type SeedData, SeedIndicator } from "@features/indicators/seed";
 import {
   DEFAULT_POPUP_CONFIG,
@@ -11,7 +12,6 @@ import { useMap } from "@shared/hooks/use-map-seed";
 import { useApi } from "@shared/hooks/useApi";
 
 import { MapBase } from "./map-base";
-import { getExternalDataPromiseByLayer } from "./utils";
 
 export const MapSeed: FC = () => {
   const { isReady, mapContainerRef, mapApiRef } = useMap();

@@ -1,3 +1,9 @@
+LAYER_INVENTAIRE_FOR ='inventaire_for'
+LAYER_INVENTAIRE_BIO ='inventaire_bio'
+LAYER_ENQUETE ='enquete'
+
+ALL4TREES_LAYERS = [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
+
 # Configuration of Proportion / Average / Total on value or dict of values
 dict_fields_inventaire = {
     # Biodiversity

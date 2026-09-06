@@ -7,9 +7,6 @@
   "filters": {
     "categories": {
       "actions": {
-        "bioInventory": "Inventaire biologique",
-        "forestInventory": "Inventaire forestier",
-        "socioEco": "Enquête socio-économique",
         "title": "Actions menées"
       },
       "all": "Tout",
@@ -193,7 +190,10 @@
     }
   },
   "layers": {
+    "bioInventory": "Inventaire biologique",
     "boundaries": "Frontières",
+    "forestInventory": "Inventaire forestier",
+    "socioEco": "Enquête socio-économique",
     "towns": "Villes",
     "villages": "Villages"
   },

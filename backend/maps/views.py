@@ -1,5 +1,3 @@
-from coordo.map import Map
-from django.conf import settings
 from django.http import JsonResponse
 from django.contrib.auth.decorators import permission_required
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -8,21 +6,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from users.models import ADMIN_PROJECT
-from copy import copy
 from . import stats
+from .constants import LAYER_INVENTAIRE_FOR
 from .datapackage_manager import DatapackageManager
-
-ALL4TREES_LAYERS = ['inventaire_for', 'enquete', 'inventaire_bio']
-
-config_path = settings.BASE_DIR / "configs" / "all4trees_config.json"
-map = Map.from_file(config_path)
+from .services.user_map import get_user_map
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication])
 def my_map_view(request, subpath):
 
-    return JsonResponse(get_map(request.user).handle_request(
+    return JsonResponse(get_user_map(request.user).handle_request(
             request.method,
             subpath,
             request.body,
@@ -32,12 +25,12 @@ def my_map_view(request, subpath):
 @api_view(['GET'])
 @authentication_classes([JWTAuthentication])
 def dashboard_view(request, layer_id):
-    data = get_map(request.user).handle_request(
+    data = get_user_map(request.user).handle_request(
             'POST',
             layer_id,
             request.body)
 
-    if (layer_id == "inventaire_for"):
+    if (layer_id == LAYER_INVENTAIRE_FOR):
         result = stats.compute_aggregation(data)
         return JsonResponse(result)
 
@@ -104,17 +97,3 @@ def remove_foreign_key_view(request):
     View for adding a foreign key to a DataPackage.
     """
     return DatapackageManager(request).remove_foreign_key()
-
-
-def get_map(user):
-    user_map = copy(map)
-    filter = ''
-    if user.is_authenticated and bool(user.project):
-        project = user.project
-        if (project.lower() != ADMIN_PROJECT):
-            filter = f"proj = '{project}' or conf = 1"
-    else:
-        filter = 'conf = 1'
-
-    user_map.set_filters(ALL4TREES_LAYERS, filter)
-    return user_map

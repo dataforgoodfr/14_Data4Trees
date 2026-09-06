@@ -28,7 +28,7 @@ export const useCategoriesConfig = (): {
       />
     ),
     identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTORY_FOR,
-    label: t("filters.categories.actions.forestInventory"),
+    label: t("layers.forestInventory"),
   };
 
   const actionDiversity: CategoryGroupItem = {
@@ -39,7 +39,7 @@ export const useCategoriesConfig = (): {
       />
     ),
     identifier: CATEGORY_IDENTIFIERS.ACTION_INVENTORY_BIO,
-    label: t("filters.categories.actions.bioInventory"),
+    label: t("layers.bioInventory"),
   };
 
   const actionSocioEco: CategoryGroupItem = {
@@ -50,7 +50,7 @@ export const useCategoriesConfig = (): {
       />
     ),
     identifier: CATEGORY_IDENTIFIERS.ACTION_SOCIO,
-    label: t("filters.categories.actions.socioEco"),
+    label: t("layers.socioEco"),
   };
 
   // ----- Data type -----

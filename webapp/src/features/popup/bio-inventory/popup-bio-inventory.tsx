@@ -1,7 +1,8 @@
 import { cx } from "class-variance-authority";
 import { Leaf } from "lucide-react";
-import { type FC, use } from "react";
+import type { FC } from "react";
 
+import { useExternalData } from "@features/external-data/context";
 import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inventory";
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
@@ -19,13 +20,12 @@ type BioInventoryPopupContentProps = RenderPopupProps<BioInventoryData>;
 
 export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
   data,
-  externalDataPromise,
   className,
   ...headerProps
 }) => {
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
-  const externalData = use(externalDataPromise);
+  const externalData = useExternalData();
 
   const biodiversityElements = useBioInventoryIndicatorElements(
     data,

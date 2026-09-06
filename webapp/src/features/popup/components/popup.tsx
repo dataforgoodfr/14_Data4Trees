@@ -1,39 +1,31 @@
 import type { FC } from "react";
 
-import { SuspenseBoundary } from "@features/fallback/suspense-boundary";
-
-import { useSuspenseData } from "@shared/api/suspense-fetch";
+import type { ExternalDataFetcher } from "@features/external-data/getter";
+import { ExternalDataFetcherBoundary } from "@features/external-data/suspense-boundary";
 
 import type { RenderPopupProps } from "../renderPopup";
 
-type PromiseFunc = () => Promise<any>;
-
 type PopupProps = {
-  promiseFunc: PromiseFunc;
+  getExternalData: ExternalDataFetcher;
   PopupContent: FC<RenderPopupProps<any>>;
   childrenProps: any;
 };
 
 export const Popup: FC<PopupProps> = ({
-  promiseFunc,
+  getExternalData,
   PopupContent,
   childrenProps,
 }) => {
-  const { dataPromise: externalDataPromise, retry } = useSuspenseData({
-    fetcher: promiseFunc,
-  });
-
   return (
     <div className="h-(--popup-height) max-h-full">
-      <SuspenseBoundary
-        resource={externalDataPromise}
-        retry={retry}
-      >
-        <PopupContent
-          {...childrenProps}
-          externalDataPromise={externalDataPromise}
-        />
-      </SuspenseBoundary>
+      {/*
+       * Popups live in their own detached `createRoot`, outside <ApiProvider>,
+       * so the fetcher is built by the map widget and passed down rather than
+       * derived from useApi() here.
+       */}
+      <ExternalDataFetcherBoundary fetcher={getExternalData}>
+        <PopupContent {...childrenProps} />
+      </ExternalDataFetcherBoundary>
     </div>
   );
 };

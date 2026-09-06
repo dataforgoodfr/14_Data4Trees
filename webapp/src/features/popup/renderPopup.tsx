@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { createRoot } from "react-dom/client";
 
-import type { ExternalData } from "@entities/data";
+import type { ExternalDataFetcher } from "@features/external-data/getter";
 
 import type { LayerMetadata, PopupOptions } from "@shared/lib/coordo";
 
@@ -33,10 +33,7 @@ export type RenderPopupProps<T> = {
   className: string;
   data: T;
   metadata: LayerMetadata;
-  externalDataPromise: Promise<ExternalData>;
 } & Pick<IndicatorPopupHeaderProps, "onClose" | "toggleShiftSize">;
-
-export type GetExternalData = () => Promise<ExternalData>;
 
 export function getRenderPopupLayer<Properties>({
   Element,
@@ -45,7 +42,7 @@ export function getRenderPopupLayer<Properties>({
 }: {
   Element: FC<RenderPopupProps<Properties>>;
   toggleShiftSize: IndicatorPopupHeaderProps["toggleShiftSize"];
-  getExternalData: GetExternalData;
+  getExternalData: ExternalDataFetcher;
 }) {
   return (properties: Properties, metadata: LayerMetadata) => {
     const container = document.createElement("div");
@@ -62,8 +59,8 @@ export function getRenderPopupLayer<Properties>({
           onClose: () => root.unmount(),
           toggleShiftSize,
         }}
+        getExternalData={getExternalData}
         PopupContent={Element}
-        promiseFunc={getExternalData}
       />,
     );
     return container;
