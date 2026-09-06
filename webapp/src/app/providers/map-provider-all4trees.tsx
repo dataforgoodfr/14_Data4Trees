@@ -3,6 +3,7 @@ import { type ReactNode, useCallback, useRef, useState } from "react";
 import { useAuth } from "@features/auth";
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
 import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
+import { syncInitialLayerFilters } from "@features/map-filters/apply-layer-filter";
 
 import { API_URL } from "@shared/api/client";
 import { MapContext } from "@shared/contexts/map-context-all4trees";
@@ -56,6 +57,11 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
         hideLayer: mapApiRef.current?.hideLayer,
         showLayer: mapApiRef.current?.showLayer,
       });
+
+      const map = mapApiRef.current?.mapInstance;
+      if (map) {
+        syncInitialLayerFilters({ map });
+      }
     };
 
     node.addEventListener(EVENTS.MAP_READY, handleReady);
