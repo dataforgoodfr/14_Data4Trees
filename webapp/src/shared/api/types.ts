@@ -7,10 +7,13 @@ export type Filters = {
   project: {
     inventaire_for: FilterLeaf<string>;
     inventaire_bio: FilterLeaf<string>;
+    /** Served as `proj`: `groupby` keeps the source column name. */
+    enquete: FilterLeaf<string>;
   };
   loc1: {
     inventaire_for: FilterLeaf<number>;
     inventaire_bio: FilterLeaf<number>;
+    enquete: FilterLeaf<string>;
   };
   loc2: {
     inventaire_for: FilterLeaf<number>;
