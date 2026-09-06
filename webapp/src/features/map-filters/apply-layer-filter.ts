@@ -1,8 +1,14 @@
 import type { FilterSpecification, MapInstance } from "@shared/lib/coordo";
 
-import { FILTERABLE_LAYERS, readLayerFilters } from "./storage";
+import {
+  FILTERABLE_LAYERS,
+  readGlobalFilters,
+  readLayerFilters,
+} from "./storage";
 import {
   FILTER_KINDS,
+  type GlobalFilter,
+  type GlobalFiltersState,
   type LayerFilter,
   type LayerFiltersState,
 } from "./types";
@@ -106,28 +112,54 @@ const buildFilterClause = (filter: LayerFilter): FilterSpecification | null => {
 };
 
 /**
+ * Narrow a global filter down to one layer.
+ *
+ * Returns `null` when the layer does not expose the concept at all — the enquete
+ * layer has no `ecos`, for instance — so it stays unfiltered by that entry.
+ */
+const resolveGlobalFilter = (
+  globalFilter: GlobalFilter,
+  layerId: string,
+): LayerFilter | null => {
+  const propertyName = globalFilter.propertyNameByLayer[layerId];
+  if (!propertyName) return null;
+
+  const { propertyNameByLayer: _byLayer, ...filter } = globalFilter;
+  // Safe by construction: `GlobalFilter` is a `LayerFilter` whose `propertyName`
+  // was swapped for the per-layer map we just resolved.
+  return { ...filter, propertyName } as LayerFilter;
+};
+
+/**
  * Push a layer's whole filter state to the map: AND between groups, on top of
  * the layer's own base filter.
  *
  * WARNING: every clause targeting `layerId` must go through this one call —
- * MapLibre has a single filter slot per layer. A future cross-layer filter
- * (date, ranges…) has to contribute its clauses *here* rather than call
- * `setFilter` itself, or it would silently drop the per-layer ones.
+ * MapLibre has a single filter slot per layer, so a caller that runs
+ * `setFilter` itself would silently drop all the other clauses. That is why
+ * global filters are composed here rather than applied on their own.
  */
 export const applyLayerFilter = ({
   map,
   layerId,
   layerFilters,
+  globalFilters,
 }: {
   map: MapInstance;
   layerId: string;
   layerFilters: LayerFiltersState;
+  globalFilters: GlobalFiltersState;
 }) => {
   // The panel can render before the style declares the layer.
   if (!map.getLayer(layerId)) return;
 
   const baseFilter = getBaseFilter(map, layerId);
-  const clauses = Object.values(layerFilters)
+  const clauses = [
+    ...Object.values(layerFilters),
+    ...Object.values(globalFilters)
+      .map((globalFilter) => resolveGlobalFilter(globalFilter, layerId))
+      .filter((filter) => filter !== null),
+  ]
     .map(buildFilterClause)
     .filter((clause) => clause !== null);
 
@@ -142,14 +174,33 @@ export const applyLayerFilter = ({
 };
 
 /**
- * Replay the persisted filters onto a freshly loaded map.
+ * Recompute one layer's filter from the persisted state.
+ *
+ * Both sides are read from localStorage rather than from React state: the
+ * per-layer panel and the global panel own different pieces of the expression
+ * and never share a React tree, but `useLocalStorage` writes synchronously, so
+ * whichever one triggers the refresh sees the other's latest value.
  */
-export const syncInitialLayerFilters = ({ map }: { map: MapInstance }) => {
+export const refreshLayerFilter = ({
+  map,
+  layerId,
+}: {
+  map: MapInstance;
+  layerId: string;
+}) =>
+  applyLayerFilter({
+    globalFilters: readGlobalFilters(),
+    layerFilters: readLayerFilters(layerId),
+    layerId,
+    map,
+  });
+
+/**
+ * Recompute every layer — after a global filter changes, and on MAP_READY to
+ * replay the persisted state onto a freshly loaded map.
+ */
+export const refreshAllLayerFilters = ({ map }: { map: MapInstance }) => {
   FILTERABLE_LAYERS.forEach((layerId) => {
-    applyLayerFilter({
-      layerFilters: readLayerFilters(layerId),
-      layerId,
-      map,
-    });
+    refreshLayerFilter({ layerId, map });
   });
 };

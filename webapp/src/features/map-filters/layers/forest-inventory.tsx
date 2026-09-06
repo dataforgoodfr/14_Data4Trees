@@ -14,13 +14,31 @@ import { Card, CardTitle } from "@shared/ui/card";
 import { Separator } from "@shared/ui/separator";
 
 import { CheckboxGroup } from "../components/checkbox-group";
-import type { FilterGroup } from "../types";
+import type { FilterGroup, FilterValue } from "../types";
 import { useLayerFilters } from "../use-layer-filters";
 
+const LAYER_ID = LAYERS.INVENTORY_FOR;
+
 const GROUP_KEYS = {
-  Loc1: "loc1",
-  Project: "project",
+  COHORT: "cohort",
+  ECOS: "ecos",
+  LOC1: "loc1",
+  LOC2: "loc2",
+  PROJECT: "project",
+  TYPE: "type",
 } as const;
+
+/**
+ * `list_name` used by the external label tables. It is the *source* column name,
+ * not the property the map serves: `type` comes from `typ` on this layer (it is
+ * `meth` on inventaire_bio). Groups absent from this map show their raw value.
+ */
+const LABEL_LIST_NAMES: Record<string, string> = {
+  [GROUP_KEYS.ECOS]: "ecos",
+  [GROUP_KEYS.LOC1]: "loc1",
+  [GROUP_KEYS.LOC2]: "loc2",
+  [GROUP_KEYS.TYPE]: "typ",
+};
 
 const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
   filters,
@@ -28,33 +46,64 @@ const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
   const externalData = useExternalData();
   const { t, i18n } = useTranslation("all4trees");
   const { isReady } = useMap();
-  const { getCheckboxGroupProps } = useLayerFilters({
-    layerId: LAYERS.INVENTORY_FOR,
-  });
+  const { getCheckboxGroupProps } = useLayerFilters({ layerId: LAYER_ID });
 
-  const labelData = getLabelData({
-    externalData,
-    layerId: LAYERS.INVENTORY_FOR,
-  });
+  const labelData = getLabelData({ externalData, layerId: LAYER_ID });
 
-  const projects = filters[GROUP_KEYS.Project][LAYERS.INVENTORY_FOR];
-  const loc1s = filters[GROUP_KEYS.Loc1][LAYERS.INVENTORY_FOR];
-
-  const projectGroup: FilterGroup = {
-    key: GROUP_KEYS.Project,
-    propertyName: projects.property_name,
-    values: projects.values,
+  const leaves: Record<
+    string,
+    { property_name: string; values: FilterValue[] }
+  > = {
+    [GROUP_KEYS.COHORT]: filters.cohort[LAYER_ID],
+    [GROUP_KEYS.ECOS]: filters.ecos[LAYER_ID],
+    [GROUP_KEYS.LOC1]: filters.loc1[LAYER_ID],
+    [GROUP_KEYS.LOC2]: filters.loc2[LAYER_ID],
+    [GROUP_KEYS.PROJECT]: filters.project[LAYER_ID],
+    [GROUP_KEYS.TYPE]: filters.type[LAYER_ID],
   };
 
-  const loc1Group: FilterGroup = {
-    key: GROUP_KEYS.Loc1,
-    propertyName: loc1s.property_name,
-    values: loc1s.values,
+  // Label tables are keyed by project. Each layer carries a single project
+  // today, so the first value is the right lookup key; this becomes ambiguous
+  // the day a layer spans several projects.
+  const project = String(leaves[GROUP_KEYS.PROJECT].values[0]);
+
+  /**
+   * Labels come from the external data, keyed by `list_name` + a **numeric**
+   * `name`. `type` is served as a string ("1") because the map config does not
+   * wrap it in `int()` the way it does for loc1/loc2/ecos, so the value is
+   * coerced here rather than in the backend config. Falls back to the raw code
+   * when the label table has no entry for it.
+   */
+  const getGroupItemLabel = (groupKey: string, value: FilterValue) => {
+    const listName = LABEL_LIST_NAMES[groupKey];
+    if (!listName) return String(value);
+
+    return (
+      findLabel(labelData, project, i18n.language, listName, Number(value)) ??
+      String(value)
+    );
   };
 
-  const getLock1Label = (value: number) =>
-    findLabel(labelData, projects.values[0], i18n.language, "loc1", value) ??
-    value.toString();
+  const renderGroup = (groupKey: string, title: string) => {
+    const leaf = leaves[groupKey];
+    const group: FilterGroup = {
+      key: groupKey,
+      propertyName: leaf.property_name,
+      values: leaf.values,
+    };
+
+    return (
+      <CheckboxGroup
+        disabled={!isReady}
+        items={leaf.values.map((value) => ({
+          identifier: String(value),
+          label: getGroupItemLabel(groupKey, value),
+        }))}
+        title={title}
+        {...getCheckboxGroupProps(group)}
+      />
+    );
+  };
 
   return (
     <Card className="p-4 flex flex-col gap-2">
@@ -65,25 +114,12 @@ const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
 
       <Separator />
 
-      <CheckboxGroup
-        disabled={!isReady}
-        items={projects.values.map((value) => ({
-          identifier: value,
-          label: value,
-        }))}
-        title="Projects"
-        {...getCheckboxGroupProps(projectGroup)}
-      />
-
-      <CheckboxGroup
-        disabled={!isReady}
-        items={loc1s.values.map((value) => ({
-          identifier: value.toString(),
-          label: getLock1Label(value),
-        }))}
-        title="Loc1"
-        {...getCheckboxGroupProps(loc1Group)}
-      />
+      {renderGroup(GROUP_KEYS.PROJECT, t("filters.groups.project"))}
+      {renderGroup(GROUP_KEYS.TYPE, t("filters.groups.type"))}
+      {renderGroup(GROUP_KEYS.COHORT, t("filters.groups.cohort"))}
+      {renderGroup(GROUP_KEYS.LOC1, t("filters.groups.loc1"))}
+      {renderGroup(GROUP_KEYS.LOC2, t("filters.groups.loc2"))}
+      {renderGroup(GROUP_KEYS.ECOS, t("filters.groups.ecos"))}
     </Card>
   );
 };
@@ -94,7 +130,7 @@ export const MapFiltersForestInventory: FC<{ filters: Filters | null }> = ({
   if (!filters) return null;
 
   return (
-    <ExternalDataBoundary layerId={LAYERS.INVENTORY_FOR}>
+    <ExternalDataBoundary layerId={LAYER_ID}>
       <MapFiltersForestInventoryInner filters={filters} />
     </ExternalDataBoundary>
   );

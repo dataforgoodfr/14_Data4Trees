@@ -25,6 +25,18 @@
         "title": "Écosystème"
       }
     },
+    "global": {
+      "title": "Tous les calques"
+    },
+    "groups": {
+      "cohort": "Cohorte",
+      "ecos": "Écosystème",
+      "loc1": "Département",
+      "loc2": "Commune",
+      "project": "Projet",
+      "type": "Type de placette",
+      "year": "Année"
+    },
     "sidebarLayout": {
       "groupCategory": "Catégories",
       "groupFilters": "Filtres",

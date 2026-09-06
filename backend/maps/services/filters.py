@@ -1,70 +1,116 @@
-from ..constants import LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE
+from ..constants import (
+    ALL4TREES_LAYERS,
+    LAYER_ENQUETE,
+    LAYER_INVENTAIRE_BIO,
+    LAYER_INVENTAIRE_FOR,
+)
+
+########## FILTERS CONFIGURATION ##########
+
+# filter key -> {layer id: name of the property in that layer's GeoJSON features}
+#
+# The property is declared per layer because the same concept is not always
+# exposed under the same name (see configs/all4trees_config.json):
+#  - "cohort" is served as "start_date" on inventaire_bio, though both come from
+#    the same source column `coh`;
+#  - the enquete layer is built with "groupby", which keeps the raw source column
+#    names instead of the renamed ones, and exposes neither ecos, type nor cohort.
+# A layer absent from a filter simply has no values for it.
+FILTER_PROPERTIES_BY_LAYER = {
+    "project": {
+        LAYER_INVENTAIRE_FOR: "project",
+        LAYER_INVENTAIRE_BIO: "project",
+    },
+    "loc1": {
+        LAYER_INVENTAIRE_FOR: "loc1",
+        LAYER_INVENTAIRE_BIO: "loc1",
+    },
+    "loc2": {
+        LAYER_INVENTAIRE_FOR: "loc2",
+        LAYER_INVENTAIRE_BIO: "loc2",
+        LAYER_ENQUETE: "loc2",
+    },
+    "type": {
+        LAYER_INVENTAIRE_FOR: "type",
+        LAYER_INVENTAIRE_BIO: "type",
+    },
+    "cohort": {
+        LAYER_INVENTAIRE_FOR: "cohort",
+        LAYER_INVENTAIRE_BIO: "start_date",
+    },
+    "ecos": {
+        LAYER_INVENTAIRE_FOR: "ecos",
+        LAYER_INVENTAIRE_BIO: "ecos",
+    },
+    "year": {
+        LAYER_INVENTAIRE_FOR: "year",
+        LAYER_INVENTAIRE_BIO: "year",
+        LAYER_ENQUETE: "year",
+    },
+}
+
+# Several of these columns are optional in the datapackage; a null or blank would
+# render as an unusable checkbox in the sidebar.
+EMPTY_VALUES = (None, "")
 
 ########## FILTERS ENTRYPOINT ##########
- 
-def get_all4trees_filters(user_map):
-    # Retrieve all layers data
-    layer_inventaire_for = get_layer(user_map, LAYER_INVENTAIRE_FOR)
-    layer_inventaire_bio = get_layer(user_map, LAYER_INVENTAIRE_BIO)
-    layer_enquete = get_layer(user_map, LAYER_ENQUETE)
-    
-    # Retrieve the data points properties
-    layer_data_inventaire_for = get_layer_data_properties(layer_inventaire_for)
-    layer_data_inventaire_bio = get_layer_data_properties(layer_inventaire_bio)
-    layer_data_enquete = get_layer_data_properties(layer_enquete)
-    
-    # Compute filters values
-    project_values = get_project_values(
-        layer_data_inventaire_for=layer_data_inventaire_for,
-        layer_data_inventaire_bio=layer_data_inventaire_bio,
-    )
-    loc1_values = get_loc1_values(
-        layer_data_inventaire_for=layer_data_inventaire_for,
-        layer_data_inventaire_bio=layer_data_inventaire_bio,
-    )
-    
-    return {
-        "project": project_values,
-        "loc1": loc1_values,
-    }
-    
-def get_layer(user_map, layer_id):
-    return user_map.handle_request(method='POST',path=layer_id, filters={})
 
-def get_layer_data_properties(layer)-> list(dict):
-    features =  layer["features"]
+
+def get_all4trees_filters(user_map):
+    """
+    Values available for each frontend filter, per layer:
+
+        {filter key: {layer id: {"property_name": ..., "values": [...]}}}
+
+    Filtering itself happens client-side (setFilter or setLayerFilter).
+    This endpoint only tells the sidebar which values exist.
+    """
+    properties_by_layer = {
+        layer_id: get_layer_data_properties(get_layer(user_map, layer_id))
+        for layer_id in ALL4TREES_LAYERS
+    }
+
+    return {
+        filter_key: {
+            layer_id: get_filter_values(properties_by_layer[layer_id], property_name)
+            for layer_id, property_name in layers.items()
+        }
+        for filter_key, layers in FILTER_PROPERTIES_BY_LAYER.items()
+    }
+
+
+def get_layer(user_map, layer_id):
+    return user_map.handle_request(method="POST", path=layer_id, filters={})
+
+
+def get_layer_data_properties(layer) -> list[dict]:
+    features = layer["features"]
     return [feat["properties"] for feat in features]
 
-########## FILTERS PER PROPERTY ##########
 
-def get_project_values(
-    layer_data_inventaire_for,
-    layer_data_inventaire_bio,
-):
-    """Retrieve projects property on layers where this field exist"""
-    return {
-        LAYER_INVENTAIRE_FOR: {
-            "property_name": "project",
-            "values": list(set([item["project"] for item in layer_data_inventaire_for])),
-        },
-        LAYER_INVENTAIRE_BIO: {
-            "property_name": "project",
-            "values": list(set([item["project"] for item in layer_data_inventaire_bio])),
-        },
+########## FILTER VALUES ##########
+
+
+def get_filter_values(layer_data, property_name):
+    """
+    Distinct values of `property_name` across a layer's features.
+
+    Sorted so the sidebar keeps a stable order between reloads, and so that the
+    checkbox identifiers the webapp persists stay predictable.
+    """
+    values = {
+        properties[property_name]
+        for properties in layer_data
+        if properties.get(property_name) not in EMPTY_VALUES
     }
 
-def get_loc1_values(
-    layer_data_inventaire_for,
-    layer_data_inventaire_bio,
-):
-    """Retrieve loc1 property on layers where this field exist"""
+    try:
+        sorted_values = sorted(values)
+    except TypeError:
+        # Defensive: a column mixing types (int and str) is not comparable.
+        sorted_values = sorted(values, key=str)
+
     return {
-        LAYER_INVENTAIRE_FOR: {
-            "property_name": "loc1",
-            "values": list(set([item["loc1"] for item in layer_data_inventaire_for])),
-        },
-        LAYER_INVENTAIRE_BIO: {
-            "property_name": "loc1",
-            "values": list(set([item["loc1"] for item in layer_data_inventaire_bio])),
-        },
+        "property_name": property_name,
+        "values": sorted_values,
     }

@@ -5,7 +5,7 @@ import { useMap } from "@shared/hooks/use-map-all4trees";
 
 import type { CheckedState } from "@ui/checkbox";
 
-import { applyLayerFilter } from "./apply-layer-filter";
+import { refreshLayerFilter } from "./apply-layer-filter";
 import { getLayerFiltersStorageKey } from "./storage";
 import {
   FILTER_KINDS,
@@ -38,11 +38,14 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
     {},
   );
 
+  // `layerFilters` is the trigger, not the input: the refresh re-reads both this
+  // layer's entry and the global one from localStorage so the two compose.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <refreshAllLayerFilters must be triggered when globalFilters are updated>
   useEffect(() => {
     const map = mapApiRef.current?.mapInstance;
     if (!isReady || !map) return;
 
-    applyLayerFilter({ layerFilters, layerId, map });
+    refreshLayerFilter({ layerId, map });
   }, [isReady, layerFilters, layerId, mapApiRef]);
 
   /** Spread onto a `<CheckboxGroup>` to bind it to `group`. */

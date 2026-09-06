@@ -1,27 +1,46 @@
 import { LAYERS } from "@shared/api/layers";
 
-import type { LayerFiltersState } from "./types";
-
-/** Layers that expose a per-layer filter panel — one localStorage entry each. */
-export const FILTERABLE_LAYERS: string[] = [LAYERS.INVENTORY_FOR];
-
-export const getLayerFiltersStorageKey = (layerId: string) =>
-  `d4g:map-filters:${layerId}`;
+import type { GlobalFiltersState, LayerFiltersState } from "./types";
 
 /**
- * Read a layer's persisted filters outside React.
- *
- * `useLocalStorage` covers the component side; this is for the map-ready
- * initiator, which runs before (and independently of) the filter panel.
+ * Layers the filters are pushed to. A per-layer panel only touches its own
+ * entry, but a global filter is applied to every layer in this list, so a layer
+ * must be listed here to be reachable by the year filter.
  */
-export const readLayerFilters = (layerId: string): LayerFiltersState => {
+export const FILTERABLE_LAYERS: string[] = [
+  LAYERS.INVENTORY_FOR,
+  LAYERS.INVENTORY_BIO,
+  LAYERS.ENQUETE,
+];
+
+const STORAGE_PREFIX = "d4g:map-filters";
+
+export const getLayerFiltersStorageKey = (layerId: string) =>
+  `${STORAGE_PREFIX}:${layerId}`;
+
+/** Global filters live in their own entry, outside any layer namespace. */
+export const GLOBAL_FILTERS_STORAGE_KEY = `${STORAGE_PREFIX}:__global__`;
+
+const read = <T>(key: string, fallback: T): T => {
   try {
-    const item = window.localStorage.getItem(
-      getLayerFiltersStorageKey(layerId),
-    );
-    return item ? JSON.parse(item) : {};
+    const item = window.localStorage.getItem(key);
+    return item ? (JSON.parse(item) as T) : fallback;
   } catch (error) {
     console.error(error);
-    return {};
+    return fallback;
   }
 };
+
+/**
+ * Read persisted filters outside React.
+ *
+ * `useLocalStorage` covers the component side; these are for `applyLayerFilter`,
+ * which recomputes a layer's whole expression — per-layer *and* global — every
+ * time either side changes, and for the map-ready initiator that runs before the
+ * filter panels have mounted.
+ */
+export const readLayerFilters = (layerId: string): LayerFiltersState =>
+  read<LayerFiltersState>(getLayerFiltersStorageKey(layerId), {});
+
+export const readGlobalFilters = (): GlobalFiltersState =>
+  read<GlobalFiltersState>(GLOBAL_FILTERS_STORAGE_KEY, {});
