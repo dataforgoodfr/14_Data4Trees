@@ -10,6 +10,7 @@ from . import stats
 from .constants import LAYER_INVENTAIRE_FOR
 from .datapackage_manager import DatapackageManager
 from .services.user_map import get_user_map
+from .services.filters import get_all4trees_filters
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication])
@@ -38,6 +39,15 @@ def dashboard_view(request, layer_id):
         "error": f'Layer "{layer_id}" not yet supported'
     }, status=status.HTTP_501_NOT_IMPLEMENTED)
 
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+def get_filters(request):
+    """
+    Return filters values to be used frontend side for coordo filtering
+    """
+    user_map = get_user_map(request.user)
+    result = get_all4trees_filters(user_map)
+    return JsonResponse(result)
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])

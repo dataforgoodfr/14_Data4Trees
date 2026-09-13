@@ -3,8 +3,8 @@ import { type FallbackProps, getErrorMessage } from "react-error-boundary";
 
 import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
 
+import type { APIError } from "@shared/api/types";
 import { useTranslation } from "@shared/i18n";
-import type { APIError } from "@shared/lib/types";
 import { cn } from "@shared/lib/utils";
 import { Alert, AlertTitle } from "@shared/ui/alert";
 

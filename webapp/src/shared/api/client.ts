@@ -1,4 +1,4 @@
-import type { APIError } from "../lib/types";
+import type { APIError, Filters } from "./types";
 
 export const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:8000/api";
@@ -62,6 +62,8 @@ export const createApiClient = (authToken: string | null) => ({
     ),
   getDashboardData: (layerId: string) =>
     fetchJSONWithAuth(`/maps/dashboard/${layerId}`, {}, authToken),
+  getFilters: (): Promise<Filters> =>
+    fetchJSONWithAuth(`/maps/get-filters/`, {}, authToken),
 });
 
 export type ApiClient = ReturnType<typeof createApiClient>;
