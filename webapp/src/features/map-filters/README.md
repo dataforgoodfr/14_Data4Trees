@@ -9,13 +9,15 @@ and persisted in localStorage.
 | File | Role |
 | --- | --- |
 | `types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`. |
+| `constants.ts` | `GROUP_KEYS` — the group names shared by every layer. |
 | `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers. |
 | `apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
 | `use-layer-filters.ts` | React binding for one layer's own filters. |
 | `use-global-filters.ts` | React binding for the filters that apply to every layer. |
-| `layers/*.tsx` | One panel per layer, deciding which groups it shows. |
+| `layers/*.tsx` | One file per layer: which groups it shows, and how to label them. |
 | `global-filters.tsx` | The all-layers panel (year). |
-| `components/` | Presentational widgets (`CheckboxGroup`). |
+| `components/layer-filter-panel.tsx` | The shared card every layer panel renders. |
+| `components/checkbox-group.tsx` | Presentational checkbox list. |
 
 ## How it fits together
 
@@ -108,32 +110,59 @@ API served, since MapLibre compares strictly.
 
 ### Add a group to an existing layer
 
-In the layer's panel, build a `FilterGroup` and spread the hook's props:
+Add one `toPanelGroup(...)` entry to that layer's `groups` array:
 
 ```tsx
-const ecosGroup: FilterGroup = {
-  key: "ecos",
-  propertyName: ecos.property_name,   // from the getFilters() payload
-  values: ecos.values,
-};
-
-<CheckboxGroup
-  items={ecos.values.map((value) => ({ identifier: String(value), label: String(value) }))}
-  title="Ecosystem"
-  {...getCheckboxGroupProps(ecosGroup)}
-/>
+toPanelGroup({
+  key: GROUP_KEYS.ECOS,
+  labelListName: "ecos",          // omit to display the raw code
+  leaf: filters.ecos[LAYER_ID],   // from the getFilters() payload
+  title: t("filters.groups.ecos"),
+}),
 ```
 
 Nothing else to wire: the group key becomes its localStorage key, and the effect
 in `useLayerFilters` pushes the change to the map.
 
+If you ever render a `<CheckboxGroup>` yourself instead of going through
+`LayerFilterPanel`, pass a `namespace` (`<layerId>-<groupKey>`). Item identifiers
+are only unique within a group — `loc1`, `loc2` and `ecos` all start at 1, and
+every layer repeats the same codes — so without it the DOM ids collide and each
+label activates the first matching checkbox in the document, silently toggling
+another group's (or another layer's) box.
+
+### Labels
+
+`LayerFilterPanel` resolves a group's labels through `findLabel`, keyed by
+`list_name` + the project. Two traps, both handled per layer rather than
+globally:
+
+- **`list_name` is the *source* column**, not the property the map serves.
+  `type` looks up `typ` on inventaire_for but `meth` on inventaire_bio.
+- **`findLabel` compares strictly**, and the label tables disagree on the key
+  type: `for_label`/`bio_label` store numeric `name`, `hh_label` stores strings.
+  Hence the panel's `labelKeyType`: `NUMBER` for the inventory layers (whose
+  `type` is a string property that must be coerced), `STRING` for enquete (whose
+  codes are uncast strings all the way through). Getting this wrong shows raw
+  codes instead of names — the lookup fails silently and falls back.
+
+Labels are also keyed by project, and each panel passes `projects.values[0]`.
+That is correct while a layer carries a single project; it becomes ambiguous the
+day one spans several.
+
 ### Add a filterable layer
 
 1. Declare its properties in `FILTER_PROPERTIES_BY_LAYER` (backend `filters.py`)
    and extend the `Filters` type in `shared/api/types.ts`.
-2. Create `layers/<layer>.tsx` and render it from `map-filters.tsx`.
+2. Create `layers/<layer>.tsx`: wrap `<LayerFilterPanel>` in an
+   `<ExternalDataBoundary>` for the layer (the panel resolves labels through
+   `useExternalData`), and render it from `map-filters.tsx`.
 3. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
    are **not** replayed on reload and global filters never reach it.
+
+Which groups a layer can offer depends on what it actually serves. The enquete
+layer is built with `groupby`, so it only exposes the grouped columns (`proj`,
+`loc1`, `loc2`, `year`) plus aggregates — no type, cohort or ecos exist there.
 
 ### Add a global (all-layers) filter
 

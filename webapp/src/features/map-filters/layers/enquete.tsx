@@ -1,4 +1,4 @@
-import { TreePineIcon } from "lucide-react";
+import { UsersIcon } from "lucide-react";
 import type { FC } from "react";
 
 import { ExternalDataBoundary } from "@features/external-data/suspense-boundary";
@@ -14,11 +14,17 @@ import {
 } from "../components/layer-filter-panel";
 import { GROUP_KEYS } from "../constants";
 
-const LAYER_ID = LAYERS.INVENTORY_FOR;
+const LAYER_ID = LAYERS.ENQUETE;
 
-const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
-  filters,
-}) => {
+/**
+ * This layer is built with `groupby`, so it only exposes the grouped columns
+ * (`proj`, `loc1`, `loc2`, `year`) plus aggregates — there is no type, cohort or
+ * ecos to filter on. `year` is covered by the global panel.
+ *
+ * Its values are also uncast strings, and `hh_label` keys its rows by a string
+ * `name`, hence `LABEL_KEY_TYPES.STRING` where the inventory layers use NUMBER.
+ */
+const MapFiltersEnqueteInner: FC<{ filters: Filters }> = ({ filters }) => {
   const { t } = useTranslation("all4trees");
 
   const projects = filters.project[LAYER_ID];
@@ -32,18 +38,6 @@ const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
           title: t("filters.groups.project"),
         }),
         toPanelGroup({
-          key: GROUP_KEYS.TYPE,
-          // Served from the `typ` source column on this layer.
-          labelListName: "typ",
-          leaf: filters.type[LAYER_ID],
-          title: t("filters.groups.type"),
-        }),
-        toPanelGroup({
-          key: GROUP_KEYS.COHORT,
-          leaf: filters.cohort[LAYER_ID],
-          title: t("filters.groups.cohort"),
-        }),
-        toPanelGroup({
           key: GROUP_KEYS.LOC1,
           labelListName: "loc1",
           leaf: filters.loc1[LAYER_ID],
@@ -55,33 +49,25 @@ const MapFiltersForestInventoryInner: FC<{ filters: Filters }> = ({
           leaf: filters.loc2[LAYER_ID],
           title: t("filters.groups.loc2"),
         }),
-        toPanelGroup({
-          key: GROUP_KEYS.ECOS,
-          labelListName: "ecos",
-          leaf: filters.ecos[LAYER_ID],
-          title: t("filters.groups.ecos"),
-        }),
       ]}
-      headerClassName="text-forest-inventory"
-      icon={<TreePineIcon size={18} />}
-      labelKeyType={LABEL_KEY_TYPES.NUMBER}
+      headerClassName="text-socio-eco"
+      icon={<UsersIcon size={18} />}
+      labelKeyType={LABEL_KEY_TYPES.STRING}
       layerId={LAYER_ID}
-      // Label tables are keyed by project. Each layer carries a single project
-      // today; this becomes ambiguous the day one spans several.
       project={String(projects.values[0])}
-      title={t("layers.forestInventory")}
+      title={t("layers.socioEco")}
     />
   );
 };
 
-export const MapFiltersForestInventory: FC<{ filters: Filters | null }> = ({
+export const MapFiltersEnquete: FC<{ filters: Filters | null }> = ({
   filters,
 }) => {
   if (!filters) return null;
 
   return (
     <ExternalDataBoundary layerId={LAYER_ID}>
-      <MapFiltersForestInventoryInner filters={filters} />
+      <MapFiltersEnqueteInner filters={filters} />
     </ExternalDataBoundary>
   );
 };

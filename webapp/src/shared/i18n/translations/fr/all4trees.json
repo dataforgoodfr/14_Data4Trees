@@ -35,6 +35,7 @@
       "loc2": "Commune",
       "project": "Projet",
       "type": "Type de placette",
+      "typeBio": "Type de dispositif",
       "year": "Année"
     },
     "sidebarLayout": {
