@@ -125,6 +125,7 @@
         "loc1": "int(loc1)",
         "loc2": "int(loc2)",
         "start_date": "coh",
+        "cohort": "coh",
         "taxon": "tax",
         "type": "meth",
         "samp_area": "inv_samp",
@@ -166,6 +167,7 @@
       },
       "columns": {
         "geom": "centroid(merge(point(hh_gps.long, hh_gps.latit)))",
+        "project": "proj",
         "household_nb": "count(_id)",
         "population": "sum(res)",
         "fuel_sources": "list_aggregate(flatten(list(ener)), 'histogram')",
