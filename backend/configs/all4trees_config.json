@@ -127,7 +127,8 @@
         "start_date": "coh",
         "cohort": "coh",
         "taxon": "tax",
-        "type": "meth",
+        "type": "typ",
+        "meth": "meth",
         "samp_area": "inv_samp",
         "samp_unit": "inv_unit",
         "density": "int(sum(inv_001.no)) / inv_samp",
@@ -168,6 +169,8 @@
       "columns": {
         "geom": "centroid(merge(point(hh_gps.long, hh_gps.latit)))",
         "project": "proj",
+        "type": "typ",
+        "cohort": "coh",
         "household_nb": "count(_id)",
         "population": "sum(res)",
         "fuel_sources": "list_aggregate(flatten(list(ener)), 'histogram')",
