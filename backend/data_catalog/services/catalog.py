@@ -9,7 +9,7 @@ from rest_framework.exceptions import NotFound
 
 CATALOG_PATH = settings.BASE_DIR / "catalog"
 
-def get_json_resource(layer_id, resource_name):
+def get_resource(layer_id, resource_name):
     """
     Get the JSON representation of a resource from a DataPackage.
     """
@@ -19,8 +19,7 @@ def get_json_resource(layer_id, resource_name):
     if not Path(resource_path).exists():
         raise NotFound(f"Resource with name '{resource_name}' was not found in the package {layer_id}")
 
-    resource_df = pd.read_parquet(resource_path)
-    return json.loads(resource_df.to_json(orient="records"))
+    return pd.read_parquet(resource_path)
 
 def get_resource_path(layer_id, resource_name):
     package_path = get_package_path(layer_id)

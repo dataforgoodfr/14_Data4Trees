@@ -45,3 +45,15 @@ dict_fields_inventaire = {
     'soil_surface_fauna_diversity': 'average-value',
     'soil_surface_fauna_abundance': 'average-dict',
 }
+
+label_data_by_layer = {
+    LAYER_INVENTAIRE_FOR: "for_label",
+    LAYER_INVENTAIRE_BIO: "bio_label",
+    LAYER_ENQUETE: "hh_label"
+}
+
+label_data_dtypes = {
+'proj': str,
+'list_name': str,
+'name':str
+}
