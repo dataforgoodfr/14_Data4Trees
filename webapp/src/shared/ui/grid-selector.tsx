@@ -5,6 +5,7 @@ import { cn } from "@shared/lib/utils";
 type Option = {
   label: string;
   id: string;
+  disabled?: boolean;
 };
 
 type GridSelectorProps = {
@@ -36,6 +37,7 @@ export const GridSelector: FC<GridSelectorProps> = ({
               "text-muted-foreground hover:text-foreground hover:cursor-pointer border-transparent":
                 !isSelected,
             })}
+            disabled={option.disabled}
             key={`grid-selector-option-${option.id}`}
             onClick={() => onChange(option.id)}
             type="button"
