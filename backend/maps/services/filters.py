@@ -1,66 +1,18 @@
 from ..constants import (
     ALL4TREES_LAYERS,
-    LAYER_ENQUETE,
-    LAYER_INVENTAIRE_BIO,
-    LAYER_INVENTAIRE_FOR,
-    label_data_by_layer,
+    LABEL_RESOURCE_BY_LAYER,
 )
 
 from data_catalog.services.catalog import get_resource
 
 ########## FILTERS CONFIGURATION ##########
 
-# filter key -> {layer id: name of the property in that layer's GeoJSON features}
-#
-# The property is declared per layer because the same concept is not always
-# exposed under the same name (see configs/all4trees_config.json):
-#  - "cohort" is served as "start_date" on inventaire_bio, though both come from
-#    the same source column `coh`;
-#  - the enquete layer is built with "groupby", which keeps the raw source column
-#    names instead of the renamed ones, and exposes neither ecos, type nor cohort.
-# A layer absent from a filter simply has no values for it.
-FILTER_PROPERTIES_BY_LAYER = {
-    "project": {
-        LAYER_INVENTAIRE_FOR: "project",
-        LAYER_INVENTAIRE_BIO: "project",
-        LAYER_ENQUETE: "project",
-    },
-    "loc1": {
-        LAYER_INVENTAIRE_FOR: "loc1",
-        LAYER_INVENTAIRE_BIO: "loc1",
-        LAYER_ENQUETE: "loc1",
-    },
-    "loc2": {
-        LAYER_INVENTAIRE_FOR: "loc2",
-        LAYER_INVENTAIRE_BIO: "loc2",
-        LAYER_ENQUETE: "loc2",
-    },
-    "type": {
-        LAYER_INVENTAIRE_FOR: "type",
-        LAYER_INVENTAIRE_BIO: "type",
-        LAYER_ENQUETE: "type"
-    },
-    "cohort": {
-        LAYER_INVENTAIRE_FOR: "cohort",
-        LAYER_INVENTAIRE_BIO: "cohort",
-        LAYER_ENQUETE: "cohort"
-    },
-    "ecos": {
-        LAYER_INVENTAIRE_FOR: "ecos",
-        LAYER_INVENTAIRE_BIO: "ecos",
-    },
-    "year": {
-        LAYER_INVENTAIRE_FOR: "year",
-        LAYER_INVENTAIRE_BIO: "year",
-        LAYER_ENQUETE: "year",
-    },
-}
-
-# Because the label data imported by All4Trees is bad and contains a column 'name' with mixed types,
-# when readin the parquet file the dataframe column is converted to one type.
-# For the layer 'inentory_for', this column is discovered as 'float',
-# hence all loc1, loc2, ecos and typ values are set to values like 1.0 instead of 1.
-# Therefore we need to cast the property to the matching type, adding a layer of complexity...
+# All4Trees Label data contains a column 'name' corresponding the values for labels, but for every kind of property.
+# Therefore 'name' values may have different types but they have been inferred to one type.
+# For the layer 'inventory_for', this column 'name' is of type 'float',
+# Therefore properties like loc1, loc2, ecos and typ have float values like 1.0 instead of 1.
+# The corresponding properties in map data are 'integer' values so we need to cast the property 
+# to the matching inferred type in the label data, adding a layer of complexity...
 LAYER_PROPERTY_TO_LABEL_PROPERTIES = {
     "project": {
         "name": "proj",
@@ -85,6 +37,10 @@ LAYER_PROPERTY_TO_LABEL_PROPERTIES = {
     "cohort": {
         "name": "coh",
         "type": str
+    },
+    "year" : {
+        "name": "year",
+        "type": int
     }
 }
 
@@ -111,10 +67,10 @@ def get_all4trees_filters(user_map):
 
     return {
         filter_key: {
-            layer_id: get_filter_values(layer_id, properties_by_layer[layer_id], property_name)
-            for layer_id, property_name in layers.items()
+            layer_id: get_filter_values(layer_id, properties_by_layer[layer_id], filter_key)
+            for layer_id in ALL4TREES_LAYERS
         }
-        for filter_key, layers in FILTER_PROPERTIES_BY_LAYER.items()
+        for filter_key in LAYER_PROPERTY_TO_LABEL_PROPERTIES
     }
 
 
@@ -137,7 +93,7 @@ def get_filter_values(layer_id, layer_data, property_name):
     Sorted so the sidebar keeps a stable order between reloads, and so that the
     checkbox identifiers the webapp persists stay predictable.
     """
-    label_data = get_resource(layer_id, label_data_by_layer[layer_id])
+    label_data = get_resource(layer_id, LABEL_RESOURCE_BY_LAYER[layer_id])
 
     values = {
         tuple(get_labelized_value(properties, property_name, label_data).items())
@@ -175,7 +131,7 @@ def get_labelized_value(properties, property_name, label_data):
     value = properties[property_name]
     value_type = get_label_name_type(property_name)
 
-    ## Filter ros to keep only the one correspondin the the project and property_name
+    ## Filter rows to keep only the row corresponding the the project and property_name
     label_candidates = label_data[
         (label_data['proj'] == properties['project'])
         & (label_data['list_name'] == get_label_list_name(property_name))
@@ -185,7 +141,6 @@ def get_labelized_value(properties, property_name, label_data):
         label_candidates['name'].map(value_type) == value_type(value)
     ]
 
-    # If a row has been found, return the labels
     if not label.empty:
         return {
             "value": value,
