@@ -23,8 +23,7 @@ FILTER_PROPERTIES_BY_LAYER = {
     "project": {
         LAYER_INVENTAIRE_FOR: "project",
         LAYER_INVENTAIRE_BIO: "project",
-        # Not renamed on this layer: "groupby" keeps the source column name.
-        LAYER_ENQUETE: "proj",
+        LAYER_ENQUETE: "project",
     },
     "loc1": {
         LAYER_INVENTAIRE_FOR: "loc1",
@@ -39,10 +38,12 @@ FILTER_PROPERTIES_BY_LAYER = {
     "type": {
         LAYER_INVENTAIRE_FOR: "type",
         LAYER_INVENTAIRE_BIO: "type",
+        LAYER_ENQUETE: "type"
     },
     "cohort": {
         LAYER_INVENTAIRE_FOR: "cohort",
-        LAYER_INVENTAIRE_BIO: "start_date",
+        LAYER_INVENTAIRE_BIO: "cohort",
+        LAYER_ENQUETE: "cohort"
     },
     "ecos": {
         LAYER_INVENTAIRE_FOR: "ecos",
