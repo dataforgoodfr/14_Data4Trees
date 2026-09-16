@@ -88,4 +88,4 @@ class FiltersServiceTest(SimpleTestCase):
 		self.assertEqual(get_label_list_name("type"), "typ")
 		self.assertIs(get_label_name_type("type"), float)
 		self.assertEqual(get_label_list_name("year"), "year")
-		self.assertIs(get_label_name_type("year"), str)
+		self.assertIs(get_label_name_type("year"), int)
