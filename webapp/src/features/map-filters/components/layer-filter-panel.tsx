@@ -1,4 +1,5 @@
 import { cx } from "class-variance-authority";
+import { ChevronDownIcon } from "lucide-react";
 import type { FC, ReactNode } from "react";
 
 import { useExternalData } from "@features/external-data/context";
@@ -8,6 +9,11 @@ import { findLabel } from "@features/indicators/labels";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@shared/i18n";
 import { Card, CardTitle } from "@shared/ui/card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@shared/ui/collapsible";
 import { Separator } from "@shared/ui/separator";
 
 import type { FilterGroup, FilterValue } from "../types";
@@ -108,33 +114,39 @@ export const LayerFilterPanel: FC<LayerFilterPanelProps> = ({
   };
 
   return (
-    <Card className="p-4 flex flex-col gap-2">
-      <div
-        className={cx(
-          "flex flex-row justify-start items-center gap-1",
-          headerClassName,
-        )}
-      >
-        {icon}
-        <CardTitle>{title}</CardTitle>
-      </div>
+    <Collapsible key={`collapse-${layerId}`}>
+      <Card className="p-4 flex flex-col gap-2">
+        <CollapsibleTrigger
+          className={cx(
+            "flex flex-row justify-start items-center gap-1",
+            "hover:cursor-pointer group/button",
+            headerClassName,
+          )}
+        >
+          {icon}
+          <CardTitle>{title}</CardTitle>
+          <ChevronDownIcon className="ml-auto group-aria-[expanded=true]/button:rotate-180" />
+        </CollapsibleTrigger>
 
-      <Separator />
+        <CollapsibleContent className="flex flex-col gap-2">
+          <Separator />
 
-      {groups.map((group) => (
-        <CheckboxGroup
-          disabled={!isReady}
-          items={group.values.map((value) => ({
-            identifier: String(value),
-            label: getItemLabel(group, value),
-          }))}
-          key={group.key}
-          // Codes repeat across groups and layers, so the DOM ids need both.
-          namespace={`${layerId}-${group.key}`}
-          title={group.title}
-          {...getCheckboxGroupProps(group)}
-        />
-      ))}
-    </Card>
+          {groups.map((group) => (
+            <CheckboxGroup
+              disabled={!isReady}
+              items={group.values.map((value) => ({
+                identifier: String(value),
+                label: getItemLabel(group, value),
+              }))}
+              key={group.key}
+              // Codes repeat across groups and layers, so the DOM ids need both.
+              namespace={`${layerId}-${group.key}`}
+              title={group.title}
+              {...getCheckboxGroupProps(group)}
+            />
+          ))}
+        </CollapsibleContent>
+      </Card>
+    </Collapsible>
   );
 };
