@@ -8,33 +8,59 @@ and persisted in localStorage.
 
 | File | Role |
 | --- | --- |
-| `types.ts` | Persisted state shape. `FILTER_KINDS` + the `LayerFilter` union. |
-| `storage.ts` | localStorage key per layer, `FILTERABLE_LAYERS`, non-React reader. |
-| `apply-layer-filter.ts` | Expression building and the actual `setFilter` call. |
-| `use-layer-filters.ts` | React binding: persisted state + checkbox props + push to map. |
+| `types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`. |
+| `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers. |
+| `apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
+| `use-layer-filters.ts` | React binding for one layer's own filters. |
+| `use-global-filters.ts` | React binding for the filters that apply to every layer. |
 | `layers/*.tsx` | One panel per layer, deciding which groups it shows. |
+| `global-filters.tsx` | The all-layers panel (year). |
 | `components/` | Presentational widgets (`CheckboxGroup`). |
 
 ## How it fits together
 
 ```text
 layers/forest-inventory.tsx     declares its FilterGroups (key + propertyName + values)
-  └─ useLayerFilters(layerId)   reads/writes localStorage, hands back checkbox props
-       └─ applyLayerFilter()    builds ["all", …] and calls map.setFilter(layerId, …)
+  └─ useLayerFilters(layerId)   reads/writes this layer's localStorage entry
+       └─ refreshLayerFilter()  recomputes that layer
+
+global-filters.tsx              declares GlobalFilterGroups (values unioned across layers)
+  └─ useGlobalFilters()         reads/writes the single global entry
+       └─ refreshAllLayerFilters()  recomputes every FILTERABLE_LAYER
+
+both end in applyLayerFilter()  ["all", baseFilter, …layerClauses, …globalClauses]
+                                 → map.setFilter(layerId, …)
 ```
 
-On reload, `syncInitialLayerFilters({ map })` replays the persisted state. It runs
-from `map-provider-all4trees.tsx` on `MAP_READY`, **not** from the panel — the
-sidebar keeps the panel in a hidden `<Activity>` until its tab is opened, so the
-panel's effects would not have run yet.
+`refreshLayerFilter` re-reads **both** entries from localStorage rather than
+taking React state. The two panels never share a React tree, and
+`useLocalStorage` does not sync across hook instances, but it writes
+synchronously — so whichever side triggers a refresh sees the other's latest
+value. That is also why a global change has to refresh every layer.
+
+On reload, `refreshAllLayerFilters({ map })` replays the persisted state. It runs
+from `map-provider-all4trees.tsx` on `MAP_READY`, **not** from the panels — the
+sidebar keeps them in a hidden `<Activity>` until its tab is opened, so their
+effects would not have run yet.
 
 ## State shape
 
 ```ts
 // localStorage["d4g:map-filters:inventaire_for"]
 {
-  "project": { kind: "values", propertyName: "proj", values: ["A", "B"] },
-  "loc1":    { kind: "values", propertyName: "loc1", values: [3, 7] }
+  "project": { kind: "values", propertyName: "project", values: ["A Kob Ale"] },
+  "loc1":    { kind: "values", propertyName: "loc1",    values: [1, 3] }
+}
+
+// localStorage["d4g:map-filters:__global__"]
+{
+  "year": {
+    kind: "values",
+    values: ["2025", "2026"],
+    // Resolved per layer: the same concept is not the same property everywhere
+    // (cohort/start_date, project/proj). A layer absent here is left alone.
+    propertyNameByLayer: { inventaire_for: "year", inventaire_bio: "year", enquete: "year" }
+  }
 }
 ```
 
@@ -61,8 +87,22 @@ identifiers are strings, so the hook maps between them with `String(value)`.
 
 > **Never call `map.setFilter()` for a filterable layer from anywhere else.** The
 > single filter slot means the last caller wins and silently drops every other
-> clause. Cross-cutting filters (a global date, say) must contribute their
-> clauses through `applyLayerFilter`.
+> clause. That is why global filters are composed inside `applyLayerFilter`
+> rather than applied on their own.
+
+## Where the values come from
+
+`GET /maps/get-filters/` returns `{filter key: {layer id: {property_name, values}}}`,
+built by `backend/maps/services/filters.py`. `FILTER_PROPERTIES_BY_LAYER` there
+declares the property **per layer**, because the same concept is not always
+exposed under the same name — `cohort` is served as `start_date` on
+inventaire_bio, and the enquete layer is built with `groupby`, which keeps the
+raw source columns (`proj`, uncast `loc1`/`loc2`) instead of the renamed ones.
+
+Value types follow the map config (`backend/configs/all4trees_config.json`):
+`loc1`/`loc2`/`ecos` are wrapped in `int()` so they arrive as numbers, while
+`type` and `year` are not and arrive as strings. Filters keep whatever type the
+API served, since MapLibre compares strictly.
 
 ## Recipes
 
@@ -89,9 +129,23 @@ in `useLayerFilters` pushes the change to the map.
 
 ### Add a filterable layer
 
-1. Create `layers/<layer>.tsx` and render it from `map-filters.tsx`.
-2. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
-   apply while the panel is open but are **not** replayed on reload.
+1. Declare its properties in `FILTER_PROPERTIES_BY_LAYER` (backend `filters.py`)
+   and extend the `Filters` type in `shared/api/types.ts`.
+2. Create `layers/<layer>.tsx` and render it from `map-filters.tsx`.
+3. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
+   are **not** replayed on reload and global filters never reach it.
+
+### Add a global (all-layers) filter
+
+1. Add the filter key to `FILTER_PROPERTIES_BY_LAYER` backend-side, listing every
+   layer that exposes it.
+2. In `global-filters.tsx`, build the group with `buildGlobalFilterGroup({ key,
+   leavesByLayer: filters.<key> })` — it unions the values for the checkbox list
+   and keeps each layer's own property name — then render a `CheckboxGroup` with
+   `getCheckboxGroupProps(group)` from `useGlobalFilters()`.
+
+Nothing else: `applyLayerFilter` already composes global clauses into every
+layer's expression, and a change refreshes all layers.
 
 ### Add a filter kind
 
