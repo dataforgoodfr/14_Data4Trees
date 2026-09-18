@@ -16,7 +16,7 @@ from data_catalog.services.catalog import get_resource
 # For the layer 'inventory_for', the column 'name' has been inferred to the type 'float' when imported.
 # Therefore properties like loc1, loc2, ecos and typ have float values like 1.0 instead of 1.
 # In the MapLibre map's FeatureCollection, these properties are of 'integer' type,
-# so we need to cast the properties so they have the same type as in label data, hence the 'type' prop here.
+# so we need to cast the properties so they have the same type as in label data, hence the 'type' prop here.    
 LAYER_PROPERTY_TO_LABEL_PROPERTIES = {
     "project": {
         "name": "proj",
@@ -114,7 +114,7 @@ def get_filter_values(layer_id, layer_data, property_name):
 
     return {
         "property_name": property_name,
-        "values": sort_filter_values(values),
+        "values": [dict(value) for value in sort_filter_values(values)],
     }
 
 def sort_filter_values(values):
