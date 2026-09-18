@@ -71,16 +71,16 @@ class FiltersServiceTest(SimpleTestCase):
 		self.assertEqual(
 			result["values"],
 			[
-				(
-					("value", 1),
-					("label::fr", "Type 1"),
-					("label::en", "Type 1"),
-				),
-				(
-					("value", 2),
-					("label::fr", "Type 2"),
-					("label::en", "Type 2"),
-				),
+				{
+					"value": 1,
+					"label::fr": "Type 1",
+					"label::en": "Type 1",
+				},
+				{
+					"value": 2,
+					"label::fr": "Type 2",
+					"label::en": "Type 2",
+				},
 			],
 		)
 
