@@ -1,46 +1,57 @@
 from ..constants import (
     ALL4TREES_LAYERS,
     LABEL_RESOURCE_BY_LAYER,
+    LAYER_INVENTAIRE_BIO,
+    LAYER_INVENTAIRE_FOR,
+    LAYER_ENQUETE,
 )
 
 from data_catalog.services.catalog import get_resource
 
 ########## FILTERS CONFIGURATION ##########
 
-# All4Trees Label data contains a column 'name' corresponding the values for labels, but for every kind of property.
-# Therefore 'name' values may have different types but they have been inferred to one type.
-# For the layer 'inventory_for', this column 'name' is of type 'float',
+# All4Trees Label data is one big table containing all the labels for all properties (see catalog/inventaire_for/for_label.parquet).
+# Therefore it mixes properties with different types, like 'loc1' property (int) and 'struc' property (float) in inventaire_for layer.
+# Therefore the 'name' column corresponding to properties' values contain mixed types.
+# For the layer 'inventory_for', the column 'name' has been inferred to the type 'float' when imported.
 # Therefore properties like loc1, loc2, ecos and typ have float values like 1.0 instead of 1.
-# The corresponding properties in map data are 'integer' values so we need to cast the property 
-# to the matching inferred type in the label data, adding a layer of complexity...
+# In the MapLibre map's FeatureCollection, these properties are of 'integer' type,
+# so we need to cast the properties so they have the same type as in label data, hence the 'type' prop here.
 LAYER_PROPERTY_TO_LABEL_PROPERTIES = {
     "project": {
         "name": "proj",
-        "type": str
+        "type": str,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     },
     "loc1": {
         "name": "loc1",
-        "type": float
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     },
     "loc2": {
         "name": "loc2",
-        "type": float
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     },
     "ecos": {
         "name": "ecos",
-        "type": float
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO]
     },
     "type": {
         "name": "typ",
-        "type": float
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO]
     },
     "cohort": {
         "name": "coh",
-        "type": str
+        "type": str,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO]
     },
     "year" : {
         "name": "year",
-        "type": int
+        "type": int,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     }
 }
 
@@ -68,9 +79,9 @@ def get_all4trees_filters(user_map):
     return {
         filter_key: {
             layer_id: get_filter_values(layer_id, properties_by_layer[layer_id], filter_key)
-            for layer_id in ALL4TREES_LAYERS
+            for layer_id in filter_props["layers"]
         }
-        for filter_key in LAYER_PROPERTY_TO_LABEL_PROPERTIES
+        for filter_key, filter_props in LAYER_PROPERTY_TO_LABEL_PROPERTIES.items()
     }
 
 
