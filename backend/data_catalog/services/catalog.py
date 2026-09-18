@@ -1,6 +1,5 @@
 
 from django.conf import settings
-import json
 from pathlib import Path
 
 import pandas as pd
