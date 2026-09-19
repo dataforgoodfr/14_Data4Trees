@@ -1,9 +1,12 @@
 import { cx } from "class-variance-authority";
-import { UsersIcon } from "lucide-react";
+import { Calendar, UsersIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 
 import { useExternalData } from "@features/external-data/context";
-import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import {
+  ICON_SIZE,
+  ICON_SIZE_HEADER,
+} from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { useEconomicIndicatorElements } from "@features/indicators/economy";
@@ -55,17 +58,23 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
     [TABS.ECONOMY]: t("indicators.economy.title"),
   };
 
+  const date = t("popup.common.date", { date: formatDate(new Date()) });
+
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.common.date", { date: formatDate(new Date()) })}
         icon={<UsersIcon size={ICON_SIZE_HEADER} />}
         subtitle={t("popup.socioEco.subtitleCount", {
           count: data.household_nb,
         })}
         title={title}
         {...headerProps}
-      />
+      >
+        <div className="flex col-span-4 flex-row items-center gap-1 text-muted-foreground">
+          <Calendar size={ICON_SIZE} />
+          <p className="pt-0.5">{date}</p>
+        </div>
+      </IndicatorPopupHeader>
 
       <GridSelector
         className="m-2 text-base"

@@ -1,10 +1,13 @@
 import { cx } from "class-variance-authority";
-import { Leaf } from "lucide-react";
+import { Calendar, Leaf } from "lucide-react";
 import type { FC } from "react";
 
 import { useExternalData } from "@features/external-data/context";
 import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inventory";
-import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import {
+  ICON_SIZE,
+  ICON_SIZE_HEADER,
+} from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { findLabel } from "@features/indicators/labels";
@@ -41,14 +44,14 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
     t("dataManagement.undefined", { ns: "common" })
   }`;
 
+  const date = t("popup.common.date", {
+    date: formatDate(new Date()),
+    ns: "all4trees",
+  });
+
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.common.date", {
-          date: formatDate(new Date()),
-          ns: "all4trees",
-        })}
-        ecos={ecos}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
           findLabel(
@@ -61,7 +64,17 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
         }
         title={title}
         {...headerProps}
-      />
+      >
+        <div className="flex grid-cols-2 gap-3">
+          <div>
+            <h3>{ecos}</h3>
+            <div className="flex col-span-4 flex-row items-center gap-1 text-muted-foreground">
+              <Calendar size={ICON_SIZE} />
+              <p className="pt-0.5">{date}</p>
+            </div>
+          </div>
+        </div>
+      </IndicatorPopupHeader>
 
       <IndicatorScrollContainer>
         <IndicatorElements elements={biodiversityElements} />

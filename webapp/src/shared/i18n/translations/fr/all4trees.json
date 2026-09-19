@@ -193,6 +193,9 @@
       "minPerHhPerDay": "{{ value }} min/ménage/jour",
       "monthPerYear": "{{ value }} mois/an",
       "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
+      "species": "",
+      "species_one": "{{ count }} espèce",
+      "species_other": "{{ count }} espèces",
       "speciesInventoried": "",
       "speciesInventoried_one": "{{ count }} espèce inventoriée",
       "speciesInventoried_other": "{{ count }} espèces inventoriées",
@@ -219,6 +222,7 @@
       "ecosystem": "Ecosystème"
     },
     "forestInventory": {
+      "size": "Surface placette: {{ size }} ha",
       "title": "Placette n°{{ id }}"
     },
     "socioEco": {
