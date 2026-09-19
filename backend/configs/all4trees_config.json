@@ -64,6 +64,7 @@
         "loc1": "int(loc1)",
         "loc2": "int(loc2)",
         "ecos": "int(ecos)",
+        "plot_size": "for_samp.adu_samp",
         "tree_pop": "count(1 if adu.cond = 1 and adu.adu_sp != '0')",
         "biomass_volume": "adu.sum(0.0673 * (for_sp.dens * (meas1 + meas2 + meas3 + meas4 + meas5 + meas6 + meas7 + meas8 + meas9 + meas10)^2 * hgt_perp)^0.976 if cond = 1) / double(for_samp.adu_samp) / for_samp.adu_tot_max",
         "tree_density": "count(1 if adu.cond = 1 and adu.adu_sp != '0') / double(for_samp.adu_samp)",

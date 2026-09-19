@@ -194,6 +194,7 @@
       "minPerHhPerDay": "{{ value }} min/household/day",
       "monthPerYear": "{{ value }} month/year",
       "percentFoodRequirements": "{{ value }} % of food needs",
+      "species": "{{ count }} species",
       "speciesInventoried": "{{ count }} species inventoried",
       "speciesPerTrap": "{{ count }} species per trap",
       "tonPerHectare": "{{ value }} t/ha"
@@ -216,6 +217,7 @@
       "ecosystem": "Ecosystem"
     },
     "forestInventory": {
+      "size": "Plot area: {{ size }} ha",
       "title": "Plot n°{{ id }}"
     },
     "socioEco": {

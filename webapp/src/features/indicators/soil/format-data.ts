@@ -100,10 +100,7 @@ export const useFormatSoilData = (
       soil_fauna_density,
       UNITS.individualPerCubicMeter,
     ),
-    soil_fauna_diversity: formatWithUnit(
-      soil_fauna_diversity,
-      UNITS.speciesPerTrap,
-    ),
+    soil_fauna_diversity: formatWithUnit(soil_fauna_diversity, UNITS.species),
     soil_structure_idx:
       String(soil_structure_idx) === noDataPlaceholder
         ? soil_structure_idx
