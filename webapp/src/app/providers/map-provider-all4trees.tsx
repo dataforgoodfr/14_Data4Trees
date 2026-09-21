@@ -29,6 +29,8 @@ type MapProviderAll4TreesProps = {
 export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
   const [isReady, setIsReady] = useState(false);
   const { isAuthenticated, token } = useAuth();
+  const authRef = useRef({ isAuthenticated, token });
+  authRef.current = { isAuthenticated, token };
 
   const mapApiRef = useRef<ReturnType<typeof createMap> | null>(null);
   const [mapSettings, setMapSettings] = useLocalStorage<MapSettings>(
@@ -75,7 +77,9 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
           renderAnchor,
           renderLayerRow,
         },
-        headers: isAuthenticated ? { Authorization: `Bearer ${token}` } : {},
+        headers: authRef.current.isAuthenticated
+          ? { Authorization: `Bearer ${authRef.current.token}` }
+          : {},
         zoom: mapSettings.zoom,
       });
       if (import.meta.env.DEV) {
