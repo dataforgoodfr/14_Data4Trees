@@ -36,6 +36,8 @@ pip install -r requirements.txt
 
 ### Coordo package
 
+To update coordo version in the project, simply go to [requirements.txt](./requirements.txt) and update the release tag or branch name between '@' and '#' symbols.
+
 When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command, replacing '<tag-name>' by the tag or branch name you want to point at on Coordo repository.
 
 ```bash
