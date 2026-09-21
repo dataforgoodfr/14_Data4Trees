@@ -24,7 +24,10 @@ export const GLOBAL_FILTERS_STORAGE_KEY = `${STORAGE_PREFIX}:__global__`;
 const read = <T>(key: string, fallback: T): T => {
   try {
     const item = window.localStorage.getItem(key);
-    return item ? (JSON.parse(item) as T) : fallback;
+    if (!item) return fallback;
+
+    const parsed = JSON.parse(item);
+    return (typeof parsed === "string" ? JSON.parse(parsed) : parsed) as T;
   } catch (error) {
     console.error(error);
     return fallback;
