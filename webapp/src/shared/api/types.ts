@@ -1,6 +1,21 @@
+import type { LANGUAGES } from "@shared/i18n";
+
+type Language = (typeof LANGUAGES)[keyof typeof LANGUAGES];
+
+/**
+ * One value a filter can take, labelled backend-side from the layer's label
+ * table (`for_label`, `bio_label`, `hh_label`), per project.
+ *
+ * A label falls back to the raw value when the table has no row for it, so it
+ * keeps the value's type (e.g. `cohort` labels are numbers).
+ */
+export type FilterOption<T> = { value: T } & {
+  [K in `label::${Language}`]: T | string;
+};
+
 type FilterLeaf<T> = {
   property_name: string;
-  values: Array<T>;
+  values: Array<FilterOption<T>>;
 };
 
 export type Filters = {

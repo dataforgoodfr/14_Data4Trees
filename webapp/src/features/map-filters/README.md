@@ -12,6 +12,7 @@ and persisted in localStorage.
 | `constants.ts` | `GROUP_KEYS` — the group names shared by every layer. |
 | `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers. |
 | `apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
+| `labels.ts` | Picks an option's label for the current language. |
 | `use-layer-filters.ts` | React binding for one layer's own filters. |
 | `use-global-filters.ts` | React binding for the filters that apply to every layer. |
 | `layers/*.tsx` | One file per layer: which groups it shows, and how to label them. |
@@ -22,7 +23,7 @@ and persisted in localStorage.
 ## How it fits together
 
 ```text
-layers/forest-inventory.tsx     declares its FilterGroups (key + propertyName + values)
+layers/forest-inventory.tsx     declares its FilterGroups (key + propertyName + options)
   └─ useLayerFilters(layerId)   reads/writes this layer's localStorage entry
        └─ refreshLayerFilter()  recomputes that layer
 
@@ -95,7 +96,14 @@ identifiers are strings, so the hook maps between them with `String(value)`.
 ## Where the values come from
 
 `GET /maps/get-filters/` returns `{filter key: {layer id: {property_name, values}}}`,
-built by `backend/maps/services/filters.py`. `FILTER_PROPERTIES_BY_LAYER` there
+built by `backend/maps/services/filters.py`. Each entry of `values` is an option
+carrying the raw value and its label in every language:
+
+```json
+{ "value": 1, "label::fr": "Makay Nord", "label::en": "North Makay" }
+```
+
+ `FILTER_PROPERTIES_BY_LAYER` there
 declares the property **per layer**, because the same concept is not always
 exposed under the same name — `cohort` is served as `start_date` on
 inventaire_bio, and the enquete layer is built with `groupby`, which keeps the
@@ -115,7 +123,6 @@ Add one `toPanelGroup(...)` entry to that layer's `groups` array:
 ```tsx
 toPanelGroup({
   key: GROUP_KEYS.ECOS,
-  labelListName: "ecos",          // omit to display the raw code
   leaf: filters.ecos[LAYER_ID],   // from the getFilters() payload
   title: t("filters.groups.ecos"),
 }),
@@ -133,30 +140,25 @@ another group's (or another layer's) box.
 
 ### Labels
 
-`LayerFilterPanel` resolves a group's labels through `findLabel`, keyed by
-`list_name` + the project. Two traps, both handled per layer rather than
-globally:
+Labels are resolved **backend-side** (`get_labelized_value` in `filters.py`),
+against the layer's label table and each feature's own project, so a layer can
+span several projects. The frontend does no external-data lookup: `labels.ts`
+only picks `label::<i18n.language>`, falling back to French then to the raw
+value. Missing or wrong labels are therefore a backend concern — the `list_name`
+and key-type mapping live in `LAYER_PROPERTY_TO_LABEL_PROPERTIES`.
 
-- **`list_name` is the *source* column**, not the property the map serves.
-  `type` looks up `typ` on inventaire_for but `meth` on inventaire_bio.
-- **`findLabel` compares strictly**, and the label tables disagree on the key
-  type: `for_label`/`bio_label` store numeric `name`, `hh_label` stores strings.
-  Hence the panel's `labelKeyType`: `NUMBER` for the inventory layers (whose
-  `type` is a string property that must be coerced), `STRING` for enquete (whose
-  codes are uncast strings all the way through). Getting this wrong shows raw
-  codes instead of names — the lookup fails silently and falls back.
+Checkbox identifiers and persisted selections stay the **raw values**, never the
+labels, so switching language keeps the selection.
 
-Labels are also keyed by project, and each panel passes `projects.values[0]`.
-That is correct while a layer carries a single project; it becomes ambiguous the
-day one spans several.
+A global group unions the options of every layer and deduplicates them by value,
+keeping the first layer's labels.
 
 ### Add a filterable layer
 
 1. Declare its properties in `FILTER_PROPERTIES_BY_LAYER` (backend `filters.py`)
    and extend the `Filters` type in `shared/api/types.ts`.
-2. Create `layers/<layer>.tsx`: wrap `<LayerFilterPanel>` in an
-   `<ExternalDataBoundary>` for the layer (the panel resolves labels through
-   `useExternalData`), and render it from `map-filters.tsx`.
+2. Create `layers/<layer>.tsx` rendering a `<LayerFilterPanel>`, and render it
+   from `map-filters.tsx`.
 3. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
    are **not** replayed on reload and global filters never reach it.
 
