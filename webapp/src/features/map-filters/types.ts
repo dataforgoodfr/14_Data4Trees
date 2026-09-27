@@ -1,5 +1,10 @@
+import type { FilterOption as ApiFilterOption } from "@shared/api/types";
+
 /** Value of a filterable GeoJSON property, in the type the API serves it. */
 export type FilterValue = string | number;
+
+/** A value offered by the API, with its label in every supported language. */
+export type FilterOption = ApiFilterOption<FilterValue>;
 
 export const FILTER_KINDS = {
   RANGE: "range",
@@ -64,7 +69,7 @@ export type FilterGroup = {
   key: string;
   propertyName: string;
   /** Every value the API offers, in API order. */
-  values: FilterValue[];
+  options: FilterOption[];
 };
 
 /* -------------------------------------------------------------------------- */
@@ -93,6 +98,6 @@ export type GlobalFiltersState = Record<string, GlobalFilter>;
 export type GlobalFilterGroup = {
   key: string;
   propertyNameByLayer: Record<string, string>;
-  /** Union of every layer's values, deduplicated. */
-  values: FilterValue[];
+  /** Union of every layer's options, deduplicated by value. */
+  options: FilterOption[];
 };

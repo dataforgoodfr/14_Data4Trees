@@ -9,6 +9,7 @@ import { Separator } from "@shared/ui/separator";
 
 import { CheckboxGroup } from "./components/checkbox-group";
 import { GROUP_KEYS } from "./constants";
+import { toCheckboxItems } from "./labels";
 import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
 
 /**
@@ -21,7 +22,7 @@ import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
 export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
   filters,
 }) => {
-  const { t } = useTranslation("all4trees");
+  const { t, i18n } = useTranslation("all4trees");
   const { isReady } = useMap();
   const { getCheckboxGroupProps } = useGlobalFilters();
 
@@ -43,10 +44,7 @@ export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
 
       <CheckboxGroup
         disabled={!isReady}
-        items={yearGroup.values.map((value) => ({
-          identifier: String(value),
-          label: String(value),
-        }))}
+        items={toCheckboxItems(yearGroup.options, i18n.language)}
         namespace={`global-${yearGroup.key}`}
         title={t("filters.groups.year")}
         {...getCheckboxGroupProps(yearGroup)}
