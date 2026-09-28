@@ -25,6 +25,21 @@ const getValuesFilter = (
 ): ValuesFilter | undefined =>
   filter?.kind === FILTER_KINDS.VALUES ? filter : undefined;
 
+const normalizeLayerFilters = (
+  value: LayerFiltersState | string,
+): LayerFiltersState => {
+  if (typeof value !== "string") return value;
+
+  try {
+    const parsed = JSON.parse(value);
+    return (
+      typeof parsed === "string" ? JSON.parse(parsed) : parsed
+    ) as LayerFiltersState;
+  } catch {
+    return {};
+  }
+};
+
 /**
  * Persisted per-layer filter state, kept in sync with the map.
  *
@@ -33,10 +48,10 @@ const getValuesFilter = (
  */
 export const useLayerFilters = ({ layerId }: { layerId: string }) => {
   const { isReady, mapApiRef } = useMap();
-  const [layerFilters, setLayerFilters] = useLocalStorage<LayerFiltersState>(
-    getLayerFiltersStorageKey(layerId),
-    {},
-  );
+  const [storedLayerFilters, setLayerFilters] = useLocalStorage<
+    LayerFiltersState | string
+  >(getLayerFiltersStorageKey(layerId), {});
+  const layerFilters = normalizeLayerFilters(storedLayerFilters);
 
   // `layerFilters` is the trigger, not the input: the refresh re-reads both this
   // layer's entry and the global one from localStorage so the two compose.
@@ -65,12 +80,15 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
 
     getOnCheckedChange: (identifier: string) => (nextValue: CheckedState) => {
       setLayerFilters((previous) => {
+        const previousLayerFilters = normalizeLayerFilters(previous);
+
         // First interaction with a group starts from "everything selected",
         // matching what the boxes were showing.
         const selectedIdentifiers = new Set(
-          (getValuesFilter(previous[group.key])?.values ?? group.values).map(
-            String,
-          ),
+          (
+            getValuesFilter(previousLayerFilters[group.key])?.values ??
+            group.values
+          ).map(String),
         );
 
         if (nextValue === true) {
@@ -80,7 +98,7 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
         }
 
         return {
-          ...previous,
+          ...previousLayerFilters,
           [group.key]: {
             kind: FILTER_KINDS.VALUES,
             propertyName: group.propertyName,
