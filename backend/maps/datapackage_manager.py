@@ -120,8 +120,13 @@ class DatapackageManager:
                 else:
                     file_loader = get_file_loader(params["package"], files["data"], **params.get("options", {}))
                     
-                # invoking specific method of laoder instance
-                getattr(file_loader, loader_method)()
+                # invoking specific method of loader instance
+                loader_result = getattr(file_loader, loader_method)()
+                response_status = (
+                    status.HTTP_200_OK
+                    if loader_result.get("success", False)
+                    else status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
                 
             except Exception as e:
                 logger.exception(e)
@@ -133,8 +138,8 @@ class DatapackageManager:
                 file.unlink(missing_ok=True)
         
         return Response(
-            {'message': self.LOADER_METHOD_TO_RESPONSE[loader_method], 'package': params["package"]},
-            status=status.HTTP_200_OK
+            loader_result | {"package": params["package"]},
+            status=response_status,
         )
     
     
