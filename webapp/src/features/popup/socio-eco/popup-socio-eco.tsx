@@ -58,7 +58,7 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
     [TABS.ECONOMY]: t("indicators.economy.title"),
   };
 
-  const date = t("popup.common.date", { date: formatDate(new Date()) });
+  const date = formatDate(new Date());
 
   return (
     <div className={cx("flex flex-col", className ?? "")}>
@@ -70,9 +70,9 @@ export const SocioEcoIndicator: FC<SocioEcoIndicatorProps> = ({
         title={title}
         {...headerProps}
       >
-        <div className="flex col-span-4 flex-row items-center gap-1 text-muted-foreground">
+        <div className="flex flex-row items-center gap-1">
           <Calendar size={ICON_SIZE} />
-          <p className="pt-0.5">{date}</p>
+          <p>{date}</p>
         </div>
       </IndicatorPopupHeader>
 
