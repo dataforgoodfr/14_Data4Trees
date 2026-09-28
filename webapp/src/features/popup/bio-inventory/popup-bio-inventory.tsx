@@ -38,8 +38,15 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
 
   const title = t("popup.bioInventory.title", {
     id: data.id,
-    type: findLabel(labelData, data.project, lang, "typ", Number(data.type))?.toLowerCase() || '',
     ns: "all4trees",
+    type:
+      findLabel(
+        labelData,
+        data.project,
+        lang,
+        "typ",
+        Number(data.type),
+      )?.toLowerCase() || "",
   });
 
   const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
@@ -54,24 +61,19 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
       <IndicatorPopupHeader
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
-          findLabel(
-            labelData,
-            data.project,
-            lang,
-            "loc2",
-            data.loc2,
-          ) || t("dataManagement.undefined", { ns: "common" })
+          findLabel(labelData, data.project, lang, "loc2", data.loc2) ||
+          t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}
       >
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
-        <h3>{ecos}</h3>
-        <div className="flex items-center gap-1">
-          <Calendar size={ICON_SIZE} />
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
+          <h3>{ecos}</h3>
+          <div className="flex items-center gap-1">
+            <Calendar size={ICON_SIZE} />
             <p>{date}</p>
+          </div>
         </div>
-      </div>
       </IndicatorPopupHeader>
 
       <IndicatorScrollContainer>

@@ -57,8 +57,15 @@ export const ForestInventoryPopupContent: FC<
 
   const title = t("popup.forestInventory.title", {
     id: data.code,
-    type: findLabel(labelData, data.project, lang, "typ", Number(data.type))?.toLowerCase() || '',
     ns: "all4trees",
+    type:
+      findLabel(
+        labelData,
+        data.project,
+        lang,
+        "typ",
+        Number(data.type),
+      )?.toLowerCase() || "",
   });
 
   const subtitle =
@@ -90,10 +97,10 @@ export const ForestInventoryPopupContent: FC<
             <h3>{ecos}</h3>
             <span>{plot_size}</span>
           </div>
-            <div className="flex items-center gap-1">
-              <Calendar size={ICON_SIZE} />
-              <p className="pt-0.5">{date}</p>
-            </div>
+          <div className="flex items-center gap-1">
+            <Calendar size={ICON_SIZE} />
+            <p className="pt-0.5">{date}</p>
+          </div>
         </div>
       </IndicatorPopupHeader>
 
