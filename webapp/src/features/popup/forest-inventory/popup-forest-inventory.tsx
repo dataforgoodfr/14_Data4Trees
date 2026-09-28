@@ -57,6 +57,7 @@ export const ForestInventoryPopupContent: FC<
 
   const title = t("popup.forestInventory.title", {
     id: data.code,
+    type: findLabel(labelData, data.project, lang, "typ", Number(data.type))?.toLowerCase() || '',
     ns: "all4trees",
   });
 
@@ -69,10 +70,7 @@ export const ForestInventoryPopupContent: FC<
     t("dataManagement.undefined", { ns: "common" })
   }`;
 
-  const date = t("popup.common.date", {
-    date: formatDate(new Date()),
-    ns: "all4trees",
-  });
+  const date = formatDate(new Date());
 
   const plot_size = t("popup.forestInventory.size", {
     ns: "all4trees",
@@ -87,15 +85,15 @@ export const ForestInventoryPopupContent: FC<
         title={title}
         {...headerProps}
       >
-        <div className="flex grid-cols-2 gap-3">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
           <div>
             <h3>{ecos}</h3>
-            <div className="flex col-span-4 flex-row items-center gap-1 text-muted-foreground">
+            <span>{plot_size}</span>
+          </div>
+            <div className="flex items-center gap-1">
               <Calendar size={ICON_SIZE} />
               <p className="pt-0.5">{date}</p>
             </div>
-          </div>
-          <span>{plot_size}</span>
         </div>
       </IndicatorPopupHeader>
 

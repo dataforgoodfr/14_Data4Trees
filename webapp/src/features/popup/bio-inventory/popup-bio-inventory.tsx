@@ -29,25 +29,25 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
   const externalData = useExternalData();
+  const labelData = externalData.bio_label;
 
   const biodiversityElements = useBioInventoryIndicatorElements(
     data,
     externalData,
   );
+
   const title = t("popup.bioInventory.title", {
     id: data.id,
+    type: findLabel(labelData, data.project, lang, "typ", Number(data.type))?.toLowerCase() || '',
     ns: "all4trees",
   });
 
   const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
-    findLabel(externalData.bio_label, data.project, lang, "ecos", data.ecos) ||
+    findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
     t("dataManagement.undefined", { ns: "common" })
   }`;
 
-  const date = t("popup.common.date", {
-    date: formatDate(new Date()),
-    ns: "all4trees",
-  });
+  const date = formatDate(new Date());
 
   return (
     <div className={cx("flex flex-col", className ?? "")}>
@@ -55,25 +55,23 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
           findLabel(
-            externalData.bio_label,
+            labelData,
             data.project,
             lang,
             "loc2",
-            Number(data.loc2),
+            data.loc2,
           ) || t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}
       >
-        <div className="flex grid-cols-2 gap-3">
-          <div>
-            <h3>{ecos}</h3>
-            <div className="flex col-span-4 flex-row items-center gap-1 text-muted-foreground">
-              <Calendar size={ICON_SIZE} />
-              <p className="pt-0.5">{date}</p>
-            </div>
-          </div>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
+        <h3>{ecos}</h3>
+        <div className="flex items-center gap-1">
+          <Calendar size={ICON_SIZE} />
+            <p>{date}</p>
         </div>
+      </div>
       </IndicatorPopupHeader>
 
       <IndicatorScrollContainer>

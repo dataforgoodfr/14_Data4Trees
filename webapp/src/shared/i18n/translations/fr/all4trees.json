@@ -215,7 +215,7 @@
   },
   "popup": {
     "bioInventory": {
-      "title": "Site n°{{ id }}"
+      "title": "Site {{ type }} n°{{ id }}"
     },
     "common": {
       "date": "Date relevé: {{ date }}",
@@ -223,7 +223,7 @@
     },
     "forestInventory": {
       "size": "Surface placette: {{ size }} ha",
-      "title": "Placette n°{{ id }}"
+      "title": "Placette {{ type }} n°{{ id }}"
     },
     "socioEco": {
       "subtitleCount": "",

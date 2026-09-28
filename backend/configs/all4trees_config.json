@@ -59,7 +59,7 @@
         "project": "proj",
         "year": "year",
         "code": "cod",
-        "type": "typ",
+        "type": "int(typ)",
         "cohort": "coh",
         "loc1": "int(loc1)",
         "loc2": "int(loc2)",
