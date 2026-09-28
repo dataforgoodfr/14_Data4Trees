@@ -13,6 +13,7 @@ export const UNITS = {
   minPerHouseholdPerDay: "minPerHouseholdPerDay",
   monthPerYear: "monthPerYear",
   percentFoodRequirements: "percentFoodRequirements",
+  species: "species",
   speciesInventoried: "speciesInventoried",
   speciesPerTrap: "speciesPerTrap",
   tonPerHectare: "tonPerHectare",
@@ -55,6 +56,11 @@ export const useFormatterWithUnit = () => {
         });
       case UNITS.speciesPerTrap:
         return t("indicators.units.speciesPerTrap", {
+          count: parseInt(formattedValue, 10),
+          ns: "all4trees",
+        });
+      case UNITS.species:
+        return t("indicators.units.species", {
           count: parseInt(formattedValue, 10),
           ns: "all4trees",
         });

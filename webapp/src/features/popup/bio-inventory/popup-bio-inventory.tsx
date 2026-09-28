@@ -1,10 +1,13 @@
 import { cx } from "class-variance-authority";
-import { Leaf } from "lucide-react";
+import { Calendar, Leaf } from "lucide-react";
 import type { FC } from "react";
 
 import { useExternalData } from "@features/external-data/context";
 import { useBioInventoryIndicatorElements } from "@features/indicators/bio-inventory";
-import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import {
+  ICON_SIZE,
+  ICON_SIZE_HEADER,
+} from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { findLabel } from "@features/indicators/labels";
@@ -26,42 +29,52 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
   const { t } = useTranslation(["common", "all4trees"]);
   const lang = i18nInstance.language;
   const externalData = useExternalData();
+  const labelData = externalData.bio_label;
 
   const biodiversityElements = useBioInventoryIndicatorElements(
     data,
     externalData,
   );
+
   const title = t("popup.bioInventory.title", {
     id: data.id,
     ns: "all4trees",
+    type:
+      findLabel(
+        labelData,
+        data.project,
+        lang,
+        "typ",
+        Number(data.type),
+      )?.toLowerCase() || "",
   });
 
   const ecos = `${t("all4trees:popup.common.ecosystem")}: ${
-    findLabel(externalData.bio_label, data.project, lang, "ecos", data.ecos) ||
+    findLabel(labelData, data.project, lang, "ecos", data.ecos) ||
     t("dataManagement.undefined", { ns: "common" })
   }`;
+
+  const date = formatDate(new Date());
 
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.common.date", {
-          date: formatDate(new Date()),
-          ns: "all4trees",
-        })}
-        ecos={ecos}
         icon={<Leaf size={ICON_SIZE_HEADER} />}
         subtitle={
-          findLabel(
-            externalData.bio_label,
-            data.project,
-            lang,
-            "loc2",
-            Number(data.loc2),
-          ) || t("dataManagement.undefined", { ns: "common" })
+          findLabel(labelData, data.project, lang, "loc2", data.loc2) ||
+          t("dataManagement.undefined", { ns: "common" })
         }
         title={title}
         {...headerProps}
-      />
+      >
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
+          <h3>{ecos}</h3>
+          <div className="flex items-center gap-1">
+            <Calendar size={ICON_SIZE} />
+            <p>{date}</p>
+          </div>
+        </div>
+      </IndicatorPopupHeader>
 
       <IndicatorScrollContainer>
         <IndicatorElements elements={biodiversityElements} />

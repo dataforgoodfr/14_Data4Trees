@@ -1,18 +1,21 @@
 import { cx } from "class-variance-authority";
-import { TreesIcon } from "lucide-react";
+import { Calendar, TreesIcon } from "lucide-react";
 import { Activity, type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useExternalData } from "@features/external-data/context";
 import { useBiodiversityIndicatorElements } from "@features/indicators/biodiversity";
-import { ICON_SIZE_HEADER } from "@features/indicators/components/constants";
+import {
+  ICON_SIZE,
+  ICON_SIZE_HEADER,
+} from "@features/indicators/components/constants";
 import { IndicatorElements } from "@features/indicators/components/indicator-elements";
 import { IndicatorScrollContainer } from "@features/indicators/components/indicator-scroll-container";
 import { findLabel } from "@features/indicators/labels";
 import { useSoilIndicatorElements } from "@features/indicators/soil";
 
 import { i18nInstance } from "@shared/i18n";
-import { formatDate } from "@shared/lib/utils";
+import { formatDate, precise } from "@shared/lib/utils";
 import { GridSelector } from "@shared/ui/grid-selector";
 
 import { IndicatorPopupHeader } from "../components/indicator-popup-header";
@@ -55,6 +58,14 @@ export const ForestInventoryPopupContent: FC<
   const title = t("popup.forestInventory.title", {
     id: data.code,
     ns: "all4trees",
+    type:
+      findLabel(
+        labelData,
+        data.project,
+        lang,
+        "typ",
+        Number(data.type),
+      )?.toLowerCase() || "",
   });
 
   const subtitle =
@@ -66,19 +77,32 @@ export const ForestInventoryPopupContent: FC<
     t("dataManagement.undefined", { ns: "common" })
   }`;
 
+  const date = formatDate(new Date());
+
+  const plot_size = t("popup.forestInventory.size", {
+    ns: "all4trees",
+    size: precise(data.plot_size),
+  });
+
   return (
     <div className={cx("flex flex-col", className ?? "")}>
       <IndicatorPopupHeader
-        date={t("popup.common.date", {
-          date: formatDate(new Date()),
-          ns: "all4trees",
-        })}
-        ecos={ecos}
         icon={<TreesIcon size={ICON_SIZE_HEADER} />}
         subtitle={subtitle}
         title={title}
         {...headerProps}
-      />
+      >
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+          <div>
+            <h3>{ecos}</h3>
+            <span>{plot_size}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Calendar size={ICON_SIZE} />
+            <p className="pt-0.5">{date}</p>
+          </div>
+        </div>
+      </IndicatorPopupHeader>
 
       <GridSelector
         className="m-2"

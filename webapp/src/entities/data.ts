@@ -14,7 +14,7 @@ export type ExternalData = {
 export type LabelData = {
   proj: string;
   list_name: string;
-  name: number;
+  name: number | string;
   "label::fr": string;
   "label::en": string;
 };
