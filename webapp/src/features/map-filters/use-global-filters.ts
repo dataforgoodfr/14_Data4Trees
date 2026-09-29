@@ -9,6 +9,7 @@ import { refreshAllLayerFilters } from "./apply-layer-filter";
 import { GLOBAL_FILTERS_STORAGE_KEY } from "./storage";
 import {
   FILTER_KINDS,
+  type FilterOption,
   type FilterValue,
   type GlobalFilter,
   type GlobalFilterGroup,
@@ -26,6 +27,10 @@ const getValuesFilter = (filter: GlobalFilter | undefined) =>
  * The checkbox list is the union of every layer's values — a year present on a
  * single layer still has to be offered — while `propertyNameByLayer` keeps each
  * layer's own property so the expression can be resolved per layer later.
+ *
+ * Options are deduplicated on their raw value, keeping the first layer's
+ * labels: a global filter only makes sense for a concept whose values mean the
+ * same thing on every layer, so the labels agree too.
  */
 export const buildGlobalFilterGroup = ({
   key,
@@ -34,23 +39,32 @@ export const buildGlobalFilterGroup = ({
   key: string;
   leavesByLayer: Record<
     string,
-    { property_name: string; values: FilterValue[] }
+    { property_name: string; values: FilterOption[] }
   >;
 }): GlobalFilterGroup => {
   const entries = Object.entries(leavesByLayer);
 
-  const values = Array.from(
-    new Set(entries.flatMap(([, leaf]) => leaf.values)),
-  ).sort((a, b) =>
-    String(a).localeCompare(String(b), undefined, { numeric: true }),
+  const optionsByValue = new Map<FilterValue, FilterOption>();
+  for (const [, leaf] of entries) {
+    for (const option of leaf.values) {
+      if (!optionsByValue.has(option.value)) {
+        optionsByValue.set(option.value, option);
+      }
+    }
+  }
+
+  const options = Array.from(optionsByValue.values()).sort((a, b) =>
+    String(a.value).localeCompare(String(b.value), undefined, {
+      numeric: true,
+    }),
   );
 
   return {
     key,
+    options,
     propertyNameByLayer: Object.fromEntries(
       entries.map(([layerId, leaf]) => [layerId, leaf.property_name]),
     ),
-    values,
   };
 };
 
@@ -90,9 +104,10 @@ export const useGlobalFilters = () => {
     getOnCheckedChange: (identifier: string) => (nextValue: CheckedState) => {
       setGlobalFilters((previous) => {
         const selectedIdentifiers = new Set(
-          (getValuesFilter(previous[group.key])?.values ?? group.values).map(
-            String,
-          ),
+          (
+            getValuesFilter(previous[group.key])?.values ??
+            group.options.map((option) => option.value)
+          ).map(String),
         );
 
         if (nextValue === true) {
@@ -106,9 +121,9 @@ export const useGlobalFilters = () => {
           [group.key]: {
             kind: FILTER_KINDS.VALUES,
             propertyNameByLayer: group.propertyNameByLayer,
-            values: group.values.filter((value) =>
-              selectedIdentifiers.has(String(value)),
-            ),
+            values: group.options
+              .map((option) => option.value)
+              .filter((value) => selectedIdentifiers.has(String(value))),
           },
         };
       });

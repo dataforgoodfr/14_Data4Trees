@@ -68,9 +68,10 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
         // First interaction with a group starts from "everything selected",
         // matching what the boxes were showing.
         const selectedIdentifiers = new Set(
-          (getValuesFilter(previous[group.key])?.values ?? group.values).map(
-            String,
-          ),
+          (
+            getValuesFilter(previous[group.key])?.values ??
+            group.options.map((option) => option.value)
+          ).map(String),
         );
 
         if (nextValue === true) {
@@ -86,9 +87,9 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
             propertyName: group.propertyName,
             // Rebuilt from the API list, so order is preserved and values the
             // backend no longer serves drop out on their own.
-            values: group.values.filter((value) =>
-              selectedIdentifiers.has(String(value)),
-            ),
+            values: group.options
+              .map((option) => option.value)
+              .filter((value) => selectedIdentifiers.has(String(value))),
           },
         };
       });
