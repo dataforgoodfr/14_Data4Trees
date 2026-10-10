@@ -193,6 +193,9 @@
       "minPerHhPerDay": "{{ value }} min/ménage/jour",
       "monthPerYear": "{{ value }} mois/an",
       "percentFoodRequirements": "{{ value }} % des besoins alimentaires",
+      "species": "",
+      "species_one": "{{ count }} espèce",
+      "species_other": "{{ count }} espèces",
       "speciesInventoried": "",
       "speciesInventoried_one": "{{ count }} espèce inventoriée",
       "speciesInventoried_other": "{{ count }} espèces inventoriées",
@@ -212,14 +215,15 @@
   },
   "popup": {
     "bioInventory": {
-      "title": "Site n°{{ id }}"
+      "title": "Site {{ type }} n°{{ id }}"
     },
     "common": {
       "date": "Date relevé: {{ date }}",
       "ecosystem": "Ecosystème"
     },
     "forestInventory": {
-      "title": "Placette n°{{ id }}"
+      "size": "Surface placette: {{ size }} ha",
+      "title": "Placette {{ type }} n°{{ id }}"
     },
     "socioEco": {
       "subtitleCount": "",

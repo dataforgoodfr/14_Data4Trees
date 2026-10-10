@@ -1,5 +1,6 @@
 export type BioInventoryData = {
   id: number;
+  date: Date;
   loc1: number;
   loc2: number;
   type: number;
