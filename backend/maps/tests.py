@@ -155,6 +155,22 @@ class DatapackageTest(TestCase):
         self.manage_file_resource('add', file_content)
         self.manage_file_resource('append', file_content)
 
+    def test_append_data_returns_duplicate_rows(self):
+        file_content = b'col_1,col_2\nvalue1,value2\n'
+        self.manage_file_resource('add', file_content)
+
+        file_data = self.format_file_data_for_post_request(file_content, "file.csv")
+        response = self.send_post_request_for_resources(
+            "maps-append-data", "file", file_data
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["success"], True)
+        self.assertEqual(
+            response.json()["duplicates"],
+            {"file": [{"col_1": "value1", "col_2": "value2"}]},
+        )
+
     def test_replace_data_in_resource_from_file(self):
         file_content = b'col_1,col_2\nvalue1,value2'
         self.manage_file_resource('add', file_content)
