@@ -94,12 +94,6 @@ def compute_aggregation(data):
 
     df_source = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
 
-    # WORK AROUND change column name, waiting for style.json update
-    df_source = df_source.rename(columns={"for": "loc2"})
-
-    # Data Type
-    df_source['loc2'] = df_source['loc2'].astype(int)
-
     # INVENTAIRE meta data
 
     # Loading projects
