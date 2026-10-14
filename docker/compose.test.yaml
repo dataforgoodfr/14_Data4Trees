@@ -30,24 +30,22 @@ services:
         max-file: "3"
 
   webapp_test:
-    build: ../webapp
+    build:
+      context: ../webapp
+      args:
+        VITE_API_URL: /api
     depends_on:
       backend_test:
         condition: service_healthy
-    ports:
-      - 5173
     labels:
       - traefik.enable=true
       - traefik.http.routers.data4trees-test.rule=Host(`test-data4trees.services.d4g.fr`)
       - traefik.http.routers.data4trees-test.entryPoints=webtls
       - traefik.http.routers.data4trees-test.tls=true
       - traefik.docker.network=d4g-internal
-      - traefik.http.services.data4trees-test.loadbalancer.server.port=5173
-    command: ["npm", "run", "docker:prod"]
+      - traefik.http.services.data4trees-test.loadbalancer.server.port=3000
     networks:
       - d4g-internal
-    environment:
-      - VITE_API_URL=/api
     healthcheck:
       test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in frontend
       interval: 10s
