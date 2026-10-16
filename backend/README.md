@@ -27,21 +27,35 @@ Installation
 
 ### Python environment
 
-In order to launch the backend, you first need to set up the python virtual environment:
+
+The Docker build uses `pyproject.toml` and `uv.lock` as its dependency source. When changing dependencies, update those with `uv add`/`uv lock`
+
+Install
+
 ``` bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+uv sync
 ```
 
 ### Coordo package
 
-To update coordo version in the project, simply go to [requirements.txt](./requirements.txt) and update the release tag or branch name between '@' and '#' symbols.
-
-When developing, you will need to frequently update coordo lib by forcing an upgrade because we don't manage the versions yet. To do so, use this command, replacing '<tag-name>' by the tag or branch name you want to point at on Coordo repository.
+Coordo is declared in `pyproject.toml` and its resolved commit is recorded in `uv.lock`. To switch to a release tag or branch, replace `<tag-or-branch>` with the desired ref:
 
 ```bash
-    pip install --upgrade --force-reinstall git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-name>#subdirectory=coordo-py
+uv add "coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-or-branch>#subdirectory=coordo-py"
+uv sync
+```
+
+To refresh a branch-based dependency to its latest commit, update the lock and reinstall Coordo:
+
+```bash
+uv lock --upgrade-package coordo
+uv sync --reinstall-package coordo
+```
+
+To reinstall the currently locked Coordo commit without updating it:
+
+```bash
+uv sync --reinstall-package coordo
 ```
 
 ### Prepare the database
@@ -78,6 +92,24 @@ Simply start the django server, and you're good to go !
 
 ``` bash
 python manage.py runserver
+```
+
+### Production Docker image
+
+The production `Dockerfile` uses Docker Hardened Images and runs Gunicorn as UID 65532. Keep the deploy-time Django secret out of the image and provide it through `DJANGO_SECRET_KEY` in the deployment environment. Rotate the old hard-coded key before deploying.
+
+The Docker builder installs AWS CLI, Bash, and Make, then runs `init-catalog.sh catalog-only` to download source data and generate the catalog. Supply `S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY` to Compose when building; BuildKit mounts them only for that build step, so they are not stored in the image. The generated catalog is copied into the final image.
+
+Run database migrations as a one-off deployment step before starting the new web image:
+
+```bash
+docker compose -f ../docker/compose.staging.yaml run --rm --no-deps backend python manage.py migrate
+```
+
+Create the administrator interactively after the service is running:
+
+```bash
+docker compose -f ../docker/compose.staging.yaml exec backend python manage.py createsuperuser
 ```
 
 ## Shared authentication between front and backend

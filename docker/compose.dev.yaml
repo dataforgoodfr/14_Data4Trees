@@ -1,6 +1,8 @@
 services:
   backend:
-    build: ../backend
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.dev
     volumes:
       - ../backend:/app # map local backend directory to container's /app directory for reactive development
     ports:

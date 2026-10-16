@@ -1,2 +1,4 @@
 pyvenv.cfg
 configs/bak
+uv.lock
+
