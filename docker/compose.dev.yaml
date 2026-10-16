@@ -2,7 +2,10 @@ services:
   backend:
     build:
       context: ../backend
-      dockerfile: Dockerfile.dev
+      secrets:
+        - S3_ACCESS_KEY_ID
+        - S3_SECRET_ACCESS_KEY
+      target: development
     volumes:
       - ../backend:/app # map local backend directory to container's /app directory for reactive development
     ports:
@@ -30,7 +33,7 @@ services:
   webapp:
     build: 
       context: ../webapp
-      dockerfile: Dockerfile.dev
+      target: development
     depends_on:
       backend:
         condition: service_healthy
@@ -52,3 +55,9 @@ services:
       options:
         max-size: "10m" # adjust as needed
         max-file: "3"
+
+secrets:
+  S3_ACCESS_KEY_ID:
+    environment: S3_ACCESS_KEY_ID
+  S3_SECRET_ACCESS_KEY:
+    environment: S3_SECRET_ACCESS_KEY

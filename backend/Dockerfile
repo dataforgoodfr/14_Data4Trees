@@ -1,3 +1,5 @@
+### SOURCE : https://docs.docker.com/guides/django/
+
 # syntax=docker/dockerfile:1
 
 # Build stage: use the glibc-based DHI variant for the project's geospatial wheels.
@@ -19,8 +21,10 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev
 
+# Copy the application code into the image. Needed to generate catalog data and static files.
 COPY . .
 
+# Steps to generate catalog data and static files
 RUN apt-get update && \
     apt-get install -y --no-install-recommends awscli bash make && \
     rm -rf /var/lib/apt/lists/*
@@ -33,6 +37,16 @@ RUN DJANGO_SECRET_KEY=build-only-not-for-runtime \
     uv run --no-sync python manage.py collectstatic --noinput && \
     mkdir -p /app/db && \
     chown -R 65532:65532 /app/catalog /app/db
+
+# The development stage inherits the -dev image and virtual environment from
+# the builder. Django's built-in server reloads when Compose Watch syncs files.
+FROM builder AS development
+
+ENV PATH="/app/.venv/bin:$PATH"
+
+ENTRYPOINT [ "./entrypoint.sh" ]
+
+EXPOSE 8000
 
 # Runtime stage: minimal DHI image with no shell or package manager,
 # already runs as the nonroot user.
@@ -47,13 +61,11 @@ ENV PATH="/app/.venv/bin:$PATH"
 WORKDIR /app
 
 # Copy application files as root-owned and only grant write access to persistent data.
-COPY . .
 COPY --from=builder /app/.venv /app/.venv
-COPY --from=builder --chown=65532:65532 /app/catalog /app/catalog
-COPY --from=builder --chown=65532:65532 /app/db /app/db
+COPY --from=builder /app/catalog /app/catalog
+COPY --from=builder /app/db /app/db
 COPY --from=builder /app/static /app/static
-
-USER 65532:65532
+COPY . .
 
 EXPOSE 8000
 
