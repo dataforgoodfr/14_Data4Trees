@@ -62,10 +62,12 @@ WORKDIR /app
 
 # Copy application files as root-owned and only grant write access to persistent data.
 COPY --from=builder /app/.venv /app/.venv
-COPY --from=builder /app/catalog /app/catalog
-COPY --from=builder /app/db /app/db
+COPY --from=builder --chown=65532:65532 /app/catalog /app/catalog
+COPY --from=builder --chown=65532:65532 /app/db /app/db
 COPY --from=builder /app/static /app/static
 COPY . .
+
+USER 65532:65532
 
 EXPOSE 8000
 
