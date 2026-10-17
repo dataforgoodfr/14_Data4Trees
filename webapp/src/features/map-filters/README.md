@@ -2,7 +2,9 @@
 
 Per-layer map filtering, applied client-side with MapLibre's
 [`map.setFilter()`](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setfilter)
-and persisted in localStorage.
+— or, on clustered layers, coordo's `setSourceFilter` (see
+[Clustered layers](#clustered-layers-filters-go-to-the-source)) — and persisted
+in localStorage.
 
 ## Files
 
@@ -32,6 +34,8 @@ global-filters.tsx              declares GlobalFilterGroups (values unioned acro
 
 both end in applyLayerFilter()  ["all", baseFilter, …layerClauses, …globalClauses]
                                  → map.setFilter(layerId, …)
+                                 clustered layer: clauses → setSourceFilter(layerId, …)
+                                                  baseFilter → map.setFilter(layerId, …)
 ```
 
 `refreshLayerFilter` re-reads **both** entries from localStorage rather than
@@ -209,30 +213,34 @@ MapLibre compares strictly and **evaluates to `false` on a type mismatch instead
 of erroring** — a filter that silently matches nothing is nearly always a bound
 whose type differs from the feature property's.
 
-## Known limitation: cluster counts
+## Clustered layers: filters go to the source
 
 `setFilter` is a *render-time* filter, while clustering happens at the **source**
-level. On a clustered layer (`LAYERS_WITH_CLUSTERS`) the individual points filter
-correctly, but the cluster bubbles keep counting filtered-out features.
+level: supercluster indexes every feature of the source, so on a clustered layer
+`setFilter` hides the points but the cluster bubbles keep counting them.
 
-There is no "recount" API: supercluster indexes whatever is in the source, so the
-counts only move if the source data moves. `setClusterOptions()` only toggles
-clustering on/off. Options considered, none implemented yet:
+So for layers in `LAYERS_WITH_CLUSTERS`, `applyLayerFilter` sends the composed
+clauses to coordo's `setSourceFilter` instead, and the layer keeps only its base
+filter. `setSourceFilter` sets the GeoJSON source's worker-side `filter` and
+reloads the original data: the MapLibre worker filters the features *before*
+building the cluster index, with the same expression evaluator, so the counts
+only include matching features. Non-clustered layers keep the cheaper `setFilter`.
 
-- **Re-cluster client-side.** Cache the original FeatureCollection once with
-  `GeoJSONSource.getData()`, filter it in JS — `featureFilter()` from
-  `@maplibre/maplibre-gl-style-spec` compiles the very expression
-  `buildFilterClause` already returns, so there is no second implementation to
-  keep in sync — then `source.setData(subset)`. Exact counts, frontend-only,
-  works for every kind. Costs: whole dataset in memory, a re-index per change
-  (debounce), async-ordering guards, and it conflicts with `setLayerFilters` on
-  the same layer.
-- **Refetch from the backend** via coordo's `setLayerFilters`, which POSTs a
-  filter payload and replaces the source data. No client memory cost, but the
-  backend has to implement the `{op, args}` DSL for these properties and it is a
-  round-trip per change.
-- **Hide the cluster layers** while a filter is active. Cheap and never wrong,
-  but loses the summary and renders every point at low zoom.
+What to know:
 
-Source `clusterProperties` was ruled out: it can only aggregate a category set
-known at style-build time, so it cannot serve user-chosen values or ranges.
+- **One source filter per source.** Same rule as the layer slot: only
+  `applyLayerFilter` may call `setSourceFilter` for a filterable layer.
+- **A change re-indexes the source** (data re-sent to the worker, supercluster
+  rebuilt). `setSourceFilter` skips unchanged filters, so a global change does
+  not re-index layers it does not affect. Rapid changes are coalesced by
+  MapLibre (only the latest pending update is sent).
+- **`setLayerFilters` composes with it**: coordo keeps the refetched data as the
+  new unfiltered reference and the source filter still applies on top.
+- The source filter is evaluated per feature at zoom 0, with no feature-state or
+  global state — plain `["get", …]` comparisons only, which is all
+  `buildFilterClause` produces.
+
+Ruled out: `setGlobalStateProperty` (a `["global-state", …]` layer filter still
+runs after clustering, and the source filter ignores global state), and source
+`clusterProperties` (can only aggregate a category set known at style-build
+time, not user-chosen values or ranges).
