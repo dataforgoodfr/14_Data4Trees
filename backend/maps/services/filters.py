@@ -1,55 +1,58 @@
 from ..constants import (
     ALL4TREES_LAYERS,
-    LAYER_ENQUETE,
+    LABEL_RESOURCE_BY_LAYER,
     LAYER_INVENTAIRE_BIO,
     LAYER_INVENTAIRE_FOR,
+    LAYER_ENQUETE,
 )
+
+from data_catalog.services.catalog import get_resource
 
 ########## FILTERS CONFIGURATION ##########
 
-# filter key -> {layer id: name of the property in that layer's GeoJSON features}
-#
-# The property is declared per layer because the same concept is not always
-# exposed under the same name (see configs/all4trees_config.json):
-#  - "cohort" is served as "start_date" on inventaire_bio, though both come from
-#    the same source column `coh`;
-#  - the enquete layer is built with "groupby", which keeps the raw source column
-#    names instead of the renamed ones, and exposes neither ecos, type nor cohort.
-# A layer absent from a filter simply has no values for it.
-FILTER_PROPERTIES_BY_LAYER = {
+# All4Trees Label data is one big table containing all the labels for all properties (see catalog/inventaire_for/for_label.parquet).
+# Therefore it mixes properties with different types, like 'loc1' property (int) and 'struc' property (float) in inventaire_for layer.
+# Therefore the 'name' column corresponding to properties' values contain mixed types.
+# For the layer 'inventory_for', the column 'name' has been inferred to the type 'float' when imported.
+# Therefore properties like loc1, loc2, ecos and typ have float values like 1.0 instead of 1.
+# In the MapLibre map's FeatureCollection, these properties are of 'integer' type,
+# so we need to cast the properties so they have the same type as in label data, hence the 'type' prop here.    
+LAYER_PROPERTY_TO_LABEL_PROPERTIES = {
     "project": {
-        LAYER_INVENTAIRE_FOR: "project",
-        LAYER_INVENTAIRE_BIO: "project",
-        # Not renamed on this layer: "groupby" keeps the source column name.
-        LAYER_ENQUETE: "proj",
+        "name": "proj",
+        "type": str,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     },
     "loc1": {
-        LAYER_INVENTAIRE_FOR: "loc1",
-        LAYER_INVENTAIRE_BIO: "loc1",
-        LAYER_ENQUETE: "loc1",
+        "name": "loc1",
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     },
     "loc2": {
-        LAYER_INVENTAIRE_FOR: "loc2",
-        LAYER_INVENTAIRE_BIO: "loc2",
-        LAYER_ENQUETE: "loc2",
-    },
-    "type": {
-        LAYER_INVENTAIRE_FOR: "type",
-        LAYER_INVENTAIRE_BIO: "type",
-    },
-    "cohort": {
-        LAYER_INVENTAIRE_FOR: "cohort",
-        LAYER_INVENTAIRE_BIO: "start_date",
+        "name": "loc2",
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
     },
     "ecos": {
-        LAYER_INVENTAIRE_FOR: "ecos",
-        LAYER_INVENTAIRE_BIO: "ecos",
+        "name": "ecos",
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO]
     },
-    "year": {
-        LAYER_INVENTAIRE_FOR: "year",
-        LAYER_INVENTAIRE_BIO: "year",
-        LAYER_ENQUETE: "year",
+    "type": {
+        "name": "typ",
+        "type": float,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO]
     },
+    "cohort": {
+        "name": "coh",
+        "type": str,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO]
+    },
+    "year" : {
+        "name": "year",
+        "type": int,
+        "layers": [LAYER_INVENTAIRE_FOR, LAYER_INVENTAIRE_BIO, LAYER_ENQUETE]
+    }
 }
 
 # Several of these columns are optional in the datapackage; a null or blank would
@@ -75,10 +78,10 @@ def get_all4trees_filters(user_map):
 
     return {
         filter_key: {
-            layer_id: get_filter_values(properties_by_layer[layer_id], property_name)
-            for layer_id, property_name in layers.items()
+            layer_id: get_filter_values(layer_id, properties_by_layer[layer_id], filter_key)
+            for layer_id in filter_props["layers"]
         }
-        for filter_key, layers in FILTER_PROPERTIES_BY_LAYER.items()
+        for filter_key, filter_props in LAYER_PROPERTY_TO_LABEL_PROPERTIES.items()
     }
 
 
@@ -94,22 +97,24 @@ def get_layer_data_properties(layer) -> list[dict]:
 ########## FILTER VALUES ##########
 
 
-def get_filter_values(layer_data, property_name):
+def get_filter_values(layer_id, layer_data, property_name):
     """
     Distinct values of `property_name` across a layer's features.
 
     Sorted so the sidebar keeps a stable order between reloads, and so that the
     checkbox identifiers the webapp persists stay predictable.
     """
+    label_data = get_resource(layer_id, LABEL_RESOURCE_BY_LAYER[layer_id])
+
     values = {
-        properties[property_name]
+        tuple(get_labelized_value(properties, property_name, label_data).items())
         for properties in layer_data
         if properties.get(property_name) not in EMPTY_VALUES
     }
 
     return {
         "property_name": property_name,
-        "values": sort_filter_values(values),
+        "values": [dict(value) for value in sort_filter_values(values)],
     }
 
 def sort_filter_values(values):
@@ -127,3 +132,53 @@ def sort_filter_values(values):
     except TypeError:
         # Defensive: a column mixing types (int and str) is not comparable.
         return sorted(values, key=str)
+
+def get_labelized_value(properties, property_name, label_data):
+    """
+    Get the label for a value from the label data resource.
+
+    If no label is found, return the value itself.
+    """
+    value = properties[property_name]
+    value_type = get_label_name_type(property_name)
+
+    ## Filter rows to keep only the row corresponding the the project and property_name
+    label_candidates = label_data[
+        (label_data['proj'] == properties['project'])
+        & (label_data['list_name'] == get_label_list_name(property_name))
+    ]
+    ## Keep only the row with matching value, not forgetting to type cast before comparison.
+    label = label_candidates[
+        label_candidates['name'].map(value_type) == value_type(value)
+    ]
+
+    if not label.empty:
+        return {
+            "value": value,
+            "label::fr": label.iloc[0]['label::fr'],
+            "label::en": label.iloc[0]['label::en'],
+        }
+    else:
+        return {
+            "value": value,
+            "label::fr": value,
+            "label::en": value,
+        }
+
+def get_label_list_name(property_name):
+    """
+    Get the list name for a property name.
+
+    The list name is used to filter the label data resource.
+    """
+    label_prop = LAYER_PROPERTY_TO_LABEL_PROPERTIES.get(property_name)
+    return label_prop['name'] if label_prop else property_name
+
+def get_label_name_type(property_name):
+    """
+    Get the label name type for a property name.
+
+    The name type is used to cast the property to the correct type.
+    """
+    label_prop = LAYER_PROPERTY_TO_LABEL_PROPERTIES.get(property_name)
+    return label_prop['type'] if label_prop else type(property_name)
