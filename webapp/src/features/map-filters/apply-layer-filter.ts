@@ -1,4 +1,9 @@
-import type { FilterSpecification, MapInstance } from "@shared/lib/coordo";
+import { LAYERS_WITH_CLUSTERS } from "@shared/api/layers";
+import {
+  type FilterSpecification,
+  type MapInstance,
+  setSourceFilter,
+} from "@shared/lib/coordo";
 
 import {
   FILTERABLE_LAYERS,
@@ -134,10 +139,15 @@ const resolveGlobalFilter = (
  * Push a layer's whole filter state to the map: AND between groups, on top of
  * the layer's own base filter.
  *
+ * On a clustered layer the clauses go to the source instead (coordo's
+ * `setSourceFilter`), so they apply before clustering and the cluster counts
+ * only include matching features. `setFilter` alone would hide the points but
+ * leave the bubbles counting them. The layer then keeps only its base filter.
+ *
  * WARNING: every clause targeting `layerId` must go through this one call —
- * MapLibre has a single filter slot per layer, so a caller that runs
- * `setFilter` itself would silently drop all the other clauses. That is why
- * global filters are composed here rather than applied on their own.
+ * MapLibre has a single filter slot per layer (and per source), so a caller
+ * that sets a filter itself would silently drop all the other clauses. That is
+ * why global filters are composed here rather than applied on their own.
  */
 export const applyLayerFilter = ({
   map,
@@ -162,6 +172,20 @@ export const applyLayerFilter = ({
   ]
     .map(buildFilterClause)
     .filter((clause) => clause !== null);
+
+  if (LAYERS_WITH_CLUSTERS.includes(layerId)) {
+    setSourceFilter({
+      filter:
+        clauses.length > 0
+          ? (["all", ...clauses] as FilterSpecification)
+          : null,
+      layerId,
+      map,
+    });
+    // Also clears a clause a previous build may have put on the layer itself.
+    map.setFilter(layerId, baseFilter ?? null);
+    return;
+  }
 
   const allClauses = baseFilter ? [baseFilter, ...clauses] : clauses;
 

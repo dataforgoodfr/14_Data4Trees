@@ -10,5 +10,6 @@ export {
   type LayerControlRenderLayerRow,
   type LayerMetadata,
   type PopupOptions,
+  setSourceFilter,
 } from "coordo";
 export type { FilterSpecification, Map as MapInstance } from "maplibre-gl";
