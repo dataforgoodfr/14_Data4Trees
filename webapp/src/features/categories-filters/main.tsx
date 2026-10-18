@@ -19,7 +19,7 @@ type CategoriesFiltersProps = {
 };
 
 export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
-  const { actions, data, system } = useCategoriesConfig();
+  const { actions } = useCategoriesConfig();
   const { t } = useTranslation("all4trees");
   const { mapApiRef, setCategoriesFilters, categoriesFilters } = useMap();
 
@@ -60,22 +60,6 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
         getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
         items={actions}
         title={t("filters.categories.actions.title")}
-      />
-
-      <CategoriesCheckboxGroup
-        disabled={disabled}
-        getIsChecked={(identifier) => categoriesFilters[identifier]}
-        getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
-        items={data}
-        title={t("filters.categories.data.title")}
-      />
-
-      <CategoriesCheckboxGroup
-        disabled={disabled}
-        getIsChecked={(identifier) => categoriesFilters[identifier]}
-        getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
-        items={system}
-        title={t("filters.categories.system.title")}
       />
     </div>
   );

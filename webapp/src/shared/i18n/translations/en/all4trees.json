@@ -10,20 +10,7 @@
         "title": "Actions taken"
       },
       "all": "All",
-      "data": {
-        "ground": "Field",
-        "model": "Model",
-        "satellite": "Satellite",
-        "title": "Data type"
-      },
-      "none": "None",
-      "system": {
-        "forestPrimary": "Primary forest",
-        "forestSecondary": "Secondary forest",
-        "mangroveHigh": "High mangrove",
-        "mangroveLow": "Low mangrove",
-        "title": "Ecosystem"
-      }
+      "none": "None"
     },
     "global": {
       "title": "All layers"
