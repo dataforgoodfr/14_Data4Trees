@@ -11,15 +11,15 @@ import { useTranslation } from "@i18n";
 
 import { Separator } from "@ui/separator";
 
-export const FILTER_KIND = {
-  category: "category",
-  filtersPerCategory: "filtersPerCategory",
+const FILTER_KIND = {
+  CALCULATION: "calculation",
+  DISPLAY: "display",
 } as const;
 
 export function MapSidebar() {
   const { t } = useTranslation("all4trees");
   const [selectedFilterKind, setSelectedFilterKind] = useState<string>(
-    FILTER_KIND.category,
+    FILTER_KIND.DISPLAY,
   );
   const [mapFilters, setMapFilters] = useState<Filters | null>(null);
   const isLoadingFilter = useRef<boolean | null>(null);
@@ -32,6 +32,7 @@ export function MapSidebar() {
       const filters = await client.getFilters();
       setMapFilters(filters);
       isLoadingFilter.current = false;
+      console.log("Set is loading filter to false");
     };
     if (mapFilters == null && !isLoadingFilter.current) {
       fetchFilters();
@@ -52,36 +53,46 @@ export function MapSidebar() {
         onChange={(value) => setSelectedFilterKind(value)}
         options={[
           {
-            id: FILTER_KIND.category,
-            label: t("filters.sidebarLayout.groupCategory"),
+            id: FILTER_KIND.DISPLAY,
+            label: t("filters.sidebarLayout.displayFilters"),
           },
           {
-            disabled: mapFilters == null,
-            id: FILTER_KIND.filtersPerCategory,
-            label: t("filters.sidebarLayout.groupFilters"),
+            // disabled: true, // Not implemented yet
+            id: FILTER_KIND.CALCULATION,
+            label: t("filters.sidebarLayout.calculationFilters"),
           },
         ]}
         value={selectedFilterKind}
       />
 
       <div
-        className="px-4 mb-3 overflow-y-scroll custom-scrollbar flex-1"
+        className="px-4 mb-3 overflow-y-scroll custom-scrollbar flex flex-col gap-6"
         style={{
           "--scrollbar-thumb": "var(--info-foreground)",
           "--scrollbar-track": "var(--background)",
         }}
       >
-        {selectedFilterKind === FILTER_KIND.category && <CategoriesFilters />}
+        <Activity
+          mode={
+            selectedFilterKind === FILTER_KIND.DISPLAY ? "visible" : "hidden"
+          }
+        >
+          <CategoriesFilters />
+          {isLoadingFilter.current ? (
+            <div className="h-8 w-8 self-center animate-spin rounded-full border-4 border-primary border-t-transparent" />
+          ) : (
+            <MapFilters filters={mapFilters} />
+          )}
+        </Activity>
 
         <Activity
           mode={
-            selectedFilterKind === FILTER_KIND.filtersPerCategory &&
-            mapFilters != null
+            selectedFilterKind === FILTER_KIND.CALCULATION
               ? "visible"
               : "hidden"
           }
         >
-          <MapFilters filters={mapFilters} />
+          Not implemented
         </Activity>
       </div>
     </div>

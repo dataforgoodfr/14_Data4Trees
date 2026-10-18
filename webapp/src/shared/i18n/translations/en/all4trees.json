@@ -26,8 +26,8 @@
       "year": "Year"
     },
     "sidebarLayout": {
-      "groupCategory": "Categories",
-      "groupFilters": "Filters",
+      "calculationFilters": "Calculation",
+      "displayFilters": "Display",
       "title": "Filtering panel"
     }
   },
