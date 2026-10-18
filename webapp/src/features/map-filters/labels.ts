@@ -1,4 +1,4 @@
-import { LANGUAGES } from "@shared/i18n";
+import { I18N_FALLBACK_LNG, LANGUAGES } from "@shared/i18n";
 
 import type { FilterOption } from "./types";
 
@@ -20,7 +20,7 @@ export const getOptionLabel = (
   const key = `label::${language}`;
   const label = isLabelKey(key)
     ? option[key]
-    : option[`label::${LANGUAGES.FRENCH}`];
+    : option[`label::${I18N_FALLBACK_LNG}`];
 
   return String(label ?? option.value);
 };

@@ -8,6 +8,8 @@ export const LANGUAGES = {
   FRENCH: "fr",
 } as const;
 
+export const I18N_FALLBACK_LNG = LANGUAGES.FRENCH;
+
 const NAMESPACES = ["all4trees", "common", "seed"];
 
 i18n
@@ -49,7 +51,7 @@ i18n
       withCredentials: false,
     },
 
-    fallbackLng: LANGUAGES.FRENCH,
+    fallbackLng: I18N_FALLBACK_LNG,
 
     interpolation: {
       /** react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape */
