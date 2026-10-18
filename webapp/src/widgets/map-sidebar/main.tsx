@@ -22,19 +22,17 @@ export function MapSidebar() {
     FILTER_KIND.DISPLAY,
   );
   const [mapFilters, setMapFilters] = useState<Filters | null>(null);
-  const isLoadingFilter = useRef<boolean | null>(null);
+  const hasLoadedFilters = useRef<boolean | null>(null);
 
   const client = useApi();
 
   useEffect(() => {
     const fetchFilters = async () => {
-      isLoadingFilter.current = true;
       const filters = await client.getFilters();
       setMapFilters(filters);
-      isLoadingFilter.current = false;
-      console.log("Set is loading filter to false");
+      hasLoadedFilters.current = true;
     };
-    if (mapFilters == null && !isLoadingFilter.current) {
+    if (mapFilters == null && !hasLoadedFilters.current) {
       fetchFilters();
     }
   }, [mapFilters, client.getFilters]);
@@ -57,7 +55,6 @@ export function MapSidebar() {
             label: t("filters.sidebarLayout.displayFilters"),
           },
           {
-            // disabled: true, // Not implemented yet
             id: FILTER_KIND.CALCULATION,
             label: t("filters.sidebarLayout.calculationFilters"),
           },
@@ -78,10 +75,10 @@ export function MapSidebar() {
           }
         >
           <CategoriesFilters />
-          {isLoadingFilter.current ? (
-            <div className="h-8 w-8 self-center animate-spin rounded-full border-4 border-primary border-t-transparent" />
-          ) : (
+          {hasLoadedFilters.current ? (
             <MapFilters filters={mapFilters} />
+          ) : (
+            <div className="mb-4 h-8 w-8 self-center animate-spin rounded-full border-4 border-primary border-t-transparent" />
           )}
         </Activity>
 
