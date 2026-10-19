@@ -183,7 +183,7 @@ export const applyLayerFilter = ({
       map,
     });
     // Also clears a clause a previous build may have put on the layer itself.
-    map.setFilter(layerId, baseFilter ?? null);
+    // map.setFilter(layerId, baseFilter ?? null);
     return;
   }
 

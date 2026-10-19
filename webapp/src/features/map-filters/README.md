@@ -242,8 +242,3 @@ What to know:
 - The source filter is evaluated per feature at zoom 0, with no feature-state or
   global state — plain `["get", …]` comparisons only, which is all
   `buildFilterClause` produces.
-
-Ruled out: `setGlobalStateProperty` (a `["global-state", …]` layer filter still
-runs after clustering, and the source filter ignores global state), and source
-`clusterProperties` (can only aggregate a category set known at style-build
-time, not user-chosen values or ranges).
