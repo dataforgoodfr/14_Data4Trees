@@ -143,8 +143,9 @@ another group's (or another layer's) box.
 Labels are resolved **backend-side** (`get_labelized_value` in `filters.py`),
 against the layer's label table and each feature's own project, so a layer can
 span several projects. The frontend does no external-data lookup: `labels.ts`
-only picks `label::<i18n.language>`, falling back to French then to the raw
-value. Missing or wrong labels are therefore a backend concern — the `list_name`
+only picks `label::<i18n.language>`, falling back to I18N_FALLBACK_LNG (i18n/config.ts)
+then to the raw value.
+Missing or wrong labels are therefore a backend concern — the `list_name`
 and key-type mapping live in `LAYER_PROPERTY_TO_LABEL_PROPERTIES`.
 
 Checkbox identifiers and persisted selections stay the **raw values**, never the

@@ -4,10 +4,9 @@ import type { FC } from "react";
 import type { Filters } from "@shared/api/types";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@shared/i18n";
-import { Card, CardTitle } from "@shared/ui/card";
-import { Separator } from "@shared/ui/separator";
 
 import { CheckboxGroup } from "./components/checkbox-group";
+import { CollapsibleSection } from "./components/collapsible-section";
 import { GROUP_KEYS } from "./constants";
 import { toCheckboxItems } from "./labels";
 import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
@@ -34,14 +33,12 @@ export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
   });
 
   return (
-    <Card className="p-4 flex flex-col gap-2">
-      <div className="flex flex-row justify-start items-center gap-1">
-        <CalendarRangeIcon size={18} />
-        <CardTitle> {t("filters.global.title")}</CardTitle>
-      </div>
-
-      <Separator />
-
+    <CollapsibleSection
+      headerClassName=""
+      icon={<CalendarRangeIcon size={18} />}
+      identifier="global-filters"
+      title={t("filters.global.title")}
+    >
       <CheckboxGroup
         disabled={!isReady}
         items={toCheckboxItems(yearGroup.options, i18n.language)}
@@ -49,6 +46,6 @@ export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
         title={t("filters.groups.year")}
         {...getCheckboxGroupProps(yearGroup)}
       />
-    </Card>
+    </CollapsibleSection>
   );
 };

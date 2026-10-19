@@ -10,20 +10,7 @@
         "title": "Actions menées"
       },
       "all": "Tout",
-      "data": {
-        "ground": "Terrain",
-        "model": "Modèle",
-        "satellite": "Satellite",
-        "title": "Type de données"
-      },
-      "none": "Aucun",
-      "system": {
-        "forestPrimary": "Forêt primaire",
-        "forestSecondary": "Forêt secondaire",
-        "mangroveHigh": "Mangrove haute",
-        "mangroveLow": "Mangrove basse",
-        "title": "Écosystème"
-      }
+      "none": "Aucun"
     },
     "global": {
       "title": "Tous les calques"
@@ -39,8 +26,8 @@
       "year": "Année"
     },
     "sidebarLayout": {
-      "groupCategory": "Catégories",
-      "groupFilters": "Filtres",
+      "calculationFilters": "Calcul",
+      "displayFilters": "Affichage",
       "title": "Panneau de filtrage"
     }
   },
@@ -209,6 +196,7 @@
     "bioInventory": "Inventaire biologique",
     "boundaries": "Frontières",
     "forestInventory": "Inventaire forestier",
+    "satellite": "Satellite",
     "socioEco": "Enquête socio-économique",
     "towns": "Villes",
     "villages": "Villages"

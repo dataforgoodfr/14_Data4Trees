@@ -77,7 +77,7 @@ function useLayerConfig(layerId: string) {
       };
     case LAYERS.SATELLITE:
       return {
-        label: t("filters.categories.data.satellite") as string,
+        label: t("layers.satellite") as string,
         renderIcon: (checked?: boolean) => (
           <SatelliteIcon
             className={checked ? "text-accent-foreground" : "text-muted"}
