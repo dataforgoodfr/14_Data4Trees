@@ -25,6 +25,11 @@ jobs:
           working-directory: backend
           activate-environment: true
     
+      - name: Install dependencies
+        run: |
+          cd backend
+          uv sync
+    
       - name: Run Tests
         run: |
           cd backend
