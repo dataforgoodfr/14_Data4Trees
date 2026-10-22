@@ -1,14 +1,18 @@
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import pandas as pd
 from django.test import SimpleTestCase
 
+from maps.constants import ALL4TREES_LAYERS
+from maps.services import user_map
 from maps.services.filters import (
 	get_filter_values,
 	get_labelized_value,
 	get_label_list_name,
 	get_label_name_type,
 )
+from users.models import ADMIN_PROJECT
 
 
 class FiltersServiceTest(SimpleTestCase):
@@ -89,3 +93,33 @@ class FiltersServiceTest(SimpleTestCase):
 		self.assertIs(get_label_name_type("type"), float)
 		self.assertEqual(get_label_list_name("year"), "year")
 		self.assertIs(get_label_name_type("year"), int)
+
+
+class UserMapServiceTest(SimpleTestCase):
+	PROJECT_FILTER = "proj = 'project-a' or conf = 1"
+
+	@staticmethod
+	def user(project):
+		return SimpleNamespace(is_authenticated=True, project=project)
+
+	def test_user_maps_do_not_share_layers(self):
+		map_a = user_map.get_user_map(self.user("project-a"))
+		map_admin = user_map.get_user_map(self.user(ADMIN_PROJECT))
+
+		for layer_id in ALL4TREES_LAYERS:
+			self.assertIsNot(map_a._get_layer(layer_id), map_admin._get_layer(layer_id))
+
+	def test_user_map_keeps_its_restriction_after_another_user_map_is_built(self):
+		map_a = user_map.get_user_map(self.user("project-a"))
+		# Concurrent request: another user's map is built before map_a is read.
+		user_map.get_user_map(self.user(ADMIN_PROJECT))
+		user_map.get_user_map(SimpleNamespace(is_authenticated=False, project=None))
+
+		for layer_id in ALL4TREES_LAYERS:
+			self.assertEqual(map_a._get_layer(layer_id).filter, self.PROJECT_FILTER)
+
+	def test_get_user_map_leaves_the_shared_map_untouched(self):
+		user_map.get_user_map(self.user("project-a"))
+
+		for layer_id in ALL4TREES_LAYERS:
+			self.assertIsNone(user_map.map._get_layer(layer_id).filter)

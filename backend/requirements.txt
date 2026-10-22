@@ -9,3 +9,4 @@ docutils==0.22
 pandas==3.0.3
 python-dotenv==1.2.2
 whitenoise[brotli]==6.12.0
+duckdb<2
