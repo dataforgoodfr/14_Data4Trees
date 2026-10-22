@@ -48,11 +48,12 @@ ENTRYPOINT [ "./entrypoint.sh" ]
 EXPOSE 8000
 
 # Runtime stage uses the same public Python and Debian versions as the builder.
-FROM python:3.14-slim-trixie as production
+FROM python:3.14-slim-trixie AS production
 
 # Prevent Python from writing bytecode and buffering stdout/stderr.
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    HOME=/tmp
 # Activate the virtual environment copied from the build stage.
 ENV PATH="/app/.venv/bin:$PATH"
 
