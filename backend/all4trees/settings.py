@@ -24,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ot7b#&pes@%&0b2w(e@b278k2x2n4y$1@t4(!@(c&zthr3k)n("
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [
     "localhost",
+    "127.0.0.1",
     "test-data4trees.services.d4g.fr",
     "data4trees.services.d4g.fr",
 ]

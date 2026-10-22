@@ -1,8 +1,13 @@
 services:
   backend:
-    build: ../backend
-    ports:
-      - 8000
+    build:
+      context: ../backend
+      target: production
+      secrets:
+        - S3_ACCESS_KEY_ID
+        - S3_SECRET_ACCESS_KEY
+    expose:
+      - "8000"
     labels:
       - traefik.enable=true
       - traefik.http.routers.backend-data4trees-staging.rule=Host(`data4trees.services.d4g.fr`) && PathRegexp(`^/(static|api|api-auth|auth|admin|token)`)
@@ -12,12 +17,14 @@ services:
       - traefik.http.services.backend-data4trees-staging.loadbalancer.server.port=8000
     volumes:
       - backend_db:/app/db # Persist user db
+      - backend_catalog:/app/catalog # Persist catalog data
     networks:
       - d4g-internal
     environment:
-      - DEBUG=False
+      DEBUG: "False"
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?Set DJANGO_SECRET_KEY in the deployment environment}
     healthcheck:
-      test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in Django
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/admin/login/', timeout=2)"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -66,3 +73,9 @@ networks:
 volumes:
   backend_db:
     external: true
+
+secrets:
+  S3_ACCESS_KEY_ID:
+    environment: S3_ACCESS_KEY_ID
+  S3_SECRET_ACCESS_KEY:
+    environment: S3_SECRET_ACCESS_KEY
