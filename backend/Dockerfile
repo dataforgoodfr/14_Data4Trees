@@ -15,6 +15,11 @@ ENV UV_LINK_MODE=copy
 
 WORKDIR /app
 
+# Install packages needed to build geospatial wheels and run the application.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends awscli bash git make && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install locked dependencies into a virtual environment.
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
@@ -23,11 +28,6 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # Copy the application code into the image. Needed to generate catalog data and static files.
 COPY . .
-
-# Steps to generate catalog data and static files
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends awscli bash make && \
-    rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=secret,id=S3_ACCESS_KEY_ID,env=S3_ACCESS_KEY_ID,required=true \
     --mount=type=secret,id=S3_SECRET_ACCESS_KEY,env=S3_SECRET_ACCESS_KEY,required=true \
