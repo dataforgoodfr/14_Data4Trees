@@ -126,6 +126,7 @@ dependencies = [
     { name = "djangorestframework" },
     { name = "djangorestframework-simplejwt" },
     { name = "docutils" },
+    { name = "duckdb" },
     { name = "gunicorn" },
     { name = "pandas" },
     { name = "python-dotenv" },
@@ -136,12 +137,13 @@ dependencies = [
 requires-dist = [
     { name = "asgiref", specifier = "==3.8.1" },
     { name = "chardet", specifier = "==7.4.3" },
-    { name = "coordo", git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.12.0" },
+    { name = "coordo", git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.13.0" },
     { name = "django", specifier = ">=4.2.27" },
     { name = "django-cors-headers", specifier = "==4.9.0" },
     { name = "djangorestframework", specifier = "==3.16.0" },
     { name = "djangorestframework-simplejwt", specifier = "==5.5.1" },
     { name = "docutils", specifier = "==0.22" },
+    { name = "duckdb", specifier = "==1.5.6" },
     { name = "gunicorn", specifier = "==23.0.0" },
     { name = "pandas", specifier = "==3.0.3" },
     { name = "python-dotenv", specifier = "==1.2.2" },
@@ -276,7 +278,7 @@ wheels = [
 [[package]]
 name = "coordo"
 version = "0.10.0"
-source = { git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.12.0#7f90b19f254b3017703a50752b5f21f056bcf126" }
+source = { git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.13.0#8d55b4b66ac0cf268d57475921ed1e36b38effe9" }
 dependencies = [
     { name = "dplib-py" },
     { name = "duckdb" },
