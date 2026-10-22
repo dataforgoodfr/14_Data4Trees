@@ -48,7 +48,7 @@ ENTRYPOINT [ "./entrypoint.sh" ]
 EXPOSE 8000
 
 # Runtime stage uses the same public Python and Debian versions as the builder.
-FROM python:3.14-slim-trixie
+FROM python:3.14-slim-trixie as production
 
 # Prevent Python from writing bytecode and buffering stdout/stderr.
 ENV PYTHONDONTWRITEBYTECODE=1 \
