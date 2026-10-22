@@ -27,4 +27,4 @@ RUN --mount=type=cache,target=/root/.npm npm install --global serve@14.2.6
 
 USER node
 EXPOSE 3000
-CMD ["serve", "-s", "dist", "-l", "3000"]use the same image as the builder
+CMD ["serve", "-s", "dist", "-l", "3000"]

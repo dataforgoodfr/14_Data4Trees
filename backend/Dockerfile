@@ -2,8 +2,8 @@
 
 # syntax=docker/dockerfile:1
 
-# Build stage: use the glibc-based DHI variant for the project's geospatial wheels.
-FROM dhi.io/python:3.14-debian13-dev AS builder
+# Build stage: use the public glibc-based Python image for geospatial wheels.
+FROM python:3.14-slim-trixie AS builder
 
 # Prevent Python from buffering stdout/stderr so logs appear immediately.
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -35,8 +35,7 @@ RUN --mount=type=secret,id=S3_ACCESS_KEY_ID,env=S3_ACCESS_KEY_ID,required=true \
 
 RUN DJANGO_SECRET_KEY=build-only-not-for-runtime \
     uv run --no-sync python manage.py collectstatic --noinput && \
-    mkdir -p /app/db && \
-    chown -R 65532:65532 /app/catalog /app/db
+    mkdir -p /app/db
 
 # The development stage inherits the -dev image and virtual environment from
 # the builder. Django's built-in server reloads when Compose Watch syncs files.
@@ -48,9 +47,8 @@ ENTRYPOINT [ "./entrypoint.sh" ]
 
 EXPOSE 8000
 
-# Runtime stage: minimal DHI image with no shell or package manager,
-# already runs as the nonroot user.
-FROM dhi.io/python:3.14-debian13
+# Runtime stage uses the same public Python and Debian versions as the builder.
+FROM python:3.14-slim-trixie
 
 # Prevent Python from writing bytecode and buffering stdout/stderr.
 ENV PYTHONDONTWRITEBYTECODE=1 \
