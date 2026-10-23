@@ -10,6 +10,11 @@ urlpatterns = [
     path("add-fk/", views.add_foreign_key_view, name="maps-add-fk"),
     path("remove-fk/", views.remove_foreign_key_view, name="maps-remove-fk"),
     path("get-filters/", views.get_filters, name="maps-get-filters"),
+    path(
+        "get-calculation-filters/",
+        views.get_calculation_filters_view,
+        name="maps-get-calculation-filters",
+    ),
     re_path(r"^(?!dashboard)(?P<subpath>\w+)", views.my_map_view, name="maps-data"),
     path("dashboard/<layer_id>", views.dashboard_view, name="dashboard-data"),
 ]
