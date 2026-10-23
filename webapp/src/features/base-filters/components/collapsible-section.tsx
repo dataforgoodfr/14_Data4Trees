@@ -10,7 +10,7 @@ import {
 } from "@shared/ui/collapsible";
 import { Separator } from "@shared/ui/separator";
 
-type LayerFilterPanelProps = {
+type CollapsibleSectionProps = {
   identifier: string;
   title: string;
   icon: ReactNode;
@@ -18,7 +18,7 @@ type LayerFilterPanelProps = {
   children: ReactNode;
 };
 
-export const CollapsibleSection: FC<LayerFilterPanelProps> = ({
+export const CollapsibleSection: FC<CollapsibleSectionProps> = ({
   identifier,
   title,
   icon,
