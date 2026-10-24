@@ -1,10 +1,4 @@
-import type { FilterOption as ApiFilterOption } from "@shared/api/types";
-
-/** Value of a filterable GeoJSON property, in the type the API serves it. */
-export type FilterValue = string | number;
-
-/** A value offered by the API, with its label in every supported language. */
-export type FilterOption = ApiFilterOption<FilterValue>;
+import type { FilterOption, FilterValue } from "@features/base-filters";
 
 export const FILTER_KINDS = {
   RANGE: "range",

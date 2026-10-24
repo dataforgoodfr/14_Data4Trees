@@ -12,15 +12,17 @@ in localStorage.
 | --- | --- |
 | `types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`. |
 | `constants.ts` | `GROUP_KEYS` — the group names shared by every layer. |
-| `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers. |
+| `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers (built on `readStorage`). |
 | `apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
-| `labels.ts` | Picks an option's label for the current language. |
 | `use-layer-filters.ts` | React binding for one layer's own filters. |
 | `use-global-filters.ts` | React binding for the filters that apply to every layer. |
 | `layers/*.tsx` | One file per layer: which groups it shows, and how to label them. |
 | `global-filters.tsx` | The all-layers panel (year). |
 | `components/layer-filter-panel.tsx` | The shared card every layer panel renders. |
-| `components/checkbox-group.tsx` | Presentational checkbox list. |
+
+The checkbox list, the collapsible card, label resolution, `FilterValue` /
+`FilterOption` and the safe storage reader live in
+[`base-filters`](../base-filters/README.md), shared with `calculation-filters`.
 
 ## How it fits together
 
@@ -146,8 +148,9 @@ another group's (or another layer's) box.
 
 Labels are resolved **backend-side** (`get_labelized_value` in `filters.py`),
 against the layer's label table and each feature's own project, so a layer can
-span several projects. The frontend does no external-data lookup: `labels.ts`
-only picks `label::<i18n.language>`, falling back to I18N_FALLBACK_LNG (i18n/config.ts)
+span several projects. The frontend does no external-data lookup:
+`getOptionLabel` (in `base-filters`) only picks `label::<i18n.language>`,
+falling back to I18N_FALLBACK_LNG (i18n/config.ts)
 then to the raw value.
 Missing or wrong labels are therefore a backend concern — the `list_name`
 and key-type mapping live in `LAYER_PROPERTY_TO_LABEL_PROPERTIES`.

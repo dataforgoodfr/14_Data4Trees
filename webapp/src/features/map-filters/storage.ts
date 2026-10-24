@@ -1,3 +1,5 @@
+import { readStorage } from "@features/base-filters";
+
 import { LAYERS } from "@shared/api/layers";
 
 import type { GlobalFiltersState, LayerFiltersState } from "./types";
@@ -21,16 +23,6 @@ export const getLayerFiltersStorageKey = (layerId: string) =>
 /** Global filters live in their own entry, outside any layer namespace. */
 export const GLOBAL_FILTERS_STORAGE_KEY = `${STORAGE_PREFIX}:__global__`;
 
-const read = <T>(key: string, fallback: T): T => {
-  try {
-    const item = window.localStorage.getItem(key);
-    return item ? (JSON.parse(item) as T) : fallback;
-  } catch (error) {
-    console.error(error);
-    return fallback;
-  }
-};
-
 /**
  * Read persisted filters outside React.
  *
@@ -40,7 +32,7 @@ const read = <T>(key: string, fallback: T): T => {
  * filter panels have mounted.
  */
 export const readLayerFilters = (layerId: string): LayerFiltersState =>
-  read<LayerFiltersState>(getLayerFiltersStorageKey(layerId), {});
+  readStorage<LayerFiltersState>(getLayerFiltersStorageKey(layerId), {});
 
 export const readGlobalFilters = (): GlobalFiltersState =>
-  read<GlobalFiltersState>(GLOBAL_FILTERS_STORAGE_KEY, {});
+  readStorage<GlobalFiltersState>(GLOBAL_FILTERS_STORAGE_KEY, {});

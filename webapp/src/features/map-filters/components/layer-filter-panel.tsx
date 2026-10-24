@@ -1,13 +1,17 @@
 import type { FC, ReactNode } from "react";
 
+import {
+  CheckboxGroup,
+  CollapsibleSection,
+  type FilterOption,
+  toCheckboxItems,
+} from "@features/base-filters";
+
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@shared/i18n";
 
-import { toCheckboxItems } from "../labels";
-import type { FilterGroup, FilterOption } from "../types";
+import type { FilterGroup } from "../types";
 import { useLayerFilters } from "../use-layer-filters";
-import { CheckboxGroup } from "./checkbox-group";
-import { CollapsibleSection } from "./collapsible-section";
 
 export type PanelFilterGroup = FilterGroup & {
   title: string;

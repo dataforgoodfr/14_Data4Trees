@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import type { FilterOption, FilterValue } from "@features/base-filters";
+
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 
@@ -9,8 +11,6 @@ import { refreshAllLayerFilters } from "./apply-layer-filter";
 import { GLOBAL_FILTERS_STORAGE_KEY } from "./storage";
 import {
   FILTER_KINDS,
-  type FilterOption,
-  type FilterValue,
   type GlobalFilter,
   type GlobalFilterGroup,
   type GlobalFiltersState,
