@@ -1,14 +1,17 @@
 import { CalendarRangeIcon } from "lucide-react";
 import type { FC } from "react";
 
+import {
+  CheckboxGroup,
+  CollapsibleSection,
+  toCheckboxItems,
+} from "@features/base-filters";
+
 import type { Filters } from "@shared/api/types";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@shared/i18n";
 
-import { CheckboxGroup } from "./components/checkbox-group";
-import { CollapsibleSection } from "./components/collapsible-section";
 import { GROUP_KEYS } from "./constants";
-import { toCheckboxItems } from "./labels";
 import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
 
 /**
