@@ -54,12 +54,10 @@ def get_filters(request):
 @authentication_classes([JWTAuthentication])
 def get_calculation_filters_view(request):
     """
-    Return the values of the enquete layer's calculation filters,
+    Return the options of the enquete layer's calculation filters,
     which restrict the raw rows before the layer aggregates them.
     """
-    user_map = get_user_map(request.user)
-    result = get_calculation_filters(user_map)
-    return JsonResponse(result)
+    return JsonResponse(get_calculation_filters())
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
