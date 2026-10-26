@@ -5,6 +5,23 @@
     }
   },
   "filters": {
+    "calculation": {
+      "apply": "Appliquer les modifications",
+      "applying": "Recalcul en cours…",
+      "error": "Le recalcul a échoué. Les données précédentes sont conservées.",
+      "groups": {
+        "age": "Âge",
+        "coh": "Cohorte",
+        "educ": "Niveau d'éducation",
+        "inc_main": "Principale source de revenus",
+        "inc_sit": "Situation financière",
+        "sex": "Sexe",
+        "typ": "Type de ménage",
+        "urb_rur": "Milieu de résidence"
+      },
+      "info": "Ces filtres s'appliquent uniquement au calque {{layer}} : ils recalculent ses indicateurs à partir des ménages sélectionnés.",
+      "loadError": "Impossible de charger les filtres de calcul."
+    },
     "categories": {
       "actions": {
         "title": "Actions menées"
