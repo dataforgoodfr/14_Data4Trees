@@ -1,4 +1,4 @@
-import type { APIError, Filters } from "./types";
+import type { APIError, CalculationFilters, Filters } from "./types";
 
 export const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:8000/api";
@@ -49,6 +49,8 @@ export const createApiClient = (authToken: string | null) => ({
       { body: formData, method: "POST" },
       authToken,
     ),
+  getCalculationFilters: (): Promise<CalculationFilters> =>
+    fetchJSONWithAuth(`/maps/get-calculation-filters/`, {}, authToken),
   getCatalogResource: (layerId: string, resourceName: string) =>
     fetchJSONWithAuth(`/catalog/${layerId}/${resourceName}`, {}, authToken),
   getCatalogResourceList: (layerId: string, resourceList: string[]) =>

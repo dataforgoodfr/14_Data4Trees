@@ -18,7 +18,8 @@ type CheckboxGroupProps = {
    * Callers pass `<layerId>-<groupKey>` (or `global-<groupKey>`).
    */
   namespace: string;
-  title: string;
+  /** Omit to render the boxes alone, e.g. below another widget of the group. */
+  title?: string;
   items: CheckboxGroupItem[];
   disabled?: boolean;
   getIsChecked: (identifier: string) => boolean;
@@ -48,7 +49,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
 }) => {
   return (
     <section>
-      <p className="font-medium text-sm mb-3">{title}</p>
+      {title && <p className="font-medium text-sm mb-3">{title}</p>}
       <FieldGroup className="mx-auto gap-2">
         {items.map((item) => {
           const fieldHtmlId = getFieldHtmlId(namespace, item.identifier);
