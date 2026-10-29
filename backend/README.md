@@ -96,7 +96,7 @@ python manage.py runserver
 
 ### Production Docker image
 
-The production `Dockerfile` uses Docker Hardened Images and runs Gunicorn as UID 65532. Keep the deploy-time Django secret out of the image and provide it through `DJANGO_SECRET_KEY` in the deployment environment. Rotate the old hard-coded key before deploying.
+The production `Dockerfile` uses the public `python:3.14-slim-trixie` image, not Docker Hardened Images, and runs Gunicorn as UID 65532. It copies `uv` from the official `ghcr.io/astral-sh/uv` image pinned to release `0.13.6` and its multi-platform manifest digest. The build compiles Python bytecode for faster startup. Keep the deploy-time Django secret out of the image and provide it through `DJANGO_SECRET_KEY` in the deployment environment. Rotate the old hard-coded key before deploying.
 
 The Docker builder installs AWS CLI, Bash, and Make, then runs `init-catalog.sh` to download source data and generate the catalog. Supply `S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY` to Compose when building; BuildKit mounts them only for that build step, so they are not stored in the image. The generated catalog is copied into the final image.
 

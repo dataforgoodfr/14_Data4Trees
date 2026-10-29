@@ -5,13 +5,15 @@
 # Build stage: use the public glibc-based Python image for geospatial wheels.
 FROM python:3.14-slim-trixie AS builder
 
+# Pin the official uv image to its release and multi-platform manifest digest.
+COPY --from=ghcr.io/astral-sh/uv:0.13.6@sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0 /uv /uvx /bin/
+
 # Prevent Python from writing bytecode and buffering stdout/stderr
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
-RUN pip install --quiet --root-user-action=ignore uv
-# Use copy mode since the cache and build filesystem are on different volumes.
-ENV UV_LINK_MODE=copy
+    PYTHONUNBUFFERED=1 \
+    UV_NO_PROGRESS=1 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy
 
 WORKDIR /app
 
@@ -33,6 +35,7 @@ RUN --mount=type=secret,id=S3_ACCESS_KEY_ID,env=S3_ACCESS_KEY_ID,required=true \
     --mount=type=secret,id=S3_SECRET_ACCESS_KEY,env=S3_SECRET_ACCESS_KEY,required=true \
     uv run --no-sync bash ./init-catalog.sh
 
+# Set DJANGO_SECRET_KEY only for the collectstatic command during the Docker build
 RUN DJANGO_SECRET_KEY=build-only-not-for-runtime \
     uv run --no-sync python manage.py collectstatic --noinput && \
     mkdir -p /app/db
