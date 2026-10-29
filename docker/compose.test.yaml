@@ -16,7 +16,7 @@ services:
       - traefik.http.services.backend-data4trees-test.loadbalancer.server.port=8000
     volumes:
       - backend_db_test:/app/db # Persist user db
-      - backend_catalog:/app/catalog # Persist catalog data
+      - backend_catalog_test:/app/catalog # Persist catalog data
     networks:
       - d4g-internal
     environment:
@@ -71,6 +71,8 @@ networks:
 
 volumes:
   backend_db_test:
+    external: true
+  backend_catalog_test:
     external: true
 
 secrets:

@@ -73,6 +73,8 @@ networks:
 volumes:
   backend_db:
     external: true
+  backend_catalog:
+    external: true
 
 secrets:
   S3_ACCESS_KEY_ID:
