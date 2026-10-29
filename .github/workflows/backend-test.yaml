@@ -29,6 +29,12 @@ jobs:
         run: |
           cd backend
           uv sync
+
+      - name: Generate Django Secret Key
+        id: generate_secret_key
+        run: |
+          SECRET_KEY=$(python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())")
+          echo "DJANGO_SECRET_KEY=$SECRET_KEY" >> $GITHUB_ENV
     
       - name: Run Tests
         run: |
