@@ -11,6 +11,7 @@ from .constants import LAYER_INVENTAIRE_FOR
 from .datapackage_manager import DatapackageManager
 from .services.user_map import get_user_map
 from .services.filters import get_all4trees_filters
+from .services.calculation_filters import get_calculation_filters
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication])
@@ -48,6 +49,15 @@ def get_filters(request):
     user_map = get_user_map(request.user)
     result = get_all4trees_filters(user_map)
     return JsonResponse(result)
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+def get_calculation_filters_view(request):
+    """
+    Return the options of the enquete layer's calculation filters,
+    which restrict the raw rows before the layer aggregates them.
+    """
+    return JsonResponse(get_calculation_filters())
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])

@@ -1,0 +1,54 @@
+{
+  "layer_id": "enquete",
+  "missing_label": {
+    "label::fr": "Non renseigné",
+    "label::en": "Not provided"
+  },
+  "filters": {
+    "typ": {
+      "kind": "values",
+      "list_name": "typ"
+    },
+    "coh": {
+      "kind": "range",
+      "list_name": "coh"
+    },
+    "urb_rur": {
+      "kind": "values",
+      "list_name": "urb_rur",
+      "missing": {
+        "values": [],
+        "include_null": true
+      }
+    },
+    "sex": {
+      "kind": "values",
+      "list_name": "sex"
+    },
+    "age": {
+      "kind": "range",
+      "values": [
+        { "value": "1", "label::fr": "Moins de 35 ans", "label::en": "Under 35" },
+        { "value": "2", "label::fr": "35 à 49 ans", "label::en": "35 to 49" },
+        { "value": "3", "label::fr": "50 à 65 ans", "label::en": "50 to 65" },
+        { "value": "4", "label::fr": "Plus de 65 ans", "label::en": "Over 65" }
+      ],
+      "missing": {
+        "values": ["98", "99"],
+        "include_null": true
+      }
+    },
+    "educ": {
+      "kind": "values",
+      "list_name": "educ"
+    },
+    "inc_main": {
+      "kind": "values",
+      "list_name": "inc"
+    },
+    "inc_sit": {
+      "kind": "values",
+      "list_name": "inc_sit"
+    }
+  }
+}
