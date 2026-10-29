@@ -5,7 +5,7 @@ requires-python = ">=3.13,<3.15"
 dependencies = [
     "asgiref==3.8.1",
     "chardet==7.4.3",
-    "coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@0.13.1#subdirectory=coordo-py",
+    "coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@0.14.1#subdirectory=coordo-py",
     "Django>=4.2.27",
     "django-cors-headers==4.9.0",
     "djangorestframework==3.16.0",
