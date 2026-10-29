@@ -5,11 +5,9 @@
 # Build stage: use the public glibc-based Python image for geospatial wheels.
 FROM python:3.14-slim-trixie AS builder
 
-# Prevent Python from writing bytecode and buffering stdout/stderr 
-# Set HOME as /tmp to avoid permissions issues while installing duck extensions
+# Prevent Python from writing bytecode and buffering stdout/stderr
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    HOME=/tmp
+    PYTHONUNBUFFERED=1
 
 RUN pip install --quiet --root-user-action=ignore uv
 # Use copy mode since the cache and build filesystem are on different volumes.
@@ -51,6 +49,12 @@ EXPOSE 8000
 
 # Runtime stage uses the same public Python and Debian versions as the builder.
 FROM python:3.14-slim-trixie AS production
+
+# Prevent Python from writing bytecode and buffering stdout/stderr
+# DuckDB stores downloaded extensions under HOME; /tmp is writable by the runtime user.
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/tmp
 
 # Activate the virtual environment copied from the build stage.
 ENV PATH="/app/.venv/bin:$PATH"
