@@ -16,17 +16,28 @@ jobs:
         python-version: [3.12, 3.13, 3.14 ]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v6
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r ./backend/requirements.txt
-    - name: Run Tests'
-      run: |
-        cd backend
-        python manage.py migrate
-        python manage.py test
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          working-directory: backend
+          activate-environment: true
+    
+      - name: Install dependencies
+        run: |
+          cd backend
+          uv sync
+
+      - name: Generate Django Secret Key
+        id: generate_secret_key
+        run: |
+          SECRET_KEY=$(python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())")
+          echo "DJANGO_SECRET_KEY=$SECRET_KEY" >> $GITHUB_ENV
+    
+      - name: Run Tests
+        run: |
+          cd backend
+          python manage.py migrate
+          python manage.py test

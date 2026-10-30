@@ -1,2 +1,14 @@
-.venv
-static
+.venv/
+.git/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+static/
+catalog/
+data/
+data.bak/
+db/
+db.sqlite3
+*.bak

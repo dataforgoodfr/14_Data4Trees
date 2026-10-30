@@ -1,3 +1,5 @@
+# Source: https://www.docker.com/blog/how-to-dockerize-react-app/
+
 ARG NODE_VERSION=24.14.0-alpine
 
 FROM node:${NODE_VERSION} AS builder
@@ -10,6 +12,13 @@ COPY . .
 ARG VITE_API_URL=/api
 ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
+
+# Development stage
+FROM builder AS development
+
+COPY . .
+
+EXPOSE 5173
 
 FROM node:${NODE_VERSION} AS runner
 ENV NODE_ENV=production

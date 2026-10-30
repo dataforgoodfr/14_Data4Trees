@@ -1,0 +1,22 @@
+[project]
+name = "all4trees-backend"
+version = "0.1.0"
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "asgiref==3.8.1",
+    "chardet==7.4.3",
+    "coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@0.14.1#subdirectory=coordo-py",
+    "Django>=4.2.27",
+    "django-cors-headers==4.9.0",
+    "djangorestframework==3.16.0",
+    "djangorestframework-simplejwt==5.5.1",
+    "docutils==0.22",
+    "duckdb==1.5.6",
+    "gunicorn==23.0.0",
+    "pandas==3.0.3",
+    "python-dotenv==1.2.2",
+    "whitenoise[brotli]==6.12.0",
+]
+
+[tool.uv]
+package = false
