@@ -54,7 +54,7 @@ export const BioInventoryPopupContent: FC<BioInventoryPopupContentProps> = ({
     t("dataManagement.undefined", { ns: "common" })
   }`;
 
-  const date = formatDate(new Date());
+  const date = formatDate(data.date);
 
   return (
     <div className={cx("flex flex-col", className ?? "")}>

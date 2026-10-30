@@ -77,7 +77,7 @@ export const ForestInventoryPopupContent: FC<
     t("dataManagement.undefined", { ns: "common" })
   }`;
 
-  const date = formatDate(new Date());
+  const date = formatDate(data.date);
 
   const plot_size = t("popup.forestInventory.size", {
     ns: "all4trees",
