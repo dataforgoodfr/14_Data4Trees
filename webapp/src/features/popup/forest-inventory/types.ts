@@ -4,6 +4,7 @@ import type { SoilData } from "@features/indicators/soil/types";
 export type ForestInventoryData = {
   id: string;
   code: number;
+  date: Date;
   type: number;
   cohort: number;
   loc1: number;

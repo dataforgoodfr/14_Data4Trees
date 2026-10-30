@@ -2,6 +2,7 @@ import type { EconomicData } from "@features/indicators/economy/types";
 import type { SocialData } from "@features/indicators/social/types";
 
 export type SocioEcoData = {
+  date: Date;
   project: string;
   year: number;
   cohort: number;
