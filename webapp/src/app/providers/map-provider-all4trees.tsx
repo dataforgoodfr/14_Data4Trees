@@ -1,6 +1,7 @@
 import { type ReactNode, useCallback, useRef, useState } from "react";
 
 import { useAuth } from "@features/auth";
+import { replayCalculationFilters } from "@features/calculation-filters";
 import { useCategoriesFilters } from "@features/categories-filters/use-categories-filters";
 import { renderAnchor, renderLayerRow } from "@features/controls/layer-control";
 import { refreshAllLayerFilters } from "@features/map-filters/apply-layer-filter";
@@ -63,6 +64,12 @@ export function MapProviderAll4Trees({ children }: MapProviderAll4TreesProps) {
       const map = mapApiRef.current?.mapInstance;
       if (map) {
         refreshAllLayerFilters({ map });
+      }
+
+      // Refetches the enquete data when calculation filters were applied
+      // before the reload. Display filters set above still apply on top.
+      if (mapApiRef.current) {
+        replayCalculationFilters({ mapApi: mapApiRef.current });
       }
     };
 

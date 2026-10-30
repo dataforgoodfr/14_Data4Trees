@@ -1,14 +1,19 @@
-import { ListFilterIcon } from "lucide-react";
+import { AlertCircleIcon, ListFilterIcon } from "lucide-react";
 import { Activity, useEffect, useRef, useState } from "react";
 
+import { CalculationFilters } from "@features/calculation-filters";
 import { CategoriesFilters } from "@features/categories-filters";
 import { MapFilters } from "@features/map-filters";
 
-import type { Filters } from "@shared/api/types";
+import type {
+  CalculationFilters as CalculationFiltersPayload,
+  Filters,
+} from "@shared/api/types";
 import { useApi } from "@shared/hooks/useApi";
 import { GridSelector } from "@shared/ui/grid-selector";
 import { useTranslation } from "@i18n";
 
+import { Alert, AlertDescription } from "@ui/alert";
 import { Separator } from "@ui/separator";
 
 const FILTER_KIND = {
@@ -36,6 +41,27 @@ export function MapSidebar() {
       fetchFilters();
     }
   }, [mapFilters, client.getFilters]);
+
+  const [calculationFilters, setCalculationFilters] =
+    useState<CalculationFiltersPayload | null>(null);
+  const [calculationFiltersStatus, setCalculationFiltersStatus] = useState<
+    "loading" | "loaded" | "error"
+  >("loading");
+
+  // Fetched once: the options are the form lists, they do not depend on the
+  // map state.
+  useEffect(() => {
+    client
+      .getCalculationFilters()
+      .then((filters) => {
+        setCalculationFilters(filters);
+        setCalculationFiltersStatus("loaded");
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+        setCalculationFiltersStatus("error");
+      });
+  }, [client.getCalculationFilters]);
 
   return (
     <div className="flex flex-col h-full">
@@ -89,7 +115,18 @@ export function MapSidebar() {
               : "hidden"
           }
         >
-          Not implemented
+          {calculationFiltersStatus === "loading" && (
+            <div className="mb-4 h-8 w-8 self-center animate-spin rounded-full border-4 border-primary border-t-transparent" />
+          )}
+          {calculationFiltersStatus === "error" && (
+            <Alert variant="destructive">
+              <AlertCircleIcon className="h-4 w-4" />
+              <AlertDescription>
+                {t("filters.calculation.loadError")}
+              </AlertDescription>
+            </Alert>
+          )}
+          <CalculationFilters filters={calculationFilters} />
         </Activity>
       </div>
     </div>
