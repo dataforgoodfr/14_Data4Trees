@@ -59,3 +59,33 @@ export type APIError = {
   message: string;
   cause: string;
 };
+
+/**
+ * The "not provided" option of a calculation filter: the codes it stands for
+ * and, when `include_null` is true, rows where the column is null.
+ */
+export type CalculationFilterMissing = {
+  values: string[];
+  include_null: boolean;
+} & {
+  [K in `label::${Language}`]: string;
+};
+
+type CalculationFilterLeaf = {
+  kind: "values" | "range";
+  /** Raw `enquete_menage` column. */
+  property_name: string;
+  /** Every choice of the form list, in order, whatever the data. */
+  values: Array<FilterOption<string>>;
+  missing: CalculationFilterMissing | null;
+};
+
+/**
+ * `GET /maps/get-calculation-filters/`, built by
+ * `backend/maps/services/calculation_filters.py`. `filters` keys come in
+ * display order.
+ */
+export type CalculationFilters = {
+  layer_id: string;
+  filters: Record<string, CalculationFilterLeaf>;
+};

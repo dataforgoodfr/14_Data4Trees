@@ -5,6 +5,23 @@
     }
   },
   "filters": {
+    "calculation": {
+      "apply": "Apply changes",
+      "applying": "Recalculating…",
+      "error": "The recalculation failed. The previous data is kept.",
+      "groups": {
+        "age": "Age",
+        "coh": "Cohort",
+        "educ": "Education level",
+        "inc_main": "Main source of income",
+        "inc_sit": "Financial situation",
+        "sex": "Sex",
+        "typ": "Household type",
+        "urb_rur": "Place of residence"
+      },
+      "info": "These filters only apply to the {{layer}} layer: they recalculate its indicators from the selected households.",
+      "loadError": "Could not load the calculation filters."
+    },
     "categories": {
       "actions": {
         "title": "Actions taken"
