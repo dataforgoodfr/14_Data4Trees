@@ -5,6 +5,13 @@
 # Build stage: use the public glibc-based Python image for geospatial wheels.
 FROM python:3.14-slim-trixie
 
+# These ARG/ENV steps are necessary because Clever Cloud passes environment variables as build arguments with --build-arg.
+ARG S3_ACCESS_KEY_ID="dummykeytooverride" \
+    S3_SECRET_ACCESS_KEY="dummysecrettooverride"
+
+ENV S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID} \
+    S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
+
 # Pin the official uv image to its release and multi-platform manifest digest.
 COPY --from=ghcr.io/astral-sh/uv:0.13.6@sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0 /uv /uvx /bin/
 
@@ -42,6 +49,17 @@ RUN DJANGO_SECRET_KEY=build-only-not-for-runtime \
 
 # Runtime stage uses the same public Python and Debian versions as the builder.
 FROM python:3.14-slim-trixie
+
+# These ARG/ENV steps are necessary because Clever Cloud passes environment variables as build arguments with --build-arg.
+ARG DJANGO_SECRET_KEY="dummykeytooverride" \
+    DJANGO_SUPERUSER_EMAIL="dummyemailtooverride" \
+    DJANGO_SUPERUSER_PASSWORD="dummypasswordtooverride" \
+    DJANGO_SUPERUSER_USERNAME="dummysuperusertooverride"
+
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} \
+    DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL} \
+    DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD} \
+    DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
 
 # Prevent Python from writing bytecode and buffering stdout/stderr
 # DuckDB stores downloaded extensions under HOME; /tmp is writable by the runtime user.
