@@ -45,12 +45,6 @@ RUN DJANGO_SECRET_KEY=build-only-not-for-runtime \
 # Runtime stage uses the same public Python and Debian versions as the builder.
 FROM python:3.14-slim-trixie
 
-# These ARG/ENV steps are necessary because Clever Cloud passes environment variables as build arguments with --build-arg.
-ARG DJANGO_SECRET_KEY
-ARG DJANGO_SUPERUSER_EMAIL
-ARG DJANGO_SUPERUSER_PASSWORD
-ARG DJANGO_SUPERUSER_USERNAME
-
 # Prevent Python from writing bytecode and buffering stdout/stderr
 # DuckDB stores downloaded extensions under HOME; /tmp is writable by the runtime user.
 ENV PYTHONDONTWRITEBYTECODE=1 \

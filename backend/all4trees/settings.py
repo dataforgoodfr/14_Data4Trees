@@ -33,6 +33,8 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "test-data4trees.services.d4g.fr",
     "data4trees.services.d4g.fr",
+    "app-9a41a4bb-ca46-46b7-9f0c-9405466f4b63.cleverapps.io",
+    "all4trees.cleverapp.io"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
