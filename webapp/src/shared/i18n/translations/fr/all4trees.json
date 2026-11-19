@@ -11,7 +11,7 @@
       "error": "Le recalcul a échoué. Les données précédentes sont conservées.",
       "groups": {
         "age": "Âge",
-        "coh": "Cohorte",
+        "coh": "Début d'intervention",
         "educ": "Niveau d'éducation",
         "inc_main": "Principale source de revenus",
         "inc_sit": "Situation financière",
@@ -33,7 +33,7 @@
       "title": "Tous les calques"
     },
     "groups": {
-      "cohort": "Cohorte",
+      "cohort": "Début d'intervention",
       "ecos": "Écosystème",
       "loc1": "Département",
       "loc2": "Commune",
@@ -43,7 +43,7 @@
       "year": "Année"
     },
     "sidebarLayout": {
-      "calculationFilters": "Calcul",
+      "calculationFilters": "Rapport",
       "displayFilters": "Affichage",
       "title": "Panneau de filtrage"
     }

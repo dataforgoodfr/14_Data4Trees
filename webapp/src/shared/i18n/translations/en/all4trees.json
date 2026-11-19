@@ -11,7 +11,7 @@
       "error": "The recalculation failed. The previous data is kept.",
       "groups": {
         "age": "Age",
-        "coh": "Cohort",
+        "coh": "Intervention start date",
         "educ": "Education level",
         "inc_main": "Main source of income",
         "inc_sit": "Financial situation",
@@ -33,7 +33,7 @@
       "title": "All layers"
     },
     "groups": {
-      "cohort": "Cohort",
+      "cohort": "Intervention start date",
       "ecos": "Ecosystem",
       "loc1": "Department",
       "loc2": "Municipality",
@@ -43,7 +43,7 @@
       "year": "Year"
     },
     "sidebarLayout": {
-      "calculationFilters": "Calculation",
+      "calculationFilters": "Report",
       "displayFilters": "Display",
       "title": "Filtering panel"
     }

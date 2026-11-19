@@ -64,8 +64,8 @@ export const CalculationFilters: FC<CalculationFiltersProps> = ({
     apply,
     getCheckboxGroupProps,
     getRangeProps,
+    hasChanged,
     hasError,
-    isDirty,
     isDisabled,
     isLoading,
   } = useCalculationFilters();
@@ -94,7 +94,7 @@ export const CalculationFilters: FC<CalculationFiltersProps> = ({
       <div className="sticky top-0 z-10 bg-background pb-2 flex flex-col gap-2">
         <Button
           className="w-full"
-          disabled={!isDirty || isDisabled}
+          disabled={!hasChanged || isDisabled}
           onClick={apply}
         >
           {isLoading && <Loader2Icon className="animate-spin" />}
