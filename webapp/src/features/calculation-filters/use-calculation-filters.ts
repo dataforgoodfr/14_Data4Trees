@@ -43,11 +43,11 @@ export const useCalculationFilters = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const isDirty = !areStatesEqual(draft, applied);
+  const hasChanged = !areStatesEqual(draft, applied);
 
   const apply = async () => {
     const mapApi = mapApiRef.current;
-    if (!mapApi || !isDirty || isLoading) return;
+    if (!mapApi || !hasChanged || isLoading) return;
 
     setIsLoading(true);
     setHasError(false);
@@ -143,8 +143,8 @@ export const useCalculationFilters = () => {
     draft,
     getCheckboxGroupProps,
     getRangeProps,
+    hasChanged,
     hasError,
-    isDirty,
     isDisabled: !isReady || isLoading,
     isLoading,
   };
