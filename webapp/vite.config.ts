@@ -21,6 +21,9 @@ export default defineConfig({
     },
   },
   plugins: [react(), tailwindcss()],
+  optimizeDeps: {
+    exclude: ["coordo", "maplibre-gl"],
+  },
   server: {
     allowedHosts: [
       "test-data4trees.services.d4g.fr",
