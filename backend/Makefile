@@ -1,3 +1,6 @@
+.PHONY: build catalog # Force the commands to be exectued even if the target files exist
+
+
 catalog:
 	# All 4 Trees - Inventaire forestier
 
