@@ -42,6 +42,8 @@ services:
       - /app/node_modules # anonymous volume: to avoid node modules from being erased during the mapping
     ports:
       - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
     command: ["npm", "run", "docker:dev"]
     healthcheck:
       test: ["CMD", "echo", "OK"] # TODO: implement healthcheck in frontend
