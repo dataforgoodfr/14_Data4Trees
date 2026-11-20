@@ -114,7 +114,7 @@ dependencies = [
 requires-dist = [
     { name = "asgiref", specifier = "==3.13.0" },
     { name = "chardet", specifier = "==7.4.3" },
-    { name = "coordo", git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.2" },
+    { name = "coordo", git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.3" },
     { name = "dj-database-url", specifier = "==3.1.2" },
     { name = "django", specifier = "==5.2.19" },
     { name = "django-cors-headers", specifier = "==4.9.0" },
@@ -244,8 +244,8 @@ wheels = [
 
 [[package]]
 name = "coordo"
-version = "0.14.2"
-source = { git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.2#55fc6cafa48155a2cb81e7fdecd592b1c8d2122a" }
+version = "0.14.3"
+source = { git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.3#800e4d57a4f8265656494e0c65590ef8efcffb2b" }
 dependencies = [
     { name = "dplib-py" },
     { name = "duckdb" },
