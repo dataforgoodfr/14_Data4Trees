@@ -121,6 +121,7 @@ dependencies = [
     { name = "asgiref" },
     { name = "chardet" },
     { name = "coordo" },
+    { name = "dj-database-url" },
     { name = "django" },
     { name = "django-cors-headers" },
     { name = "djangorestframework" },
@@ -137,7 +138,8 @@ dependencies = [
 requires-dist = [
     { name = "asgiref", specifier = "==3.8.1" },
     { name = "chardet", specifier = "==7.4.3" },
-    { name = "coordo", git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.1" },
+    { name = "coordo", git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.2" },
+    { name = "dj-database-url", specifier = ">=3.1.2" },
     { name = "django", specifier = ">=4.2.27" },
     { name = "django-cors-headers", specifier = "==4.9.0" },
     { name = "djangorestframework", specifier = "==3.16.0" },
@@ -283,8 +285,8 @@ wheels = [
 
 [[package]]
 name = "coordo"
-version = "0.14.1"
-source = { git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.1#a80f16a535eac68e265405e711ebeb33d2ded792" }
+version = "0.14.2"
+source = { git = "https://github.com/dataforgoodfr/Coordonnees.git?subdirectory=coordo-py&rev=0.14.2#55fc6cafa48155a2cb81e7fdecd592b1c8d2122a" }
 dependencies = [
     { name = "dplib-py" },
     { name = "duckdb" },
@@ -326,6 +328,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/0f/d5/c66da9b79e5bdb124974bfe172b4daf3c984ebd9c2a06e2b8a4dc7331c72/defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69", size = 75520, upload-time = "2021-03-08T10:59:26.269Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61", size = 25604, upload-time = "2021-03-08T10:59:24.45Z" },
+]
+
+[[package]]
+name = "dj-database-url"
+version = "3.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/03/f6/00b625e9d371b980aa261011d0dc906a16444cb688f94215e0dc86996eb5/dj_database_url-3.1.2.tar.gz", hash = "sha256:63c20e4bbaa51690dfd4c8d189521f6bf6bc9da9fcdb23d95d2ee8ee87f9ec62", size = 11490, upload-time = "2026-02-19T15:30:23.638Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cf/a9/57c66006373381f1d3e5bd94216f1d371228a89f443d3030e010f73dd198/dj_database_url-3.1.2-py3-none-any.whl", hash = "sha256:544e015fee3efa5127a1eb1cca465f4ace578265b3671fe61d0ed7dbafb5ec8a", size = 8953, upload-time = "2026-02-19T15:30:39.37Z" },
 ]
 
 [[package]]
