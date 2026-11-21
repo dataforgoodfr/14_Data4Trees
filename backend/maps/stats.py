@@ -94,17 +94,6 @@ def compute_aggregation(data):
 
     df_source = pd.DataFrame([feat.get("properties", {}) for feat in data["features"]])
 
-    # WORK AROUND change column name, waiting for style.json update
-    df_source = df_source.rename(columns={"for": "loc2"})
-
-    # Data Type
-    df_source['loc2'] = df_source['loc2'].astype(int)
-
-    # WORK AROUND split soil_eros_rainfall_and_wind and typage soil_eros_slope
-    df_source[['soil_eros_rainfall','soil_eros_wind']] = df_source['soil_eros_rainfall_and_wind'].str.split('-', expand=True).astype(int)
-    to_drop = ['soil_eros_rainfall_and_wind']
-    df_source.drop(columns=to_drop, inplace=True)
-
     # INVENTAIRE meta data
 
     # Loading projects
