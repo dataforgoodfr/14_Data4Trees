@@ -200,10 +200,9 @@ export const applyLayerFilter = ({
 /**
  * Recompute one layer's filter from the persisted state.
  *
- * Both sides are read from localStorage rather than from React state: the
- * per-layer panel and the global panel own different pieces of the expression
- * and never share a React tree, but `useLocalStorage` writes synchronously, so
- * whichever one triggers the refresh sees the other's latest value.
+ * Both sides are read from localStorage rather than from React state, so the
+ * same call serves the panels (`MapFiltersProvider` writes storage before
+ * refreshing) and the MAP_READY replay, which runs before any panel mounts.
  */
 export const refreshLayerFilter = ({
   map,

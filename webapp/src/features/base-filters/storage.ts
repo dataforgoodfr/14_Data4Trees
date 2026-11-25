@@ -13,3 +13,17 @@ export const readStorage = <T>(key: string, fallback: T): T => {
     return fallback;
   }
 };
+
+/**
+ * Write a localStorage entry outside React, as JSON.
+ *
+ * Failures (quota, blocked site data) are logged and swallowed: the in-memory
+ * state stays the source of truth for the session, only persistence is lost.
+ */
+export const writeStorage = <T>(key: string, value: T) => {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(error);
+  }
+};

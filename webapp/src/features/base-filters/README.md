@@ -24,9 +24,10 @@ here imports from another feature.
 | --- | --- |
 | `types.ts` | `FilterValue`, `FilterOption` — an API option with its labels. |
 | `labels.ts` | `getOptionLabel` picks an option's label for the current language; `toCheckboxItems` maps options to checkbox items. |
-| `storage.ts` | `readStorage` — safe JSON read of a localStorage entry outside React. |
-| `components/checkbox-group.tsx` | Presentational checkbox list. Requires a `namespace` to keep DOM ids unique. The title is optional. |
-| `components/collapsible-section.tsx` | Collapsible card with an icon and a title. |
+| `storage.ts` | `readStorage` / `writeStorage` — safe JSON read and write of a localStorage entry outside React. |
+| `components/all-or-none-toggle.tsx` | "All" / "None" buttons. Presentational: each panel decides what all and none mean. |
+| `components/checkbox-group.tsx` | Presentational checkbox list. Requires a `namespace` to keep DOM ids unique. The title is optional. Past 3 items, the list scrolls (about 3.5 rows visible). |
+| `components/collapsible-section.tsx` | Collapsible card with an icon and a title. Collapsed unless `defaultOpen`. |
 | `components/range-group.tsx` | Two-thumb slider over ordered options, with each option's label under its stop. Works on option indices. |
 
 ## Labels

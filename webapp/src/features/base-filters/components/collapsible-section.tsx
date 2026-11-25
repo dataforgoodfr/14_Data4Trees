@@ -16,6 +16,8 @@ type CollapsibleSectionProps = {
   icon: ReactNode;
   headerClassName: string;
   children: ReactNode;
+  /** Expanded on first render. Collapsed by default. */
+  defaultOpen?: boolean;
 };
 
 export const CollapsibleSection: FC<CollapsibleSectionProps> = ({
@@ -24,9 +26,13 @@ export const CollapsibleSection: FC<CollapsibleSectionProps> = ({
   icon,
   children,
   headerClassName,
+  defaultOpen = false,
 }) => {
   return (
-    <Collapsible key={`collapse-${identifier}`}>
+    <Collapsible
+      defaultOpen={defaultOpen}
+      key={`collapse-${identifier}`}
+    >
       <Card className="p-4 flex flex-col gap-2">
         <CollapsibleTrigger
           className={cx(

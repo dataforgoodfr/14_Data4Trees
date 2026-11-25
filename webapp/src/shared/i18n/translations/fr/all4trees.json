@@ -5,6 +5,10 @@
     }
   },
   "filters": {
+    "allOrNone": {
+      "all": "Tout",
+      "none": "Aucun"
+    },
     "calculation": {
       "apply": "Appliquer les modifications",
       "applying": "Recalcul en cours…",
@@ -25,9 +29,7 @@
     "categories": {
       "actions": {
         "title": "Actions menées"
-      },
-      "all": "Tout",
-      "none": "Aucun"
+      }
     },
     "global": {
       "title": "Tous les calques"

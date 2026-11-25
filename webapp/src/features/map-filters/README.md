@@ -10,42 +10,44 @@ in localStorage.
 
 | File | Role |
 | --- | --- |
-| `types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`. |
-| `constants.ts` | `GROUP_KEYS` — the group names shared by every layer. |
-| `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers (built on `readStorage`). |
+| `types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`, `MapFiltersState`. |
+| `constants.ts` | `GROUP_KEYS`, the groups of each panel (`LAYER_GROUP_KEYS`, `GLOBAL_GROUP_KEYS`) and their titles. |
+| `groups.ts` | Builds the panels' checkbox groups from the `getFilters()` payload. |
+| `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers and writers. |
 | `apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
-| `use-layer-filters.ts` | React binding for one layer's own filters. |
-| `use-global-filters.ts` | React binding for the filters that apply to every layer. |
-| `layers/*.tsx` | One file per layer: which groups it shows, and how to label them. |
+| `map-filters-provider.tsx` | The single state shared by every panel and the All / None toggle. |
+| `use-layer-filters.ts` | Binds one layer's checkboxes to the shared state. |
+| `use-global-filters.ts` | Binds the all-layers checkboxes to the shared state. |
+| `all-or-none.ts` | Pure "everything" / "nothing" states and their checks, for the toggle. |
+| `layers/*.tsx` | One card per layer: icon, colour, title overrides. |
 | `global-filters.tsx` | The all-layers panel (year). |
 | `components/layer-filter-panel.tsx` | The shared card every layer panel renders. |
 
-The checkbox list, the collapsible card, label resolution, `FilterValue` /
-`FilterOption` and the safe storage reader live in
+The checkbox list, the collapsible card, the All / None buttons, label
+resolution, `FilterValue` / `FilterOption` and the safe storage helpers live in
 [`base-filters`](../base-filters/README.md), shared with `calculation-filters`.
 
 ## How it fits together
 
 ```text
-layers/forest-inventory.tsx     declares its FilterGroups (key + propertyName + options)
-  └─ useLayerFilters(layerId)   reads/writes this layer's localStorage entry
-       └─ refreshLayerFilter()  recomputes that layer
+MapFiltersProvider              one state { global, byLayer } for every panel
+  ├─ LayerFilterPanel           groups from LAYER_GROUP_KEYS + payload
+  │    └─ useLayerFilters       updateLayerFilters → write entry → refreshLayerFilter()
+  ├─ MapGlobalFilters           groups unioned across layers
+  │    └─ useGlobalFilters      updateGlobalFilters → write entry → refreshAllLayerFilters()
+  └─ All / None toggle          replaceMapFilters → write all → refreshAllLayerFilters(), once
 
-global-filters.tsx              declares GlobalFilterGroups (values unioned across layers)
-  └─ useGlobalFilters()         reads/writes the single global entry
-       └─ refreshAllLayerFilters()  recomputes every FILTERABLE_LAYER
-
-both end in applyLayerFilter()  ["all", baseFilter, …layerClauses, …globalClauses]
+all end in applyLayerFilter()   ["all", baseFilter, …layerClauses, …globalClauses]
                                  → map.setFilter(layerId, …)
                                  clustered layer: clauses → setSourceFilter(layerId, …)
                                                   baseFilter → map.setFilter(layerId, …)
 ```
 
-`refreshLayerFilter` re-reads **both** entries from localStorage rather than
-taking React state. The two panels never share a React tree, and
-`useLocalStorage` does not sync across hook instances, but it writes
-synchronously — so whichever side triggers a refresh sees the other's latest
-value. That is also why a global change has to refresh every layer.
+The panels share one React state through `MapFiltersProvider`: a separate
+`useLocalStorage` per panel would not sync, so a bulk change would leave the
+other panels' boxes stale. Every change is written to storage *before* the
+refresh, because `refreshLayerFilter` re-reads **both** entries from storage to
+compose them. That is also why a global change has to refresh every layer.
 
 On reload, `refreshAllLayerFilters({ map })` replays the persisted state. It runs
 from `map-provider-all4trees.tsx` on `MAP_READY`, **not** from the panels — the
@@ -124,18 +126,13 @@ API served, since MapLibre compares strictly.
 
 ### Add a group to an existing layer
 
-Add one `toPanelGroup(...)` entry to that layer's `groups` array:
+Add the key to that layer's list in `LAYER_GROUP_KEYS` (`constants.ts`). The
+panel reads the leaf from the `getFilters()` payload and the title from
+`GROUP_TITLE_KEYS`. A layer that names the group differently passes a
+`groupTitles` override to `LayerFilterPanel` (bio does it for `type`).
 
-```tsx
-toPanelGroup({
-  key: GROUP_KEYS.ECOS,
-  leaf: filters.ecos[LAYER_ID],   // from the getFilters() payload
-  title: t("filters.groups.ecos"),
-}),
-```
-
-Nothing else to wire: the group key becomes its localStorage key, and the effect
-in `useLayerFilters` pushes the change to the map.
+Nothing else to wire: the group key becomes its localStorage key, the shared
+state pushes the change to the map, and All / None picks the group up.
 
 If you ever render a `<CheckboxGroup>` yourself instead of going through
 `LayerFilterPanel`, pass a `namespace` (`<layerId>-<groupKey>`). Item identifiers
@@ -165,10 +162,12 @@ keeping the first layer's labels.
 
 1. Declare its properties in `FILTER_PROPERTIES_BY_LAYER` (backend `filters.py`)
    and extend the `Filters` type in `shared/api/types.ts`.
-2. Create `layers/<layer>.tsx` rendering a `<LayerFilterPanel>`, and render it
+2. List its groups in `LAYER_GROUP_KEYS` (`constants.ts`).
+3. Create `layers/<layer>.tsx` rendering a `<LayerFilterPanel>`, and render it
    from `map-filters.tsx`.
-3. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
-   are **not** replayed on reload and global filters never reach it.
+4. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
+   are **not** replayed on reload, global filters never reach it and All / None
+   ignores it.
 
 Which groups a layer can offer depends on what it actually serves. The enquete
 layer is built with `groupby`, so it only exposes the grouped columns (`proj`,
@@ -178,13 +177,13 @@ layer is built with `groupby`, so it only exposes the grouped columns (`proj`,
 
 1. Add the filter key to `FILTER_PROPERTIES_BY_LAYER` backend-side, listing every
    layer that exposes it.
-2. In `global-filters.tsx`, build the group with `buildGlobalFilterGroup({ key,
-   leavesByLayer: filters.<key> })` — it unions the values for the checkbox list
-   and keeps each layer's own property name — then render a `CheckboxGroup` with
-   `getCheckboxGroupProps(group)` from `useGlobalFilters()`.
+2. Add the key to `GLOBAL_GROUP_KEYS` (`constants.ts`). `getGlobalGroups` builds
+   it with `buildGlobalFilterGroup`, which unions the values for the checkbox
+   list and keeps each layer's own property name.
 
-Nothing else: `applyLayerFilter` already composes global clauses into every
-layer's expression, and a change refreshes all layers.
+Nothing else: the panel renders every global group, `applyLayerFilter` already
+composes global clauses into every layer's expression, and a change refreshes
+all layers.
 
 ### Add a filter kind
 
@@ -198,9 +197,11 @@ end to end and is the template to copy.
 3. **`use-layer-filters.ts`** — the current hook only knows how to *edit* a
    `VALUES` filter (checkbox toggles). A new kind needs its own writer, e.g. a
    `getRangeProps(group)` returning `{ value, onChange }` for a slider or date
-   picker. The reading side (the effect, the storage key) is kind-agnostic and
-   needs no change.
+   picker. The reading side (the shared state, the storage key) is
+   kind-agnostic and needs no change.
 4. **`components/`** — add the widget.
+5. **`all-or-none.ts`** — decide what "everything" and "nothing" mean for it.
+   Until then, a stored filter of that kind reads as a restriction.
 
 Returning `null` from `buildFilterClause` means "restricts nothing", which is
 also how a state written by an older build (unknown `kind`) degrades.
