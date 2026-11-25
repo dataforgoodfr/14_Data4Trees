@@ -19,7 +19,7 @@ A recomputation takes about 1.5–2 s, so changes are applied explicitly with
 | --- | --- |
 | `types.ts` | Persisted state shape (`CalculationFilter`, `CalculationFiltersState`), `CalculationFilterGroup`, `GroupSelection`. |
 | `storage.ts` | localStorage key and the non-React reader. |
-| `selection.ts` | Pure transitions between what the widgets show and what is stored, normalization, state comparison. |
+| `selection.ts` | Pure transitions between what the widgets show and what is stored, normalization, state comparison, the All / None states. |
 | `build-where.ts` | State → CQL2 filter, with coordo's `where` and `cql` builders. |
 | `apply-calculation-filters.ts` | `setLayerFilters` / `clearLayerFilters`, and the MAP_READY replay. |
 | `use-calculation-filters.ts` | Draft, applied, `isDirty`, `apply()`, loading and error state. |
@@ -95,6 +95,22 @@ Same rules as `display-filters`:
 
 `toCalculationFilter` applies that normalization on every edit, so "Apply
 changes" is disabled again as soon as the draft is back to the applied state.
+
+## All / None
+
+The `AllOrNoneToggle` (from `base-filters`, same as the Display tab) sits under
+"Apply changes" and edits the **draft** only, like any other change: "Apply
+changes" still sends it.
+
+- **All** → `{}` (`getUnrestrictedState`): everything, "Non renseigné"
+  included.
+- **None** → `getEmptyState(groups)`: every checkbox group empty and every
+  "Non renseigné" unchecked. A slider can't be empty, so a range group stays at
+  full extent and only loses its "Non renseigné" (a range without that option
+  is left untouched). One empty checkbox group is enough for the AND to match
+  no household.
+
+Each button is highlighted when the draft equals that state.
 
 ## Compilation
 

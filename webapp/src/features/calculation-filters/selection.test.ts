@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import {
   areStatesEqual,
+  getEmptyState,
+  getUnrestrictedState,
   readGroupSelection,
   toCalculationFilter,
   withGroupFilter,
@@ -173,5 +175,64 @@ describe("areStatesEqual", () => {
 
     expect(areStatesEqual({ coh, typ }, { coh, typ })).toBe(true);
     expect(areStatesEqual({ coh, typ }, { typ })).toBe(false);
+  });
+});
+
+describe("getEmptyState", () => {
+  const SEX: CalculationFilterGroup = {
+    key: "sex",
+    kind: CALCULATION_FILTER_KINDS.VALUES,
+    missing: MISSING,
+    options: ["1", "2"].map(option),
+    propertyName: "sex",
+  };
+
+  it("unchecks every box and leaves sliders at full extent", () => {
+    expect(getEmptyState([TYP, SEX, COH, AGE])).toEqual({
+      age: {
+        kind: CALCULATION_FILTER_KINDS.RANGE,
+        max: "4",
+        min: "1",
+        missing: { checked: false, includeNull: true, values: ["98", "99"] },
+        propertyName: "age",
+        values: ["1", "2", "3", "4"],
+      },
+      sex: {
+        kind: CALCULATION_FILTER_KINDS.VALUES,
+        missing: { checked: false, includeNull: true, values: ["98", "99"] },
+        propertyName: "sex",
+        values: [],
+      },
+      typ: {
+        kind: CALCULATION_FILTER_KINDS.VALUES,
+        propertyName: "typ",
+        values: [],
+      },
+    });
+  });
+
+  it("reads back as nothing checked, except the slider", () => {
+    const state = getEmptyState([TYP, SEX, COH, AGE]);
+
+    expect(readGroupSelection(TYP, state.typ)).toEqual({
+      missing: true,
+      values: [],
+    });
+    expect(readGroupSelection(SEX, state.sex)).toEqual({
+      missing: false,
+      values: [],
+    });
+    expect(readGroupSelection(AGE, state.age)).toEqual({
+      missing: false,
+      values: ["1", "2", "3", "4"],
+    });
+    expect(state.coh).toBeUndefined();
+  });
+
+  it("differs from the unrestricted state", () => {
+    expect(getUnrestrictedState()).toEqual({});
+    expect(areStatesEqual(getEmptyState([TYP]), getUnrestrictedState())).toBe(
+      false,
+    );
   });
 });

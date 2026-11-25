@@ -11,6 +11,8 @@ import {
 } from "./apply-calculation-filters";
 import {
   areStatesEqual,
+  getEmptyState,
+  getUnrestrictedState,
   readGroupSelection,
   toCalculationFilter,
   withGroupFilter,
@@ -65,6 +67,20 @@ export const useCalculationFilters = () => {
       setIsLoading(false);
     }
   };
+
+  /*
+   * All / None edit the draft like any other change: "Apply changes" still
+   * sends it, since a recomputation takes a couple of seconds.
+   */
+  const isAllSelected = areStatesEqual(draft, getUnrestrictedState());
+
+  const getIsNoneSelected = (groups: CalculationFilterGroup[]) =>
+    areStatesEqual(draft, getEmptyState(groups));
+
+  const selectAll = () => setDraft(getUnrestrictedState());
+
+  const selectNone = (groups: CalculationFilterGroup[]) =>
+    setDraft(getEmptyState(groups));
 
   const getSelection = (group: CalculationFilterGroup) =>
     readGroupSelection(group, draft[group.key]);
@@ -142,10 +158,14 @@ export const useCalculationFilters = () => {
     apply,
     draft,
     getCheckboxGroupProps,
+    getIsNoneSelected,
     getRangeProps,
     hasChanged,
     hasError,
+    isAllSelected,
     isDisabled: !isReady || isLoading,
     isLoading,
+    selectAll,
+    selectNone,
   };
 };

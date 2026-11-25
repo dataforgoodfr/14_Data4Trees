@@ -138,3 +138,33 @@ export const areStatesEqual = (
   a: CalculationFiltersState,
   b: CalculationFiltersState,
 ) => toCanonicalJson(a) === toCanonicalJson(b);
+
+/** "All": every group absent, so nothing is restricted. */
+export const getUnrestrictedState = (): CalculationFiltersState => ({});
+
+/**
+ * "None": every checkbox group with nothing checked, "Non renseigné"
+ * included.
+ *
+ * A slider always spans at least one option, so a range group stays at full
+ * extent and only loses its "Non renseigné"; one without that option is left
+ * untouched. A single empty checkbox group is enough for the AND of the groups
+ * to match no household anyway.
+ */
+export const getEmptyState = (
+  groups: CalculationFilterGroup[],
+): CalculationFiltersState =>
+  groups.reduce<CalculationFiltersState>((state, group) => {
+    const isRange = group.kind === CALCULATION_FILTER_KINDS.RANGE;
+    const selection: GroupSelection = {
+      // Without a missing option, `true` is what "everything" reads as.
+      missing: isRange && !group.missing,
+      values: isRange ? getOptionValues(group) : [],
+    };
+
+    return withGroupFilter(
+      state,
+      group.key,
+      toCalculationFilter(group, selection),
+    );
+  }, {});
