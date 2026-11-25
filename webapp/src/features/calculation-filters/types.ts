@@ -59,7 +59,7 @@ export type CalculationFilter =
 /**
  * The applied filters, keyed by group (`typ`, `coh`, …).
  *
- * Same rules as `map-filters`: a group **absent** restricts nothing, so a fresh
+ * Same rules as `display-filters`: a group **absent** restricts nothing, so a fresh
  * visitor has `{}`. A group where everything is selected is removed rather
  * than stored, so households with a null value stay included.
  */

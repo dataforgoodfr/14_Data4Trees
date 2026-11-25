@@ -1,33 +1,78 @@
-# map-filters
+# display-filters
 
-Per-layer map filtering, applied client-side with MapLibre's
-[`map.setFilter()`](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setfilter)
-— or, on clustered layers, coordo's `setSourceFilter` (see
-[Clustered layers](#clustered-layers-filters-go-to-the-source)) — and persisted
-in localStorage.
+The sidebar's **Display** tab: everything that changes what the map *shows*,
+applied client-side and persisted in localStorage. (Filters that change how the
+enquete layer is *computed* live in
+[`calculation-filters`](../calculation-filters/README.md).)
+
+It has two parts:
+
+- **`layers/`** — which layers are visible (the "categories": forest inventory,
+  biodiversity, socio-eco), through coordo's `showLayer` / `hideLayer`.
+- **`core/`** — the filters on the features of each layer, applied with MapLibre's
+  [`map.setFilter()`](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#setfilter)
+  — or, on clustered layers, coordo's `setSourceFilter` (see
+  [Clustered layers](#clustered-layers-filters-go-to-the-source)).
+
+One **All / None** toggle at the top drives both.
+
+Import from `@features/display-filters` only: `index.ts` is the public API
+(`DisplayFilters` for the sidebar; `useCategoriesFilters` and
+`refreshAllLayerFilters` for the map provider, which replays the state on
+`MAP_READY`).
 
 ## Files
 
 | File | Role |
 | --- | --- |
-| `types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`, `MapFiltersState`. |
-| `constants.ts` | `GROUP_KEYS`, the groups of each panel (`LAYER_GROUP_KEYS`, `GLOBAL_GROUP_KEYS`) and their titles. |
-| `groups.ts` | Builds the panels' checkbox groups from the `getFilters()` payload. |
-| `storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers and writers. |
-| `apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
-| `map-filters-provider.tsx` | The single state shared by every panel and the All / None toggle. |
-| `use-layer-filters.ts` | Binds one layer's checkboxes to the shared state. |
-| `use-global-filters.ts` | Binds the all-layers checkboxes to the shared state. |
-| `all-or-none.ts` | Pure "everything" / "nothing" states and their checks, for the toggle. |
-| `layers/*.tsx` | One card per layer: icon, colour, title overrides. |
-| `global-filters.tsx` | The all-layers panel (year). |
-| `components/layer-filter-panel.tsx` | The shared card every layer panel renders. |
+| `display-filters.tsx` | The tab: provider, toggle, then the cards. |
+| `display-all-or-none.tsx` | The tab-wide All / None toggle. |
+| `all-or-none.ts` | Pure "everything" / "nothing" filter states and their checks, for the toggle. |
+| `layers/categories-filters.tsx` | The layer visibility card (open by default). |
+| `layers/use-categories-filters.ts` | Visibility state (persisted in the map context), its MAP_READY sync, `useLayersVisibility` for bulk changes. |
+| `layers/use-categories-config.tsx` | The layers offered, with their icon and label. |
+| `core/types.ts` | Persisted state shape. `FILTER_KINDS`, the `LayerFilter` union, `GlobalFilter`, `MapFiltersState`. |
+| `core/constants.ts` | `GROUP_KEYS`, the groups of each panel (`LAYER_GROUP_KEYS`, `GLOBAL_GROUP_KEYS`) and their titles. |
+| `core/groups.ts` | Builds the panels' checkbox groups from the `getFilters()` payload. |
+| `core/storage.ts` | localStorage keys, `FILTERABLE_LAYERS`, non-React readers and writers. |
+| `core/apply-layer-filter.ts` | Expression building, clause composition, the `setFilter` call. |
+| `core/map-filters-provider.tsx` | The single filter state shared by every panel and the toggle. |
+| `core/use-layer-filters.ts` | Binds one layer's checkboxes to the shared state. |
+| `core/use-global-filters.ts` | Binds the all-layers checkboxes to the shared state. |
+| `core/map-filters.tsx` | The filter cards: all-layers, then one per layer. |
+| `core/panels/*.tsx` | One card per layer: icon, colour, title overrides. |
+| `core/global-filters.tsx` | The all-layers card (year). |
+| `core/components/layer-filter-panel.tsx` | The shared card every layer panel renders. |
 
 The checkbox list, the collapsible card, the All / None buttons, label
 resolution, `FilterValue` / `FilterOption` and the safe storage helpers live in
 [`base-filters`](../base-filters/README.md), shared with `calculation-filters`.
 
-## How it fits together
+## All / None
+
+- **All**: every layer shown, every filter cleared (nothing stored restricts).
+- **None**: every layer hidden, every checkbox group the panels offer stored
+  with nothing selected.
+
+Each side is a single state update per part and a single
+`refreshAllLayerFilters`. "All" is highlighted when every layer is visible and
+every box is checked, "None" when every layer is hidden and every box
+unchecked. The toggle stays disabled until the `getFilters()` payload is in,
+since "None" needs its group list.
+
+After None, showing a layer again shows nothing until values are checked again:
+its groups are still empty.
+
+## Layer visibility (`layers/`)
+
+The state is `{ [categoryIdentifier]: boolean }`, persisted under the
+`categories-filters` localStorage key by the map provider (it lives in the map
+context, since `shared/api/categories-filters.ts` defines the identifiers).
+Coordo's layer control can also show/hide layers: it dispatches
+`EVENTS.LAYER_SHOW` / `LAYER_HIDE`, which keep the state in sync. A clustered
+layer's cluster layers follow it (`changeLayerVisibility`).
+
+## Filters (`core/`)
 
 ```text
 MapFiltersProvider              one state { global, byLayer } for every panel
@@ -54,7 +99,7 @@ from `map-provider-all4trees.tsx` on `MAP_READY`, **not** from the panels — th
 sidebar keeps them in a hidden `<Activity>` until its tab is opened, so their
 effects would not have run yet.
 
-## State shape
+### State shape
 
 ```ts
 // localStorage["d4g:map-filters:inventaire_for"]
@@ -86,7 +131,7 @@ Three rules make this work without seeding defaults:
 Selections are stored as the API's own values (numbers stay numbers). Checkbox
 identifiers are strings, so the hook maps between them with `String(value)`.
 
-## Semantics
+### Semantics
 
 - **Within a group → OR.** `["in", ["get", prop], ["literal", [...]]]`, so several
   checked boxes need no special handling.
@@ -101,7 +146,7 @@ identifiers are strings, so the hook maps between them with `String(value)`.
 > clause. That is why global filters are composed inside `applyLayerFilter`
 > rather than applied on their own.
 
-## Where the values come from
+### Where the values come from
 
 `GET /maps/get-filters/` returns `{filter key: {layer id: {property_name, values}}}`,
 built by `backend/maps/services/filters.py`. Each entry of `values` is an option
@@ -122,11 +167,11 @@ Value types follow the map config (`backend/configs/all4trees_config.json`):
 `type` and `year` are not and arrive as strings. Filters keep whatever type the
 API served, since MapLibre compares strictly.
 
-## Recipes
+### Recipes
 
-### Add a group to an existing layer
+#### Add a group to an existing layer
 
-Add the key to that layer's list in `LAYER_GROUP_KEYS` (`constants.ts`). The
+Add the key to that layer's list in `LAYER_GROUP_KEYS` (`core/constants.ts`). The
 panel reads the leaf from the `getFilters()` payload and the title from
 `GROUP_TITLE_KEYS`. A layer that names the group differently passes a
 `groupTitles` override to `LayerFilterPanel` (bio does it for `type`).
@@ -141,7 +186,7 @@ every layer repeats the same codes — so without it the DOM ids collide and eac
 label activates the first matching checkbox in the document, silently toggling
 another group's (or another layer's) box.
 
-### Labels
+#### Labels
 
 Labels are resolved **backend-side** (`get_labelized_value` in `filters.py`),
 against the layer's label table and each feature's own project, so a layer can
@@ -158,14 +203,14 @@ labels, so switching language keeps the selection.
 A global group unions the options of every layer and deduplicates them by value,
 keeping the first layer's labels.
 
-### Add a filterable layer
+#### Add a filterable layer
 
 1. Declare its properties in `FILTER_PROPERTIES_BY_LAYER` (backend `filters.py`)
    and extend the `Filters` type in `shared/api/types.ts`.
-2. List its groups in `LAYER_GROUP_KEYS` (`constants.ts`).
-3. Create `layers/<layer>.tsx` rendering a `<LayerFilterPanel>`, and render it
-   from `map-filters.tsx`.
-4. Add the layer id to `FILTERABLE_LAYERS` in `storage.ts` — otherwise its filters
+2. List its groups in `LAYER_GROUP_KEYS` (`core/constants.ts`).
+3. Create `core/panels/<layer>.tsx` rendering a `<LayerFilterPanel>`, and render it
+   from `core/map-filters.tsx`.
+4. Add the layer id to `FILTERABLE_LAYERS` in `core/storage.ts` — otherwise its filters
    are **not** replayed on reload, global filters never reach it and All / None
    ignores it.
 
@@ -173,11 +218,11 @@ Which groups a layer can offer depends on what it actually serves. The enquete
 layer is built with `groupby`, so it only exposes the grouped columns (`proj`,
 `loc1`, `loc2`, `year`) plus aggregates — no type, cohort or ecos exist there.
 
-### Add a global (all-layers) filter
+#### Add a global (all-layers) filter
 
 1. Add the filter key to `FILTER_PROPERTIES_BY_LAYER` backend-side, listing every
    layer that exposes it.
-2. Add the key to `GLOBAL_GROUP_KEYS` (`constants.ts`). `getGlobalGroups` builds
+2. Add the key to `GLOBAL_GROUP_KEYS` (`core/constants.ts`). `getGlobalGroups` builds
    it with `buildGlobalFilterGroup`, which unions the values for the checkbox
    list and keeps each layer's own property name.
 
@@ -185,28 +230,28 @@ Nothing else: the panel renders every global group, `applyLayerFilter` already
 composes global clauses into every layer's expression, and a change refreshes
 all layers.
 
-### Add a filter kind
+#### Add a filter kind
 
 `RANGE` is the worked example — nothing renders it yet, but it is implemented
 end to end and is the template to copy.
 
-1. **`types.ts`** — add the kind to `FILTER_KINDS` and its variant to the
+1. **`core/types.ts`** — add the kind to `FILTER_KINDS` and its variant to the
    `LayerFilter` union.
-2. **`apply-layer-filter.ts`** — add a `case` to `buildFilterClause`. Adding the
+2. **`core/apply-layer-filter.ts`** — add a `case` to `buildFilterClause`. Adding the
    union member first makes the missing case a compile error.
-3. **`use-layer-filters.ts`** — the current hook only knows how to *edit* a
+3. **`core/use-layer-filters.ts`** — the current hook only knows how to *edit* a
    `VALUES` filter (checkbox toggles). A new kind needs its own writer, e.g. a
    `getRangeProps(group)` returning `{ value, onChange }` for a slider or date
    picker. The reading side (the shared state, the storage key) is
    kind-agnostic and needs no change.
-4. **`components/`** — add the widget.
+4. **`core/components/`** — add the widget.
 5. **`all-or-none.ts`** — decide what "everything" and "nothing" mean for it.
    Until then, a stored filter of that kind reads as a restriction.
 
 Returning `null` from `buildFilterClause` means "restricts nothing", which is
 also how a state written by an older build (unknown `kind`) degrades.
 
-### Dates and other comparisons
+#### Dates and other comparisons
 
 MapLibre expressions have no date type. Store the date on the feature as an
 ISO-8601 string (they sort lexicographically, so `>=` / `<=` work as-is) or as an
@@ -220,7 +265,7 @@ MapLibre compares strictly and **evaluates to `false` on a type mismatch instead
 of erroring** — a filter that silently matches nothing is nearly always a bound
 whose type differs from the feature property's.
 
-## Clustered layers: filters go to the source
+### Clustered layers: filters go to the source
 
 `setFilter` is a *render-time* filter, while clustering happens at the **source**
 level: supercluster indexes every feature of the source, so on a clustered layer

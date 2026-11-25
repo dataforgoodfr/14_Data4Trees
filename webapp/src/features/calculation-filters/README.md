@@ -1,7 +1,7 @@
 # calculation-filters
 
 Backend filters on the `enquete` (Socio-eco) layer. Where
-[`map-filters`](../map-filters/README.md) **hide** points on the client, these
+[`display-filters`](../display-filters/README.md) **hide** points on the client, these
 change **which survey rows each point is computed from**: they are sent as a
 CQL2 filter through coordo's `setLayerFilters`, the backend applies it as a SQL
 `WHERE` on the raw `enquete_menage` resource before the layer's `groupby`, and
@@ -83,7 +83,7 @@ dropped on reload.
 }
 ```
 
-Same rules as `map-filters`:
+Same rules as `display-filters`:
 
 - **Group absent** → no restriction. A fresh visitor has `{}`.
 - **Empty `values`** (and "Non renseigné" unchecked) → matches nothing.

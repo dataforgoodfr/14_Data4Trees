@@ -2,14 +2,14 @@ import type { FilterOption } from "@features/base-filters";
 
 import type { Filters } from "@shared/api/types";
 
-import { getGlobalGroups, getLayerGroups } from "./groups";
-import { FILTERABLE_LAYERS } from "./storage";
+import { getGlobalGroups, getLayerGroups } from "./core/groups";
+import { FILTERABLE_LAYERS } from "./core/storage";
 import {
   FILTER_KINDS,
   type GlobalFilter,
   type LayerFilter,
   type MapFiltersState,
-} from "./types";
+} from "./core/types";
 
 /*
  * Pure helpers behind the display tab's All / None toggle. They work on the

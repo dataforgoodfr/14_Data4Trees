@@ -1,6 +1,6 @@
 # base-filters
 
-Generic building blocks for filter panels, shared by `map-filters` (display
+Generic building blocks for filter panels, shared by `display-filters` (display
 filters, applied client-side) and `calculation-filters` (backend filters on the
 enquete layer).
 

@@ -3,9 +3,9 @@ import type { FC } from "react";
 import type { Filters } from "@shared/api/types";
 
 import { MapGlobalFilters } from "./global-filters";
-import { MapFiltersBioInventory } from "./layers/bio-inventory";
-import { MapFiltersEnquete } from "./layers/enquete";
-import { MapFiltersForestInventory } from "./layers/forest-inventory";
+import { MapFiltersBioInventory } from "./panels/bio-inventory";
+import { MapFiltersEnquete } from "./panels/enquete";
+import { MapFiltersForestInventory } from "./panels/forest-inventory";
 
 type MapFiltersProps = {
   filters: Filters | null;
