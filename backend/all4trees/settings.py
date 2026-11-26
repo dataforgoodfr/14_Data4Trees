@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load variables from .env file into os.env
 load_dotenv()
@@ -117,7 +118,6 @@ WSGI_APPLICATION = "all4trees.wsgi.application"
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
-    import dj_database_url
 
     DATABASES = {
         "default": dj_database_url.parse(
