@@ -36,38 +36,26 @@ Install
 uv sync
 ```
 
-### Coordo package
+### Prepare Django
 
-Coordo is declared in `pyproject.toml` and its resolved commit is recorded in `uv.lock`. To switch to a release tag or branch, replace `<tag-or-branch>` with the desired ref:
-
+1. Add DJANGO_SECRET_KEY to your .env
 ```bash
-uv add "coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-or-branch>#subdirectory=coordo-py"
-uv sync
+printf 'DJANGO_SECRET_KEY=%s\n' "$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" >> .env
 ```
 
-To refresh a branch-based dependency to its latest commit, update the lock and reinstall Coordo:
-
+2. Collect static files
 ```bash
-uv lock --upgrade-package coordo
-uv sync --reinstall-package coordo
+uv run python manage.py collectstatic
 ```
 
-To reinstall the currently locked Coordo commit without updating it:
-
+3. Migrate database tables into the database
 ```bash
-uv sync --reinstall-package coordo
+uv run python manage.py migrate
 ```
 
-### Prepare the database
-
-1. Migrate database tables into the database
-```bash
-python manage.py migrate
-```
-
-2. Create admin user
+4. Create admin user
 ``` bash
-python manage.py createsuperuser
+uv run python manage.py createsuperuser
 ```
 
 ### Map Data
@@ -91,7 +79,29 @@ make catalog
 Simply start the django server, and you're good to go !
 
 ``` bash
-python manage.py runserver
+uv run python manage.py runserver
+```
+
+### Coordo package
+
+For developers working on Coordonnes, coordo lib is declared in `pyproject.toml` and its resolved commit is recorded in `uv.lock`. To switch to a release tag or branch, replace `<tag-or-branch>` with the desired ref:
+
+```bash
+uv add "coordo @ git+https://github.com/dataforgoodfr/Coordonnees.git@<tag-or-branch>#subdirectory=coordo-py"
+uv sync
+```
+
+To refresh a branch-based dependency to its latest commit, update the lock and reinstall Coordo:
+
+```bash
+uv lock --upgrade-package coordo
+uv sync --reinstall-package coordo
+```
+
+To reinstall the currently locked Coordo commit without updating it:
+
+```bash
+uv sync --reinstall-package coordo
 ```
 
 ### Production Docker image

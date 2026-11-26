@@ -2,8 +2,8 @@
 set -euo pipefail
 
 echo "Migrating database..."
-python manage.py migrate
+uv run python manage.py migrate && uv run python manage.py collectstatic --clear --noinput
 echo "Creating superuser..."
-python manage.py createsuperuser --noinput
+uv run python manage.py createsuperuser --noinput
 echo "Starting server..."
-python manage.py runserver 0.0.0.0:8000
+uv run python manage.py runserver 0.0.0.0:8000

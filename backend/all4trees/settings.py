@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load variables from .env file into os.env
 load_dotenv()
@@ -24,21 +25,42 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "test-data4trees.services.d4g.fr",
-    "data4trees.services.d4g.fr",
+    host.strip()
+    for host in os.getenv(
+        "DJANGO_ALLOWED_HOSTS",
+        "localhost,127.0.0.1,test-data4trees.services.d4g.fr,data4trees.services.d4g.fr",
+    ).split(",")
+    if host.strip()
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://test-data4trees.services.d4g.fr",
-    "https://data4trees.services.d4g.fr",
+    origin.strip()
+    for origin in os.getenv(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "https://test-data4trees.services.d4g.fr,https://data4trees.services.d4g.fr",
+    ).split(",")
+    if origin.strip()
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "DJANGO_CORS_ALLOWED_ORIGINS",
+        "http://localhost:5173,https://test-data4trees.services.d4g.fr,https://data4trees.services.d4g.fr",
+    ).split(",")
+    if origin.strip()
+]
+
+# Enable credentials (e.g., cookies) if needed
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE")
+
 
 # Application definition
 
@@ -93,13 +115,23 @@ WSGI_APPLICATION = "all4trees.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db" / "db.sqlite3",
-    }
-}
+DATABASE_URL = os.getenv("DATABASE_URL")
 
+if DATABASE_URL:
+
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db" / "db.sqlite3",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -120,18 +152,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "https://test-data4trees.services.d4g.fr",
-    "https://data4trees.services.d4g.fr",
-]
-
-# Enable credentials (e.g., cookies) if needed
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE")
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

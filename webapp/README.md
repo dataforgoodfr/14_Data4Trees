@@ -9,6 +9,11 @@
 ```
 npm ci
 ```
+## Démarrer le serveur
+
+```
+npm run dev
+```
 
 ### Coordo Lib
 
@@ -18,11 +23,6 @@ Durant le dévloppement, vous serez souvent amenés à devoir réinstaller la li
 npm install coordo
 ```
 
-## Démarrer le serveur
-
-```
-npm run dev
-```
 
 ## Architecture
 
