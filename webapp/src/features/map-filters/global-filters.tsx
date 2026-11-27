@@ -11,8 +11,9 @@ import type { Filters } from "@shared/api/types";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@shared/i18n";
 
-import { GROUP_KEYS } from "./constants";
-import { buildGlobalFilterGroup, useGlobalFilters } from "./use-global-filters";
+import { GROUP_TITLE_KEYS, type GroupKey } from "./constants";
+import { getGlobalGroups } from "./groups";
+import { useGlobalFilters } from "./use-global-filters";
 
 /**
  * Filters applied to every layer at once, above the per-layer panels.
@@ -30,11 +31,6 @@ export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
 
   if (!filters) return null;
 
-  const yearGroup = buildGlobalFilterGroup({
-    key: GROUP_KEYS.YEAR,
-    leavesByLayer: filters.year,
-  });
-
   return (
     <CollapsibleSection
       headerClassName=""
@@ -42,13 +38,16 @@ export const MapGlobalFilters: FC<{ filters: Filters | null }> = ({
       identifier="global-filters"
       title={t("filters.global.title")}
     >
-      <CheckboxGroup
-        disabled={!isReady}
-        items={toCheckboxItems(yearGroup.options, i18n.language)}
-        namespace={`global-${yearGroup.key}`}
-        title={t("filters.groups.year")}
-        {...getCheckboxGroupProps(yearGroup)}
-      />
+      {getGlobalGroups(filters).map((group) => (
+        <CheckboxGroup
+          disabled={!isReady}
+          items={toCheckboxItems(group.options, i18n.language)}
+          key={group.key}
+          namespace={`global-${group.key}`}
+          title={t(GROUP_TITLE_KEYS[group.key as GroupKey])}
+          {...getCheckboxGroupProps(group)}
+        />
+      ))}
     </CollapsibleSection>
   );
 };

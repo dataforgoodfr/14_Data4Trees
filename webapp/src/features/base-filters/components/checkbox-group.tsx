@@ -1,3 +1,4 @@
+import { cx } from "class-variance-authority";
 import type { FC, ReactNode } from "react";
 
 import { Checkbox, type CheckedState } from "@ui/checkbox";
@@ -39,6 +40,16 @@ const getFieldHtmlId = (namespace: string, identifier: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-");
 
+/** Beyond this many items, the list scrolls instead of growing the card. */
+const MAX_VISIBLE_ITEMS = 3;
+
+/**
+ * 3.5 rows: a single-line row is 2.375rem (`p-2`, a 1.25rem line, the border)
+ * plus the 0.5rem gap. The half row left visible hints there is more below.
+ */
+const SCROLLABLE_LIST_CLASS_NAME =
+  "max-h-[calc(3.5*2.875rem)] overflow-y-auto custom-scrollbar p-0.5 pr-2";
+
 export const CheckboxGroup: FC<CheckboxGroupProps> = ({
   namespace,
   title,
@@ -50,7 +61,13 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
   return (
     <section>
       {title && <p className="font-medium text-sm mb-3">{title}</p>}
-      <FieldGroup className="mx-auto gap-2">
+      <FieldGroup
+        className={cx(
+          "mx-auto gap-2",
+          // The padding keeps the focus rings inside the scroll box.
+          items.length > MAX_VISIBLE_ITEMS && SCROLLABLE_LIST_CLASS_NAME,
+        )}
+      >
         {items.map((item) => {
           const fieldHtmlId = getFieldHtmlId(namespace, item.identifier);
 

@@ -7,6 +7,7 @@ import {
 } from "@shared/api/categories-filters";
 import { LAYERS_WITH_CLUSTERS } from "@shared/api/layers";
 import { useLocalStorage } from "@shared/hooks/use-local-storage";
+import { useMap } from "@shared/hooks/use-map-all4trees";
 import { EVENTS, getClusterLayerIds } from "@shared/lib/coordo";
 
 /**
@@ -100,4 +101,44 @@ export const useCategoriesFilters = () => {
     setCategoriesFilters,
     syncInitialCategoriesFilters,
   };
+};
+
+/**
+ * Show or hide every layer at once, for the display tab's All / None toggle.
+ */
+export const useLayersVisibility = () => {
+  const { categoriesFilters, mapApiRef, setCategoriesFilters } = useMap();
+  const identifiers = Object.values(CATEGORY_IDENTIFIERS);
+
+  const isAllVisible = identifiers.every(
+    (identifier) => categoriesFilters[identifier],
+  );
+  const isAllHidden = identifiers.every(
+    (identifier) => !categoriesFilters[identifier],
+  );
+
+  const setAllVisibility = (isVisible: boolean) => {
+    setCategoriesFilters(
+      Object.fromEntries(
+        identifiers.map((identifier) => [identifier, isVisible]),
+      ) as CategoriesFiltersState,
+    );
+
+    const mapApi = mapApiRef.current;
+    if (!mapApi) return;
+
+    for (const identifier of identifiers) {
+      const layerId = parseLayerId(identifier);
+      if (!layerId) continue;
+
+      changeLayerVisibility({
+        hideLayer: mapApi.hideLayer,
+        isActive: isVisible,
+        layerId,
+        showLayer: mapApi.showLayer,
+      });
+    }
+  };
+
+  return { isAllHidden, isAllVisible, setAllVisibility };
 };

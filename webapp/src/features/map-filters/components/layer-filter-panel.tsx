@@ -3,60 +3,44 @@ import type { FC, ReactNode } from "react";
 import {
   CheckboxGroup,
   CollapsibleSection,
-  type FilterOption,
   toCheckboxItems,
 } from "@features/base-filters";
 
+import type { Filters } from "@shared/api/types";
 import { useMap } from "@shared/hooks/use-map-all4trees";
 import { useTranslation } from "@shared/i18n";
 
-import type { FilterGroup } from "../types";
+import { GROUP_TITLE_KEYS, type GroupKey } from "../constants";
+import { getLayerGroups } from "../groups";
 import { useLayerFilters } from "../use-layer-filters";
-
-export type PanelFilterGroup = FilterGroup & {
-  title: string;
-};
-
-/** Turn a `getFilters()` leaf into a group the panel can render. */
-export const toPanelGroup = ({
-  key,
-  leaf,
-  title,
-}: {
-  key: string;
-  leaf: { property_name: string; values: FilterOption[] };
-  title: string;
-}): PanelFilterGroup => ({
-  key,
-  options: leaf.values,
-  propertyName: leaf.property_name,
-  title,
-});
 
 type LayerFilterPanelProps = {
   layerId: string;
+  filters: Filters;
   title: string;
   icon: ReactNode;
   /** Colour class for the header, e.g. `text-forest-inventory`. */
   headerClassName: string;
-  groups: PanelFilterGroup[];
+  /** Group titles that differ on this layer (e.g. its `type`). */
+  groupTitles?: Partial<Record<GroupKey, string>>;
 };
 
 /**
- * One layer's filter card: a checkbox group per filter, bound to that layer's
- * persisted state.
+ * One layer's filter card: a checkbox group per filter of `LAYER_GROUP_KEYS`,
+ * bound to that layer's state.
  *
  * Labels come with the `getFilters()` payload, already resolved per project by
  * the backend, so the panel only picks the current language.
  */
 export const LayerFilterPanel: FC<LayerFilterPanelProps> = ({
   layerId,
+  filters,
   title,
   icon,
   headerClassName,
-  groups,
+  groupTitles,
 }) => {
-  const { i18n } = useTranslation("all4trees");
+  const { t, i18n } = useTranslation("all4trees");
   const { isReady } = useMap();
   const { getCheckboxGroupProps } = useLayerFilters({ layerId });
 
@@ -67,14 +51,14 @@ export const LayerFilterPanel: FC<LayerFilterPanelProps> = ({
       identifier={layerId}
       title={title}
     >
-      {groups.map((group) => (
+      {getLayerGroups(filters, layerId).map((group) => (
         <CheckboxGroup
           disabled={!isReady}
           items={toCheckboxItems(group.options, i18n.language)}
           key={group.key}
           // Codes repeat across groups and layers, so the DOM ids need both.
           namespace={`${layerId}-${group.key}`}
-          title={group.title}
+          title={groupTitles?.[group.key] ?? t(GROUP_TITLE_KEYS[group.key])}
           {...getCheckboxGroupProps(group)}
         />
       ))}

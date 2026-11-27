@@ -5,6 +5,10 @@
     }
   },
   "filters": {
+    "allOrNone": {
+      "all": "All",
+      "none": "None"
+    },
     "calculation": {
       "apply": "Apply changes",
       "applying": "Recalculating…",
@@ -25,9 +29,7 @@
     "categories": {
       "actions": {
         "title": "Actions taken"
-      },
-      "all": "All",
-      "none": "None"
+      }
     },
     "global": {
       "title": "All layers"

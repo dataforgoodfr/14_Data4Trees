@@ -1,4 +1,7 @@
+import { LayersIcon } from "lucide-react";
 import type { FC } from "react";
+
+import { CheckboxGroup, CollapsibleSection } from "@features/base-filters";
 
 import {
   type CategoryIdentifier,
@@ -9,26 +12,25 @@ import { useTranslation } from "@i18n";
 
 import type { CheckedState } from "@ui/checkbox";
 
-import { AllOrNoneSelector } from "./all-or-none-selector";
-import { CategoriesCheckboxGroup } from "./categories-checkbox-group";
 import { useCategoriesConfig } from "./use-categories-config";
 import { changeLayerVisibility } from "./use-categories-filters";
 
-type CategoriesFiltersProps = {
-  disabled?: boolean;
-};
-
-export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
+/**
+ * Which layers are shown, as a card like the filter panels below it. Open by
+ * default: it is the first thing to set.
+ */
+export const CategoriesFilters: FC = () => {
   const { actions } = useCategoriesConfig();
   const { t } = useTranslation("all4trees");
-  const { mapApiRef, setCategoriesFilters, categoriesFilters } = useMap();
+  const { isReady, mapApiRef, setCategoriesFilters, categoriesFilters } =
+    useMap();
 
-  const getOnCheckedChange = (identifier: CategoryIdentifier) => {
+  const getOnCheckedChange = (identifier: string) => {
     return (checkedState: CheckedState) => {
       // Update website state and storage
       setCategoriesFilters((prev) => ({
         ...prev,
-        [identifier]: checkedState,
+        [identifier]: checkedState === true,
       }));
       // Update coordo map
       const layerId = parseLayerId(identifier);
@@ -40,7 +42,7 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
       try {
         changeLayerVisibility({
           hideLayer: mapApiRef.current.hideLayer,
-          isActive: Boolean(checkedState),
+          isActive: checkedState === true,
           layerId,
           showLayer: mapApiRef.current.showLayer,
         });
@@ -51,16 +53,22 @@ export const CategoriesFilters: FC<CategoriesFiltersProps> = ({ disabled }) => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <AllOrNoneSelector />
-
-      <CategoriesCheckboxGroup
-        disabled={disabled}
-        getIsChecked={(identifier) => categoriesFilters[identifier]}
-        getOnCheckedChange={(identifier) => getOnCheckedChange(identifier)}
+    <CollapsibleSection
+      defaultOpen
+      headerClassName=""
+      icon={<LayersIcon size={18} />}
+      identifier="categories-filters"
+      title={t("filters.categories.actions.title")}
+    >
+      <CheckboxGroup
+        disabled={!isReady}
+        getIsChecked={(identifier) =>
+          categoriesFilters[identifier as CategoryIdentifier]
+        }
+        getOnCheckedChange={getOnCheckedChange}
         items={actions}
-        title={t("filters.categories.actions.title")}
+        namespace="categories"
       />
-    </div>
+    </CollapsibleSection>
   );
 };

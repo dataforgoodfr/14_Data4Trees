@@ -95,3 +95,17 @@ export type GlobalFilterGroup = {
   /** Union of every layer's options, deduplicated by value. */
   options: FilterOption[];
 };
+
+/* -------------------------------------------------------------------------- */
+/*                                 Whole state                                */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Every display filter at once: what the panels share through
+ * `MapFiltersProvider`, so a bulk change (All / None) is one state update.
+ */
+export type MapFiltersState = {
+  global: GlobalFiltersState;
+  /** One entry per `FILTERABLE_LAYERS` id. */
+  byLayer: Record<string, LayerFiltersState>;
+};

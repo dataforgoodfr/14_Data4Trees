@@ -1,17 +1,10 @@
-import { useEffect } from "react";
-
-import { useLocalStorage } from "@shared/hooks/use-local-storage";
-import { useMap } from "@shared/hooks/use-map-all4trees";
-
 import type { CheckedState } from "@ui/checkbox";
 
-import { refreshLayerFilter } from "./apply-layer-filter";
-import { getLayerFiltersStorageKey } from "./storage";
+import { useMapFiltersStore } from "./map-filters-provider";
 import {
   FILTER_KINDS,
   type FilterGroup,
   type LayerFilter,
-  type LayerFiltersState,
   type ValuesFilter,
 } from "./types";
 
@@ -26,27 +19,12 @@ const getValuesFilter = (
   filter?.kind === FILTER_KINDS.VALUES ? filter : undefined;
 
 /**
- * Persisted per-layer filter state, kept in sync with the map.
- *
- * The map is updated whenever the selection changes; the reload case is handled
- * upstream by `syncInitialLayerFilters` on MAP_READY.
+ * One layer's display filters, read from and written to the shared
+ * `MapFiltersProvider` state, which persists them and refreshes the layer.
  */
 export const useLayerFilters = ({ layerId }: { layerId: string }) => {
-  const { isReady, mapApiRef } = useMap();
-  const [layerFilters, setLayerFilters] = useLocalStorage<LayerFiltersState>(
-    getLayerFiltersStorageKey(layerId),
-    {},
-  );
-
-  // `layerFilters` is the trigger, not the input: the refresh re-reads both this
-  // layer's entry and the global one from localStorage so the two compose.
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <refreshAllLayerFilters must be triggered when globalFilters are updated>
-  useEffect(() => {
-    const map = mapApiRef.current?.mapInstance;
-    if (!isReady || !map) return;
-
-    refreshLayerFilter({ layerId, map });
-  }, [isReady, layerFilters, layerId, mapApiRef]);
+  const { state, updateLayerFilters } = useMapFiltersStore();
+  const layerFilters = state.byLayer[layerId] ?? {};
 
   /** Spread onto a `<CheckboxGroup>` to bind it to `group`. */
   const getCheckboxGroupProps = (group: FilterGroup) => ({
@@ -64,7 +42,7 @@ export const useLayerFilters = ({ layerId }: { layerId: string }) => {
     },
 
     getOnCheckedChange: (identifier: string) => (nextValue: CheckedState) => {
-      setLayerFilters((previous) => {
+      updateLayerFilters(layerId, (previous) => {
         // First interaction with a group starts from "everything selected",
         // matching what the boxes were showing.
         const selectedIdentifiers = new Set(
