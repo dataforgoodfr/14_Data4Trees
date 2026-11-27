@@ -2,6 +2,7 @@ import { AlertCircleIcon, InfoIcon, Loader2Icon } from "lucide-react";
 import type { FC } from "react";
 
 import {
+  AllOrNoneToggle,
   CheckboxGroup,
   getOptionLabel,
   RangeGroup,
@@ -63,14 +64,20 @@ export const CalculationFilters: FC<CalculationFiltersProps> = ({
   const {
     apply,
     getCheckboxGroupProps,
+    getIsNoneSelected,
     getRangeProps,
     hasChanged,
     hasError,
+    isAllSelected,
     isDisabled,
     isLoading,
+    selectAll,
+    selectNone,
   } = useCalculationFilters();
 
   if (!filters) return null;
+
+  const groups = toGroups(filters);
 
   const getTitle = (key: string) =>
     isTitledGroup(key) ? t(GROUP_TITLE_KEYS[key]) : key;
@@ -103,6 +110,15 @@ export const CalculationFilters: FC<CalculationFiltersProps> = ({
             : t("filters.calculation.apply")}
         </Button>
 
+        {/* Edits the draft only: "Apply changes" above sends it. */}
+        <AllOrNoneToggle
+          disabled={isDisabled}
+          isAll={isAllSelected}
+          isNone={getIsNoneSelected(groups)}
+          onAll={selectAll}
+          onNone={() => selectNone(groups)}
+        />
+
         {hasError && (
           <Alert variant="destructive">
             <AlertCircleIcon className="h-4 w-4" />
@@ -120,7 +136,7 @@ export const CalculationFilters: FC<CalculationFiltersProps> = ({
         </AlertDescription>
       </Alert>
 
-      {toGroups(filters).map((group) => {
+      {groups.map((group) => {
         // Codes repeat across groups, so the DOM ids need the group key.
         const namespace = `calculation-${group.key}`;
         const checkboxProps = getCheckboxGroupProps(group);
