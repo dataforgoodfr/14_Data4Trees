@@ -8,7 +8,7 @@ import {
   isMapFiltersEmpty,
   isMapFiltersUnrestricted,
 } from "./all-or-none";
-import { FILTER_KINDS, type MapFiltersState } from "./types";
+import { FILTER_KINDS, type MapFiltersState } from "./core/types";
 
 const option = <T extends string | number>(value: T) => ({
   "label::en": String(value),

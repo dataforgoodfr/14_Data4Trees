@@ -1,17 +1,18 @@
 import type { FC } from "react";
 
 import { AllOrNoneToggle } from "@features/base-filters";
-import { useLayersVisibility } from "@features/categories-filters";
+
+import type { Filters } from "@shared/api/types";
+import { useMap } from "@shared/hooks/use-map-all4trees";
+
 import {
   getEmptyMapFilters,
   getUnrestrictedMapFilters,
   isMapFiltersEmpty,
   isMapFiltersUnrestricted,
-  useMapFiltersStore,
-} from "@features/map-filters";
-
-import type { Filters } from "@shared/api/types";
-import { useMap } from "@shared/hooks/use-map-all4trees";
+} from "./all-or-none";
+import { useMapFiltersStore } from "./core/map-filters-provider";
+import { useLayersVisibility } from "./layers/use-categories-filters";
 
 /**
  * The display tab's All / None: drives the layer visibility *and* every

@@ -2,8 +2,7 @@ import { AlertCircleIcon, ListFilterIcon } from "lucide-react";
 import { Activity, useEffect, useRef, useState } from "react";
 
 import { CalculationFilters } from "@features/calculation-filters";
-import { CategoriesFilters } from "@features/categories-filters";
-import { MapFilters, MapFiltersProvider } from "@features/map-filters";
+import { DisplayFilters } from "@features/display-filters";
 
 import type {
   CalculationFilters as CalculationFiltersPayload,
@@ -15,8 +14,6 @@ import { useTranslation } from "@i18n";
 
 import { Alert, AlertDescription } from "@ui/alert";
 import { Separator } from "@ui/separator";
-
-import { DisplayAllOrNone } from "./display-all-or-none";
 
 const FILTER_KIND = {
   CALCULATION: "calculation",
@@ -102,17 +99,7 @@ export function MapSidebar() {
             selectedFilterKind === FILTER_KIND.DISPLAY ? "visible" : "hidden"
           }
         >
-          <MapFiltersProvider>
-            <DisplayAllOrNone filters={mapFilters} />
-            <div className="flex flex-col gap-3">
-              <CategoriesFilters />
-              {hasLoadedFilters.current ? (
-                <MapFilters filters={mapFilters} />
-              ) : (
-                <div className="mb-4 h-8 w-8 self-center animate-spin rounded-full border-4 border-primary border-t-transparent" />
-              )}
-            </div>
-          </MapFiltersProvider>
+          <DisplayFilters filters={mapFilters} />
         </Activity>
 
         <Activity
